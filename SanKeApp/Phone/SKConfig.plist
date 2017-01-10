@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>serverList</key>
+	<dict>
+		<key>testServer</key>
+		<string>http://mobile.yanxiu.com/test/api/</string>
+		<key>releaseServer</key>
+		<string>http://mobile.yanxiu.com/v20/api/</string>
+		<key>uploadServer</key>
+		<string>http://upload.yanxiu.com/resource/index.jsp</string>
+		<key>testLoginServer</key>
+		<string>http://u.yanxiu.com/test/</string>
+		<key>releaseLoginServer</key>
+		<string>http://u.yanxiu.com/</string>
+		<key>testWebsocket</key>
+		<string>ws://mobile.yanxiu.com/test/api/websocket</string>
+		<key>websocket</key>
+		<string>ws://mobile.yanxiu.com/websocket</string>
+	</dict>
+	<key>mockFrameworkOn</key>
+	<false/>
+	<key>testFrameworkOn</key>
+	<false/>
+</dict>
+</plist>
