@@ -1,27 +1,27 @@
 //
-//  CourseTableViewCell.m
+//  PlayRecordCell.m
 //  SanKeApp
 //
 //  Created by 郑小龙 on 17/1/11.
 //  Copyright © 2017年 niuzhaowang. All rights reserved.
 //
 
-#import "CourseTableViewCell.h"
+#import "PlayRecordCell.h"
 #import "PlayImageView.h"
-@interface CourseTableViewCell ()
+@interface PlayRecordCell ()
 @property (nonatomic, strong) PlayImageView *posterImagView;
-@property (nonatomic, strong) UILabel *titleLabel;
 @property (nonatomic, strong) UILabel *contentLabel;
-@property (nonatomic, strong) UILabel *expertLabel;
-
+@property (nonatomic, strong) UILabel *allTimeLabel;
+@property (nonatomic, strong) UILabel *playTimeLabel;
 @end
 
-@implementation CourseTableViewCell
+@implementation PlayRecordCell
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
     if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
         self.selectionStyle = UITableViewCellSelectionStyleNone;
         [self setupUI];
         [self setupLayout];
+        [self setupMokeData];
     }
     return self;
 }
@@ -31,12 +31,6 @@
     self.posterImagView = [[PlayImageView alloc] init];
     self.posterImagView.backgroundColor = [UIColor redColor];
     [self.contentView addSubview:self.posterImagView];
-
-    self.titleLabel = [[UILabel alloc] init];
-    self.titleLabel.font = [UIFont systemFontOfSize:12.0f];
-    self.titleLabel.textColor = [UIColor colorWithHexString:@"1d878b"];
-    self.titleLabel.numberOfLines = 1;
-    [self.contentView addSubview:self.titleLabel];
     
     self.contentLabel = [[UILabel alloc] init];
     self.contentLabel.font = [UIFont systemFontOfSize:14.0f];
@@ -44,41 +38,40 @@
     self.contentLabel.numberOfLines = 2;
     [self.contentView addSubview:self.contentLabel];
     
-    self.expertLabel = [[UILabel alloc] init];
-    self.expertLabel.font = [UIFont systemFontOfSize:12.0f];
-    self.expertLabel.textColor = [UIColor colorWithHexString:@"999999"];
-    self.expertLabel.numberOfLines = 1;
-    [self.contentView addSubview:self.expertLabel];
+    self.allTimeLabel = [[UILabel alloc] init];
+    self.allTimeLabel.font = [UIFont systemFontOfSize:12.0f];
+    self.allTimeLabel.textColor = [UIColor colorWithHexString:@"999999"];
+    [self.contentView addSubview:self.allTimeLabel];
     
+    self.playTimeLabel = [[UILabel alloc] init];
+    self.playTimeLabel.font = [UIFont systemFontOfSize:12.0f];
+    self.playTimeLabel.textColor = [UIColor colorWithHexString:@"d65b4b"];
+    [self.contentView addSubview:self.playTimeLabel];
 }
-
-- (void)setupLayout {    
+- (void)setupLayout {
     [self.posterImagView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.contentView.mas_top).offset(15.0f);
         make.left.equalTo(self.contentView.mas_left).offset(19.0f);
         make.size.mas_offset(CGSizeMake(80.0f, 80.0f));
     }];
     
-    [self.titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+    [self.contentLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.posterImagView.mas_right).offset(12.0f);
         make.top.equalTo(self.contentView.mas_top).offset(16.0);
         make.right.equalTo(self.contentView.mas_right).offset(-20.0);
     }];
     
-    [self.contentLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.titleLabel.mas_left);
-        make.top.equalTo(self.titleLabel.mas_bottom).offset(8.0);
-        make.right.equalTo(self.contentView.mas_right).offset(-20.0);
+    [self.allTimeLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(self.contentLabel.mas_left);
+        make.top.equalTo(self.contentLabel.mas_bottom).offset(30.0f);
     }];
     
-    [self.expertLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.contentLabel.mas_left);
-        make.top.equalTo(self.contentLabel.mas_bottom).offset(8.0);
-        make.right.equalTo(self.contentView.mas_right).offset(-20.0);
+    [self.playTimeLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.right.equalTo(self.contentLabel.mas_right);
+        make.top.equalTo(self.allTimeLabel.mas_top);
     }];
 }
-- (void)setupMokeData:(NSString *)string {
-    self.titleLabel.text = [NSString stringWithFormat:@"%@小学语文七年级下册第一课",string];
+- (void)setupMokeData {
     NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
     paragraphStyle.lineSpacing = 4.0f;
     paragraphStyle.lineBreakMode = NSLineBreakByTruncatingTail;
@@ -86,8 +79,11 @@
     NSMutableAttributedString *attString = [[NSMutableAttributedString alloc] initWithString:contentString];
     [attString addAttribute:NSParagraphStyleAttributeName value:paragraphStyle range:NSMakeRange(0, contentString.length)];
     self.contentLabel.attributedText = attString;
-    self.expertLabel.text = @"主讲专家: 孙敏 湖北省武汉啊骄傲的加法";
+    self.allTimeLabel.text = @"25:00";
+    self.playTimeLabel.text = @"已观看90%";
+    
 }
+
 
 - (void)awakeFromNib {
     [super awakeFromNib];

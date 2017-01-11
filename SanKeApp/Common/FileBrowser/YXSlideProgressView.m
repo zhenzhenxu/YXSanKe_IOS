@@ -72,6 +72,7 @@
     [self.timeLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.mas_equalTo(@0);
         make.right.mas_equalTo(@-15).priorityHigh();
+        make.width.mas_offset(70.0f);
     }];
 }
 

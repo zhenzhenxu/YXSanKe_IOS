@@ -8,9 +8,10 @@
 
 #import "CourseViewController.h"
 #import "CourseTableViewCell.h"
+#import "YXFileVideoItem.h"
 @implementation CourseTabItem
 @end;
-@interface CourseViewController ()// <UITableViewDelegate, UITableViewDataSource>
+@interface CourseViewController ()
 @end
 
 @implementation CourseViewController
@@ -45,14 +46,14 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     CourseTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"CourseTableViewCell" forIndexPath:indexPath];
     if (self.dataArray.count <= 1) {
-        cell.cellStatus = CourseTableViewCellStatus_Top | CourseTableViewCellStatus_Bottom;
+        cell.cellStatus = RadianBaseCellStatus_Top | RadianBaseCellStatus_Bottom;
     }else {
         if (indexPath.row == 0) {
-            cell.cellStatus = CourseTableViewCellStatus_Top;
+            cell.cellStatus = RadianBaseCellStatus_Top;
         } else if (indexPath.row < self.dataArray.count - 1) {
-            cell.cellStatus = CourseTableViewCellStatus_Middle;
+            cell.cellStatus = RadianBaseCellStatus_Middle;
         } else {
-           cell.cellStatus = CourseTableViewCellStatus_Bottom;
+           cell.cellStatus = RadianBaseCellStatus_Bottom;
         }
     }
     [cell setupMokeData:self.title];
@@ -60,5 +61,12 @@
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     return 110.0f;
+}
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    YXFileVideoItem *videoItem = [[YXFileVideoItem alloc] init];
+    videoItem.name = self.title;
+    videoItem.url = @"http://yuncdn.teacherclub.com.cn/course/cf/2016bjxxjs/wh/xxylalkdx/video/2.1_l/2.1_l.m3u8";
+    videoItem.baseViewController = self;
+    [videoItem browseFile];
 }
 @end

@@ -1,5 +1,5 @@
 //
-//  CourseTableViewCell.h
+//  PlayRecordCell.h
 //  SanKeApp
 //
 //  Created by 郑小龙 on 17/1/11.
@@ -7,6 +7,5 @@
 //
 
 #import "RadianBaseCell.h"
-@interface CourseTableViewCell : RadianBaseCell
-- (void)setupMokeData:(NSString *)string;
+@interface PlayRecordCell : RadianBaseCell
 @end

@@ -27,6 +27,8 @@ static const NSUInteger kTagBase = 10086;
 - (void)setupUI {
     self.topScrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, kScreenWidth, 44)];
     self.topScrollView.backgroundColor = [UIColor colorWithHexString:@"d65b4b"];
+    self.topScrollView.showsHorizontalScrollIndicator = NO;
+    self.topScrollView.showsVerticalScrollIndicator = NO;
     [self addSubview:self.topScrollView];
     self.bottomScrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(0, self.topScrollView.frame.origin.y+self.topScrollView.frame.size.height, self.frame.size.width, self.frame.size.height-self.topScrollView.frame.size.height)];
     self.bottomScrollView.autoresizingMask = UIViewAutoresizingFlexibleHeight;
@@ -101,18 +103,31 @@ static const NSUInteger kTagBase = 10086;
 
 - (void)layoutSubviews{
     self.bottomScrollView.contentSize = CGSizeMake(self.bottomScrollView.frame.size.width*self.childViewControllers.count, self.bottomScrollView.frame.size.height);
+    self.topScrollView.contentSize = CGSizeMake( kScreenWidth / 4.0f * self.childViewControllers.count, 44);
 }
 #pragma mark - UIScrollViewDelegate
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView{
     NSInteger index = scrollView.contentOffset.x/scrollView.frame.size.width;
+    CGFloat offsetx = 0.0f;
     for (UIButton *b in self.topScrollView.subviews) {
         if ([b isKindOfClass:[UIButton class]]) {
             b.selected = NO;
             if (b.tag-kTagBase == index) {
                 b.selected = YES;
+               offsetx = b.center.x - self.topScrollView.frame.size.width * 0.5;
             }
         }
     }
+    CGFloat offsetMax = self.topScrollView.contentSize.width - self.topScrollView.frame.size.width;
+    if (offsetx < 0) {
+        offsetx = 0;
+    }else if (offsetx > offsetMax){
+        offsetx = offsetMax;
+    }
+    
+    CGPoint offset = CGPointMake(offsetx, self.topScrollView.contentOffset.y);
+    [self.topScrollView setContentOffset:offset animated:YES];
+    
     CourseViewController *newsVc = self.childViewControllers[index];
     if (newsVc.view.superview) return;
     newsVc.view.frame = CGRectMake(self.bottomScrollView.frame.size.width*index, 0, self.bottomScrollView.frame.size.width, self.bottomScrollView.frame.size.height);
