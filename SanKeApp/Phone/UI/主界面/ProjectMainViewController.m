@@ -9,9 +9,10 @@
 #import "ProjectMainViewController.h"
 #import "YXDrawerController.h"
 #import "PlayRecordViewController.h"
-
+#import "ProjectContainerView.h"
+#import "CourseViewController.h"
 @interface ProjectMainViewController ()
-
+@property (nonatomic, strong) NSMutableArray *dataMutableArrray;
 @end
 
 @implementation ProjectMainViewController
@@ -29,6 +30,7 @@
     [self setupLeftWithCustomView:naviLeftButton];
     
     [self setupRightWithTitle:@"播放记录"];
+    [self setupUI];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -40,6 +42,26 @@
     PlayRecordViewController *vc = [[PlayRecordViewController alloc]init];
     [self.navigationController pushViewController:vc animated:YES];
 }
+#pragma mark - setupUI
+- (void)setupUI {
+    [self setupMokeData];
+    ProjectContainerView *containerView = [[ProjectContainerView alloc]initWithFrame:self.view.bounds];
+    containerView.autoresizingMask = UIViewAutoresizingFlexibleHeight;
+    containerView.childViewControllers = self.childViewControllers;
+    [self.view addSubview:containerView];
+}
+
+- (void)setupMokeData {
+    self.dataMutableArrray = [@[@"全部",@"\"新\"在哪里",@"关键点位",@"颗粒研修"] mutableCopy];
+    for (int i=0 ; i<self.dataMutableArrray.count ;i++){
+        CourseTabItem *item = [[CourseTabItem alloc] init];
+        item.name = self.dataMutableArrray[i];
+        CourseViewController *vc = [[CourseViewController alloc] init];
+        vc.tabItem = item;
+        [self addChildViewController:vc];
+    }
+}
+
 
 
 @end

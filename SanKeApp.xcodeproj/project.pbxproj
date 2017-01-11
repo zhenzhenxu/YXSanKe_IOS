@@ -119,6 +119,9 @@
 		7C6F219C1E2481D6000AB43A /* AreaDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C6F219B1E2481D6000AB43A /* AreaDataManager.m */; };
 		7C6F219E1E24838C000AB43A /* area_data.json in Resources */ = {isa = PBXBuildFile; fileRef = 7C6F219D1E24838C000AB43A /* area_data.json */; };
 		7CC9ADA81E25D12A00A392EA /* StageSubjectSelectViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CC9ADA71E25D12A00A392EA /* StageSubjectSelectViewController.m */; };
+		9241FFE11E25D5830015B587 /* ProjectContainerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9241FFE01E25D5830015B587 /* ProjectContainerView.m */; };
+		9241FFE41E25D77F0015B587 /* CourseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9241FFE31E25D77F0015B587 /* CourseViewController.m */; };
+		9241FFE71E25E7C90015B587 /* CourseTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9241FFE61E25E7C90015B587 /* CourseTableViewCell.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -363,6 +366,12 @@
 		7C6F21A61E248BDA000AB43A /* readme.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = readme.txt; sourceTree = "<group>"; };
 		7CC9ADA61E25D12A00A392EA /* StageSubjectSelectViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StageSubjectSelectViewController.h; sourceTree = "<group>"; };
 		7CC9ADA71E25D12A00A392EA /* StageSubjectSelectViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StageSubjectSelectViewController.m; sourceTree = "<group>"; };
+		9241FFDF1E25D5830015B587 /* ProjectContainerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProjectContainerView.h; sourceTree = "<group>"; };
+		9241FFE01E25D5830015B587 /* ProjectContainerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProjectContainerView.m; sourceTree = "<group>"; };
+		9241FFE21E25D77F0015B587 /* CourseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CourseViewController.h; sourceTree = "<group>"; };
+		9241FFE31E25D77F0015B587 /* CourseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CourseViewController.m; sourceTree = "<group>"; };
+		9241FFE51E25E7C90015B587 /* CourseTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CourseTableViewCell.h; sourceTree = "<group>"; };
+		9241FFE61E25E7C90015B587 /* CourseTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CourseTableViewCell.m; sourceTree = "<group>"; };
 		F85EF3DA4AEC6DA4B2E1F0AA /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		FDFFD28C45A34489A38320DE /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -937,8 +946,11 @@
 			isa = PBXGroup;
 			children = (
 				7C18093E1E2618AE00B71863 /* 筛选 */,
+				9241FFDE1E25D5680015B587 /* view */,
 				7C6F21881E232F6A000AB43A /* ProjectMainViewController.h */,
 				7C6F21891E232F6A000AB43A /* ProjectMainViewController.m */,
+				9241FFE21E25D77F0015B587 /* CourseViewController.h */,
+				9241FFE31E25D77F0015B587 /* CourseViewController.m */,
 			);
 			path = "主界面";
 			sourceTree = "<group>";
@@ -1008,6 +1020,17 @@
 				7C6F21A61E248BDA000AB43A /* readme.txt */,
 			);
 			path = "主界面";
+			sourceTree = "<group>";
+		};
+		9241FFDE1E25D5680015B587 /* view */ = {
+			isa = PBXGroup;
+			children = (
+				9241FFDF1E25D5830015B587 /* ProjectContainerView.h */,
+				9241FFE01E25D5830015B587 /* ProjectContainerView.m */,
+				9241FFE51E25E7C90015B587 /* CourseTableViewCell.h */,
+				9241FFE61E25E7C90015B587 /* CourseTableViewCell.m */,
+			);
+			name = view;
 			sourceTree = "<group>";
 		};
 		F408629257CB581950B8FDF3 /* Pods */ = {
@@ -1245,11 +1268,13 @@
 				7C6F21901E232F8E000AB43A /* YXDrawerController.m in Sources */,
 				7C1A5F771E15132200832DED /* YXFileFavorWrapper.m in Sources */,
 				7C1A60111E163B8800832DED /* YXTestViewController.m in Sources */,
+				9241FFE11E25D5830015B587 /* ProjectContainerView.m in Sources */,
 				7C1A5FD81E1636F500832DED /* DataErrorView.m in Sources */,
 				7C1A5EE71E1505BF00832DED /* SKNavigationController.m in Sources */,
 				7C1A5FCD1E1634DE00832DED /* YXPromtController.m in Sources */,
 				7C1A5F241E1510FA00832DED /* PostRequest.m in Sources */,
 				7C1A5F891E1513D600832DED /* MJRefreshHeaderView.m in Sources */,
+				9241FFE41E25D77F0015B587 /* CourseViewController.m in Sources */,
 				7C2251CD1E1DEB32004785D5 /* SKAlertButton.m in Sources */,
 				7C1A5F141E15108F00832DED /* DownloaderEntity.m in Sources */,
 				7C18094C1E271AFC00B71863 /* CollectionViewEqualSpaceFlowLayout.m in Sources */,
@@ -1288,6 +1313,7 @@
 				7C1A5F751E15132200832DED /* YXFileDownloadProgressView.m in Sources */,
 				7C1A5F681E15130200832DED /* YXFileVideoItem.m in Sources */,
 				7C1A5FFD1E16396C00832DED /* UIImage+YXImage.m in Sources */,
+				9241FFE71E25E7C90015B587 /* CourseTableViewCell.m in Sources */,
 				7C1A5FFF1E16396C00832DED /* NSString+YXString.m in Sources */,
 				7C1A5EF11E150B6A00832DED /* SKConfigManager.m in Sources */,
 				7C1A5F951E15143F00832DED /* YXMockManager.m in Sources */,
