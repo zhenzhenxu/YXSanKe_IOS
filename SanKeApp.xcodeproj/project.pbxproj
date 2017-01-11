@@ -8,6 +8,15 @@
 
 /* Begin PBXBuildFile section */
 		4C52696A59114A67B85E0645 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FDFFD28C45A34489A38320DE /* libPods.a */; };
+		7C1809351E25D4A900B71863 /* StageSubjectHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C1809341E25D4A900B71863 /* StageSubjectHeaderView.m */; };
+		7C1809381E25DEBA00B71863 /* StageSubjectCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C1809371E25DEBA00B71863 /* StageSubjectCell.m */; };
+		7C18093A1E25FEF800B71863 /* stage_subject.json in Resources */ = {isa = PBXBuildFile; fileRef = 7C1809391E25FEF800B71863 /* stage_subject.json */; };
+		7C18093D1E25FF5600B71863 /* StageSubjectModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C18093C1E25FF5600B71863 /* StageSubjectModel.m */; };
+		7C1809411E26285B00B71863 /* FilterSelectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C1809401E26285B00B71863 /* FilterSelectionView.m */; };
+		7C1809441E262D6200B71863 /* FilterHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C1809431E262D6200B71863 /* FilterHeaderView.m */; };
+		7C1809471E262DAA00B71863 /* FilterCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C1809461E262DAA00B71863 /* FilterCell.m */; };
+		7C1809491E2631C400B71863 /* edition_filter.json in Resources */ = {isa = PBXBuildFile; fileRef = 7C1809481E2631C400B71863 /* edition_filter.json */; };
+		7C18094C1E271AFC00B71863 /* CollectionViewEqualSpaceFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C18094B1E271AFC00B71863 /* CollectionViewEqualSpaceFlowLayout.m */; };
 		7C1A5EA51E14F08700832DED /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C1A5EA41E14F08700832DED /* main.m */; };
 		7C1A5EA81E14F08700832DED /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C1A5EA71E14F08700832DED /* AppDelegate.m */; };
 		7C1A5EBE1E14F08700832DED /* SanKeAppTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C1A5EBD1E14F08700832DED /* SanKeAppTests.m */; };
@@ -109,6 +118,7 @@
 		7C6F21991E237FD2000AB43A /* PlayRecordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C6F21981E237FD2000AB43A /* PlayRecordViewController.m */; };
 		7C6F219C1E2481D6000AB43A /* AreaDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C6F219B1E2481D6000AB43A /* AreaDataManager.m */; };
 		7C6F219E1E24838C000AB43A /* area_data.json in Resources */ = {isa = PBXBuildFile; fileRef = 7C6F219D1E24838C000AB43A /* area_data.json */; };
+		7CC9ADA81E25D12A00A392EA /* StageSubjectSelectViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CC9ADA71E25D12A00A392EA /* StageSubjectSelectViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -130,6 +140,22 @@
 
 /* Begin PBXFileReference section */
 		2A31F19DD1F3A8E3CF6B9DE0 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+		7C1809331E25D4A900B71863 /* StageSubjectHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StageSubjectHeaderView.h; sourceTree = "<group>"; };
+		7C1809341E25D4A900B71863 /* StageSubjectHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StageSubjectHeaderView.m; sourceTree = "<group>"; };
+		7C1809361E25DEBA00B71863 /* StageSubjectCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StageSubjectCell.h; sourceTree = "<group>"; };
+		7C1809371E25DEBA00B71863 /* StageSubjectCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StageSubjectCell.m; sourceTree = "<group>"; };
+		7C1809391E25FEF800B71863 /* stage_subject.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = stage_subject.json; sourceTree = "<group>"; };
+		7C18093B1E25FF5600B71863 /* StageSubjectModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StageSubjectModel.h; sourceTree = "<group>"; };
+		7C18093C1E25FF5600B71863 /* StageSubjectModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StageSubjectModel.m; sourceTree = "<group>"; };
+		7C18093F1E26285B00B71863 /* FilterSelectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FilterSelectionView.h; sourceTree = "<group>"; };
+		7C1809401E26285B00B71863 /* FilterSelectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FilterSelectionView.m; sourceTree = "<group>"; };
+		7C1809421E262D6200B71863 /* FilterHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FilterHeaderView.h; sourceTree = "<group>"; };
+		7C1809431E262D6200B71863 /* FilterHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FilterHeaderView.m; sourceTree = "<group>"; };
+		7C1809451E262DAA00B71863 /* FilterCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FilterCell.h; sourceTree = "<group>"; };
+		7C1809461E262DAA00B71863 /* FilterCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FilterCell.m; sourceTree = "<group>"; };
+		7C1809481E2631C400B71863 /* edition_filter.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = edition_filter.json; sourceTree = "<group>"; };
+		7C18094A1E271AFC00B71863 /* CollectionViewEqualSpaceFlowLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CollectionViewEqualSpaceFlowLayout.h; sourceTree = "<group>"; };
+		7C18094B1E271AFC00B71863 /* CollectionViewEqualSpaceFlowLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CollectionViewEqualSpaceFlowLayout.m; sourceTree = "<group>"; };
 		7C1A5EA01E14F08700832DED /* SanKeApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SanKeApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7C1A5EA41E14F08700832DED /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = main.m; path = SanKeApp/main.m; sourceTree = "<group>"; };
 		7C1A5EA61E14F08700832DED /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = SanKeApp/AppDelegate.h; sourceTree = "<group>"; };
@@ -335,6 +361,8 @@
 		7C6F21A21E248BDA000AB43A /* readme.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = readme.txt; sourceTree = "<group>"; };
 		7C6F21A41E248BDA000AB43A /* readme.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = readme.txt; sourceTree = "<group>"; };
 		7C6F21A61E248BDA000AB43A /* readme.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = readme.txt; sourceTree = "<group>"; };
+		7CC9ADA61E25D12A00A392EA /* StageSubjectSelectViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StageSubjectSelectViewController.h; sourceTree = "<group>"; };
+		7CC9ADA71E25D12A00A392EA /* StageSubjectSelectViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StageSubjectSelectViewController.m; sourceTree = "<group>"; };
 		F85EF3DA4AEC6DA4B2E1F0AA /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		FDFFD28C45A34489A38320DE /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -371,6 +399,31 @@
 				FDFFD28C45A34489A38320DE /* libPods.a */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		7C1809321E25D3BA00B71863 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				7C1809331E25D4A900B71863 /* StageSubjectHeaderView.h */,
+				7C1809341E25D4A900B71863 /* StageSubjectHeaderView.m */,
+				7C1809361E25DEBA00B71863 /* StageSubjectCell.h */,
+				7C1809371E25DEBA00B71863 /* StageSubjectCell.m */,
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
+		7C18093E1E2618AE00B71863 /* 筛选 */ = {
+			isa = PBXGroup;
+			children = (
+				7C18093F1E26285B00B71863 /* FilterSelectionView.h */,
+				7C1809401E26285B00B71863 /* FilterSelectionView.m */,
+				7C1809421E262D6200B71863 /* FilterHeaderView.h */,
+				7C1809431E262D6200B71863 /* FilterHeaderView.m */,
+				7C1809451E262DAA00B71863 /* FilterCell.h */,
+				7C1809461E262DAA00B71863 /* FilterCell.m */,
+				7C1809481E2631C400B71863 /* edition_filter.json */,
+			);
+			name = "筛选";
 			sourceTree = "<group>";
 		};
 		7C1A5E971E14F08700832DED = {
@@ -847,6 +900,8 @@
 		7C1A60141E163C8200832DED /* CustomView */ = {
 			isa = PBXGroup;
 			children = (
+				7C18094A1E271AFC00B71863 /* CollectionViewEqualSpaceFlowLayout.h */,
+				7C18094B1E271AFC00B71863 /* CollectionViewEqualSpaceFlowLayout.m */,
 			);
 			path = CustomView;
 			sourceTree = "<group>";
@@ -881,6 +936,7 @@
 		7C6F21841E232F2A000AB43A /* 主界面 */ = {
 			isa = PBXGroup;
 			children = (
+				7C18093E1E2618AE00B71863 /* 筛选 */,
 				7C6F21881E232F6A000AB43A /* ProjectMainViewController.h */,
 				7C6F21891E232F6A000AB43A /* ProjectMainViewController.m */,
 			);
@@ -910,8 +966,14 @@
 		7C6F21931E237F40000AB43A /* 登录注册 */ = {
 			isa = PBXGroup;
 			children = (
+				7C1809321E25D3BA00B71863 /* View */,
 				7C6F21941E237FAF000AB43A /* LoginEntranceViewController.h */,
 				7C6F21951E237FAF000AB43A /* LoginEntranceViewController.m */,
+				7CC9ADA61E25D12A00A392EA /* StageSubjectSelectViewController.h */,
+				7CC9ADA71E25D12A00A392EA /* StageSubjectSelectViewController.m */,
+				7C1809391E25FEF800B71863 /* stage_subject.json */,
+				7C18093B1E25FF5600B71863 /* StageSubjectModel.h */,
+				7C18093C1E25FF5600B71863 /* StageSubjectModel.m */,
 			);
 			path = "登录注册";
 			sourceTree = "<group>";
@@ -1070,6 +1132,8 @@
 				7C1A5EE91E1506C500832DED /* PhoneImage.xcassets in Resources */,
 				7C1A5EF31E150BD100832DED /* env_config.json in Resources */,
 				7C1A5F941E15143F00832DED /* MockConfig.plist in Resources */,
+				7C18093A1E25FEF800B71863 /* stage_subject.json in Resources */,
+				7C1809491E2631C400B71863 /* edition_filter.json in Resources */,
 				7C6F219E1E24838C000AB43A /* area_data.json in Resources */,
 				7C1A5F8E1E15143400832DED /* neterror_mock.json in Resources */,
 				7C1A5EEE1E150A3800832DED /* SKConfig.plist in Resources */,
@@ -1167,9 +1231,11 @@
 				7C1A5FAF1E151D4E00832DED /* UIViewController+YXAddtion.m in Sources */,
 				7C1A5F871E1513D600832DED /* MJRefreshConst.m in Sources */,
 				7C1A5F561E15129600832DED /* YXQLPreviewController.m in Sources */,
+				7C1809351E25D4A900B71863 /* StageSubjectHeaderView.m in Sources */,
 				7C1A5EE41E15052000832DED /* BaseViewController.m in Sources */,
 				7C1A60101E163B8800832DED /* TestsRootViewController.m in Sources */,
 				7C1A5FD61E1636F500832DED /* YXErrorView.m in Sources */,
+				7C1809441E262D6200B71863 /* FilterHeaderView.m in Sources */,
 				7C1A5F961E15143F00832DED /* YXMockParser.m in Sources */,
 				7C6F21991E237FD2000AB43A /* PlayRecordViewController.m in Sources */,
 				7C1A5F2D1E15111800832DED /* YXPostRequest.m in Sources */,
@@ -1186,6 +1252,7 @@
 				7C1A5F891E1513D600832DED /* MJRefreshHeaderView.m in Sources */,
 				7C2251CD1E1DEB32004785D5 /* SKAlertButton.m in Sources */,
 				7C1A5F141E15108F00832DED /* DownloaderEntity.m in Sources */,
+				7C18094C1E271AFC00B71863 /* CollectionViewEqualSpaceFlowLayout.m in Sources */,
 				7C2251C31E1CE3AC004785D5 /* UIImage+GIF.m in Sources */,
 				7C1A5F691E15130200832DED /* YXFileAudioItem.m in Sources */,
 				7C1A5F161E15108F00832DED /* DownloadModel.xcdatamodel in Sources */,
@@ -1193,6 +1260,7 @@
 				7C1A5F3B1E15126500832DED /* YXAudioSlideProgressView.m in Sources */,
 				7C1A5F861E1513D600832DED /* MJRefreshBaseView.m in Sources */,
 				7C1A5EFD1E150E3400832DED /* LogFormatter.m in Sources */,
+				7C1809471E262DAA00B71863 /* FilterCell.m in Sources */,
 				7C1A5EA51E14F08700832DED /* main.m in Sources */,
 				7C2251DD1E1F43A2004785D5 /* NSObject+BackgroundTask.m in Sources */,
 				7C6F218A1E232F6A000AB43A /* ProjectMainViewController.m in Sources */,
@@ -1211,8 +1279,11 @@
 				7C1A60021E16396C00832DED /* UIImage+Color.m in Sources */,
 				7C1A5F121E15108F00832DED /* PersistentUrlDownloader.m in Sources */,
 				7C1A5F6B1E15130200832DED /* YXFileDocItem.m in Sources */,
+				7CC9ADA81E25D12A00A392EA /* StageSubjectSelectViewController.m in Sources */,
+				7C18093D1E25FF5600B71863 /* StageSubjectModel.m in Sources */,
 				7C1A5F211E1510FA00832DED /* HttpBaseRequest.m in Sources */,
 				7C1A5F051E150F4B00832DED /* LePlayerView.m in Sources */,
+				7C1809381E25DEBA00B71863 /* StageSubjectCell.m in Sources */,
 				7C1A5F761E15132200832DED /* FileDownloadHelper.m in Sources */,
 				7C1A5F751E15132200832DED /* YXFileDownloadProgressView.m in Sources */,
 				7C1A5F681E15130200832DED /* YXFileVideoItem.m in Sources */,
@@ -1226,6 +1297,7 @@
 				7C1A5F221E1510FA00832DED /* UploadRequest.m in Sources */,
 				7C1A60031E16396C00832DED /* UIImage+FixOrientation.m in Sources */,
 				7C1A5F4C1E15127200832DED /* YXSlideProgressView.m in Sources */,
+				7C1809411E26285B00B71863 /* FilterSelectionView.m in Sources */,
 				7C1A60071E16396D00832DED /* UIImage+YXResize.m in Sources */,
 				7C1A5F491E15127200832DED /* YXPlayerBufferingView.m in Sources */,
 				7C1A5F481E15127200832DED /* YXPlayerBottomView.m in Sources */,

@@ -47,6 +47,7 @@ extern int ddLogLevel;
 #import <IQKeyboardManager.h>
 #import <SCRecorder.h>
 #import <QiniuSDK.h>
+#import <UIView+CBFrameHelpers.h>
 
 #pragma mark - Category
 #import "UIViewController+Keyboard.h"
@@ -63,6 +64,7 @@ extern int ddLogLevel;
 #import "NSObject+BackgroundTask.h"
 
 #pragma  - Other
+#import "CollectionViewEqualSpaceFlowLayout.h"
 #import "AreaDataManager.h"
 #import "GCDTimer.h"
 #import "UnhandledRequestData.h"

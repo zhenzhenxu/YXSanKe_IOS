@@ -17,14 +17,14 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-//    // 导航背景
-//    [self.navigationBar setBackgroundImage:[UIImage yx_imageWithColor:[UIColor whiteColor]] forBarMetrics:UIBarMetricsDefault];
-//    self.navigationBar.translucent = YES;
-//    // 标题样式
-//    [self.navigationBar setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:
-//                                                [UIColor colorWithHexString:@"b28f47"], NSForegroundColorAttributeName,
-//                                                [UIFont systemFontOfSize:17], NSFontAttributeName,
-//                                                nil]];
+    // 导航背景
+    [self.navigationBar setBackgroundImage:[UIImage yx_imageWithColor:[UIColor whiteColor]] forBarMetrics:UIBarMetricsDefault];
+    self.navigationBar.translucent = YES;
+    // 标题样式
+    [self.navigationBar setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:
+                                                [UIColor colorWithHexString:@"333333"], NSForegroundColorAttributeName,
+                                                [UIFont systemFontOfSize:17], NSFontAttributeName,
+                                                nil]];
 }
 
 - (void)didReceiveMemoryWarning {
