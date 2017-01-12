@@ -7,13 +7,13 @@
 //
 
 #import "YXSlideProgressView.h"
-
+#import "YXGradientView.h"
 @interface YXSlideProgressView()
 @property (nonatomic, strong) UIImageView *thumbNormalView;
 
 
 @property (nonatomic, strong) UIView *wholeProgressView;
-@property (nonatomic, strong) UIView *playProgressView;
+@property (nonatomic, strong) YXGradientView *playProgressView;
 @property (nonatomic, strong) UIView *bufferProgressView;
 @end
 
@@ -37,16 +37,13 @@
     self.wholeProgressView.userInteractionEnabled = NO;
     
     self.bufferProgressView = [[UIView alloc] init];
-    self.bufferProgressView.backgroundColor = [UIColor colorWithHexString:@"91b9ed"];
+    self.bufferProgressView.backgroundColor = [UIColor colorWithHexString:@"a2d2df"];
     [self addSubview:self.bufferProgressView];
     self.bufferProgressView.userInteractionEnabled = NO;
     
-    self.playProgressView = [[UIView alloc] init];
-    self.playProgressView.backgroundColor = [UIColor colorWithHexString:@"4688f1"];
+    self.playProgressView = [[YXGradientView alloc]initWithStartColor:[UIColor colorWithHexString:@"4cdafd"] endColor:[UIColor colorWithHexString:@"4692a7"] orientation:YXGradientLeftToRight];;
     [self addSubview:self.playProgressView];
     self.playProgressView.userInteractionEnabled = NO;
-    
-    _iconImage = [UIImage imageNamed:@"03动态详情页UI-附件全屏浏览-未按-修改版"];
     
     self.thumbNormalView = [[UIImageView alloc] init];
     self.thumbNormalView.frame = CGRectMake(0, 0, 16.0f, 16.0f);
@@ -66,12 +63,12 @@
         make.left.mas_equalTo(self.thumbNormalView.bounds.size.width * 0.5).priorityHigh();
         make.centerY.mas_equalTo(@0);
         make.height.mas_equalTo(@3.0f);
-        make.right.equalTo(self.timeLabel.mas_left).offset(-5.0f).priorityHigh();
+        make.right.equalTo(self.timeLabel.mas_left).offset(-6.0f).priorityHigh();
     }];
     
     [self.timeLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.mas_equalTo(@0);
-        make.right.mas_equalTo(@-15).priorityHigh();
+        make.right.mas_equalTo(@-10).priorityHigh();
         make.width.mas_offset(70.0f);
     }];
 }
@@ -109,7 +106,7 @@
     NSString *temString = [NSString stringWithFormat:@"%@/%@",playTime,durationTime];
     NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc]
                                                    initWithString:temString];
-    [attributedString addAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:11.0f],NSForegroundColorAttributeName:[UIColor colorWithHexString:@"919191"]} range:NSMakeRange(0, [temString length])];
+    [attributedString addAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:11.0f],NSForegroundColorAttributeName:[UIColor colorWithHexString:@"999999"]} range:NSMakeRange(0, [temString length])];
     [attributedString addAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:11.0f],NSForegroundColorAttributeName:[UIColor whiteColor]} range:NSMakeRange(0, playTime.length + 1)];
     return attributedString;
 }

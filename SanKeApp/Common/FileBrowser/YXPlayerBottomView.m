@@ -30,8 +30,9 @@ UIView *_sepView;
     [self addSubview:self.playPauseButton];
     
     [self.playPauseButton mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.top.bottom.mas_equalTo(@0);
-        make.width.mas_equalTo(@44);
+        make.centerY.equalTo(self.mas_centerY);
+        make.left.equalTo(self.mas_left).offset(10.0f);
+        make.size.mas_offset(CGSizeMake(30.0f, 30.0f));
     }];
     
     self.slideProgressView = [[YXSlideProgressView alloc] init];
@@ -73,7 +74,7 @@ UIView *_sepView;
 
 - (void)setPaused {
     _playPauseState = PlayerView_State_Paused;
-    [self.playPauseButton setImage:[UIImage imageNamed:@"播放按钮"] forState:UIControlStateNormal];
+    [self.playPauseButton setImage:[UIImage imageNamed:@"播放"] forState:UIControlStateNormal];
 }
 
 - (void)setBShowDefinition:(BOOL)bShowDefinition {

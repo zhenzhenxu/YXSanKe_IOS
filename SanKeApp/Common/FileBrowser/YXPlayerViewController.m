@@ -114,7 +114,7 @@ static const NSTimeInterval kTopBottomHiddenTime = 5;
     [self.view addSubview:self.topView];
     [self.topView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.left.right.mas_equalTo(@0);
-        make.height.mas_equalTo(@44);
+        make.height.mas_equalTo(@43);
     }];
     
     //self.bottomView = [[YXPlayerBottomView alloc] init];
@@ -122,7 +122,7 @@ static const NSTimeInterval kTopBottomHiddenTime = 5;
     [self.view addSubview:self.bottomView];
     [self.bottomView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.bottom.left.right.mas_equalTo(@0);
-        make.height.mas_equalTo(@55).priorityHigh();
+        make.height.mas_equalTo(@43).priorityHigh();
     }];
 
     [self.topView.backButton addTarget:self action:@selector(backAction) forControlEvents:UIControlEventTouchUpInside];

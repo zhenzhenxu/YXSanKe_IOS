@@ -11,6 +11,8 @@
 #import "PlayRecordViewController.h"
 #import "ProjectContainerView.h"
 #import "CourseViewController.h"
+#import "ProjectNavRightView.h"
+#import "FilterSelectionView.h"
 @interface ProjectMainViewController ()
 @property (nonatomic, strong) NSMutableArray *dataMutableArrray;
 @end
@@ -23,7 +25,8 @@
     self.navigationItem.title = @"主界面";
     [self setupRightWithTitle:@"播放记录"];
     [self setupUI];
-    [self setupLeftNavButton];
+    [self setupLeftNavView];
+    [self setupRightNavView];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -31,10 +34,6 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (void)naviRightAction{
-    PlayRecordViewController *vc = [[PlayRecordViewController alloc]init];
-    [self.navigationController pushViewController:vc animated:YES];
-}
 #pragma mark - setupUI
 - (void)setupUI {
     [self setupMokeData];
@@ -44,7 +43,7 @@
     [self.view addSubview:containerView];
 }
 
-- (void)setupLeftNavButton {
+- (void)setupLeftNavView {
     UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
     button.frame = CGRectMake(0, 0, 32.0f, 32.0f);
     [button sd_setBackgroundImageWithURL:[NSURL URLWithString:@""] forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"默认用户头像"]];
@@ -62,6 +61,54 @@
     button.layer.cornerRadius = 16;
     button.clipsToBounds = YES;
     [self setupLeftWithCustomView:button];
+}
+- (void)setupRightNavView {
+    ProjectNavRightView *rightView = [[ProjectNavRightView alloc] init];
+    WEAK_SELF
+    [rightView setProjectNavButtonLeftBlock:^{
+        STRONG_SELF
+        [self showFilterSelectionView];
+    }];
+    [rightView setProjectNavButtonRightBlock:^{
+        STRONG_SELF;
+        PlayRecordViewController *vc = [[PlayRecordViewController alloc]init];
+        [self.navigationController pushViewController:vc animated:YES];
+    }];
+    [self setupRightWithCustomView:rightView];
+}
+- (void)showFilterSelectionView {
+    FilterSelectionView *v = [[FilterSelectionView alloc]init];
+    AlertView *alert = [[AlertView alloc]init];
+    alert.hideWhenMaskClicked = YES;
+    alert.contentView = v;
+    [alert setHideBlock:^(AlertView *view) {
+        [UIView animateWithDuration:0.3 animations:^{
+            [v mas_remakeConstraints:^(MASConstraintMaker *make) {
+                make.left.mas_equalTo(view.mas_right);
+                make.top.bottom.mas_equalTo(0);
+                make.width.mas_equalTo([UIScreen mainScreen].bounds.size.width*300/375);
+            }];
+            [view layoutIfNeeded];
+        } completion:^(BOOL finished) {
+            [view removeFromSuperview];
+        }];
+    }];
+    [alert showWithLayout:^(AlertView *view) {
+        [v mas_remakeConstraints:^(MASConstraintMaker *make) {
+            make.left.mas_equalTo(view.mas_right);
+            make.top.bottom.mas_equalTo(0);
+            make.width.mas_equalTo([UIScreen mainScreen].bounds.size.width*300/375);
+        }];
+        [view layoutIfNeeded];
+        [UIView animateWithDuration:0.3 animations:^{
+            [v mas_remakeConstraints:^(MASConstraintMaker *make) {
+                make.right.mas_equalTo(view.mas_right);
+                make.top.bottom.mas_equalTo(0);
+                make.width.mas_equalTo([UIScreen mainScreen].bounds.size.width*300/375);
+            }];
+            [view layoutIfNeeded];
+        }];
+    }];
 }
 
 - (void)setupMokeData {

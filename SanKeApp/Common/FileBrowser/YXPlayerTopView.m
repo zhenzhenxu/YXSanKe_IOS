@@ -25,8 +25,8 @@
     self.backgroundColor = [UIColor colorWithWhite:0.0f alpha:0.6f];
 
     self.backButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    [self.backButton setImage:[UIImage imageNamed:@"返回按钮A"] forState:UIControlStateNormal];
-    [self.backButton setImage:[UIImage imageNamed:@"返回按钮-点击态A"] forState:UIControlStateHighlighted];
+    [self.backButton setImage:[UIImage imageNamed:@"返回按钮"] forState:UIControlStateNormal];
+    [self.backButton setImage:[UIImage imageNamed:@"返回按钮-点击态"] forState:UIControlStateHighlighted];
     [self addSubview:self.backButton];
     
     UIView *sep0 = [[UIView alloc] init];
