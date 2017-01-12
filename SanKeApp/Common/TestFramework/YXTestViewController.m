@@ -9,13 +9,14 @@
 #import "YXTestViewController.h"
 #import "StageSubjectSelectViewController.h"
 #import "FilterSelectionView.h"
+#import "LoginViewController.h"
 
 @interface YXTestViewController ()
 @end
 
 @implementation YXTestViewController
 - (void)viewDidLoad {
-    self.devTestActions = @[@"stage_subject",@"filter",@"34",@"45"];
+    self.devTestActions = @[@"stage_subject",@"filter",@"login",@"45"];
     [super viewDidLoad];
 }
 
@@ -57,6 +58,11 @@
             [view layoutIfNeeded];
         }];
     }];
+}
+
+- (void)login {
+    LoginViewController *vc = [[LoginViewController alloc]init];
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 @end

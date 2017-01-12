@@ -48,6 +48,7 @@ extern int ddLogLevel;
 #import <SCRecorder.h>
 #import <QiniuSDK.h>
 #import <UIView+CBFrameHelpers.h>
+#import <FLAnimatedImage/FLAnimatedImage.h>
 
 #pragma mark - Category
 #import "UIViewController+Keyboard.h"

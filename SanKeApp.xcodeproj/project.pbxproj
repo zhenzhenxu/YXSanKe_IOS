@@ -118,6 +118,12 @@
 		7C6F21991E237FD2000AB43A /* PlayRecordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C6F21981E237FD2000AB43A /* PlayRecordViewController.m */; };
 		7C6F219C1E2481D6000AB43A /* AreaDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C6F219B1E2481D6000AB43A /* AreaDataManager.m */; };
 		7C6F219E1E24838C000AB43A /* area_data.json in Resources */ = {isa = PBXBuildFile; fileRef = 7C6F219D1E24838C000AB43A /* area_data.json */; };
+		7C7629BB1E2731A1007B5698 /* LoginBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C7629BA1E2731A1007B5698 /* LoginBaseViewController.m */; };
+		7C7629BE1E27351F007B5698 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C7629BD1E27351F007B5698 /* LoginViewController.m */; };
+		7C7629C11E27371D007B5698 /* LoginActionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C7629C01E27371D007B5698 /* LoginActionView.m */; };
+		7C7629C71E27443F007B5698 /* LoginInputView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C7629C61E27443F007B5698 /* LoginInputView.m */; };
+		7C7629CA1E276093007B5698 /* LoginLogoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C7629C91E276093007B5698 /* LoginLogoView.m */; };
+		7C7629D21E276DBE007B5698 /* logo.gif in Resources */ = {isa = PBXBuildFile; fileRef = 7C7629D11E276DBE007B5698 /* logo.gif */; };
 		7CC9ADA81E25D12A00A392EA /* StageSubjectSelectViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CC9ADA71E25D12A00A392EA /* StageSubjectSelectViewController.m */; };
 		9241FFE11E25D5830015B587 /* ProjectContainerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9241FFE01E25D5830015B587 /* ProjectContainerView.m */; };
 		9241FFE41E25D77F0015B587 /* CourseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9241FFE31E25D77F0015B587 /* CourseViewController.m */; };
@@ -370,6 +376,17 @@
 		7C6F21A21E248BDA000AB43A /* readme.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = readme.txt; sourceTree = "<group>"; };
 		7C6F21A41E248BDA000AB43A /* readme.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = readme.txt; sourceTree = "<group>"; };
 		7C6F21A61E248BDA000AB43A /* readme.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = readme.txt; sourceTree = "<group>"; };
+		7C7629B91E2731A1007B5698 /* LoginBaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginBaseViewController.h; sourceTree = "<group>"; };
+		7C7629BA1E2731A1007B5698 /* LoginBaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginBaseViewController.m; sourceTree = "<group>"; };
+		7C7629BC1E27351F007B5698 /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
+		7C7629BD1E27351F007B5698 /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
+		7C7629BF1E27371D007B5698 /* LoginActionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginActionView.h; sourceTree = "<group>"; };
+		7C7629C01E27371D007B5698 /* LoginActionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginActionView.m; sourceTree = "<group>"; };
+		7C7629C51E27443F007B5698 /* LoginInputView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginInputView.h; sourceTree = "<group>"; };
+		7C7629C61E27443F007B5698 /* LoginInputView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginInputView.m; sourceTree = "<group>"; };
+		7C7629C81E276093007B5698 /* LoginLogoView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginLogoView.h; sourceTree = "<group>"; };
+		7C7629C91E276093007B5698 /* LoginLogoView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginLogoView.m; sourceTree = "<group>"; };
+		7C7629D11E276DBE007B5698 /* logo.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = logo.gif; sourceTree = "<group>"; };
 		7CC9ADA61E25D12A00A392EA /* StageSubjectSelectViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StageSubjectSelectViewController.h; sourceTree = "<group>"; };
 		7CC9ADA71E25D12A00A392EA /* StageSubjectSelectViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StageSubjectSelectViewController.m; sourceTree = "<group>"; };
 		9241FFDF1E25D5830015B587 /* ProjectContainerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProjectContainerView.h; sourceTree = "<group>"; };
@@ -435,6 +452,12 @@
 				7C1809341E25D4A900B71863 /* StageSubjectHeaderView.m */,
 				7C1809361E25DEBA00B71863 /* StageSubjectCell.h */,
 				7C1809371E25DEBA00B71863 /* StageSubjectCell.m */,
+				7C7629C81E276093007B5698 /* LoginLogoView.h */,
+				7C7629C91E276093007B5698 /* LoginLogoView.m */,
+				7C7629BF1E27371D007B5698 /* LoginActionView.h */,
+				7C7629C01E27371D007B5698 /* LoginActionView.m */,
+				7C7629C51E27443F007B5698 /* LoginInputView.h */,
+				7C7629C61E27443F007B5698 /* LoginInputView.m */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -501,6 +524,7 @@
 		7C1A5ED61E14FF2500832DED /* Phone */ = {
 			isa = PBXGroup;
 			children = (
+				7C7629CB1E276235007B5698 /* Res */,
 				7C1A5EDD1E15041C00832DED /* UI */,
 				7C1A5ED71E14FF2500832DED /* InfoPhone.plist */,
 				7C1A5EED1E150A3800832DED /* SKConfig.plist */,
@@ -1006,6 +1030,10 @@
 				7C6F21951E237FAF000AB43A /* LoginEntranceViewController.m */,
 				7CC9ADA61E25D12A00A392EA /* StageSubjectSelectViewController.h */,
 				7CC9ADA71E25D12A00A392EA /* StageSubjectSelectViewController.m */,
+				7C7629B91E2731A1007B5698 /* LoginBaseViewController.h */,
+				7C7629BA1E2731A1007B5698 /* LoginBaseViewController.m */,
+				7C7629BC1E27351F007B5698 /* LoginViewController.h */,
+				7C7629BD1E27351F007B5698 /* LoginViewController.m */,
 				7C1809391E25FEF800B71863 /* stage_subject.json */,
 				7C18093B1E25FF5600B71863 /* StageSubjectModel.h */,
 				7C18093C1E25FF5600B71863 /* StageSubjectModel.m */,
@@ -1043,6 +1071,22 @@
 				7C6F21A61E248BDA000AB43A /* readme.txt */,
 			);
 			path = "主界面";
+			sourceTree = "<group>";
+		};
+		7C7629CB1E276235007B5698 /* Res */ = {
+			isa = PBXGroup;
+			children = (
+				7C7629CE1E2762B7007B5698 /* gif */,
+			);
+			path = Res;
+			sourceTree = "<group>";
+		};
+		7C7629CE1E2762B7007B5698 /* gif */ = {
+			isa = PBXGroup;
+			children = (
+				7C7629D11E276DBE007B5698 /* logo.gif */,
+			);
+			name = gif;
 			sourceTree = "<group>";
 		};
 		9241FFDE1E25D5680015B587 /* view */ = {
@@ -1191,6 +1235,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7C1A5EE91E1506C500832DED /* PhoneImage.xcassets in Resources */,
+				7C7629D21E276DBE007B5698 /* logo.gif in Resources */,
 				7C1A5EF31E150BD100832DED /* env_config.json in Resources */,
 				7C1A5F941E15143F00832DED /* MockConfig.plist in Resources */,
 				7C18093A1E25FEF800B71863 /* stage_subject.json in Resources */,
@@ -1278,6 +1323,7 @@
 				7C1A5F4A1E15127200832DED /* YXPlayerTopView.m in Sources */,
 				7C1A5FE51E1637FC00832DED /* PagedListFetcherBase.m in Sources */,
 				7C2251C71E1DE66E004785D5 /* AlertView.m in Sources */,
+				7C7629BE1E27351F007B5698 /* LoginViewController.m in Sources */,
 				7C1A5F4D1E15127200832DED /* PreventHangingCourseView.m in Sources */,
 				7C1A5F171E15108F00832DED /* UrlDownloader.m in Sources */,
 				7C1A5F6C1E15130200832DED /* YXFileHtmlItem.m in Sources */,
@@ -1286,6 +1332,7 @@
 				7C1A5FD71E1636F500832DED /* YXEmptyView.m in Sources */,
 				7C1A5FE61E1637FC00832DED /* PagedListViewControllerBase.m in Sources */,
 				7C1A5EA81E14F08700832DED /* AppDelegate.m in Sources */,
+				7C7629C71E27443F007B5698 /* LoginInputView.m in Sources */,
 				7C1A5F041E150F4B00832DED /* LePlayer.m in Sources */,
 				7C6F21911E232F8E000AB43A /* YXDrawerViewController.m in Sources */,
 				7C1A5FC51E15214A00832DED /* YXShowWebMenuTableViewCell.m in Sources */,
@@ -1302,6 +1349,8 @@
 				7C1A5F2D1E15111800832DED /* YXPostRequest.m in Sources */,
 				7C1A60051E16396C00832DED /* UIView+ViewController.m in Sources */,
 				7C1A5FAB1E151C1C00832DED /* NavigationBarController.m in Sources */,
+				7C7629CA1E276093007B5698 /* LoginLogoView.m in Sources */,
+				7C7629C11E27371D007B5698 /* LoginActionView.m in Sources */,
 				7C1A5F231E1510FA00832DED /* GetRequest.m in Sources */,
 				7C6F21901E232F8E000AB43A /* YXDrawerController.m in Sources */,
 				7C1A5F771E15132200832DED /* YXFileFavorWrapper.m in Sources */,
@@ -1332,6 +1381,7 @@
 				9241FFFB1E2722470015B587 /* ProjectNavRightView.m in Sources */,
 				7C6F219C1E2481D6000AB43A /* AreaDataManager.m in Sources */,
 				7C1A5F6A1E15130200832DED /* YXFilePhotoItem.m in Sources */,
+				7C7629BB1E2731A1007B5698 /* LoginBaseViewController.m in Sources */,
 				7C1A5F151E15108F00832DED /* DownloadManager.m in Sources */,
 				7C1A60001E16396C00832DED /* UIImageView+AnimationCompletion.m in Sources */,
 				7C1A60011E16396C00832DED /* UIViewController+Keyboard.m in Sources */,
