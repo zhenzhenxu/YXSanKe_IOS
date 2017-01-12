@@ -7,6 +7,7 @@
 //
 
 #import "StageSubjectSelectViewController.h"
+#import "LoginViewController.h"
 #import "StageSubjectCell.h"
 #import "StageSubjectHeaderView.h"
 #import "StageSubjectModel.h"
@@ -25,6 +26,13 @@ static const NSInteger kNotSelectedTag = -1;
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    if (self.navigationController.viewControllers.count == 1) {
+        UIButton *rightView = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 30, 30)];
+        rightView.backgroundColor = [UIColor redColor];
+        [rightView addTarget:self action:@selector(naviRightAction) forControlEvents:UIControlEventTouchUpInside];
+        [self setupRightWithCustomView:rightView];
+    }
+
     self.view.backgroundColor = [UIColor colorWithHexString:@"e6e6e6"];
     self.stageSelectedIndex = kNotSelectedTag;
     self.subjectSelectedIndex = kNotSelectedTag;
@@ -35,6 +43,11 @@ static const NSInteger kNotSelectedTag = -1;
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)naviRightAction {
+    LoginViewController *vc = [[LoginViewController alloc]init];
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 - (void)setupMockData {

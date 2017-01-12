@@ -7,6 +7,7 @@
 //
 
 #import "LoginViewController.h"
+#import "StageSubjectSelectViewController.h"
 #import "LoginActionView.h"
 #import "LoginInputView.h"
 #import "LoginLogoView.h"
@@ -28,6 +29,16 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    self.navigationController.navigationBarHidden = YES;
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    self.navigationController.navigationBarHidden = NO;
 }
 
 - (void)setupUI {
@@ -75,6 +86,17 @@
         make.left.top.right.mas_equalTo(0);
         make.bottom.mas_equalTo(self.usernameView.mas_top);
     }];
+    
+    UIButton *touristButton = [[UIButton alloc]init];
+    touristButton.titleLabel.font = [UIFont systemFontOfSize:12];
+    [touristButton setTitle:@"游客登陆" forState:UIControlStateNormal];
+    [touristButton setTitleColor:[UIColor colorWithHexString:@"333333"] forState:UIControlStateNormal];
+    [touristButton addTarget:self action:@selector(touristLogin) forControlEvents:UIControlEventTouchUpInside];
+    [self.contentView addSubview:touristButton];
+    [touristButton mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerX.mas_equalTo(0);
+        make.top.mas_equalTo(actionView.mas_bottom).mas_equalTo(15);
+    }];
 }
 
 - (void)startLogin {
@@ -87,6 +109,12 @@
         [self showToast:@"请输入密码"];
         return;
     }
+    [UserManager sharedInstance].loginStatus = YES;
+}
+
+- (void)touristLogin {
+    StageSubjectSelectViewController *vc = [[StageSubjectSelectViewController alloc]init];
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 @end

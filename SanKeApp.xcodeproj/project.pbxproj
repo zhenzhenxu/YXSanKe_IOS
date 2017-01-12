@@ -114,7 +114,6 @@
 		7C6F218A1E232F6A000AB43A /* ProjectMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C6F21891E232F6A000AB43A /* ProjectMainViewController.m */; };
 		7C6F21901E232F8E000AB43A /* YXDrawerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C6F218D1E232F8E000AB43A /* YXDrawerController.m */; };
 		7C6F21911E232F8E000AB43A /* YXDrawerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C6F218F1E232F8E000AB43A /* YXDrawerViewController.m */; };
-		7C6F21961E237FAF000AB43A /* LoginEntranceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C6F21951E237FAF000AB43A /* LoginEntranceViewController.m */; };
 		7C6F21991E237FD2000AB43A /* PlayRecordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C6F21981E237FD2000AB43A /* PlayRecordViewController.m */; };
 		7C6F219C1E2481D6000AB43A /* AreaDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C6F219B1E2481D6000AB43A /* AreaDataManager.m */; };
 		7C6F219E1E24838C000AB43A /* area_data.json in Resources */ = {isa = PBXBuildFile; fileRef = 7C6F219D1E24838C000AB43A /* area_data.json */; };
@@ -124,6 +123,7 @@
 		7C7629C71E27443F007B5698 /* LoginInputView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C7629C61E27443F007B5698 /* LoginInputView.m */; };
 		7C7629CA1E276093007B5698 /* LoginLogoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C7629C91E276093007B5698 /* LoginLogoView.m */; };
 		7C7629D21E276DBE007B5698 /* logo.gif in Resources */ = {isa = PBXBuildFile; fileRef = 7C7629D11E276DBE007B5698 /* logo.gif */; };
+		7C7629D51E278E16007B5698 /* UserManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C7629D41E278E16007B5698 /* UserManager.m */; };
 		7CC9ADA81E25D12A00A392EA /* StageSubjectSelectViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CC9ADA71E25D12A00A392EA /* StageSubjectSelectViewController.m */; };
 		9241FFE11E25D5830015B587 /* ProjectContainerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9241FFE01E25D5830015B587 /* ProjectContainerView.m */; };
 		9241FFE41E25D77F0015B587 /* CourseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9241FFE31E25D77F0015B587 /* CourseViewController.m */; };
@@ -365,8 +365,6 @@
 		7C6F218D1E232F8E000AB43A /* YXDrawerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YXDrawerController.m; sourceTree = "<group>"; };
 		7C6F218E1E232F8E000AB43A /* YXDrawerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YXDrawerViewController.h; sourceTree = "<group>"; };
 		7C6F218F1E232F8E000AB43A /* YXDrawerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YXDrawerViewController.m; sourceTree = "<group>"; };
-		7C6F21941E237FAF000AB43A /* LoginEntranceViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginEntranceViewController.h; sourceTree = "<group>"; };
-		7C6F21951E237FAF000AB43A /* LoginEntranceViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginEntranceViewController.m; sourceTree = "<group>"; };
 		7C6F21971E237FD2000AB43A /* PlayRecordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayRecordViewController.h; sourceTree = "<group>"; };
 		7C6F21981E237FD2000AB43A /* PlayRecordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlayRecordViewController.m; sourceTree = "<group>"; };
 		7C6F219A1E2481D6000AB43A /* AreaDataManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AreaDataManager.h; sourceTree = "<group>"; };
@@ -387,6 +385,8 @@
 		7C7629C81E276093007B5698 /* LoginLogoView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginLogoView.h; sourceTree = "<group>"; };
 		7C7629C91E276093007B5698 /* LoginLogoView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginLogoView.m; sourceTree = "<group>"; };
 		7C7629D11E276DBE007B5698 /* logo.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = logo.gif; sourceTree = "<group>"; };
+		7C7629D31E278E16007B5698 /* UserManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserManager.h; sourceTree = "<group>"; };
+		7C7629D41E278E16007B5698 /* UserManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserManager.m; sourceTree = "<group>"; };
 		7CC9ADA61E25D12A00A392EA /* StageSubjectSelectViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StageSubjectSelectViewController.h; sourceTree = "<group>"; };
 		7CC9ADA71E25D12A00A392EA /* StageSubjectSelectViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StageSubjectSelectViewController.m; sourceTree = "<group>"; };
 		9241FFDF1E25D5830015B587 /* ProjectContainerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProjectContainerView.h; sourceTree = "<group>"; };
@@ -944,6 +944,8 @@
 				7C6F21A51E248BDA000AB43A /* 主界面 */,
 				7C6F219A1E2481D6000AB43A /* AreaDataManager.h */,
 				7C6F219B1E2481D6000AB43A /* AreaDataManager.m */,
+				7C7629D31E278E16007B5698 /* UserManager.h */,
+				7C7629D41E278E16007B5698 /* UserManager.m */,
 			);
 			path = Business;
 			sourceTree = "<group>";
@@ -1026,8 +1028,6 @@
 			isa = PBXGroup;
 			children = (
 				7C1809321E25D3BA00B71863 /* View */,
-				7C6F21941E237FAF000AB43A /* LoginEntranceViewController.h */,
-				7C6F21951E237FAF000AB43A /* LoginEntranceViewController.m */,
 				7CC9ADA61E25D12A00A392EA /* StageSubjectSelectViewController.h */,
 				7CC9ADA71E25D12A00A392EA /* StageSubjectSelectViewController.m */,
 				7C7629B91E2731A1007B5698 /* LoginBaseViewController.h */,
@@ -1327,7 +1327,6 @@
 				7C1A5F4D1E15127200832DED /* PreventHangingCourseView.m in Sources */,
 				7C1A5F171E15108F00832DED /* UrlDownloader.m in Sources */,
 				7C1A5F6C1E15130200832DED /* YXFileHtmlItem.m in Sources */,
-				7C6F21961E237FAF000AB43A /* LoginEntranceViewController.m in Sources */,
 				7C6F21871E232F4A000AB43A /* SideMenuViewController.m in Sources */,
 				7C1A5FD71E1636F500832DED /* YXEmptyView.m in Sources */,
 				7C1A5FE61E1637FC00832DED /* PagedListViewControllerBase.m in Sources */,
@@ -1369,6 +1368,7 @@
 				7C18094C1E271AFC00B71863 /* CollectionViewEqualSpaceFlowLayout.m in Sources */,
 				7C2251C31E1CE3AC004785D5 /* UIImage+GIF.m in Sources */,
 				7C1A5F691E15130200832DED /* YXFileAudioItem.m in Sources */,
+				7C7629D51E278E16007B5698 /* UserManager.m in Sources */,
 				7C1A5F161E15108F00832DED /* DownloadModel.xcdatamodel in Sources */,
 				7C1A5F4B1E15127200832DED /* YXPlayerViewController.m in Sources */,
 				7C1A5F3B1E15126500832DED /* YXAudioSlideProgressView.m in Sources */,

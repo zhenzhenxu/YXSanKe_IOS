@@ -74,5 +74,6 @@ extern int ddLogLevel;
 #import "GlobalUtils.h"
 #import "SKConfigManager.h"
 #import "YXFileItemBase.h"
+#import "UserManager.h"
 
 #endif /* PrefixHeader_pch */

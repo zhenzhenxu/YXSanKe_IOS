@@ -11,6 +11,8 @@
 #import "SideMenuViewController.h"
 #import "YXDrawerViewController.h"
 #import "ProjectMainViewController.h"
+#import "LoginViewController.h"
+#import "StageSubjectSelectViewController.h"
 
 @interface AppDelegate ()
 
@@ -22,7 +24,8 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
     [GlobalUtils setupCore];
-
+    [self registerNotifications];
+    
     self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
     self.window.backgroundColor = [UIColor whiteColor];
     
@@ -37,15 +40,37 @@
 }
 
 - (void)setupUI {
-    SideMenuViewController *menuVC = [[SideMenuViewController alloc]init];
-    ProjectMainViewController *mainVC = [[ProjectMainViewController alloc]init];
-    SKNavigationController *mainNavi = [[SKNavigationController alloc]initWithRootViewController:mainVC];
-    
-    YXDrawerViewController *drawerVC = [[YXDrawerViewController alloc]init];
-    drawerVC.drawerViewController = menuVC;
-    drawerVC.paneViewController = mainNavi;
-    drawerVC.drawerWidth = [UIScreen mainScreen].bounds.size.width * 600/750.0f;
-    self.window.rootViewController = drawerVC;
+    if ([UserManager sharedInstance].loginStatus) {
+        SideMenuViewController *menuVC = [[SideMenuViewController alloc]init];
+        ProjectMainViewController *mainVC = [[ProjectMainViewController alloc]init];
+        SKNavigationController *mainNavi = [[SKNavigationController alloc]initWithRootViewController:mainVC];
+        
+        YXDrawerViewController *drawerVC = [[YXDrawerViewController alloc]init];
+        drawerVC.drawerViewController = menuVC;
+        drawerVC.paneViewController = mainNavi;
+        drawerVC.drawerWidth = [UIScreen mainScreen].bounds.size.width * 600/750.0f;
+        self.window.rootViewController = drawerVC;
+    }else {
+        LoginViewController *loginVC = [[LoginViewController alloc]init];
+        SKNavigationController *loginNavi = [[SKNavigationController alloc]initWithRootViewController:loginVC];
+        if (self.window.rootViewController) {
+            [self.window.rootViewController presentViewController:loginNavi animated:YES completion:nil];
+        }else {
+            self.window.rootViewController = loginNavi;
+        }
+    }
+}
+
+- (void)registerNotifications {
+    WEAK_SELF
+    [[[NSNotificationCenter defaultCenter]rac_addObserverForName:kUserDidLoginNotification object:nil]subscribeNext:^(id x) {
+        STRONG_SELF
+        [self setupUI];
+    }];
+    [[[NSNotificationCenter defaultCenter]rac_addObserverForName:kUserDidLogoutNotification object:nil]subscribeNext:^(id x) {
+        STRONG_SELF
+        [self setupUI];
+    }];
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {

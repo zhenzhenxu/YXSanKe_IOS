@@ -22,6 +22,6 @@
 	<key>mockFrameworkOn</key>
 	<false/>
 	<key>testFrameworkOn</key>
-	<true/>
+	<false/>
 </dict>
 </plist>

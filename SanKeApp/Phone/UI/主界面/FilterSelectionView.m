@@ -120,10 +120,18 @@ static const NSInteger kNotSelectedTag = -1;
     if (self.firstLevelSelectedIndex == kNotSelectedTag) {
         return 1;
     }
+    StageSubjectItem *first = self.model.items[self.firstLevelSelectedIndex];
     if (self.secondLevelSelectedIndex == kNotSelectedTag) {
-        return 2;
+        if (first.items.count > 0) {
+            return 2;
+        }
+        return 1;
     }
-    return 3;
+    StageSubjectItem *second = first.items[self.secondLevelSelectedIndex];
+    if (second.items.count > 0) {
+        return 3;
+    }
+    return 2;
 }
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
