@@ -7,6 +7,8 @@
 //
 
 #import "RadianBaseCell.h"
+
 @interface CourseTableViewCell : RadianBaseCell
+@property (nonatomic, copy) void(^ClickCourseTitleBlock)();
 - (void)setupMokeData:(NSString *)string;
 @end

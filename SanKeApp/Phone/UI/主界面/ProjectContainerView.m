@@ -20,6 +20,7 @@ static const NSUInteger kTagBase = 10086;
 - (instancetype)initWithFrame:(CGRect)frame {
     if (self = [super initWithFrame:frame]) {
         [self setupUI];
+        self.backgroundColor = [UIColor colorWithHexString:@"e6e6e6"];
     }
     return self;
 }

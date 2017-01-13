@@ -1,28 +1,24 @@
 //
-//  CourseViewController.m
+//  AloneCourseViewController.m
 //  SanKeApp
 //
-//  Created by 郑小龙 on 17/1/11.
+//  Created by 郑小龙 on 17/1/13.
 //  Copyright © 2017年 niuzhaowang. All rights reserved.
 //
 
-#import "CourseViewController.h"
-#import "CourseTableViewCell.h"
-#import "YXFileVideoItem.h"
 #import "AloneCourseViewController.h"
-@implementation CourseTabItem
-@end;
-@interface CourseViewController ()
+#import "AloneCourseTableViewCell.h"
+#import "YXFileVideoItem.h"
+@interface AloneCourseViewController ()
+
 @end
 
-@implementation CourseViewController
-
+@implementation AloneCourseViewController
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self setupMokeData];
     [self setupUI];
     self.tableView.backgroundColor = [UIColor colorWithHexString:@"e6e6e6"];
-    self.title = self.tabItem.name;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -34,7 +30,7 @@
 #pragma mark - setupUI
 - (void)setupUI {
     
-    [self.tableView registerClass:[CourseTableViewCell class] forCellReuseIdentifier:@"CourseTableViewCell"];
+    [self.tableView registerClass:[AloneCourseTableViewCell class] forCellReuseIdentifier:@"AloneCourseTableViewCell"];
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, 10.0f)];
     headerView.backgroundColor = [UIColor colorWithHexString:@"e6e6e6"];
@@ -46,7 +42,7 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    CourseTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"CourseTableViewCell" forIndexPath:indexPath];
+    AloneCourseTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"AloneCourseTableViewCell" forIndexPath:indexPath];
     if (self.dataArray.count <= 1) {
         cell.cellStatus = RadianBaseCellStatus_Top | RadianBaseCellStatus_Bottom;
     }else {
@@ -55,16 +51,9 @@
         } else if (indexPath.row < self.dataArray.count - 1) {
             cell.cellStatus = RadianBaseCellStatus_Middle;
         } else {
-           cell.cellStatus = RadianBaseCellStatus_Bottom;
+            cell.cellStatus = RadianBaseCellStatus_Bottom;
         }
     }
-    WEAK_SELF
-    [cell setClickCourseTitleBlock:^{
-        STRONG_SELF
-        AloneCourseViewController *VC = [[AloneCourseViewController alloc] init];
-        [self.navigationController pushViewController:VC animated:YES];
-    }];
-    [cell setupMokeData:self.title];
     return cell;
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {

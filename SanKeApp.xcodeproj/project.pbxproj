@@ -136,6 +136,8 @@
 		9241FFF71E2651390015B587 /* YXGradientView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9241FFF41E2651390015B587 /* YXGradientView.m */; };
 		9241FFF81E2651390015B587 /* YXTriangleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9241FFF61E2651390015B587 /* YXTriangleView.m */; };
 		9241FFFB1E2722470015B587 /* ProjectNavRightView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9241FFFA1E2722470015B587 /* ProjectNavRightView.m */; };
+		92E7D1391E28A83F00A34300 /* AloneCourseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 92E7D1381E28A83F00A34300 /* AloneCourseViewController.m */; };
+		92E7D13D1E28A88600A34300 /* AloneCourseTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 92E7D13C1E28A88600A34300 /* AloneCourseTableViewCell.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -413,6 +415,10 @@
 		9241FFF61E2651390015B587 /* YXTriangleView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YXTriangleView.m; sourceTree = "<group>"; };
 		9241FFF91E2722470015B587 /* ProjectNavRightView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProjectNavRightView.h; sourceTree = "<group>"; };
 		9241FFFA1E2722470015B587 /* ProjectNavRightView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProjectNavRightView.m; sourceTree = "<group>"; };
+		92E7D1371E28A83F00A34300 /* AloneCourseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AloneCourseViewController.h; sourceTree = "<group>"; };
+		92E7D1381E28A83F00A34300 /* AloneCourseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AloneCourseViewController.m; sourceTree = "<group>"; };
+		92E7D13B1E28A88600A34300 /* AloneCourseTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AloneCourseTableViewCell.h; sourceTree = "<group>"; };
+		92E7D13C1E28A88600A34300 /* AloneCourseTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AloneCourseTableViewCell.m; sourceTree = "<group>"; };
 		F85EF3DA4AEC6DA4B2E1F0AA /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		FDFFD28C45A34489A38320DE /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -1006,6 +1012,8 @@
 				7C6F21891E232F6A000AB43A /* ProjectMainViewController.m */,
 				9241FFE21E25D77F0015B587 /* CourseViewController.h */,
 				9241FFE31E25D77F0015B587 /* CourseViewController.m */,
+				92E7D1371E28A83F00A34300 /* AloneCourseViewController.h */,
+				92E7D1381E28A83F00A34300 /* AloneCourseViewController.m */,
 			);
 			path = "主界面";
 			sourceTree = "<group>";
@@ -1120,6 +1128,8 @@
 				9241FFF11E2615B80015B587 /* PlayImageView.m */,
 				9241FFF91E2722470015B587 /* ProjectNavRightView.h */,
 				9241FFFA1E2722470015B587 /* ProjectNavRightView.m */,
+				92E7D13B1E28A88600A34300 /* AloneCourseTableViewCell.h */,
+				92E7D13C1E28A88600A34300 /* AloneCourseTableViewCell.m */,
 			);
 			name = view;
 			sourceTree = "<group>";
@@ -1369,6 +1379,7 @@
 				7C1A5FAB1E151C1C00832DED /* NavigationBarController.m in Sources */,
 				7C7629CA1E276093007B5698 /* LoginLogoView.m in Sources */,
 				7C7629C11E27371D007B5698 /* LoginActionView.m in Sources */,
+				92E7D1391E28A83F00A34300 /* AloneCourseViewController.m in Sources */,
 				7C1A5F231E1510FA00832DED /* GetRequest.m in Sources */,
 				7C6F21901E232F8E000AB43A /* YXDrawerController.m in Sources */,
 				7C1A5F771E15132200832DED /* YXFileFavorWrapper.m in Sources */,
@@ -1448,6 +1459,7 @@
 				7C1A5F671E15130200832DED /* YXFileItemBase.m in Sources */,
 				7C1A5EFC1E150E3400832DED /* FileLogger.m in Sources */,
 				9241FFF21E2615B80015B587 /* PlayImageView.m in Sources */,
+				92E7D13D1E28A88600A34300 /* AloneCourseTableViewCell.m in Sources */,
 				7C2251CA1E1DEADA004785D5 /* SKAlertView.m in Sources */,
 				9241FFF71E2651390015B587 /* YXGradientView.m in Sources */,
 			);

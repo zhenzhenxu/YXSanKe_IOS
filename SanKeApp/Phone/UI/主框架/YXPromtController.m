@@ -14,19 +14,18 @@
     if ([MBProgressHUD HUDForView:view]) {
         return;
     }
-//    [MBProgressHUD showHUDAddedTo:view animated:YES];
-    YXLoadView *loadView = [[YXLoadView alloc] initWithFrame:CGRectMake(0, 0, 45.0f, 45.0f)];
-    loadView.layer.cornerRadius = 22.5f;
-    loadView.layer.borderColor = [UIColor colorWithHexString:@"b3bdc6"].CGColor;
-    loadView.layer.borderWidth = 4.0f;
-    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:view animated:YES];
-    hud.mode = MBProgressHUDModeCustomView;
-    hud.customView = loadView;
-    hud.color = [UIColor clearColor];
-    hud.removeFromSuperViewOnHide = YES;
-    [hud show:YES];
-    [loadView startAnimate];
-    
+    [MBProgressHUD showHUDAddedTo:view animated:YES];
+//    YXLoadView *loadView = [[YXLoadView alloc] initWithFrame:CGRectMake(0, 0, 45.0f, 45.0f)];
+//    loadView.layer.cornerRadius = 22.5f;
+//    loadView.layer.borderColor = [UIColor colorWithHexString:@"b3bdc6"].CGColor;
+//    loadView.layer.borderWidth = 4.0f;
+//    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:view animated:YES];
+//    hud.mode = MBProgressHUDModeCustomView;
+//    hud.customView = loadView;
+//    hud.color = [UIColor clearColor];
+//    hud.removeFromSuperViewOnHide = YES;
+//    [hud show:YES];
+//    [loadView startAnimate];
 }
 
 + (void)stopLoadingInView:(UIView *)view{
