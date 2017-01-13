@@ -44,6 +44,7 @@
     self.loginServer = [envDic valueForKey:@"loginServer"];
     self.uploadServer = [envDic valueForKey:@"uploadServer"];
     self.websocketServer = [envDic valueForKey:@"websocketServer"];
+    self.initializeUrl = [envDic valueForKey:@"initializeUrl"];
     self.mode = [envDic valueForKey:@"mode"];
 }
 

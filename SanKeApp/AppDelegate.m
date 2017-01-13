@@ -24,6 +24,7 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
     [GlobalUtils setupCore];
+    [UpgradeManager checkForUpgrade];
     [self registerNotifications];
     
     self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];

@@ -3,6 +3,7 @@
     "loginServer":"http://u.yanxiu.com/test/",
     "uploadServer":"http://upload.yanxiu.com/resource/index.jsp",
     "websocketServer":"ws://mobile.yanxiu.com/test/api/websocket",
+    "initializeUrl":"http://mobile.yanxiu.com/test/api/initialize",
     "mode":"test",
     "serverList" :{
         "server":"http://mobile.yanxiu.com/v20/api/",

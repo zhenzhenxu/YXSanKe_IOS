@@ -15,6 +15,7 @@
 @property (nonatomic, strong) NSString<Optional> *loginServer;
 @property (nonatomic, strong) NSString<Optional> *uploadServer;
 @property (nonatomic, strong) NSString<Optional> *websocketServer;
+@property (nonatomic, strong) NSString<Optional> *initializeUrl;
 @property (nonatomic, strong) NSString<Optional> *mode;
 
 @property (nonatomic, strong) NSString<Ignore> *appName;

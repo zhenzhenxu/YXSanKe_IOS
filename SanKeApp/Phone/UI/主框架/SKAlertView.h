@@ -16,6 +16,7 @@ typedef void(^ButtonActionBlock)(void);
 @interface SKAlertView : AlertView
 @property (nonatomic, copy) NSString *title;
 @property (nonatomic, copy) NSString *imageName;
+@property (nonatomic, assign) BOOL hideWhenButtonClicked;
 
 - (void)addButtonWithTitle:(NSString *)title style:(SKAlertButtonStyle)style action:(ButtonActionBlock)buttonActionBlock;
 - (UIView *)generateDefaultView;

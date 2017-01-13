@@ -27,6 +27,7 @@ CGFloat const kDefaultContentViewHeight = 155.0f;
 - (instancetype)initWithFrame:(CGRect)frame {
     if (self = [super initWithFrame:frame]) {
         self.alertButtonItems = [NSMutableArray array];
+        self.hideWhenButtonClicked = YES;
     }
     return self;
 }
@@ -47,7 +48,9 @@ CGFloat const kDefaultContentViewHeight = 155.0f;
 }
 
 - (void)buttonAction:(SKAlertButton *)sender {
-    [self hide];
+    if (self.hideWhenButtonClicked) {
+        [self hide];
+    }
     [self.alertButtonItems enumerateObjectsUsingBlock:^(SKAlertButtonItem * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         if ([sender isEqual:obj.button]) {
             BLOCK_EXEC(obj.block);
