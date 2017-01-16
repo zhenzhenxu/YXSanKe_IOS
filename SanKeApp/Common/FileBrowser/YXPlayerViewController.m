@@ -157,11 +157,15 @@ static const NSTimeInterval kTopBottomHiddenTime = 5;
     
     self.topView.titleLabel.text = self.title;
     [self setupGesture];
+    WEAK_SELF
+    [[[NSNotificationCenter defaultCenter] rac_addObserverForName:kRecordNeedUpdateNotification object:nil] subscribeNext:^(id x) {
+        STRONG_SELF
+        [self recordPlayerDuration];
+    }];
     //[self _setupDefinitions];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applicationDidBecomeActive:) name:UIApplicationDidBecomeActiveNotification object:nil];// TD: fix bug 192
     
-    WEAK_SELF
     self.preventView = [[PreventHangingCourseView alloc] init];
     [self.preventView setPreventHangingCourseBlock:^{
         STRONG_SELF

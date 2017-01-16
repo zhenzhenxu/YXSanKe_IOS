@@ -125,6 +125,7 @@
 		7C7629D51E278E16007B5698 /* UserManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C7629D41E278E16007B5698 /* UserManager.m */; };
 		7C7629D91E28A9D5007B5698 /* YXInitRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C7629D81E28A9D5007B5698 /* YXInitRequest.m */; };
 		7C7629DC1E28B1F2007B5698 /* UpgradeManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C7629DB1E28B1F2007B5698 /* UpgradeManager.m */; };
+		7C7841731E2CA73800755BC0 /* RecordManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C7841721E2CA73800755BC0 /* RecordManager.m */; };
 		7CC9ADA81E25D12A00A392EA /* StageSubjectSelectViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CC9ADA71E25D12A00A392EA /* StageSubjectSelectViewController.m */; };
 		9241FFE11E25D5830015B587 /* ProjectContainerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9241FFE01E25D5830015B587 /* ProjectContainerView.m */; };
 		9241FFE41E25D77F0015B587 /* CourseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9241FFE31E25D77F0015B587 /* CourseViewController.m */; };
@@ -405,6 +406,8 @@
 		7C7629D81E28A9D5007B5698 /* YXInitRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YXInitRequest.m; sourceTree = "<group>"; };
 		7C7629DA1E28B1F2007B5698 /* UpgradeManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UpgradeManager.h; sourceTree = "<group>"; };
 		7C7629DB1E28B1F2007B5698 /* UpgradeManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UpgradeManager.m; sourceTree = "<group>"; };
+		7C7841711E2CA73800755BC0 /* RecordManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecordManager.h; sourceTree = "<group>"; };
+		7C7841721E2CA73800755BC0 /* RecordManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecordManager.m; sourceTree = "<group>"; };
 		7CC9ADA61E25D12A00A392EA /* StageSubjectSelectViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StageSubjectSelectViewController.h; sourceTree = "<group>"; };
 		7CC9ADA71E25D12A00A392EA /* StageSubjectSelectViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StageSubjectSelectViewController.m; sourceTree = "<group>"; };
 		9241FFDF1E25D5830015B587 /* ProjectContainerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProjectContainerView.h; sourceTree = "<group>"; };
@@ -721,6 +724,7 @@
 		7C1A5F2F1E1511F600832DED /* FileBrowser */ = {
 			isa = PBXGroup;
 			children = (
+				7C7841701E2CA70500755BC0 /* Record */,
 				7C1A5F5A1E1512E800832DED /* Type */,
 				7C1A5F301E15120600832DED /* Browsers */,
 				7C1A5F6D1E15132200832DED /* YXFileDownloadProgressView.h */,
@@ -1160,6 +1164,15 @@
 			path = "初始化";
 			sourceTree = "<group>";
 		};
+		7C7841701E2CA70500755BC0 /* Record */ = {
+			isa = PBXGroup;
+			children = (
+				7C7841711E2CA73800755BC0 /* RecordManager.h */,
+				7C7841721E2CA73800755BC0 /* RecordManager.m */,
+			);
+			name = Record;
+			sourceTree = "<group>";
+		};
 		9241FFDE1E25D5680015B587 /* view */ = {
 			isa = PBXGroup;
 			children = (
@@ -1493,6 +1506,7 @@
 				7C1A5F691E15130200832DED /* YXFileAudioItem.m in Sources */,
 				7C7629D51E278E16007B5698 /* UserManager.m in Sources */,
 				7C1A5F161E15108F00832DED /* DownloadModel.xcdatamodel in Sources */,
+				7C7841731E2CA73800755BC0 /* RecordManager.m in Sources */,
 				7C1A5F4B1E15127200832DED /* YXPlayerViewController.m in Sources */,
 				7C1A5F3B1E15126500832DED /* YXAudioSlideProgressView.m in Sources */,
 				7C1A5F861E1513D600832DED /* MJRefreshBaseView.m in Sources */,

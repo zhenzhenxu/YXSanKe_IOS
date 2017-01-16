@@ -15,7 +15,8 @@
 #import "StageSubjectSelectViewController.h"
 
 @interface AppDelegate ()
-
+@property (nonatomic, unsafe_unretained) UIBackgroundTaskIdentifier backgroundTaskIdentifier;
+@property (nonatomic, strong) NSTimer *backgroundTimer;
 @end
 
 @implementation AppDelegate
@@ -81,8 +82,48 @@
 
 
 - (void)applicationDidEnterBackground:(UIApplication *)application {
-    // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
-    // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
+    if ([RecordManager sharedInstance].isActive) {
+        WEAK_SELF
+        self.backgroundTaskIdentifier =[application beginBackgroundTaskWithExpirationHandler:^(void) {
+            STRONG_SELF
+            [self.backgroundTimer invalidate];
+            self.backgroundTimer = nil;
+            [self endBackgroundTask];
+        }];
+        [self.backgroundTimer invalidate];
+        self.backgroundTimer = [NSTimer scheduledTimerWithTimeInterval:1.0f target:self selector:@selector(timerMethod:) userInfo:nil repeats:YES];
+        [[[NSNotificationCenter defaultCenter]rac_addObserverForName:kRecordReportCompleteNotification object:nil]subscribeNext:^(id x) {
+            STRONG_SELF
+            [self.backgroundTimer invalidate];
+            self.backgroundTimer = nil;
+            if (self.backgroundTaskIdentifier) {
+                [self endBackgroundTask];
+            }
+        }];
+    }
+}
+
+- (void)endBackgroundTask{
+    dispatch_queue_t mainQueue = dispatch_get_main_queue();
+    @weakify(self);
+    dispatch_async(mainQueue, ^(void) {
+        @strongify(self);
+        if (self != nil){
+            [[UIApplication sharedApplication] endBackgroundTask:self.backgroundTaskIdentifier];
+            // 销毁后台任务标识符
+            self.backgroundTaskIdentifier = UIBackgroundTaskInvalid;
+        }
+    });
+}
+
+- (void)timerMethod:(NSTimer *)paramSender{
+    // backgroundTimeRemaining 属性包含了程序留给的我们的时间
+    NSTimeInterval backgroundTimeRemaining =[[UIApplication sharedApplication] backgroundTimeRemaining];
+    if (backgroundTimeRemaining == DBL_MAX){
+        DDLogDebug(@"Background Time Remaining = Undetermined");
+    } else {
+        DDLogDebug(@"Background Time Remaining = %.02f Seconds", backgroundTimeRemaining);
+    }
 }
 
 
