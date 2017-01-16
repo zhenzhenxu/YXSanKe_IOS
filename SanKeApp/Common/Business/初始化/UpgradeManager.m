@@ -8,9 +8,11 @@
 
 #import "UpgradeManager.h"
 #import "YXInitRequest.h"
+#import "UpgradeView.h"
 
 @interface UpgradeManager()
 @property (nonatomic, strong) YXInitRequest *request;
+@property (nonatomic, strong) UpgradeView *upgradeView;
 @end
 
 @implementation UpgradeManager
@@ -48,36 +50,28 @@
     if (![body.fileURL yx_isHttpLink]) { //http链接
         return;
     }
+    [self showUpgradeWithBody:body];
+}
+
+- (void)showUpgradeWithBody:(YXInitRequestItem_Body *)body {
+    self.upgradeView = [[UpgradeView alloc]init];
+    self.upgradeView.isForce = body.isForce;
+    WEAK_SELF
+    [self.upgradeView setUpgradeButtonActionBlock:^{
+        STRONG_SELF
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:body.fileURL]];
+    }];
     
-    if ([body isForce]) {
-        [self showForceUpgradeWithBody:body];
-    }else {
-        [self showUnForceUpgradeWithBody:body];
-    }
-}
-
-- (void)showForceUpgradeWithBody:(YXInitRequestItem_Body *)body {
     SKAlertView *alert = [[SKAlertView alloc]init];
-    alert.title = body.title;
-    alert.hideWhenButtonClicked = NO;
-    WEAK_SELF
-    [alert addButtonWithTitle:@"升级" style:SKAlertButtonStyle_Alone action:^{
+    alert.maskColor = [[UIColor blackColor] colorWithAlphaComponent:0.4];
+    alert.contentView = self.upgradeView;
+    [alert showWithLayout:^(AlertView *view) {
         STRONG_SELF
-        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:body.fileURL]];
+        [view.contentView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.center.mas_equalTo(0);
+            make.size.mas_equalTo(CGSizeMake(275, 379));
+        }];
     }];
-    [alert show];
-}
-
-- (void)showUnForceUpgradeWithBody:(YXInitRequestItem_Body *)body {
-    SKAlertView *alert = [[SKAlertView alloc]init];
-    alert.title = body.title;
-    WEAK_SELF
-    [alert addButtonWithTitle:@"取消" style:SKAlertButtonStyle_Cancel action:nil];
-    [alert addButtonWithTitle:@"升级" style:SKAlertButtonStyle_Alone action:^{
-        STRONG_SELF
-        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:body.fileURL]];
-    }];
-    [alert show];
 }
 
 @end

@@ -13,6 +13,7 @@
 #import "UserSubjectStageInfoPicker.h"
 #import "UserAreaInfoPicker.h"
 #import "StageAndSubjectRequest.h"
+
 @interface MineViewController ()<UITableViewDelegate, UITableViewDataSource>
 
 @property (nonatomic, strong) UITableView *tableView;
@@ -20,6 +21,7 @@
 @property (nonatomic, strong) UserSubjectStageInfoPicker *subjectStageInfoPicker;
 @property (nonatomic, strong) StageAndSubjectItem *stageAndSubjectItem;
 @property (nonatomic, strong) UserAreaInfoPicker *areaInfoPicker;
+
 @end
 
 @implementation MineViewController
@@ -35,10 +37,10 @@
         NSError *error;
         self.stageAndSubjectItem = [[StageAndSubjectItem alloc] initWithData:data error:&error];
     }
-
+    
     [self setupInfoPicker];
-   //定义一个属性profile 从网络请求回来的个人数据保存到里面
-//    [self requestUserProfile];
+    //定义一个属性profile 从网络请求回来的个人数据保存到里面
+    //    [self requestUserProfile];
     // Do any additional setup after loading the view.
 }
 
@@ -58,7 +60,7 @@
     }];
     
     self.userInfoPickerView = [[UserInfoPickerView alloc]init];
-     [self.navigationController.view addSubview:self.userInfoPickerView];
+    [self.navigationController.view addSubview:self.userInfoPickerView];
     [self.userInfoPickerView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.mas_equalTo(0);
     }];
@@ -129,7 +131,7 @@
                 self.userInfoPickerView.pickerView.dataSource = self.subjectStageInfoPicker;
                 self.userInfoPickerView.pickerView.delegate = self.subjectStageInfoPicker;
                 [self.userInfoPickerView showPickerView];
-//               [self.subjectStageInfoPicker resetSelectedSubjectsWithProfile:profile];//重置选中的学科学段
+                //               [self.subjectStageInfoPicker resetSelectedSubjectsWithProfile:profile];//重置选中的学科学段
                 [self showStageAndSubjectPicker];//显示
             }];
         }else if (indexPath.row == 3) {
@@ -141,9 +143,8 @@
                 self.userInfoPickerView.pickerView.dataSource = self.areaInfoPicker;
                 self.userInfoPickerView.pickerView.delegate = self.areaInfoPicker;
                 [self.userInfoPickerView showPickerView];
-//                [self.areaInfoPicker resetSelectedProvinceDataWithProfile:profile]//重置选中的地区
+                ////                [self.areaInfoPicker resetSelectedProvinceDataWithProfile:profile]//重置选中的地区
                 [self showProvinceListPicker];//显示
-
             }];
         }
         return cell;
@@ -174,5 +175,6 @@
     [self.userInfoPickerView.pickerView selectRow:item.selectedCityRow inComponent:1 animated:NO];
     [self.userInfoPickerView.pickerView selectRow:item.selectedCountyRow inComponent:2 animated:NO];
 }
+
 
 @end

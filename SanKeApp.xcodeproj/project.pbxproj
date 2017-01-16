@@ -156,6 +156,7 @@
 		E902E6C51E2BA423009441B3 /* SideTableViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E902E6C41E2BA423009441B3 /* SideTableViewModel.m */; };
 		E902E6CB1E2C9722009441B3 /* StageAndSubjectRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = E902E6CA1E2C9722009441B3 /* StageAndSubjectRequest.m */; };
 		E902E6CD1E2C9FD5009441B3 /* stageAndSubject.json in Resources */ = {isa = PBXBuildFile; fileRef = E902E6CC1E2C9FD5009441B3 /* stageAndSubject.json */; };
+		E902E6D81E2CC1E7009441B3 /* UpgradeView.m in Sources */ = {isa = PBXBuildFile; fileRef = E902E6D71E2CC1E7009441B3 /* UpgradeView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -469,6 +470,8 @@
 		E902E6C91E2C9722009441B3 /* StageAndSubjectRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StageAndSubjectRequest.h; sourceTree = "<group>"; };
 		E902E6CA1E2C9722009441B3 /* StageAndSubjectRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StageAndSubjectRequest.m; sourceTree = "<group>"; };
 		E902E6CC1E2C9FD5009441B3 /* stageAndSubject.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = stageAndSubject.json; sourceTree = "<group>"; };
+		E902E6D61E2CC1E7009441B3 /* UpgradeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UpgradeView.h; sourceTree = "<group>"; };
+		E902E6D71E2CC1E7009441B3 /* UpgradeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UpgradeView.m; sourceTree = "<group>"; };
 		F85EF3DA4AEC6DA4B2E1F0AA /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		FDFFD28C45A34489A38320DE /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -1060,6 +1063,7 @@
 		7C6F21841E232F2A000AB43A /* 主界面 */ = {
 			isa = PBXGroup;
 			children = (
+				E902E6D21E2CB268009441B3 /* 升级 */,
 				7C18093E1E2618AE00B71863 /* 筛选 */,
 				9241FFDE1E25D5680015B587 /* view */,
 				7C6F21881E232F6A000AB43A /* ProjectMainViewController.h */,
@@ -1263,6 +1267,15 @@
 				E902E6AD1E2BA3BE009441B3 /* SideTableViewCell.m */,
 			);
 			name = Views;
+			sourceTree = "<group>";
+		};
+		E902E6D21E2CB268009441B3 /* 升级 */ = {
+			isa = PBXGroup;
+			children = (
+				E902E6D61E2CC1E7009441B3 /* UpgradeView.h */,
+				E902E6D71E2CC1E7009441B3 /* UpgradeView.m */,
+			);
+			name = "升级";
 			sourceTree = "<group>";
 		};
 		F408629257CB581950B8FDF3 /* Pods */ = {
@@ -1483,6 +1496,7 @@
 				7C1A5F6C1E15130200832DED /* YXFileHtmlItem.m in Sources */,
 				E902E6BD1E2BA3E0009441B3 /* UserImageTableViewCell.m in Sources */,
 				7C1A5FD71E1636F500832DED /* YXEmptyView.m in Sources */,
+				E902E6D81E2CC1E7009441B3 /* UpgradeView.m in Sources */,
 				7C1A5FE61E1637FC00832DED /* PagedListViewControllerBase.m in Sources */,
 				7C1A5EA81E14F08700832DED /* AppDelegate.m in Sources */,
 				7C7629C71E27443F007B5698 /* LoginInputView.m in Sources */,
