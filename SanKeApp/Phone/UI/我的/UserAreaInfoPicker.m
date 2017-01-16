@@ -8,10 +8,20 @@
 
 #import "UserAreaInfoPicker.h"
 #import "AreaDataManager.h"
-@interface UserAreaInfoPicker ()
 
+@implementation UserAreaSelectedInfoItem
 @end
+
+@interface UserAreaInfoPicker ()
+@property (nonatomic, strong) Area *selectedProvince;
+@property (nonatomic ,strong)NSArray<Area *> *selectedCitys;
+@property (nonatomic ,strong)NSArray<Area *> *selectedCounties;
+@property (nonatomic, strong) Area *selectedCity;
+@property (nonatomic, strong) Area *selectedCounty;
+@end
+
 @implementation UserAreaInfoPicker
+
 #pragma mark - UIPickerViewDataSource
 - (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView
 {
@@ -122,16 +132,57 @@
     }
     // Fill the label text here
     pickerLabel.text=[self pickerView:pickerView titleForRow:row forComponent:component];
-    self.integer = row;
     return pickerLabel;
 }
 
-- (void)setSelectedProvince:(Area *)selectedProvince {
-    _selectedProvince = selectedProvince;
-    self.selectedCitys = selectedProvince.subAreas;
-    self.selectedCounties = self.selectedCitys[0].subAreas;
-}
-- (void)selectRow:(UIPickerView *)view  {
-       [view selectRow:self.integer inComponent:0 animated:NO];
+//- (void)resetSelectedProvinceDataWithProfile:(YXUserProfile *)profile
+//{
+//    if (!profile) {
+//        return;
+//    }
+//    [self getProvinceList];//获取地区的数据 现在用UpgradeManager就行
+//    [self.provincesRequestItem.data enumerateObjectsUsingBlock:^(YXProvincesRequestItem_subArea *subArea, NSUInteger idx, BOOL *stop) {
+//        if ([profile.province isEqualToString:subArea.name]) {
+//            self.selectedProvince = subArea;
+//            self.selectedCitys = self.selectedProvince.subArea;
+//            *stop = YES;
+//        }
+//    }];
+//    [self.selectedCitys enumerateObjectsUsingBlock:^(YXProvincesRequestItem_subArea *subArea, NSUInteger idx, BOOL *stop) {
+//        if ([profile.city isEqualToString:subArea.name]) {
+//            self.selectedCity = subArea;
+//            self.selectedCounties = self.selectedCity.subArea;
+//            *stop = YES;
+//        }
+//    }];
+//    [self.selectedCounties enumerateObjectsUsingBlock:^(YXProvincesRequestItem_subArea *subArea, NSUInteger idx, BOOL *stop) {
+//        if ([profile.region isEqualToString:subArea.name]) {
+//            self.selectedCounty = subArea;
+//            *stop = YES;
+//        }
+//    }];
+//}
+
+- (UserAreaSelectedInfoItem *)selectedItem {
+    UserAreaSelectedInfoItem *item = [[UserAreaSelectedInfoItem alloc]init];
+    item.selectedProvinceRow = 0;
+    item.selectedCityRow = 0;
+    item.selectedCountyRow = 0;
+    if ([self.model.areas containsObject:self.selectedProvince]) {
+        item.selectedProvinceRow = [self.model.areas indexOfObject:self.selectedProvince];
+    } else if (self.model.areas > 0) {
+        self.selectedCitys = ((Area *)self.model.areas[0]).subAreas;
+    }
+    
+    if ([self.selectedCitys containsObject:self.selectedCity]) {
+        item.selectedCityRow = [self.selectedCitys indexOfObject:self.selectedCity];
+    } else if (self.selectedCitys.count > 0) {
+        self.selectedCounties = ((Area *)self.selectedCitys[0]).subAreas;
+    }
+    
+    if ([self.selectedCounties containsObject:self.selectedCounty]) {
+        item.selectedCountyRow = [self.selectedCounties indexOfObject:self.selectedCounty];
+    }
+    return item;
 }
 @end

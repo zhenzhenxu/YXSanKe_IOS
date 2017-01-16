@@ -7,10 +7,17 @@
 //
 
 #import "UserSubjectStageInfoPicker.h"
+#import "StageAndSubjectRequest.h"
+
+@implementation UserSubjectStageSelectedInfoItem
+@end
 
 @interface UserSubjectStageInfoPicker ()
-
+@property (nonatomic, strong) NSArray *selectedSubjects;
+@property (nonatomic, strong) StageAndSubjectItem_Stage *selectedStage;
+@property (nonatomic, strong) StageAndSubjectItem_Stage_Subject *selectedSubject;
 @end
+
 @implementation UserSubjectStageInfoPicker
 #pragma mark - UIPickerViewDataSource
 - (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView
@@ -22,9 +29,9 @@
 {
     switch (component) {
         case 0:
-            return 5;
+            return self.stageAndSubjectItem.stages.count;
         case 1:
-            return 10;
+            return self.selectedSubjects.count;
         default:
             return 0;
     }
@@ -51,15 +58,10 @@
 {
     switch (component) {
         case 0:
-        {
-            return @"学科";
-        }
+            return ((StageAndSubjectItem_Stage *)self.stageAndSubjectItem.stages[row]).name;
         case 1:
-        {
-            return @"学段";
-            
-        }
-            default:
+            return ((StageAndSubjectItem_Stage_Subject *)self.selectedSubjects[row]).name;
+        default:
             return nil;
     }
 }
@@ -71,30 +73,12 @@
     switch (component) {
         case 0:
         {
-            //                    self.selectedCitys = ((YXProvincesRequestItem_subArea *)self.provincesRequestItem.data[row]).subArea;
-            //                    if (self.selectedCitys.count > 0){
-            //                        self.selectedCounties = ((YXProvincesRequestItem_subArea *)self.selectedCitys[0]).subArea;
-            //                    }else{
-            //                        self.selectedCounties = nil;
-            //                    }
-            //
-            //                    [pickerView reloadComponent:1];
-            //                    [pickerView reloadComponent:2];
-            //                    [pickerView selectRow:0 inComponent:1 animated:NO];
-            //                    [pickerView selectRow:0 inComponent:2 animated:NO];
+            self.selectedSubjects = ((StageAndSubjectItem_Stage *)self.stageAndSubjectItem.stages[row]).subjects;
+            [pickerView reloadComponent:1];
+            [pickerView selectRow:0 inComponent:1 animated:NO];
         }
             break;
         case 1:
-        {
-            //                    if (self.selectedCitys.count > row){
-            //                        self.selectedCounties = ((YXProvincesRequestItem_subArea *)self.selectedCitys[row]).subArea;
-            //                    }else{
-            //                        self.selectedCounties = nil;
-            //                    }
-            //                    [pickerView reloadComponent:2];
-            //                    [pickerView selectRow:0 inComponent:2 animated:NO];
-        }
-            break;
         default:
             break;
     }
@@ -114,4 +98,36 @@
     return pickerLabel;
 }
 
+//- (void)resetSelectedSubjectsWithProfile:(YXUserProfile *)profile
+//{
+//    [self.stageAndSubjectItem.stages enumerateObjectsUsingBlock:^(StageAndSubjectItem_Stage *stage, NSUInteger idx, BOOL *stop) {
+//        if ([profile.stageId isEqualToString:stage.sid]) {
+//            self.selectedStage = stage;
+//            self.selectedSubjects = self.selectedStage.subjects;
+//            *stop = YES;
+//        }
+//    }];
+//    [self.selectedSubjects enumerateObjectsUsingBlock:^(StageAndSubjectItem_Stage_Subject *subject, NSUInteger idx, BOOL *stop) {
+//        if ([profile.subjectId isEqualToString:subject.sid]) {
+//            self.selectedSubject = subject;
+//            *stop = YES;
+//        }
+//    }];
+//}
+
+- (UserSubjectStageSelectedInfoItem *)selectedItem {
+    UserSubjectStageSelectedInfoItem *item = [[UserSubjectStageSelectedInfoItem alloc]init];
+    item.selectedStageRow = 0;
+    item.selectedSubjectRow = 0;
+    if ([self.stageAndSubjectItem.stages containsObject:self.selectedStage]) {
+        item.selectedStageRow = [self.stageAndSubjectItem.stages indexOfObject:self.selectedStage];
+    } else if (self.stageAndSubjectItem.stages.count > 0) {
+        self.selectedSubjects = ((StageAndSubjectItem_Stage *)self.stageAndSubjectItem.stages[0]).subjects;
+    }
+    
+    if ([self.selectedSubjects containsObject:self.selectedSubject]) {
+        item.selectedStageRow = [self.selectedSubjects indexOfObject:self.selectedSubject];
+    }
+    return item;
+}
 @end

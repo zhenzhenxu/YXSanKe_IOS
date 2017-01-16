@@ -110,6 +110,9 @@
 }
 
 #pragma mark -
+- (void)showPickerView {
+    [self showPickerView:NO];
+}
 - (void)showPickerView:(BOOL)animated
 {
     CGFloat height = CGRectGetHeight(self.bounds);

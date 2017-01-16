@@ -14,7 +14,7 @@ typedef void(^ConfirmButtonActionBlock)(void);
 
 @property (nonatomic, strong) UIPickerView *pickerView;
 
-
+- (void)showPickerView;
 - (void)hidePickerView;
 // 显示PickerView并展示数据
 - (void)reloadPickerView;
