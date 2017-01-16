@@ -43,14 +43,13 @@ static const NSUInteger kTagBase = 10086;
 }
 
 - (void)setChildViewControllers:(NSArray<__kindof CourseViewController *> *)childViewControllers {
-    _childViewControllers = childViewControllers;
     for (UIView *v in self.topScrollView.subviews) {
         [v removeFromSuperview];
     }
     for (UIView *v in self.bottomScrollView.subviews) {
         [v removeFromSuperview];
     }
-    
+    _childViewControllers = childViewControllers;
     [_childViewControllers enumerateObjectsUsingBlock:^(CourseViewController *obj, NSUInteger idx, BOOL * _Nonnull stop) {
         UIButton *b = [self buttonWithTitle:obj.tabItem.name];
         CGFloat btnWidth = kScreenWidth / 4.0f;
@@ -61,6 +60,8 @@ static const NSUInteger kTagBase = 10086;
             obj.view.frame = CGRectMake(self.bottomScrollView.frame.size.width*idx, 0, self.bottomScrollView.frame.size.width, self.bottomScrollView.frame.size.height);
             obj.view.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
             [self.bottomScrollView addSubview:obj.view];
+            self.bottomScrollView.contentOffset = CGPointMake(0, 0);
+            self.topScrollView.contentOffset = CGPointMake(0, 0);
             b.selected = YES;
         }
         if (idx < _childViewControllers.count - 1) {

@@ -7,8 +7,9 @@
 //
 
 #import "RadianBaseCell.h"
-
+#import "ChannelIndexRequest.h"
 @interface CourseTableViewCell : RadianBaseCell
+@property (nonatomic, strong) ChannelIndexRequestItem_Data_Elements *element;
 @property (nonatomic, copy) void(^ClickCourseTitleBlock)();
-- (void)setupMokeData:(NSString *)string;
+
 @end

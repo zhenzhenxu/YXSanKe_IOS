@@ -127,6 +127,11 @@
 		7C7629DC1E28B1F2007B5698 /* UpgradeManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C7629DB1E28B1F2007B5698 /* UpgradeManager.m */; };
 		7C7841731E2CA73800755BC0 /* RecordManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C7841721E2CA73800755BC0 /* RecordManager.m */; };
 		7CC9ADA81E25D12A00A392EA /* StageSubjectSelectViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CC9ADA71E25D12A00A392EA /* StageSubjectSelectViewController.m */; };
+		923A4E2E1E2C9FF5001059E2 /* ChannelTabRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 923A4E2D1E2C9FF5001059E2 /* ChannelTabRequest.m */; };
+		923A4E311E2CA4E7001059E2 /* ChannelIndexRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 923A4E301E2CA4E7001059E2 /* ChannelIndexRequest.m */; };
+		923A4E351E2CAE1C001059E2 /* channelTab_mock.json in Resources */ = {isa = PBXBuildFile; fileRef = 923A4E331E2CAE1C001059E2 /* channelTab_mock.json */; };
+		923A4E361E2CAE1C001059E2 /* channelIndex_mock.json in Resources */ = {isa = PBXBuildFile; fileRef = 923A4E341E2CAE1C001059E2 /* channelIndex_mock.json */; };
+		923A4E391E2CB310001059E2 /* ChannelIndexFetch.m in Sources */ = {isa = PBXBuildFile; fileRef = 923A4E381E2CB310001059E2 /* ChannelIndexFetch.m */; };
 		9241FFE11E25D5830015B587 /* ProjectContainerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9241FFE01E25D5830015B587 /* ProjectContainerView.m */; };
 		9241FFE41E25D77F0015B587 /* CourseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9241FFE31E25D77F0015B587 /* CourseViewController.m */; };
 		9241FFE71E25E7C90015B587 /* CourseTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9241FFE61E25E7C90015B587 /* CourseTableViewCell.m */; };
@@ -410,6 +415,14 @@
 		7C7841721E2CA73800755BC0 /* RecordManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecordManager.m; sourceTree = "<group>"; };
 		7CC9ADA61E25D12A00A392EA /* StageSubjectSelectViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StageSubjectSelectViewController.h; sourceTree = "<group>"; };
 		7CC9ADA71E25D12A00A392EA /* StageSubjectSelectViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StageSubjectSelectViewController.m; sourceTree = "<group>"; };
+		923A4E2C1E2C9FF5001059E2 /* ChannelTabRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChannelTabRequest.h; sourceTree = "<group>"; };
+		923A4E2D1E2C9FF5001059E2 /* ChannelTabRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChannelTabRequest.m; sourceTree = "<group>"; };
+		923A4E2F1E2CA4E7001059E2 /* ChannelIndexRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChannelIndexRequest.h; sourceTree = "<group>"; };
+		923A4E301E2CA4E7001059E2 /* ChannelIndexRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChannelIndexRequest.m; sourceTree = "<group>"; };
+		923A4E331E2CAE1C001059E2 /* channelTab_mock.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = channelTab_mock.json; sourceTree = "<group>"; };
+		923A4E341E2CAE1C001059E2 /* channelIndex_mock.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = channelIndex_mock.json; sourceTree = "<group>"; };
+		923A4E371E2CB310001059E2 /* ChannelIndexFetch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChannelIndexFetch.h; sourceTree = "<group>"; };
+		923A4E381E2CB310001059E2 /* ChannelIndexFetch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChannelIndexFetch.m; sourceTree = "<group>"; };
 		9241FFDF1E25D5830015B587 /* ProjectContainerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProjectContainerView.h; sourceTree = "<group>"; };
 		9241FFE01E25D5830015B587 /* ProjectContainerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProjectContainerView.m; sourceTree = "<group>"; };
 		9241FFE21E25D77F0015B587 /* CourseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CourseViewController.h; sourceTree = "<group>"; };
@@ -1133,6 +1146,14 @@
 			isa = PBXGroup;
 			children = (
 				7C6F21A61E248BDA000AB43A /* readme.txt */,
+				923A4E2C1E2C9FF5001059E2 /* ChannelTabRequest.h */,
+				923A4E2D1E2C9FF5001059E2 /* ChannelTabRequest.m */,
+				923A4E331E2CAE1C001059E2 /* channelTab_mock.json */,
+				923A4E2F1E2CA4E7001059E2 /* ChannelIndexRequest.h */,
+				923A4E301E2CA4E7001059E2 /* ChannelIndexRequest.m */,
+				923A4E341E2CAE1C001059E2 /* channelIndex_mock.json */,
+				923A4E371E2CB310001059E2 /* ChannelIndexFetch.h */,
+				923A4E381E2CB310001059E2 /* ChannelIndexFetch.m */,
 			);
 			path = "主界面";
 			sourceTree = "<group>";
@@ -1373,10 +1394,12 @@
 				E902E6C21E2BA3FC009441B3 /* huoying.jpg in Resources */,
 				7C1A5F8E1E15143400832DED /* neterror_mock.json in Resources */,
 				7C1A5EEE1E150A3800832DED /* SKConfig.plist in Resources */,
+				923A4E361E2CAE1C001059E2 /* channelIndex_mock.json in Resources */,
 				7C1A5F8D1E15143400832DED /* errorcode_mock.json in Resources */,
 				7C1A5F851E1513D600832DED /* MJRefresh.bundle in Resources */,
 				7C1A5EDC1E15035100832DED /* Empty.xib in Resources */,
 				E902E6CD1E2C9FD5009441B3 /* stageAndSubject.json in Resources */,
+				923A4E351E2CAE1C001059E2 /* channelTab_mock.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1466,6 +1489,7 @@
 				7C7629DC1E28B1F2007B5698 /* UpgradeManager.m in Sources */,
 				7C1A5F041E150F4B00832DED /* LePlayer.m in Sources */,
 				7C6F21911E232F8E000AB43A /* YXDrawerViewController.m in Sources */,
+				923A4E2E1E2C9FF5001059E2 /* ChannelTabRequest.m in Sources */,
 				7C1A5FC51E15214A00832DED /* YXShowWebMenuTableViewCell.m in Sources */,
 				7C1A5FAF1E151D4E00832DED /* UIViewController+YXAddtion.m in Sources */,
 				7C1A5F871E1513D600832DED /* MJRefreshConst.m in Sources */,
@@ -1540,6 +1564,7 @@
 				7CC9ADA81E25D12A00A392EA /* StageSubjectSelectViewController.m in Sources */,
 				7C18093D1E25FF5600B71863 /* StageSubjectModel.m in Sources */,
 				7C1A5F211E1510FA00832DED /* HttpBaseRequest.m in Sources */,
+				923A4E391E2CB310001059E2 /* ChannelIndexFetch.m in Sources */,
 				7C1A5F051E150F4B00832DED /* LePlayerView.m in Sources */,
 				7C1809381E25DEBA00B71863 /* StageSubjectCell.m in Sources */,
 				7C1A5F761E15132200832DED /* FileDownloadHelper.m in Sources */,
@@ -1572,6 +1597,7 @@
 				E902E6AF1E2BA3BE009441B3 /* SideHeaderView.m in Sources */,
 				7C1A5EFC1E150E3400832DED /* FileLogger.m in Sources */,
 				9241FFF21E2615B80015B587 /* PlayImageView.m in Sources */,
+				923A4E311E2CA4E7001059E2 /* ChannelIndexRequest.m in Sources */,
 				92E7D13D1E28A88600A34300 /* AloneCourseTableViewCell.m in Sources */,
 				7C2251CA1E1DEADA004785D5 /* SKAlertView.m in Sources */,
 				9241FFF71E2651390015B587 /* YXGradientView.m in Sources */,

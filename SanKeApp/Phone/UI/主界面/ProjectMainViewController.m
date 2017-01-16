@@ -13,8 +13,10 @@
 #import "CourseViewController.h"
 #import "ProjectNavRightView.h"
 #import "FilterSelectionView.h"
+#import "ChannelTabRequest.h"
 @interface ProjectMainViewController ()
-@property (nonatomic, strong) NSMutableArray *dataMutableArrray;
+@property (nonatomic, strong) ChannelTabRequest *tabRequest;
+@property (nonatomic, strong) ProjectContainerView *containerView;
 @end
 
 @implementation ProjectMainViewController
@@ -27,6 +29,7 @@
     [self setupUI];
     [self setupLeftNavView];
     [self setupRightNavView];
+    [self requestForChannelTab];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -36,11 +39,10 @@
 
 #pragma mark - setupUI
 - (void)setupUI {
-    [self setupMokeData];
-    ProjectContainerView *containerView = [[ProjectContainerView alloc]initWithFrame:self.view.bounds];
-    containerView.autoresizingMask = UIViewAutoresizingFlexibleHeight;
-    containerView.childViewControllers = self.childViewControllers;
-    [self.view addSubview:containerView];
+    self.containerView = [[ProjectContainerView alloc]initWithFrame:self.view.bounds];
+    self.containerView.hidden = YES;
+    self.containerView.autoresizingMask = UIViewAutoresizingFlexibleHeight;
+    [self.view addSubview:self.containerView];
 }
 
 - (void)setupLeftNavView {
@@ -76,6 +78,21 @@
     }];
     [self setupRightWithCustomView:rightView];
 }
+- (void)showContainerView:(NSArray *)tabs {
+    self.containerView.hidden = NO;
+    for (CourseViewController *vc in self.childViewControllers) {
+        [vc removeFromParentViewController];
+    }
+    for (ChannelTabRequestItem_Data_Tab *tab in tabs) {
+        CourseTabItem *item = [[CourseTabItem alloc] init];
+        item.name = [NSString stringWithFormat:@"%@",tab.catname];
+        item.tabId = tab.catid;
+        CourseViewController *vc = [[CourseViewController alloc] init];
+        vc.tabItem = item;
+        [self addChildViewController:vc];
+    }
+    self.containerView.childViewControllers = self.childViewControllers;
+}
 - (void)showFilterSelectionView {
     FilterSelectionView *v = [[FilterSelectionView alloc]init];
     AlertView *alert = [[AlertView alloc]init];
@@ -110,18 +127,25 @@
         }];
     }];
 }
-
-- (void)setupMokeData {
-    self.dataMutableArrray = [@[@"全部",@"\"新\"在哪里",@"关键点位",@"颗粒研修"] mutableCopy];
-    for (int i=0 ; i<self.dataMutableArrray.count ;i++){
-        CourseTabItem *item = [[CourseTabItem alloc] init];
-        item.name = self.dataMutableArrray[i];
-        CourseViewController *vc = [[CourseViewController alloc] init];
-        vc.tabItem = item;
-        [self addChildViewController:vc];
+#pragma mark - request
+- (void)requestForChannelTab {
+    if (self.tabRequest) {
+        [self.tabRequest stopRequest];
     }
+
+    ChannelTabRequest *request = [[ChannelTabRequest alloc] init];
+    [self startLoading];
+    WEAK_SELF
+    [request startRequestWithRetClass:[ChannelTabRequestItem class] andCompleteBlock:^(id retItem, NSError *error, BOOL isMock) {
+        STRONG_SELF
+        [self stopLoading];
+        if (error) {
+            
+        }else {
+            ChannelTabRequestItem *item = retItem;
+            [self showContainerView:item.data.tab];
+        }
+    }];
+    self.tabRequest = request;
 }
-
-
-
 @end

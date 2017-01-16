@@ -38,7 +38,7 @@
     [self.contentView addSubview:self.bottomView];
     
     self.lineView = [[UIView alloc] init];
-    self.lineView.backgroundColor = [UIColor colorWithHexString:@"e6e6e6"];
+    self.lineView.backgroundColor = [UIColor colorWithHexString:@"fda89d"];
     [self.contentView addSubview:self.lineView];
 }
 

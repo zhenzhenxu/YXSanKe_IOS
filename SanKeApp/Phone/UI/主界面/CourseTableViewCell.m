@@ -77,16 +77,16 @@
         make.right.equalTo(self.contentView.mas_right).offset(-20.0);
     }];
 }
-- (void)setupMokeData:(NSString *)string {
-    self.titleLabel.text = [NSString stringWithFormat:@"%@小学语文七年级下册第一课",string];
+- (void)setElement:(ChannelIndexRequestItem_Data_Elements *)element {
+    _element = element;
+    self.titleLabel.text = _element.title;
     NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
     paragraphStyle.lineSpacing = 4.0f;
     paragraphStyle.lineBreakMode = NSLineBreakByTruncatingTail;
-    NSString *contentString = @"啊啊大书法家饭店;阿卡京东方;看家;看京东方;阿卡京东方;卡死;打飞机;阿里看见是否;了空间啊;大理石开房间大";
-    NSMutableAttributedString *attString = [[NSMutableAttributedString alloc] initWithString:contentString];
-    [attString addAttribute:NSParagraphStyleAttributeName value:paragraphStyle range:NSMakeRange(0, contentString.length)];
+    NSMutableAttributedString *attString = [[NSMutableAttributedString alloc] initWithString:_element.desc];
+    [attString addAttribute:NSParagraphStyleAttributeName value:paragraphStyle range:NSMakeRange(0, _element.desc.length)];
     self.contentLabel.attributedText = attString;
-    self.expertLabel.text = @"主讲专家: 孙敏 湖北省武汉啊骄傲的加法";
+    self.expertLabel.text = [NSString stringWithFormat:@"主讲专家: %@ %@",_element.author,_element.thanks];
 }
 - (void)touchesEnded:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
     [super touchesEnded:touches withEvent:event];

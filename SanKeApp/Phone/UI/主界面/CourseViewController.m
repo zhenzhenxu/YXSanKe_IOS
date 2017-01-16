@@ -10,16 +10,20 @@
 #import "CourseTableViewCell.h"
 #import "YXFileVideoItem.h"
 #import "AloneCourseViewController.h"
+#import "ChannelIndexFetch.h"
 @implementation CourseTabItem
 @end;
 @interface CourseViewController ()
 @end
 
 @implementation CourseViewController
-
+- (void)dealloc{
+    DDLogError(@"release====>%@,%@",NSStringFromClass([self class]),self.title);
+}
 - (void)viewDidLoad {
+    ChannelIndexFetch *fetcher = [[ChannelIndexFetch alloc]init];
+    self.dataFetcher = fetcher;
     [super viewDidLoad];
-    [self setupMokeData];
     [self setupUI];
     self.tableView.backgroundColor = [UIColor colorWithHexString:@"e6e6e6"];
     self.title = self.tabItem.name;
@@ -28,12 +32,8 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
 }
-- (void)setupMokeData {
-    self.dataArray = [@[@"你好",@"我好",@"大家好",@"很好",@"你好",@"我好",@"大家好",@"很好"] mutableCopy];
-}
 #pragma mark - setupUI
 - (void)setupUI {
-    
     [self.tableView registerClass:[CourseTableViewCell class] forCellReuseIdentifier:@"CourseTableViewCell"];
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, 10.0f)];
@@ -42,7 +42,6 @@
     UIView *footerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, 10.0f)];
     footerView.backgroundColor = [UIColor colorWithHexString:@"e6e6e6"];
     self.tableView.tableFooterView = footerView;
-    [self stopLoading];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -64,7 +63,7 @@
         AloneCourseViewController *VC = [[AloneCourseViewController alloc] init];
         [self.navigationController pushViewController:VC animated:YES];
     }];
-    [cell setupMokeData:self.title];
+    cell.element = self.dataArray[indexPath.row];
     return cell;
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {

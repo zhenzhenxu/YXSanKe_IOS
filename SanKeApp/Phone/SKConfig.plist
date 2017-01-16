@@ -20,7 +20,7 @@
 		<string>ws://mobile.yanxiu.com/websocket</string>
 	</dict>
 	<key>mockFrameworkOn</key>
-	<false/>
+	<true/>
 	<key>testFrameworkOn</key>
 	<false/>
 </dict>
