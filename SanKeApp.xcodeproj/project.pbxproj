@@ -110,7 +110,6 @@
 		7C2251D01E1DEB4F004785D5 /* SKAlertTitleLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C2251CF1E1DEB4F004785D5 /* SKAlertTitleLabel.m */; };
 		7C2251D31E1E2626004785D5 /* GCDTimer.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C2251D21E1E2626004785D5 /* GCDTimer.m */; };
 		7C2251DD1E1F43A2004785D5 /* NSObject+BackgroundTask.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C2251DC1E1F43A2004785D5 /* NSObject+BackgroundTask.m */; };
-		7C6F21871E232F4A000AB43A /* SideMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C6F21861E232F4A000AB43A /* SideMenuViewController.m */; };
 		7C6F218A1E232F6A000AB43A /* ProjectMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C6F21891E232F6A000AB43A /* ProjectMainViewController.m */; };
 		7C6F21901E232F8E000AB43A /* YXDrawerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C6F218D1E232F8E000AB43A /* YXDrawerController.m */; };
 		7C6F21911E232F8E000AB43A /* YXDrawerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C6F218F1E232F8E000AB43A /* YXDrawerViewController.m */; };
@@ -138,6 +137,17 @@
 		9241FFFB1E2722470015B587 /* ProjectNavRightView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9241FFFA1E2722470015B587 /* ProjectNavRightView.m */; };
 		92E7D1391E28A83F00A34300 /* AloneCourseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 92E7D1381E28A83F00A34300 /* AloneCourseViewController.m */; };
 		92E7D13D1E28A88600A34300 /* AloneCourseTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 92E7D13C1E28A88600A34300 /* AloneCourseTableViewCell.m */; };
+		E902E6AE1E2BA3BE009441B3 /* MineViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E902E6A71E2BA3BE009441B3 /* MineViewController.m */; };
+		E902E6AF1E2BA3BE009441B3 /* SideHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = E902E6A91E2BA3BE009441B3 /* SideHeaderView.m */; };
+		E902E6B01E2BA3BE009441B3 /* SideMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E902E6AB1E2BA3BE009441B3 /* SideMenuViewController.m */; };
+		E902E6B11E2BA3BE009441B3 /* SideTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E902E6AD1E2BA3BE009441B3 /* SideTableViewCell.m */; };
+		E902E6BC1E2BA3E0009441B3 /* UserAreaInfoPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = E902E6B31E2BA3E0009441B3 /* UserAreaInfoPicker.m */; };
+		E902E6BD1E2BA3E0009441B3 /* UserImageTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E902E6B51E2BA3E0009441B3 /* UserImageTableViewCell.m */; };
+		E902E6BE1E2BA3E0009441B3 /* UserInfoPickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = E902E6B71E2BA3E0009441B3 /* UserInfoPickerView.m */; };
+		E902E6BF1E2BA3E0009441B3 /* UserInfoTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E902E6B91E2BA3E0009441B3 /* UserInfoTableViewCell.m */; };
+		E902E6C01E2BA3E0009441B3 /* UserSubjectStageInfoPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = E902E6BB1E2BA3E0009441B3 /* UserSubjectStageInfoPicker.m */; };
+		E902E6C21E2BA3FC009441B3 /* huoying.jpg in Resources */ = {isa = PBXBuildFile; fileRef = E902E6C11E2BA3FC009441B3 /* huoying.jpg */; };
+		E902E6C51E2BA423009441B3 /* SideTableViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E902E6C41E2BA423009441B3 /* SideTableViewModel.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -361,8 +371,6 @@
 		7C2251D21E1E2626004785D5 /* GCDTimer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GCDTimer.m; sourceTree = "<group>"; };
 		7C2251DB1E1F43A2004785D5 /* NSObject+BackgroundTask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+BackgroundTask.h"; sourceTree = "<group>"; };
 		7C2251DC1E1F43A2004785D5 /* NSObject+BackgroundTask.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+BackgroundTask.m"; sourceTree = "<group>"; };
-		7C6F21851E232F4A000AB43A /* SideMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SideMenuViewController.h; sourceTree = "<group>"; };
-		7C6F21861E232F4A000AB43A /* SideMenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SideMenuViewController.m; sourceTree = "<group>"; };
 		7C6F21881E232F6A000AB43A /* ProjectMainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProjectMainViewController.h; sourceTree = "<group>"; };
 		7C6F21891E232F6A000AB43A /* ProjectMainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProjectMainViewController.m; sourceTree = "<group>"; };
 		7C6F218C1E232F8E000AB43A /* YXDrawerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YXDrawerController.h; sourceTree = "<group>"; };
@@ -419,6 +427,27 @@
 		92E7D1381E28A83F00A34300 /* AloneCourseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AloneCourseViewController.m; sourceTree = "<group>"; };
 		92E7D13B1E28A88600A34300 /* AloneCourseTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AloneCourseTableViewCell.h; sourceTree = "<group>"; };
 		92E7D13C1E28A88600A34300 /* AloneCourseTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AloneCourseTableViewCell.m; sourceTree = "<group>"; };
+		E902E6A61E2BA3BE009441B3 /* MineViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MineViewController.h; sourceTree = "<group>"; };
+		E902E6A71E2BA3BE009441B3 /* MineViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MineViewController.m; sourceTree = "<group>"; };
+		E902E6A81E2BA3BE009441B3 /* SideHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SideHeaderView.h; sourceTree = "<group>"; };
+		E902E6A91E2BA3BE009441B3 /* SideHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SideHeaderView.m; sourceTree = "<group>"; };
+		E902E6AA1E2BA3BE009441B3 /* SideMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SideMenuViewController.h; sourceTree = "<group>"; };
+		E902E6AB1E2BA3BE009441B3 /* SideMenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SideMenuViewController.m; sourceTree = "<group>"; };
+		E902E6AC1E2BA3BE009441B3 /* SideTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SideTableViewCell.h; sourceTree = "<group>"; };
+		E902E6AD1E2BA3BE009441B3 /* SideTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SideTableViewCell.m; sourceTree = "<group>"; };
+		E902E6B21E2BA3E0009441B3 /* UserAreaInfoPicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserAreaInfoPicker.h; sourceTree = "<group>"; };
+		E902E6B31E2BA3E0009441B3 /* UserAreaInfoPicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserAreaInfoPicker.m; sourceTree = "<group>"; };
+		E902E6B41E2BA3E0009441B3 /* UserImageTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserImageTableViewCell.h; sourceTree = "<group>"; };
+		E902E6B51E2BA3E0009441B3 /* UserImageTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserImageTableViewCell.m; sourceTree = "<group>"; };
+		E902E6B61E2BA3E0009441B3 /* UserInfoPickerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserInfoPickerView.h; sourceTree = "<group>"; };
+		E902E6B71E2BA3E0009441B3 /* UserInfoPickerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserInfoPickerView.m; sourceTree = "<group>"; };
+		E902E6B81E2BA3E0009441B3 /* UserInfoTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserInfoTableViewCell.h; sourceTree = "<group>"; };
+		E902E6B91E2BA3E0009441B3 /* UserInfoTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserInfoTableViewCell.m; sourceTree = "<group>"; };
+		E902E6BA1E2BA3E0009441B3 /* UserSubjectStageInfoPicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserSubjectStageInfoPicker.h; sourceTree = "<group>"; };
+		E902E6BB1E2BA3E0009441B3 /* UserSubjectStageInfoPicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserSubjectStageInfoPicker.m; sourceTree = "<group>"; };
+		E902E6C11E2BA3FC009441B3 /* huoying.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = huoying.jpg; sourceTree = "<group>"; };
+		E902E6C31E2BA423009441B3 /* SideTableViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SideTableViewModel.h; sourceTree = "<group>"; };
+		E902E6C41E2BA423009441B3 /* SideTableViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SideTableViewModel.m; sourceTree = "<group>"; };
 		F85EF3DA4AEC6DA4B2E1F0AA /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		FDFFD28C45A34489A38320DE /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -549,6 +578,7 @@
 		7C1A5EDD1E15041C00832DED /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				E902E6A51E2BA36C009441B3 /* 我的 */,
 				7C6F21921E237F40000AB43A /* 播放记录 */,
 				7C6F21931E237F40000AB43A /* 登录注册 */,
 				7C6F21831E232F2A000AB43A /* 侧边栏 */,
@@ -997,8 +1027,14 @@
 		7C6F21831E232F2A000AB43A /* 侧边栏 */ = {
 			isa = PBXGroup;
 			children = (
-				7C6F21851E232F4A000AB43A /* SideMenuViewController.h */,
-				7C6F21861E232F4A000AB43A /* SideMenuViewController.m */,
+				E902E6A61E2BA3BE009441B3 /* MineViewController.h */,
+				E902E6A71E2BA3BE009441B3 /* MineViewController.m */,
+				E902E6A81E2BA3BE009441B3 /* SideHeaderView.h */,
+				E902E6A91E2BA3BE009441B3 /* SideHeaderView.m */,
+				E902E6AA1E2BA3BE009441B3 /* SideMenuViewController.h */,
+				E902E6AB1E2BA3BE009441B3 /* SideMenuViewController.m */,
+				E902E6AC1E2BA3BE009441B3 /* SideTableViewCell.h */,
+				E902E6AD1E2BA3BE009441B3 /* SideTableViewCell.m */,
 			);
 			path = "侧边栏";
 			sourceTree = "<group>";
@@ -1075,6 +1111,8 @@
 		7C6F21A31E248BDA000AB43A /* 我的 */ = {
 			isa = PBXGroup;
 			children = (
+				E902E6C31E2BA423009441B3 /* SideTableViewModel.h */,
+				E902E6C41E2BA423009441B3 /* SideTableViewModel.m */,
 				7C6F21A41E248BDA000AB43A /* readme.txt */,
 			);
 			path = "我的";
@@ -1141,6 +1179,24 @@
 				9241FFEB1E2610C60015B587 /* PlayRecordCell.m */,
 			);
 			name = view;
+			sourceTree = "<group>";
+		};
+		E902E6A51E2BA36C009441B3 /* 我的 */ = {
+			isa = PBXGroup;
+			children = (
+				E902E6C11E2BA3FC009441B3 /* huoying.jpg */,
+				E902E6B21E2BA3E0009441B3 /* UserAreaInfoPicker.h */,
+				E902E6B31E2BA3E0009441B3 /* UserAreaInfoPicker.m */,
+				E902E6B41E2BA3E0009441B3 /* UserImageTableViewCell.h */,
+				E902E6B51E2BA3E0009441B3 /* UserImageTableViewCell.m */,
+				E902E6B61E2BA3E0009441B3 /* UserInfoPickerView.h */,
+				E902E6B71E2BA3E0009441B3 /* UserInfoPickerView.m */,
+				E902E6B81E2BA3E0009441B3 /* UserInfoTableViewCell.h */,
+				E902E6B91E2BA3E0009441B3 /* UserInfoTableViewCell.m */,
+				E902E6BA1E2BA3E0009441B3 /* UserSubjectStageInfoPicker.h */,
+				E902E6BB1E2BA3E0009441B3 /* UserSubjectStageInfoPicker.m */,
+			);
+			path = "我的";
 			sourceTree = "<group>";
 		};
 		F408629257CB581950B8FDF3 /* Pods */ = {
@@ -1269,6 +1325,7 @@
 				7C18093A1E25FEF800B71863 /* stage_subject.json in Resources */,
 				7C1809491E2631C400B71863 /* edition_filter.json in Resources */,
 				7C6F219E1E24838C000AB43A /* area_data.json in Resources */,
+				E902E6C21E2BA3FC009441B3 /* huoying.jpg in Resources */,
 				7C1A5F8E1E15143400832DED /* neterror_mock.json in Resources */,
 				7C1A5EEE1E150A3800832DED /* SKConfig.plist in Resources */,
 				7C1A5F8D1E15143400832DED /* errorcode_mock.json in Resources */,
@@ -1355,7 +1412,7 @@
 				7C1A5F4D1E15127200832DED /* PreventHangingCourseView.m in Sources */,
 				7C1A5F171E15108F00832DED /* UrlDownloader.m in Sources */,
 				7C1A5F6C1E15130200832DED /* YXFileHtmlItem.m in Sources */,
-				7C6F21871E232F4A000AB43A /* SideMenuViewController.m in Sources */,
+				E902E6BD1E2BA3E0009441B3 /* UserImageTableViewCell.m in Sources */,
 				7C1A5FD71E1636F500832DED /* YXEmptyView.m in Sources */,
 				7C1A5FE61E1637FC00832DED /* PagedListViewControllerBase.m in Sources */,
 				7C1A5EA81E14F08700832DED /* AppDelegate.m in Sources */,
@@ -1366,6 +1423,7 @@
 				7C1A5FC51E15214A00832DED /* YXShowWebMenuTableViewCell.m in Sources */,
 				7C1A5FAF1E151D4E00832DED /* UIViewController+YXAddtion.m in Sources */,
 				7C1A5F871E1513D600832DED /* MJRefreshConst.m in Sources */,
+				E902E6C01E2BA3E0009441B3 /* UserSubjectStageInfoPicker.m in Sources */,
 				7C1A5F561E15129600832DED /* YXQLPreviewController.m in Sources */,
 				7C1809351E25D4A900B71863 /* StageSubjectHeaderView.m in Sources */,
 				7C1A5EE41E15052000832DED /* BaseViewController.m in Sources */,
@@ -1381,8 +1439,10 @@
 				7C7629C11E27371D007B5698 /* LoginActionView.m in Sources */,
 				92E7D1391E28A83F00A34300 /* AloneCourseViewController.m in Sources */,
 				7C1A5F231E1510FA00832DED /* GetRequest.m in Sources */,
+				E902E6BE1E2BA3E0009441B3 /* UserInfoPickerView.m in Sources */,
 				7C6F21901E232F8E000AB43A /* YXDrawerController.m in Sources */,
 				7C1A5F771E15132200832DED /* YXFileFavorWrapper.m in Sources */,
+				E902E6C51E2BA423009441B3 /* SideTableViewModel.m in Sources */,
 				7C1A60111E163B8800832DED /* YXTestViewController.m in Sources */,
 				9241FFF81E2651390015B587 /* YXTriangleView.m in Sources */,
 				9241FFE11E25D5830015B587 /* ProjectContainerView.m in Sources */,
@@ -1417,15 +1477,18 @@
 				7C1A60011E16396C00832DED /* UIViewController+Keyboard.m in Sources */,
 				7C1A60061E16396C00832DED /* UIView+YXShadowColor.m in Sources */,
 				7C1A5FCE1E1634DE00832DED /* YXLoadView.m in Sources */,
+				E902E6B01E2BA3BE009441B3 /* SideMenuViewController.m in Sources */,
 				7C1A5F2C1E15111800832DED /* YXGetRequest.m in Sources */,
 				7C1A5FA71E151A9100832DED /* YXBroseWebView.m in Sources */,
 				7C1A5FC21E15212000832DED /* YXShowWebMenuView.m in Sources */,
 				7C1A5F781E15132200832DED /* FileBrowserFactory.m in Sources */,
+				E902E6B11E2BA3BE009441B3 /* SideTableViewCell.m in Sources */,
 				7C1A5FC81E1631DD00832DED /* UnhandledRequestData.m in Sources */,
 				7C1A60021E16396C00832DED /* UIImage+Color.m in Sources */,
 				7C1A5F121E15108F00832DED /* PersistentUrlDownloader.m in Sources */,
 				9241FFEF1E26120A0015B587 /* RadianBaseCell.m in Sources */,
 				7C1A5F6B1E15130200832DED /* YXFileDocItem.m in Sources */,
+				E902E6BC1E2BA3E0009441B3 /* UserAreaInfoPicker.m in Sources */,
 				7CC9ADA81E25D12A00A392EA /* StageSubjectSelectViewController.m in Sources */,
 				7C18093D1E25FF5600B71863 /* StageSubjectModel.m in Sources */,
 				7C1A5F211E1510FA00832DED /* HttpBaseRequest.m in Sources */,
@@ -1442,6 +1505,7 @@
 				7C1A5F951E15143F00832DED /* YXMockManager.m in Sources */,
 				7C1A600A1E1639BD00832DED /* UIView+YXAddtion.m in Sources */,
 				7C1A5F3A1E15126500832DED /* YXAudioPlayerViewController.m in Sources */,
+				E902E6AE1E2BA3BE009441B3 /* MineViewController.m in Sources */,
 				7C1A5F2E1E15111800832DED /* YXUploadRequest.m in Sources */,
 				7C1A5F221E1510FA00832DED /* UploadRequest.m in Sources */,
 				7C1A60031E16396C00832DED /* UIImage+FixOrientation.m in Sources */,
@@ -1457,11 +1521,13 @@
 				7C1A5FFE1E16396C00832DED /* NSDate+Utilities.m in Sources */,
 				7C1A5EF61E150E1E00832DED /* GlobalUtils.m in Sources */,
 				7C1A5F671E15130200832DED /* YXFileItemBase.m in Sources */,
+				E902E6AF1E2BA3BE009441B3 /* SideHeaderView.m in Sources */,
 				7C1A5EFC1E150E3400832DED /* FileLogger.m in Sources */,
 				9241FFF21E2615B80015B587 /* PlayImageView.m in Sources */,
 				92E7D13D1E28A88600A34300 /* AloneCourseTableViewCell.m in Sources */,
 				7C2251CA1E1DEADA004785D5 /* SKAlertView.m in Sources */,
 				9241FFF71E2651390015B587 /* YXGradientView.m in Sources */,
+				E902E6BF1E2BA3E0009441B3 /* UserInfoTableViewCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

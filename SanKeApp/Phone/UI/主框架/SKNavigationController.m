@@ -32,7 +32,16 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (BOOL)shouldAutorotate{
+    return [self.topViewController shouldAutorotate];
+}
+
+- (UIInterfaceOrientationMask)supportedInterfaceOrientations {
+    return [self.topViewController supportedInterfaceOrientations];
+}
+
 - (void)pushViewController:(UIViewController *)viewController animated:(BOOL)animated{
+    [YXDrawerController hideDrawer];
     if (self.viewControllers.count == 1) {
         viewController.hidesBottomBarWhenPushed = YES;
     }    
