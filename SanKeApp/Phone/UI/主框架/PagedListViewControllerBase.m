@@ -59,8 +59,8 @@
         make.edges.equalTo(@0);
     }];
     
-    self.emptyView = [[YXEmptyView alloc]init];
-    self.errorView = [[YXErrorView alloc]init];
+    self.emptyView = [[EmptyView alloc]init];
+    self.errorView = [[ErrorView alloc]init];
     @weakify(self);
     [self.errorView setRetryBlock:^{
         @strongify(self); if (!self) return;

@@ -157,6 +157,8 @@
 		E902E6CB1E2C9722009441B3 /* StageAndSubjectRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = E902E6CA1E2C9722009441B3 /* StageAndSubjectRequest.m */; };
 		E902E6CD1E2C9FD5009441B3 /* stageAndSubject.json in Resources */ = {isa = PBXBuildFile; fileRef = E902E6CC1E2C9FD5009441B3 /* stageAndSubject.json */; };
 		E902E6DB1E2CD109009441B3 /* UpgradeView.m in Sources */ = {isa = PBXBuildFile; fileRef = E902E6DA1E2CD109009441B3 /* UpgradeView.m */; };
+		E902E6DE1E2CE19D009441B3 /* ErrorView.m in Sources */ = {isa = PBXBuildFile; fileRef = E902E6DD1E2CE19D009441B3 /* ErrorView.m */; };
+		E902E6E11E2CE1B8009441B3 /* EmptyView.m in Sources */ = {isa = PBXBuildFile; fileRef = E902E6E01E2CE1B8009441B3 /* EmptyView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -472,6 +474,10 @@
 		E902E6CC1E2C9FD5009441B3 /* stageAndSubject.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = stageAndSubject.json; sourceTree = "<group>"; };
 		E902E6D91E2CD109009441B3 /* UpgradeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UpgradeView.h; sourceTree = "<group>"; };
 		E902E6DA1E2CD109009441B3 /* UpgradeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UpgradeView.m; sourceTree = "<group>"; };
+		E902E6DC1E2CE19D009441B3 /* ErrorView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ErrorView.h; sourceTree = "<group>"; };
+		E902E6DD1E2CE19D009441B3 /* ErrorView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ErrorView.m; sourceTree = "<group>"; };
+		E902E6DF1E2CE1B8009441B3 /* EmptyView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EmptyView.h; sourceTree = "<group>"; };
+		E902E6E01E2CE1B8009441B3 /* EmptyView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EmptyView.m; sourceTree = "<group>"; };
 		F85EF3DA4AEC6DA4B2E1F0AA /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		FDFFD28C45A34489A38320DE /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -977,6 +983,10 @@
 				7C1A5FD31E1636F500832DED /* YXEmptyView.m */,
 				7C1A5FD41E1636F500832DED /* DataErrorView.h */,
 				7C1A5FD51E1636F500832DED /* DataErrorView.m */,
+				E902E6DC1E2CE19D009441B3 /* ErrorView.h */,
+				E902E6DD1E2CE19D009441B3 /* ErrorView.m */,
+				E902E6DF1E2CE1B8009441B3 /* EmptyView.h */,
+				E902E6E01E2CE1B8009441B3 /* EmptyView.m */,
 			);
 			name = "网络提示";
 			sourceTree = "<group>";
@@ -1520,6 +1530,7 @@
 				E902E6C51E2BA423009441B3 /* SideTableViewModel.m in Sources */,
 				7C1A60111E163B8800832DED /* YXTestViewController.m in Sources */,
 				9241FFF81E2651390015B587 /* YXTriangleView.m in Sources */,
+				E902E6DE1E2CE19D009441B3 /* ErrorView.m in Sources */,
 				9241FFE11E25D5830015B587 /* ProjectContainerView.m in Sources */,
 				7C1A5FD81E1636F500832DED /* DataErrorView.m in Sources */,
 				7C1A5EE71E1505BF00832DED /* SKNavigationController.m in Sources */,
@@ -1602,6 +1613,7 @@
 				7C1A5F671E15130200832DED /* YXFileItemBase.m in Sources */,
 				E902E6AF1E2BA3BE009441B3 /* SideHeaderView.m in Sources */,
 				7C1A5EFC1E150E3400832DED /* FileLogger.m in Sources */,
+				E902E6E11E2CE1B8009441B3 /* EmptyView.m in Sources */,
 				9241FFF21E2615B80015B587 /* PlayImageView.m in Sources */,
 				923A4E311E2CA4E7001059E2 /* ChannelIndexRequest.m in Sources */,
 				92E7D13D1E28A88600A34300 /* AloneCourseTableViewCell.m in Sources */,

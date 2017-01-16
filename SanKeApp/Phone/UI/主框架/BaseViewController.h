@@ -7,8 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "YXEmptyView.h"
-#import "YXErrorView.h"
+#import "EmptyView.h"
+#import "ErrorView.h"
 #import "DataErrorView.h"
 
 @interface BaseViewController : UIViewController
@@ -16,8 +16,8 @@
 /**
  *  内容为空/网络错误/数据错误界面
  */
-@property (nonatomic, strong)YXEmptyView *emptyView;
-@property (nonatomic, strong)YXErrorView *errorView;
+@property (nonatomic, strong)EmptyView *emptyView;
+@property (nonatomic, strong)ErrorView *errorView;
 @property (nonatomic, strong)DataErrorView *dataErrorView;
 /**
  *  设置导航右端图片
