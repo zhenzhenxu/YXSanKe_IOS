@@ -427,24 +427,24 @@
 		92E7D1381E28A83F00A34300 /* AloneCourseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AloneCourseViewController.m; sourceTree = "<group>"; };
 		92E7D13B1E28A88600A34300 /* AloneCourseTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AloneCourseTableViewCell.h; sourceTree = "<group>"; };
 		92E7D13C1E28A88600A34300 /* AloneCourseTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AloneCourseTableViewCell.m; sourceTree = "<group>"; };
-		E902E6A61E2BA3BE009441B3 /* MineViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MineViewController.h; sourceTree = "<group>"; };
-		E902E6A71E2BA3BE009441B3 /* MineViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MineViewController.m; sourceTree = "<group>"; };
+		E902E6A61E2BA3BE009441B3 /* MineViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MineViewController.h; path = "../侧边栏/MineViewController.h"; sourceTree = "<group>"; };
+		E902E6A71E2BA3BE009441B3 /* MineViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MineViewController.m; path = "../侧边栏/MineViewController.m"; sourceTree = "<group>"; };
 		E902E6A81E2BA3BE009441B3 /* SideHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SideHeaderView.h; sourceTree = "<group>"; };
 		E902E6A91E2BA3BE009441B3 /* SideHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SideHeaderView.m; sourceTree = "<group>"; };
 		E902E6AA1E2BA3BE009441B3 /* SideMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SideMenuViewController.h; sourceTree = "<group>"; };
 		E902E6AB1E2BA3BE009441B3 /* SideMenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SideMenuViewController.m; sourceTree = "<group>"; };
 		E902E6AC1E2BA3BE009441B3 /* SideTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SideTableViewCell.h; sourceTree = "<group>"; };
 		E902E6AD1E2BA3BE009441B3 /* SideTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SideTableViewCell.m; sourceTree = "<group>"; };
-		E902E6B21E2BA3E0009441B3 /* UserAreaInfoPicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserAreaInfoPicker.h; sourceTree = "<group>"; };
-		E902E6B31E2BA3E0009441B3 /* UserAreaInfoPicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserAreaInfoPicker.m; sourceTree = "<group>"; };
+		E902E6B21E2BA3E0009441B3 /* UserAreaInfoPicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UserAreaInfoPicker.h; path = "../../../Phone/UI/我的/UserAreaInfoPicker.h"; sourceTree = "<group>"; };
+		E902E6B31E2BA3E0009441B3 /* UserAreaInfoPicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UserAreaInfoPicker.m; path = "../../../Phone/UI/我的/UserAreaInfoPicker.m"; sourceTree = "<group>"; };
 		E902E6B41E2BA3E0009441B3 /* UserImageTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserImageTableViewCell.h; sourceTree = "<group>"; };
 		E902E6B51E2BA3E0009441B3 /* UserImageTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserImageTableViewCell.m; sourceTree = "<group>"; };
 		E902E6B61E2BA3E0009441B3 /* UserInfoPickerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserInfoPickerView.h; sourceTree = "<group>"; };
 		E902E6B71E2BA3E0009441B3 /* UserInfoPickerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserInfoPickerView.m; sourceTree = "<group>"; };
 		E902E6B81E2BA3E0009441B3 /* UserInfoTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserInfoTableViewCell.h; sourceTree = "<group>"; };
 		E902E6B91E2BA3E0009441B3 /* UserInfoTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserInfoTableViewCell.m; sourceTree = "<group>"; };
-		E902E6BA1E2BA3E0009441B3 /* UserSubjectStageInfoPicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserSubjectStageInfoPicker.h; sourceTree = "<group>"; };
-		E902E6BB1E2BA3E0009441B3 /* UserSubjectStageInfoPicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserSubjectStageInfoPicker.m; sourceTree = "<group>"; };
+		E902E6BA1E2BA3E0009441B3 /* UserSubjectStageInfoPicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UserSubjectStageInfoPicker.h; path = "../../../Phone/UI/我的/UserSubjectStageInfoPicker.h"; sourceTree = "<group>"; };
+		E902E6BB1E2BA3E0009441B3 /* UserSubjectStageInfoPicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UserSubjectStageInfoPicker.m; path = "../../../Phone/UI/我的/UserSubjectStageInfoPicker.m"; sourceTree = "<group>"; };
 		E902E6C11E2BA3FC009441B3 /* huoying.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = huoying.jpg; sourceTree = "<group>"; };
 		E902E6C31E2BA423009441B3 /* SideTableViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SideTableViewModel.h; sourceTree = "<group>"; };
 		E902E6C41E2BA423009441B3 /* SideTableViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SideTableViewModel.m; sourceTree = "<group>"; };
@@ -578,10 +578,10 @@
 		7C1A5EDD1E15041C00832DED /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				7C6F21831E232F2A000AB43A /* 侧边栏 */,
 				E902E6A51E2BA36C009441B3 /* 我的 */,
 				7C6F21921E237F40000AB43A /* 播放记录 */,
 				7C6F21931E237F40000AB43A /* 登录注册 */,
-				7C6F21831E232F2A000AB43A /* 侧边栏 */,
 				7C6F21841E232F2A000AB43A /* 主界面 */,
 				7C1A5EDE1E15041C00832DED /* 主框架 */,
 			);
@@ -1027,14 +1027,9 @@
 		7C6F21831E232F2A000AB43A /* 侧边栏 */ = {
 			isa = PBXGroup;
 			children = (
-				E902E6A61E2BA3BE009441B3 /* MineViewController.h */,
-				E902E6A71E2BA3BE009441B3 /* MineViewController.m */,
-				E902E6A81E2BA3BE009441B3 /* SideHeaderView.h */,
-				E902E6A91E2BA3BE009441B3 /* SideHeaderView.m */,
+				E902E6C81E2C5CA8009441B3 /* Views */,
 				E902E6AA1E2BA3BE009441B3 /* SideMenuViewController.h */,
 				E902E6AB1E2BA3BE009441B3 /* SideMenuViewController.m */,
-				E902E6AC1E2BA3BE009441B3 /* SideTableViewCell.h */,
-				E902E6AD1E2BA3BE009441B3 /* SideTableViewCell.m */,
 			);
 			path = "侧边栏";
 			sourceTree = "<group>";
@@ -1113,6 +1108,10 @@
 			children = (
 				E902E6C31E2BA423009441B3 /* SideTableViewModel.h */,
 				E902E6C41E2BA423009441B3 /* SideTableViewModel.m */,
+				E902E6BA1E2BA3E0009441B3 /* UserSubjectStageInfoPicker.h */,
+				E902E6BB1E2BA3E0009441B3 /* UserSubjectStageInfoPicker.m */,
+				E902E6B21E2BA3E0009441B3 /* UserAreaInfoPicker.h */,
+				E902E6B31E2BA3E0009441B3 /* UserAreaInfoPicker.m */,
 				7C6F21A41E248BDA000AB43A /* readme.txt */,
 			);
 			path = "我的";
@@ -1184,19 +1183,44 @@
 		E902E6A51E2BA36C009441B3 /* 我的 */ = {
 			isa = PBXGroup;
 			children = (
+				E902E6C61E2C5C61009441B3 /* Views */,
+				E902E6C71E2C5C6B009441B3 /* Controllers */,
 				E902E6C11E2BA3FC009441B3 /* huoying.jpg */,
-				E902E6B21E2BA3E0009441B3 /* UserAreaInfoPicker.h */,
-				E902E6B31E2BA3E0009441B3 /* UserAreaInfoPicker.m */,
-				E902E6B41E2BA3E0009441B3 /* UserImageTableViewCell.h */,
-				E902E6B51E2BA3E0009441B3 /* UserImageTableViewCell.m */,
-				E902E6B61E2BA3E0009441B3 /* UserInfoPickerView.h */,
-				E902E6B71E2BA3E0009441B3 /* UserInfoPickerView.m */,
-				E902E6B81E2BA3E0009441B3 /* UserInfoTableViewCell.h */,
-				E902E6B91E2BA3E0009441B3 /* UserInfoTableViewCell.m */,
-				E902E6BA1E2BA3E0009441B3 /* UserSubjectStageInfoPicker.h */,
-				E902E6BB1E2BA3E0009441B3 /* UserSubjectStageInfoPicker.m */,
 			);
 			path = "我的";
+			sourceTree = "<group>";
+		};
+		E902E6C61E2C5C61009441B3 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				E902E6B41E2BA3E0009441B3 /* UserImageTableViewCell.h */,
+				E902E6B51E2BA3E0009441B3 /* UserImageTableViewCell.m */,
+				E902E6B81E2BA3E0009441B3 /* UserInfoTableViewCell.h */,
+				E902E6B91E2BA3E0009441B3 /* UserInfoTableViewCell.m */,
+				E902E6B61E2BA3E0009441B3 /* UserInfoPickerView.h */,
+				E902E6B71E2BA3E0009441B3 /* UserInfoPickerView.m */,
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
+		E902E6C71E2C5C6B009441B3 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				E902E6A61E2BA3BE009441B3 /* MineViewController.h */,
+				E902E6A71E2BA3BE009441B3 /* MineViewController.m */,
+			);
+			name = Controllers;
+			sourceTree = "<group>";
+		};
+		E902E6C81E2C5CA8009441B3 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				E902E6A81E2BA3BE009441B3 /* SideHeaderView.h */,
+				E902E6A91E2BA3BE009441B3 /* SideHeaderView.m */,
+				E902E6AC1E2BA3BE009441B3 /* SideTableViewCell.h */,
+				E902E6AD1E2BA3BE009441B3 /* SideTableViewCell.m */,
+			);
+			name = Views;
 			sourceTree = "<group>";
 		};
 		F408629257CB581950B8FDF3 /* Pods */ = {
