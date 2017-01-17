@@ -68,12 +68,6 @@
         [self firstPageFetch];
     }];
     self.dataErrorView = [[DataErrorView alloc]init];
-    self.dataErrorView.refreshBlock = ^{
-        STRONG_SELF
-        [self startLoading];
-        [self firstPageFetch];
-    };
-    
     if (self.bNeedFooter) {
         _footer = [MJRefreshFooterView footer];
         _footer.scrollView = self.tableView;

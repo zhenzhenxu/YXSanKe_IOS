@@ -9,8 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface DataErrorView : UIView
-@property (nonatomic, copy) void(^refreshBlock)();
-
-//活动视频界面专用
-@property (nonatomic, assign) BOOL isActivityVideo;
+@property (nonatomic, strong) NSString *title;
 @end

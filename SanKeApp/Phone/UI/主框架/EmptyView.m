@@ -8,7 +8,7 @@
 
 #import "EmptyView.h"
 
-@interface EmptyView ()<UIGestureRecognizerDelegate>
+@interface EmptyView ()
 @property (nonatomic, strong) UIImageView *iconView;
 @property (nonatomic, strong) UILabel *retryLabel;
 @end
