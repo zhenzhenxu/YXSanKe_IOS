@@ -32,8 +32,6 @@
     self.title = @"个人信息";
     self.view.backgroundColor = [UIColor whiteColor];
     [self setupUI];
-//    [self testErrorView];
-//    [self testEmptyView];
     NSString *filePath =  [[NSBundle mainBundle] pathForResource:@"stageAndSubject" ofType:@"json"];
     NSData *data = [NSData dataWithContentsOfFile:filePath];
     if (data) {
@@ -131,7 +129,6 @@
             [cell setSelectedButtonActionBlock:^{
                 STRONG_SELF
                 DDLogDebug(@"点击选择学段");
-                [self testEmptyView];
                 self.userInfoPickerView.pickerView.dataSource = self.subjectStageInfoPicker;
                 self.userInfoPickerView.pickerView.delegate = self.subjectStageInfoPicker;
                 [self.userInfoPickerView showPickerView];
@@ -180,23 +177,4 @@
     [self.userInfoPickerView.pickerView selectRow:item.selectedCountyRow inComponent:2 animated:NO];
 }
 
-- (void)testErrorView {
-    self.errorView = [[ErrorView alloc]init];
-    [self.view addSubview:self.errorView];
-    [self.errorView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.left.bottom.right.equalTo(self.view);
-    }];
-    [self.errorView setRetryBlock:^{
-        DDLogDebug(@"网络错误界面");
-    }];
-}
-
-- (void)testEmptyView {
-    self.emptyView = [[EmptyView alloc]init];
-    self.emptyView.title = @"空空如也";
-    [self.view addSubview:self.emptyView];
-    [self.emptyView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.left.bottom.right.equalTo(self.view);
-    }];
-}
 @end
