@@ -32,7 +32,7 @@ const CGFloat kSideLeftDrawerWidth = 600.0f;
 
 - (void)setupUI {
     self.iconImageView = [[UIImageView alloc] init];
-    self.iconImageView.image = [UIImage imageNamed:@"个人信息默认用户头像"];
+    self.iconImageView.image = [UIImage imageNamed:@"大头像"];
     self.iconImageView.backgroundColor = [UIColor redColor];
     self.iconImageView.layer.cornerRadius = 20.0f;
     self.iconImageView.layer.masksToBounds = YES;
@@ -71,6 +71,7 @@ const CGFloat kSideLeftDrawerWidth = 600.0f;
     }];
     [self.editButton mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.left.bottom.right.equalTo(self);
+        make.size.mas_equalTo(CGSizeMake(30, 30));
     }];
     [self.lineView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.bottom.equalTo(self);

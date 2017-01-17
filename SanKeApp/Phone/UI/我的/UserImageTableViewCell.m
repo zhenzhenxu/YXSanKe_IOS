@@ -62,7 +62,7 @@
 }
 - (void)setImageUrl:(NSString *)imageUrl {
     _imageUrl = imageUrl;
-    [self.iconImageView sd_setImageWithURL:[NSURL URLWithString:imageUrl] placeholderImage:[UIImage imageNamed:@"huoying.jpg"]];
-    [self.backgroundImageView sd_setImageWithURL:[NSURL URLWithString:imageUrl] placeholderImage:[UIImage imageNamed:@"huoying.jpg"]];
+    [self.iconImageView sd_setImageWithURL:[NSURL URLWithString:imageUrl] placeholderImage:[UIImage imageNamed:@"大头像"]];
+    [self.backgroundImageView sd_setImageWithURL:[NSURL URLWithString:imageUrl] placeholderImage:[UIImage imageNamed:@"大头像"]];
 }
 @end
