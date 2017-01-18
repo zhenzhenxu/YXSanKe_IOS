@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "HttpBaseRequest.h"
+#import "SaveRecordRequest.h"
 
 extern NSString * const kRecordReportCompleteNotification;
 extern NSString * const kRecordReportSuccessNotification;
@@ -17,6 +17,6 @@ extern NSString * const kRecordNeedUpdateNotification;
 + (RecordManager *)sharedInstance;
 
 @property (nonatomic, assign) BOOL isActive;
-- (void)addRecordRequest:(HttpBaseRequest *)request;
+- (void)addRecordRequest:(SaveRecordRequest *)request;
 
 @end

@@ -10,7 +10,6 @@
 #import "LoginViewController.h"
 #import "StageSubjectCell.h"
 #import "StageSubjectHeaderView.h"
-#import "StageSubjectModel.h"
 
 static const NSInteger kNotSelectedTag = -1;
 
@@ -18,7 +17,7 @@ static const NSInteger kNotSelectedTag = -1;
 @property (nonatomic, strong) UICollectionView *collectionView;
 @property (nonatomic, assign) NSInteger stageSelectedIndex;
 @property (nonatomic, assign) NSInteger subjectSelectedIndex;
-@property (nonatomic, strong) StageSubjectModel *model;
+@property (nonatomic, strong) FetchStageSubjectRequestItem *item;
 @end
 
 @implementation StageSubjectSelectViewController
@@ -27,16 +26,12 @@ static const NSInteger kNotSelectedTag = -1;
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     if (self.navigationController.viewControllers.count == 1) {
-        UIButton *rightView = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 30, 30)];
-        rightView.backgroundColor = [UIColor redColor];
-        [rightView addTarget:self action:@selector(naviRightAction) forControlEvents:UIControlEventTouchUpInside];
-        [self setupRightWithCustomView:rightView];
+        [self setupRightWithImageNamed:@"登陆" highlightImageNamed:@"登陆"];
     }
-
     self.view.backgroundColor = [UIColor colorWithHexString:@"e6e6e6"];
     self.stageSelectedIndex = kNotSelectedTag;
     self.subjectSelectedIndex = kNotSelectedTag;
-    [self setupMockData];
+    self.item = [StageSubjectDataManager dataForStageAndSubject];
     [self setupUI];
 }
 
@@ -48,12 +43,6 @@ static const NSInteger kNotSelectedTag = -1;
 - (void)naviRightAction {
     LoginViewController *vc = [[LoginViewController alloc]init];
     [self.navigationController pushViewController:vc animated:YES];
-}
-
-- (void)setupMockData {
-    NSString *path = [[NSBundle mainBundle]pathForResource:@"stage_subject" ofType:@"json"];
-    NSData *data = [NSData dataWithContentsOfFile:path];
-    self.model = [[StageSubjectModel alloc]initWithData:data error:nil];
 }
 
 - (void)setupUI {
@@ -112,16 +101,20 @@ static const NSInteger kNotSelectedTag = -1;
 }
 
 - (void)doneAction {
-    if (self.stageSelectedIndex == kNotSelectedTag) {
-        DDLogError(@"您尚未进行任何选择");
+    if (self.stageSelectedIndex == kNotSelectedTag || self.subjectSelectedIndex == kNotSelectedTag) {
+        [self showToast:@"请选择学段和学科"];
         return;
     }
-    StageSubjectItem *stage = self.model.items[self.stageSelectedIndex];
-    StageSubjectItem *subject = nil;
-    if (self.subjectSelectedIndex != kNotSelectedTag) {
-        subject = stage.items[self.subjectSelectedIndex];
-    }
-    DDLogInfo(@"选择结果为 学段: %@， 学科: %@", stage.name, subject.name);
+    FetchStageSubjectRequestItem_stage *stage = self.item.data.stages[self.stageSelectedIndex];
+    FetchStageSubjectRequestItem_subject *subject = stage.subjects[self.subjectSelectedIndex];
+    WEAK_SELF
+    [MineDataManager updateStage:stage.stageID subject:subject.subjectID completeBlock:^(NSError *error) {
+        STRONG_SELF
+        if (error) {
+            [self showToast:error.localizedDescription];
+            return;
+        }
+    }];
 }
 
 #pragma mark - UICollectionViewDataSource
@@ -134,17 +127,17 @@ static const NSInteger kNotSelectedTag = -1;
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
     if (section == 0) {
-        return self.model.items.count;
+        return self.item.data.stages.count;
     }
-    StageSubjectItem *stage = self.model.items[self.stageSelectedIndex];
-    return stage.items.count;
+    FetchStageSubjectRequestItem_stage *stage = self.item.data.stages[self.stageSelectedIndex];
+    return stage.subjects.count;
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
     StageSubjectCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"StageSubjectCell" forIndexPath:indexPath];
     
-    StageSubjectItem *item = [self itemForIndexPath:indexPath];
-    cell.title = item.name;
+    NSString *name = [self itemNameForIndexPath:indexPath];
+    cell.title = name;
     if (indexPath.section == 0) {
         cell.isCurrent = indexPath.row==self.stageSelectedIndex;
     }else {
@@ -174,10 +167,10 @@ static const NSInteger kNotSelectedTag = -1;
         StageSubjectHeaderView *headerView = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"StageSubjectHeaderView" forIndexPath:indexPath];
         if (indexPath.section == 0) {
             headerView.seperatorHidden = YES;
-            headerView.type = StageSubject_Stage;
+            headerView.title = self.item.data.category.name;
         }else {
             headerView.seperatorHidden = NO;
-            headerView.type = StageSubject_Subject;
+            headerView.title = self.item.data.category.subCategory.name;
         }
         return headerView;
     }
@@ -186,19 +179,19 @@ static const NSInteger kNotSelectedTag = -1;
 
 #pragma mark - UICollectionViewDelegate
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath{
-    StageSubjectItem *item = [self itemForIndexPath:indexPath];
-    return [StageSubjectCell sizeForTitle:item.name];
+    NSString *name = [self itemNameForIndexPath:indexPath];
+    return [StageSubjectCell sizeForTitle:name];
 }
 
-- (StageSubjectItem *)itemForIndexPath:(NSIndexPath *)indexPath {
-    StageSubjectItem *item = nil;
+- (NSString *)itemNameForIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section == 0) {
-        item = self.model.items[indexPath.row];
+        FetchStageSubjectRequestItem_stage *stage = self.item.data.stages[indexPath.row];
+        return stage.name;
     }else {
-        StageSubjectItem *stage = self.model.items[self.stageSelectedIndex];
-        item = stage.items[indexPath.row];
+        FetchStageSubjectRequestItem_stage *stage = self.item.data.stages[self.stageSelectedIndex];
+        FetchStageSubjectRequestItem_subject *subject = stage.subjects[indexPath.row];
+        return subject.name;
     }
-    return item;
 }
 
 @end

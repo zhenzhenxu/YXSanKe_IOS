@@ -13,7 +13,7 @@ NSString * const kRecordReportSuccessNotification = @"kRecordReportSuccessNotifi
 NSString * const kRecordNeedUpdateNotification = @"kRecordNeedUpdateNotification";
 
 @interface RecordManager()
-@property (nonatomic, strong) NSMutableArray<__kindof HttpBaseRequest *> *requestArray;
+@property (nonatomic, strong) NSMutableArray<__kindof SaveRecordRequest *> *requestArray;
 @end
 
 @implementation RecordManager
@@ -28,7 +28,7 @@ NSString * const kRecordNeedUpdateNotification = @"kRecordNeedUpdateNotification
     return sharedInstance;
 }
 
-- (void)addRecordRequest:(HttpBaseRequest *)request {
+- (void)addRecordRequest:(SaveRecordRequest *)request {
     [self.requestArray addObject:request];
     if (self.isActive) {
         return;
@@ -39,12 +39,13 @@ NSString * const kRecordNeedUpdateNotification = @"kRecordNeedUpdateNotification
 
 - (void)checkAndStart {
     if (self.requestArray.count > 0) {
-        HttpBaseRequest *request = self.requestArray.firstObject;
+        SaveRecordRequest *request = self.requestArray.firstObject;
+        NSString *resourceID = request.resource_id;
         WEAK_SELF
         [request startRequestWithRetClass:[HttpBaseRequestItem class] andCompleteBlock:^(id retItem, NSError *error, BOOL isMock) {
             STRONG_SELF
             if (!error) {
-                [[NSNotificationCenter defaultCenter] postNotificationName:kRecordReportSuccessNotification object:nil userInfo:nil];
+                [[NSNotificationCenter defaultCenter] postNotificationName:kRecordReportSuccessNotification object:nil userInfo:@{@"resourceID":resourceID}];
             }
             [self.requestArray removeObjectAtIndex:0];
             if (self.requestArray.count == 0) {

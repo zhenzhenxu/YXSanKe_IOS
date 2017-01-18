@@ -40,13 +40,9 @@
     }];
 }
 
-- (void)setType:(StageSubjectType)type {
-    _type = type;
-    if (type == StageSubject_Stage) {
-        self.titleLabel.text = @"学段";
-    }else if (type == StageSubject_Subject) {
-        self.titleLabel.text = @"学科";
-    }
+- (void)setTitle:(NSString *)title {
+    _title = title;
+    self.titleLabel.text = title;
 }
 
 - (void)setSeperatorHidden:(BOOL)seperatorHidden {

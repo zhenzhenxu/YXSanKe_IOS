@@ -9,7 +9,6 @@
 #import "FilterSelectionView.h"
 #import "FilterHeaderView.h"
 #import "FilterCell.h"
-#import "StageSubjectModel.h"
 
 static const NSInteger kNotSelectedTag = -1;
 
@@ -18,7 +17,6 @@ static const NSInteger kNotSelectedTag = -1;
 @property (nonatomic, assign) NSInteger firstLevelSelectedIndex;
 @property (nonatomic, assign) NSInteger secondLevelSelectedIndex;
 @property (nonatomic, assign) NSInteger thirdLevelSelectedIndex;
-@property (nonatomic, strong) StageSubjectModel *model;
 @end
 
 @implementation FilterSelectionView
@@ -28,16 +26,9 @@ static const NSInteger kNotSelectedTag = -1;
         self.firstLevelSelectedIndex = kNotSelectedTag;
         self.secondLevelSelectedIndex = kNotSelectedTag;
         self.thirdLevelSelectedIndex = kNotSelectedTag;
-        [self setupMockData];
         [self setupUI];
     }
     return self;
-}
-
-- (void)setupMockData {
-    NSString *path = [[NSBundle mainBundle]pathForResource:@"edition_filter" ofType:@"json"];
-    NSData *data = [NSData dataWithContentsOfFile:path];
-    self.model = [[StageSubjectModel alloc]initWithData:data error:nil];
 }
 
 - (void)setupUI {
@@ -103,16 +94,21 @@ static const NSInteger kNotSelectedTag = -1;
         DDLogError(@"您尚未进行任何选择");
         return;
     }
-    StageSubjectItem *first = self.model.items[self.firstLevelSelectedIndex];
-    StageSubjectItem *second = nil;
-    StageSubjectItem *third = nil;
+    ChannelTabFilterRequestItem_filter *first = self.data.filters[self.firstLevelSelectedIndex];
+    ChannelTabFilterRequestItem_filter *second = nil;
+    ChannelTabFilterRequestItem_filter *third = nil;
     if (self.secondLevelSelectedIndex != kNotSelectedTag) {
-        second = first.items[self.secondLevelSelectedIndex];
+        second = first.subFilters[self.secondLevelSelectedIndex];
         if (self.thirdLevelSelectedIndex != kNotSelectedTag) {
-            third = second.items[self.thirdLevelSelectedIndex];
+            third = second.subFilters[self.thirdLevelSelectedIndex];
         }
     }
-    DDLogInfo(@"选择结果为 版本: %@， 年级: %@， 学科: %@", first.name, second.name, third.name);
+    NSString *f1 = first? first.filterID:@"0";
+    NSString *f2 = second? second.filterID:@"0";
+    NSString *f3 = third? third.filterID:@"0";
+    NSArray *array = @[f1,f2,f3];
+    NSString *filterString = [array componentsJoinedByString:@","];
+    BLOCK_EXEC(self.completeBlock,filterString);
 }
 
 #pragma mark - UICollectionViewDataSource
@@ -120,15 +116,15 @@ static const NSInteger kNotSelectedTag = -1;
     if (self.firstLevelSelectedIndex == kNotSelectedTag) {
         return 1;
     }
-    StageSubjectItem *first = self.model.items[self.firstLevelSelectedIndex];
+    ChannelTabFilterRequestItem_filter *first = self.data.filters[self.firstLevelSelectedIndex];
     if (self.secondLevelSelectedIndex == kNotSelectedTag) {
-        if (first.items.count > 0) {
+        if (first.subFilters.count > 0) {
             return 2;
         }
         return 1;
     }
-    StageSubjectItem *second = first.items[self.secondLevelSelectedIndex];
-    if (second.items.count > 0) {
+    ChannelTabFilterRequestItem_filter *second = first.subFilters[self.secondLevelSelectedIndex];
+    if (second.subFilters.count > 0) {
         return 3;
     }
     return 2;
@@ -136,20 +132,20 @@ static const NSInteger kNotSelectedTag = -1;
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
     if (section == 0) {
-        return self.model.items.count;
+        return self.data.filters.count;
     }
-    StageSubjectItem *firstItem = self.model.items[self.firstLevelSelectedIndex];
+    ChannelTabFilterRequestItem_filter *firstItem = self.data.filters[self.firstLevelSelectedIndex];
     if (section == 1) {
-        return firstItem.items.count;
+        return firstItem.subFilters.count;
     }
-    StageSubjectItem *secondItem = firstItem.items[self.secondLevelSelectedIndex];
-    return secondItem.items.count;
+    ChannelTabFilterRequestItem_filter *secondItem = firstItem.subFilters[self.secondLevelSelectedIndex];
+    return secondItem.subFilters.count;
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
     FilterCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"FilterCell" forIndexPath:indexPath];
     
-    StageSubjectItem *item = [self itemForIndexPath:indexPath];
+    ChannelTabFilterRequestItem_filter *item = [self itemForIndexPath:indexPath];
     cell.title = item.name;
     if (indexPath.section == 0) {
         cell.isCurrent = indexPath.row==self.firstLevelSelectedIndex;
@@ -189,13 +185,13 @@ static const NSInteger kNotSelectedTag = -1;
         FilterHeaderView *headerView = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"FilterHeaderView" forIndexPath:indexPath];
         if (indexPath.section == 0) {
             headerView.seperatorHidden = YES;
-            headerView.title = @"版本";
+            headerView.title = self.data.category.name;
         }else if (indexPath.section == 1){
             headerView.seperatorHidden = NO;
-            headerView.title = @"年级";
+            headerView.title = self.data.category.subCategory.name;
         }else {
             headerView.seperatorHidden = NO;
-            headerView.title = @"单元";
+            headerView.title = self.data.category.subCategory.subCategory.name;
         }
         return headerView;
     }
@@ -204,21 +200,21 @@ static const NSInteger kNotSelectedTag = -1;
 
 #pragma mark - UICollectionViewDelegate
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath{
-    StageSubjectItem *item = [self itemForIndexPath:indexPath];
+    ChannelTabFilterRequestItem_filter *item = [self itemForIndexPath:indexPath];
     return [FilterCell sizeForTitle:item.name];
 }
 
-- (StageSubjectItem *)itemForIndexPath:(NSIndexPath *)indexPath {
-    StageSubjectItem *item = nil;
+- (ChannelTabFilterRequestItem_filter *)itemForIndexPath:(NSIndexPath *)indexPath {
+    ChannelTabFilterRequestItem_filter *item = nil;
     if (indexPath.section == 0) {
-        item = self.model.items[indexPath.row];
+        item = self.data.filters[indexPath.row];
     }else {
-        StageSubjectItem *firstItem = self.model.items[self.firstLevelSelectedIndex];
+        ChannelTabFilterRequestItem_filter *firstItem = self.data.filters[self.firstLevelSelectedIndex];
         if (indexPath.section == 1) {
-            item = firstItem.items[indexPath.row];
+            item = firstItem.subFilters[indexPath.row];
         }else {
-            StageSubjectItem *secondItem = firstItem.items[self.secondLevelSelectedIndex];
-            item = secondItem.items[indexPath.row];
+            ChannelTabFilterRequestItem_filter *secondItem = firstItem.subFilters[self.secondLevelSelectedIndex];
+            item = secondItem.subFilters[indexPath.row];
         }
     }
     return item;

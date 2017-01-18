@@ -8,12 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-typedef NS_ENUM(NSUInteger, StageSubjectType) {
-    StageSubject_Stage,
-    StageSubject_Subject
-};
-
 @interface StageSubjectHeaderView : UICollectionReusableView
-@property (nonatomic, assign) StageSubjectType type;
+@property (nonatomic, strong) NSString *title;
 @property (nonatomic, assign) BOOL seperatorHidden; // default is NO
 @end

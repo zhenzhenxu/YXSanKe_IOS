@@ -109,12 +109,35 @@
         [self showToast:@"请输入密码"];
         return;
     }
-    [UserManager sharedInstance].loginStatus = YES;
+    WEAK_SELF
+    [LoginDataManager loginWithName:self.usernameView.text password:self.passwordView.text completeBlock:^(NSError *error) {
+        STRONG_SELF
+        if (error) {
+            [self showToast:error.localizedDescription];
+            return;
+        }
+        if ([UserManager sharedInstance].userModel.isTaged) {
+            return;
+        }
+        StageSubjectSelectViewController *vc = [[StageSubjectSelectViewController alloc]init];
+        [self.navigationController pushViewController:vc animated:YES];
+    }];
 }
 
 - (void)touristLogin {
-    StageSubjectSelectViewController *vc = [[StageSubjectSelectViewController alloc]init];
-    [self.navigationController pushViewController:vc animated:YES];
+    WEAK_SELF
+    [LoginDataManager touristLoginWithCompleteBlock:^(NSError *error) {
+        STRONG_SELF
+        if (error) {
+            [self showToast:error.localizedDescription];
+            return;
+        }
+        if ([UserManager sharedInstance].userModel.isTaged) {
+            return;
+        }
+        StageSubjectSelectViewController *vc = [[StageSubjectSelectViewController alloc]init];
+        [self.navigationController pushViewController:vc animated:YES];
+    }];
 }
 
 @end

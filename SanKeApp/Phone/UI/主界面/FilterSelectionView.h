@@ -7,7 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ChannelTabFilterRequest.h"
 
 @interface FilterSelectionView : UIView
-
+@property (nonatomic, strong) ChannelTabFilterRequestItem_data *data;
+@property (nonatomic, strong) void(^completeBlock)(NSString *filterString);
 @end

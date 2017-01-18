@@ -79,5 +79,8 @@ extern int ddLogLevel;
 #import "BaseDownloader.h"
 #import "YXDrawerController.h"
 #import "RecordManager.h"
+#import "StageSubjectDataManager.h"
+#import "MineDataManager.h"
+#import "LoginDataManager.h"
 
 #endif /* PrefixHeader_pch */

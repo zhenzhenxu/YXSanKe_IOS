@@ -7,23 +7,15 @@
 //
 
 #import "JSONModel.h"
+#import "HttpBaseRequestItem_info.h"
 
 static NSString *const YXTokenInValidNotification = @"kYXTokenInValidNotification";
 
-@interface HttpBaseRequestItem_Status : JSONModel
-@property (nonatomic, copy) NSString<Optional> *status;
-@property (nonatomic, copy) NSString<Optional> *desc;
-@property (nonatomic, copy) NSString<Optional> *code;
-@end
-
 @interface HttpBaseRequestItem : JSONModel
 
-//@property (nonatomic, copy) HttpBaseRequestItem_Status<Optional> *status;
-@property (nonatomic, copy) NSString<Optional> *debugDesc;
-//老良师通接口通用格式
 @property (nonatomic, copy) NSString<Optional> *code;
 @property (nonatomic, copy) NSString<Optional> *desc;
-@property (nonatomic, copy) NSString<Optional> *debug;
+@property (nonatomic, strong) HttpBaseRequestItem_info<Optional> *info;
 
 @end
 

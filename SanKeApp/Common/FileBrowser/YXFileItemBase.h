@@ -27,6 +27,8 @@ typedef NS_ENUM(NSUInteger, YXFileType) {
 @property (nonatomic, strong) NSString *lurl;
 @property (nonatomic, strong) NSString *murl;
 @property (nonatomic, strong) NSString *surl;
+@property (nonatomic, strong) NSString *record; // 已播放时长，用于视频
+@property (nonatomic, strong) NSString *resourceID; // 资源id，用于上报
 
 @property (nonatomic, weak) BaseViewController *baseViewController;
 - (void)addFavorWithData:(id)data completion:(void(^)())completeBlock; // 如果需要收藏，则调用此方法

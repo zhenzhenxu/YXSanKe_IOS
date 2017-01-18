@@ -8,9 +8,10 @@
 
 #import "YXFileVideoItem.h"
 #import "YXPlayerViewController.h"
+#import "SaveRecordRequest.h"
 
 @interface YXFileVideoItem()<YXPlayProgressDelegate,YXBrowserExitDelegate>
-
+@property (nonatomic, strong) NSString *duration;
 @end
 
 @implementation YXFileVideoItem
@@ -27,8 +28,16 @@
     [[[NSNotificationCenter defaultCenter]rac_addObserverForName:UIApplicationWillResignActiveNotification object:nil]subscribeNext:^(id x) {
         STRONG_SELF
         [[NSNotificationCenter defaultCenter]postNotificationName:kRecordNeedUpdateNotification object:nil];
-        // 添加上报请求
+        [self saveRecord];
     }];
+}
+
+- (void)saveRecord {
+    SaveRecordRequest *request = [[SaveRecordRequest alloc]init];
+    request.watch_record = self.record;
+    request.total_time = self.duration;
+    request.resource_id = self.resourceID;
+    [[RecordManager sharedInstance]addRecordRequest:request];
 }
 
 - (void)openFile {
@@ -63,16 +72,17 @@
 
 #pragma mark - YXPlayProgressDelegate
 - (void)playerProgress:(CGFloat)progress totalDuration:(NSTimeInterval)duration stayTime:(NSTimeInterval)time {
-    
+    self.duration = [NSString stringWithFormat:@"%@",@(duration)];
+    self.record = [NSString stringWithFormat:@"%@",@(duration*progress)];
 }
 
 - (CGFloat)preProgress {
-    return 0;
+    return self.record.floatValue;
 }
 
 #pragma mark - YXBrowserExitDelegate 
 - (void)browserExit {
-    // 添加上报请求
+    [self saveRecord];
 }
 
 @end

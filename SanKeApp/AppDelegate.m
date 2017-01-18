@@ -26,6 +26,7 @@
     // Override point for customization after application launch.
     [GlobalUtils setupCore];
     [UpgradeManager checkForUpgrade];
+    [StageSubjectDataManager updateToLatestData];
     [self registerNotifications];
     
     self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
@@ -43,15 +44,21 @@
 
 - (void)setupUI {
     if ([UserManager sharedInstance].loginStatus) {
-        SideMenuViewController *menuVC = [[SideMenuViewController alloc]init];
-        ProjectMainViewController *mainVC = [[ProjectMainViewController alloc]init];
-        SKNavigationController *mainNavi = [[SKNavigationController alloc]initWithRootViewController:mainVC];
-        
-        YXDrawerViewController *drawerVC = [[YXDrawerViewController alloc]init];
-        drawerVC.drawerViewController = menuVC;
-        drawerVC.paneViewController = mainNavi;
-        drawerVC.drawerWidth = [UIScreen mainScreen].bounds.size.width * 600/750.0f;
-        self.window.rootViewController = drawerVC;
+        if (![UserManager sharedInstance].userModel.isTaged) {
+            StageSubjectSelectViewController *selectVC = [[StageSubjectSelectViewController alloc]init];
+            SKNavigationController *selectNavi = [[SKNavigationController alloc]initWithRootViewController:selectVC];
+            self.window.rootViewController = selectNavi;
+        }else {
+            SideMenuViewController *menuVC = [[SideMenuViewController alloc]init];
+            ProjectMainViewController *mainVC = [[ProjectMainViewController alloc]init];
+            SKNavigationController *mainNavi = [[SKNavigationController alloc]initWithRootViewController:mainVC];
+            
+            YXDrawerViewController *drawerVC = [[YXDrawerViewController alloc]init];
+            drawerVC.drawerViewController = menuVC;
+            drawerVC.paneViewController = mainNavi;
+            drawerVC.drawerWidth = [UIScreen mainScreen].bounds.size.width * 600/750.0f;
+            self.window.rootViewController = drawerVC;
+        }
     }else {
         LoginViewController *loginVC = [[LoginViewController alloc]init];
         SKNavigationController *loginNavi = [[SKNavigationController alloc]initWithRootViewController:loginVC];

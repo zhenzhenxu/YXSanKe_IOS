@@ -1,5 +1,5 @@
 {
-    "server":"http://mobile.yanxiu.com/test/api/",
+    "server":"http://main.zgjiaoyan.com/",
     "loginServer":"http://u.yanxiu.com/test/",
     "uploadServer":"http://upload.yanxiu.com/resource/index.jsp",
     "websocketServer":"ws://mobile.yanxiu.com/test/api/websocket",

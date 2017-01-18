@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "UserModel.h"
 
 extern NSString * const kUserDidLoginNotification;
 extern NSString * const kUserDidLogoutNotification;
@@ -15,6 +16,7 @@ extern NSString * const kUserDidLogoutNotification;
 
 + (UserManager *)sharedInstance;
 
+@property (nonatomic, strong) UserModel *userModel;
 @property (nonatomic, assign) BOOL loginStatus;
 
 @end

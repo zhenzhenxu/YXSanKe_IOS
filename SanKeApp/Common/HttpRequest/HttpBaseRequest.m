@@ -59,8 +59,6 @@
 
 
 #pragma mark -
-@implementation HttpBaseRequestItem_Status
-@end
 
 @implementation HttpBaseRequestItem
 @end
