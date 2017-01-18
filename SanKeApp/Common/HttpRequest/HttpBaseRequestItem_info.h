@@ -27,4 +27,5 @@
 @property (nonatomic, strong) NSString<Optional> *token;
 @property (nonatomic, strong) NSString<Optional> *is_taged;  //0--未设置学段学科，1--已设置
 @property (nonatomic, strong) NSString<Optional> *is_sanke;  // 1--是三科用户
+@property (nonatomic, strong) NSString<Optional> *is_anonymous; // 1表示游客
 @end

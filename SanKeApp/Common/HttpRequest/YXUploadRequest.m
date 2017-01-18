@@ -13,7 +13,10 @@
 - (instancetype)init
 {
     if (self = [super init]) {
-//        self.token = [YXUserManager sharedManager].userModel.token;
+        self.token = [UserManager sharedInstance].userModel.token;
+        if ([UserManager sharedInstance].userModel.isAnonymous) {
+            self.is_anonymous = @"1";
+        }
     }
     return self;
 }

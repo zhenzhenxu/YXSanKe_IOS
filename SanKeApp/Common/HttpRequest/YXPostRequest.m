@@ -13,9 +13,12 @@
 - (instancetype)init
 {
     if (self = [super init]) {
-//        self.token = [YXUserManager sharedManager].userModel.token;
+        self.token = [UserManager sharedInstance].userModel.token;
         self.ver = [SKConfigManager sharedInstance].clientVersion;
         self.os = @"ios";
+        if ([UserManager sharedInstance].userModel.isAnonymous) {
+            self.is_anonymous = @"1";
+        }
     }
     return self;
 }

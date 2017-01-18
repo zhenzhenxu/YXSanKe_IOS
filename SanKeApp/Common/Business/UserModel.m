@@ -25,6 +25,7 @@
     model.token = rawData.token;
     model.isTaged = [rawData.is_taged isEqualToString:@"1"];
     model.isSankeUser = [rawData.is_sanke isEqualToString:@"1"];
+    model.isAnonymous = [rawData.is_anonymous isEqualToString:@"1"];
     return model;
 }
 @end

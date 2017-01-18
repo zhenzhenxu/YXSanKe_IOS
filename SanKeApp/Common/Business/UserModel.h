@@ -25,6 +25,7 @@
 @property (nonatomic, strong) NSString<Optional> *token;
 @property (nonatomic, assign) BOOL isTaged;  //NO--未设置学段学科，YES--已设置
 @property (nonatomic, assign) BOOL isSankeUser;  // YES--是三科用户
+@property (nonatomic, assign) BOOL isAnonymous;
 
 + (UserModel *)modelFromRawData:(HttpBaseRequestItem_info *)rawData;
 @end

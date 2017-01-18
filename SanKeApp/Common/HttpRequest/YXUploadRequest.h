@@ -11,5 +11,6 @@
 @interface YXUploadRequest : UploadRequest
 
 @property (nonatomic, strong) NSString<Optional> *token;
+@property (nonatomic, strong) NSString<Optional> *is_anonymous;
 
 @end

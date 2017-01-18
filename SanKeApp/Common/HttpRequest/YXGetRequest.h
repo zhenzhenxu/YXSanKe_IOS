@@ -14,5 +14,6 @@
 @property (nonatomic, strong) NSString<Optional> *ver;
 @property (nonatomic, strong) NSString<Optional> *os;
 @property (nonatomic, strong) NSString<Optional> *osType; //设备类型，1:iPhone，2:iPad
+@property (nonatomic, strong) NSString<Optional> *is_anonymous;
 
 @end
