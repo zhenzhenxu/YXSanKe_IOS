@@ -77,7 +77,7 @@
         make.right.equalTo(self.contentView.mas_right).offset(-20.0);
     }];
 }
-- (void)setElement:(ChannelIndexRequestItem_Data_Elements *)element {
+- (void)setElement:(CourseVideoRequestItem_Data_Elements *)element {
     _element = element;
     self.titleLabel.text = _element.title;
     NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];

@@ -7,15 +7,15 @@
 //
 
 #import "YXGetRequest.h"
-@protocol ChannelTabRequestItem_Data_Tab
+@protocol ChannelTabRequestItem_Data_Category
 @end
-@interface ChannelTabRequestItem_Data_Tab : JSONModel
+@interface ChannelTabRequestItem_Data_Category : JSONModel
 @property (nonatomic, strong) NSString *catname;
 @property (nonatomic, strong) NSString *catid;
 @end
 
 @interface ChannelTabRequestItem_Data : JSONModel
-@property (nonatomic, strong) NSArray<ChannelTabRequestItem_Data_Tab, Optional> *tab;
+@property (nonatomic, strong) NSArray<ChannelTabRequestItem_Data_Category, Optional> *category;
 @end
 
 @interface ChannelTabRequestItem : HttpBaseRequestItem

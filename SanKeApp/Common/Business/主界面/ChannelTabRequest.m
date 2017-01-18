@@ -7,7 +7,7 @@
 //
 
 #import "ChannelTabRequest.h"
-@implementation ChannelTabRequestItem_Data_Tab
+@implementation ChannelTabRequestItem_Data_Category
 @end
 @implementation ChannelTabRequestItem_Data
 @end

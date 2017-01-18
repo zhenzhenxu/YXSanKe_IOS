@@ -34,7 +34,7 @@
 				</dict>
 			</array>
 		</dict>
-		<key>ChannelIndexRequest</key>
+		<key>CourseVideoRequest</key>
 		<dict>
 			<key>mockEnable</key>
 			<true/>
@@ -43,6 +43,34 @@
 				<dict>
 					<key>fileName</key>
 					<string>channelIndex_mock.json</string>
+					<key>percent</key>
+					<integer>100</integer>
+				</dict>
+			</array>
+		</dict>
+		<key>PlayHistoryRequest</key>
+		<dict>
+			<key>mockEnable</key>
+			<true/>
+			<key>mockFile</key>
+			<array>
+				<dict>
+					<key>fileName</key>
+					<string>playHistory_mock.json</string>
+					<key>percent</key>
+					<integer>100</integer>
+				</dict>
+			</array>
+		</dict>
+		<key>HistoryRecordRequest</key>
+		<dict>
+			<key>mockEnable</key>
+			<true/>
+			<key>mockFile</key>
+			<array>
+				<dict>
+					<key>fileName</key>
+					<string>historyRecord_mock.json</string>
 					<key>percent</key>
 					<integer>100</integer>
 				</dict>

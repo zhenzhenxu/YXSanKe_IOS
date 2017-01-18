@@ -3,7 +3,7 @@
     "debugDesc":"[debug_token: 1466492260388-12_7_45901 ][返回数据成功]",
     "desc":"success",
     "data":{
-        "tab":[
+        "category":[
                {
                "catid":234224,
                "catname":"全部",

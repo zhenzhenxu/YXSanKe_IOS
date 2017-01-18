@@ -63,6 +63,7 @@ static const NSUInteger kTagBase = 10086;
             self.bottomScrollView.contentOffset = CGPointMake(0, 0);
             self.topScrollView.contentOffset = CGPointMake(0, 0);
             b.selected = YES;
+            self.chooseViewController = obj;
         }
         if (idx < _childViewControllers.count - 1) {
             CGFloat lineHeight = 9.0f;  CGFloat lineWidth = 1.0f;
@@ -96,11 +97,11 @@ static const NSUInteger kTagBase = 10086;
     sender.selected = YES;
     NSInteger index = sender.tag - kTagBase;
     self.bottomScrollView.contentOffset = CGPointMake(self.bottomScrollView.frame.size.width*index, 0);
-    CourseViewController *newsVc = self.childViewControllers[index];
-    if (newsVc.view.superview) return;
-    newsVc.view.frame = CGRectMake(self.bottomScrollView.frame.size.width*index, 0, self.bottomScrollView.frame.size.width, self.bottomScrollView.frame.size.height);
-    newsVc.view.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
-    [self.bottomScrollView addSubview:newsVc.view];
+    self.chooseViewController = self.childViewControllers[index];
+    if (self.chooseViewController.view.superview) return;
+    self.chooseViewController.view.frame = CGRectMake(self.bottomScrollView.frame.size.width*index, 0, self.bottomScrollView.frame.size.width, self.bottomScrollView.frame.size.height);
+    self.chooseViewController.view.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
+    [self.bottomScrollView addSubview:self.chooseViewController.view];
 }
 
 - (void)layoutSubviews{
@@ -126,15 +127,13 @@ static const NSUInteger kTagBase = 10086;
     }else if (offsetx > offsetMax){
         offsetx = offsetMax;
     }
-    
     CGPoint offset = CGPointMake(offsetx, self.topScrollView.contentOffset.y);
     [self.topScrollView setContentOffset:offset animated:YES];
-    
-    CourseViewController *newsVc = self.childViewControllers[index];
-    if (newsVc.view.superview) return;
-    newsVc.view.frame = CGRectMake(self.bottomScrollView.frame.size.width*index, 0, self.bottomScrollView.frame.size.width, self.bottomScrollView.frame.size.height);
-    newsVc.view.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
-    [self.bottomScrollView addSubview:newsVc.view];    
+    self.chooseViewController = self.childViewControllers[index];
+    if (self.chooseViewController.view.superview) return;
+    self.chooseViewController.view.frame = CGRectMake(self.bottomScrollView.frame.size.width*index, 0, self.bottomScrollView.frame.size.width, self.bottomScrollView.frame.size.height);
+    self.chooseViewController.view.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
+    [self.bottomScrollView addSubview:self.chooseViewController.view];
 }
 
 

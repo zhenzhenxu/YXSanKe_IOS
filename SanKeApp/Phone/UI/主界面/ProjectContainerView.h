@@ -10,4 +10,5 @@
 @class CourseViewController;
 @interface ProjectContainerView : UIView
 @property(nonatomic,strong) NSArray<__kindof CourseViewController *> *childViewControllers;
+@property(nonatomic,strong) CourseViewController *chooseViewController;
 @end

@@ -126,10 +126,10 @@
 		7C7841731E2CA73800755BC0 /* RecordManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C7841721E2CA73800755BC0 /* RecordManager.m */; };
 		7CC9ADA81E25D12A00A392EA /* StageSubjectSelectViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CC9ADA71E25D12A00A392EA /* StageSubjectSelectViewController.m */; };
 		923A4E2E1E2C9FF5001059E2 /* ChannelTabRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 923A4E2D1E2C9FF5001059E2 /* ChannelTabRequest.m */; };
-		923A4E311E2CA4E7001059E2 /* ChannelIndexRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 923A4E301E2CA4E7001059E2 /* ChannelIndexRequest.m */; };
+		923A4E311E2CA4E7001059E2 /* CourseVideoRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 923A4E301E2CA4E7001059E2 /* CourseVideoRequest.m */; };
 		923A4E351E2CAE1C001059E2 /* channelTab_mock.json in Resources */ = {isa = PBXBuildFile; fileRef = 923A4E331E2CAE1C001059E2 /* channelTab_mock.json */; };
 		923A4E361E2CAE1C001059E2 /* channelIndex_mock.json in Resources */ = {isa = PBXBuildFile; fileRef = 923A4E341E2CAE1C001059E2 /* channelIndex_mock.json */; };
-		923A4E391E2CB310001059E2 /* ChannelIndexFetch.m in Sources */ = {isa = PBXBuildFile; fileRef = 923A4E381E2CB310001059E2 /* ChannelIndexFetch.m */; };
+		923A4E391E2CB310001059E2 /* CourseVideoFetch.m in Sources */ = {isa = PBXBuildFile; fileRef = 923A4E381E2CB310001059E2 /* CourseVideoFetch.m */; };
 		9241FFE11E25D5830015B587 /* ProjectContainerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9241FFE01E25D5830015B587 /* ProjectContainerView.m */; };
 		9241FFE41E25D77F0015B587 /* CourseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9241FFE31E25D77F0015B587 /* CourseViewController.m */; };
 		9241FFE71E25E7C90015B587 /* CourseTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9241FFE61E25E7C90015B587 /* CourseTableViewCell.m */; };
@@ -139,6 +139,12 @@
 		9241FFF71E2651390015B587 /* YXGradientView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9241FFF41E2651390015B587 /* YXGradientView.m */; };
 		9241FFF81E2651390015B587 /* YXTriangleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9241FFF61E2651390015B587 /* YXTriangleView.m */; };
 		9241FFFB1E2722470015B587 /* ProjectNavRightView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9241FFFA1E2722470015B587 /* ProjectNavRightView.m */; };
+		927594DC1E2F0C1400F87838 /* PlayHistoryRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 927594DB1E2F0C1400F87838 /* PlayHistoryRequest.m */; };
+		927594DF1E2F0C2800F87838 /* PlayHistoryFetch.m in Sources */ = {isa = PBXBuildFile; fileRef = 927594DE1E2F0C2800F87838 /* PlayHistoryFetch.m */; };
+		927594E21E2F0C5A00F87838 /* HistoryRecordRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 927594E11E2F0C5A00F87838 /* HistoryRecordRequest.m */; };
+		927594E51E2F0C6E00F87838 /* HistoryRecordFetch.m in Sources */ = {isa = PBXBuildFile; fileRef = 927594E41E2F0C6E00F87838 /* HistoryRecordFetch.m */; };
+		927594E81E2F0DA000F87838 /* historyRecord_mock.json in Resources */ = {isa = PBXBuildFile; fileRef = 927594E61E2F0DA000F87838 /* historyRecord_mock.json */; };
+		927594E91E2F0DA000F87838 /* playHistory_mock.json in Resources */ = {isa = PBXBuildFile; fileRef = 927594E71E2F0DA000F87838 /* playHistory_mock.json */; };
 		92E7D1391E28A83F00A34300 /* AloneCourseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 92E7D1381E28A83F00A34300 /* AloneCourseViewController.m */; };
 		92E7D13D1E28A88600A34300 /* AloneCourseTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 92E7D13C1E28A88600A34300 /* AloneCourseTableViewCell.m */; };
 		E902E6AE1E2BA3BE009441B3 /* MineViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E902E6A71E2BA3BE009441B3 /* MineViewController.m */; };
@@ -414,12 +420,12 @@
 		7CC9ADA71E25D12A00A392EA /* StageSubjectSelectViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StageSubjectSelectViewController.m; sourceTree = "<group>"; };
 		923A4E2C1E2C9FF5001059E2 /* ChannelTabRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChannelTabRequest.h; sourceTree = "<group>"; };
 		923A4E2D1E2C9FF5001059E2 /* ChannelTabRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChannelTabRequest.m; sourceTree = "<group>"; };
-		923A4E2F1E2CA4E7001059E2 /* ChannelIndexRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChannelIndexRequest.h; sourceTree = "<group>"; };
-		923A4E301E2CA4E7001059E2 /* ChannelIndexRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChannelIndexRequest.m; sourceTree = "<group>"; };
+		923A4E2F1E2CA4E7001059E2 /* CourseVideoRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CourseVideoRequest.h; sourceTree = "<group>"; };
+		923A4E301E2CA4E7001059E2 /* CourseVideoRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CourseVideoRequest.m; sourceTree = "<group>"; };
 		923A4E331E2CAE1C001059E2 /* channelTab_mock.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = channelTab_mock.json; sourceTree = "<group>"; };
 		923A4E341E2CAE1C001059E2 /* channelIndex_mock.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = channelIndex_mock.json; sourceTree = "<group>"; };
-		923A4E371E2CB310001059E2 /* ChannelIndexFetch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChannelIndexFetch.h; sourceTree = "<group>"; };
-		923A4E381E2CB310001059E2 /* ChannelIndexFetch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChannelIndexFetch.m; sourceTree = "<group>"; };
+		923A4E371E2CB310001059E2 /* CourseVideoFetch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CourseVideoFetch.h; sourceTree = "<group>"; };
+		923A4E381E2CB310001059E2 /* CourseVideoFetch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CourseVideoFetch.m; sourceTree = "<group>"; };
 		9241FFDF1E25D5830015B587 /* ProjectContainerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProjectContainerView.h; sourceTree = "<group>"; };
 		9241FFE01E25D5830015B587 /* ProjectContainerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProjectContainerView.m; sourceTree = "<group>"; };
 		9241FFE21E25D77F0015B587 /* CourseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CourseViewController.h; sourceTree = "<group>"; };
@@ -438,6 +444,16 @@
 		9241FFF61E2651390015B587 /* YXTriangleView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YXTriangleView.m; sourceTree = "<group>"; };
 		9241FFF91E2722470015B587 /* ProjectNavRightView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProjectNavRightView.h; sourceTree = "<group>"; };
 		9241FFFA1E2722470015B587 /* ProjectNavRightView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProjectNavRightView.m; sourceTree = "<group>"; };
+		927594DA1E2F0C1400F87838 /* PlayHistoryRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayHistoryRequest.h; sourceTree = "<group>"; };
+		927594DB1E2F0C1400F87838 /* PlayHistoryRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlayHistoryRequest.m; sourceTree = "<group>"; };
+		927594DD1E2F0C2800F87838 /* PlayHistoryFetch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayHistoryFetch.h; sourceTree = "<group>"; };
+		927594DE1E2F0C2800F87838 /* PlayHistoryFetch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlayHistoryFetch.m; sourceTree = "<group>"; };
+		927594E01E2F0C5A00F87838 /* HistoryRecordRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HistoryRecordRequest.h; sourceTree = "<group>"; };
+		927594E11E2F0C5A00F87838 /* HistoryRecordRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HistoryRecordRequest.m; sourceTree = "<group>"; };
+		927594E31E2F0C6E00F87838 /* HistoryRecordFetch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HistoryRecordFetch.h; sourceTree = "<group>"; };
+		927594E41E2F0C6E00F87838 /* HistoryRecordFetch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HistoryRecordFetch.m; sourceTree = "<group>"; };
+		927594E61E2F0DA000F87838 /* historyRecord_mock.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = historyRecord_mock.json; sourceTree = "<group>"; };
+		927594E71E2F0DA000F87838 /* playHistory_mock.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = playHistory_mock.json; sourceTree = "<group>"; };
 		92E7D1371E28A83F00A34300 /* AloneCourseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AloneCourseViewController.h; sourceTree = "<group>"; };
 		92E7D1381E28A83F00A34300 /* AloneCourseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AloneCourseViewController.m; sourceTree = "<group>"; };
 		92E7D13B1E28A88600A34300 /* AloneCourseTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AloneCourseTableViewCell.h; sourceTree = "<group>"; };
@@ -1117,6 +1133,16 @@
 			isa = PBXGroup;
 			children = (
 				7C6F21A01E248BDA000AB43A /* readme.txt */,
+				927594DA1E2F0C1400F87838 /* PlayHistoryRequest.h */,
+				927594DB1E2F0C1400F87838 /* PlayHistoryRequest.m */,
+				927594E71E2F0DA000F87838 /* playHistory_mock.json */,
+				927594DD1E2F0C2800F87838 /* PlayHistoryFetch.h */,
+				927594DE1E2F0C2800F87838 /* PlayHistoryFetch.m */,
+				927594E01E2F0C5A00F87838 /* HistoryRecordRequest.h */,
+				927594E11E2F0C5A00F87838 /* HistoryRecordRequest.m */,
+				927594E61E2F0DA000F87838 /* historyRecord_mock.json */,
+				927594E31E2F0C6E00F87838 /* HistoryRecordFetch.h */,
+				927594E41E2F0C6E00F87838 /* HistoryRecordFetch.m */,
 			);
 			path = "播放记录";
 			sourceTree = "<group>";
@@ -1152,11 +1178,11 @@
 				923A4E2C1E2C9FF5001059E2 /* ChannelTabRequest.h */,
 				923A4E2D1E2C9FF5001059E2 /* ChannelTabRequest.m */,
 				923A4E331E2CAE1C001059E2 /* channelTab_mock.json */,
-				923A4E2F1E2CA4E7001059E2 /* ChannelIndexRequest.h */,
-				923A4E301E2CA4E7001059E2 /* ChannelIndexRequest.m */,
+				923A4E2F1E2CA4E7001059E2 /* CourseVideoRequest.h */,
+				923A4E301E2CA4E7001059E2 /* CourseVideoRequest.m */,
 				923A4E341E2CAE1C001059E2 /* channelIndex_mock.json */,
-				923A4E371E2CB310001059E2 /* ChannelIndexFetch.h */,
-				923A4E381E2CB310001059E2 /* ChannelIndexFetch.m */,
+				923A4E371E2CB310001059E2 /* CourseVideoFetch.h */,
+				923A4E381E2CB310001059E2 /* CourseVideoFetch.m */,
 			);
 			path = "主界面";
 			sourceTree = "<group>";
@@ -1391,7 +1417,9 @@
 			files = (
 				7C1A5EE91E1506C500832DED /* PhoneImage.xcassets in Resources */,
 				7C7629D21E276DBE007B5698 /* logo.gif in Resources */,
+				927594E91E2F0DA000F87838 /* playHistory_mock.json in Resources */,
 				7C1A5EF31E150BD100832DED /* env_config.json in Resources */,
+				927594E81E2F0DA000F87838 /* historyRecord_mock.json in Resources */,
 				7C1A5F941E15143F00832DED /* MockConfig.plist in Resources */,
 				7C18093A1E25FEF800B71863 /* stage_subject.json in Resources */,
 				7C1809491E2631C400B71863 /* edition_filter.json in Resources */,
@@ -1524,11 +1552,13 @@
 				7C1A5EE71E1505BF00832DED /* SKNavigationController.m in Sources */,
 				9241FFEC1E2610C60015B587 /* PlayRecordCell.m in Sources */,
 				7C1A5FCD1E1634DE00832DED /* YXPromtController.m in Sources */,
+				927594E21E2F0C5A00F87838 /* HistoryRecordRequest.m in Sources */,
 				7C1A5F241E1510FA00832DED /* PostRequest.m in Sources */,
 				7C1A5F891E1513D600832DED /* MJRefreshHeaderView.m in Sources */,
 				9241FFE41E25D77F0015B587 /* CourseViewController.m in Sources */,
 				7C2251CD1E1DEB32004785D5 /* SKAlertButton.m in Sources */,
 				7C1A5F141E15108F00832DED /* DownloaderEntity.m in Sources */,
+				927594E51E2F0C6E00F87838 /* HistoryRecordFetch.m in Sources */,
 				7C18094C1E271AFC00B71863 /* CollectionViewEqualSpaceFlowLayout.m in Sources */,
 				7C2251C31E1CE3AC004785D5 /* UIImage+GIF.m in Sources */,
 				7C1A5F691E15130200832DED /* YXFileAudioItem.m in Sources */,
@@ -1568,7 +1598,7 @@
 				7CC9ADA81E25D12A00A392EA /* StageSubjectSelectViewController.m in Sources */,
 				7C18093D1E25FF5600B71863 /* StageSubjectModel.m in Sources */,
 				7C1A5F211E1510FA00832DED /* HttpBaseRequest.m in Sources */,
-				923A4E391E2CB310001059E2 /* ChannelIndexFetch.m in Sources */,
+				923A4E391E2CB310001059E2 /* CourseVideoFetch.m in Sources */,
 				7C1A5F051E150F4B00832DED /* LePlayerView.m in Sources */,
 				7C1809381E25DEBA00B71863 /* StageSubjectCell.m in Sources */,
 				7C1A5F761E15132200832DED /* FileDownloadHelper.m in Sources */,
@@ -1589,6 +1619,7 @@
 				7C1A60031E16396C00832DED /* UIImage+FixOrientation.m in Sources */,
 				7C1A5F4C1E15127200832DED /* YXSlideProgressView.m in Sources */,
 				7C1809411E26285B00B71863 /* FilterSelectionView.m in Sources */,
+				927594DC1E2F0C1400F87838 /* PlayHistoryRequest.m in Sources */,
 				7C1A60071E16396D00832DED /* UIImage+YXResize.m in Sources */,
 				7C1A5F491E15127200832DED /* YXPlayerBufferingView.m in Sources */,
 				7C1A5F481E15127200832DED /* YXPlayerBottomView.m in Sources */,
@@ -1603,7 +1634,8 @@
 				7C1A5EFC1E150E3400832DED /* FileLogger.m in Sources */,
 				E902E6E11E2CE1B8009441B3 /* EmptyView.m in Sources */,
 				9241FFF21E2615B80015B587 /* PlayImageView.m in Sources */,
-				923A4E311E2CA4E7001059E2 /* ChannelIndexRequest.m in Sources */,
+				927594DF1E2F0C2800F87838 /* PlayHistoryFetch.m in Sources */,
+				923A4E311E2CA4E7001059E2 /* CourseVideoRequest.m in Sources */,
 				92E7D13D1E28A88600A34300 /* AloneCourseTableViewCell.m in Sources */,
 				7C2251CA1E1DEADA004785D5 /* SKAlertView.m in Sources */,
 				9241FFF71E2651390015B587 /* YXGradientView.m in Sources */,

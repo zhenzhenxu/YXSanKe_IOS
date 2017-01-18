@@ -83,10 +83,10 @@
     for (CourseViewController *vc in self.childViewControllers) {
         [vc removeFromParentViewController];
     }
-    for (ChannelTabRequestItem_Data_Tab *tab in tabs) {
+    for (ChannelTabRequestItem_Data_Category *cat in tabs) {
         CourseTabItem *item = [[CourseTabItem alloc] init];
-        item.name = [NSString stringWithFormat:@"%@",tab.catname];
-        item.tabId = tab.catid;
+        item.name = [NSString stringWithFormat:@"%@",cat.catname];
+        item.tabId = cat.catid;
         CourseViewController *vc = [[CourseViewController alloc] init];
         vc.tabItem = item;
         [self addChildViewController:vc];
@@ -143,7 +143,7 @@
             
         }else {
             ChannelTabRequestItem *item = retItem;
-            [self showContainerView:item.data.tab];
+            [self showContainerView:item.data.category];
         }
     }];
     self.tabRequest = request;

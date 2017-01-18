@@ -10,7 +10,7 @@
 #import "CourseTableViewCell.h"
 #import "YXFileVideoItem.h"
 #import "AloneCourseViewController.h"
-#import "ChannelIndexFetch.h"
+#import "CourseVideoFetch.h"
 @implementation CourseTabItem
 @end;
 @interface CourseViewController ()
@@ -21,7 +21,7 @@
     DDLogError(@"release====>%@,%@",NSStringFromClass([self class]),self.title);
 }
 - (void)viewDidLoad {
-    ChannelIndexFetch *fetcher = [[ChannelIndexFetch alloc]init];
+    CourseVideoFetch *fetcher = [[CourseVideoFetch alloc]init];
     self.dataFetcher = fetcher;
     [super viewDidLoad];
     [self setupUI];

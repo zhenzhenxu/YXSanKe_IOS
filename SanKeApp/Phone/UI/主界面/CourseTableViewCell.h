@@ -7,9 +7,9 @@
 //
 
 #import "RadianBaseCell.h"
-#import "ChannelIndexRequest.h"
+#import "CourseVideoRequest.h"
 @interface CourseTableViewCell : RadianBaseCell
-@property (nonatomic, strong) ChannelIndexRequestItem_Data_Elements *element;
+@property (nonatomic, strong) CourseVideoRequestItem_Data_Elements *element;
 @property (nonatomic, copy) void(^ClickCourseTitleBlock)();
 
 @end
