@@ -11,7 +11,8 @@
 #import "YXFileVideoItem.h"
 #import "AloneCourseViewController.h"
 #import "CourseVideoFetch.h"
-@implementation CourseTabItem
+#import "FilterSelectionView.h"
+@implementation CourseVideoItem
 @end;
 @interface CourseViewController ()
 @end
@@ -22,11 +23,15 @@
 }
 - (void)viewDidLoad {
     CourseVideoFetch *fetcher = [[CourseVideoFetch alloc]init];
+    fetcher.filterID = self.videoItem.filterID;
+    fetcher.catID = self.videoItem.catID;
+    fetcher.fromType = self.videoItem.fromType;
+    fetcher.lastID = 0;
     self.dataFetcher = fetcher;
     [super viewDidLoad];
     [self setupUI];
     self.tableView.backgroundColor = [UIColor colorWithHexString:@"e6e6e6"];
-    self.title = self.tabItem.name;
+    self.title = self.videoItem.name;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -42,6 +47,19 @@
     UIView *footerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, 10.0f)];
     footerView.backgroundColor = [UIColor colorWithHexString:@"e6e6e6"];
     self.tableView.tableFooterView = footerView;
+    WEAK_SELF
+    [self.selectionView setCompleteBlock:^(NSString *filterId) {
+        STRONG_SELF
+        CourseVideoFetch *fetcher = (CourseVideoFetch *)self.dataFetcher;
+        fetcher.filterID = filterId;
+        if ([filterId isEqualToString:@"0,0,0"]) {
+            fetcher.fromType = 0;
+        }else {
+           fetcher.fromType = 1;
+        }
+        [self startLoading];
+        [self firstPageFetch];
+    }];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -70,10 +88,13 @@
     return 110.0f;
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    CourseVideoRequestItem_Data_Elements *element = self.dataArray[indexPath.row];
     YXFileVideoItem *videoItem = [[YXFileVideoItem alloc] init];
-    videoItem.name = self.title;
-    videoItem.url = @"http://yuncdn.teacherclub.com.cn/course/cf/2016bjxxjs/wh/xxylalkdx/video/2.1_l/2.1_l.m3u8";
+    videoItem.name = element.title;
+    videoItem.url = element.videos;
     videoItem.baseViewController = self;
+    videoItem.record = element.wealth;
+    videoItem.resourceID = element.videoID;
     [videoItem browseFile];
 }
 @end

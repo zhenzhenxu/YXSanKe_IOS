@@ -10,10 +10,15 @@
 @protocol CourseVideoRequestItem_Data_Elements
 @end
 @interface CourseVideoRequestItem_Data_Elements : JSONModel
+@property (nonatomic ,copy) NSString<Optional> *videoID;
 @property (nonatomic ,copy) NSString<Optional> *title;
 @property (nonatomic ,copy) NSString<Optional> *desc;
 @property (nonatomic ,copy) NSString<Optional> *author;
 @property (nonatomic ,copy) NSString<Optional> *thanks;
+@property (nonatomic ,copy) NSString<Optional> *icon;
+@property (nonatomic ,copy) NSString<Optional> *videos;
+@property (nonatomic ,copy) NSString<Optional> *wealth;
+
 @end
 @interface CourseVideoRequestItem_Data : JSONModel
 @property (nonatomic, strong) NSArray<CourseVideoRequestItem_Data_Elements, Optional> *items;

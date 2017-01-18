@@ -11,9 +11,8 @@
 @interface PagedListFetcherBase : NSObject {
     void(^_completeBlock)(int total, NSArray *retItemArray, NSError *error);
 }
-
-@property (nonatomic, assign) int pageindex;
-@property (nonatomic, assign) int pagesize;
+@property (nonatomic, assign) NSInteger pageSize;
+@property (nonatomic, assign) NSInteger lastID;
 @property (nonatomic, assign) BOOL isDataArrayMerged;
 
 - (void)startWithBlock:(void(^)(int total, NSArray *retItemArray, NSError *error))aCompleteBlock;

@@ -2,7 +2,7 @@
     "code":"0",
     "debugDesc":"[debug_token: 1466492260388-12_7_45901 ][返回数据成功]",
     "desc":"success",
-    "body":{
+    "data":{
         "actives":[
                    {
                    "aid":234224,

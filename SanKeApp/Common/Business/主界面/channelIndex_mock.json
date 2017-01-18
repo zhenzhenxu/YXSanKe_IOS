@@ -5,13 +5,13 @@
     "data":{
         "items":[
                    {
-                   "aid":234224,
+                   "id":234224,
                    "title":"hello,world",
                    "joinUserCount":0,
                    "actTypeName":"专题研讨",
                    "startTime":"2016-11-08 12:01",
                    "endTime":"2016-11-15 12:01",
-                   "level":0,
+                   "wealth":0,
                    "hasJoin":0,
                    "createUserid":11389565,
                    "author":"县级辅导教师1",
@@ -22,17 +22,17 @@
                    "publishtime":"2016-11-08 12:03:54",
                    "createtime":"2016-11-08 12:01:03",
                    "status":2,
-                   "pic":"http://s1.jsyxw.cn/res/web/3.0/img/active/default.jpg",
-                   "source":"club"
+                   "icon":"http://s1.jsyxw.cn/res/web/3.0/img/active/default.jpg",
+                   "videos":"http://yuncdn.teacherclub.com.cn/course/cf/2016bjxxjs/wh/xxylalkdx/video/2.1_l/2.1_l.m3u8"
                    },
                    {
-                   "aid":234225,
+                   "id":234225,
                    "title":"你好,世界",
                    "joinUserCount":0,
                    "actTypeName":"专题研讨",
                    "startTime":"2015-11-08 08:01",
                    "endTime":"2016-11-15 12:01",
-                   "level":0,
+                   "wealth":0,
                    "hasJoin":0,
                    "createUserid":11389565,
                    "author":"县级辅导教师1",
@@ -43,17 +43,17 @@
                    "publishtime":"2016-11-08 12:03:54",
                    "createtime":"2016-11-08 12:01:03",
                    "status":2,
-                   "pic":"http://s1.jsyxw.cn/res/web/3.0/img/active/default.jpg",
-                   "source":"club"
+                   "icon":"http://s1.jsyxw.cn/res/web/3.0/img/active/default.jpg",
+                   "videos":"http://yuncdn.teacherclub.com.cn/course/cf/2016bjxxjs/wh/xxylalkdx/video/2.1_l/2.1_l.m3u8"
                    },
                    {
-                   "aid":234226,
+                   "id":234226,
                    "title":"既然选择了远方,便只顾风雨兼程",
                    "joinUserCount":0,
                    "actTypeName":"专题研讨",
                    "startTime":"2016-11-08 10:10",
                    "endTime":"2016-11-15 12:01",
-                   "level":0,
+                   "wealth":0,
                    "hasJoin":0,
                    "createUserid":11389565,
                    "author":"县级辅导教师1",
@@ -64,17 +64,17 @@
                    "publishtime":"2016-11-08 12:03:54",
                    "createtime":"2016-11-08 12:01:03",
                    "status":2,
-                   "pic":"http://s1.jsyxw.cn/res/web/3.0/img/active/default.jpg",
-                   "source":"club"
+                   "icon":"http://s1.jsyxw.cn/res/web/3.0/img/active/default.jpg",
+                   "videos":"http://yuncdn.teacherclub.com.cn/course/cf/2016bjxxjs/wh/xxylalkdx/video/2.1_l/2.1_l.m3u8"
                    },
                    {
-                   "aid":234227,
+                   "id":234227,
                    "title":"天若有情天亦老,人间正道是沧桑",
                    "joinUserCount":0,
                    "actTypeName":"专题研讨",
                    "startTime":"2016-11-11 00:01",
                    "endTime":"2016-11-15 12:01",
-                   "level":0,
+                   "wealth":0,
                    "hasJoin":0,
                    "createUserid":11389565,
                    "author":"县级辅导教师1",
@@ -85,17 +85,17 @@
                    "publishtime":"2016-11-08 12:03:54",
                    "createtime":"2016-11-08 12:01:03",
                    "status":2,
-                   "pic":"http://s1.jsyxw.cn/res/web/3.0/img/active/default.jpg",
-                   "source":"club"
+                   "icon":"http://s1.jsyxw.cn/res/web/3.0/img/active/default.jpg",
+                   "videos":"http://yuncdn.teacherclub.com.cn/course/cf/2016bjxxjs/wh/xxylalkdx/video/2.1_l/2.1_l.m3u8"
                    },
                    {
-                   "aid":234225,
+                   "id":234225,
                    "title":"爱与孤独",
                    "joinUserCount":0,
                    "actTypeName":"专题研讨",
                    "startTime":"2015-11-08 08:01",
                    "endTime":"2016-11-15 12:01",
-                   "level":0,
+                   "wealth":0,
                    "hasJoin":0,
                    "createUserid":11389565,
                    "author":"县级辅导教师1",
@@ -106,17 +106,17 @@
                    "publishtime":"2016-11-08 12:03:54",
                    "createtime":"2016-11-08 12:01:03",
                    "status":2,
-                   "pic":"http://s1.jsyxw.cn/res/web/3.0/img/active/default.jpg",
-                   "source":"club"
+                   "icon":"http://s1.jsyxw.cn/res/web/3.0/img/active/default.jpg",
+                   "videos":"http://yuncdn.teacherclub.com.cn/course/cf/2016bjxxjs/wh/xxylalkdx/video/2.1_l/2.1_l.m3u8"
                    },
                    {
-                   "aid":234225,
+                   "id":234225,
                    "title":"灵魂只能独行",
                    "joinUserCount":0,
                    "actTypeName":"专题研讨",
                    "startTime":"2015-11-08 08:01",
                    "endTime":"2016-11-15 12:01",
-                   "level":0,
+                   "wealth":0,
                    "hasJoin":0,
                    "createUserid":11389565,
                    "author":"县级辅导教师1",
@@ -127,17 +127,17 @@
                    "publishtime":"2016-11-08 12:03:54",
                    "createtime":"2016-11-08 12:01:03",
                    "status":2,
-                   "pic":"http://s1.jsyxw.cn/res/web/3.0/img/active/default.jpg",
-                   "source":"club"
+                   "icon":"http://s1.jsyxw.cn/res/web/3.0/img/active/default.jpg",
+                   "videos":"http://yuncdn.teacherclub.com.cn/course/cf/2016bjxxjs/wh/xxylalkdx/video/2.1_l/2.1_l.m3u8"
                    },
                    {
-                   "aid":234225,
+                   "id":234225,
                    "title":"撒哈拉的沙漠",
                    "joinUserCount":0,
                    "actTypeName":"专题研讨",
                    "startTime":"2015-11-08 08:01",
                    "endTime":"2016-11-15 12:01",
-                   "level":0,
+                   "wealth":0,
                    "hasJoin":0,
                    "createUserid":11389565,
                    "author":"县级辅导教师1",
@@ -148,17 +148,17 @@
                    "publishtime":"2016-11-08 12:03:54",
                    "createtime":"2016-11-08 12:01:03",
                    "status":2,
-                   "pic":"http://s1.jsyxw.cn/res/web/3.0/img/active/default.jpg",
-                   "source":"club"
+                   "icon":"http://s1.jsyxw.cn/res/web/3.0/img/active/default.jpg",
+                   "videos":"http://yuncdn.teacherclub.com.cn/course/cf/2016bjxxjs/wh/xxylalkdx/video/2.1_l/2.1_l.m3u8"
                    },
                    {
-                   "aid":234225,
+                   "id":234225,
                    "title":"追风筝的人",
                    "joinUserCount":0,
                    "actTypeName":"专题研讨",
                    "startTime":"2015-11-08 08:01",
                    "endTime":"2016-11-15 12:01",
-                   "level":0,
+                   "wealth":0,
                    "hasJoin":0,
                    "createUserid":11389565,
                    "author":"县级辅导教师1",
@@ -169,16 +169,16 @@
                    "publishtime":"2016-11-08 12:03:54",
                    "createtime":"2016-11-08 12:01:03",
                    "status":2,
-                   "pic":"http://s1.jsyxw.cn/res/web/3.0/img/active/default.jpg",
-                   "source":"club"
+                   "icon":"http://s1.jsyxw.cn/res/web/3.0/img/active/default.jpg",
+                   "videos":"http://yuncdn.teacherclub.com.cn/course/cf/2016bjxxjs/wh/xxylalkdx/video/2.1_l/2.1_l.m3u8"
                    },{
-                   "aid":234225,
+                   "id":234225,
                    "title":"好",
                    "joinUserCount":0,
                    "actTypeName":"专题研讨",
                    "startTime":"2015-11-08 08:01",
                    "endTime":"2016-11-15 12:01",
-                   "level":0,
+                   "wealth":0,
                    "hasJoin":0,
                    "createUserid":11389565,
                    "author":"县级辅导教师1",
@@ -189,17 +189,17 @@
                    "publishtime":"2016-11-08 12:03:54",
                    "createtime":"2016-11-08 12:01:03",
                    "status":2,
-                   "pic":"http://s1.jsyxw.cn/res/web/3.0/img/active/default.jpg",
-                   "source":"club"
+                   "icon":"http://s1.jsyxw.cn/res/web/3.0/img/active/default.jpg",
+                   "videos":"http://yuncdn.teacherclub.com.cn/course/cf/2016bjxxjs/wh/xxylalkdx/video/2.1_l/2.1_l.m3u8"
                    },
                    {
-                   "aid":234225,
+                   "id":234225,
                    "title":"你好,世界",
                    "joinUserCount":0,
                    "actTypeName":"专题研讨",
                    "startTime":"2015-11-08 08:01",
                    "endTime":"2016-11-15 12:01",
-                   "level":0,
+                   "wealth":0,
                    "hasJoin":0,
                    "createUserid":11389565,
                    "author":"县级辅导教师1",
@@ -210,16 +210,16 @@
                    "publishtime":"2016-11-08 12:03:54",
                    "createtime":"2016-11-08 12:01:03",
                    "status":2,
-                   "pic":"http://s1.jsyxw.cn/res/web/3.0/img/active/default.jpg",
-                   "source":"club"
+                   "icon":"http://s1.jsyxw.cn/res/web/3.0/img/active/default.jpg",
+                   "videos":"http://yuncdn.teacherclub.com.cn/course/cf/2016bjxxjs/wh/xxylalkdx/video/2.1_l/2.1_l.m3u8"
                    },{
-                   "aid":234225,
+                   "id":234225,
                    "title":"你好,世界",
                    "joinUserCount":0,
                    "actTypeName":"专题研讨",
                    "startTime":"2015-11-08 08:01",
                    "endTime":"2016-11-15 12:01",
-                   "level":0,
+                   "wealth":0,
                    "hasJoin":0,
                    "createUserid":11389565,
                    "author":"县级辅导教师1",
@@ -230,16 +230,16 @@
                    "publishtime":"2016-11-08 12:03:54",
                    "createtime":"2016-11-08 12:01:03",
                    "status":2,
-                   "pic":"http://s1.jsyxw.cn/res/web/3.0/img/active/default.jpg",
-                   "source":"club"
+                   "icon":"http://s1.jsyxw.cn/res/web/3.0/img/active/default.jpg",
+                   "videos":"http://yuncdn.teacherclub.com.cn/course/cf/2016bjxxjs/wh/xxylalkdx/video/2.1_l/2.1_l.m3u8"
                    },{
-                   "aid":234225,
+                   "id":234225,
                    "title":"你好,世界",
                    "joinUserCount":0,
                    "actTypeName":"专题研讨",
                    "startTime":"2015-11-08 08:01",
                    "endTime":"2016-11-15 12:01",
-                   "level":0,
+                   "wealth":0,
                    "hasJoin":0,
                    "createUserid":11389565,
                    "author":"县级辅导教师1",
@@ -250,8 +250,8 @@
                    "publishtime":"2016-11-08 12:03:54",
                    "createtime":"2016-11-08 12:01:03",
                    "status":2,
-                   "pic":"http://s1.jsyxw.cn/res/web/3.0/img/active/default.jpg",
-                   "source":"club"
+                   "icon":"http://s1.jsyxw.cn/res/web/3.0/img/active/default.jpg",
+                   "videos":"http://yuncdn.teacherclub.com.cn/course/cf/2016bjxxjs/wh/xxylalkdx/video/2.1_l/2.1_l.m3u8"
                    }
                    ],
         "moreData":10

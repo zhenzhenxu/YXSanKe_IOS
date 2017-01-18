@@ -9,5 +9,6 @@
 #import "PagedListViewControllerBase.h"
 
 @interface AloneCourseViewController : PagedListViewControllerBase
-
+@property (nonatomic, strong) NSString *filterID;
+@property (nonatomic, strong) NSString *catID;
 @end

@@ -7,7 +7,20 @@
 //
 
 #import "HistoryRecordRequest.h"
-
+@implementation HistoryRecordRequestItem_Data
+@end
+@implementation HistoryRecordRequestItem
+@end
 @implementation HistoryRecordRequest
-
++ (JSONKeyMapper *)keyMapper {
+    return [[JSONKeyMapper alloc] initWithDictionary:@{@"resource_id":@"resourceID",
+                                                       @"watch_record":@"watchRecord",
+                                                       @"total_time":@"totalTime"}];
+}
+- (instancetype)init {
+    if (self = [super init]) {
+        
+    }
+    return self;
+}
 @end

@@ -12,6 +12,5 @@
 @property (nonatomic, copy) NSString *filterID;
 @property (nonatomic, copy) NSString *catID;
 @property (nonatomic, assign) NSInteger fromType;
-@property (nonatomic, assign) NSInteger pageSize;
-@property (nonatomic, assign) NSInteger lastID;
+
 @end

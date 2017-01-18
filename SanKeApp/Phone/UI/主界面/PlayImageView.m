@@ -25,7 +25,8 @@
     }];
     
     UIImageView *playImageView = [[UIImageView alloc] init];
-    playImageView.backgroundColor = [UIColor blueColor];
+    playImageView.image = [UIImage imageNamed:@"播放"];
+    playImageView.alpha = 0.7f;
     [self addSubview:playImageView];
     [playImageView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.size.mas_offset(CGSizeMake(30.0f, 30.0f));

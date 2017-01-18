@@ -8,16 +8,19 @@
 
 #import "PlayRecordViewController.h"
 #import "PlayRecordCell.h"
+#import "PlayHistoryFetch.h"
+#import "YXFileVideoItem.h"
 @interface PlayRecordViewController ()
-
+@property (nonatomic, strong) PlayHistoryFetch *historyFetch;
 @end
 
 @implementation PlayRecordViewController
 
 - (void)viewDidLoad {
+    PlayHistoryFetch *fetch = [[PlayHistoryFetch alloc] init];
+    self.dataFetcher = fetch;
     [super viewDidLoad];
     self.title = @"播放记录";
-    [self setupMokeData];
     [self setupUI];
     self.tableView.backgroundColor = [UIColor colorWithHexString:@"e6e6e6"];
 }
@@ -26,7 +29,6 @@
     [super didReceiveMemoryWarning];
 }
 - (void)setupMokeData {
-    self.dataArray = [@[@"你好",@"我好",@"大家好",@"很好",@"你好",@"我好",@"大家好",@"很好"] mutableCopy];
     [self stopLoading];
 }
 #pragma mark - setupUI
@@ -39,7 +41,6 @@
     UIView *footerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, 10.0f)];
     footerView.backgroundColor = [UIColor colorWithHexString:@"e6e6e6"];
     self.tableView.tableFooterView = footerView;
-    [self stopLoading];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -55,9 +56,20 @@
             cell.cellStatus = RadianBaseCellStatus_Bottom;
         }
     }
+    cell.history = self.dataArray[indexPath.row];
     return cell;
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     return 110.0f;
+}
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    PlayHistoryRequestItem_Data_History *history = self.dataArray[indexPath.row];
+    YXFileVideoItem *videoItem = [[YXFileVideoItem alloc] init];
+    videoItem.name = history.title;
+    videoItem.url = history.videos;
+    videoItem.resourceID = history.videoID;
+    videoItem.record = history.timeWatched;
+    videoItem.baseViewController = self;
+    [videoItem browseFile];
 }
 @end

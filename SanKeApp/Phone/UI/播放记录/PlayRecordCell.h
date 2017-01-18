@@ -7,5 +7,7 @@
 //
 
 #import "RadianBaseCell.h"
+#import "PlayHistoryRequest.h"
 @interface PlayRecordCell : RadianBaseCell
+@property (nonatomic, strong) PlayHistoryRequestItem_Data_History *history;
 @end

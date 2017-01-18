@@ -9,5 +9,4 @@
 #import "PagedListFetcherBase.h"
 
 @interface PlayHistoryFetch : PagedListFetcherBase
-
 @end

@@ -29,7 +29,6 @@
 - (void)setupUI {
     self.contentView.backgroundColor = [UIColor colorWithHexString:@"e6e6e6"];
     self.posterImagView = [[PlayImageView alloc] init];
-    self.posterImagView.backgroundColor = [UIColor redColor];
     [self.contentView addSubview:self.posterImagView];
 
     self.titleLabel = [[UILabel alloc] init];
@@ -87,6 +86,7 @@
     [attString addAttribute:NSParagraphStyleAttributeName value:paragraphStyle range:NSMakeRange(0, _element.desc.length)];
     self.contentLabel.attributedText = attString;
     self.expertLabel.text = [NSString stringWithFormat:@"主讲专家: %@ %@",_element.author,_element.thanks];
+    [self.posterImagView sd_setImageWithURL:[NSURL URLWithString:_element.icon] placeholderImage:[UIImage imageNamed:@""]];
 }
 - (void)touchesEnded:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
     [super touchesEnded:touches withEvent:event];

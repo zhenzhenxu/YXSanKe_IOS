@@ -21,7 +21,6 @@
         self.selectionStyle = UITableViewCellSelectionStyleNone;
         [self setupUI];
         [self setupLayout];
-        [self setupMokeData];
     }
     return self;
 }
@@ -29,7 +28,6 @@
 - (void)setupUI {
     self.contentView.backgroundColor = [UIColor colorWithHexString:@"e6e6e6"];
     self.posterImagView = [[PlayImageView alloc] init];
-    self.posterImagView.backgroundColor = [UIColor redColor];
     [self.contentView addSubview:self.posterImagView];
     
     self.contentLabel = [[UILabel alloc] init];
@@ -71,16 +69,20 @@
         make.top.equalTo(self.allTimeLabel.mas_top);
     }];
 }
-- (void)setupMokeData {
+- (void)setHistory:(PlayHistoryRequestItem_Data_History *)history {
+    _history = history;
     NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
     paragraphStyle.lineSpacing = 4.0f;
     paragraphStyle.lineBreakMode = NSLineBreakByTruncatingTail;
-    NSString *contentString = @"啊啊大书法家饭店;阿卡京东方;看家;看京东方;阿卡京东方;卡死;打飞机;阿里看见是否;了空间啊;大理石开房间大";
-    NSMutableAttributedString *attString = [[NSMutableAttributedString alloc] initWithString:contentString];
-    [attString addAttribute:NSParagraphStyleAttributeName value:paragraphStyle range:NSMakeRange(0, contentString.length)];
+    NSMutableAttributedString *attString = [[NSMutableAttributedString alloc] initWithString:_history.title];
+    [attString addAttribute:NSParagraphStyleAttributeName value:paragraphStyle range:NSMakeRange(0, _history.title.length)];
     self.contentLabel.attributedText = attString;
-    self.allTimeLabel.text = @"25:00";
-    self.playTimeLabel.text = @"已观看90%";
+    self.allTimeLabel.text = [self formatShowTime:_history.totalTime];
+    self.playTimeLabel.text = [NSString stringWithFormat:@"已观看%0.1f%%",_history.timeWatched.doubleValue/_history.totalTime.doubleValue * 100];
+    [self.posterImagView sd_setImageWithURL:[NSURL URLWithString:_history.thumb] placeholderImage:[UIImage imageNamed:@""]];
+}
+- (NSString *)formatShowTime:(NSString *)time {
+    return [NSString stringWithFormat:@"%0.2ld:%0.2ld",time.integerValue/60, time.integerValue/60/60];
     
 }
 

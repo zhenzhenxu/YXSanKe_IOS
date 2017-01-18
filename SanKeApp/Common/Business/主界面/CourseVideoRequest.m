@@ -12,6 +12,9 @@
 @implementation CourseVideoRequestItem_Data
 @end
 @implementation CourseVideoRequestItem
++ (JSONKeyMapper *)keyMapper {
+    return [[JSONKeyMapper alloc] initWithDictionary:@{@"id":@"videoID"}];
+}
 @end
 @implementation CourseVideoRequest
 + (JSONKeyMapper *)keyMapper

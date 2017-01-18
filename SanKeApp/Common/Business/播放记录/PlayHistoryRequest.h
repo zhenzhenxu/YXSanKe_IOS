@@ -7,7 +7,27 @@
 //
 
 #import "YXGetRequest.h"
+@protocol PlayHistoryRequestItem_Data_History
 
+@end
+@interface PlayHistoryRequestItem_Data_History : JSONModel
+@property (nonatomic, copy) NSString<Optional> *catid;
+@property (nonatomic, copy) NSString<Optional> *videoID;
+@property (nonatomic, copy) NSString<Optional> *thumb;
+@property (nonatomic, copy) NSString<Optional> *videos;
+@property (nonatomic, copy) NSString<Optional> *title;
+@property (nonatomic, copy) NSString<Optional> *timeWatched;
+@property (nonatomic, copy) NSString<Optional> *totalTime;
+@end
+@interface PlayHistoryRequestItem_Data : JSONModel
+@property (nonatomic, strong) NSArray<PlayHistoryRequestItem_Data_History, Optional> *history;
+@property (nonatomic, copy) NSString<Optional> *moreData;
+@end
+
+@interface PlayHistoryRequestItem : HttpBaseRequestItem
+@property (nonatomic, strong) PlayHistoryRequestItem_Data<Optional> *data;
+@end
 @interface PlayHistoryRequest : YXGetRequest
-
+@property (nonatomic, assign) NSInteger pageSize;
+@property (nonatomic, assign) NSInteger lastID;
 @end

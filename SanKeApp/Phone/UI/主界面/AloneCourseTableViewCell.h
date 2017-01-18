@@ -7,7 +7,7 @@
 //
 
 #import "RadianBaseCell.h"
-
+#import "CourseVideoRequest.h"
 @interface AloneCourseTableViewCell : RadianBaseCell
-
+@property (nonatomic, strong) CourseVideoRequestItem_Data_Elements *element;
 @end

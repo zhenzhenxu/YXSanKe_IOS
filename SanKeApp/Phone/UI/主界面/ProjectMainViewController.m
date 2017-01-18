@@ -14,12 +14,16 @@
 #import "ProjectNavRightView.h"
 #import "FilterSelectionView.h"
 #import "ChannelTabRequest.h"
+extern NSString * const kStageSubjectDidChangeNotification;
 @interface ProjectMainViewController ()
 @property (nonatomic, strong) ChannelTabRequest *tabRequest;
 @property (nonatomic, strong) ProjectContainerView *containerView;
 @end
 
 @implementation ProjectMainViewController
+- (void) dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -30,6 +34,7 @@
     [self setupLeftNavView];
     [self setupRightNavView];
     [self requestForChannelTab];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(requestForChannelTab) name:kStageSubjectDidChangeNotification object:nil];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -78,23 +83,27 @@
     }];
     [self setupRightWithCustomView:rightView];
 }
-- (void)showContainerView:(NSArray *)tabs {
+- (void)showContainerView:(NSArray *)categorys {
     self.containerView.hidden = NO;
     for (CourseViewController *vc in self.childViewControllers) {
         [vc removeFromParentViewController];
     }
-    for (ChannelTabRequestItem_Data_Category *cat in tabs) {
-        CourseTabItem *item = [[CourseTabItem alloc] init];
+    for (ChannelTabRequestItem_Data_Category *cat in categorys) {
+        CourseVideoItem *item = [[CourseVideoItem alloc] init];
         item.name = [NSString stringWithFormat:@"%@",cat.catname];
-        item.tabId = cat.catid;
+        item.catID = cat.catid;
+        item.fromType = 0;
         CourseViewController *vc = [[CourseViewController alloc] init];
-        vc.tabItem = item;
+        vc.videoItem = item;
         [self addChildViewController:vc];
     }
     self.containerView.childViewControllers = self.childViewControllers;
 }
 - (void)showFilterSelectionView {
-    FilterSelectionView *v = [[FilterSelectionView alloc]init];
+    FilterSelectionView *v = self.containerView.chooseViewController.selectionView;
+    if (v == nil) {
+        v = [[FilterSelectionView alloc]init];
+    }
     AlertView *alert = [[AlertView alloc]init];
     alert.hideWhenMaskClicked = YES;
     alert.contentView = v;
@@ -132,7 +141,6 @@
     if (self.tabRequest) {
         [self.tabRequest stopRequest];
     }
-
     ChannelTabRequest *request = [[ChannelTabRequest alloc] init];
     [self startLoading];
     WEAK_SELF

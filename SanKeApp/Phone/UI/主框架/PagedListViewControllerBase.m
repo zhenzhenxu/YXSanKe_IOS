@@ -106,9 +106,9 @@
     //    _total = (int)[self.dataArray count];
     
     // 2, fetch
-    self.dataFetcher.pageindex = 0;
-    if (!self.dataFetcher.pagesize) {
-        self.dataFetcher.pagesize = 20;
+    self.dataFetcher.lastID = 0;
+    if (!self.dataFetcher.pageSize) {
+        self.dataFetcher.pageSize = 20;
     }
     @weakify(self);
     [self.dataFetcher startWithBlock:^(int total, NSArray *retItemArray, NSError *error) {
@@ -159,13 +159,13 @@
 
 - (void)morePageFetch {
     [self.dataFetcher stop];
-    self.dataFetcher.pageindex++;
+    self.dataFetcher.lastID = self.dataFetcher.lastID + self.dataFetcher.pageSize;
     @weakify(self);
     [self.dataFetcher startWithBlock:^(int total, NSArray *retItemArray, NSError *error) {
         @strongify(self); if (!self) return;
         [self->_footer endRefreshing];
         if (error) {
-            self.dataFetcher.pageindex--;
+            self.dataFetcher.lastID = self.dataFetcher.lastID - self.dataFetcher.pageSize;
             [self showToast:error.localizedDescription];
             return;
         }
