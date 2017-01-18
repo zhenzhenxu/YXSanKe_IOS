@@ -60,9 +60,10 @@
         make.size.mas_equalTo(CGSizeMake(73, 73));
     }];
 }
-- (void)setImageUrl:(NSString *)imageUrl {
-    _imageUrl = imageUrl;
-    [self.iconImageView sd_setImageWithURL:[NSURL URLWithString:imageUrl] placeholderImage:[UIImage imageNamed:@"大头像"]];
-    [self.backgroundImageView sd_setImageWithURL:[NSURL URLWithString:imageUrl] placeholderImage:[UIImage imageNamed:@"大头像"]];
+
+- (void)setModel:(UserModel *)model {
+    _model = model;
+    [self.iconImageView sd_setImageWithURL:[NSURL URLWithString:model.portraitUrl] placeholderImage:[UIImage imageNamed:@"大头像"]];
+    [self.backgroundImageView sd_setImageWithURL:[NSURL URLWithString:model.backgroundImageUrl] placeholderImage:[UIImage imageNamed:@"大头像"]];//此处大头像待UI切横条图之后替换
 }
 @end

@@ -135,33 +135,32 @@
     return pickerLabel;
 }
 
-//- (void)resetSelectedProvinceDataWithProfile:(YXUserProfile *)profile
-//{
+- (void)resetSelectedProvinceDataWithUserModel:(UserModel *)userModel {
 //    if (!profile) {
 //        return;
 //    }
 //    [self getProvinceList];//获取地区的数据 现在用UpgradeManager就行
-//    [self.provincesRequestItem.data enumerateObjectsUsingBlock:^(YXProvincesRequestItem_subArea *subArea, NSUInteger idx, BOOL *stop) {
-//        if ([profile.province isEqualToString:subArea.name]) {
-//            self.selectedProvince = subArea;
-//            self.selectedCitys = self.selectedProvince.subArea;
-//            *stop = YES;
-//        }
-//    }];
-//    [self.selectedCitys enumerateObjectsUsingBlock:^(YXProvincesRequestItem_subArea *subArea, NSUInteger idx, BOOL *stop) {
-//        if ([profile.city isEqualToString:subArea.name]) {
-//            self.selectedCity = subArea;
-//            self.selectedCounties = self.selectedCity.subArea;
-//            *stop = YES;
-//        }
-//    }];
-//    [self.selectedCounties enumerateObjectsUsingBlock:^(YXProvincesRequestItem_subArea *subArea, NSUInteger idx, BOOL *stop) {
-//        if ([profile.region isEqualToString:subArea.name]) {
-//            self.selectedCounty = subArea;
-//            *stop = YES;
-//        }
-//    }];
-//}
+    [self.model.areas enumerateObjectsUsingBlock:^(Area *subArea, NSUInteger idx, BOOL *stop) {
+        if ([userModel.provinceID isEqualToString:subArea.number]) {
+            self.selectedProvince = subArea;
+            self.selectedCitys = self.selectedProvince.subAreas;
+            *stop = YES;
+        }
+    }];
+    [self.selectedCitys enumerateObjectsUsingBlock:^(Area *subArea, NSUInteger idx, BOOL *stop) {
+        if ([userModel.cityID isEqualToString:subArea.number]) {
+            self.selectedCity = subArea;
+            self.selectedCounties = self.selectedCity.subAreas;
+            *stop = YES;
+        }
+    }];
+    [self.selectedCounties enumerateObjectsUsingBlock:^(Area *subArea, NSUInteger idx, BOOL *stop) {
+        if ([userModel.districtID isEqualToString:subArea.number]) {
+            self.selectedCounty = subArea;
+            *stop = YES;
+        }
+    }];
+}
 
 - (UserAreaSelectedInfoItem *)selectedItem {
     UserAreaSelectedInfoItem *item = [[UserAreaSelectedInfoItem alloc]init];

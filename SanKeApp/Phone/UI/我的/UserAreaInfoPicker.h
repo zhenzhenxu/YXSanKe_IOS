@@ -21,6 +21,6 @@
 @interface UserAreaInfoPicker : NSObject<UIPickerViewDelegate,UIPickerViewDataSource>
 
 @property (nonatomic, strong) AreaModel *model;
-//- (void)resetSelectedProvinceDataWithProfile:(YXUserProfile *)profile;//设置选中的地区
+- (void)resetSelectedProvinceDataWithUserModel:(UserModel *)userModel;//设置选中的地区
 - (UserAreaSelectedInfoItem *)selectedItem;
 @end

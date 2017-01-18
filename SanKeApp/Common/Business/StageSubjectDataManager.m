@@ -79,6 +79,12 @@
         self.requestItem = [[FetchStageSubjectRequestItem alloc]initWithString:json error:nil];
     }else {
         // 此处需要加载本地数据以保证学科学段表不为空
+        NSString *filePath =  [[NSBundle mainBundle] pathForResource:@"stageAndSubject" ofType:@"json"];
+        NSData *data = [NSData dataWithContentsOfFile:filePath];
+        if (data) {
+            NSError *error;
+            self.requestItem = [[FetchStageSubjectRequestItem alloc] initWithData:data error:&error];
+        }
     }
 }
 

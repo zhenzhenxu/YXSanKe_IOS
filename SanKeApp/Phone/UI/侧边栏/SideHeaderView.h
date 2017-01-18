@@ -7,10 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+@class UserModel;
 typedef void(^EditButtonActionBlock)(void);
 
 @interface SideHeaderView : UIView
-//@property (nonatomic, strong) YXUserProfile *profile;
+@property (nonatomic, strong) UserModel *model;
 - (void)setEditButtonActionBlock:(EditButtonActionBlock)block;
 
 @end

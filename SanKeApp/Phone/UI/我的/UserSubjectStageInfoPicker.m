@@ -7,15 +7,14 @@
 //
 
 #import "UserSubjectStageInfoPicker.h"
-#import "StageAndSubjectRequest.h"
 
 @implementation UserSubjectStageSelectedInfoItem
 @end
 
 @interface UserSubjectStageInfoPicker ()
 @property (nonatomic, strong) NSArray *selectedSubjects;
-@property (nonatomic, strong) StageAndSubjectItem_Stage *selectedStage;
-@property (nonatomic, strong) StageAndSubjectItem_Stage_Subject *selectedSubject;
+@property (nonatomic, strong) FetchStageSubjectRequestItem_stage *selectedStage;
+@property (nonatomic, strong) FetchStageSubjectRequestItem_subject *selectedSubject;
 @end
 
 @implementation UserSubjectStageInfoPicker
@@ -29,7 +28,7 @@
 {
     switch (component) {
         case 0:
-            return self.stageAndSubjectItem.stages.count;
+            return self.stageAndSubjectItem.data.stages.count;
         case 1:
             return self.selectedSubjects.count;
         default:
@@ -58,9 +57,9 @@
 {
     switch (component) {
         case 0:
-            return ((StageAndSubjectItem_Stage *)self.stageAndSubjectItem.stages[row]).name;
+            return ((FetchStageSubjectRequestItem_stage *)self.stageAndSubjectItem.data.stages[row]).name;
         case 1:
-            return ((StageAndSubjectItem_Stage_Subject *)self.selectedSubjects[row]).name;
+            return ((FetchStageSubjectRequestItem_subject *)self.selectedSubjects[row]).name;
         default:
             return nil;
     }
@@ -73,7 +72,7 @@
     switch (component) {
         case 0:
         {
-            self.selectedSubjects = ((StageAndSubjectItem_Stage *)self.stageAndSubjectItem.stages[row]).subjects;
+            self.selectedSubjects = ((FetchStageSubjectRequestItem_stage *)self.stageAndSubjectItem.data.stages[row]).subjects;
             [pickerView reloadComponent:1];
             [pickerView selectRow:0 inComponent:1 animated:NO];
         }
@@ -98,31 +97,30 @@
     return pickerLabel;
 }
 
-//- (void)resetSelectedSubjectsWithProfile:(YXUserProfile *)profile
-//{
-//    [self.stageAndSubjectItem.stages enumerateObjectsUsingBlock:^(StageAndSubjectItem_Stage *stage, NSUInteger idx, BOOL *stop) {
-//        if ([profile.stageId isEqualToString:stage.sid]) {
-//            self.selectedStage = stage;
-//            self.selectedSubjects = self.selectedStage.subjects;
-//            *stop = YES;
-//        }
-//    }];
-//    [self.selectedSubjects enumerateObjectsUsingBlock:^(StageAndSubjectItem_Stage_Subject *subject, NSUInteger idx, BOOL *stop) {
-//        if ([profile.subjectId isEqualToString:subject.sid]) {
-//            self.selectedSubject = subject;
-//            *stop = YES;
-//        }
-//    }];
-//}
+- (void)resetSelectedSubjectsWithUserModel:(UserModel *)userModel {
+    [self.stageAndSubjectItem.data.stages enumerateObjectsUsingBlock:^(FetchStageSubjectRequestItem_stage *stage, NSUInteger idx, BOOL *stop) {
+        if ([userModel.stageID isEqualToString:stage.stageID]) {
+            self.selectedStage = stage;
+            self.selectedSubjects = self.selectedStage.subjects;
+            *stop = YES;
+        }
+    }];
+    [self.selectedSubjects enumerateObjectsUsingBlock:^(FetchStageSubjectRequestItem_subject *subject, NSUInteger idx, BOOL *stop) {
+        if ([userModel.subjectID isEqualToString:subject.subjectID]) {
+            self.selectedSubject = subject;
+            *stop = YES;
+        }
+    }];
+}
 
 - (UserSubjectStageSelectedInfoItem *)selectedItem {
     UserSubjectStageSelectedInfoItem *item = [[UserSubjectStageSelectedInfoItem alloc]init];
     item.selectedStageRow = 0;
     item.selectedSubjectRow = 0;
-    if ([self.stageAndSubjectItem.stages containsObject:self.selectedStage]) {
-        item.selectedStageRow = [self.stageAndSubjectItem.stages indexOfObject:self.selectedStage];
-    } else if (self.stageAndSubjectItem.stages.count > 0) {
-        self.selectedSubjects = ((StageAndSubjectItem_Stage *)self.stageAndSubjectItem.stages[0]).subjects;
+    if ([self.stageAndSubjectItem.data.stages containsObject:self.selectedStage]) {
+        item.selectedStageRow = [self.stageAndSubjectItem.data.stages indexOfObject:self.selectedStage];
+    } else if (self.stageAndSubjectItem.data.stages.count > 0) {
+        self.selectedSubjects = ((FetchStageSubjectRequestItem_stage *)self.stageAndSubjectItem.data.stages[0]).subjects;
     }
     
     if ([self.selectedSubjects containsObject:self.selectedSubject]) {

@@ -17,10 +17,10 @@
 #import "EmptyView.h"
 @interface MineViewController ()<UITableViewDelegate, UITableViewDataSource>
 
+@property (nonatomic, strong) UserModel *userModel;
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) UserInfoPickerView *userInfoPickerView;
 @property (nonatomic, strong) UserSubjectStageInfoPicker *subjectStageInfoPicker;
-@property (nonatomic, strong) StageAndSubjectItem *stageAndSubjectItem;
 @property (nonatomic, strong) UserAreaInfoPicker *areaInfoPicker;
 
 @end
@@ -32,16 +32,9 @@
     self.title = @"个人信息";
     self.view.backgroundColor = [UIColor whiteColor];
     [self setupUI];
-    NSString *filePath =  [[NSBundle mainBundle] pathForResource:@"stageAndSubject" ofType:@"json"];
-    NSData *data = [NSData dataWithContentsOfFile:filePath];
-    if (data) {
-        NSError *error;
-        self.stageAndSubjectItem = [[StageAndSubjectItem alloc] initWithData:data error:&error];
-    }
-    
     [self setupInfoPicker];
     //定义一个属性profile 从网络请求回来的个人数据保存到里面
-    //    [self requestUserProfile];
+    [self loadData];
     // Do any additional setup after loading the view.
 }
 
@@ -82,29 +75,29 @@
 
 - (void)setupInfoPicker {
     self.subjectStageInfoPicker = [[UserSubjectStageInfoPicker alloc]init];
-    self.subjectStageInfoPicker.stageAndSubjectItem = self.stageAndSubjectItem;
+    self.subjectStageInfoPicker.stageAndSubjectItem = [StageSubjectDataManager dataForStageAndSubject];
     self.areaInfoPicker = [[UserAreaInfoPicker alloc]init];
     self.areaInfoPicker.model = [AreaDataManager areaModel];
     //设置初始的数据等(请求数据之后赋值)
 }
 
-//- (void)requestUserProfile
-//{
-//    [self startLoading];
-//    @weakify(self);
-//    [[YXUserProfileHelper sharedHelper] requestCompeletion:^(NSError *error) {
-//        @strongify(self);
-//        self.profile = [YXUserManager sharedManager].userModel.profile;
-//        [self stopLoading];
-//        [self reloadDataWithProfile:self.profile];
-//        [self.tableView reloadData];
-//    }];
-//}
-//- (void)reloadDataWithProfile:(YXUserProfile *)profile
-//{
-//    [self.subjectStageInfoPicker resetSelectedSubjectsWithProfile:profile];//设置学科学段
-//    [self.areaInfoPicker resetSelectedProvinceDataWithProfile:profile];//设置地区
-//}
+- (void)loadData {
+    self.userModel = [UserManager sharedInstance].userModel;
+    [self reloadDataWithUserModel:self.userModel];
+    [self.tableView reloadData];
+    //    [[YXUserProfileHelper sharedHelper] requestCompeletion:^(NSError *error) {
+    //        STRONG_SELF
+    //        self.profile = [YXUserManager sharedManager].userModel.profile;
+    //        [self stopLoading];
+    //        [self reloadDataWithProfile:self.profile];
+    //        [self.tableView reloadData];
+    //    }];
+}
+- (void)reloadDataWithUserModel:(UserModel *)userModel
+{
+    [self.subjectStageInfoPicker resetSelectedSubjectsWithUserModel:userModel];//设置学科学段
+    //    [self.areaInfoPicker resetSelectedProvinceDataWithProfile:profile];//设置地区
+}
 
 
 #pragma mark - UITableViewDataSource
@@ -115,7 +108,7 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     if (indexPath.row == 0) {
         UserImageTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"UserImageTableViewCell" forIndexPath:indexPath];
-        cell.imageUrl = @"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1484655476277&di=e770651f8bb63c31be85f56bf3e6f954&imgtype=0&src=http%3A%2F%2Fjiangsu.china.com.cn%2Fuploadfile%2F2016%2F1127%2F1480230195622492.jpg";
+        cell.model = [UserManager sharedInstance].userModel;
         return cell;
     }else {
         UserInfoTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"UserInfoTableViewCell" forIndexPath:indexPath];
@@ -132,7 +125,7 @@
                 self.userInfoPickerView.pickerView.dataSource = self.subjectStageInfoPicker;
                 self.userInfoPickerView.pickerView.delegate = self.subjectStageInfoPicker;
                 [self.userInfoPickerView showPickerView];
-                //               [self.subjectStageInfoPicker resetSelectedSubjectsWithProfile:profile];//重置选中的学科学段
+                [self.subjectStageInfoPicker resetSelectedSubjectsWithUserModel:self.userModel];//重置选中的学科学段
                 [self showStageAndSubjectPicker];//显示
             }];
         }else if (indexPath.row == 3) {
@@ -144,7 +137,7 @@
                 self.userInfoPickerView.pickerView.dataSource = self.areaInfoPicker;
                 self.userInfoPickerView.pickerView.delegate = self.areaInfoPicker;
                 [self.userInfoPickerView showPickerView];
-                ////                [self.areaInfoPicker resetSelectedProvinceDataWithProfile:profile]//重置选中的地区
+                [self.areaInfoPicker resetSelectedProvinceDataWithUserModel:self.userModel];//重置选中的地区
                 [self showProvinceListPicker];//显示
             }];
         }

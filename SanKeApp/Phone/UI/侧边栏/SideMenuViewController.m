@@ -28,11 +28,11 @@
     [self setupUI];
     [self setupLayout];
     [self setupTabeleViewData];
-    [self loadHeaderViewData];
 }
 
 - (void)setupUI {
     self.headerView = [[SideHeaderView alloc]init];
+    self.headerView.model = [UserManager sharedInstance].userModel;
     WEAK_SELF
     [self.headerView setEditButtonActionBlock:^{
         STRONG_SELF
@@ -74,18 +74,6 @@
     [dataArray addObject:model3];
     
     self.dataArray = dataArray;
-}
-
-- (void)loadHeaderViewData
-{
-    //    if (!self.headerView.profile) {
-    //        @weakify(self);
-    //        [[YXUserProfileHelper sharedHelper] requestCompeletion:^(NSError *error) {
-    //            @strongify(self);
-    //            [self showToast:error.localizedDescription];
-    //        }];
-    //    }
-    //    self.headerView.profile = [YXUserManager sharedManager].userModel.profile;
 }
 
 #pragma mark - UITableViewDataSource

@@ -87,9 +87,9 @@ const CGFloat kSideLeftDrawerWidth = 600.0f;
     self.buttonActionBlock = block;
 }
 
-//-(void)setProfile:(YXUserProfile *)profile {
-//    _profile = profile;
-//    self.nameLabel = profile.realName;
-//    self.iconImageView sd_setImageWithURL:profile.head placeholderImage:[UIImage imageNamed:@"个人信息默认用户头像"];
-//}
+- (void)setModel:(UserModel *)model {
+    _model = model;
+    self.nameLabel.text = model.name;
+    [self.iconImageView sd_setImageWithURL:[NSURL URLWithString:model.backgroundImageUrl] placeholderImage:[UIImage imageNamed:@"大头像"]];
+}
 @end

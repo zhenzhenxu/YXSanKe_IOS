@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-
+@class UserModel;
 @interface UserImageTableViewCell : UITableViewCell
-@property (nonatomic, strong) NSString *imageUrl;
+@property (nonatomic, strong) UserModel *model;
 @end

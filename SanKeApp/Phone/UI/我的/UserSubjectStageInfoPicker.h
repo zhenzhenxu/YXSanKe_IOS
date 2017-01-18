@@ -7,7 +7,6 @@
 //
 
 #import <Foundation/Foundation.h>
-@class StageAndSubjectItem;
 @interface UserSubjectStageSelectedInfoItem : NSObject
 @property (nonatomic, assign) NSInteger selectedStageRow;
 @property (nonatomic, assign) NSInteger selectedSubjectRow;
@@ -15,7 +14,7 @@
 @end
 
 @interface UserSubjectStageInfoPicker : NSObject<UIPickerViewDelegate,UIPickerViewDataSource>
-@property (nonatomic, strong) StageAndSubjectItem *stageAndSubjectItem;
-//- (void)resetSelectedSubjectsWithProfile:(YXUserProfile *)profile;//设置选中的学科学段
+@property (nonatomic, strong) FetchStageSubjectRequestItem *stageAndSubjectItem;
+- (void)resetSelectedSubjectsWithUserModel:(UserModel *)userModel;//设置选中的学科学段
 - (UserSubjectStageSelectedInfoItem *)selectedItem;
 @end
