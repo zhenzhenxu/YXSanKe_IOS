@@ -8,6 +8,7 @@
 
 #import "UserAreaInfoPicker.h"
 #import "AreaDataManager.h"
+#import "MineUserModel.h"
 
 @implementation UserAreaSelectedInfoItem
 @end
@@ -90,9 +91,12 @@
         case 0:
         {
             Area *area = self.model.areas[row];
+            self.selectedProvince = area;
             self.selectedCitys = area.subAreas;
+            self.selectedCity = self.selectedCitys[0];
             if (self.selectedCitys.count > 0){
                 self.selectedCounties = self.selectedCitys[0].subAreas;
+                self.selectedCounty = self.selectedCounties[0];
             }else{
                 self.selectedCounties = nil;
             }
@@ -107,7 +111,9 @@
         {
             if (self.selectedCitys.count > row){
                 Area *area = self.selectedCitys[row];
+                self.selectedCity = area;
                 self.selectedCounties = area.subAreas;
+                self.selectedCounty = self.selectedCounties[0];
             }else{
                 self.selectedCounties = nil;
             }
@@ -116,9 +122,19 @@
         }
             break;
         case 2:
+        {
+            if (self.selectedCounties.count > row){
+                Area *area = self.selectedCounties[row];
+                self.selectedCounty = area;
+            }else {
+                self.selectedCounty = nil;
+            }
+        }
+            break;
         default:
             break;
     }
+    DDLogDebug(@"要选择地区:%@-%@-%@",self.selectedProvince.name,self.selectedCity.name,self.selectedCounty.name);
 }
 
 - (UIView *)pickerView:(UIPickerView *)pickerView viewForRow:(NSInteger)row forComponent:(NSInteger)component reusingView:(UIView *)view{
@@ -135,59 +151,38 @@
     return pickerLabel;
 }
 
-- (void)resetSelectedProvinceDataWithUserModel:(UserModel *)userModel {
-//    if (!profile) {
-//        return;
-//    }
-//    [self getProvinceList];//获取地区的数据 现在用UpgradeManager就行
+- (UserAreaSelectedInfoItem *)resetSelectedProvinceDataWithUserModel:(MineUserModel *)userModel {
+     UserAreaSelectedInfoItem *item = [[UserAreaSelectedInfoItem alloc]init];
     [self.model.areas enumerateObjectsUsingBlock:^(Area *subArea, NSUInteger idx, BOOL *stop) {
-        if ([userModel.provinceID isEqualToString:subArea.number]) {
+        if ([userModel.province.areaID isEqualToString:subArea.areaID]) {
             self.selectedProvince = subArea;
             self.selectedCitys = self.selectedProvince.subAreas;
+            item.selectedProvinceRow = idx;
             *stop = YES;
         }
     }];
     [self.selectedCitys enumerateObjectsUsingBlock:^(Area *subArea, NSUInteger idx, BOOL *stop) {
-        if ([userModel.cityID isEqualToString:subArea.number]) {
+        if ([userModel.city.areaID isEqualToString:subArea.areaID]) {
             self.selectedCity = subArea;
             self.selectedCounties = self.selectedCity.subAreas;
+            item.selectedCityRow = idx;
             *stop = YES;
         }
     }];
     [self.selectedCounties enumerateObjectsUsingBlock:^(Area *subArea, NSUInteger idx, BOOL *stop) {
-        if ([userModel.districtID isEqualToString:subArea.number]) {
+        if ([userModel.district.areaID isEqualToString:subArea.areaID]) {
             self.selectedCounty = subArea;
+            item.selectedCountyRow = idx;
             *stop = YES;
         }
     }];
-    DDLogDebug(@"选中了%@省-%@市-%@区",self.selectedProvince.name,self.selectedCity.name,self.selectedCounty.name);
-}
-
-- (UserAreaSelectedInfoItem *)selectedItem {
-    UserAreaSelectedInfoItem *item = [[UserAreaSelectedInfoItem alloc]init];
-    item.selectedProvinceRow = 0;
-    item.selectedCityRow = 0;
-    item.selectedCountyRow = 0;
-    if ([self.model.areas containsObject:self.selectedProvince]) {
-        item.selectedProvinceRow = [self.model.areas indexOfObject:self.selectedProvince];
-    } else if (self.model.areas > 0) {
-        self.selectedCitys = ((Area *)self.model.areas[0]).subAreas;
-    }
-    
-    if ([self.selectedCitys containsObject:self.selectedCity]) {
-        item.selectedCityRow = [self.selectedCitys indexOfObject:self.selectedCity];
-    } else if (self.selectedCitys.count > 0) {
-        self.selectedCounties = ((Area *)self.selectedCitys[0]).subAreas;
-    }
-    
-    if ([self.selectedCounties containsObject:self.selectedCounty]) {
-        item.selectedCountyRow = [self.selectedCounties indexOfObject:self.selectedCounty];
-    }
-    return item;
+    DDLogDebug(@"设置选中为%@省-%@市-%@区",self.selectedProvince.name,self.selectedCity.name,self.selectedCounty.name);
+     return item;
 }
 
 - (void)updateAreaWithCompleteBlock:(void (^)(NSError *))completeBlock {
-    NSString *area = [NSString stringWithFormat:@"%@,%@,%@",self.selectedProvince.number,self.selectedCity.number,self.selectedCounty.number];
+    DDLogDebug(@"要选择地区:%@-%@-%@",self.selectedProvince.name,self.selectedCity.name,self.selectedCounty.name);
+    NSString *area = [NSString stringWithFormat:@"%@,%@,%@",self.selectedProvince.areaID,self.selectedCity.areaID,self.selectedCounty.areaID];
     [MineDataManager updateArea:area completeBlock:^(NSError *error) {
         if (error) {
             BLOCK_EXEC(completeBlock,error);

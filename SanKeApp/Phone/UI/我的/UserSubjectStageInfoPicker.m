@@ -7,6 +7,7 @@
 //
 
 #import "UserSubjectStageInfoPicker.h"
+#import "MineUserModel.h"
 
 @implementation UserSubjectStageSelectedInfoItem
 @end
@@ -72,15 +73,30 @@
     switch (component) {
         case 0:
         {
-            self.selectedSubjects = ((FetchStageSubjectRequestItem_stage *)self.stageAndSubjectItem.data.stages[row]).subjects;
+            if (self.stageAndSubjectItem.data.stages.count > row) {
+                self.selectedStage = self.stageAndSubjectItem.data.stages[row];
+                self.selectedSubjects = ((FetchStageSubjectRequestItem_stage *)self.stageAndSubjectItem.data.stages[row]).subjects;
+                self.selectedSubject = self.selectedSubjects[0];
+            }else {
+                self.selectedSubjects = nil;
+            }
             [pickerView reloadComponent:1];
             [pickerView selectRow:0 inComponent:1 animated:NO];
         }
             break;
         case 1:
+        {
+            if (self.selectedSubjects.count > row) {
+                self.selectedSubject = self.selectedSubjects[row];
+            }else {
+                self.selectedSubject = nil;
+            }
+        }
+            break;
         default:
             break;
     }
+    DDLogDebug(@"要选择学科%@-学段%@",self.selectedStage.name,self.selectedSubject.name);
 }
 
 - (UIView *)pickerView:(UIPickerView *)pickerView viewForRow:(NSInteger)row forComponent:(NSInteger)component reusingView:(UIView *)view{
@@ -97,39 +113,30 @@
     return pickerLabel;
 }
 
-- (void)resetSelectedSubjectsWithUserModel:(UserModel *)userModel {
+- (UserSubjectStageSelectedInfoItem *)resetSelectedSubjectsWithUserModel:(MineUserModel *)userModel {
+    UserSubjectStageSelectedInfoItem *item = [[UserSubjectStageSelectedInfoItem alloc]init];
+    
     [self.stageAndSubjectItem.data.stages enumerateObjectsUsingBlock:^(FetchStageSubjectRequestItem_stage *stage, NSUInteger idx, BOOL *stop) {
-        if ([userModel.stageID isEqualToString:stage.stageID]) {
+        if ([userModel.stage.stageID isEqualToString:stage.stageID]) {
             self.selectedStage = stage;
             self.selectedSubjects = self.selectedStage.subjects;
+            item.selectedStageRow = idx;
             *stop = YES;
         }
     }];
     [self.selectedSubjects enumerateObjectsUsingBlock:^(FetchStageSubjectRequestItem_subject *subject, NSUInteger idx, BOOL *stop) {
-        if ([userModel.subjectID isEqualToString:subject.subjectID]) {
+        if ([userModel.subject.subjectID isEqualToString:subject.subjectID]) {
             self.selectedSubject = subject;
+            item.selectedSubjectRow = idx;
             *stop = YES;
         }
     }];
-    DDLogDebug(@"选中了%@学段-%@学科",self.selectedStage.name,self.selectedStage.name);
-}
-
-- (UserSubjectStageSelectedInfoItem *)selectedItem {
-    UserSubjectStageSelectedInfoItem *item = [[UserSubjectStageSelectedInfoItem alloc]init];
-    item.selectedStageRow = 0;
-    item.selectedSubjectRow = 0;
-    if ([self.stageAndSubjectItem.data.stages containsObject:self.selectedStage]) {
-        item.selectedStageRow = [self.stageAndSubjectItem.data.stages indexOfObject:self.selectedStage];
-    } else if (self.stageAndSubjectItem.data.stages.count > 0) {
-        self.selectedSubjects = ((FetchStageSubjectRequestItem_stage *)self.stageAndSubjectItem.data.stages[0]).subjects;
-    }
-    if ([self.selectedSubjects containsObject:self.selectedSubject]) {
-        item.selectedStageRow = [self.selectedSubjects indexOfObject:self.selectedSubject];
-    }
+    DDLogDebug(@"设置为选中%@学段-%@学科",self.selectedStage.name,self.selectedSubject.name);
     return item;
 }
 
 - (void)updateStageWithCompleteBlock:(void (^)(NSError *))completeBlock {
+    DDLogDebug(@"要选择学科%@-学段%@",self.selectedStage.name,self.selectedSubject.name);
     [MineDataManager updateStage:self.selectedStage.stageID subject:self.selectedSubject.subjectID completeBlock:^(NSError *error) {
         if (error) {
             BLOCK_EXEC(completeBlock,error);

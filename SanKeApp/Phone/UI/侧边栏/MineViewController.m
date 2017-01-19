@@ -12,13 +12,12 @@
 #import "UserInfoPickerView.h"
 #import "UserSubjectStageInfoPicker.h"
 #import "UserAreaInfoPicker.h"
-#import "StageAndSubjectRequest.h"
 #import "ErrorView.h"
 #import "EmptyView.h"
-
+#import "MineUserModel.h"
 @interface MineViewController ()<UITableViewDelegate, UITableViewDataSource>
 
-@property (nonatomic, strong) UserModel *userModel;
+@property (nonatomic, strong) MineUserModel *userModel;
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) UserInfoPickerView *userInfoPickerView;
 @property (nonatomic, strong) UserSubjectStageInfoPicker *subjectStageInfoPicker;
@@ -71,8 +70,9 @@
     if ([self.userInfoPickerView.pickerView.dataSource isKindOfClass:[UserSubjectStageInfoPicker class]]) {
         [self.subjectStageInfoPicker updateStageWithCompleteBlock:^(NSError *error) {
             STRONG_SELF
-            DDLogDebug(@"选择好了学科学段");
+            DDLogDebug(@"最终结果学科%@-学段%@",self.userModel.stage.name,self.userModel.subject.name);
             if (error) {
+                DDLogDebug(@"学科学段Error%@",error);
                 return;
             }
             [self updateData];
@@ -80,8 +80,9 @@
     }else if ([self.userInfoPickerView.pickerView.dataSource isKindOfClass:[UserAreaInfoPicker class]]) {
         [self.areaInfoPicker updateAreaWithCompleteBlock:^(NSError *error) {
             STRONG_SELF
-            DDLogDebug(@"选择好了地区");
+            DDLogDebug(@"最终结果地区:%@-%@-%@",self.userModel.province.name,self.userModel.city.name,self.userModel.district.name);
             if (error) {
+                DDLogDebug(@"地区Error%@",error);
                 return;
             }
             [self updateData];
@@ -98,9 +99,7 @@
 }
 
 - (void)updateData {
-    self.userModel = [UserManager sharedInstance].userModel;
-//    [self.subjectStageInfoPicker resetSelectedSubjectsWithUserModel:self.userModel];
-//    [self.areaInfoPicker resetSelectedProvinceDataWithUserModel:self.userModel];
+    self.userModel = [MineUserModel mineUserModelFromRawModel:[UserManager sharedInstance].userModel];
     [self.tableView reloadData];
 }
 
@@ -118,9 +117,9 @@
         UserInfoTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"UserInfoTableViewCell" forIndexPath:indexPath];
         if (indexPath.row == 1 || indexPath.row == 2) {
             if (indexPath.row == 1) {
-                [cell configTitle:@"学段" content:@"小学"];//content应该换为具体的数据
+                [cell configTitle:@"学段" content:self.userModel.stage.name];
             }else if (indexPath.row == 2) {
-                [cell configTitle:@"学科" content:@"语文"];//content应该换为具体的数据
+                [cell configTitle:@"学科" content:self.userModel.subject.name];
             }
             WEAK_SELF
             [cell setSelectedButtonActionBlock:^{
@@ -129,11 +128,12 @@
                 self.userInfoPickerView.pickerView.dataSource = self.subjectStageInfoPicker;
                 self.userInfoPickerView.pickerView.delegate = self.subjectStageInfoPicker;
                 [self.userInfoPickerView showPickerView];
-                [self.subjectStageInfoPicker resetSelectedSubjectsWithUserModel:self.userModel];//重置选中的学科学段
-                [self showStageAndSubjectPicker];//显示
+                UserSubjectStageSelectedInfoItem *item = [self.subjectStageInfoPicker resetSelectedSubjectsWithUserModel:self.userModel];
+                [self showStageAndSubjectPickerWithInfoItem:item];
             }];
         }else if (indexPath.row == 3) {
-            [cell configTitle:@"地区" content:@"张家口市"];//content应该换为具体的数据
+            NSString *area = [NSString stringWithFormat:@"%@%@%@",self.userModel.province.name,self.userModel.city.name,self.userModel.district.name];
+            [cell configTitle:@"地区" content:area];
             WEAK_SELF
             [cell setSelectedButtonActionBlock:^{
                 STRONG_SELF
@@ -141,8 +141,8 @@
                 self.userInfoPickerView.pickerView.dataSource = self.areaInfoPicker;
                 self.userInfoPickerView.pickerView.delegate = self.areaInfoPicker;
                 [self.userInfoPickerView showPickerView];
-                [self.areaInfoPicker resetSelectedProvinceDataWithUserModel:self.userModel];//重置选中的地区
-                [self showProvinceListPicker];//显示
+               UserAreaSelectedInfoItem *item = [self.areaInfoPicker resetSelectedProvinceDataWithUserModel:self.userModel];
+                [self showProvinceListPickerWithInfoItem:item];
             }];
         }
         return cell;
@@ -158,17 +158,15 @@
 }
 
 #pragma mark - InfoPicker
-- (void)showStageAndSubjectPicker
+- (void)showStageAndSubjectPickerWithInfoItem:(UserSubjectStageSelectedInfoItem *)item
 {
-    UserSubjectStageSelectedInfoItem *item = [self.subjectStageInfoPicker selectedItem];
     [self.userInfoPickerView reloadPickerView];
     [self.userInfoPickerView.pickerView selectRow:item.selectedStageRow inComponent:0 animated:NO];
     [self.userInfoPickerView.pickerView selectRow:item.selectedSubjectRow inComponent:1 animated:NO];
 }
 
-- (void)showProvinceListPicker
+- (void)showProvinceListPickerWithInfoItem:(UserAreaSelectedInfoItem *)item;
 {
-    UserAreaSelectedInfoItem *item = [self.areaInfoPicker selectedItem];
     [self.userInfoPickerView reloadPickerView];
     [self.userInfoPickerView.pickerView selectRow:item.selectedProvinceRow inComponent:0 animated:NO];
     [self.userInfoPickerView.pickerView selectRow:item.selectedCityRow inComponent:1 animated:NO];

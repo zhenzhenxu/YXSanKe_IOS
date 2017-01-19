@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 @class AreaDataManager;
 @class UserInfoPickerView;
+@class MineUserModel;
 
 @interface UserAreaSelectedInfoItem : NSObject
 
@@ -21,7 +22,8 @@
 @interface UserAreaInfoPicker : NSObject<UIPickerViewDelegate,UIPickerViewDataSource>
 
 @property (nonatomic, strong) AreaModel *model;
-- (void)resetSelectedProvinceDataWithUserModel:(UserModel *)userModel;//设置选中的地区
-- (UserAreaSelectedInfoItem *)selectedItem;
+
+- (UserAreaSelectedInfoItem *)resetSelectedProvinceDataWithUserModel:(MineUserModel *)userModel;
 - (void)updateAreaWithCompleteBlock:(void(^)(NSError *error))completeBlock;
+
 @end
