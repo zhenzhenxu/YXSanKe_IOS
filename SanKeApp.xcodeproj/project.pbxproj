@@ -173,6 +173,7 @@
 		E9230C531E30900600AC6617 /* SideTableViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E9230C521E30900600AC6617 /* SideTableViewModel.m */; };
 		E9230C561E30919B00AC6617 /* UpdateAreaRequest.json in Resources */ = {isa = PBXBuildFile; fileRef = E9230C541E30919B00AC6617 /* UpdateAreaRequest.json */; };
 		E9230C571E30919B00AC6617 /* UpdateStageSubjectRequest.json in Resources */ = {isa = PBXBuildFile; fileRef = E9230C551E30919B00AC6617 /* UpdateStageSubjectRequest.json */; };
+		E9230C5A1E30BAB400AC6617 /* FetchStageSubjectRequest.json in Resources */ = {isa = PBXBuildFile; fileRef = E9230C591E30BAB400AC6617 /* FetchStageSubjectRequest.json */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -516,6 +517,7 @@
 		E9230C521E30900600AC6617 /* SideTableViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SideTableViewModel.m; sourceTree = "<group>"; };
 		E9230C541E30919B00AC6617 /* UpdateAreaRequest.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = UpdateAreaRequest.json; sourceTree = "<group>"; };
 		E9230C551E30919B00AC6617 /* UpdateStageSubjectRequest.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = UpdateStageSubjectRequest.json; sourceTree = "<group>"; };
+		E9230C591E30BAB400AC6617 /* FetchStageSubjectRequest.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = FetchStageSubjectRequest.json; sourceTree = "<group>"; };
 		F85EF3DA4AEC6DA4B2E1F0AA /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		FDFFD28C45A34489A38320DE /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -1059,6 +1061,7 @@
 				7C6F21A51E248BDA000AB43A /* 主界面 */,
 				7C6F219A1E2481D6000AB43A /* AreaDataManager.h */,
 				7C6F219B1E2481D6000AB43A /* AreaDataManager.m */,
+				E9230C591E30BAB400AC6617 /* FetchStageSubjectRequest.json */,
 				7C7841AC1E2F142800755BC0 /* FetchStageSubjectRequest.h */,
 				7C7841AD1E2F142800755BC0 /* FetchStageSubjectRequest.m */,
 				7C7841B21E2F15DA00755BC0 /* StageSubjectDataManager.h */,
@@ -1498,6 +1501,7 @@
 				927594E91E2F0DA000F87838 /* playHistory_mock.json in Resources */,
 				E9230C461E2F829900AC6617 /* LoginRequest.json in Resources */,
 				7C1A5EF31E150BD100832DED /* env_config.json in Resources */,
+				E9230C5A1E30BAB400AC6617 /* FetchStageSubjectRequest.json in Resources */,
 				927594E81E2F0DA000F87838 /* historyRecord_mock.json in Resources */,
 				7C1A5F941E15143F00832DED /* MockConfig.plist in Resources */,
 				7C6F219E1E24838C000AB43A /* area_data.json in Resources */,

@@ -75,10 +75,13 @@
         {
             if (self.stageAndSubjectItem.data.stages.count > row) {
                 self.selectedStage = self.stageAndSubjectItem.data.stages[row];
-                self.selectedSubjects = ((FetchStageSubjectRequestItem_stage *)self.stageAndSubjectItem.data.stages[row]).subjects;
-                self.selectedSubject = self.selectedSubjects[0];
-            }else {
-                self.selectedSubjects = nil;
+                if (self.selectedStage.subjects.count > 0) {
+                    self.selectedSubjects = self.selectedStage.subjects;
+                    self.selectedSubject = self.selectedSubjects[0];
+                }else {
+                    self.selectedSubjects = nil;
+                    self.selectedSubject = nil;
+                }
             }
             [pickerView reloadComponent:1];
             [pickerView selectRow:0 inComponent:1 animated:NO];
@@ -96,7 +99,6 @@
         default:
             break;
     }
-    DDLogDebug(@"要选择学科%@-学段%@",self.selectedStage.name,self.selectedSubject.name);
 }
 
 - (UIView *)pickerView:(UIPickerView *)pickerView viewForRow:(NSInteger)row forComponent:(NSInteger)component reusingView:(UIView *)view{

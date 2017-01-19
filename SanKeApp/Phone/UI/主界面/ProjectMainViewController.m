@@ -28,11 +28,7 @@ extern NSString * const kStageSubjectDidChangeNotification;
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    UserModel *model = [UserManager sharedInstance].userModel;
-    [StageSubjectDataManager fetchStageSubjectWithStageID:model.stageID subjectID:model.subjectID completeBlock:^(FetchStageSubjectRequestItem_stage *stage, FetchStageSubjectRequestItem_subject *subject) {
-        NSString *title = [stage.name stringByAppendingString:subject.name];
-        self.navigationItem.title = title;
-    }];
+   
     [self setupUI];
     [self setupLeftNavView];
     [self setupRightNavView];
@@ -141,6 +137,11 @@ extern NSString * const kStageSubjectDidChangeNotification;
 }
 #pragma mark - request
 - (void)requestForChannelTab {
+    UserModel *model = [UserManager sharedInstance].userModel;
+    [StageSubjectDataManager fetchStageSubjectWithStageID:model.stageID subjectID:model.subjectID completeBlock:^(FetchStageSubjectRequestItem_stage *stage, FetchStageSubjectRequestItem_subject *subject) {
+        NSString *title = [stage.name stringByAppendingString:subject.name];
+        self.navigationItem.title = title;
+    }];
     if (self.tabRequest) {
         [self.tabRequest stopRequest];
     }

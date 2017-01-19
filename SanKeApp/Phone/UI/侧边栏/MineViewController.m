@@ -33,7 +33,7 @@
     self.view.backgroundColor = [UIColor whiteColor];
     [self setupUI];
     [self setupInfoPicker];
-    [self updateData];
+    [self LoadData];
     // Do any additional setup after loading the view.
 }
 
@@ -65,6 +65,20 @@
     }];
 }
 
+- (void)setupInfoPicker {
+    self.subjectStageInfoPicker = [[UserSubjectStageInfoPicker alloc]init];
+    self.subjectStageInfoPicker.stageAndSubjectItem = [StageSubjectDataManager dataForStageAndSubject];
+    
+    self.areaInfoPicker = [[UserAreaInfoPicker alloc]init];
+    self.areaInfoPicker.model = [AreaDataManager areaModel];
+}
+
+- (void)LoadData {
+    self.userModel = [MineUserModel mineUserModelFromRawModel:[UserManager sharedInstance].userModel];
+    [self.tableView reloadData];
+}
+
+#pragma mark -update Picker Selected Info
 - (void)updateSelectedInfo {
     WEAK_SELF
     if ([self.userInfoPickerView.pickerView.dataSource isKindOfClass:[UserSubjectStageInfoPicker class]]) {
@@ -75,7 +89,7 @@
                 DDLogDebug(@"学科学段Error%@",error);
                 return;
             }
-            [self updateData];
+            [self updateStageSubjectInfo];
         }];
     }else if ([self.userInfoPickerView.pickerView.dataSource isKindOfClass:[UserAreaInfoPicker class]]) {
         [self.areaInfoPicker updateAreaWithCompleteBlock:^(NSError *error) {
@@ -85,24 +99,24 @@
                 DDLogDebug(@"地区Error%@",error);
                 return;
             }
-            [self updateData];
+            [self updateAreaInfo];
         }];
     }
 }
 
-- (void)setupInfoPicker {
-    self.subjectStageInfoPicker = [[UserSubjectStageInfoPicker alloc]init];
-    self.subjectStageInfoPicker.stageAndSubjectItem = [StageSubjectDataManager dataForStageAndSubject];
-    
-    self.areaInfoPicker = [[UserAreaInfoPicker alloc]init];
-    self.areaInfoPicker.model = [AreaDataManager areaModel];
-}
-
-- (void)updateData {
+- (void)updateStageSubjectInfo {
     self.userModel = [MineUserModel mineUserModelFromRawModel:[UserManager sharedInstance].userModel];
-    [self.tableView reloadData];
+    NSIndexPath *stageIndexPath = [NSIndexPath indexPathForRow:1 inSection:0];
+    NSIndexPath *subjectIndexPath = [NSIndexPath indexPathForRow:2 inSection:0];
+    [self.tableView reloadRowsAtIndexPaths:@[stageIndexPath,subjectIndexPath] withRowAnimation:UITableViewRowAnimationNone];
 }
 
+- (void)updateAreaInfo {
+    self.userModel = [MineUserModel mineUserModelFromRawModel:[UserManager sharedInstance].userModel];
+    NSIndexPath *areaIndexPath = [NSIndexPath indexPathForRow:3 inSection:0];
+    [self.tableView reloadRowsAtIndexPaths:@[areaIndexPath] withRowAnimation:UITableViewRowAnimationNone];
+
+}
 #pragma mark - UITableViewDataSource
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     return 4;

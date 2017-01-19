@@ -90,17 +90,25 @@
     switch (component) {
         case 0:
         {
-            Area *area = self.model.areas[row];
-            self.selectedProvince = area;
-            self.selectedCitys = area.subAreas;
-            self.selectedCity = self.selectedCitys[0];
-            if (self.selectedCitys.count > 0){
-                self.selectedCounties = self.selectedCitys[0].subAreas;
-                self.selectedCounty = self.selectedCounties[0];
-            }else{
-                self.selectedCounties = nil;
+            if (self.model.areas.count > row) {
+                self.selectedProvince = self.model.areas[row];
+                if (self.selectedProvince.subAreas.count > 0) {
+                    self.selectedCitys = self.selectedProvince.subAreas;
+                    self.selectedCity = self.selectedCitys[0];
+                    if (self.selectedCity.subAreas.count > 0) {
+                        self.selectedCounties = self.selectedCity.subAreas;
+                        self.selectedCounty = self.selectedCounties[0];
+                    }else {
+                        self.selectedCounties = nil;
+                        self.selectedCounty = nil;
+                    }
+                }else {
+                    self.selectedCitys = nil;
+                    self.selectedCity = nil;
+                    self.selectedCounties = nil;
+                    self.selectedCounty = nil;
+                }
             }
-            
             [pickerView reloadComponent:1];
             [pickerView reloadComponent:2];
             [pickerView selectRow:0 inComponent:1 animated:NO];
@@ -110,12 +118,14 @@
         case 1:
         {
             if (self.selectedCitys.count > row){
-                Area *area = self.selectedCitys[row];
-                self.selectedCity = area;
-                self.selectedCounties = area.subAreas;
-                self.selectedCounty = self.selectedCounties[0];
-            }else{
-                self.selectedCounties = nil;
+                self.selectedCity = self.selectedCitys[row];
+                if (self.selectedCity.subAreas.count > 0) {
+                    self.selectedCounties = self.selectedCity.subAreas;
+                    self.selectedCounty = self.selectedCounties[0];
+                }else{
+                    self.selectedCounties = nil;
+                    self.selectedCounty = nil;
+                }
             }
             [pickerView reloadComponent:2];
             [pickerView selectRow:0 inComponent:2 animated:NO];
@@ -124,8 +134,7 @@
         case 2:
         {
             if (self.selectedCounties.count > row){
-                Area *area = self.selectedCounties[row];
-                self.selectedCounty = area;
+                self.selectedCounty = self.selectedCounties[row];
             }else {
                 self.selectedCounty = nil;
             }
@@ -134,7 +143,6 @@
         default:
             break;
     }
-    DDLogDebug(@"要选择地区:%@-%@-%@",self.selectedProvince.name,self.selectedCity.name,self.selectedCounty.name);
 }
 
 - (UIView *)pickerView:(UIPickerView *)pickerView viewForRow:(NSInteger)row forComponent:(NSInteger)component reusingView:(UIView *)view{
@@ -152,7 +160,7 @@
 }
 
 - (UserAreaSelectedInfoItem *)resetSelectedProvinceDataWithUserModel:(MineUserModel *)userModel {
-     UserAreaSelectedInfoItem *item = [[UserAreaSelectedInfoItem alloc]init];
+    UserAreaSelectedInfoItem *item = [[UserAreaSelectedInfoItem alloc]init];
     [self.model.areas enumerateObjectsUsingBlock:^(Area *subArea, NSUInteger idx, BOOL *stop) {
         if ([userModel.province.areaID isEqualToString:subArea.areaID]) {
             self.selectedProvince = subArea;
@@ -177,7 +185,7 @@
         }
     }];
     DDLogDebug(@"设置选中为%@省-%@市-%@区",self.selectedProvince.name,self.selectedCity.name,self.selectedCounty.name);
-     return item;
+    return item;
 }
 
 - (void)updateAreaWithCompleteBlock:(void (^)(NSError *))completeBlock {
