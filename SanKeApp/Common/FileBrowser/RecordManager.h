@@ -13,6 +13,8 @@ extern NSString * const kRecordReportCompleteNotification;
 extern NSString * const kRecordReportSuccessNotification;
 extern NSString * const kRecordNeedUpdateNotification;
 
+extern NSString * const kResourceIDKey;
+
 @interface RecordManager : NSObject
 + (RecordManager *)sharedInstance;
 

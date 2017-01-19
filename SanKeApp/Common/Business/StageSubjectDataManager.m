@@ -46,6 +46,26 @@
     return [StageSubjectDataManager sharedInstance].requestItem;
 }
 
++ (void)fetchStageSubjectWithStageID:(NSString *)stageID subjectID:(NSString *)subjectID completeBlock:(void(^)(FetchStageSubjectRequestItem_stage *stage,FetchStageSubjectRequestItem_subject *subject))completeBlock {
+    __block FetchStageSubjectRequestItem_stage *stage = nil;
+    __block FetchStageSubjectRequestItem_subject *subject = nil;
+    
+    NSArray *stageArray = [self dataForStageAndSubject].data.stages;
+    [stageArray enumerateObjectsUsingBlock:^(FetchStageSubjectRequestItem_stage *  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        if ([obj.stageID isEqualToString:stageID]) {
+            stage = obj;
+            *stop = YES;
+        }
+    }];
+    [stage.subjects enumerateObjectsUsingBlock:^(FetchStageSubjectRequestItem_subject *  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        if ([obj.subjectID isEqualToString:subjectID]) {
+            subject = obj;
+            *stop = YES;
+        }
+    }];
+    BLOCK_EXEC(completeBlock,stage,subject);
+}
+
 #pragma mark - 
 - (void)saveData {
     NSString *json = [self.requestItem toJSONString];

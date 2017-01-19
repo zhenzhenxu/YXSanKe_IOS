@@ -12,4 +12,6 @@
 @interface StageSubjectDataManager : NSObject
 + (void)updateToLatestData;
 + (FetchStageSubjectRequestItem *)dataForStageAndSubject;
+
++ (void)fetchStageSubjectWithStageID:(NSString *)stageID subjectID:(NSString *)subjectID completeBlock:(void(^)(FetchStageSubjectRequestItem_stage *stage,FetchStageSubjectRequestItem_subject *subject))completeBlock;
 @end

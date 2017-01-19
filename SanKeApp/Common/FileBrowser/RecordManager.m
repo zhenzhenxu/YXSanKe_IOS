@@ -12,6 +12,8 @@ NSString * const kRecordReportCompleteNotification = @"kRecordReportCompleteNoti
 NSString * const kRecordReportSuccessNotification = @"kRecordReportSuccessNotification";
 NSString * const kRecordNeedUpdateNotification = @"kRecordNeedUpdateNotification";
 
+NSString * const kResourceIDKey = @"kResourceIDKey";
+
 @interface RecordManager()
 @property (nonatomic, strong) NSMutableArray<__kindof SaveRecordRequest *> *requestArray;
 @end
@@ -45,7 +47,7 @@ NSString * const kRecordNeedUpdateNotification = @"kRecordNeedUpdateNotification
         [request startRequestWithRetClass:[HttpBaseRequestItem class] andCompleteBlock:^(id retItem, NSError *error, BOOL isMock) {
             STRONG_SELF
             if (!error) {
-                [[NSNotificationCenter defaultCenter] postNotificationName:kRecordReportSuccessNotification object:nil userInfo:@{@"resourceID":resourceID}];
+                [[NSNotificationCenter defaultCenter] postNotificationName:kRecordReportSuccessNotification object:nil userInfo:@{kResourceIDKey:resourceID}];
             }
             [self.requestArray removeObjectAtIndex:0];
             if (self.requestArray.count == 0) {

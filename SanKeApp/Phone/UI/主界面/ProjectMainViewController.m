@@ -21,15 +21,18 @@ extern NSString * const kStageSubjectDidChangeNotification;
 @end
 
 @implementation ProjectMainViewController
-- (void) dealloc {
+- (void)dealloc {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    self.navigationItem.title = @"主界面";
-    [self setupRightWithTitle:@"播放记录"];
+    UserModel *model = [UserManager sharedInstance].userModel;
+    [StageSubjectDataManager fetchStageSubjectWithStageID:model.stageID subjectID:model.subjectID completeBlock:^(FetchStageSubjectRequestItem_stage *stage, FetchStageSubjectRequestItem_subject *subject) {
+        NSString *title = [stage.name stringByAppendingString:subject.name];
+        self.navigationItem.title = title;
+    }];
     [self setupUI];
     [self setupLeftNavView];
     [self setupRightNavView];

@@ -12,7 +12,7 @@
 @end
 @interface Area:JSONModel
 @property (nonatomic, copy) NSString<Optional> *name;
-@property (nonatomic, copy) NSString<Optional> *number;
+@property (nonatomic, copy) NSString<Optional> *areaID;
 @property (nonatomic ,strong) NSArray<Area,Optional> *subAreas;
 @end
 
@@ -23,4 +23,6 @@
 
 @interface AreaDataManager : NSObject
 + (AreaModel *)areaModel;
+
++ (void)fetchAreaWithProvinceID:(NSString *)provinceID cityID:(NSString *)cityID districtID:(NSString *)districtID completeBlock:(void(^)(Area *province,Area *city,Area *district))completeBlock;
 @end
