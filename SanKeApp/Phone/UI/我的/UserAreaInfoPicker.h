@@ -23,4 +23,5 @@
 @property (nonatomic, strong) AreaModel *model;
 - (void)resetSelectedProvinceDataWithUserModel:(UserModel *)userModel;//设置选中的地区
 - (UserAreaSelectedInfoItem *)selectedItem;
+- (void)updateAreaWithCompleteBlock:(void(^)(NSError *error))completeBlock;
 @end

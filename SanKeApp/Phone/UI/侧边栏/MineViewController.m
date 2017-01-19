@@ -15,6 +15,7 @@
 #import "StageAndSubjectRequest.h"
 #import "ErrorView.h"
 #import "EmptyView.h"
+
 @interface MineViewController ()<UITableViewDelegate, UITableViewDataSource>
 
 @property (nonatomic, strong) UserModel *userModel;
@@ -33,8 +34,7 @@
     self.view.backgroundColor = [UIColor whiteColor];
     [self setupUI];
     [self setupInfoPicker];
-    //定义一个属性profile 从网络请求回来的个人数据保存到里面
-    [self loadData];
+    [self updateData];
     // Do any additional setup after loading the view.
 }
 
@@ -62,43 +62,47 @@
     WEAK_SELF
     [self.userInfoPickerView setConfirmButtonActionBlock:^{
         STRONG_SELF
-        //确定之后的回调
-        //先发送请求,成功之后,再修改cell的标题(判断数据源是哪个,进行相应的更新)
-        if ([self.userInfoPickerView.pickerView.dataSource isKindOfClass:[UserAreaInfoPicker class]]) {
-            DDLogDebug(@"选择好了地区");
-        };
-        if ([self.userInfoPickerView.pickerView.dataSource isKindOfClass:[UserSubjectStageInfoPicker class]]) {
-            DDLogDebug(@"选择好了学科学段");
-        };
+        [self updateSelectedInfo];
     }];
+}
+
+- (void)updateSelectedInfo {
+    WEAK_SELF
+    if ([self.userInfoPickerView.pickerView.dataSource isKindOfClass:[UserSubjectStageInfoPicker class]]) {
+        [self.subjectStageInfoPicker updateStageWithCompleteBlock:^(NSError *error) {
+            STRONG_SELF
+            DDLogDebug(@"选择好了学科学段");
+            if (error) {
+                return;
+            }
+            [self updateData];
+        }];
+    }else if ([self.userInfoPickerView.pickerView.dataSource isKindOfClass:[UserAreaInfoPicker class]]) {
+        [self.areaInfoPicker updateAreaWithCompleteBlock:^(NSError *error) {
+            STRONG_SELF
+            DDLogDebug(@"选择好了地区");
+            if (error) {
+                return;
+            }
+            [self updateData];
+        }];
+    }
 }
 
 - (void)setupInfoPicker {
     self.subjectStageInfoPicker = [[UserSubjectStageInfoPicker alloc]init];
     self.subjectStageInfoPicker.stageAndSubjectItem = [StageSubjectDataManager dataForStageAndSubject];
+    
     self.areaInfoPicker = [[UserAreaInfoPicker alloc]init];
     self.areaInfoPicker.model = [AreaDataManager areaModel];
-    //设置初始的数据等(请求数据之后赋值)
 }
 
-- (void)loadData {
+- (void)updateData {
     self.userModel = [UserManager sharedInstance].userModel;
-    [self reloadDataWithUserModel:self.userModel];
+//    [self.subjectStageInfoPicker resetSelectedSubjectsWithUserModel:self.userModel];
+//    [self.areaInfoPicker resetSelectedProvinceDataWithUserModel:self.userModel];
     [self.tableView reloadData];
-    //    [[YXUserProfileHelper sharedHelper] requestCompeletion:^(NSError *error) {
-    //        STRONG_SELF
-    //        self.profile = [YXUserManager sharedManager].userModel.profile;
-    //        [self stopLoading];
-    //        [self reloadDataWithProfile:self.profile];
-    //        [self.tableView reloadData];
-    //    }];
 }
-- (void)reloadDataWithUserModel:(UserModel *)userModel
-{
-    [self.subjectStageInfoPicker resetSelectedSubjectsWithUserModel:userModel];//设置学科学段
-    //    [self.areaInfoPicker resetSelectedProvinceDataWithProfile:profile];//设置地区
-}
-
 
 #pragma mark - UITableViewDataSource
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
@@ -121,7 +125,7 @@
             WEAK_SELF
             [cell setSelectedButtonActionBlock:^{
                 STRONG_SELF
-                DDLogDebug(@"点击选择学段");
+                DDLogDebug(@"点击选择学段学科");
                 self.userInfoPickerView.pickerView.dataSource = self.subjectStageInfoPicker;
                 self.userInfoPickerView.pickerView.delegate = self.subjectStageInfoPicker;
                 [self.userInfoPickerView showPickerView];
@@ -153,6 +157,7 @@
     }
 }
 
+#pragma mark - InfoPicker
 - (void)showStageAndSubjectPicker
 {
     UserSubjectStageSelectedInfoItem *item = [self.subjectStageInfoPicker selectedItem];
@@ -169,5 +174,6 @@
     [self.userInfoPickerView.pickerView selectRow:item.selectedCityRow inComponent:1 animated:NO];
     [self.userInfoPickerView.pickerView selectRow:item.selectedCountyRow inComponent:2 animated:NO];
 }
+
 
 @end

@@ -17,4 +17,5 @@
 @property (nonatomic, strong) FetchStageSubjectRequestItem *stageAndSubjectItem;
 - (void)resetSelectedSubjectsWithUserModel:(UserModel *)userModel;//设置选中的学科学段
 - (UserSubjectStageSelectedInfoItem *)selectedItem;
+- (void)updateStageWithCompleteBlock:(void(^)(NSError *error))completeBlock;
 @end

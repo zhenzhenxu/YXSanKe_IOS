@@ -171,6 +171,7 @@
 		E902E6DB1E2CD109009441B3 /* UpgradeView.m in Sources */ = {isa = PBXBuildFile; fileRef = E902E6DA1E2CD109009441B3 /* UpgradeView.m */; };
 		E902E6DE1E2CE19D009441B3 /* ErrorView.m in Sources */ = {isa = PBXBuildFile; fileRef = E902E6DD1E2CE19D009441B3 /* ErrorView.m */; };
 		E902E6E11E2CE1B8009441B3 /* EmptyView.m in Sources */ = {isa = PBXBuildFile; fileRef = E902E6E01E2CE1B8009441B3 /* EmptyView.m */; };
+		E9230C461E2F829900AC6617 /* LoginRequest.json in Resources */ = {isa = PBXBuildFile; fileRef = E9230C451E2F829900AC6617 /* LoginRequest.json */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -512,6 +513,7 @@
 		E902E6DD1E2CE19D009441B3 /* ErrorView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ErrorView.m; sourceTree = "<group>"; };
 		E902E6DF1E2CE1B8009441B3 /* EmptyView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EmptyView.h; sourceTree = "<group>"; };
 		E902E6E01E2CE1B8009441B3 /* EmptyView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EmptyView.m; sourceTree = "<group>"; };
+		E9230C451E2F829900AC6617 /* LoginRequest.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = LoginRequest.json; sourceTree = "<group>"; };
 		F85EF3DA4AEC6DA4B2E1F0AA /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		FDFFD28C45A34489A38320DE /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -1281,6 +1283,7 @@
 		7C7841B51E2F1DFA00755BC0 /* Network */ = {
 			isa = PBXGroup;
 			children = (
+				E9230C451E2F829900AC6617 /* LoginRequest.json */,
 				7C78418F1E2E221800755BC0 /* LoginRequest.h */,
 				7C7841901E2E221800755BC0 /* LoginRequest.m */,
 				7C7841921E2E225D00755BC0 /* TouristLoginRequest.h */,
@@ -1482,6 +1485,7 @@
 				7C1A5EE91E1506C500832DED /* PhoneImage.xcassets in Resources */,
 				7C7629D21E276DBE007B5698 /* logo.gif in Resources */,
 				927594E91E2F0DA000F87838 /* playHistory_mock.json in Resources */,
+				E9230C461E2F829900AC6617 /* LoginRequest.json in Resources */,
 				7C1A5EF31E150BD100832DED /* env_config.json in Resources */,
 				927594E81E2F0DA000F87838 /* historyRecord_mock.json in Resources */,
 				7C1A5F941E15143F00832DED /* MockConfig.plist in Resources */,

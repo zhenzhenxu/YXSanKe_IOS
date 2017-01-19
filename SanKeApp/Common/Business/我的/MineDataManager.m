@@ -56,7 +56,7 @@ NSString * const kStageSubjectDidChangeNotification = @"kStageSubjectDidChangeNo
     [manager.areaRequest stopRequest];
     manager.areaRequest = [[UpdateAreaRequest alloc]init];
     WEAK_SELF
-    [manager.stageSubjectRequest startRequestWithRetClass:[HttpBaseRequestItem class] andCompleteBlock:^(id retItem, NSError *error, BOOL isMock) {
+    [manager.areaRequest startRequestWithRetClass:[HttpBaseRequestItem class] andCompleteBlock:^(id retItem, NSError *error, BOOL isMock) {
         STRONG_SELF
         if (error) {
             BLOCK_EXEC(completeBlock,error);

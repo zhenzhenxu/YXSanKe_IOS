@@ -160,6 +160,7 @@
             *stop = YES;
         }
     }];
+    DDLogDebug(@"选中了%@省-%@市-%@区",self.selectedProvince.name,self.selectedCity.name,self.selectedCounty.name);
 }
 
 - (UserAreaSelectedInfoItem *)selectedItem {
@@ -183,5 +184,16 @@
         item.selectedCountyRow = [self.selectedCounties indexOfObject:self.selectedCounty];
     }
     return item;
+}
+
+- (void)updateAreaWithCompleteBlock:(void (^)(NSError *))completeBlock {
+    NSString *area = [NSString stringWithFormat:@"%@,%@,%@",self.selectedProvince.number,self.selectedCity.number,self.selectedCounty.number];
+    [MineDataManager updateArea:area completeBlock:^(NSError *error) {
+        if (error) {
+            BLOCK_EXEC(completeBlock,error);
+            return;
+        }
+        BLOCK_EXEC(completeBlock,nil);
+    }];
 }
 @end

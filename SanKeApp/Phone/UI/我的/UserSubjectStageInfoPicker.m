@@ -111,6 +111,7 @@
             *stop = YES;
         }
     }];
+    DDLogDebug(@"选中了%@学段-%@学科",self.selectedStage.name,self.selectedStage.name);
 }
 
 - (UserSubjectStageSelectedInfoItem *)selectedItem {
@@ -122,10 +123,20 @@
     } else if (self.stageAndSubjectItem.data.stages.count > 0) {
         self.selectedSubjects = ((FetchStageSubjectRequestItem_stage *)self.stageAndSubjectItem.data.stages[0]).subjects;
     }
-    
     if ([self.selectedSubjects containsObject:self.selectedSubject]) {
         item.selectedStageRow = [self.selectedSubjects indexOfObject:self.selectedSubject];
     }
     return item;
+}
+
+- (void)updateStageWithCompleteBlock:(void (^)(NSError *))completeBlock {
+    [MineDataManager updateStage:self.selectedStage.stageID subject:self.selectedSubject.subjectID completeBlock:^(NSError *error) {
+        if (error) {
+            BLOCK_EXEC(completeBlock,error);
+            return;
+        }
+        BLOCK_EXEC(completeBlock,nil);
+    }];
+    
 }
 @end
