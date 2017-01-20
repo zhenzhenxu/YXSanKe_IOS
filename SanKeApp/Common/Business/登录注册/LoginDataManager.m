@@ -41,11 +41,6 @@
         }
         HttpBaseRequestItem *item = retItem;
         UserModel *model = [UserModel modelFromRawData:item.info];
-        if (!model.isSankeUser) {
-            NSString *uuid = [[NSUUID UUID]UUIDString];
-            [self touristLoginWithUUID:uuid completeBlock:completeBlock];
-            return;
-        }
         [UserManager sharedInstance].userModel = model;
         if (model.isTaged) {
             [UserManager sharedInstance].loginStatus = YES;
