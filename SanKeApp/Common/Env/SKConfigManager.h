@@ -30,4 +30,7 @@
 
 @property (nonatomic, strong) NSNumber<Optional> *mockFrameworkOn;
 @property (nonatomic, strong) NSNumber<Optional> *testFrameworkOn;
+
+@property (nonatomic, strong) NSString<Optional> *TalkingDataAppID;
+@property (nonatomic, strong) NSString<Optional> *channel;
 @end

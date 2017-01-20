@@ -57,8 +57,6 @@
         _appVersion = [SKConfigManager sharedInstance].clientVersion;
         _content = @"";
         _operType = @"app.upload.log";
-#warning 稍后需要放开
-//        _phone = [YXUserManager sharedManager].userModel.mobile;
         _remoteIp = @"";
         _mode = [SKConfigManager sharedInstance].mode;
         self.urlHead = [SKConfigManager sharedInstance].initializeUrl;

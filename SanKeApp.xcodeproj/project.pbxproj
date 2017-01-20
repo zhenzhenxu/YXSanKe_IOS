@@ -133,6 +133,10 @@
 		7C7841B81E2F1E2900755BC0 /* MineDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C7841B71E2F1E2900755BC0 /* MineDataManager.m */; };
 		7C7841BB1E2F211B00755BC0 /* UserModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C7841BA1E2F211B00755BC0 /* UserModel.m */; };
 		7C7841BE1E2F37EB00755BC0 /* LoginDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C7841BD1E2F37EB00755BC0 /* LoginDataManager.m */; };
+		7C7841D71E3211B500755BC0 /* libTalkingData.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7C7841D51E3211B500755BC0 /* libTalkingData.a */; };
+		7C7841D91E3214C400755BC0 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7C7841D81E3214C400755BC0 /* CoreTelephony.framework */; };
+		7C7841DB1E3214CB00755BC0 /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7C7841DA1E3214CB00755BC0 /* CoreMotion.framework */; };
+		7C7841DD1E3214F300755BC0 /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7C7841DC1E3214F300755BC0 /* AdSupport.framework */; };
 		7CC9ADA81E25D12A00A392EA /* StageSubjectSelectViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CC9ADA71E25D12A00A392EA /* StageSubjectSelectViewController.m */; };
 		923A4E2E1E2C9FF5001059E2 /* ChannelTabRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 923A4E2D1E2C9FF5001059E2 /* ChannelTabRequest.m */; };
 		923A4E311E2CA4E7001059E2 /* CourseVideoRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 923A4E301E2CA4E7001059E2 /* CourseVideoRequest.m */; };
@@ -446,6 +450,11 @@
 		7C7841BA1E2F211B00755BC0 /* UserModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserModel.m; sourceTree = "<group>"; };
 		7C7841BC1E2F37EB00755BC0 /* LoginDataManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginDataManager.h; sourceTree = "<group>"; };
 		7C7841BD1E2F37EB00755BC0 /* LoginDataManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginDataManager.m; sourceTree = "<group>"; };
+		7C7841D51E3211B500755BC0 /* libTalkingData.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libTalkingData.a; sourceTree = "<group>"; };
+		7C7841D61E3211B500755BC0 /* TalkingData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TalkingData.h; sourceTree = "<group>"; };
+		7C7841D81E3214C400755BC0 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
+		7C7841DA1E3214CB00755BC0 /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = System/Library/Frameworks/CoreMotion.framework; sourceTree = SDKROOT; };
+		7C7841DC1E3214F300755BC0 /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
 		7CC9ADA61E25D12A00A392EA /* StageSubjectSelectViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StageSubjectSelectViewController.h; sourceTree = "<group>"; };
 		7CC9ADA71E25D12A00A392EA /* StageSubjectSelectViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StageSubjectSelectViewController.m; sourceTree = "<group>"; };
 		923A4E2C1E2C9FF5001059E2 /* ChannelTabRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChannelTabRequest.h; sourceTree = "<group>"; };
@@ -529,6 +538,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7C7841DD1E3214F300755BC0 /* AdSupport.framework in Frameworks */,
+				7C7841DB1E3214CB00755BC0 /* CoreMotion.framework in Frameworks */,
+				7C7841D91E3214C400755BC0 /* CoreTelephony.framework in Frameworks */,
+				7C7841D71E3211B500755BC0 /* libTalkingData.a in Frameworks */,
 				4C52696A59114A67B85E0645 /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -553,6 +566,9 @@
 		3F85DC58A46B1352E7AE59A6 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				7C7841DC1E3214F300755BC0 /* AdSupport.framework */,
+				7C7841DA1E3214CB00755BC0 /* CoreMotion.framework */,
+				7C7841D81E3214C400755BC0 /* CoreTelephony.framework */,
 				FDFFD28C45A34489A38320DE /* libPods.a */,
 			);
 			name = Frameworks;
@@ -902,6 +918,7 @@
 		7C1A5F791E1513B700832DED /* 3rdLib */ = {
 			isa = PBXGroup;
 			children = (
+				7C7841D41E3211B500755BC0 /* TalkingData */,
 				7C1A5F7A1E1513D600832DED /* MJRefresh */,
 			);
 			path = 3rdLib;
@@ -1299,6 +1316,15 @@
 				7C7841931E2E225D00755BC0 /* TouristLoginRequest.m */,
 			);
 			name = Network;
+			sourceTree = "<group>";
+		};
+		7C7841D41E3211B500755BC0 /* TalkingData */ = {
+			isa = PBXGroup;
+			children = (
+				7C7841D51E3211B500755BC0 /* libTalkingData.a */,
+				7C7841D61E3211B500755BC0 /* TalkingData.h */,
+			);
+			path = TalkingData;
 			sourceTree = "<group>";
 		};
 		9241FFDE1E25D5680015B587 /* view */ = {
@@ -1873,6 +1899,10 @@
 				INFOPLIST_FILE = "$(SRCROOT)/SanKeApp/Phone/InfoPhone.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/SanKeApp/Common/3rdLib/TalkingData",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = yanxiu.com.SanKeApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "9df588d5-707f-4e9b-83bf-82890757c75f";
@@ -1890,6 +1920,10 @@
 				INFOPLIST_FILE = "$(SRCROOT)/SanKeApp/Phone/InfoPhone.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/SanKeApp/Common/3rdLib/TalkingData",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = yanxiu.com.SanKeApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};

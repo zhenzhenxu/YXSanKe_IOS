@@ -24,6 +24,10 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+    [TalkingData setExceptionReportEnabled:YES];
+    [TalkingData setSignalReportEnabled:YES];
+    [TalkingData sessionStarted:[SKConfigManager sharedInstance].TalkingDataAppID withChannelId:[SKConfigManager sharedInstance].channel];
+    
     [GlobalUtils setupCore];
     [UpgradeManager checkForUpgrade];
     [StageSubjectDataManager updateToLatestData];

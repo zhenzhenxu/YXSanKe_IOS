@@ -65,6 +65,7 @@ extern int ddLogLevel;
 #import "NSObject+BackgroundTask.h"
 
 #pragma  - Other
+#import "TalkingData.h"
 #import "CollectionViewEqualSpaceFlowLayout.h"
 #import "AreaDataManager.h"
 #import "GCDTimer.h"
