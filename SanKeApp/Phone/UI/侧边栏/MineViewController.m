@@ -196,8 +196,6 @@
                 [self.userInfoPickerView showPickerView];
                 [self.subjectStageInfoPicker resetSelectedSubjectsWithUserModel:self.userModel];
                 [self showStageAndSubjectPicker];
-//                UserSubjectStageSelectedInfoItem *item = [self.subjectStageInfoPicker resetSelectedSubjectsWithUserModel:self.userModel];
-//                [self showStageAndSubjectPickerWithInfoItem:item];
             }];
         }else if (indexPath.row == 3) {
             NSString *area = [self configAreaString];
@@ -209,8 +207,6 @@
                 self.userInfoPickerView.pickerView.dataSource = self.areaInfoPicker;
                 self.userInfoPickerView.pickerView.delegate = self.areaInfoPicker;
                 [self.userInfoPickerView showPickerView];
-//               UserAreaSelectedInfoItem *item = [self.areaInfoPicker resetSelectedProvinceDataWithUserModel:self.userModel];
-//                [self showProvinceListPickerWithInfoItem:item];
                 [self.areaInfoPicker resetSelectedProvinceDataWithUserModel:self.userModel];
                 [self showProvinceListPicker];
             }];
@@ -228,21 +224,6 @@
 }
 
 #pragma mark - InfoPicker
-//- (void)showStageAndSubjectPickerWithInfoItem:(UserSubjectStageSelectedInfoItem *)item
-//{
-//    [self.userInfoPickerView reloadPickerView];
-//    [self.userInfoPickerView.pickerView selectRow:item.selectedStageRow inComponent:0 animated:NO];
-//    [self.userInfoPickerView.pickerView selectRow:item.selectedSubjectRow inComponent:1 animated:NO];
-//}
-//
-//- (void)showProvinceListPickerWithInfoItem:(UserAreaSelectedInfoItem *)item;
-//{
-//    [self.userInfoPickerView reloadPickerView];
-//    [self.userInfoPickerView.pickerView selectRow:item.selectedProvinceRow inComponent:0 animated:NO];
-//    [self.userInfoPickerView.pickerView selectRow:item.selectedCityRow inComponent:1 animated:NO];
-//    [self.userInfoPickerView.pickerView selectRow:item.selectedCountyRow inComponent:2 animated:NO];
-//}
-
 - (void)showStageAndSubjectPicker {
     UserSubjectStageSelectedInfoItem *item = [self.subjectStageInfoPicker selectedInfoItem];
     [self.userInfoPickerView reloadPickerView];
@@ -257,6 +238,7 @@
     [self.userInfoPickerView.pickerView selectRow:item.selectedCityRow inComponent:1 animated:NO];
     [self.userInfoPickerView.pickerView selectRow:item.selectedCountyRow inComponent:2 animated:NO];
 }
+#pragma  mark - configAreaSring
 -(NSString *)configAreaString {
     NSString *area = [NSString string];
     if (!isEmpty(self.userModel.province)) {
