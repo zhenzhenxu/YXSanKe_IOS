@@ -43,7 +43,7 @@
 
 - (void)setupUI {
     LoginActionView *actionView = [[LoginActionView alloc]init];
-    actionView.title = @"登陆";
+    actionView.title = @"登录";
     WEAK_SELF
     [actionView setActionBlock:^{
         STRONG_SELF
@@ -89,7 +89,7 @@
     
     UIButton *touristButton = [[UIButton alloc]init];
     touristButton.titleLabel.font = [UIFont systemFontOfSize:12];
-    [touristButton setTitle:@"游客登陆" forState:UIControlStateNormal];
+    [touristButton setTitle:@"游客登录" forState:UIControlStateNormal];
     [touristButton setTitleColor:[UIColor colorWithHexString:@"333333"] forState:UIControlStateNormal];
     [touristButton addTarget:self action:@selector(touristLogin) forControlEvents:UIControlEventTouchUpInside];
     [self.contentView addSubview:touristButton];

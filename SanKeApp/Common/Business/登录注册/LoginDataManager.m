@@ -51,7 +51,7 @@
 
 + (void)touristLoginWithCompleteBlock:(void(^)(NSError *error))completeBlock {
     NSString *uuid = [[NSUserDefaults standardUserDefaults]valueForKey:@"tourist_login_uuid_key"];
-    if (uuid) {
+    if (!uuid) {
         uuid = [[NSUUID UUID]UUIDString];
         [[NSUserDefaults standardUserDefaults]setValue:uuid forKey:@"tourist_login_uuid_key"];
         [[NSUserDefaults standardUserDefaults]synchronize];

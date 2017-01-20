@@ -174,6 +174,7 @@
 		E9230C561E30919B00AC6617 /* UpdateAreaRequest.json in Resources */ = {isa = PBXBuildFile; fileRef = E9230C541E30919B00AC6617 /* UpdateAreaRequest.json */; };
 		E9230C571E30919B00AC6617 /* UpdateStageSubjectRequest.json in Resources */ = {isa = PBXBuildFile; fileRef = E9230C551E30919B00AC6617 /* UpdateStageSubjectRequest.json */; };
 		E9230C5A1E30BAB400AC6617 /* FetchStageSubjectRequest.json in Resources */ = {isa = PBXBuildFile; fileRef = E9230C591E30BAB400AC6617 /* FetchStageSubjectRequest.json */; };
+		E9F4541C1E31B18D00860DC2 /* TouristLoginRequest.json in Resources */ = {isa = PBXBuildFile; fileRef = E9F4541B1E31B18D00860DC2 /* TouristLoginRequest.json */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -518,6 +519,7 @@
 		E9230C541E30919B00AC6617 /* UpdateAreaRequest.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = UpdateAreaRequest.json; sourceTree = "<group>"; };
 		E9230C551E30919B00AC6617 /* UpdateStageSubjectRequest.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = UpdateStageSubjectRequest.json; sourceTree = "<group>"; };
 		E9230C591E30BAB400AC6617 /* FetchStageSubjectRequest.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = FetchStageSubjectRequest.json; sourceTree = "<group>"; };
+		E9F4541B1E31B18D00860DC2 /* TouristLoginRequest.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = TouristLoginRequest.json; sourceTree = "<group>"; };
 		F85EF3DA4AEC6DA4B2E1F0AA /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		FDFFD28C45A34489A38320DE /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -1292,6 +1294,7 @@
 				E9230C451E2F829900AC6617 /* LoginRequest.json */,
 				7C78418F1E2E221800755BC0 /* LoginRequest.h */,
 				7C7841901E2E221800755BC0 /* LoginRequest.m */,
+				E9F4541B1E31B18D00860DC2 /* TouristLoginRequest.json */,
 				7C7841921E2E225D00755BC0 /* TouristLoginRequest.h */,
 				7C7841931E2E225D00755BC0 /* TouristLoginRequest.m */,
 			);
@@ -1508,6 +1511,7 @@
 				E9230C571E30919B00AC6617 /* UpdateStageSubjectRequest.json in Resources */,
 				7C1A5F8E1E15143400832DED /* neterror_mock.json in Resources */,
 				7C1A5EEE1E150A3800832DED /* SKConfig.plist in Resources */,
+				E9F4541C1E31B18D00860DC2 /* TouristLoginRequest.json in Resources */,
 				923A4E361E2CAE1C001059E2 /* channelIndex_mock.json in Resources */,
 				E9230C561E30919B00AC6617 /* UpdateAreaRequest.json in Resources */,
 				7C1A5F8D1E15143400832DED /* errorcode_mock.json in Resources */,
