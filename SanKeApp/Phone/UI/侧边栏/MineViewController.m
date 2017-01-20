@@ -86,20 +86,20 @@
             STRONG_SELF
             DDLogDebug(@"最终结果学科%@-学段%@",self.userModel.stage.name,self.userModel.subject.name);
             if (error) {
-                DDLogDebug(@"学科学段Error%@",error);
                 return;
             }
-            [self updateStageSubjectInfo];
+//            [self updateStageSubjectInfo];//接入真实数据后用
+            [self updateMockStageSubjectInfo];
         }];
     }else if ([self.userInfoPickerView.pickerView.dataSource isKindOfClass:[UserAreaInfoPicker class]]) {
         [self.areaInfoPicker updateAreaWithCompleteBlock:^(NSError *error) {
             STRONG_SELF
             DDLogDebug(@"最终结果地区:%@-%@-%@",self.userModel.province.name,self.userModel.city.name,self.userModel.district.name);
             if (error) {
-                DDLogDebug(@"地区Error%@",error);
                 return;
             }
-            [self updateAreaInfo];
+//            [self updateAreaInfo];//待接入真实数据后使用
+            [self updateMockAreaInfo];
         }];
     }
 }
@@ -116,6 +116,58 @@
     NSIndexPath *areaIndexPath = [NSIndexPath indexPathForRow:3 inSection:0];
     [self.tableView reloadRowsAtIndexPaths:@[areaIndexPath] withRowAnimation:UITableViewRowAnimationNone];
 
+}
+
+- (void)updateMockStageSubjectInfo {
+    FetchStageSubjectRequestItem *stageSubjectItem = [StageSubjectDataManager dataForStageAndSubject];
+    UserSubjectStageSelectedInfoItem *item = [self.subjectStageInfoPicker selectedInfoItem];
+    FetchStageSubjectRequestItem_stage *stage = [[FetchStageSubjectRequestItem_stage alloc]init];
+    FetchStageSubjectRequestItem_subject *subject = [[FetchStageSubjectRequestItem_subject alloc]init];
+    if (stageSubjectItem.data.stages.count > 0) {
+        stage = stageSubjectItem.data.stages[item.selectedStageRow];
+        if (stage.subjects.count > 0) {
+            subject = stage.subjects[item.selectedSubjectRow];
+        }
+    }
+    UserInfoTableViewCell *cell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:0]];
+    UserInfoTableViewCell *cell1 = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:2 inSection:0]];
+    [cell configTitle:@"学段" content:stage.name];
+    [cell1 configTitle:@"学科" content:subject.name];
+}
+
+- (void)updateMockAreaInfo {
+    AreaModel *model = [AreaDataManager areaModel];
+    UserAreaSelectedInfoItem *item = [self.areaInfoPicker selectedInfoItem];
+    Area *province = [[Area alloc]init];
+    Area *city = [[Area alloc]init];
+    Area *county = [[Area alloc]init];
+    if (model.areas.count > 0) {
+        province = model.areas[item.selectedProvinceRow];
+        if (province.subAreas.count > 0) {
+            city = province.subAreas[item.selectedCityRow];
+            if (city.subAreas.count > 0) {
+                county = city.subAreas[item.selectedCountyRow];
+            }else {
+                county = nil;
+            }
+        }else {
+            city = nil;
+        }
+    }else {
+        province = nil;
+    }
+    UserInfoTableViewCell *cell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:3 inSection:0]];
+    NSString *area = [NSString string];
+    if (!isEmpty(province)) {
+        area = province.name;
+        if (!isEmpty(city)) {
+            area = [area stringByAppendingString:city.name];
+            if (!isEmpty(county)) {
+                area = [area stringByAppendingString:county.name];
+            }
+        }
+    }
+    [cell configTitle:@"地区" content:area];
 }
 #pragma mark - UITableViewDataSource
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
@@ -142,11 +194,13 @@
                 self.userInfoPickerView.pickerView.dataSource = self.subjectStageInfoPicker;
                 self.userInfoPickerView.pickerView.delegate = self.subjectStageInfoPicker;
                 [self.userInfoPickerView showPickerView];
-                UserSubjectStageSelectedInfoItem *item = [self.subjectStageInfoPicker resetSelectedSubjectsWithUserModel:self.userModel];
-                [self showStageAndSubjectPickerWithInfoItem:item];
+                [self.subjectStageInfoPicker resetSelectedSubjectsWithUserModel:self.userModel];
+                [self showStageAndSubjectPicker];
+//                UserSubjectStageSelectedInfoItem *item = [self.subjectStageInfoPicker resetSelectedSubjectsWithUserModel:self.userModel];
+//                [self showStageAndSubjectPickerWithInfoItem:item];
             }];
         }else if (indexPath.row == 3) {
-            NSString *area = [NSString stringWithFormat:@"%@%@%@",self.userModel.province.name,self.userModel.city.name,self.userModel.district.name];
+            NSString *area = [self configAreaString];
             [cell configTitle:@"地区" content:area];
             WEAK_SELF
             [cell setSelectedButtonActionBlock:^{
@@ -155,8 +209,10 @@
                 self.userInfoPickerView.pickerView.dataSource = self.areaInfoPicker;
                 self.userInfoPickerView.pickerView.delegate = self.areaInfoPicker;
                 [self.userInfoPickerView showPickerView];
-               UserAreaSelectedInfoItem *item = [self.areaInfoPicker resetSelectedProvinceDataWithUserModel:self.userModel];
-                [self showProvinceListPickerWithInfoItem:item];
+//               UserAreaSelectedInfoItem *item = [self.areaInfoPicker resetSelectedProvinceDataWithUserModel:self.userModel];
+//                [self showProvinceListPickerWithInfoItem:item];
+                [self.areaInfoPicker resetSelectedProvinceDataWithUserModel:self.userModel];
+                [self showProvinceListPicker];
             }];
         }
         return cell;
@@ -172,20 +228,46 @@
 }
 
 #pragma mark - InfoPicker
-- (void)showStageAndSubjectPickerWithInfoItem:(UserSubjectStageSelectedInfoItem *)item
-{
+//- (void)showStageAndSubjectPickerWithInfoItem:(UserSubjectStageSelectedInfoItem *)item
+//{
+//    [self.userInfoPickerView reloadPickerView];
+//    [self.userInfoPickerView.pickerView selectRow:item.selectedStageRow inComponent:0 animated:NO];
+//    [self.userInfoPickerView.pickerView selectRow:item.selectedSubjectRow inComponent:1 animated:NO];
+//}
+//
+//- (void)showProvinceListPickerWithInfoItem:(UserAreaSelectedInfoItem *)item;
+//{
+//    [self.userInfoPickerView reloadPickerView];
+//    [self.userInfoPickerView.pickerView selectRow:item.selectedProvinceRow inComponent:0 animated:NO];
+//    [self.userInfoPickerView.pickerView selectRow:item.selectedCityRow inComponent:1 animated:NO];
+//    [self.userInfoPickerView.pickerView selectRow:item.selectedCountyRow inComponent:2 animated:NO];
+//}
+
+- (void)showStageAndSubjectPicker {
+    UserSubjectStageSelectedInfoItem *item = [self.subjectStageInfoPicker selectedInfoItem];
     [self.userInfoPickerView reloadPickerView];
     [self.userInfoPickerView.pickerView selectRow:item.selectedStageRow inComponent:0 animated:NO];
     [self.userInfoPickerView.pickerView selectRow:item.selectedSubjectRow inComponent:1 animated:NO];
 }
 
-- (void)showProvinceListPickerWithInfoItem:(UserAreaSelectedInfoItem *)item;
-{
+- (void)showProvinceListPicker {
+    UserAreaSelectedInfoItem *item = [self.areaInfoPicker selectedInfoItem];
     [self.userInfoPickerView reloadPickerView];
     [self.userInfoPickerView.pickerView selectRow:item.selectedProvinceRow inComponent:0 animated:NO];
     [self.userInfoPickerView.pickerView selectRow:item.selectedCityRow inComponent:1 animated:NO];
     [self.userInfoPickerView.pickerView selectRow:item.selectedCountyRow inComponent:2 animated:NO];
 }
-
-
+-(NSString *)configAreaString {
+    NSString *area = [NSString string];
+    if (!isEmpty(self.userModel.province)) {
+        area = self.userModel.province.name;
+        if (!isEmpty(self.userModel.city)) {
+            area = [area stringByAppendingString:self.userModel.city.name];
+            if (!isEmpty(self.userModel.district)) {
+                area = [area stringByAppendingString:self.userModel.district.name];
+            }
+        }
+    }
+    return area;
+}
 @end

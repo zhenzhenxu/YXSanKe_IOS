@@ -115,26 +115,21 @@
     return pickerLabel;
 }
 
-- (UserSubjectStageSelectedInfoItem *)resetSelectedSubjectsWithUserModel:(MineUserModel *)userModel {
-    UserSubjectStageSelectedInfoItem *item = [[UserSubjectStageSelectedInfoItem alloc]init];
-    
+- (void)resetSelectedSubjectsWithUserModel:(MineUserModel *)userModel {
     [self.stageAndSubjectItem.data.stages enumerateObjectsUsingBlock:^(FetchStageSubjectRequestItem_stage *stage, NSUInteger idx, BOOL *stop) {
         if ([userModel.stage.stageID isEqualToString:stage.stageID]) {
             self.selectedStage = stage;
             self.selectedSubjects = self.selectedStage.subjects;
-            item.selectedStageRow = idx;
             *stop = YES;
         }
     }];
     [self.selectedSubjects enumerateObjectsUsingBlock:^(FetchStageSubjectRequestItem_subject *subject, NSUInteger idx, BOOL *stop) {
         if ([userModel.subject.subjectID isEqualToString:subject.subjectID]) {
             self.selectedSubject = subject;
-            item.selectedSubjectRow = idx;
             *stop = YES;
         }
     }];
     DDLogDebug(@"设置为选中%@学段-%@学科",self.selectedStage.name,self.selectedSubject.name);
-    return item;
 }
 
 - (void)updateStageWithCompleteBlock:(void (^)(NSError *))completeBlock {
@@ -146,6 +141,22 @@
         }
         BLOCK_EXEC(completeBlock,nil);
     }];
-    
+}
+
+- (UserSubjectStageSelectedInfoItem *)selectedInfoItem {
+    UserSubjectStageSelectedInfoItem *item = [[UserSubjectStageSelectedInfoItem alloc]init];
+    item.selectedStageRow = 0;
+    item.selectedSubjectRow = 0;
+    if (self.stageAndSubjectItem.data.stages.count > 0) {
+        if ([self.stageAndSubjectItem.data.stages containsObject:self.selectedStage]) {
+            item.selectedStageRow = [self.stageAndSubjectItem.data.stages indexOfObject:self.selectedStage];
+        }
+    }
+    if (self.selectedSubjects.count > 0) {
+        if ([self.selectedSubjects containsObject:self.selectedSubject]) {
+            item.selectedSubjectRow = [self.selectedSubjects indexOfObject:self.selectedSubject];
+        }
+    }
+    return item;
 }
 @end

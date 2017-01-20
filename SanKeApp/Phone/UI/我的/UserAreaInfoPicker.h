@@ -23,7 +23,8 @@
 
 @property (nonatomic, strong) AreaModel *model;
 
-- (UserAreaSelectedInfoItem *)resetSelectedProvinceDataWithUserModel:(MineUserModel *)userModel;
+- (void)resetSelectedProvinceDataWithUserModel:(MineUserModel *)userModel;
 - (void)updateAreaWithCompleteBlock:(void(^)(NSError *error))completeBlock;
 
+- (UserAreaSelectedInfoItem *)selectedInfoItem;
 @end

@@ -19,7 +19,8 @@
 
 @property (nonatomic, strong) FetchStageSubjectRequestItem *stageAndSubjectItem;
 
-- (UserSubjectStageSelectedInfoItem *)resetSelectedSubjectsWithUserModel:(MineUserModel *)userModel;
+- (void)resetSelectedSubjectsWithUserModel:(MineUserModel *)userModel;
 - (void)updateStageWithCompleteBlock:(void(^)(NSError *error))completeBlock;
 
+- (UserSubjectStageSelectedInfoItem *)selectedInfoItem;
 @end

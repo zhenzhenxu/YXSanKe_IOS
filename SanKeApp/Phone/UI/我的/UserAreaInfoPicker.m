@@ -159,13 +159,11 @@
     return pickerLabel;
 }
 
-- (UserAreaSelectedInfoItem *)resetSelectedProvinceDataWithUserModel:(MineUserModel *)userModel {
-    UserAreaSelectedInfoItem *item = [[UserAreaSelectedInfoItem alloc]init];
+- (void)resetSelectedProvinceDataWithUserModel:(MineUserModel *)userModel {
     [self.model.areas enumerateObjectsUsingBlock:^(Area *subArea, NSUInteger idx, BOOL *stop) {
         if ([userModel.province.areaID isEqualToString:subArea.areaID]) {
             self.selectedProvince = subArea;
             self.selectedCitys = self.selectedProvince.subAreas;
-            item.selectedProvinceRow = idx;
             *stop = YES;
         }
     }];
@@ -173,19 +171,16 @@
         if ([userModel.city.areaID isEqualToString:subArea.areaID]) {
             self.selectedCity = subArea;
             self.selectedCounties = self.selectedCity.subAreas;
-            item.selectedCityRow = idx;
             *stop = YES;
         }
     }];
     [self.selectedCounties enumerateObjectsUsingBlock:^(Area *subArea, NSUInteger idx, BOOL *stop) {
         if ([userModel.district.areaID isEqualToString:subArea.areaID]) {
             self.selectedCounty = subArea;
-            item.selectedCountyRow = idx;
             *stop = YES;
         }
     }];
     DDLogDebug(@"设置选中为%@省-%@市-%@区",self.selectedProvince.name,self.selectedCity.name,self.selectedCounty.name);
-    return item;
 }
 
 - (void)updateAreaWithCompleteBlock:(void (^)(NSError *))completeBlock {
@@ -198,5 +193,28 @@
         }
         BLOCK_EXEC(completeBlock,nil);
     }];
+}
+
+- (UserAreaSelectedInfoItem *)selectedInfoItem {
+    UserAreaSelectedInfoItem *item = [[UserAreaSelectedInfoItem alloc]init];
+    item.selectedProvinceRow = 0;
+    item.selectedCityRow = 0;
+    item.selectedCountyRow = 0;
+    if (self.model.areas.count > 0) {
+        if ([self.model.areas containsObject:self.selectedProvince]) {
+            item.selectedProvinceRow = [self.model.areas indexOfObject:self.selectedProvince];
+        }
+    }
+    if (self.selectedCitys.count > 0) {
+        if ([self.selectedCitys containsObject:self.selectedCity]) {
+            item.selectedCityRow = [self.selectedCitys indexOfObject:self.selectedCity];
+        }
+    }
+    if (self.selectedCounties.count > 0) {
+        if ([self.selectedCounties containsObject:self.selectedCounty]) {
+            item.selectedCountyRow = [self.selectedCounties indexOfObject:self.selectedCounty];
+        }
+    }
+    return item;
 }
 @end
