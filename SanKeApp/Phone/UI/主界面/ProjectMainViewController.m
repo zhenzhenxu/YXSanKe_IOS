@@ -55,7 +55,8 @@ extern NSString * const kStageSubjectDidChangeNotification;
 - (void)setupLeftNavView {
     UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
     button.frame = CGRectMake(0, 0, 32.0f, 32.0f);
-    [button sd_setBackgroundImageWithURL:[NSURL URLWithString:@""] forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"默认用户头像"]];
+    NSString *icon = [UserManager sharedInstance].userModel.portraitUrl;
+    [button sd_setBackgroundImageWithURL:[NSURL URLWithString:icon] forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"大头像"]];
     [[[NSNotificationCenter defaultCenter]rac_addObserverForName:@"" object:nil]subscribeNext:^(id x) {
         [button sd_setBackgroundImageWithURL:[NSURL URLWithString:@""] forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"默认用户头像"]];
     }];

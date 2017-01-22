@@ -82,7 +82,7 @@
     [self.posterImagView sd_setImageWithURL:[NSURL URLWithString:_history.thumb] placeholderImage:[UIImage imageNamed:@""]];
 }
 - (NSString *)formatShowTime:(NSString *)time {
-    return [NSString stringWithFormat:@"%0.2ld:%0.2ld",time.integerValue/60, time.integerValue/60/60];
+    return [NSString stringWithFormat:@"%0.2zd:%0.2zd",time.integerValue/60, time.integerValue/60/60];
     
 }
 

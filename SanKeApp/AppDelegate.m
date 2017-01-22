@@ -30,7 +30,7 @@
     
     [GlobalUtils setupCore];
     [UpgradeManager checkForUpgrade];
-    [StageSubjectDataManager updateToLatestData];
+//    [StageSubjectDataManager updateToLatestData];
     [self registerNotifications];
     
     self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];

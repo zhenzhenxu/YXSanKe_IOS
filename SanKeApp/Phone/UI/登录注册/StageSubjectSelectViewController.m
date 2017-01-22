@@ -33,6 +33,9 @@ static const NSInteger kNotSelectedTag = -1;
     self.subjectSelectedIndex = kNotSelectedTag;
     self.item = [StageSubjectDataManager dataForStageAndSubject];
     [self setupUI];
+    if (![UserManager sharedInstance].userModel.isSankeUser) {
+        [self showToast:@"您不是三科用户,将转为游客登录"];
+    }
 }
 
 - (void)didReceiveMemoryWarning {

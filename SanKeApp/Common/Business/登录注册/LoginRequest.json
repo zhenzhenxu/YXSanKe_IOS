@@ -6,7 +6,7 @@
     "info":{
         "userInfo":{
             "activitycount":0,
-            "backgroundimage":"http://s1.jsyxw.cn/zgjiaoyan_static/img/default/background.jpg",
+            "backgroundimage":"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1485061970957&di=3e386558667a88ac30a28266d9d711f2&imgtype=0&src=http%3A%2F%2Fimg1.jiemian.com%2F101%2Foriginal%2F20160110%2F145241146943217100_a580xH.jpg",
             "company":"中国教研网",
             "companyId":0,
             "description":"",
@@ -35,7 +35,7 @@
             "wealth":0
         },
         "token":"dc255cb42ae740f694f2c74df2cbb6f7",
-        "is_taged":0,
+        "is_taged":1,
         "is_sanke":1,
         "is_anonymous":1
     }
