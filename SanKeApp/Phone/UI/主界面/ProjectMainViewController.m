@@ -14,10 +14,13 @@
 #import "ProjectNavRightView.h"
 #import "FilterSelectionView.h"
 #import "ChannelTabRequest.h"
+#import "ChannelTabFilterRequest.h"
+
 extern NSString * const kStageSubjectDidChangeNotification;
 @interface ProjectMainViewController ()
 @property (nonatomic, strong) ChannelTabRequest *tabRequest;
 @property (nonatomic, strong) ProjectContainerView *containerView;
+@property (nonatomic, strong) ChannelTabFilterRequest *selectionrequest;
 @end
 
 @implementation ProjectMainViewController
@@ -73,7 +76,7 @@ extern NSString * const kStageSubjectDidChangeNotification;
     WEAK_SELF
     [rightView setProjectNavButtonLeftBlock:^{
         STRONG_SELF
-        [self showFilterSelectionView];
+        [self requestSelection];
     }];
     [rightView setProjectNavButtonRightBlock:^{
         STRONG_SELF;
@@ -94,6 +97,11 @@ extern NSString * const kStageSubjectDidChangeNotification;
         item.fromType = 0;
         CourseViewController *vc = [[CourseViewController alloc] init];
         vc.videoItem = item;
+        [[vc rac_signalForSelector:@selector(viewWillAppear:)] subscribeNext:^(id x) {
+            NSLog(@"%@", item.catID);
+        } error:^(NSError *error) {
+            
+        }];
         [self addChildViewController:vc];
     }
     self.containerView.childViewControllers = self.childViewControllers;
@@ -134,8 +142,32 @@ extern NSString * const kStageSubjectDidChangeNotification;
             [view layoutIfNeeded];
         }];
     }];
+    [v setCompleteBlock:^(NSString *filterString) {
+        [alert hide];
+    }];
 }
 #pragma mark - request
+- (void)requestSelection{
+    [self.selectionrequest stopRequest];
+    self.selectionrequest = [ChannelTabFilterRequest new];
+    self.selectionrequest.catid = self.containerView.chooseViewController.videoItem.catID;
+    [self startLoading];
+    WEAK_SELF
+    [self.selectionrequest startRequestWithRetClass:[ChannelTabFilterRequestItem class] andCompleteBlock:^(id retItem, NSError *error, BOOL isMock) {
+        STRONG_SELF
+        [self stopLoading];
+        if (error) {
+            return;
+        }
+        if (self.containerView.chooseViewController.selectionView == nil) {
+            self.containerView.chooseViewController.selectionView = [[FilterSelectionView alloc]init];
+        }
+        ChannelTabFilterRequestItem *item = retItem;
+        self.containerView.chooseViewController.selectionView.data = item.data;
+        [self showFilterSelectionView];
+    }];
+}
+    
 - (void)requestForChannelTab {
     UserModel *model = [UserManager sharedInstance].userModel;
     [StageSubjectDataManager fetchStageSubjectWithStageID:model.stageID subjectID:model.subjectID completeBlock:^(FetchStageSubjectRequestItem_stage *stage, FetchStageSubjectRequestItem_subject *subject) {

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		30E70FC01E3482E8001B9BA4 /* ChannelTabFilterRequest.json in Resources */ = {isa = PBXBuildFile; fileRef = 30E70FBF1E3482E8001B9BA4 /* ChannelTabFilterRequest.json */; };
 		4C52696A59114A67B85E0645 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FDFFD28C45A34489A38320DE /* libPods.a */; };
 		7C1809351E25D4A900B71863 /* StageSubjectHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C1809341E25D4A900B71863 /* StageSubjectHeaderView.m */; };
 		7C1809381E25DEBA00B71863 /* StageSubjectCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C1809371E25DEBA00B71863 /* StageSubjectCell.m */; };
@@ -200,6 +201,7 @@
 
 /* Begin PBXFileReference section */
 		2A31F19DD1F3A8E3CF6B9DE0 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+		30E70FBF1E3482E8001B9BA4 /* ChannelTabFilterRequest.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = ChannelTabFilterRequest.json; sourceTree = "<group>"; };
 		7C1809331E25D4A900B71863 /* StageSubjectHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StageSubjectHeaderView.h; sourceTree = "<group>"; };
 		7C1809341E25D4A900B71863 /* StageSubjectHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StageSubjectHeaderView.m; sourceTree = "<group>"; };
 		7C1809361E25DEBA00B71863 /* StageSubjectCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StageSubjectCell.h; sourceTree = "<group>"; };
@@ -946,6 +948,7 @@
 			children = (
 				7C1A5F971E15144800832DED /* json */,
 				7C1A5F8F1E15143F00832DED /* MockConfig.plist */,
+				30E70FBF1E3482E8001B9BA4 /* ChannelTabFilterRequest.json */,
 				7C1A5F901E15143F00832DED /* YXMockManager.h */,
 				7C1A5F911E15143F00832DED /* YXMockManager.m */,
 				7C1A5F921E15143F00832DED /* YXMockParser.h */,
@@ -1545,6 +1548,7 @@
 				7C1A5EDC1E15035100832DED /* Empty.xib in Resources */,
 				E902E6CD1E2C9FD5009441B3 /* stageAndSubject.json in Resources */,
 				923A4E351E2CAE1C001059E2 /* channelTab_mock.json in Resources */,
+				30E70FC01E3482E8001B9BA4 /* ChannelTabFilterRequest.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
