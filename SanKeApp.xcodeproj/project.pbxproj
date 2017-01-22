@@ -7,8 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		05166036300F87931771322D /* libPods-SanKeApp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 95C0F730E14B85E0B6BD8FAF /* libPods-SanKeApp.a */; };
 		30E70FC01E3482E8001B9BA4 /* ChannelTabFilterRequest.json in Resources */ = {isa = PBXBuildFile; fileRef = 30E70FBF1E3482E8001B9BA4 /* ChannelTabFilterRequest.json */; };
-		4C52696A59114A67B85E0645 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FDFFD28C45A34489A38320DE /* libPods.a */; };
 		7C1809351E25D4A900B71863 /* StageSubjectHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C1809341E25D4A900B71863 /* StageSubjectHeaderView.m */; };
 		7C1809381E25DEBA00B71863 /* StageSubjectCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C1809371E25DEBA00B71863 /* StageSubjectCell.m */; };
 		7C1809411E26285B00B71863 /* FilterSelectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C1809401E26285B00B71863 /* FilterSelectionView.m */; };
@@ -200,7 +200,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		2A31F19DD1F3A8E3CF6B9DE0 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+		035C2BB43478E81E220D1287 /* Pods-SanKeApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SanKeApp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SanKeApp/Pods-SanKeApp.debug.xcconfig"; sourceTree = "<group>"; };
 		30E70FBF1E3482E8001B9BA4 /* ChannelTabFilterRequest.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = ChannelTabFilterRequest.json; sourceTree = "<group>"; };
 		7C1809331E25D4A900B71863 /* StageSubjectHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StageSubjectHeaderView.h; sourceTree = "<group>"; };
 		7C1809341E25D4A900B71863 /* StageSubjectHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StageSubjectHeaderView.m; sourceTree = "<group>"; };
@@ -459,6 +459,7 @@
 		7C7841DC1E3214F300755BC0 /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
 		7CC9ADA61E25D12A00A392EA /* StageSubjectSelectViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StageSubjectSelectViewController.h; sourceTree = "<group>"; };
 		7CC9ADA71E25D12A00A392EA /* StageSubjectSelectViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StageSubjectSelectViewController.m; sourceTree = "<group>"; };
+		8CA901E0E3034091D4CACB93 /* Pods-SanKeApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SanKeApp.release.xcconfig"; path = "Pods/Target Support Files/Pods-SanKeApp/Pods-SanKeApp.release.xcconfig"; sourceTree = "<group>"; };
 		923A4E2C1E2C9FF5001059E2 /* ChannelTabRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChannelTabRequest.h; sourceTree = "<group>"; };
 		923A4E2D1E2C9FF5001059E2 /* ChannelTabRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChannelTabRequest.m; sourceTree = "<group>"; };
 		923A4E2F1E2CA4E7001059E2 /* CourseVideoRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CourseVideoRequest.h; sourceTree = "<group>"; };
@@ -497,6 +498,7 @@
 		92E7D1381E28A83F00A34300 /* AloneCourseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AloneCourseViewController.m; sourceTree = "<group>"; };
 		92E7D13B1E28A88600A34300 /* AloneCourseTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AloneCourseTableViewCell.h; sourceTree = "<group>"; };
 		92E7D13C1E28A88600A34300 /* AloneCourseTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AloneCourseTableViewCell.m; sourceTree = "<group>"; };
+		95C0F730E14B85E0B6BD8FAF /* libPods-SanKeApp.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-SanKeApp.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E902E6A61E2BA3BE009441B3 /* MineViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MineViewController.h; path = "../侧边栏/MineViewController.h"; sourceTree = "<group>"; };
 		E902E6A71E2BA3BE009441B3 /* MineViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MineViewController.m; path = "../侧边栏/MineViewController.m"; sourceTree = "<group>"; };
 		E902E6A81E2BA3BE009441B3 /* SideHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SideHeaderView.h; sourceTree = "<group>"; };
@@ -531,8 +533,6 @@
 		E9230C551E30919B00AC6617 /* UpdateStageSubjectRequest.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = UpdateStageSubjectRequest.json; sourceTree = "<group>"; };
 		E9230C591E30BAB400AC6617 /* FetchStageSubjectRequest.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = FetchStageSubjectRequest.json; sourceTree = "<group>"; };
 		E9F4541B1E31B18D00860DC2 /* TouristLoginRequest.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = TouristLoginRequest.json; sourceTree = "<group>"; };
-		F85EF3DA4AEC6DA4B2E1F0AA /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
-		FDFFD28C45A34489A38320DE /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -544,7 +544,7 @@
 				7C7841DB1E3214CB00755BC0 /* CoreMotion.framework in Frameworks */,
 				7C7841D91E3214C400755BC0 /* CoreTelephony.framework in Frameworks */,
 				7C7841D71E3211B500755BC0 /* libTalkingData.a in Frameworks */,
-				4C52696A59114A67B85E0645 /* libPods.a in Frameworks */,
+				05166036300F87931771322D /* libPods-SanKeApp.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -565,13 +565,22 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1F873B0E7DE3812E514DAAA6 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				035C2BB43478E81E220D1287 /* Pods-SanKeApp.debug.xcconfig */,
+				8CA901E0E3034091D4CACB93 /* Pods-SanKeApp.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		3F85DC58A46B1352E7AE59A6 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
 				7C7841DC1E3214F300755BC0 /* AdSupport.framework */,
 				7C7841DA1E3214CB00755BC0 /* CoreMotion.framework */,
 				7C7841D81E3214C400755BC0 /* CoreTelephony.framework */,
-				FDFFD28C45A34489A38320DE /* libPods.a */,
+				95C0F730E14B85E0B6BD8FAF /* libPods-SanKeApp.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -618,8 +627,8 @@
 				7C1A5EBC1E14F08700832DED /* SanKeAppTests */,
 				7C1A5EC71E14F08700832DED /* SanKeAppUITests */,
 				7C1A5EA11E14F08700832DED /* Products */,
-				F408629257CB581950B8FDF3 /* Pods */,
 				3F85DC58A46B1352E7AE59A6 /* Frameworks */,
+				1F873B0E7DE3812E514DAAA6 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -1409,15 +1418,6 @@
 			path = "侧边栏";
 			sourceTree = "<group>";
 		};
-		F408629257CB581950B8FDF3 /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				F85EF3DA4AEC6DA4B2E1F0AA /* Pods.debug.xcconfig */,
-				2A31F19DD1F3A8E3CF6B9DE0 /* Pods.release.xcconfig */,
-			);
-			name = Pods;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -1425,12 +1425,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 7C1A5ECD1E14F08700832DED /* Build configuration list for PBXNativeTarget "SanKeApp" */;
 			buildPhases = (
-				9F42285937217DC38B08D517 /* Check Pods Manifest.lock */,
+				6D50BC479DF95BA08497628E /* [CP] Check Pods Manifest.lock */,
 				7C1A5E9C1E14F08700832DED /* Sources */,
 				7C1A5E9D1E14F08700832DED /* Frameworks */,
 				7C1A5E9E1E14F08700832DED /* Resources */,
-				4AD00247865C32ABF1EA2F37 /* Embed Pods Frameworks */,
-				F28517E313E59A1B7A9217BD /* Copy Pods Resources */,
+				660C52640FDF5A095D25BDF2 /* [CP] Embed Pods Frameworks */,
+				2F2F20BACCAAAC24EC84237F /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -1569,49 +1569,49 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		4AD00247865C32ABF1EA2F37 /* Embed Pods Frameworks */ = {
+		2F2F20BACCAAAC24EC84237F /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Embed Pods Frameworks";
+			name = "[CP] Copy Pods Resources";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-frameworks.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-SanKeApp/Pods-SanKeApp-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		9F42285937217DC38B08D517 /* Check Pods Manifest.lock */ = {
+		660C52640FDF5A095D25BDF2 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Check Pods Manifest.lock";
+			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-SanKeApp/Pods-SanKeApp-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		F28517E313E59A1B7A9217BD /* Copy Pods Resources */ = {
+		6D50BC479DF95BA08497628E /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Copy Pods Resources";
+			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -1895,7 +1895,7 @@
 		};
 		7C1A5ECE1E14F08700832DED /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = F85EF3DA4AEC6DA4B2E1F0AA /* Pods.debug.xcconfig */;
+			baseConfigurationReference = 035C2BB43478E81E220D1287 /* Pods-SanKeApp.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = P8ZS8UUN27;
@@ -1916,7 +1916,7 @@
 		};
 		7C1A5ECF1E14F08700832DED /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 2A31F19DD1F3A8E3CF6B9DE0 /* Pods.release.xcconfig */;
+			baseConfigurationReference = 8CA901E0E3034091D4CACB93 /* Pods-SanKeApp.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = "";

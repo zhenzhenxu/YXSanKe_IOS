@@ -1,3 +1,4 @@
+target :SanKeApp do
 platform :ios, '8.0'
 pod 'CocoaLumberjack', '~> 2.0'
 pod 'ReactiveCocoa', '~> 2.0'
@@ -37,6 +38,6 @@ pod 'IQKeyboardManager'
 pod 'SocketRocket'
 pod 'SCRecorder', '~> 2.6.1'
 pod 'Qiniu', '~> 7.0'
-pod 'Reveal-iOS-SDK', :configurations => ['Debug']
 
 inhibit_all_warnings!
+end
