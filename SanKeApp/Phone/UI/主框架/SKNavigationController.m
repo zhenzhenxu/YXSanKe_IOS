@@ -44,7 +44,8 @@
     [YXDrawerController hideDrawer];
     if (self.viewControllers.count == 1) {
         viewController.hidesBottomBarWhenPushed = YES;
-    }    
+    }
+    self.topViewController.view.userInteractionEnabled = NO;
     [super pushViewController:viewController animated:YES];
 }
 
