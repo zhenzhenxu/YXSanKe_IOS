@@ -17,7 +17,8 @@
 @property (nonatomic ,copy) NSString<Optional> *thanks;
 @property (nonatomic ,copy) NSString<Optional> *icon;
 @property (nonatomic ,copy) NSString<Optional> *videos;
-@property (nonatomic ,copy) NSString<Optional> *wealth;
+@property (nonatomic ,copy) NSString<Optional> *timeWatched;
+@property (nonatomic ,copy) NSString<Optional> *totalTime;
 
 @end
 @interface CourseVideoRequestItem_Data : JSONModel

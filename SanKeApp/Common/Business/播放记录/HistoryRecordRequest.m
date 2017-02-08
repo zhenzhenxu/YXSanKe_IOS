@@ -19,7 +19,7 @@
 }
 - (instancetype)init {
     if (self = [super init]) {
-        
+        self.urlHead = [[SKConfigManager sharedInstance].server stringByAppendingString:@"app/sanke/user/history_record"];
     }
     return self;
 }

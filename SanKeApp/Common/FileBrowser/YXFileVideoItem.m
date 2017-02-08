@@ -49,7 +49,7 @@
         vc.favorWrapper = wrapper;
     }
     vc.videoUrl = self.url;
-    
+    vc.preProgress = self.record.floatValue;
     YXPlayerDefinition *d0 = [[YXPlayerDefinition alloc] init];
     d0.identifier = @"流畅";
     d0.url = self.lurl;

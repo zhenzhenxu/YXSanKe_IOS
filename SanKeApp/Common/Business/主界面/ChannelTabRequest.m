@@ -16,7 +16,7 @@
 @implementation ChannelTabRequest
 - (instancetype)init {
     if (self = [super init]) {
-       self.urlHead = [[SKConfigManager sharedInstance].server stringByAppendingString:@""]; 
+       self.urlHead = [[SKConfigManager sharedInstance].server stringByAppendingString:@"app/sanke/pd_tab"]; 
     }
     return self;
 }

@@ -68,7 +68,7 @@
     videoItem.name = history.title;
     videoItem.url = history.videos;
     videoItem.resourceID = history.videoID;
-    videoItem.record = history.timeWatched;
+    videoItem.record = [NSString stringWithFormat:@"%f", history.timeWatched.floatValue / history.totalTime.floatValue];
     videoItem.baseViewController = self;
     [videoItem browseFile];
 }

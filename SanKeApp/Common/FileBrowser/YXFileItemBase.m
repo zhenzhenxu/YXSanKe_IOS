@@ -32,6 +32,14 @@
     
 }
 
+//- (void)setRecord:(NSString *)record{
+//    _record = record;
+//    NSArray *times = [record componentsSeparatedByString:@":"];
+//    if (times.count >= 2) {
+//        
+//    }
+//}
+
 - (void)checkNetwork {
     Reachability *r = [Reachability reachabilityForInternetConnection];
     if (![r isReachable]) {
