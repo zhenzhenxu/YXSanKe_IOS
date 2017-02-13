@@ -89,7 +89,7 @@
                 return;
             }
 //            [self updateStageSubjectInfo];//接入真实数据后用
-            [self updateMockStageSubjectInfo];
+            [self updateMockStageSubjectInfo];//mock数据
         }];
     }else if ([self.userInfoPickerView.pickerView.dataSource isKindOfClass:[UserAreaInfoPicker class]]) {
         [self.areaInfoPicker updateAreaWithCompleteBlock:^(NSError *error) {
@@ -99,7 +99,7 @@
                 return;
             }
 //            [self updateAreaInfo];//待接入真实数据后使用
-            [self updateMockAreaInfo];
+            [self updateMockAreaInfo];//mock数据
         }];
     }
 }

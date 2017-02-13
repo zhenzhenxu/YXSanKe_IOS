@@ -28,7 +28,7 @@
     self.clipsToBounds = YES;
     
     self.clearButton = [[UIButton alloc]init];
-    self.clearButton.backgroundColor = [UIColor redColor];
+    [self.clearButton setBackgroundImage:[UIImage imageNamed:@"删除"] forState:UIControlStateNormal];
     self.clearButton.hidden = YES;
     [self.clearButton addTarget:self action:@selector(clearAction) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:self.clearButton];

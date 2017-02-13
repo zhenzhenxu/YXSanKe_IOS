@@ -12,6 +12,9 @@
 
 + (MineUserModel *)mineUserModelFromRawModel:(UserModel *)model {
     
+    if (!model) {
+        return nil;
+    }
     MineUserModel *mineUserModel = [[MineUserModel alloc]init];
     mineUserModel.backgroundImageUrl = model.backgroundImageUrl;
     mineUserModel.name = model.name;

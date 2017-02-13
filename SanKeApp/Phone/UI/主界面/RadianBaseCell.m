@@ -38,7 +38,7 @@
     [self.contentView addSubview:self.bottomView];
     
     self.lineView = [[UIView alloc] init];
-    self.lineView.backgroundColor = [UIColor colorWithHexString:@"fda89d"];
+    self.lineView.backgroundColor = [UIColor colorWithHexString:@"e6e6e6"];
     [self.contentView addSubview:self.lineView];
 }
 
@@ -65,8 +65,8 @@
     }];
     
     [self.lineView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.contentView.mas_left);
-        make.right.equalTo(self.contentView.mas_right);
+        make.left.equalTo(self.contentView.mas_left).offset(10);
+        make.right.equalTo(self.contentView.mas_right).offset(-10);
         make.bottom.equalTo(self.contentView.mas_bottom);
         make.height.mas_offset(1.0f);
     }];

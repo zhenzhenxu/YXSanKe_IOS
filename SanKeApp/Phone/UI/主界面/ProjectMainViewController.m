@@ -16,7 +16,6 @@
 #import "ChannelTabRequest.h"
 #import "ChannelTabFilterRequest.h"
 
-extern NSString * const kStageSubjectDidChangeNotification;
 @interface ProjectMainViewController ()
 @property (nonatomic, strong) ChannelTabRequest *tabRequest;
 @property (nonatomic, strong) ProjectContainerView *containerView;
@@ -57,17 +56,12 @@ extern NSString * const kStageSubjectDidChangeNotification;
     button.frame = CGRectMake(0, 0, 32.0f, 32.0f);
     NSString *icon = [UserManager sharedInstance].userModel.portraitUrl;
     [button sd_setBackgroundImageWithURL:[NSURL URLWithString:icon] forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"大头像"]];
-    [[[NSNotificationCenter defaultCenter]rac_addObserverForName:@"" object:nil]subscribeNext:^(id x) {
-        [button sd_setBackgroundImageWithURL:[NSURL URLWithString:@""] forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"默认用户头像"]];
-    }];
-    
-    [[[NSNotificationCenter defaultCenter]rac_addObserverForName:@"" object:nil]subscribeNext:^(id x) {
-        [button sd_setBackgroundImageWithURL:[NSURL URLWithString:@""] forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"默认用户头像"]];
-    }];
+//    [[[NSNotificationCenter defaultCenter]rac_addObserverForName:@"成功修改头像的通知" object:nil]subscribeNext:^(id x) {
+//        [button sd_setBackgroundImageWithURL:[NSURL URLWithString:@""] forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"默认用户头像"]];
+//    }];//现在用户头像不能修改,先注释掉,待后续修改头像的时候再加上
     [[button rac_signalForControlEvents:UIControlEventTouchUpInside]subscribeNext:^(id x) {
         [YXDrawerController showDrawer];
     }];
-    button.backgroundColor = [UIColor redColor];
     button.layer.cornerRadius = 16;
     button.clipsToBounds = YES;
     [self setupLeftWithCustomView:button];

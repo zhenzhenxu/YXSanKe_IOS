@@ -30,7 +30,7 @@
     
     [GlobalUtils setupCore];
     [UpgradeManager checkForUpgrade];
-//    [StageSubjectDataManager updateToLatestData];
+//    [StageSubjectDataManager updateToLatestData];//当前版本的学科学段从本地取,不更新
     [self registerNotifications];
     
     self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];

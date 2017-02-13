@@ -34,7 +34,7 @@ static const NSInteger kNotSelectedTag = -1;
     self.item = [StageSubjectDataManager dataForStageAndSubject];
     [self setupUI];
     if (![UserManager sharedInstance].userModel.isSankeUser) {
-        [self showToast:@"您所在的学科正在搭建"];
+        [self showToast:@"您所在的学科频道正在搭建中!"];
     }
 }
 

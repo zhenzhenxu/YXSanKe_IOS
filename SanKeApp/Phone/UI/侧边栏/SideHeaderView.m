@@ -33,7 +33,6 @@ const CGFloat kSideLeftDrawerWidth = 600.0f;
 - (void)setupUI {
     self.iconImageView = [[UIImageView alloc] init];
     self.iconImageView.image = [UIImage imageNamed:@"大头像"];
-    self.iconImageView.backgroundColor = [UIColor redColor];
     self.iconImageView.layer.cornerRadius = 20.0f;
     self.iconImageView.layer.masksToBounds = YES;
     

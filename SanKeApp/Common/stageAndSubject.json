@@ -131,10 +131,10 @@
                  }
                  ],
         "category":{
-            "name":"",
+            "name":"学段",
             "id":"",
             "sub":{
-                "name":"",
+                "name":"学科",
                 "id":"",
                 "sub":{
                     "name":"",
