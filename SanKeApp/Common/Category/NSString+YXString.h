@@ -10,6 +10,8 @@
 
 @interface NSString (YXString)
 
+@property (nonatomic, weak, readonly) NSDictionary *dictionary;
+
 // 是否为有效字符串
 - (BOOL)yx_isValidString;
 
@@ -44,31 +46,4 @@
 // 加密
 - (NSString *)yx_md5;
 
-@end
-
-
-@interface NSString (YXFormatDate)
-/*
- /   得到“2016-01-08”格式的时间字符串。
- */
-+ (NSString *)timeStringWithDate:(NSDate *)date;
-
-/*
- /   得到“203M”格式字符串。
- */
-+ (NSString *)sizeStringWithFileSize:(unsigned long long)fileSize;
-
-/*
- /   得到“00:00”格式的时间字符串。time是秒数。
- */
-+ (NSString *)stringWithFormatFloat:(CGFloat)time;
-
-/**
- *  格式化时间显示(动态 热点使用)
- *
- *  @param time 时间戳 单位毫秒
- *
- *  @return 需要显示的时间文本
- */
-+ (NSString *)timeStringWithTimeStamp:(NSString *)time;
 @end

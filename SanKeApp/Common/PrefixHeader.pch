@@ -63,6 +63,9 @@ extern int ddLogLevel;
 #import "UIView+YXAddtion.h"
 #import "UIImage+GIF.h"
 #import "NSObject+BackgroundTask.h"
+#import "NSDictionary+Dictionarys.h"
+#import "NSString+YXString.h"
+#import "NSMutableDictionary+YXDictionarys.h"
 
 #pragma  - Other
 #import "TalkingData.h"
