@@ -170,10 +170,10 @@ static const NSInteger kNotSelectedTag = -1;
         StageSubjectHeaderView *headerView = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"StageSubjectHeaderView" forIndexPath:indexPath];
         if (indexPath.section == 0) {
             headerView.seperatorHidden = YES;
-            headerView.title = self.item.data.category.name;
+            headerView.title = self.item.category.name;
         }else {
             headerView.seperatorHidden = NO;
-            headerView.title = self.item.data.category.subCategory.name;
+            headerView.title = self.item.category.subCategory.name;
         }
         return headerView;
     }

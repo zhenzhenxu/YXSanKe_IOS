@@ -32,6 +32,8 @@ NSString * const kStageSubjectDidChangeNotification = @"kStageSubjectDidChangeNo
     MineDataManager *manager = [MineDataManager sharedInstance];
     [manager.stageSubjectRequest stopRequest];
     manager.stageSubjectRequest = [[UpdateStageSubjectRequest alloc]init];
+    manager.stageSubjectRequest.stage = stageID;
+    manager.stageSubjectRequest.subject = subjectID;
     WEAK_SELF
     [manager.stageSubjectRequest startRequestWithRetClass:[HttpBaseRequestItem class] andCompleteBlock:^(id retItem, NSError *error, BOOL isMock) {
         STRONG_SELF
@@ -55,6 +57,7 @@ NSString * const kStageSubjectDidChangeNotification = @"kStageSubjectDidChangeNo
     MineDataManager *manager = [MineDataManager sharedInstance];
     [manager.areaRequest stopRequest];
     manager.areaRequest = [[UpdateAreaRequest alloc]init];
+    manager.areaRequest.area = areaID;
     WEAK_SELF
     [manager.areaRequest startRequestWithRetClass:[HttpBaseRequestItem class] andCompleteBlock:^(id retItem, NSError *error, BOOL isMock) {
         STRONG_SELF

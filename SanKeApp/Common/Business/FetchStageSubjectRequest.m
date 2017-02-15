@@ -20,7 +20,7 @@
 @end
 @implementation FetchStageSubjectRequestItem_category
 + (JSONKeyMapper *)keyMapper{
-    return [[JSONKeyMapper alloc] initWithDictionary:@{@"id":@"categoryID",@"sub":@"subCategory"}];
+    return [[JSONKeyMapper alloc] initWithDictionary:@{@"sub":@"subCategory"}];
 }
 @end
 @implementation FetchStageSubjectRequestItem_data

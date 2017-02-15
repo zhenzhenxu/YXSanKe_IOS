@@ -84,28 +84,27 @@
     if ([self.userInfoPickerView.pickerView.dataSource isKindOfClass:[UserSubjectStageInfoPicker class]]) {
         [self.subjectStageInfoPicker updateStageWithCompleteBlock:^(NSError *error) {
             STRONG_SELF
-            DDLogDebug(@"最终结果学科%@-学段%@",self.userModel.stage.name,self.userModel.subject.name);
             if (error) {
                 return;
             }
-//            [self updateStageSubjectInfo];//接入真实数据后用
-            [self updateMockStageSubjectInfo];//mock数据
+            [self updateStageSubjectInfo];//接入真实数据后用
+//            [self updateMockStageSubjectInfo];//mock数据
         }];
     }else if ([self.userInfoPickerView.pickerView.dataSource isKindOfClass:[UserAreaInfoPicker class]]) {
         [self.areaInfoPicker updateAreaWithCompleteBlock:^(NSError *error) {
             STRONG_SELF
-            DDLogDebug(@"最终结果地区:%@-%@-%@",self.userModel.province.name,self.userModel.city.name,self.userModel.district.name);
             if (error) {
                 return;
             }
-//            [self updateAreaInfo];//待接入真实数据后使用
-            [self updateMockAreaInfo];//mock数据
+            [self updateAreaInfo];//待接入真实数据后使用
+//            [self updateMockAreaInfo];//mock数据
         }];
     }
 }
 
 - (void)updateStageSubjectInfo {
     self.userModel = [MineUserModel mineUserModelFromRawModel:[UserManager sharedInstance].userModel];
+     DDLogDebug(@"最终结果学科%@-学段%@",self.userModel.stage.name,self.userModel.subject.name);
     NSIndexPath *stageIndexPath = [NSIndexPath indexPathForRow:1 inSection:0];
     NSIndexPath *subjectIndexPath = [NSIndexPath indexPathForRow:2 inSection:0];
     [self.tableView reloadRowsAtIndexPaths:@[stageIndexPath,subjectIndexPath] withRowAnimation:UITableViewRowAnimationNone];
@@ -113,6 +112,7 @@
 
 - (void)updateAreaInfo {
     self.userModel = [MineUserModel mineUserModelFromRawModel:[UserManager sharedInstance].userModel];
+    DDLogDebug(@"最终结果地区:%@-%@-%@",self.userModel.province.name,self.userModel.city.name,self.userModel.district.name);
     NSIndexPath *areaIndexPath = [NSIndexPath indexPathForRow:3 inSection:0];
     [self.tableView reloadRowsAtIndexPaths:@[areaIndexPath] withRowAnimation:UITableViewRowAnimationNone];
 

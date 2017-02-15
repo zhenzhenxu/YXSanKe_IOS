@@ -24,18 +24,17 @@
 @end
 
 @interface FetchStageSubjectRequestItem_category : JSONModel
-@property (nonatomic, strong) NSString *categoryID;
 @property (nonatomic, strong) NSString *name;
 @property (nonatomic, strong) FetchStageSubjectRequestItem_category<Optional> *subCategory;
 @end
 
 @interface FetchStageSubjectRequestItem_data : JSONModel
 @property (nonatomic, strong) NSArray<FetchStageSubjectRequestItem_stage,Optional> *stages;
-@property (nonatomic, strong) FetchStageSubjectRequestItem_category<Optional> *category;
 @end
 
 @interface FetchStageSubjectRequestItem : HttpBaseRequestItem
 @property (nonatomic, strong) FetchStageSubjectRequestItem_data<Optional> *data;
+@property (nonatomic, strong) FetchStageSubjectRequestItem_category<Optional> *category;
 @end
 
 @interface FetchStageSubjectRequest : YXGetRequest
