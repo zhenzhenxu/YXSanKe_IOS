@@ -52,7 +52,7 @@ static const NSUInteger kTagBase = 10086;
     _childViewControllers = childViewControllers;
     [_childViewControllers enumerateObjectsUsingBlock:^(CourseViewController *obj, NSUInteger idx, BOOL * _Nonnull stop) {
         UIButton *b = [self buttonWithTitle:obj.videoItem.name];
-        CGFloat btnWidth = kScreenWidth / 4.0f;
+        CGFloat btnWidth = b.intrinsicContentSize.width + 20;
         b.frame = CGRectMake(btnWidth*idx, 0, btnWidth, self.topScrollView.frame.size.height);
         b.tag = kTagBase + idx;
         [self.topScrollView addSubview:b];

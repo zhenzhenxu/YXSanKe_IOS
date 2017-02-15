@@ -10,8 +10,8 @@
 @protocol ChannelTabRequestItem_Data_Category
 @end
 @interface ChannelTabRequestItem_Data_Category : JSONModel
-@property (nonatomic, strong) NSString *catname;
-@property (nonatomic, strong) NSString *catid;
+@property (nonatomic, strong) NSString *cateName;
+@property (nonatomic, strong) NSString *catId;
 @end
 
 @interface ChannelTabRequestItem_Data : JSONModel

@@ -87,8 +87,8 @@
     }
     for (ChannelTabRequestItem_Data_Category *cat in categorys) {
         CourseVideoItem *item = [[CourseVideoItem alloc] init];
-        item.name = [NSString stringWithFormat:@"%@",cat.catname];
-        item.catID = cat.catid;
+        item.name = [NSString stringWithFormat:@"%@",cat.cateName];
+        item.catID = cat.catId;
         item.fromType = 0;
         CourseViewController *vc = [[CourseViewController alloc] init];
         vc.videoItem = item;
