@@ -134,17 +134,23 @@
         }else {
             if (data.error.code == ASIConnectionFailureErrorType || data.error.code == ASIRequestTimedOutErrorType) {//网络错误/请求超时
                 [view addSubview:self.errorView];
-                self.errorView.frame = view.bounds;
+                [self.errorView mas_makeConstraints:^(MASConstraintMaker *make) {
+                    make.edges.equalTo(view);
+                }];
             }else {
                 [view addSubview:self.dataErrorView];
-                self.dataErrorView.frame = view.bounds;
+                [self.dataErrorView mas_makeConstraints:^(MASConstraintMaker *make) {
+                    make.edges.equalTo(view);
+                }];
             }
         }
         handled = YES;
     }else {
         if (!data.requestDataExist) {
             [view addSubview:self.emptyView];
-            self.emptyView.frame = view.bounds;
+            [self.emptyView mas_makeConstraints:^(MASConstraintMaker *make) {
+                make.edges.equalTo(view);
+            }];
             handled = YES;
         }
     }

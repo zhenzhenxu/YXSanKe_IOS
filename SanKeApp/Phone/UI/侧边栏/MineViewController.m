@@ -85,6 +85,7 @@
         [self.subjectStageInfoPicker updateStageWithCompleteBlock:^(NSError *error) {
             STRONG_SELF
             if (error) {
+                [self showToast:error.localizedDescription];
                 return;
             }
             [self updateStageSubjectInfo];//接入真实数据后用
@@ -94,6 +95,7 @@
         [self.areaInfoPicker updateAreaWithCompleteBlock:^(NSError *error) {
             STRONG_SELF
             if (error) {
+                [self showToast:error.localizedDescription];
                 return;
             }
             [self updateAreaInfo];//待接入真实数据后使用

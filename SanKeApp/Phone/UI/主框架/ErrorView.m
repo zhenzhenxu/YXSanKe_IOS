@@ -25,6 +25,7 @@
 }
 
 - (void)setupUI {
+    self.backgroundColor = [UIColor whiteColor];
     self.iconView = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"哭脸"]];
     
     self.retryLabel = [[UILabel alloc]init];
