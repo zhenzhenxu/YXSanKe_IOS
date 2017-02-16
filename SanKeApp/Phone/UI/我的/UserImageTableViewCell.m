@@ -7,6 +7,7 @@
 //
 
 #import "UserImageTableViewCell.h"
+#import "MineUserModel.h"
 
 @interface UserImageTableViewCell ()
 @property (nonatomic, strong) UIImageView *backgroundImageView;
@@ -61,7 +62,7 @@
     }];
 }
 
-- (void)setModel:(UserModel *)model {
+- (void)setModel:(MineUserModel *)model {
     _model = model;
     [self.iconImageView sd_setImageWithURL:[NSURL URLWithString:model.portraitUrl] placeholderImage:[UIImage imageNamed:@"大头像"]];
     [self.backgroundImageView sd_setImageWithURL:[NSURL URLWithString:model.portraitUrl] placeholderImage:[UIImage imageNamed:@"大头像"]];

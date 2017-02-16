@@ -185,14 +185,27 @@
 
 - (void)updateAreaWithCompleteBlock:(void (^)(NSError *))completeBlock {
     DDLogDebug(@"要选择地区:%@-%@-%@",self.selectedProvince.name,self.selectedCity.name,self.selectedCounty.name);
-    NSString *area = [NSString stringWithFormat:@"%@,%@,%@",self.selectedProvince.areaID,self.selectedCity.areaID,self.selectedCounty.areaID];
-    [MineDataManager updateArea:area completeBlock:^(NSError *error) {
+    [MineDataManager updateArea:[self configAreaID] completeBlock:^(NSError *error) {
         if (error) {
             BLOCK_EXEC(completeBlock,error);
             return;
         }
         BLOCK_EXEC(completeBlock,nil);
     }];
+}
+
+-(NSString *)configAreaID {
+    NSString *areaID = [NSString string];
+    if (!isEmpty(self.selectedProvince.areaID)) {
+        areaID = self.selectedProvince.areaID;
+        if (!isEmpty(self.selectedCity.areaID)) {
+            areaID = [NSString stringWithFormat:@"%@,%@",areaID,self.selectedCity.areaID];
+            if (!isEmpty(self.selectedCounty.areaID)) {
+                areaID = [NSString stringWithFormat:@"%@,%@",areaID,self.selectedCounty.areaID];
+            }
+        }
+    }
+    return areaID;
 }
 
 - (UserAreaSelectedInfoItem *)selectedInfoItem {

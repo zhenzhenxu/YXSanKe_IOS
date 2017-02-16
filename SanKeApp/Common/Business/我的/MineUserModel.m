@@ -17,7 +17,7 @@
     }
     MineUserModel *mineUserModel = [[MineUserModel alloc]init];
     mineUserModel.backgroundImageUrl = model.backgroundImageUrl;
-    mineUserModel.name = model.name;
+    mineUserModel.name = model.truename;
     mineUserModel.portraitUrl = model.portraitUrl;
     
     WEAK_SELF

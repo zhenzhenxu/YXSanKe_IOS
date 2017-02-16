@@ -88,7 +88,7 @@ const CGFloat kSideLeftDrawerWidth = 600.0f;
 
 - (void)setModel:(UserModel *)model {
     _model = model;
-    self.nameLabel.text = model.name;
+    self.nameLabel.text = model.truename;
     [self.iconImageView sd_setImageWithURL:[NSURL URLWithString:model.portraitUrl] placeholderImage:[UIImage imageNamed:@"大头像"]];
 }
 @end
