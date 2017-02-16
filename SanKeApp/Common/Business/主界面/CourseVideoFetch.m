@@ -15,11 +15,11 @@
 - (void)startWithBlock:(void (^)(int, NSArray *, NSError *))aCompleteBlock {
     [self.videoRequest stopRequest];
     self.videoRequest = [[CourseVideoRequest alloc] init];
-    self.videoRequest.filterID = self.filterID;
+    self.videoRequest.filterID = self.filterID.length? self.filterID: @"0,0,0";
     self.videoRequest.catID = self.catID;
     self.videoRequest.fromType = self.fromType;
     if (self.fromType == 0) {
-        self.videoRequest.filterID = nil;
+        self.videoRequest.filterID = @"0,0,0";
     }
     self.videoRequest.pageSize = self.pageSize;
     self.videoRequest.lastID = self.lastID;

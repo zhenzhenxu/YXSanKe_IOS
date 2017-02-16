@@ -8,6 +8,9 @@
 
 #import "CourseVideoRequest.h"
 @implementation CourseVideoRequestItem_Data_Elements
++ (JSONKeyMapper *)keyMapper {
+    return [[JSONKeyMapper alloc] initWithDictionary:@{@"description":@"desc"}];
+}
 @end
 @implementation CourseVideoRequestItem_Data
 @end
@@ -22,7 +25,7 @@
     return [[JSONKeyMapper alloc] initWithDictionary:@{@"filter_id":@"filterID",
                                                        @"last_id":@"lastID",
                                                        @"catid":@"catID",
-                                                       @"fromType":@"fromType",
+                                                       @"from_type":@"fromType",
                                                        @"last_id":@"lastID",
                                                        @"page_size":@"pageSize"}];
 }

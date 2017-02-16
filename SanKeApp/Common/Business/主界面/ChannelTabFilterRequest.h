@@ -17,7 +17,7 @@
 @end
 
 @interface ChannelTabFilterRequestItem_category : JSONModel
-@property (nonatomic, strong) NSString *categoryID;
+//@property (nonatomic, strong) NSString *categoryID;
 @property (nonatomic, strong) NSString *name;
 @property (nonatomic, strong) ChannelTabFilterRequestItem_category<Optional> *subCategory;
 @end

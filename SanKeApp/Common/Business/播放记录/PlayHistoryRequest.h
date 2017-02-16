@@ -16,7 +16,7 @@
 @property (nonatomic, copy) NSString<Optional> *thumb;
 @property (nonatomic, copy) NSString<Optional> *videos;
 @property (nonatomic, copy) NSString<Optional> *title;
-@property (nonatomic, copy) NSString<Optional> *timeWatched;
+@property (nonatomic, copy) NSString<Optional> *watchRecord;
 @property (nonatomic, copy) NSString<Optional> *totalTime;
 @end
 @interface PlayHistoryRequestItem_Data : JSONModel

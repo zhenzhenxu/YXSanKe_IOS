@@ -78,7 +78,7 @@
     [attString addAttribute:NSParagraphStyleAttributeName value:paragraphStyle range:NSMakeRange(0, _history.title.length)];
     self.contentLabel.attributedText = attString;
     self.allTimeLabel.text = [self formatShowTime:_history.totalTime];
-    self.playTimeLabel.text = [NSString stringWithFormat:@"已观看%0.1f%%",_history.timeWatched.doubleValue/_history.totalTime.doubleValue * 100];
+    self.playTimeLabel.text = [NSString stringWithFormat:@"已观看%0.1f%%",_history.watchRecord.doubleValue/_history.totalTime.doubleValue * 100];
     [self.posterImagView sd_setImageWithURL:[NSURL URLWithString:_history.thumb] placeholderImage:[UIImage imageNamed:@""]];
 }
 - (NSString *)formatShowTime:(NSString *)time {

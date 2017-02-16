@@ -47,6 +47,7 @@
     UIView *footerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, 10.0f)];
     footerView.backgroundColor = [UIColor colorWithHexString:@"e6e6e6"];
     self.tableView.tableFooterView = footerView;
+    self.selectionView = [FilterSelectionView new];
     WEAK_SELF
     [self.selectionView setCompleteBlock:^(NSString *filterId) {
         STRONG_SELF

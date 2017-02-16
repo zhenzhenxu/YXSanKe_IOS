@@ -60,6 +60,7 @@
     }];
     
     self.emptyView = [[EmptyView alloc]init];
+    self.emptyView.backgroundColor = [UIColor whiteColor];
     self.errorView = [[ErrorView alloc]init];
     @weakify(self);
     [self.errorView setRetryBlock:^{
@@ -123,6 +124,8 @@
         data.localDataExist = self.dataArray.count != 0;
         data.error = error;
         if ([self handleRequestData:data inView:self.contentView]) {
+            [self.dataArray removeAllObjects];
+            [self.tableView reloadData];
             return;
         }
         [self->_header setLastUpdateTime:[NSDate date]];

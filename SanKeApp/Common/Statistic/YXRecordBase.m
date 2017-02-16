@@ -51,7 +51,7 @@
         self.ip            = @"";
         self.url           = @"";
         self.resID         = @"";
-        self.appkey        = @"20001";
+        self.appkey        = @"20002";
     }
     return self;
 }

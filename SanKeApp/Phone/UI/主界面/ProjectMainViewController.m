@@ -92,20 +92,17 @@
         item.fromType = 0;
         CourseViewController *vc = [[CourseViewController alloc] init];
         vc.videoItem = item;
-        [[vc rac_signalForSelector:@selector(viewWillAppear:)] subscribeNext:^(id x) {
-            NSLog(@"%@", item.catID);
-        } error:^(NSError *error) {
-            
-        }];
+//        [[vc rac_signalForSelector:@selector(viewWillAppear:)] subscribeNext:^(id x) {
+//            NSLog(@"%@", item.catID);
+//        } error:^(NSError *error) {
+//            
+//        }];
         [self addChildViewController:vc];
     }
     self.containerView.childViewControllers = self.childViewControllers;
 }
 - (void)showFilterSelectionView {
     FilterSelectionView *v = self.containerView.chooseViewController.selectionView;
-    if (v == nil) {
-        v = [[FilterSelectionView alloc]init];
-    }
     AlertView *alert = [[AlertView alloc]init];
     alert.hideWhenMaskClicked = YES;
     alert.contentView = v;
@@ -137,8 +134,10 @@
             [view layoutIfNeeded];
         }];
     }];
+    void(^completeBlock)(NSString *filterString) = v.completeBlock;
     [v setCompleteBlock:^(NSString *filterString) {
         [alert hide];
+        completeBlock(filterString);
     }];
 }
 #pragma mark - request
@@ -153,9 +152,6 @@
         [self stopLoading];
         if (error) {
             return;
-        }
-        if (self.containerView.chooseViewController.selectionView == nil) {
-            self.containerView.chooseViewController.selectionView = [[FilterSelectionView alloc]init];
         }
         ChannelTabFilterRequestItem *item = retItem;
         self.containerView.chooseViewController.selectionView.data = item.data;
