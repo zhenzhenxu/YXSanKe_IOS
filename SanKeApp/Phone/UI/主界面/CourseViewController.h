@@ -21,4 +21,6 @@
 @property (nonatomic, strong) CourseVideoItem *videoItem;
 @property (nonatomic, strong) FilterSelectionView *selectionView;
 @property (nonatomic, strong) ProjectNavRightView *projectNavRightView;
+
+- (void)showFilterSelectionView;
 @end

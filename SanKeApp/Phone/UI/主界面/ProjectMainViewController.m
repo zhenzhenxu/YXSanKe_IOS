@@ -82,7 +82,7 @@
     WEAK_SELF
     [rightView setProjectNavButtonLeftBlock:^{
         STRONG_SELF
-        [self requestSelection];
+        [self.containerView.chooseViewController showFilterSelectionView];
     }];
     [rightView setProjectNavButtonRightBlock:^{
         STRONG_SELF;
@@ -108,65 +108,8 @@
     }
     self.containerView.childViewControllers = self.childViewControllers;
 }
-- (void)showFilterSelectionView {
-    FilterSelectionView *v = self.containerView.chooseViewController.selectionView;
-    AlertView *alert = [[AlertView alloc]init];
-    alert.hideWhenMaskClicked = YES;
-    alert.contentView = v;
-    [alert setHideBlock:^(AlertView *view) {
-        [UIView animateWithDuration:0.3 animations:^{
-            [v mas_remakeConstraints:^(MASConstraintMaker *make) {
-                make.left.mas_equalTo(view.mas_right);
-                make.top.bottom.mas_equalTo(0);
-                make.width.mas_equalTo([UIScreen mainScreen].bounds.size.width*300/375);
-            }];
-            [view layoutIfNeeded];
-        } completion:^(BOOL finished) {
-            [view removeFromSuperview];
-        }];
-    }];
-    [alert showWithLayout:^(AlertView *view) {
-        [v mas_remakeConstraints:^(MASConstraintMaker *make) {
-            make.left.mas_equalTo(view.mas_right);
-            make.top.bottom.mas_equalTo(0);
-            make.width.mas_equalTo([UIScreen mainScreen].bounds.size.width*300/375);
-        }];
-        [view layoutIfNeeded];
-        [UIView animateWithDuration:0.3 animations:^{
-            [v mas_remakeConstraints:^(MASConstraintMaker *make) {
-                make.right.mas_equalTo(view.mas_right);
-                make.top.bottom.mas_equalTo(0);
-                make.width.mas_equalTo([UIScreen mainScreen].bounds.size.width*300/375);
-            }];
-            [view layoutIfNeeded];
-        }];
-    }];
-    void(^completeBlock)(NSString *filterString) = v.completeBlock;
-    [v setCompleteBlock:^(NSString *filterString) {
-        [alert hide];
-        completeBlock(filterString);
-    }];
-}
+
 #pragma mark - request
-- (void)requestSelection{
-    [self.selectionrequest stopRequest];
-    self.selectionrequest = [ChannelTabFilterRequest new];
-    self.selectionrequest.catid = self.containerView.chooseViewController.videoItem.catID;
-    [self startLoading];
-    WEAK_SELF
-    [self.selectionrequest startRequestWithRetClass:[ChannelTabFilterRequestItem class] andCompleteBlock:^(id retItem, NSError *error, BOOL isMock) {
-        STRONG_SELF
-        [self stopLoading];
-        if (error) {
-            [self showToast:error.localizedDescription];
-            return;
-        }
-        ChannelTabFilterRequestItem *item = retItem;
-        self.containerView.chooseViewController.selectionView.data = item.data;
-        [self showFilterSelectionView];
-    }];
-}
-    
 - (void)requestForChannelTab {
     UserModel *model = [UserManager sharedInstance].userModel;
     [StageSubjectDataManager fetchStageSubjectWithStageID:model.stageID subjectID:model.subjectID completeBlock:^(FetchStageSubjectRequestItem_stage *stage, FetchStageSubjectRequestItem_subject *subject) {

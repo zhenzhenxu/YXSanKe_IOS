@@ -15,6 +15,8 @@
 @implementation CourseVideoItem
 @end;
 @interface CourseViewController ()
+@property (nonatomic, strong) ChannelTabFilterRequest *selectionrequest;
+
 @end
 
 @implementation CourseViewController
@@ -52,16 +54,6 @@
     UIView *footerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, 10.0f)];
     footerView.backgroundColor = [UIColor colorWithHexString:@"e6e6e6"];
     self.tableView.tableFooterView = footerView;
-    self.selectionView = [FilterSelectionView new];
-    WEAK_SELF
-    [self.selectionView setCompleteBlock:^(NSString *filterId) {
-        STRONG_SELF
-        CourseVideoFetch *fetcher = (CourseVideoFetch *)self.dataFetcher;
-        fetcher.filterID = filterId;
-        fetcher.fromType = 1;
-        [self startLoading];
-        [self firstPageFetch];
-    }];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -101,4 +93,78 @@
     videoItem.resourceID = element.videoID;
     [videoItem browseFile];
 }
+
+- (void)showFilterSelectionView {
+    if (self.selectionView) {
+        [self showSelectionView];
+    }else {
+        [self requestSelection];
+    }
+}
+- (void)showSelectionView {
+    FilterSelectionView *selectionView = self.selectionView;
+    AlertView *alert = [[AlertView alloc]init];
+    alert.hideWhenMaskClicked = YES;
+    alert.contentView = selectionView;
+    WEAK_SELF
+    [alert setHideBlock:^(AlertView *view) {
+        STRONG_SELF
+        [UIView animateWithDuration:0.3 animations:^{
+            [selectionView mas_remakeConstraints:^(MASConstraintMaker *make) {
+                make.left.mas_equalTo(view.mas_right);
+                make.top.bottom.mas_equalTo(0);
+                make.width.mas_equalTo([UIScreen mainScreen].bounds.size.width*300/375);
+            }];
+            [view layoutIfNeeded];
+        } completion:^(BOOL finished) {
+            [view removeFromSuperview];
+        }];
+    }];
+    [alert showWithLayout:^(AlertView *view) {
+        STRONG_SELF
+        [selectionView mas_remakeConstraints:^(MASConstraintMaker *make) {
+            make.left.mas_equalTo(view.mas_right);
+            make.top.bottom.mas_equalTo(0);
+            make.width.mas_equalTo([UIScreen mainScreen].bounds.size.width*300/375);
+        }];
+        [view layoutIfNeeded];
+        [UIView animateWithDuration:0.3 animations:^{
+            [selectionView mas_remakeConstraints:^(MASConstraintMaker *make) {
+                make.right.mas_equalTo(view.mas_right);
+                make.top.bottom.mas_equalTo(0);
+                make.width.mas_equalTo([UIScreen mainScreen].bounds.size.width*300/375);
+            }];
+            [view layoutIfNeeded];
+        }];
+    }];
+    [selectionView setCompleteBlock:^(NSString *filterId) {
+        STRONG_SELF
+        [alert hide];
+        CourseVideoFetch *fetcher = (CourseVideoFetch *)self.dataFetcher;
+        fetcher.filterID = filterId;
+        fetcher.fromType = 1;
+        [self startLoading];
+        [self firstPageFetch];
+    }];
+}
+- (void)requestSelection{
+    [self.selectionrequest stopRequest];
+    self.selectionrequest = [ChannelTabFilterRequest new];
+    self.selectionrequest.catid = self.videoItem.catID;
+    [self startLoading];
+    WEAK_SELF
+    [self.selectionrequest startRequestWithRetClass:[ChannelTabFilterRequestItem class] andCompleteBlock:^(id retItem, NSError *error, BOOL isMock) {
+        STRONG_SELF
+        [self stopLoading];
+        if (error) {
+            [self showToast:error.localizedDescription];
+            return;
+        }
+        ChannelTabFilterRequestItem *item = retItem;
+        self.selectionView = [[FilterSelectionView alloc]init];
+        self.selectionView.data = item.data;
+        [self showSelectionView];
+    }];
+}
+
 @end
