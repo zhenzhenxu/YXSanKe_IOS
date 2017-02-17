@@ -83,10 +83,7 @@ typedef NS_ENUM(NSUInteger, YXRecordDB) {
         [manager.instantRecordArray addObject:record];
         [manager checkInstantRecordAndStartUpload];
     }
-    
-    if (record.type == YXRecordQuitType) {//关闭程序，需要特殊搞一下，防杀死进程
-        [self defenseKillProcess];
-    }
+
 }
 
 + (void)defenseKillProcess
@@ -130,9 +127,7 @@ typedef NS_ENUM(NSUInteger, YXRecordDB) {
         self.request.content = [[record toJSONString] formatContent];
 
         [self.request startRequestWithRetClass:[NSDictionary class] andCompleteBlock:^(id retItem, NSError *error, BOOL isMock) {
-            if (record.type == YXRecordQuitType) {
-                [[NSNotificationCenter defaultCenter] postNotificationName:YXFINALKILL object:nil];
-            }
+            
             if (error) {
                 [MagicalRecord saveWithBlockAndWait:^(NSManagedObjectContext * _Nonnull localContext) {
                     InstantRecordEntity *instant = [InstantRecordEntity MR_createEntityInContext:localContext];
