@@ -20,6 +20,7 @@
 @property (nonatomic, strong) ChannelTabRequest *tabRequest;
 @property (nonatomic, strong) ProjectContainerView *containerView;
 @property (nonatomic, strong) ChannelTabFilterRequest *selectionrequest;
+@property (nonatomic, strong) ProjectNavRightView *projectNavRightView;
 @end
 
 @implementation ProjectMainViewController
@@ -68,6 +69,7 @@
 }
 - (void)setupRightNavView {
     ProjectNavRightView *rightView = [[ProjectNavRightView alloc] init];
+    self.projectNavRightView = rightView;
     WEAK_SELF
     [rightView setProjectNavButtonLeftBlock:^{
         STRONG_SELF
@@ -89,14 +91,10 @@
         CourseVideoItem *item = [[CourseVideoItem alloc] init];
         item.name = [NSString stringWithFormat:@"%@",cat.cateName];
         item.catID = cat.catId;
-        item.fromType = 0;
+        item.fromType = 1;
         CourseViewController *vc = [[CourseViewController alloc] init];
         vc.videoItem = item;
-//        [[vc rac_signalForSelector:@selector(viewWillAppear:)] subscribeNext:^(id x) {
-//            NSLog(@"%@", item.catID);
-//        } error:^(NSError *error) {
-//            
-//        }];
+        vc.projectNavRightView = self.projectNavRightView;
         [self addChildViewController:vc];
     }
     self.containerView.childViewControllers = self.childViewControllers;

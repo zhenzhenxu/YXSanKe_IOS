@@ -13,41 +13,21 @@
  */
 typedef NS_ENUM(NSInteger, YXRecordType) {
     /**
-     *  注册成功
+     *  Click点击
      */
-    YXRecordResigerType    = 1,
+    YXRecordTabType    = 1,
     /**
-     *  每次启动
+     *  首次进入板块页面
      */
-    YXRecordStartType      = 2,
+    YXRecordPlateType      = 2,
     /**
-     *  提交练习/作业
+     *  学科学段
      */
-    YXRecordSubmitWorkType = 3,
+    YXRecordGradeType = 3,
     /**
-     *  收到作业(每份作业统计一次)
+     *  学科学点
      */
-    YXRecordReciveWorkType = 4,
-    /**
-     *  进入练习
-     */
-    YXRecordPractiseType   = 5,
-    /**
-     *  进入后台
-     */
-    YXRecordBackgroundType = 6,
-    /**
-     *  进入前台
-     */
-    YXRecordActiveType     = 7,
-    /**
-     *  退出app
-     */
-    YXRecordQuitType       = 8,
-    /**
-     *  加入班级成功
-     */
-    YXRecordClassType      = 9,
+    YXRecordPointType = 4,
 };
 
 // record strategy enumeration

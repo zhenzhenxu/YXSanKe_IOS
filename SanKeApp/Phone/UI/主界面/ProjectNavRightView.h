@@ -11,4 +11,5 @@
 @interface ProjectNavRightView : UIView
 @property (nonatomic, copy) void(^ProjectNavButtonLeftBlock)();
 @property (nonatomic, copy) void(^ProjectNavButtonRightBlock)();
+@property (nonatomic, strong) UIButton *leftButton;
 @end

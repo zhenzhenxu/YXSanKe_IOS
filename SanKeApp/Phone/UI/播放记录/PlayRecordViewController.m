@@ -12,6 +12,7 @@
 #import "YXFileVideoItem.h"
 @interface PlayRecordViewController ()
 @property (nonatomic, strong) PlayHistoryFetch *historyFetch;
+@property (nonatomic, assign) BOOL freshed;
 @end
 
 @implementation PlayRecordViewController
@@ -23,6 +24,17 @@
     self.title = @"播放记录";
     [self setupUI];
     self.tableView.backgroundColor = [UIColor colorWithHexString:@"e6e6e6"];
+    self.freshed = YES;
+}
+
+- (void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    if (self.freshed) {
+        self.freshed = NO;
+    }else{
+        [self startLoading];
+        [self firstPageFetch];
+    }
 }
 
 - (void)didReceiveMemoryWarning {

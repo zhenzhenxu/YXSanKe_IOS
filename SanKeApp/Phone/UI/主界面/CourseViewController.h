@@ -7,6 +7,8 @@
 //
 
 #import "PagedListViewControllerBase.h"
+#import "ProjectNavRightView.h"
+
 @class FilterSelectionView;
 @interface CourseVideoItem : NSObject
 @property (nonatomic, copy) NSString *name;
@@ -18,4 +20,5 @@
 @interface CourseViewController : PagedListViewControllerBase
 @property (nonatomic, strong) CourseVideoItem *videoItem;
 @property (nonatomic, strong) FilterSelectionView *selectionView;
+@property (nonatomic, strong) ProjectNavRightView *projectNavRightView;
 @end

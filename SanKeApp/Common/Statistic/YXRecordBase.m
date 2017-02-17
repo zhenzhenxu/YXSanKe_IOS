@@ -36,7 +36,7 @@
 - (void)setType:(YXRecordType)type
 {
     _type = type;
-    self.eventID = [NSString stringWithFormat:@"20:event_%d", (int)type];
+    self.eventID = [NSString stringWithFormat:@"22:event_%d", (int)type];
 }
 
 #pragma mark-

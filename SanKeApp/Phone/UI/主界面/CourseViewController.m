@@ -34,6 +34,11 @@
     self.title = self.videoItem.name;
 }
 
+- (void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    self.projectNavRightView.leftButton.hidden = [self.videoItem.catID isEqualToString:@"0"];
+}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
 }
@@ -53,11 +58,7 @@
         STRONG_SELF
         CourseVideoFetch *fetcher = (CourseVideoFetch *)self.dataFetcher;
         fetcher.filterID = filterId;
-        if ([filterId isEqualToString:@"0,0,0"]) {
-            fetcher.fromType = 0;
-        }else {
-           fetcher.fromType = 1;
-        }
+        fetcher.fromType = 1;
         [self startLoading];
         [self firstPageFetch];
     }];
@@ -76,13 +77,15 @@
            cell.cellStatus = RadianBaseCellStatus_Bottom;
         }
     }
+    CourseVideoRequestItem_Data_Elements *element = self.dataArray[indexPath.row];
+    cell.element = element;
     WEAK_SELF
     [cell setClickCourseTitleBlock:^{
         STRONG_SELF
         AloneCourseViewController *VC = [[AloneCourseViewController alloc] init];
+        VC.catID = element.catid;
         [self.navigationController pushViewController:VC animated:YES];
     }];
-    cell.element = self.dataArray[indexPath.row];
     return cell;
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {

@@ -8,7 +8,6 @@
 
 #import "ProjectNavRightView.h"
 @interface ProjectNavRightView ()
-@property (nonatomic, strong) UIButton *leftButton;
 @property (nonatomic, strong) UIButton *rightButton;
 @end
 @implementation ProjectNavRightView
