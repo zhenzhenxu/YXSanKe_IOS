@@ -50,6 +50,15 @@
     self.containerView.hidden = YES;
     self.containerView.autoresizingMask = UIViewAutoresizingFlexibleHeight;
     [self.view addSubview:self.containerView];
+    self.emptyView = [[EmptyView alloc]init];
+    self.emptyView.backgroundColor = [UIColor whiteColor];
+    self.errorView = [[ErrorView alloc]init];
+    @weakify(self);
+    [self.errorView setRetryBlock:^{
+        @strongify(self); if (!self) return;
+        [self requestForChannelTab];
+    }];
+    self.dataErrorView = [[DataErrorView alloc]init];
 }
 
 - (void)setupLeftNavView {
@@ -149,6 +158,7 @@
         STRONG_SELF
         [self stopLoading];
         if (error) {
+            [self showToast:error.localizedDescription];
             return;
         }
         ChannelTabFilterRequestItem *item = retItem;
@@ -172,12 +182,17 @@
     [request startRequestWithRetClass:[ChannelTabRequestItem class] andCompleteBlock:^(id retItem, NSError *error, BOOL isMock) {
         STRONG_SELF
         [self stopLoading];
-        if (error) {
-            
-        }else {
-            ChannelTabRequestItem *item = retItem;
-            [self showContainerView:item.data.category];
+        
+        ChannelTabRequestItem *item = retItem;
+        UnhandledRequestData *data = [[UnhandledRequestData alloc]init];
+        data.requestDataExist = item.data.category.count > 0;
+        data.localDataExist = NO;
+        data.error = error;
+        if ([self handleRequestData:data]) {
+            return;
         }
+        
+        [self showContainerView:item.data.category];
     }];
     self.tabRequest = request;
 }
