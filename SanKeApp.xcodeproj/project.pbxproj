@@ -2003,6 +2003,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer: xingfu liu (J63VXZH2U7)";
 				DEVELOPMENT_TEAM = P8ZS8UUN27;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/SanKeApp/Common/PrefixHeader.pch";
 				INFOPLIST_FILE = "$(SRCROOT)/SanKeApp/Phone/InfoPhone.plist";
@@ -2014,8 +2015,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = yanxiu.com.SanKeApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "9df588d5-707f-4e9b-83bf-82890757c75f";
-				PROVISIONING_PROFILE_SPECIFIER = DevAll;
+				PROVISIONING_PROFILE = "265d850f-eb9a-46d4-8c06-ea944c4f0b07";
+				PROVISIONING_PROFILE_SPECIFIER = SanKe_Dev;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
@@ -2026,7 +2027,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				DEVELOPMENT_TEAM = "";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Beijing Shang Rui Tong Technology Co.,Ltd. (P8ZS8UUN27)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				DEVELOPMENT_TEAM = P8ZS8UUN27;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/SanKeApp/Common/PrefixHeader.pch";
 				INFOPLIST_FILE = "$(SRCROOT)/SanKeApp/Phone/InfoPhone.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
@@ -2037,6 +2040,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = yanxiu.com.SanKeApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "50b0d8e2-441c-4054-b276-65714907eb21";
+				PROVISIONING_PROFILE_SPECIFIER = SanKe_Rel;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
