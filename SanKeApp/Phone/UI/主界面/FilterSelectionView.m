@@ -9,6 +9,8 @@
 #import "FilterSelectionView.h"
 #import "FilterHeaderView.h"
 #import "FilterCell.h"
+#import "YXRecordManager.h"
+#import "YXProblemItem.h"
 
 static const NSInteger kNotSelectedTag = -1;
 
@@ -109,6 +111,12 @@ static const NSInteger kNotSelectedTag = -1;
     NSArray *array = @[f1,f2,f3];
     NSString *filterString = [array componentsJoinedByString:@","];
     BLOCK_EXEC(self.completeBlock,filterString);
+    
+    YXProblemItem *item = [YXProblemItem new];
+    item.objType = @"unit";
+    item.objId = filterString;
+    item.objName = [NSString stringWithFormat:@"%@,%@,%@", first.name, second.name, third.name];
+    [YXRecordManager addRecord:item];
 }
 
 #pragma mark - UICollectionViewDataSource

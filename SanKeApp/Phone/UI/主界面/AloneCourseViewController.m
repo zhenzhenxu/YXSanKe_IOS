@@ -10,6 +10,8 @@
 #import "AloneCourseTableViewCell.h"
 #import "YXFileVideoItem.h"
 #import "CourseVideoFetch.h"
+#import "YXProblemItem.h"
+#import "YXRecordManager.h"
 @interface AloneCourseViewController ()
 
 @end
@@ -26,6 +28,11 @@
     [self setupUI];
     self.title = @"课程";
     self.tableView.backgroundColor = [UIColor colorWithHexString:@"e6e6e6"];
+    YXProblemItem *item = [YXProblemItem new];
+    item.objType = @"course";
+    item.objId = self.catID;
+//    item.objName = self.
+    [YXRecordManager addRecord:item];
 }
 
 - (void)didReceiveMemoryWarning {

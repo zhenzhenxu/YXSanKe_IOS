@@ -13,6 +13,7 @@
 #import "ProjectMainViewController.h"
 #import "LoginViewController.h"
 #import "StageSubjectSelectViewController.h"
+#import "YXRecordManager.h"
 
 @interface AppDelegate ()
 @property (nonatomic, unsafe_unretained) UIBackgroundTaskIdentifier backgroundTaskIdentifier;
@@ -43,6 +44,8 @@
         [self setupUI];
     }
     [self.window makeKeyAndVisible];
+    
+    [YXRecordManager addRecordWithType:YXRecordPlateType];
     return YES;
 }
 

@@ -14,6 +14,7 @@
 #import "YXPlayerBufferingView.h"
 #import "AppDelegate.h"
 #import "PreventHangingCourseView.h"
+
 static NSInteger kPreventHangingCourseDefaultTime = 600;
 @implementation YXPlayerDefinition
 
@@ -176,7 +177,7 @@ static const NSTimeInterval kTopBottomHiddenTime = 5;
     [self.preventView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.equalTo(self.view);
     }];
-    
+
 }
 - (void)applicationDidBecomeActive:(NSNotification *)notification{
     if (self.player.state == PlayerView_State_Playing) {

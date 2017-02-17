@@ -8,6 +8,9 @@
 
 #import "ProjectContainerView.h"
 #import "CourseViewController.h"
+#import "YXRecordManager.h"
+#import "YXProblemItem.h"
+
 #define kScreenHeight [UIScreen mainScreen].bounds.size.height
 #define kScreenWidth   [UIScreen mainScreen].bounds.size.width
 static const NSUInteger kTagBase = 10086;
@@ -50,10 +53,15 @@ static const NSUInteger kTagBase = 10086;
         [v removeFromSuperview];
     }
     _childViewControllers = childViewControllers;
+    
+    __block CGFloat x = 20;
+    
     [_childViewControllers enumerateObjectsUsingBlock:^(CourseViewController *obj, NSUInteger idx, BOOL * _Nonnull stop) {
         UIButton *b = [self buttonWithTitle:obj.videoItem.name];
-        CGFloat btnWidth = b.intrinsicContentSize.width + 20;
-        b.frame = CGRectMake(btnWidth*idx, 0, btnWidth, self.topScrollView.frame.size.height);
+        [b sizeToFit];
+        CGFloat btnWidth = b.width + 10;
+        b.frame = CGRectMake(x, 0, btnWidth, self.topScrollView.frame.size.height);
+        x += btnWidth + 10;
         b.tag = kTagBase + idx;
         [self.topScrollView addSubview:b];
         if (idx == 0) {
@@ -94,14 +102,25 @@ static const NSUInteger kTagBase = 10086;
             b.selected = NO;
         }
     }
+    
     sender.selected = YES;
     NSInteger index = sender.tag - kTagBase;
     self.bottomScrollView.contentOffset = CGPointMake(self.bottomScrollView.frame.size.width*index, 0);
     self.chooseViewController = self.childViewControllers[index];
-    if (self.chooseViewController.view.superview) return;
+    self.chooseViewController.projectNavRightView.leftButton.hidden = [self.chooseViewController.videoItem.catID isEqualToString:@"0"];
+    
+    YXProblemItem *item = [YXProblemItem new];
+    item.objType = @"section";
+    item.objId = self.chooseViewController.videoItem.catID;
+    item.objName = self.chooseViewController.videoItem.name;
+    [YXRecordManager addRecord:item];
+
+    if (self.chooseViewController.view.superview)
+        return;
     self.chooseViewController.view.frame = CGRectMake(self.bottomScrollView.frame.size.width*index, 0, self.bottomScrollView.frame.size.width, self.bottomScrollView.frame.size.height);
     self.chooseViewController.view.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
     [self.bottomScrollView addSubview:self.chooseViewController.view];
+    
 }
 
 - (void)layoutSubviews{
