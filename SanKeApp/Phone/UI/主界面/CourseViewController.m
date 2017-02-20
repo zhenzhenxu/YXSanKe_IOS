@@ -15,7 +15,7 @@
 @implementation CourseVideoItem
 @end;
 @interface CourseViewController ()
-@property (nonatomic, strong) ChannelTabFilterRequest *selectionrequest;
+@property (nonatomic, strong) ChannelTabFilterRequest *selectionRequest;
 
 @end
 
@@ -148,12 +148,12 @@
     }];
 }
 - (void)requestSelection{
-    [self.selectionrequest stopRequest];
-    self.selectionrequest = [ChannelTabFilterRequest new];
-    self.selectionrequest.catid = self.videoItem.catID;
+    [self.selectionRequest stopRequest];
+    self.selectionRequest = [ChannelTabFilterRequest new];
+    self.selectionRequest.catid = self.videoItem.catID;
     [self startLoading];
     WEAK_SELF
-    [self.selectionrequest startRequestWithRetClass:[ChannelTabFilterRequestItem class] andCompleteBlock:^(id retItem, NSError *error, BOOL isMock) {
+    [self.selectionRequest startRequestWithRetClass:[ChannelTabFilterRequestItem class] andCompleteBlock:^(id retItem, NSError *error, BOOL isMock) {
         STRONG_SELF
         [self stopLoading];
         if (error) {
