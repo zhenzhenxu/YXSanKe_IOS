@@ -15,6 +15,9 @@
 #import "ErrorView.h"
 #import "EmptyView.h"
 #import "MineUserModel.h"
+#import "YXRecordManager.h"
+#import "YXProblemItem.h"
+
 @interface MineViewController ()<UITableViewDelegate, UITableViewDataSource>
 
 @property (nonatomic, strong) MineUserModel *userModel;
@@ -110,6 +113,11 @@
     NSIndexPath *stageIndexPath = [NSIndexPath indexPathForRow:1 inSection:0];
     NSIndexPath *subjectIndexPath = [NSIndexPath indexPathForRow:2 inSection:0];
     [self.tableView reloadRowsAtIndexPaths:@[stageIndexPath,subjectIndexPath] withRowAnimation:UITableViewRowAnimationNone];
+    YXProblemItem *item = [YXProblemItem new];
+    item.subject = self.userModel.stage.stageID;
+    item.grade = self.userModel.subject.subjectID;
+    item.type = YXRecordGradeChangeType;
+    [YXRecordManager addRecord:item];
 }
 
 - (void)updateAreaInfo {
@@ -117,7 +125,6 @@
     DDLogDebug(@"最终结果地区:%@-%@-%@",self.userModel.province.name,self.userModel.city.name,self.userModel.district.name);
     NSIndexPath *areaIndexPath = [NSIndexPath indexPathForRow:3 inSection:0];
     [self.tableView reloadRowsAtIndexPaths:@[areaIndexPath] withRowAnimation:UITableViewRowAnimationNone];
-
 }
 
 - (void)updateMockStageSubjectInfo {

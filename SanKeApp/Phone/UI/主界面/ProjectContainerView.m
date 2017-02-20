@@ -113,6 +113,7 @@ static const NSUInteger kTagBase = 10086;
     item.objType = @"section";
     item.objId = self.chooseViewController.videoItem.catID;
     item.objName = self.chooseViewController.videoItem.name;
+    item.type = YXRecordGradeType;
     [YXRecordManager addRecord:item];
 
     if (self.chooseViewController.view.superview)

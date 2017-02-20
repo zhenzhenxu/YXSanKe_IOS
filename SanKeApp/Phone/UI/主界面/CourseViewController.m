@@ -75,6 +75,7 @@
     [cell setClickCourseTitleBlock:^{
         STRONG_SELF
         AloneCourseViewController *VC = [[AloneCourseViewController alloc] init];
+        VC.title = element.title;
         VC.catID = element.catid;
         [self.navigationController pushViewController:VC animated:YES];
     }];

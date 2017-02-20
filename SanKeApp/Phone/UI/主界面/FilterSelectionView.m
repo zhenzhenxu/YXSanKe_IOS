@@ -114,6 +114,7 @@ static const NSInteger kNotSelectedTag = -1;
     
     YXProblemItem *item = [YXProblemItem new];
     item.objType = @"unit";
+    item.type = YXRecordClickType;
     item.objId = filterString;
     item.objName = [NSString stringWithFormat:@"%@,%@,%@", first.name, second.name, third.name];
     [YXRecordManager addRecord:item];

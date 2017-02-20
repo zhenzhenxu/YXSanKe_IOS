@@ -15,7 +15,7 @@ typedef NS_ENUM(NSInteger, YXRecordType) {
     /**
      *  Click点击
      */
-    YXRecordTabType    = 1,
+    YXRecordClickType    = 1,
     /**
      *  首次进入板块页面
      */
@@ -27,7 +27,7 @@ typedef NS_ENUM(NSInteger, YXRecordType) {
     /**
      *  学科学点
      */
-    YXRecordPointType = 4,
+    YXRecordGradeChangeType = 4,
 };
 
 // record strategy enumeration

@@ -75,6 +75,7 @@
     item.objType = @"video";
     item.objId = self.resourceID;
     item.objName = self.name;
+    item.type = YXRecordClickType;
     [YXRecordManager addRecord:item];
 }
 

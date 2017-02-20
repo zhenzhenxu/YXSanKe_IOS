@@ -31,7 +31,8 @@
     YXProblemItem *item = [YXProblemItem new];
     item.objType = @"course";
     item.objId = self.catID;
-//    item.objName = self.
+    item.type = YXRecordClickType;
+    item.objName = self.title;
     [YXRecordManager addRecord:item];
 }
 

@@ -10,6 +10,8 @@
 #import "LoginViewController.h"
 #import "StageSubjectCell.h"
 #import "StageSubjectHeaderView.h"
+#import "YXProblemItem.h"
+#import "YXRecordManager.h"
 
 static const NSInteger kNotSelectedTag = -1;
 
@@ -110,6 +112,11 @@ static const NSInteger kNotSelectedTag = -1;
     }
     FetchStageSubjectRequestItem_stage *stage = self.item.data.stages[self.stageSelectedIndex];
     FetchStageSubjectRequestItem_subject *subject = stage.subjects[self.subjectSelectedIndex];
+    YXProblemItem *item = [YXProblemItem new];
+    item.subject = stage.stageID;
+    item.grade = subject.subjectID;
+    item.type = YXRecordGradeType;
+    [YXRecordManager addRecord:item];
     WEAK_SELF
     [MineDataManager updateStage:stage.stageID subject:subject.subjectID completeBlock:^(NSError *error) {
         STRONG_SELF

@@ -15,5 +15,6 @@
 @property (nonatomic, copy) NSString *objName;
 
 @property (nonatomic, copy) NSString *subject;
+@property (nonatomic, copy) NSString *grade;
 
 @end
