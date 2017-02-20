@@ -33,7 +33,7 @@ static const NSInteger kNotSelectedTag = -1;
     self.subjectSelectedIndex = kNotSelectedTag;
     self.item = [StageSubjectDataManager dataForStageAndSubject];
     [self setupUI];
-    if (![UserManager sharedInstance].userModel.isSankeUser) {
+    if (![UserManager sharedInstance].userModel.isSankeUser && ![UserManager sharedInstance].userModel.isAnonymous) {
         [self showToast:@"您所在的学科频道正在搭建中!"];
     }
 }
