@@ -132,7 +132,7 @@ static const CGFloat margin = 10;
     self.bottomScrollView.contentSize = CGSizeMake(self.bottomScrollView.frame.size.width*self.childViewControllers.count, self.bottomScrollView.frame.size.height);
     self.topScrollView.contentSize = CGSizeMake( kScreenWidth / 4.0f * self.childViewControllers.count, 44);
 }
-#pragma mark - UIScrollViewDelegate
+
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView{
     NSInteger index = scrollView.contentOffset.x/scrollView.frame.size.width;
     CGFloat offsetx = 0.0f;
@@ -156,6 +156,7 @@ static const CGFloat margin = 10;
         [self.topScrollView setContentOffset:offset animated:YES];
     }
     self.chooseViewController = self.childViewControllers[index];
+    self.chooseViewController.projectNavRightView.leftButton.hidden = [self.chooseViewController.videoItem.catID isEqualToString:@"0"];
     if (self.chooseViewController.view.superview) return;
     self.chooseViewController.view.frame = CGRectMake(self.bottomScrollView.frame.size.width*index, 0, self.bottomScrollView.frame.size.width, self.bottomScrollView.frame.size.height);
     self.chooseViewController.view.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;

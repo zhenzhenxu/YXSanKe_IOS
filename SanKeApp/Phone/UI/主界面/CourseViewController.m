@@ -38,7 +38,6 @@
 
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    self.projectNavRightView.leftButton.hidden = [self.videoItem.catID isEqualToString:@"0"];
 }
 
 - (void)didReceiveMemoryWarning {

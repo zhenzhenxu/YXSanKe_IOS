@@ -112,6 +112,9 @@
         [self.containerView.chooseViewController firstPageFetch];
     }];
     self.containerView.childViewControllers = self.childViewControllers;
+    CourseViewController *vc = self.containerView.childViewControllers.firstObject;
+    vc.projectNavRightView.leftButton.hidden = YES;
+
 }
 
 #pragma mark - request
