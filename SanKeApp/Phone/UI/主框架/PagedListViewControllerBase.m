@@ -123,12 +123,7 @@
         data.requestDataExist = retItemArray.count != 0;
         data.localDataExist = self.dataArray.count != 0;
         data.error = error;
-        UIView *networkTipView = [[UIView alloc]init];
-        [self.view addSubview:networkTipView];
-        [networkTipView mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.edges.mas_equalTo(UIEdgeInsetsMake(10, 10, 10, 10));
-        }];
-        if ([self handleRequestData:data inView:networkTipView]) {
+        if ([self handleRequestData:data inView:self.contentView]) {
             return;
         }
         [self->_header setLastUpdateTime:[NSDate date]];

@@ -14,6 +14,7 @@
 #define kScreenHeight [UIScreen mainScreen].bounds.size.height
 #define kScreenWidth   [UIScreen mainScreen].bounds.size.width
 static const NSUInteger kTagBase = 10086;
+static const CGFloat margin = 10;
 @interface ProjectContainerView ()<UIScrollViewDelegate>
 @property (nonatomic, strong) UIScrollView *topScrollView;
 @property (nonatomic, strong) UIScrollView *bottomScrollView;
@@ -54,14 +55,14 @@ static const NSUInteger kTagBase = 10086;
     }
     _childViewControllers = childViewControllers;
     
-    __block CGFloat x = 10;
+    __block CGFloat x = margin;
     
     [_childViewControllers enumerateObjectsUsingBlock:^(CourseViewController *obj, NSUInteger idx, BOOL * _Nonnull stop) {
         UIButton *b = [self buttonWithTitle:obj.videoItem.name];
         [b sizeToFit];
         CGFloat btnWidth = b.width;
         b.frame = CGRectMake(x, 0, btnWidth, self.topScrollView.frame.size.height);
-        x = CGRectGetMaxX(b.frame) + 10;
+        x = CGRectGetMaxX(b.frame) + margin;
         b.tag = kTagBase + idx;
         [self.topScrollView addSubview:b];
         if (idx == 0) {
@@ -76,9 +77,9 @@ static const NSUInteger kTagBase = 10086;
         if (idx < _childViewControllers.count - 1) {
             CGFloat lineHeight = 9.0f;  CGFloat lineWidth = 1.0f;
             CGFloat y = (self.topScrollView.bounds.size.height - lineHeight) / 2.0f;
-            UIView *line = [[UIView alloc]initWithFrame:CGRectMake(CGRectGetMaxX(b.frame) + 10 -lineWidth, y, lineWidth, lineHeight)];
+            UIView *line = [[UIView alloc]initWithFrame:CGRectMake(CGRectGetMaxX(b.frame) + margin -lineWidth, y, lineWidth, lineHeight)];
             line.backgroundColor = [UIColor colorWithHexString:@"fda89d"];
-            x = CGRectGetMaxX(line.frame) + 10;
+            x = CGRectGetMaxX(line.frame) + margin;
             [self.topScrollView addSubview:line];
         }
     }];
@@ -118,7 +119,7 @@ static const NSUInteger kTagBase = 10086;
     item.objName = self.chooseViewController.videoItem.name;
     item.type = YXRecordGradeType;
     [YXRecordManager addRecord:item];
-
+    
     if (self.chooseViewController.view.superview)
         return;
     self.chooseViewController.view.frame = CGRectMake(self.bottomScrollView.frame.size.width*index, 0, self.bottomScrollView.frame.size.width, self.bottomScrollView.frame.size.height);
@@ -140,18 +141,20 @@ static const NSUInteger kTagBase = 10086;
             b.selected = NO;
             if (b.tag-kTagBase == index) {
                 b.selected = YES;
-               offsetx = b.center.x - self.topScrollView.frame.size.width * 0.5;
+                offsetx = b.center.x - self.topScrollView.frame.size.width * 0.5;
             }
         }
     }
-    CGFloat offsetMax = self.topScrollView.contentSize.width - self.topScrollView.frame.size.width;
-    if (offsetx < 0) {
-        offsetx = 0;
-    }else if (offsetx > offsetMax){
-        offsetx = offsetMax;
+    if ((self.topScrollView.contentSize.width - kScreenWidth) >= margin * 2 * self.childViewControllers.count) {
+        CGFloat offsetMax = self.topScrollView.contentSize.width - self.topScrollView.frame.size.width;
+        if (offsetx < 0) {
+            offsetx = 0;
+        }else if (offsetx > offsetMax){
+            offsetx = offsetMax;
+        }
+        CGPoint offset = CGPointMake(offsetx, self.topScrollView.contentOffset.y);
+        [self.topScrollView setContentOffset:offset animated:YES];
     }
-    CGPoint offset = CGPointMake(offsetx, self.topScrollView.contentOffset.y);
-    [self.topScrollView setContentOffset:offset animated:YES];
     self.chooseViewController = self.childViewControllers[index];
     if (self.chooseViewController.view.superview) return;
     self.chooseViewController.view.frame = CGRectMake(self.bottomScrollView.frame.size.width*index, 0, self.bottomScrollView.frame.size.width, self.bottomScrollView.frame.size.height);
