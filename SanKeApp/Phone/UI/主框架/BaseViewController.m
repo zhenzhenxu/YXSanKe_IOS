@@ -135,12 +135,12 @@
             if (data.error.code == ASIConnectionFailureErrorType || data.error.code == ASIRequestTimedOutErrorType) {//网络错误/请求超时
                 [view addSubview:self.errorView];
                 [self.errorView mas_makeConstraints:^(MASConstraintMaker *make) {
-                    make.edges.equalTo(view);
+                    make.edges.mas_equalTo(UIEdgeInsetsMake(10, 10, 10, 10));
                 }];
             }else {
                 [view addSubview:self.dataErrorView];
                 [self.dataErrorView mas_makeConstraints:^(MASConstraintMaker *make) {
-                    make.edges.equalTo(view);
+                    make.edges.mas_equalTo(UIEdgeInsetsMake(10, 10, 10, 10));
                 }];
             }
         }
@@ -149,7 +149,7 @@
         if (!data.requestDataExist) {
             [view addSubview:self.emptyView];
             [self.emptyView mas_makeConstraints:^(MASConstraintMaker *make) {
-                make.edges.equalTo(view);
+                make.edges.mas_equalTo(UIEdgeInsetsMake(10, 10, 10, 10));
             }];
             handled = YES;
         }

@@ -44,7 +44,7 @@
         [self setupUI];
     }
     [self.window makeKeyAndVisible];
-    
+    [YXRecordManager startRegularReport];
     [YXRecordManager addRecordWithType:YXRecordPlateType];
     return YES;
 }

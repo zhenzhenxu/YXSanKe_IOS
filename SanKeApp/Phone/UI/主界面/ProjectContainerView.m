@@ -54,14 +54,14 @@ static const NSUInteger kTagBase = 10086;
     }
     _childViewControllers = childViewControllers;
     
-    __block CGFloat x = 20;
+    __block CGFloat x = 10;
     
     [_childViewControllers enumerateObjectsUsingBlock:^(CourseViewController *obj, NSUInteger idx, BOOL * _Nonnull stop) {
         UIButton *b = [self buttonWithTitle:obj.videoItem.name];
         [b sizeToFit];
-        CGFloat btnWidth = b.width + 10;
+        CGFloat btnWidth = b.width;
         b.frame = CGRectMake(x, 0, btnWidth, self.topScrollView.frame.size.height);
-        x += btnWidth + 10;
+        x = CGRectGetMaxX(b.frame) + 10;
         b.tag = kTagBase + idx;
         [self.topScrollView addSubview:b];
         if (idx == 0) {
@@ -76,11 +76,14 @@ static const NSUInteger kTagBase = 10086;
         if (idx < _childViewControllers.count - 1) {
             CGFloat lineHeight = 9.0f;  CGFloat lineWidth = 1.0f;
             CGFloat y = (self.topScrollView.bounds.size.height - lineHeight) / 2.0f;
-            UIView *line = [[UIView alloc]initWithFrame:CGRectMake(b.frame.origin.x+b.frame.size.width - lineWidth, y, lineWidth, lineHeight)];
-            line.backgroundColor = [UIColor colorWithHexString:@"999999"];
+            UIView *line = [[UIView alloc]initWithFrame:CGRectMake(CGRectGetMaxX(b.frame) + 10 -lineWidth, y, lineWidth, lineHeight)];
+            line.backgroundColor = [UIColor colorWithHexString:@"fda89d"];
+            x = CGRectGetMaxX(line.frame) + 10;
             [self.topScrollView addSubview:line];
         }
     }];
+    self.topScrollView.contentSize = CGSizeMake( x, 44);
+    self.bottomScrollView.contentSize = CGSizeMake(self.bottomScrollView.frame.size.width*self.childViewControllers.count, self.bottomScrollView.frame.size.height);
 }
 - (UIButton *)buttonWithTitle:(NSString *)title {
     UIButton *b = [UIButton buttonWithType:UIButtonTypeCustom];
