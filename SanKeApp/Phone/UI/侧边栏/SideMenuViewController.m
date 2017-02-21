@@ -70,7 +70,7 @@
 - (void)setupTabeleViewData {
     NSMutableArray *dataArray = [NSMutableArray array];
     SideTableViewModel *model1 = [SideTableViewModel modelWithIcon:@"清除缓存" title:@"清空缓存"];
-    SideTableViewModel *model2 = [SideTableViewModel modelWithIcon:@"打分" title:@"去AppStore打分"];
+    SideTableViewModel *model2 = [SideTableViewModel modelWithIcon:@"app-store" title:@"去AppStore打分"];
     SideTableViewModel *model3 = [SideTableViewModel modelWithIcon:@"退出" title:@"退出"];
     [dataArray addObject:model1];
     [dataArray addObject:model2];
