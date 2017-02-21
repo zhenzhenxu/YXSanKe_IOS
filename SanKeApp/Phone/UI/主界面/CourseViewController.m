@@ -88,7 +88,7 @@
     CourseVideoRequestItem_Data_Elements *element = self.dataArray[indexPath.row];
     YXFileVideoItem *videoItem = [[YXFileVideoItem alloc] init];
     videoItem.name = element.title;
-    videoItem.url = element.videos;
+    videoItem.url = element.videosMp4;
     videoItem.baseViewController = self;
     videoItem.record = [NSString stringWithFormat:@"%f", element.timeWatched.floatValue / element.totalTime.floatValue];
     videoItem.resourceID = element.videoID;

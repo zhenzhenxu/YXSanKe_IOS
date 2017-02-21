@@ -78,7 +78,7 @@
     PlayHistoryRequestItem_Data_History *history = self.dataArray[indexPath.row];
     YXFileVideoItem *videoItem = [[YXFileVideoItem alloc] init];
     videoItem.name = history.title;
-    videoItem.url = history.videos;
+    videoItem.url = history.videosMp4;
     videoItem.resourceID = history.videoID;
     videoItem.record = [NSString stringWithFormat:@"%f", history.watchRecord.floatValue / history.totalTime.floatValue];
     videoItem.baseViewController = self;
