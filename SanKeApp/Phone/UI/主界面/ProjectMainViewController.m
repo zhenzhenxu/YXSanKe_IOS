@@ -106,6 +106,11 @@
         vc.projectNavRightView = self.projectNavRightView;
         [self addChildViewController:vc];
     }
+    WEAK_SELF
+    [self.containerView setClickTabButtonBlock:^{
+        STRONG_SELF
+        [self.containerView.chooseViewController firstPageFetch];
+    }];
     self.containerView.childViewControllers = self.childViewControllers;
 }
 

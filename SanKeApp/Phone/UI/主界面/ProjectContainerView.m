@@ -98,7 +98,7 @@ static const NSUInteger kTagBase = 10086;
 
 - (void)chooseButtonAction:(UIButton *)sender {
     if (sender.selected) {
-        return;
+        BLOCK_EXEC(self.ClickTabButtonBlock);
     }
     for (UIButton *b in self.topScrollView.subviews) {
         if ([b isKindOfClass:[UIButton class]]) {

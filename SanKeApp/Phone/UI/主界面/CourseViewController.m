@@ -16,7 +16,7 @@
 @end;
 @interface CourseViewController ()
 @property (nonatomic, strong) ChannelTabFilterRequest *selectionRequest;
-
+@property (nonatomic, strong) YXFileVideoItem *fileVideoItem;
 @end
 
 @implementation CourseViewController
@@ -91,8 +91,9 @@
     videoItem.url = element.videosMp4;
     videoItem.baseViewController = self;
     videoItem.record = [NSString stringWithFormat:@"%f", element.timeWatched.floatValue / element.totalTime.floatValue];
-    videoItem.resourceID = element.videoID;
+    videoItem.resourceID = element.resourceId;
     [videoItem browseFile];
+    self.fileVideoItem = videoItem;
 }
 
 - (void)showFilterSelectionView {

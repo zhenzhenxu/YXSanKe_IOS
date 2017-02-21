@@ -11,7 +11,7 @@
 @implementation SaveRecordRequest
 - (instancetype)init {
     if (self = [super init]) {
-        self.urlHead = [[SKConfigManager sharedInstance].server stringByAppendingString:@"app/sanke/user/history_record"];
+        self.urlHead = [[SKConfigManager sharedInstance].server stringByAppendingString:@"app/sanke/history_record"];
     }
     return self;
 }
