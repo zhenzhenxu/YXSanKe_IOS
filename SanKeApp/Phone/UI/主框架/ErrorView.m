@@ -34,7 +34,7 @@
     self.retryLabel.text = @"网络错误,点击后重试";
     self.retryLabel.userInteractionEnabled = YES;
     UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(retryLabelClick)];
-    [self.retryLabel addGestureRecognizer:tapGestureRecognizer];
+    [self addGestureRecognizer:tapGestureRecognizer];
     tapGestureRecognizer.delegate = self;
 }
 
