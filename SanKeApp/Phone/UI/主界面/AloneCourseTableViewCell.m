@@ -71,7 +71,7 @@
     [attString addAttribute:NSParagraphStyleAttributeName value:paragraphStyle range:NSMakeRange(0, _element.desc.length)];
     self.contentLabel.attributedText = attString;
     self.expertLabel.text = [NSString stringWithFormat:@"主讲专家: %@ %@",_element.author,_element.thanks];
-    [self.posterImagView sd_setImageWithURL:[NSURL URLWithString:_element.icon] placeholderImage:[UIImage imageNamed:@""]];
+    [self.posterImagView sd_setImageWithURL:[NSURL URLWithString:_element.icon] placeholderImage:[UIImage imageNamed:@"默认"]];
 }
 - (void)awakeFromNib {
     [super awakeFromNib];
