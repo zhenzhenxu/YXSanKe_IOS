@@ -112,12 +112,34 @@ static const NSInteger kNotSelectedTag = -1;
     NSString *filterString = [array componentsJoinedByString:@","];
     BLOCK_EXEC(self.completeBlock,filterString);
     
-    YXProblemItem *item = [YXProblemItem new];
-    item.objType = @"unit";
-    item.type = YXRecordClickType;
-    item.objId = filterString;
-    item.objName = [NSString stringWithFormat:@"%@,%@,%@", first.name, second.name, third.name];
-    [YXRecordManager addRecord:item];
+    NSMutableString *filter = [NSMutableString new];
+    if (first.filterID.length) {
+        [filter appendString:first.filterID];
+    }
+    if (second.filterID.length) {
+        [filter appendFormat:@",%@", second.filterID];
+    }
+    if (third.filterID.length) {
+        [filter appendFormat:@",%@", third.filterID];
+    }
+    if (filter.length) {
+        NSMutableString *filterName = [NSMutableString new];
+        if (first.name.length) {
+            [filterName appendString:first.name];
+        }
+        if (second.name.length) {
+            [filterName appendFormat:@",%@", second.name];
+        }
+        if (third.name.length) {
+            [filterName appendFormat:@",%@", third.name];
+        }
+        YXProblemItem *item = [YXProblemItem new];
+        item.objType = @"unit";
+        item.type = YXRecordClickType;
+        item.objId = filter;
+        item.objName = [NSString stringWithFormat:@"%@,%@,%@", first.name, second.name, third.name];
+        [YXRecordManager addRecord:item];
+    }
 }
 
 #pragma mark - UICollectionViewDataSource

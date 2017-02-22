@@ -14,6 +14,7 @@
 #import "YXRecordManager.h"
 @interface AloneCourseViewController ()
 
+@property (nonatomic, strong) YXFileVideoItem *videoItem;
 @end
 
 @implementation AloneCourseViewController
@@ -76,8 +77,9 @@
     videoItem.name = element.title;
     videoItem.url = element.videosMp4;
     videoItem.baseViewController = self;
-    videoItem.record = [NSString stringWithFormat:@"%f", element.timeWatched.floatValue / element.totalTime.floatValue];
+    videoItem.record = element.timeWatched;
     videoItem.resourceID = element.resourceId;
+    self.videoItem = videoItem;
     [videoItem browseFile];
 }
 @end

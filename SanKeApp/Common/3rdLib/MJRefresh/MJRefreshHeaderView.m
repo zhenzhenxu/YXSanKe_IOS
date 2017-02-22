@@ -35,7 +35,7 @@
     _statusLabel.hidden = YES;
     _arrowImage.hidden = YES;
     _lastUpdateTimeLabel.hidden = YES;
-    self.loadView.hidden = NO;
+//    self.loadView.hidden = YES;
 }
 
 #pragma mark - 状态相关

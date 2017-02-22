@@ -19,7 +19,9 @@
 @property (nonatomic, copy) NSString<Optional> *title;
 @property (nonatomic, copy) NSString<Optional> *watchRecord;
 @property (nonatomic, copy) NSString<Optional> *totalTime;
+@property (nonatomic, copy) NSString<Optional> *resourceId;
 @end
+
 @interface PlayHistoryRequestItem_Data : JSONModel
 @property (nonatomic, strong) NSArray<PlayHistoryRequestItem_Data_History, Optional> *history;
 @property (nonatomic, copy) NSString<Optional> *moreData;

@@ -82,7 +82,7 @@
 #pragma mark - YXPlayProgressDelegate
 - (void)playerProgress:(CGFloat)progress totalDuration:(NSTimeInterval)duration stayTime:(NSTimeInterval)time {
     self.duration = [NSString stringWithFormat:@"%@",@(duration)];
-    self.record = [NSString stringWithFormat:@"%@",@(duration*progress)];
+    self.record = [NSString stringWithFormat:@"%@",@(progress)];
 }
 
 - (CGFloat)preProgress {

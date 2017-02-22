@@ -19,7 +19,7 @@
 
 @interface YXPlayerViewController : BaseViewController
 @property (nonatomic, assign) CGFloat preProgress;
-@property (nonatomic, strong) NSString *timeWatched; // 已播放时长，用于视频
+//@property (nonatomic, strong) NSString *timeWatched; // 已播放时长，用于视频
 
 @property (nonatomic, assign) BOOL bIsLocalFile;
 @property (nonatomic, strong) NSString *videoUrl;

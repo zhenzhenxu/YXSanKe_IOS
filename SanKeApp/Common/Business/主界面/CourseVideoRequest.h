@@ -21,6 +21,7 @@
 @property (nonatomic ,copy) NSString<Optional> *timeWatched;
 @property (nonatomic ,copy) NSString<Optional> *totalTime;
 @property (nonatomic ,copy) NSString<Optional> *catid;
+@property (nonatomic ,copy) NSString<Optional> *thumb;
 
 @end
 @interface CourseVideoRequestItem_Data : JSONModel

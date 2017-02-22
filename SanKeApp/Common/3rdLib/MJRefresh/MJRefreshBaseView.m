@@ -119,11 +119,11 @@
         
         // 6.设置默认状态
         [self setState:MJRefreshStateNormal];
-        _loadView = [[YXLoadView alloc] initWithFrame:CGRectMake(0, 0, 45.0f, 45.0f)];
-        _loadView.layer.cornerRadius = 22.5f;
-        _loadView.layer.borderColor = [UIColor colorWithHexString:@"b3bdc6"].CGColor;
-        _loadView.layer.borderWidth = 4.0f;
-        _loadView.hidden = YES;
+        _loadView = [[UIActivityIndicatorView alloc] initWithFrame:CGRectMake(0, 0, 45.0f, 45.0f)];
+//        _loadView.layer.cornerRadius = 22.5f;
+//        _loadView.layer.borderColor = [UIColor colorWithHexString:@"b3bdc6"].CGColor;
+//        _loadView.layer.borderWidth = 4.0f;
+//        _loadView.hidden = YES;
         [self addSubview:_loadView];
 
     }
@@ -192,9 +192,9 @@
     
     // scrollView所滚动的Y值 * 控件的类型（头部控件是-1，尾部控件是1）
     CGFloat offsetY = _scrollView.contentOffset.y * self.viewType;
-    if (offsetY/100.0f > 1.0f) {
-       [_loadView stopAnimate];
-    }
+//    if (offsetY/100.0f > 1.0f) {
+//       [_loadView stopAnimating];
+//    }
 //    CGFloat scale = MIN(offsetY/100.0f, 1.0f);
 //    if (offsetY == -0.0f && _state == MJRefreshStateNormal) {
 //        [UIView animateWithDuration:MJRefreshAnimationDuration delay:0.0f options:UIViewAnimationOptionCurveLinear | UIViewAnimationOptionBeginFromCurrentState animations:^{
@@ -233,7 +233,7 @@
             if (_refreshStateChangeBlock) {
                 _refreshStateChangeBlock(self, MJRefreshStateNormal);
             }
-           [_loadView startAnimate];
+//           [_loadView startAnimating];
         } else if (_state == MJRefreshStateNormal && offsetY > validOffsetY) {
             // 转为即将刷新状态
             [self setState:MJRefreshStatePulling];
@@ -246,7 +246,7 @@
             if (_refreshStateChangeBlock) {
                 _refreshStateChangeBlock(self, MJRefreshStatePulling);
             }
-            [_loadView startAnimate];
+//            [_loadView startAnimating];
         }
     } else { // 即将刷新 && 手松开
         if (_state == MJRefreshStatePulling) {
@@ -261,9 +261,9 @@
             if (_refreshStateChangeBlock) {
                 _refreshStateChangeBlock(self, MJRefreshStateRefreshing);
             }
-            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.2f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                [_loadView startAnimate];
-            });
+//            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.2f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+//                [_loadView startAnimating];
+//            });
         }
     }
 }
@@ -332,6 +332,7 @@
             [_imageView.layer removeAllAnimations];
             
             //[_activityView stopAnimating];
+            [_loadView stopAnimating];
             
             // 说明是刚刷新完毕 回到 普通状态的
             if (MJRefreshStateRefreshing == _state) {
@@ -362,6 +363,7 @@
             [_imageView.layer addAnimation:anim forKey:anim.keyPath];
             [CATransaction commit];
             
+            [_loadView startAnimating];
             //[_activityView startAnimating];
             // 隐藏箭头
             //_arrowImage.hidden = YES;
@@ -404,7 +406,7 @@
 #pragma mark 结束刷新
 - (void)endRefreshing
 {
-    [_loadView stopAnimate];
+//    [_loadView stopAnimating];
     double delayInSeconds = self.viewType == MJRefreshViewTypeFooter ? 1.0f : 0.0;
     dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
     dispatch_after(popTime, dispatch_get_main_queue(), ^(void){

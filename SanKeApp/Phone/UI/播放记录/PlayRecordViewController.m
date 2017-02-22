@@ -13,6 +13,7 @@
 @interface PlayRecordViewController ()
 @property (nonatomic, strong) PlayHistoryFetch *historyFetch;
 @property (nonatomic, assign) BOOL freshed;
+@property (nonatomic, strong) YXFileVideoItem *videoItem;
 @end
 
 @implementation PlayRecordViewController
@@ -25,16 +26,21 @@
     [self setupUI];
     self.tableView.backgroundColor = [UIColor colorWithHexString:@"e6e6e6"];
     self.freshed = YES;
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refresh:) name:kRecordReportSuccessNotification object:nil];
+}
+
+- (void)refresh:(NSNotification *)notification{
+    NSString *resourceID = notification.userInfo[kResourceIDKey];
+    for (PlayHistoryRequestItem_Data_History *item in self.dataArray) {
+        if ([item.resourceId isEqualToString:resourceID]) {
+            [self startLoading];
+            [self firstPageFetch];
+        }
+    }
 }
 
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    if (self.freshed) {
-        self.freshed = NO;
-    }else{
-        [self startLoading];
-        [self firstPageFetch];
-    }
 }
 
 - (void)didReceiveMemoryWarning {
@@ -79,9 +85,10 @@
     YXFileVideoItem *videoItem = [[YXFileVideoItem alloc] init];
     videoItem.name = history.title;
     videoItem.url = history.videosMp4;
-    videoItem.resourceID = history.videoID;
-    videoItem.record = [NSString stringWithFormat:@"%f", history.watchRecord.floatValue / history.totalTime.floatValue];
+    videoItem.resourceID = history.resourceId;
+    videoItem.record = history.watchRecord;
     videoItem.baseViewController = self;
+    self.videoItem = videoItem;
     [videoItem browseFile];
 }
 @end
