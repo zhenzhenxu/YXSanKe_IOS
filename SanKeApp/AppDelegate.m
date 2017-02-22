@@ -30,7 +30,7 @@
     [TalkingData sessionStarted:[SKConfigManager sharedInstance].TalkingDataAppID withChannelId:[SKConfigManager sharedInstance].channel];
     
     [GlobalUtils setupCore];
-    [UpgradeManager checkForUpgrade];
+//    [UpgradeManager checkForUpgrade];//当前版本暂不做升级界面
 //    [StageSubjectDataManager updateToLatestData];//当前版本的学科学段从本地取,不更新
     [self registerNotifications];
     

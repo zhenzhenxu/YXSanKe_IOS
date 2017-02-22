@@ -41,9 +41,9 @@ static const NSInteger kNotSelectedTag = -1;
     flowLayout.scrollDirection = UICollectionViewScrollDirectionVertical;
     flowLayout.minimumInteritemSpacing = 10;
     flowLayout.minimumLineSpacing = 7;
-    flowLayout.headerReferenceSize = CGSizeMake(self.width, 25);
+    flowLayout.headerReferenceSize = CGSizeMake(self.width, 28);
     flowLayout.footerReferenceSize = CGSizeZero;
-    flowLayout.sectionInset = UIEdgeInsetsMake(12, 10, 14, 10);
+    flowLayout.sectionInset = UIEdgeInsetsMake(10, 10, 14, 10);
     
     self.collectionView = [[UICollectionView alloc] initWithFrame:CGRectZero collectionViewLayout:flowLayout];
     self.collectionView.delegate = self;

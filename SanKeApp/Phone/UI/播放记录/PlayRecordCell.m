@@ -49,23 +49,23 @@
 - (void)setupLayout {
     [self.posterImagView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.contentView.mas_top).offset(15.0f);
-        make.left.equalTo(self.contentView.mas_left).offset(19.0f);
+        make.left.equalTo(self.contentView.mas_left).offset(18.0f);
         make.size.mas_offset(CGSizeMake(80.0f, 80.0f));
     }];
     
     [self.contentLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.posterImagView.mas_right).offset(12.0f);
-        make.top.equalTo(self.contentView.mas_top).offset(16.0);
+        make.top.equalTo(self.posterImagView).offset(1.0);
         make.right.equalTo(self.contentView.mas_right).offset(-20.0);
     }];
     
     [self.allTimeLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.contentLabel.mas_left);
-        make.top.equalTo(self.contentLabel.mas_bottom).offset(30.0f);
+        make.bottom.equalTo(self.posterImagView).offset(1.0f);
     }];
     
     [self.playTimeLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.right.equalTo(self.contentLabel.mas_right);
+        make.right.equalTo(self.contentLabel.mas_right).offset(-2.0f);
         make.top.equalTo(self.allTimeLabel.mas_top);
     }];
 }

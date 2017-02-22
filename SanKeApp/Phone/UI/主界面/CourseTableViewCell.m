@@ -54,25 +54,25 @@
 - (void)setupLayout {    
     [self.posterImagView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.contentView.mas_top).offset(15.0f);
-        make.left.equalTo(self.contentView.mas_left).offset(19.0f);
+        make.left.equalTo(self.contentView.mas_left).offset(18.0f);
         make.size.mas_offset(CGSizeMake(80.0f, 80.0f));
     }];
     
     [self.titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.posterImagView.mas_right).offset(12.0f);
-        make.top.equalTo(self.contentView.mas_top).offset(16.0);
+        make.top.equalTo(self.posterImagView);
         make.right.lessThanOrEqualTo(self.contentView.mas_right).offset(-20.0);
     }];
     
     [self.contentLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.titleLabel.mas_left);
-        make.top.equalTo(self.titleLabel.mas_bottom).offset(8.0);
+        make.top.equalTo(self.titleLabel.mas_bottom).offset(7.0);
         make.right.equalTo(self.contentView.mas_right).offset(-20.0);
     }];
     
     [self.expertLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.contentLabel.mas_left);
-        make.top.equalTo(self.contentLabel.mas_bottom).offset(8.0);
+        make.top.equalTo(self.contentLabel.mas_bottom).offset(7.0);
         make.right.equalTo(self.contentView.mas_right).offset(-20.0);
     }];
 }

@@ -51,8 +51,8 @@
     }];
     [self.contentView addSubview:actionView];
     [actionView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.mas_equalTo(50);
-        make.right.mas_equalTo(-50);
+        make.left.mas_equalTo(75*[UIScreen mainScreen].bounds.size.width/375);
+        make.right.mas_equalTo(-75*[UIScreen mainScreen].bounds.size.width/375);
         make.bottom.mas_equalTo(-90);
         make.height.mas_equalTo(40);
     }];
