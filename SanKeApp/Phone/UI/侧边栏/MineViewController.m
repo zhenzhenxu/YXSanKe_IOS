@@ -34,12 +34,20 @@
     [super viewDidLoad];
     self.title = @"个人信息";
     self.view.backgroundColor = [UIColor whiteColor];
+    [self setupNavgationBar];
     [self setupUI];
     [self setupInfoPicker];
     [self LoadData];
     // Do any additional setup after loading the view.
 }
 
+- (void)setupNavgationBar {
+    UINavigationBar *navigationBar = self.navigationController.navigationBar;
+    [navigationBar setBackgroundImage:[UIImage yx_imageWithColor:[UIColor colorWithHexString:@"ffffff"]]
+                       forBarPosition:UIBarPositionAny
+                           barMetrics:UIBarMetricsDefault];
+    [navigationBar setShadowImage:[UIImage new]];
+}
 - (void)setupUI {
     self.tableView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
     self.tableView.delegate = self;

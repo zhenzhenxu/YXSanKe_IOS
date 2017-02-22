@@ -48,7 +48,7 @@
     self.contentLabel.textColor = [UIColor colorWithHexString:@"999999"];
     
     self.selectedButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    [self.selectedButton setImage:[UIImage imageNamed:@"下拉"] forState:UIControlStateNormal];
+    [self.selectedButton setImage:[UIImage imageNamed:@"学科"] forState:UIControlStateNormal];
     [self.selectedButton addTarget:self action:@selector(selectedButtonAction:) forControlEvents:UIControlEventTouchUpInside];
     
     self.lineView = [[UIView alloc]init];
@@ -82,8 +82,13 @@
 }
 
 - (void)configTitle:(NSString *)title content:(NSString *)content {
+    if (isEmpty(content)) {
+        self.contentLabel.text = @"请选择";
+    }else {
+        
+        self.contentLabel.text = content;
+    }
     self.titleLabel.text = title;
-    self.contentLabel.text = content;
 }
 
 - (void)selectedButtonAction:(UIButton *)sender {

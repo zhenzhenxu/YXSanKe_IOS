@@ -32,7 +32,7 @@
     }];
     
     UIImageView *titleImageView = [[UIImageView alloc]init];
-    titleImageView.image = [UIImage imageNamed:@"教材通"];
+    titleImageView.image = [UIImage imageNamed:@"i教研"];
     titleImageView.contentMode = UIViewContentModeScaleAspectFit;
     [self addSubview:titleImageView];
     [titleImageView mas_makeConstraints:^(MASConstraintMaker *make) {

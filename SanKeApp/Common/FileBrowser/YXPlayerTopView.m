@@ -80,7 +80,7 @@
     
     [sep0 mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.mas_equalTo(@0);
-        make.size.mas_equalTo(CGSizeMake(1/[UIScreen mainScreen].scale, 16));
+        make.size.mas_equalTo(CGSizeMake(1/[UIScreen mainScreen].scale, 11));
         make.left.mas_equalTo(self.mas_left).offset(50.0f);
     }];
 

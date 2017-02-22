@@ -61,6 +61,7 @@ static const NSInteger kNotSelectedTag = -1;
     }];
     
     UIButton *resetButton = [[UIButton alloc]init];
+    resetButton.titleLabel.font = [UIFont systemFontOfSize:15.0];
     [resetButton setBackgroundImage:[UIImage yx_imageWithColor:[[UIColor colorWithHexString:@"d65b4b"] colorWithAlphaComponent:0.2]] forState:UIControlStateNormal];
     [resetButton setTitle:@"重置" forState:UIControlStateNormal];
     [resetButton setTitleColor:[UIColor colorWithHexString:@"d65b4b"] forState:UIControlStateNormal];
@@ -70,6 +71,7 @@ static const NSInteger kNotSelectedTag = -1;
     }];
     
     UIButton *doneButton = [[UIButton alloc]init];
+    doneButton.titleLabel.font = [UIFont systemFontOfSize:15.0];
     [doneButton setBackgroundImage:[UIImage yx_imageWithColor:[UIColor colorWithHexString:@"d65b4b"]] forState:UIControlStateNormal];
     [doneButton setTitle:@"完成" forState:UIControlStateNormal];
     [doneButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
