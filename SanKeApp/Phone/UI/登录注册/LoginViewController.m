@@ -110,8 +110,10 @@
         return;
     }
     WEAK_SELF
+    [self startLoading];
     [LoginDataManager loginWithName:self.usernameView.text password:self.passwordView.text completeBlock:^(NSError *error) {
         STRONG_SELF
+        [self stopLoading];
         if (error) {
             [self showToast:error.localizedDescription];
             return;
@@ -126,8 +128,10 @@
 
 - (void)touristLogin {
     WEAK_SELF
+    [self startLoading];
     [LoginDataManager touristLoginWithCompleteBlock:^(NSError *error) {
         STRONG_SELF
+        [self stopLoading];
         if (error) {
             [self showToast:error.localizedDescription];
             return;

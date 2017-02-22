@@ -60,7 +60,6 @@
     }];
     
     self.emptyView = [[EmptyView alloc]init];
-    self.emptyView.backgroundColor = [UIColor whiteColor];
     self.errorView = [[ErrorView alloc]init];
     @weakify(self);
     [self.errorView setRetryBlock:^{
