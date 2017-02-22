@@ -128,11 +128,11 @@ static const CGFloat margin = 10;
     
 }
 
-- (void)layoutSubviews{
-    self.bottomScrollView.contentSize = CGSizeMake(self.bottomScrollView.frame.size.width*self.childViewControllers.count, self.bottomScrollView.frame.size.height);
-    self.topScrollView.contentSize = CGSizeMake( kScreenWidth / 4.0f * self.childViewControllers.count, 44);
-}
-
+//- (void)layoutSubviews{
+//    self.bottomScrollView.contentSize = CGSizeMake(self.bottomScrollView.frame.size.width*self.childViewControllers.count, self.bottomScrollView.frame.size.height);
+//    self.topScrollView.contentSize = CGSizeMake( kScreenWidth / 4.0f * self.childViewControllers.count, 44);
+//}
+#pragma mark - UIScrollViewDelegate
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView{
     NSInteger index = scrollView.contentOffset.x/scrollView.frame.size.width;
     CGFloat offsetx = 0.0f;
