@@ -12,8 +12,9 @@
 #import "AloneCourseViewController.h"
 #import "CourseVideoFetch.h"
 #import "FilterSelectionView.h"
+#import "YXRecordManager.h"
 @implementation CourseVideoItem
-@end;
+@end
 @interface CourseViewController ()
 @property (nonatomic, strong) ChannelTabFilterRequest *selectionRequest;
 @property (nonatomic, strong) YXFileVideoItem *fileVideoItem;
@@ -34,6 +35,11 @@
     [self setupUI];
     self.tableView.backgroundColor = [UIColor colorWithHexString:@"e6e6e6"];
     self.title = self.videoItem.name;
+    static BOOL first = YES;
+    if (first) {
+        [YXRecordManager addRecordWithType:YXRecordPlateType];
+        first = NO;
+    }
 }
 
 - (void)viewWillAppear:(BOOL)animated{

@@ -161,6 +161,13 @@ static const CGFloat margin = 10;
     self.chooseViewController.view.frame = CGRectMake(self.bottomScrollView.frame.size.width*index, 0, self.bottomScrollView.frame.size.width, self.bottomScrollView.frame.size.height);
     self.chooseViewController.view.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
     [self.bottomScrollView addSubview:self.chooseViewController.view];
+    
+    YXProblemItem *item = [YXProblemItem new];
+    item.objType = @"section";
+    item.objId = self.chooseViewController.videoItem.catID;
+    item.objName = self.chooseViewController.videoItem.name;
+    item.type = YXRecordGradeType;
+    [YXRecordManager addRecord:item];
 }
 
 
