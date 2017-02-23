@@ -36,13 +36,6 @@
 
 - (void)saveRecord {
     SaveRecordRequest *request = [[SaveRecordRequest alloc]init];
-    if (self.record.floatValue - 1 > 0) {
-        self.record = @"1";
-    }else if (self.record.floatValue < 0){
-        self.record = @"0";
-    }else if ([self.record hasPrefix:@"-"]){
-        self.record = @"0";
-    }
     request.watch_record = self.record;
     request.total_time = self.duration;
     request.resource_id = self.resourceID;

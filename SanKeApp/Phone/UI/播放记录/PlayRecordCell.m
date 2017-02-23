@@ -84,12 +84,17 @@
     }else{
         historyTime = _history.watchRecord.floatValue/_history.totalTime.floatValue * 100;
     }
-    self.playTimeLabel.text = [NSString stringWithFormat:@"已观看%0.1f%%", _history.watchRecord.floatValue/_history.totalTime.floatValue * 100];
+    if (historyTime - 100 > 0) {
+        historyTime = 100;
+    }else if (historyTime < 0){
+        historyTime = 0;
+    }
+    NSLog(@"%@, %@", _history.watchRecord, _history.totalTime);
+    self.playTimeLabel.text = [NSString stringWithFormat:@"已观看%0.1f%%", historyTime];
     [self.posterImagView sd_setImageWithURL:[NSURL URLWithString:_history.thumb] placeholderImage:[UIImage imageNamed:@"默认"]];
 }
 - (NSString *)formatShowTime:(NSString *)time {
     NSString *format = [NSString stringWithFormat:@"%0.2zd:%0.2zd:%0.2zd",time.integerValue/60/60, time.integerValue/60%60, time.integerValue%60];
-    NSLog(@"%@, %@", format, time);
     return format;
     
 }

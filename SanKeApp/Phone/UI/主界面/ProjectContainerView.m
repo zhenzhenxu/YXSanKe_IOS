@@ -114,6 +114,7 @@ static const CGFloat margin = 10;
     self.chooseViewController.projectNavRightView.leftButton.hidden = [self.chooseViewController.videoItem.catID isEqualToString:@"0"];
     
     [self recordUp];
+    [self scrollTitleWithIndex:index];
     
     if (self.chooseViewController.view.superview)
         return;
@@ -121,7 +122,6 @@ static const CGFloat margin = 10;
     self.chooseViewController.view.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
     [self.bottomScrollView addSubview:self.chooseViewController.view];
     
-    [self scrollTitleWithIndex:index];
 }
 
 - (void)recordUp{

@@ -19,6 +19,9 @@ static const NSInteger kNotSelectedTag = -1;
 @property (nonatomic, assign) NSInteger firstLevelSelectedIndex;
 @property (nonatomic, assign) NSInteger secondLevelSelectedIndex;
 @property (nonatomic, assign) NSInteger thirdLevelSelectedIndex;
+@property (nonatomic, assign) NSInteger tFirstLevelSelectedIndex;
+@property (nonatomic, assign) NSInteger tSecondLevelSelectedIndex;
+@property (nonatomic, assign) NSInteger tThirdLevelSelectedIndex;
 @property (nonatomic, assign) BOOL needReset;
 @end
 
@@ -63,6 +66,7 @@ static const NSInteger kNotSelectedTag = -1;
     [resetButton setTitleColor:[UIColor colorWithHexString:@"d65b4b"] forState:UIControlStateNormal];
     [[resetButton rac_signalForControlEvents:UIControlEventTouchUpInside] subscribeNext:^(id x) {
         self.needReset = YES;
+        [self resetAction];
     }];
     
     UIButton *doneButton = [[UIButton alloc]init];
@@ -89,17 +93,25 @@ static const NSInteger kNotSelectedTag = -1;
 
 #pragma mark -  Button Actions
 - (void)resetAction {
+    
+    self.tFirstLevelSelectedIndex = self.firstLevelSelectedIndex;
+    self.tSecondLevelSelectedIndex = self.secondLevelSelectedIndex;
+    self.tThirdLevelSelectedIndex = self.thirdLevelSelectedIndex;
+    
     self.firstLevelSelectedIndex = kNotSelectedTag;
     self.secondLevelSelectedIndex = kNotSelectedTag;
     self.thirdLevelSelectedIndex = kNotSelectedTag;
+    
     [self.collectionView reloadData];
 }
 
+- (void)cancelReset{
+    self.firstLevelSelectedIndex = self.tFirstLevelSelectedIndex;
+    self.secondLevelSelectedIndex = self.tSecondLevelSelectedIndex;
+    self.tThirdLevelSelectedIndex = self.thirdLevelSelectedIndex;
+}
+
 - (void)doneAction {
-    if (self.needReset) {
-        self.needReset = NO;
-        [self resetAction];
-    }
 //    if (self.firstLevelSelectedIndex == kNotSelectedTag) {
 //        DDLogError(@"您尚未进行任何选择");
 //        return;

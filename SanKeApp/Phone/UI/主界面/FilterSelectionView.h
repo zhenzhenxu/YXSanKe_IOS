@@ -12,4 +12,5 @@
 @interface FilterSelectionView : UIView
 @property (nonatomic, strong) ChannelTabFilterRequestItem_data *data;
 @property (nonatomic, copy) void(^completeBlock)(NSString *filterString);
+- (void)cancelReset;
 @end
