@@ -19,6 +19,7 @@ static const NSInteger kNotSelectedTag = -1;
 @property (nonatomic, assign) NSInteger firstLevelSelectedIndex;
 @property (nonatomic, assign) NSInteger secondLevelSelectedIndex;
 @property (nonatomic, assign) NSInteger thirdLevelSelectedIndex;
+@property (nonatomic, assign) BOOL needReset;
 @end
 
 @implementation FilterSelectionView
@@ -29,6 +30,7 @@ static const NSInteger kNotSelectedTag = -1;
         self.secondLevelSelectedIndex = kNotSelectedTag;
         self.thirdLevelSelectedIndex = kNotSelectedTag;
         [self setupUI];
+        self.needReset = NO;
     }
     return self;
 }
@@ -59,7 +61,9 @@ static const NSInteger kNotSelectedTag = -1;
     [resetButton setBackgroundImage:[UIImage yx_imageWithColor:[[UIColor colorWithHexString:@"d65b4b"] colorWithAlphaComponent:0.2]] forState:UIControlStateNormal];
     [resetButton setTitle:@"重置" forState:UIControlStateNormal];
     [resetButton setTitleColor:[UIColor colorWithHexString:@"d65b4b"] forState:UIControlStateNormal];
-    [resetButton addTarget:self action:@selector(resetAction) forControlEvents:UIControlEventTouchUpInside];
+    [[resetButton rac_signalForControlEvents:UIControlEventTouchUpInside] subscribeNext:^(id x) {
+        self.needReset = YES;
+    }];
     
     UIButton *doneButton = [[UIButton alloc]init];
     [doneButton setBackgroundImage:[UIImage yx_imageWithColor:[UIColor colorWithHexString:@"d65b4b"]] forState:UIControlStateNormal];
@@ -92,11 +96,20 @@ static const NSInteger kNotSelectedTag = -1;
 }
 
 - (void)doneAction {
-    if (self.firstLevelSelectedIndex == kNotSelectedTag) {
-        DDLogError(@"您尚未进行任何选择");
-        return;
+    if (self.needReset) {
+        self.needReset = NO;
+        [self resetAction];
     }
-    ChannelTabFilterRequestItem_filter *first = self.data.filters[self.firstLevelSelectedIndex];
+//    if (self.firstLevelSelectedIndex == kNotSelectedTag) {
+//        DDLogError(@"您尚未进行任何选择");
+//        return;
+//    }
+    ChannelTabFilterRequestItem_filter *first;
+    if (self.firstLevelSelectedIndex == kNotSelectedTag) {
+        first = nil;
+    }else{
+        first = self.data.filters[self.firstLevelSelectedIndex];
+    }
     ChannelTabFilterRequestItem_filter *second = nil;
     ChannelTabFilterRequestItem_filter *third = nil;
     if (self.secondLevelSelectedIndex != kNotSelectedTag) {
