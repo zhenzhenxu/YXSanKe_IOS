@@ -26,6 +26,7 @@ static const NSInteger kNotSelectedTag = -1;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.title = @"i教研";
     // Do any additional setup after loading the view.
     if (self.navigationController.viewControllers.count == 1) {
         [self setupRightWithImageNamed:@"登陆" highlightImageNamed:@"登陆"];
