@@ -32,9 +32,9 @@
     self.autoresizingMask = UIViewAutoresizingFlexibleWidth;
     // 2.加载时间
     self.lastUpdateTime = [[NSUserDefaults standardUserDefaults] objectForKey:MJRefreshHeaderTimeKey];
-    _statusLabel.hidden = YES;
-    _arrowImage.hidden = YES;
-    _lastUpdateTimeLabel.hidden = YES;
+//    _statusLabel.hidden = YES;
+//    _arrowImage.hidden = YES;
+//    _lastUpdateTimeLabel.hidden = YES;
 //    self.loadView.hidden = YES;
 }
 

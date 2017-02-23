@@ -119,12 +119,12 @@
         
         // 6.设置默认状态
         [self setState:MJRefreshStateNormal];
-        _loadView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+//        _loadView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
 //        _loadView.layer.cornerRadius = 22.5f;
 //        _loadView.layer.borderColor = [UIColor colorWithHexString:@"b3bdc6"].CGColor;
 //        _loadView.layer.borderWidth = 4.0f;
 //        _loadView.hidden = YES;
-        [self addSubview:_loadView];
+//        [self addSubview:_loadView];
 
     }
     return self;
@@ -233,7 +233,7 @@
             if (_refreshStateChangeBlock) {
                 _refreshStateChangeBlock(self, MJRefreshStateNormal);
             }
-//           [_loadView startAnimating];
+           [_loadView startAnimating];
         } else if (_state == MJRefreshStateNormal && offsetY > validOffsetY) {
             // 转为即将刷新状态
             [self setState:MJRefreshStatePulling];
@@ -326,12 +326,12 @@
     switch (state) {
         case MJRefreshStateNormal: // 普通状态
             // 显示箭头
-            //_arrowImage.hidden = NO;
+            _arrowImage.hidden = NO;
             // 停止转圈圈
             _imageView.alpha = 0;
             [_imageView.layer removeAllAnimations];
             
-            //[_activityView stopAnimating];
+            [_activityView stopAnimating];
             [_loadView stopAnimating];
             
             // 说明是刚刷新完毕 回到 普通状态的
@@ -364,9 +364,9 @@
             [CATransaction commit];
             
             [_loadView startAnimating];
-            //[_activityView startAnimating];
+            [_activityView startAnimating];
             // 隐藏箭头
-            //_arrowImage.hidden = YES;
+            _arrowImage.hidden = YES;
             _arrowImage.transform = CGAffineTransformIdentity;
             
             // 通知代理
