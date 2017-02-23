@@ -119,7 +119,7 @@
         
         // 6.设置默认状态
         [self setState:MJRefreshStateNormal];
-        _loadView = [[UIActivityIndicatorView alloc] initWithFrame:CGRectMake(0, 0, 45.0f, 45.0f)];
+        _loadView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
 //        _loadView.layer.cornerRadius = 22.5f;
 //        _loadView.layer.borderColor = [UIColor colorWithHexString:@"b3bdc6"].CGColor;
 //        _loadView.layer.borderWidth = 4.0f;
@@ -246,7 +246,7 @@
             if (_refreshStateChangeBlock) {
                 _refreshStateChangeBlock(self, MJRefreshStatePulling);
             }
-//            [_loadView startAnimating];
+            [_loadView startAnimating];
         }
     } else { // 即将刷新 && 手松开
         if (_state == MJRefreshStatePulling) {
