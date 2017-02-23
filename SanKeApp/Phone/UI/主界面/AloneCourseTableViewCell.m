@@ -10,6 +10,7 @@
 #import "PlayImageView.h"
 @interface AloneCourseTableViewCell ()
 @property (nonatomic, strong) PlayImageView *posterImagView;
+@property (nonatomic, strong) UILabel *titleLabel;
 @property (nonatomic, strong) UILabel *contentLabel;
 @property (nonatomic, strong) UILabel *expertLabel;
 @end
@@ -29,8 +30,14 @@
     self.posterImagView.backgroundColor = [UIColor redColor];
     [self.contentView addSubview:self.posterImagView];
     
+    self.titleLabel = [[UILabel alloc] init];
+    self.titleLabel.font = [UIFont systemFontOfSize:14.0f];
+    self.titleLabel.textColor = [UIColor colorWithHexString:@"333333"];
+    self.titleLabel.numberOfLines = 1;
+    [self.contentView addSubview:self.titleLabel];
+    
     self.contentLabel = [[UILabel alloc] init];
-    self.contentLabel.font = [UIFont systemFontOfSize:14.0f];
+    self.contentLabel.font = [UIFont systemFontOfSize:12.0f];
     self.contentLabel.textColor = [UIColor colorWithHexString:@"333333"];
     self.contentLabel.numberOfLines = 2;
     [self.contentView addSubview:self.contentLabel];
@@ -50,20 +57,27 @@
         make.size.mas_offset(CGSizeMake(80.0f, 80.0f));
     }];
     
-    [self.contentLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+    [self.titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.posterImagView.mas_right).offset(12.0f);
-        make.top.equalTo(self.contentView.mas_top).offset(16.0);
+        make.top.equalTo(self.posterImagView);
+        make.right.lessThanOrEqualTo(self.contentView.mas_right).offset(-20.0);
+    }];
+    
+    [self.contentLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(self.titleLabel.mas_left);
+        make.top.equalTo(self.titleLabel.mas_bottom).offset(7.0);
         make.right.equalTo(self.contentView.mas_right).offset(-20.0);
     }];
     
     [self.expertLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.contentLabel.mas_left);
-        make.top.equalTo(self.contentLabel.mas_bottom).offset(8.0);
+        make.top.equalTo(self.contentLabel.mas_bottom).offset(7.0);
         make.right.equalTo(self.contentView.mas_right).offset(-20.0);
     }];
 }
 - (void)setElement:(CourseVideoRequestItem_Data_Elements *)element {
     _element = element;
+    self.titleLabel.text = _element.title;
     NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
     paragraphStyle.lineSpacing = 4.0f;
     paragraphStyle.lineBreakMode = NSLineBreakByTruncatingTail;

@@ -46,7 +46,7 @@
     
     self.confirmButton = [[UIButton alloc] init];
     [self.confirmButton setTitle:@"确定" forState:UIControlStateNormal];
-    [self.confirmButton setTitleColor:[UIColor colorWithHexString:@"0067be"] forState:UIControlStateNormal];
+    [self.confirmButton setTitleColor:[UIColor colorWithHexString:@"1d878b"] forState:UIControlStateNormal];
     [self.confirmButton addTarget:self action:@selector(confirmAction:) forControlEvents:UIControlEventTouchUpInside];
     self.confirmButton.titleLabel.font = self.cancelButton.titleLabel.font;
     

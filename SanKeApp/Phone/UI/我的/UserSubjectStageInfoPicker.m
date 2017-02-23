@@ -69,7 +69,7 @@
 - (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component
 {
     UILabel* selectLabel = (UILabel *)[pickerView viewForRow:row forComponent:component];
-    selectLabel.textColor = [UIColor colorWithHexString:@"0067be"];
+    selectLabel.textColor = [UIColor colorWithHexString:@"1d878b"];
     switch (component) {
         case 0:
         {
@@ -123,6 +123,12 @@
             *stop = YES;
         }
     }];
+//    if (!self.selectedStage) {
+//        self.selectedStage = self.stageAndSubjectItem.data.stages.firstObject;
+//        self.selectedSubjects = self.selectedStage.subjects;
+//        self.selectedSubject = self.selectedSubjects.firstObject;
+//        return;
+//    }
     [self.selectedSubjects enumerateObjectsUsingBlock:^(FetchStageSubjectRequestItem_subject *subject, NSUInteger idx, BOOL *stop) {
         if ([userModel.subject.subjectID isEqualToString:subject.subjectID]) {
             self.selectedSubject = subject;

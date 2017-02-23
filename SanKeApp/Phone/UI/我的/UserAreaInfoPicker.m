@@ -86,7 +86,7 @@
 - (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component
 {
     UILabel* selectLabel = (UILabel *)[pickerView viewForRow:row forComponent:component];
-    selectLabel.textColor = [UIColor colorWithHexString:@"0067be"];
+    selectLabel.textColor = [UIColor colorWithHexString:@"1d878b"];
     switch (component) {
         case 0:
         {
@@ -167,6 +167,14 @@
             *stop = YES;
         }
     }];
+    if (!self.selectedProvince) {
+        self.selectedProvince = self.model.areas.firstObject;
+        self.selectedCitys = self.selectedProvince.subAreas;
+        self.selectedCity = self.selectedCitys.firstObject;
+        self.selectedCounties = self.selectedCity.subAreas;
+        self.selectedCounty = self.selectedCounties.firstObject;
+        return;
+    }
     [self.selectedCitys enumerateObjectsUsingBlock:^(Area *subArea, NSUInteger idx, BOOL *stop) {
         if ([userModel.city.areaID isEqualToString:subArea.areaID]) {
             self.selectedCity = subArea;

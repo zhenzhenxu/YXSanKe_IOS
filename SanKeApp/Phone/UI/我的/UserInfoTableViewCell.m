@@ -49,12 +49,17 @@
     
     self.selectedButton = [UIButton buttonWithType:UIButtonTypeCustom];
     [self.selectedButton setImage:[UIImage imageNamed:@"学科"] forState:UIControlStateNormal];
-    [self.selectedButton addTarget:self action:@selector(selectedButtonAction:) forControlEvents:UIControlEventTouchUpInside];
     
     self.lineView = [[UIView alloc]init];
     self.lineView.backgroundColor = [UIColor colorWithHexString:@"e6e6e6"];
+    
+    UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(selectedAction)];
+    [self.contentView addGestureRecognizer:tapGestureRecognizer];
+    tapGestureRecognizer.delegate = self;
 }
-
+- (void)selectedAction {
+    BLOCK_EXEC(self.buttonActionBlock);;
+}
 - (void)setupLayout {
     [self.contentView addSubview:self.titleLabel];
     [self.contentView addSubview:self.contentLabel];
@@ -89,10 +94,6 @@
         self.contentLabel.text = content;
     }
     self.titleLabel.text = title;
-}
-
-- (void)selectedButtonAction:(UIButton *)sender {
-    BLOCK_EXEC(self.buttonActionBlock);
 }
 
 - (void)setSelectedButtonActionBlock:(SelectedButtonActionBlock)block {
