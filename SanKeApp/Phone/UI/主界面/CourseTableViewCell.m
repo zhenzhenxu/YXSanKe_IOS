@@ -91,7 +91,8 @@
 - (void)touchesEnded:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
     [super touchesEnded:touches withEvent:event];
     CGPoint location = [[[event allTouches] anyObject] locationInView:self];
-    if (CGRectContainsPoint(self.titleLabel.frame, location)) {
+    CGRect frame = CGRectMake(self.posterImagView.maxX, 0, self.width - self.posterImagView.maxX, self.height);
+    if (CGRectContainsPoint(frame, location)) {
         BLOCK_EXEC(self.ClickCourseTitleBlock);
     }
 }
