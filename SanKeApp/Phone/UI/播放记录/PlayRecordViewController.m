@@ -87,6 +87,7 @@
     videoItem.url = history.videosMp4;
     videoItem.resourceID = history.resourceId;
     videoItem.record = history.watchRecord;
+    videoItem.duration = history.totalTime;
     videoItem.baseViewController = self;
     self.videoItem = videoItem;
     [videoItem browseFile];

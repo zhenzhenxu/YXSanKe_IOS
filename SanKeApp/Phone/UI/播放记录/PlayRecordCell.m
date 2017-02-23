@@ -84,7 +84,7 @@
     }else{
         historyTime = _history.watchRecord.floatValue/_history.totalTime.floatValue * 100;
     }
-    self.playTimeLabel.text = [NSString stringWithFormat:@"已观看%0.1f%%", _history.watchRecord.floatValue * 100];
+    self.playTimeLabel.text = [NSString stringWithFormat:@"已观看%0.1f%%", _history.watchRecord.floatValue/_history.totalTime.floatValue * 100];
     [self.posterImagView sd_setImageWithURL:[NSURL URLWithString:_history.thumb] placeholderImage:[UIImage imageNamed:@"默认"]];
 }
 - (NSString *)formatShowTime:(NSString *)time {

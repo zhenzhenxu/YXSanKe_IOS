@@ -13,7 +13,7 @@
 #import "YXProblemItem.h"
 
 @interface YXFileVideoItem()<YXPlayProgressDelegate,YXBrowserExitDelegate>
-@property (nonatomic, strong) NSString *duration;
+
 @end
 
 @implementation YXFileVideoItem
@@ -82,11 +82,14 @@
 #pragma mark - YXPlayProgressDelegate
 - (void)playerProgress:(CGFloat)progress totalDuration:(NSTimeInterval)duration stayTime:(NSTimeInterval)time {
     self.duration = [NSString stringWithFormat:@"%.0f",duration];
-    self.record = [NSString stringWithFormat:@"%.0f",progress];
+    self.record = [NSString stringWithFormat:@"%.0f",progress*duration];
 }
 
 - (CGFloat)preProgress {
-    return self.record.floatValue;
+    if (self.duration.floatValue==0.f) {
+        return 0;
+    }
+    return self.record.floatValue/self.duration.floatValue;
 }
 
 #pragma mark - YXBrowserExitDelegate 
