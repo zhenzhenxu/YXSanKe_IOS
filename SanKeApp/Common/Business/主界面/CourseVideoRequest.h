@@ -12,7 +12,7 @@
 @interface CourseVideoRequestItem_Data_Elements : JSONModel
 @property (nonatomic ,copy) NSString<Optional> *resourceId;
 @property (nonatomic ,copy) NSString<Optional> *title;
-@property (nonatomic ,copy) NSString<Optional> *desc;
+//@property (nonatomic ,copy) NSString<Optional> *desc;
 @property (nonatomic ,copy) NSString<Optional> *author;
 @property (nonatomic ,copy) NSString<Optional> *thanks;
 @property (nonatomic ,copy) NSString<Optional> *icon;
@@ -22,6 +22,7 @@
 @property (nonatomic ,copy) NSString<Optional> *totalTime;
 @property (nonatomic ,copy) NSString<Optional> *catid;
 @property (nonatomic ,copy) NSString<Optional> *thumb;
+@property (nonatomic ,copy) NSString<Optional> *summary;
 
 @end
 @interface CourseVideoRequestItem_Data : JSONModel

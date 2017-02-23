@@ -113,12 +113,7 @@ static const CGFloat margin = 10;
     self.chooseViewController = self.childViewControllers[index];
     self.chooseViewController.projectNavRightView.leftButton.hidden = [self.chooseViewController.videoItem.catID isEqualToString:@"0"];
     
-    YXProblemItem *item = [YXProblemItem new];
-    item.objType = @"section";
-    item.objId = self.chooseViewController.videoItem.catID;
-    item.objName = self.chooseViewController.videoItem.name;
-    item.type = YXRecordGradeType;
-    [YXRecordManager addRecord:item];
+    [self recordUp];
     
     if (self.chooseViewController.view.superview)
         return;
@@ -126,15 +121,19 @@ static const CGFloat margin = 10;
     self.chooseViewController.view.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
     [self.bottomScrollView addSubview:self.chooseViewController.view];
     
+    [self scrollTitleWithIndex:index];
 }
 
-//- (void)layoutSubviews{
-//    self.bottomScrollView.contentSize = CGSizeMake(self.bottomScrollView.frame.size.width*self.childViewControllers.count, self.bottomScrollView.frame.size.height);
-//    self.topScrollView.contentSize = CGSizeMake( kScreenWidth / 4.0f * self.childViewControllers.count, 44);
-//}
-#pragma mark - UIScrollViewDelegate
-- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView{
-    NSInteger index = scrollView.contentOffset.x/scrollView.frame.size.width;
+- (void)recordUp{
+    YXProblemItem *item = [YXProblemItem new];
+    item.objType = @"section";
+    item.objId = self.chooseViewController.videoItem.catID;
+    item.objName = self.chooseViewController.videoItem.name;
+    item.type = YXRecordClickType;
+    [YXRecordManager addRecord:item];
+}
+
+- (void)scrollTitleWithIndex:(NSInteger)index{
     CGFloat offsetx = 0.0f;
     for (UIButton *b in self.topScrollView.subviews) {
         if ([b isKindOfClass:[UIButton class]]) {
@@ -155,19 +154,25 @@ static const CGFloat margin = 10;
         CGPoint offset = CGPointMake(offsetx, self.topScrollView.contentOffset.y);
         [self.topScrollView setContentOffset:offset animated:YES];
     }
+}
+
+//- (void)layoutSubviews{
+//    self.bottomScrollView.contentSize = CGSizeMake(self.bottomScrollView.frame.size.width*self.childViewControllers.count, self.bottomScrollView.frame.size.height);
+//    self.topScrollView.contentSize = CGSizeMake( kScreenWidth / 4.0f * self.childViewControllers.count, 44);
+//}
+#pragma mark - UIScrollViewDelegate
+- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView{
+    NSInteger index = scrollView.contentOffset.x/scrollView.frame.size.width;
+    [self scrollTitleWithIndex:index];
+    
     self.chooseViewController = self.childViewControllers[index];
     self.chooseViewController.projectNavRightView.leftButton.hidden = [self.chooseViewController.videoItem.catID isEqualToString:@"0"];
+    [self recordUp];
     if (self.chooseViewController.view.superview) return;
     self.chooseViewController.view.frame = CGRectMake(self.bottomScrollView.frame.size.width*index, 0, self.bottomScrollView.frame.size.width, self.bottomScrollView.frame.size.height);
     self.chooseViewController.view.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
     [self.bottomScrollView addSubview:self.chooseViewController.view];
     
-    YXProblemItem *item = [YXProblemItem new];
-    item.objType = @"section";
-    item.objId = self.chooseViewController.videoItem.catID;
-    item.objName = self.chooseViewController.videoItem.name;
-    item.type = YXRecordGradeType;
-    [YXRecordManager addRecord:item];
 }
 
 

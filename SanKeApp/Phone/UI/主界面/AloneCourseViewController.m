@@ -27,7 +27,6 @@
     self.dataFetcher = fetcher;
     [super viewDidLoad];
     [self setupUI];
-    self.title = @"课程";
     self.tableView.backgroundColor = [UIColor colorWithHexString:@"e6e6e6"];
     YXProblemItem *item = [YXProblemItem new];
     item.objType = @"course";
