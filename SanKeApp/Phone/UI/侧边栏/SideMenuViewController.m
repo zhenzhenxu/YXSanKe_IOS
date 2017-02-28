@@ -24,6 +24,7 @@
 
 - (void)dealloc {
     DDLogDebug(@"%@释放啦",[self class]);
+    [[NSNotificationCenter defaultCenter]removeObserver:self];
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -51,6 +52,11 @@
     self.tableView.rowHeight = 45;
     self.tableView.backgroundColor = [UIColor whiteColor];
     [self.tableView registerClass:[SideTableViewCell class] forCellReuseIdentifier:@"SideTableViewCell"];
+    
+    [[[NSNotificationCenter defaultCenter]rac_addObserverForName:kUploadUserPicSuccessNotification object:nil]subscribeNext:^(id x) {
+        self.headerView.model = [UserManager sharedInstance].userModel;
+        DDLogDebug(@"侧边栏修改头像");
+    }];
 }
 
 - (void)setupLayout {

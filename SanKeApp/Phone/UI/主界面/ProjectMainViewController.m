@@ -66,9 +66,10 @@
     button.frame = CGRectMake(0, 0, 32.0f, 32.0f);
     NSString *icon = [UserManager sharedInstance].userModel.portraitUrl;
     [button sd_setBackgroundImageWithURL:[NSURL URLWithString:icon] forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"大头像"]];
-//    [[[NSNotificationCenter defaultCenter]rac_addObserverForName:@"成功修改头像的通知" object:nil]subscribeNext:^(id x) {
-//        [button sd_setBackgroundImageWithURL:[NSURL URLWithString:@""] forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"默认用户头像"]];
-//    }];//现在用户头像不能修改,先注释掉,待后续修改头像的时候再加上
+    [[[NSNotificationCenter defaultCenter]rac_addObserverForName:kUploadUserPicSuccessNotification object:nil]subscribeNext:^(id x) {
+        DDLogDebug(@"主界面修改头像");
+        [button sd_setBackgroundImageWithURL:[NSURL URLWithString:[UserManager sharedInstance].userModel.portraitUrl] forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"默认用户头像"]];
+    }];
     [[button rac_signalForControlEvents:UIControlEventTouchUpInside]subscribeNext:^(id x) {
         [YXDrawerController showDrawer];
     }];

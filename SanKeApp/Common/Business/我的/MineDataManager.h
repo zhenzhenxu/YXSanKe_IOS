@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 
 extern NSString * const kStageSubjectDidChangeNotification;
+extern NSString * const kUploadUserPicSuccessNotification;
 
 @interface MineDataManager : NSObject
 //设置学科学段
