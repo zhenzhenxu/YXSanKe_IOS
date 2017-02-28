@@ -17,7 +17,8 @@
 #import "MineUserModel.h"
 #import "YXRecordManager.h"
 #import "YXProblemItem.h"
-
+#import "YXImagePickerController.h"
+#import "ChangeAvatarView.h"
 @interface MineViewController ()<UITableViewDelegate, UITableViewDataSource>
 
 @property (nonatomic, strong) MineUserModel *userModel;
@@ -25,6 +26,8 @@
 @property (nonatomic, strong) UserInfoPickerView *userInfoPickerView;
 @property (nonatomic, strong) UserSubjectStageInfoPicker *subjectStageInfoPicker;
 @property (nonatomic, strong) UserAreaInfoPicker *areaInfoPicker;
+@property (nonatomic, strong) YXImagePickerController *imagePickerController;
+@property (nonatomic, strong) ChangeAvatarView *changeAvatarView;
 
 @end
 
@@ -74,6 +77,8 @@
         STRONG_SELF
         [self updateSelectedInfo];
     }];
+    
+    self.imagePickerController = [[YXImagePickerController alloc] init];
 }
 
 - (void)setupInfoPicker {
@@ -194,7 +199,14 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     if (indexPath.row == 0) {
         UserImageTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"UserImageTableViewCell" forIndexPath:indexPath];
-        cell.model = self.userModel;
+        cell.model = [UserManager sharedInstance].userModel;
+        WEAK_SELF
+        [cell setEditBlock:^{
+            DDLogDebug(@"修改头像");
+            STRONG_SELF
+            [self.view endEditing:YES];
+            [self changeAvatar];
+        }];
         return cell;
     }else {
         UserInfoTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"UserInfoTableViewCell" forIndexPath:indexPath];
@@ -238,6 +250,73 @@
     }else {
         return 50;
     }
+}
+
+#pragma mark - changeAvatar
+- (void)changeAvatar
+{
+    self.changeAvatarView = [[ChangeAvatarView alloc]init];
+    [self.view addSubview:self.changeAvatarView];
+    AlertView *alert = [[AlertView alloc]init];
+    alert.hideWhenMaskClicked = YES;
+    alert.maskColor = [[UIColor blackColor]colorWithAlphaComponent:0.4];
+    alert.contentView = self.changeAvatarView;
+    WEAK_SELF
+    [alert showWithLayout:^(AlertView *view) {
+        STRONG_SELF
+        [self.changeAvatarView mas_remakeConstraints:^(MASConstraintMaker *make) {
+            make.left.right.equalTo(view);
+            make.height.mas_equalTo(160.0f);
+            make.bottom.equalTo(view);
+        }];
+        [view layoutIfNeeded];
+     }];
+    [self.changeAvatarView setChangeAvatarBlock:^(NSInteger idx) {
+        STRONG_SELF
+        [alert hide];
+        [self pickImageAction:idx];
+    }];
+}
+
+- (void)pickImageAction:(NSInteger)index {
+    switch (index) {
+        case 0:
+        {
+            WEAK_SELF
+            [self.imagePickerController pickImageWithSourceType:UIImagePickerControllerSourceTypeCamera completion:^(UIImage *selectedImage) {
+                STRONG_SELF
+                [self updateWithHeaderImage:selectedImage];
+            }];
+        }
+            break;
+        case 1:{
+            WEAK_SELF
+            [self.imagePickerController pickImageWithSourceType:UIImagePickerControllerSourceTypePhotoLibrary completion:^(UIImage *selectedImage) {
+                STRONG_SELF
+                [self updateWithHeaderImage:selectedImage];
+            }];
+            
+        }
+            break;
+            
+        default:
+            break;
+    }
+}
+
+- (void)updateWithHeaderImage:(UIImage *)image
+{
+    DDLogDebug(@"更新头像%@",image);
+    if (!image) {
+        return;
+    }
+    [MineDataManager updateHeadPortrait:image completeBlock:^(NSError *error) {
+        if (error) {
+            [self showToast:error.localizedDescription];
+        }
+        UserImageTableViewCell *cell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
+        [cell setModel:[UserManager sharedInstance].userModel];
+    }];
 }
 
 #pragma mark - InfoPicker

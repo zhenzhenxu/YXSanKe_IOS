@@ -8,6 +8,10 @@
 
 #import <UIKit/UIKit.h>
 @class MineUserModel;
+typedef void(^EditBlock)(void);
+
 @interface UserImageTableViewCell : UITableViewCell
-@property (nonatomic, strong) MineUserModel *model;
+
+@property (nonatomic, strong) UserModel *model;
+- (void)setEditBlock:(EditBlock)block;
 @end

@@ -9,9 +9,11 @@
 #import "UserImageTableViewCell.h"
 #import "MineUserModel.h"
 
-@interface UserImageTableViewCell ()
+@interface UserImageTableViewCell ()<UIGestureRecognizerDelegate>
 @property (nonatomic, strong) UIImageView *backgroundImageView;
 @property (nonatomic, strong) UIImageView *iconImageView;
+@property (nonatomic, strong) UILabel *editLabel;
+@property (nonatomic, copy) EditBlock block;
 @end
 
 @implementation UserImageTableViewCell
@@ -46,10 +48,24 @@
     self.iconImageView.layer.borderColor = [UIColor whiteColor].CGColor;
     self.iconImageView.layer.borderWidth = 1;
     self.iconImageView.clipsToBounds = YES;
+    self.iconImageView.userInteractionEnabled = YES;
+    UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(editIconAction)];
+    [self.iconImageView addGestureRecognizer:tapGestureRecognizer];
+    tapGestureRecognizer.delegate = self;
+    
+    self.editLabel = [[UILabel alloc]init];
+    self.editLabel.font = [UIFont systemFontOfSize:12.0f];
+    self.editLabel.textColor = [UIColor colorWithHexString:@"4691a6"];
+    self.editLabel.text = @"编辑头像";
+    self.editLabel.userInteractionEnabled = YES;
+    UITapGestureRecognizer *tapGestureRecognizer1 = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(editIconAction)];
+    [self.editLabel addGestureRecognizer:tapGestureRecognizer1];
+    tapGestureRecognizer1.delegate = self;
     
     [self.contentView addSubview:self.backgroundImageView];
     [self.backgroundImageView addSubview:effectView];
-    [self.contentView addSubview:self.iconImageView];
+    [self.backgroundImageView addSubview:self.iconImageView];
+    [self.backgroundImageView addSubview:self.editLabel];
     [self.backgroundImageView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.top.bottom.equalTo(self.contentView);
     }];
@@ -57,12 +73,24 @@
         make.left.right.top.bottom.equalTo(self.backgroundImageView);
     }];
     [self.iconImageView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.center.equalTo(self.contentView);
+        make.centerX.equalTo(self.contentView);
+        make.centerY.equalTo(self.contentView).offset(-12.0f);
         make.size.mas_equalTo(CGSizeMake(73, 73));
+    }];
+    [self.editLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerX.equalTo(self.iconImageView);
+        make.top.equalTo(self.iconImageView.mas_bottom).offset(12.0f);
     }];
 }
 
-- (void)setModel:(MineUserModel *)model {
+- (void)editIconAction {
+    BLOCK_EXEC(self.block);
+}
+- (void)setEditBlock:(EditBlock)block {
+    self.block = block;
+}
+
+- (void)setModel:(UserModel *)model {
     _model = model;
     [self.iconImageView sd_setImageWithURL:[NSURL URLWithString:model.portraitUrl] placeholderImage:[UIImage imageNamed:@"大头像"]];
     [self.backgroundImageView sd_setImageWithURL:[NSURL URLWithString:model.portraitUrl] placeholderImage:[UIImage imageNamed:@"大头像"]];

@@ -9,12 +9,13 @@
 #import "MineDataManager.h"
 #import "UpdateStageSubjectRequest.h"
 #import "UpdateAreaRequest.h"
-
+#import "UploadHeadImgRequest.h"
 NSString * const kStageSubjectDidChangeNotification = @"kStageSubjectDidChangeNotification";
 
 @interface MineDataManager()
 @property (nonatomic, strong) UpdateStageSubjectRequest *stageSubjectRequest;
 @property (nonatomic, strong) UpdateAreaRequest *areaRequest;
+@property (nonatomic, strong) UploadHeadImgRequest *uploadHeadImgRequest;
 @end
 
 @implementation MineDataManager
@@ -72,4 +73,23 @@ NSString * const kStageSubjectDidChangeNotification = @"kStageSubjectDidChangeNo
     }];
 }
 
++ (void)updateHeadPortrait:(UIImage *)portrait completeBlock:(void (^)(NSError *))completeBlock {
+    MineDataManager *manager = [MineDataManager sharedInstance];
+    [manager.uploadHeadImgRequest stopRequest];
+    manager.uploadHeadImgRequest = [[UploadHeadImgRequest alloc] init];
+    WEAK_SELF
+    [manager.uploadHeadImgRequest startRequestWithRetClass:[UploadHeadImgRequestItem class] andCompleteBlock:^(id retItem, NSError *error, BOOL isMock) {
+        STRONG_SELF
+        if (error) {
+            BLOCK_EXEC(completeBlock,error);
+            return;
+        }
+        [[NSNotificationCenter defaultCenter] postNotificationName:YXUploadUserPicSuccessNotification
+                                                            object:nil];
+        UploadHeadImgRequestItem *item = retItem;
+        UserModel *model = [UserModel modelFromRawData:item.info];
+        [UserManager sharedInstance].userModel = model;
+    }];
+    
+}
 @end
