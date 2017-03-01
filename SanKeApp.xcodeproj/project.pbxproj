@@ -197,6 +197,9 @@
 		E9355AD51E653222007AE9F0 /* YXImagePickerController.m in Sources */ = {isa = PBXBuildFile; fileRef = E9355AD41E653222007AE9F0 /* YXImagePickerController.m */; };
 		E9355AE41E65574E007AE9F0 /* UploadHeadImgRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = E9355AE31E65574E007AE9F0 /* UploadHeadImgRequest.m */; };
 		E9355AEA1E6674B4007AE9F0 /* MenuSelectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = E9355AE91E6674B4007AE9F0 /* MenuSelectionView.m */; };
+		E9355AF81E669C06007AE9F0 /* 隐私政策.txt in Resources */ = {isa = PBXBuildFile; fileRef = E9355AF71E669C06007AE9F0 /* 隐私政策.txt */; };
+		E9355AFE1E669E70007AE9F0 /* PrivacyPolicyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E9355AFD1E669E70007AE9F0 /* PrivacyPolicyViewController.m */; };
+		E9355B011E66AA4E007AE9F0 /* LoginUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = E9355B001E66AA4E007AE9F0 /* LoginUtils.m */; };
 		E9F4541C1E31B18D00860DC2 /* TouristLoginRequest.json in Resources */ = {isa = PBXBuildFile; fileRef = E9F4541B1E31B18D00860DC2 /* TouristLoginRequest.json */; };
 /* End PBXBuildFile section */
 
@@ -585,6 +588,11 @@
 		E9355AE31E65574E007AE9F0 /* UploadHeadImgRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UploadHeadImgRequest.m; sourceTree = "<group>"; };
 		E9355AE81E6674B4007AE9F0 /* MenuSelectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuSelectionView.h; sourceTree = "<group>"; };
 		E9355AE91E6674B4007AE9F0 /* MenuSelectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuSelectionView.m; sourceTree = "<group>"; };
+		E9355AF71E669C06007AE9F0 /* 隐私政策.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "隐私政策.txt"; sourceTree = "<group>"; };
+		E9355AFC1E669E70007AE9F0 /* PrivacyPolicyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrivacyPolicyViewController.h; sourceTree = "<group>"; };
+		E9355AFD1E669E70007AE9F0 /* PrivacyPolicyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PrivacyPolicyViewController.m; sourceTree = "<group>"; };
+		E9355AFF1E66AA4E007AE9F0 /* LoginUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginUtils.h; sourceTree = "<group>"; };
+		E9355B001E66AA4E007AE9F0 /* LoginUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginUtils.m; sourceTree = "<group>"; };
 		E9F4541B1E31B18D00860DC2 /* TouristLoginRequest.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = TouristLoginRequest.json; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -800,6 +808,7 @@
 		7C1A5EEA1E15090B00832DED /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				E9355AF71E669C06007AE9F0 /* 隐私政策.txt */,
 				30C48A6B1E52E72100CCDBBE /* Statistic */,
 				E902E6CC1E2C9FD5009441B3 /* stageAndSubject.json */,
 				7C1A5EEC1E15094700832DED /* PrefixHeader.pch */,
@@ -1292,6 +1301,8 @@
 				7C7629BA1E2731A1007B5698 /* LoginBaseViewController.m */,
 				7C7629BC1E27351F007B5698 /* LoginViewController.h */,
 				7C7629BD1E27351F007B5698 /* LoginViewController.m */,
+				E9355AFC1E669E70007AE9F0 /* PrivacyPolicyViewController.h */,
+				E9355AFD1E669E70007AE9F0 /* PrivacyPolicyViewController.m */,
 			);
 			path = "登录注册";
 			sourceTree = "<group>";
@@ -1318,6 +1329,8 @@
 				7C7841B51E2F1DFA00755BC0 /* Network */,
 				7C7841BC1E2F37EB00755BC0 /* LoginDataManager.h */,
 				7C7841BD1E2F37EB00755BC0 /* LoginDataManager.m */,
+				E9355AFF1E66AA4E007AE9F0 /* LoginUtils.h */,
+				E9355B001E66AA4E007AE9F0 /* LoginUtils.m */,
 			);
 			path = "登录注册";
 			sourceTree = "<group>";
@@ -1644,6 +1657,7 @@
 				E9230C571E30919B00AC6617 /* UpdateStageSubjectRequest.json in Resources */,
 				7C1A5F8E1E15143400832DED /* neterror_mock.json in Resources */,
 				7C1A5EEE1E150A3800832DED /* SKConfig.plist in Resources */,
+				E9355AF81E669C06007AE9F0 /* 隐私政策.txt in Resources */,
 				E9F4541C1E31B18D00860DC2 /* TouristLoginRequest.json in Resources */,
 				923A4E361E2CAE1C001059E2 /* channelIndex_mock.json in Resources */,
 				E9230C561E30919B00AC6617 /* UpdateAreaRequest.json in Resources */,
@@ -1772,6 +1786,7 @@
 				7C7629C11E27371D007B5698 /* LoginActionView.m in Sources */,
 				92E7D1391E28A83F00A34300 /* AloneCourseViewController.m in Sources */,
 				7C7841941E2E225D00755BC0 /* TouristLoginRequest.m in Sources */,
+				E9355B011E66AA4E007AE9F0 /* LoginUtils.m in Sources */,
 				7C1A5F231E1510FA00832DED /* GetRequest.m in Sources */,
 				E902E6BE1E2BA3E0009441B3 /* UserInfoPickerView.m in Sources */,
 				7C6F21901E232F8E000AB43A /* YXDrawerController.m in Sources */,
@@ -1821,6 +1836,7 @@
 				7C1A60061E16396C00832DED /* UIView+YXShadowColor.m in Sources */,
 				7C7841B11E2F150100755BC0 /* SaveRecordRequest.m in Sources */,
 				7C1A5FCE1E1634DE00832DED /* YXLoadView.m in Sources */,
+				E9355AFE1E669E70007AE9F0 /* PrivacyPolicyViewController.m in Sources */,
 				E902E6B01E2BA3BE009441B3 /* SideMenuViewController.m in Sources */,
 				7C1A5F2C1E15111800832DED /* YXGetRequest.m in Sources */,
 				7C1A5FA71E151A9100832DED /* YXBroseWebView.m in Sources */,
