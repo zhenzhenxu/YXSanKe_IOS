@@ -195,8 +195,8 @@
 		E9230C571E30919B00AC6617 /* UpdateStageSubjectRequest.json in Resources */ = {isa = PBXBuildFile; fileRef = E9230C551E30919B00AC6617 /* UpdateStageSubjectRequest.json */; };
 		E9230C5A1E30BAB400AC6617 /* FetchStageSubjectRequest.json in Resources */ = {isa = PBXBuildFile; fileRef = E9230C591E30BAB400AC6617 /* FetchStageSubjectRequest.json */; };
 		E9355AD51E653222007AE9F0 /* YXImagePickerController.m in Sources */ = {isa = PBXBuildFile; fileRef = E9355AD41E653222007AE9F0 /* YXImagePickerController.m */; };
-		E9355ADE1E6543C9007AE9F0 /* ChangeAvatarView.m in Sources */ = {isa = PBXBuildFile; fileRef = E9355ADD1E6543C9007AE9F0 /* ChangeAvatarView.m */; };
 		E9355AE41E65574E007AE9F0 /* UploadHeadImgRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = E9355AE31E65574E007AE9F0 /* UploadHeadImgRequest.m */; };
+		E9355AEA1E6674B4007AE9F0 /* MenuSelectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = E9355AE91E6674B4007AE9F0 /* MenuSelectionView.m */; };
 		E9F4541C1E31B18D00860DC2 /* TouristLoginRequest.json in Resources */ = {isa = PBXBuildFile; fileRef = E9F4541B1E31B18D00860DC2 /* TouristLoginRequest.json */; };
 /* End PBXBuildFile section */
 
@@ -581,10 +581,10 @@
 		E9230C591E30BAB400AC6617 /* FetchStageSubjectRequest.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = FetchStageSubjectRequest.json; sourceTree = "<group>"; };
 		E9355AD31E653222007AE9F0 /* YXImagePickerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YXImagePickerController.h; sourceTree = "<group>"; };
 		E9355AD41E653222007AE9F0 /* YXImagePickerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YXImagePickerController.m; sourceTree = "<group>"; };
-		E9355ADC1E6543C9007AE9F0 /* ChangeAvatarView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChangeAvatarView.h; sourceTree = "<group>"; };
-		E9355ADD1E6543C9007AE9F0 /* ChangeAvatarView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChangeAvatarView.m; sourceTree = "<group>"; };
 		E9355AE21E65574E007AE9F0 /* UploadHeadImgRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UploadHeadImgRequest.h; sourceTree = "<group>"; };
 		E9355AE31E65574E007AE9F0 /* UploadHeadImgRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UploadHeadImgRequest.m; sourceTree = "<group>"; };
+		E9355AE81E6674B4007AE9F0 /* MenuSelectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuSelectionView.h; sourceTree = "<group>"; };
+		E9355AE91E6674B4007AE9F0 /* MenuSelectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuSelectionView.m; sourceTree = "<group>"; };
 		E9F4541B1E31B18D00860DC2 /* TouristLoginRequest.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = TouristLoginRequest.json; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -1212,6 +1212,8 @@
 				9241FFF41E2651390015B587 /* YXGradientView.m */,
 				9241FFF51E2651390015B587 /* YXTriangleView.h */,
 				9241FFF61E2651390015B587 /* YXTriangleView.m */,
+				E9355AE81E6674B4007AE9F0 /* MenuSelectionView.h */,
+				E9355AE91E6674B4007AE9F0 /* MenuSelectionView.m */,
 			);
 			path = CustomView;
 			sourceTree = "<group>";
@@ -1485,8 +1487,6 @@
 				E902E6B91E2BA3E0009441B3 /* UserInfoTableViewCell.m */,
 				E902E6B61E2BA3E0009441B3 /* UserInfoPickerView.h */,
 				E902E6B71E2BA3E0009441B3 /* UserInfoPickerView.m */,
-				E9355ADC1E6543C9007AE9F0 /* ChangeAvatarView.h */,
-				E9355ADD1E6543C9007AE9F0 /* ChangeAvatarView.m */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -1729,6 +1729,7 @@
 				E9355AE41E65574E007AE9F0 /* UploadHeadImgRequest.m in Sources */,
 				7C2251D31E1E2626004785D5 /* GCDTimer.m in Sources */,
 				7C1A5F4A1E15127200832DED /* YXPlayerTopView.m in Sources */,
+				E9355AEA1E6674B4007AE9F0 /* MenuSelectionView.m in Sources */,
 				7C1A5FE51E1637FC00832DED /* PagedListFetcherBase.m in Sources */,
 				30C87E111E52F4CF000CFBAA /* NSMutableDictionary+YXDictionarys.m in Sources */,
 				7C2251C71E1DE66E004785D5 /* AlertView.m in Sources */,
@@ -1873,7 +1874,6 @@
 				7C1A5FFE1E16396C00832DED /* NSDate+Utilities.m in Sources */,
 				7C1A5EF61E150E1E00832DED /* GlobalUtils.m in Sources */,
 				7C1A5F671E15130200832DED /* YXFileItemBase.m in Sources */,
-				E9355ADE1E6543C9007AE9F0 /* ChangeAvatarView.m in Sources */,
 				E902E6AF1E2BA3BE009441B3 /* SideHeaderView.m in Sources */,
 				7C1A5EFC1E150E3400832DED /* FileLogger.m in Sources */,
 				E902E6E11E2CE1B8009441B3 /* EmptyView.m in Sources */,

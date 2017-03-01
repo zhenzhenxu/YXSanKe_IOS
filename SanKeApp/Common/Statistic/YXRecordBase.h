@@ -28,6 +28,10 @@ typedef NS_ENUM(NSInteger, YXRecordType) {
      *  学科学点
      */
     YXRecordGradeChangeType = 4,
+    /**
+     *  注册成功
+     */
+    YXRecordRegisterSuccessfulType = 5
 };
 
 // record strategy enumeration

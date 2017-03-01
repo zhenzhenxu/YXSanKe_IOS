@@ -1,18 +1,22 @@
 //
-//  ChangeAvatarView.m
+//  MenuSelectionView.m
 //  SanKeApp
 //
-//  Created by ZLL on 2017/2/28.
+//  Created by ZLL on 2017/3/1.
 //  Copyright © 2017年 niuzhaowang. All rights reserved.
 //
 
-#import "ChangeAvatarView.h"
+#import "MenuSelectionView.h"
 
-@interface ChangeAvatarView ()<UITableViewDelegate, UITableViewDataSource>
+@interface MenuSelectionView ()<UITableViewDelegate, UITableViewDataSource>
+
 @property (nonatomic, strong) UITableView *tableView;
-@property (nonatomic, copy) ChangeAvatarBlock block;
+@property (nonatomic, copy) ChooseMenuBlock block;
 @end
-@implementation ChangeAvatarView
+
+
+@implementation MenuSelectionView
+
 - (instancetype)initWithFrame:(CGRect)frame{
     self = [super initWithFrame:frame];
     if (self) {
@@ -37,7 +41,7 @@
 
 #pragma mark - UITableViewDataSource
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 3;
+    return self.dataArray.count;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
@@ -47,15 +51,7 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"UITableViewCell" forIndexPath:indexPath];
     cell.backgroundColor = [UIColor whiteColor];
-    NSString *title;
-    if (indexPath.section == 0) {
-        title = @"拍照";
-    }else if (indexPath.section == 1){
-        title = @"从相册选择";
-    }else {
-        title = @"取消";
-    }
-    cell.textLabel.text = title;
+    cell.textLabel.text = self.dataArray[indexPath.section];
     cell.textLabel.textAlignment = NSTextAlignmentCenter;
     cell.textLabel.font = [UIFont systemFontOfSize:14.0f];
     cell.textLabel.textColor = [UIColor colorWithHexString:@"333333"];
@@ -75,19 +71,17 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-    if (section == 2) {
+    if (section == self.dataArray.count - 1) {
         return 10.0f;
     }
-    return 0;
-}
-- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
-    if (section == 0) {
-        return 1.0f;
-    }
-    return 0;
+    return 1.0f;
 }
 
-- (void)setChangeAvatarBlock:(ChangeAvatarBlock)block {
+- (void)setChooseMenuBlock:(ChooseMenuBlock)block {
     self.block = block;
+}
+
+- (CGFloat)totalHeight {
+    return self.dataArray.count * 50 + 10;
 }
 @end

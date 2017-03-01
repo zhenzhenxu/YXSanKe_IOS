@@ -58,9 +58,9 @@
     self.editLabel.textColor = [UIColor colorWithHexString:@"4691a6"];
     self.editLabel.text = @"编辑头像";
     self.editLabel.userInteractionEnabled = YES;
-    UITapGestureRecognizer *tapGestureRecognizer1 = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(editIconAction)];
-    [self.editLabel addGestureRecognizer:tapGestureRecognizer1];
-    tapGestureRecognizer1.delegate = self;
+//    UITapGestureRecognizer *tapGestureRecognizer1 = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(editIconAction)];
+//    [self.editLabel addGestureRecognizer:tapGestureRecognizer1];
+//    tapGestureRecognizer1.delegate = self;
     
     [self.contentView addSubview:self.backgroundImageView];
     [self.backgroundImageView addSubview:effectView];

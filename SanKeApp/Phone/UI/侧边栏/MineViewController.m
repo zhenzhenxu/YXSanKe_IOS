@@ -18,7 +18,7 @@
 #import "YXRecordManager.h"
 #import "YXProblemItem.h"
 #import "YXImagePickerController.h"
-#import "ChangeAvatarView.h"
+#import "MenuSelectionView.h"
 @interface MineViewController ()<UITableViewDelegate, UITableViewDataSource>
 
 @property (nonatomic, strong) MineUserModel *userModel;
@@ -27,7 +27,7 @@
 @property (nonatomic, strong) UserSubjectStageInfoPicker *subjectStageInfoPicker;
 @property (nonatomic, strong) UserAreaInfoPicker *areaInfoPicker;
 @property (nonatomic, strong) YXImagePickerController *imagePickerController;
-@property (nonatomic, strong) ChangeAvatarView *changeAvatarView;
+@property (nonatomic, strong) MenuSelectionView *menuSelectionView;
 
 @end
 
@@ -205,7 +205,7 @@
             DDLogDebug(@"修改头像");
             STRONG_SELF
             [self.view endEditing:YES];
-            [self changeAvatar];
+            [self changeHeadPortrait];
         }];
         return cell;
     }else {
@@ -252,40 +252,45 @@
     }
 }
 
-#pragma mark - changeAvatar
-- (void)changeAvatar
-{
-    self.changeAvatarView = [[ChangeAvatarView alloc]init];
-    [self.view addSubview:self.changeAvatarView];
+#pragma mark - change HeadPortrait
+- (void)changeHeadPortrait {
+    self.menuSelectionView = [[MenuSelectionView alloc]init];
+    self.menuSelectionView.dataArray = @[
+                                        @"拍照",
+                                        @"从相册选择",
+                                        @"取消"
+                                        ];
+    CGFloat height = [self.menuSelectionView totalHeight];
+    [self.view addSubview:self.menuSelectionView];
     AlertView *alert = [[AlertView alloc]init];
     alert.hideWhenMaskClicked = YES;
     alert.maskColor = [[UIColor blackColor]colorWithAlphaComponent:0.4];
-    alert.contentView = self.changeAvatarView;
+    alert.contentView = self.menuSelectionView;
     WEAK_SELF
     [alert showWithLayout:^(AlertView *view) {
         STRONG_SELF
-        [self.changeAvatarView mas_remakeConstraints:^(MASConstraintMaker *make) {
+        [self.menuSelectionView mas_remakeConstraints:^(MASConstraintMaker *make) {
             make.left.right.equalTo(view);
-            make.height.mas_equalTo(160.0f);
+            make.height.mas_equalTo(height);
             make.bottom.equalTo(view);
         }];
         [view layoutIfNeeded];
      }];
-    [self.changeAvatarView setChangeAvatarBlock:^(NSInteger idx) {
+    [self.menuSelectionView setChooseMenuBlock:^(NSInteger index) {
         STRONG_SELF
         [alert hide];
-        [self pickImageAction:idx];
+        [self chooseMenuWithIndex:index];
     }];
 }
 
-- (void)pickImageAction:(NSInteger)index {
+- (void)chooseMenuWithIndex:(NSInteger)index {
     switch (index) {
         case 0:
         {
             WEAK_SELF
             [self.imagePickerController pickImageWithSourceType:UIImagePickerControllerSourceTypeCamera completion:^(UIImage *selectedImage) {
                 STRONG_SELF
-                [self updateWithHeaderImage:selectedImage];
+                [self updateHeadPortrait:selectedImage];
             }];
         }
             break;
@@ -293,7 +298,7 @@
             WEAK_SELF
             [self.imagePickerController pickImageWithSourceType:UIImagePickerControllerSourceTypePhotoLibrary completion:^(UIImage *selectedImage) {
                 STRONG_SELF
-                [self updateWithHeaderImage:selectedImage];
+                [self updateHeadPortrait:selectedImage];
             }];
             
         }
@@ -304,8 +309,7 @@
     }
 }
 
-- (void)updateWithHeaderImage:(UIImage *)image
-{
+- (void)updateHeadPortrait:(UIImage *)image {
     DDLogDebug(@"更新头像%@",image);
     if (!image) {
         return;
