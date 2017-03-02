@@ -76,14 +76,15 @@
     }
     CourseVideoRequestItem_Data_Elements *element = self.dataArray[indexPath.row];
     cell.element = element;
-    WEAK_SELF
-    [cell setClickCourseTitleBlock:^{
-        STRONG_SELF
-        AloneCourseViewController *VC = [[AloneCourseViewController alloc] init];
-        VC.title = element.title;
-        VC.catID = element.catid;
-        [self.navigationController pushViewController:VC animated:YES];
-    }];
+    //V1.1产品去掉此功能
+//    WEAK_SELF
+//    [cell setClickCourseTitleBlock:^{
+//        STRONG_SELF
+//        AloneCourseViewController *VC = [[AloneCourseViewController alloc] init];
+//        VC.title = element.title;
+//        VC.catID = element.catid;
+//        [self.navigationController pushViewController:VC animated:YES];
+//    }];
     return cell;
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {

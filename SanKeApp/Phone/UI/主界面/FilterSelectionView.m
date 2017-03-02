@@ -19,9 +19,11 @@ static const NSInteger kNotSelectedTag = -1;
 @property (nonatomic, assign) NSInteger firstLevelSelectedIndex;
 @property (nonatomic, assign) NSInteger secondLevelSelectedIndex;
 @property (nonatomic, assign) NSInteger thirdLevelSelectedIndex;
+@property (nonatomic, assign) NSInteger forthLevelSelectedIndex;
 @property (nonatomic, assign) NSInteger tFirstLevelSelectedIndex;
 @property (nonatomic, assign) NSInteger tSecondLevelSelectedIndex;
 @property (nonatomic, assign) NSInteger tThirdLevelSelectedIndex;
+@property (nonatomic, assign) NSInteger tForthLevelSelectedIndex;
 @property (nonatomic, assign) BOOL needReset;
 @end
 
@@ -32,6 +34,7 @@ static const NSInteger kNotSelectedTag = -1;
         self.firstLevelSelectedIndex = kNotSelectedTag;
         self.secondLevelSelectedIndex = kNotSelectedTag;
         self.thirdLevelSelectedIndex = kNotSelectedTag;
+        self.forthLevelSelectedIndex = kNotSelectedTag;
         [self setupUI];
         self.needReset = NO;
     }
@@ -99,10 +102,12 @@ static const NSInteger kNotSelectedTag = -1;
     self.tFirstLevelSelectedIndex = self.firstLevelSelectedIndex;
     self.tSecondLevelSelectedIndex = self.secondLevelSelectedIndex;
     self.tThirdLevelSelectedIndex = self.thirdLevelSelectedIndex;
+    self.tFirstLevelSelectedIndex = self.forthLevelSelectedIndex;
     
     self.firstLevelSelectedIndex = kNotSelectedTag;
     self.secondLevelSelectedIndex = kNotSelectedTag;
     self.thirdLevelSelectedIndex = kNotSelectedTag;
+    self.forthLevelSelectedIndex = kNotSelectedTag;
     
     [self.collectionView reloadData];
 }
@@ -111,6 +116,7 @@ static const NSInteger kNotSelectedTag = -1;
     self.firstLevelSelectedIndex = self.tFirstLevelSelectedIndex;
     self.secondLevelSelectedIndex = self.tSecondLevelSelectedIndex;
     self.tThirdLevelSelectedIndex = self.thirdLevelSelectedIndex;
+    self.forthLevelSelectedIndex = self.tFirstLevelSelectedIndex;
 }
 
 - (void)doneAction {
@@ -126,16 +132,21 @@ static const NSInteger kNotSelectedTag = -1;
     }
     ChannelTabFilterRequestItem_filter *second = nil;
     ChannelTabFilterRequestItem_filter *third = nil;
+    ChannelTabFilterRequestItem_filter *forth = nil;
     if (self.secondLevelSelectedIndex != kNotSelectedTag) {
         second = first.subFilters[self.secondLevelSelectedIndex];
         if (self.thirdLevelSelectedIndex != kNotSelectedTag) {
             third = second.subFilters[self.thirdLevelSelectedIndex];
+            if (self.forthLevelSelectedIndex != kNotSelectedTag) {
+                forth = third.subFilters[self.forthLevelSelectedIndex];
+            }
         }
     }
     NSString *f1 = first? first.filterID:@"0";
     NSString *f2 = second? second.filterID:@"0";
     NSString *f3 = third? third.filterID:@"0";
-    NSArray *array = @[f1,f2,f3];
+    NSString *f4 = forth? forth.filterID:@"0";
+    NSArray *array = @[f1,f2,f3,f4];
     NSString *filterString = [array componentsJoinedByString:@","];
     BLOCK_EXEC(self.completeBlock,filterString);
     
@@ -149,6 +160,9 @@ static const NSInteger kNotSelectedTag = -1;
     if (third.filterID.length) {
         [filter appendFormat:@",%@", third.filterID];
     }
+    if (forth.filterID.length) {
+        [filter appendFormat:@",%@", forth.filterID];
+    }
     if (filter.length) {
         NSMutableString *filterName = [NSMutableString new];
         if (first.name.length) {
@@ -160,11 +174,14 @@ static const NSInteger kNotSelectedTag = -1;
         if (third.name.length) {
             [filterName appendFormat:@",%@", third.name];
         }
+        if (forth.name.length) {
+            [filterName appendFormat:@",%@", forth.name];
+        }
         YXProblemItem *item = [YXProblemItem new];
         item.objType = @"unit";
         item.type = YXRecordClickType;
         item.objId = filter;
-        item.objName = [NSString stringWithFormat:@"%@,%@,%@", first.name, second.name, third.name];
+        item.objName = [NSString stringWithFormat:@"%@,%@,%@,%@", first.name, second.name, third.name,forth.name];
         [YXRecordManager addRecord:item];
     }
 }
@@ -182,10 +199,17 @@ static const NSInteger kNotSelectedTag = -1;
         return 1;
     }
     ChannelTabFilterRequestItem_filter *second = first.subFilters[self.secondLevelSelectedIndex];
+    if (self.thirdLevelSelectedIndex == kNotSelectedTag) {
     if (second.subFilters.count > 0) {
         return 3;
     }
     return 2;
+    }
+    ChannelTabFilterRequestItem_filter *third = first.subFilters[self.secondLevelSelectedIndex];
+        if (third.subFilters.count > 0) {
+            return 4;
+        }
+    return 3;
 }
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
@@ -197,7 +221,12 @@ static const NSInteger kNotSelectedTag = -1;
         return firstItem.subFilters.count;
     }
     ChannelTabFilterRequestItem_filter *secondItem = firstItem.subFilters[self.secondLevelSelectedIndex];
-    return secondItem.subFilters.count;
+    if (section == 2) {
+        return secondItem.subFilters.count;
+    }
+    ChannelTabFilterRequestItem_filter *thirdItem = secondItem.subFilters[self.thirdLevelSelectedIndex];
+    return thirdItem.subFilters.count;
+
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
@@ -209,8 +238,10 @@ static const NSInteger kNotSelectedTag = -1;
         cell.isCurrent = indexPath.row==self.firstLevelSelectedIndex;
     }else if (indexPath.section == 1){
         cell.isCurrent = indexPath.row==self.secondLevelSelectedIndex;
-    }else {
+    }else if (indexPath.section == 2){
         cell.isCurrent = indexPath.row==self.thirdLevelSelectedIndex;
+    }else {
+        cell.isCurrent = indexPath.row==self.forthLevelSelectedIndex;
     }
     WEAK_SELF
     [cell setActionBlock:^{
@@ -225,8 +256,12 @@ static const NSInteger kNotSelectedTag = -1;
                 self.secondLevelSelectedIndex = indexPath.row;
                 self.thirdLevelSelectedIndex = kNotSelectedTag;
                 [self.collectionView reloadData];
-            }else {
+            }else if (indexPath.section == 2){
                 self.thirdLevelSelectedIndex = indexPath.row;
+                self.forthLevelSelectedIndex = kNotSelectedTag;
+                [self.collectionView reloadData];
+            }else {
+                self.forthLevelSelectedIndex = indexPath.row;
                 [CATransaction begin];
                 [CATransaction setDisableActions:YES];
                 [self.collectionView reloadSections:[NSIndexSet indexSetWithIndex:indexPath.section]];
@@ -247,9 +282,12 @@ static const NSInteger kNotSelectedTag = -1;
         }else if (indexPath.section == 1){
             headerView.seperatorHidden = NO;
             headerView.title = self.data.category.subCategory.name;
-        }else {
+        }else if (indexPath.section == 2){
             headerView.seperatorHidden = NO;
             headerView.title = self.data.category.subCategory.subCategory.name;
+        }else {
+            headerView.seperatorHidden = NO;
+            headerView.title = self.data.category.subCategory.subCategory.subCategory.name;
         }
         return headerView;
     }
@@ -270,9 +308,14 @@ static const NSInteger kNotSelectedTag = -1;
         ChannelTabFilterRequestItem_filter *firstItem = self.data.filters[self.firstLevelSelectedIndex];
         if (indexPath.section == 1) {
             item = firstItem.subFilters[indexPath.row];
-        }else {
+        }else{
             ChannelTabFilterRequestItem_filter *secondItem = firstItem.subFilters[self.secondLevelSelectedIndex];
-            item = secondItem.subFilters[indexPath.row];
+            if (indexPath.section == 2){
+                item = secondItem.subFilters[indexPath.row];
+            }else {
+                ChannelTabFilterRequestItem_filter *thirdItem = secondItem.subFilters[self.thirdLevelSelectedIndex];
+                item = thirdItem.subFilters[indexPath.row];
+            }
         }
     }
     return item;
