@@ -123,12 +123,12 @@
             *stop = YES;
         }
     }];
-//    if (!self.selectedStage) {
-//        self.selectedStage = self.stageAndSubjectItem.data.stages.firstObject;
-//        self.selectedSubjects = self.selectedStage.subjects;
-//        self.selectedSubject = self.selectedSubjects.firstObject;
-//        return;
-//    }
+    if (!self.selectedStage) {
+        self.selectedStage = self.stageAndSubjectItem.data.stages.firstObject;
+        self.selectedSubjects = self.selectedStage.subjects;
+        self.selectedSubject = self.selectedSubjects.firstObject;
+        return;
+    }
     [self.selectedSubjects enumerateObjectsUsingBlock:^(FetchStageSubjectRequestItem_subject *subject, NSUInteger idx, BOOL *stop) {
         if ([userModel.subject.subjectID isEqualToString:subject.subjectID]) {
             self.selectedSubject = subject;

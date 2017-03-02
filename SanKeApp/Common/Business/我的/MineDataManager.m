@@ -11,7 +11,7 @@
 #import "UpdateAreaRequest.h"
 #import "UploadHeadImgRequest.h"
 NSString * const kStageSubjectDidChangeNotification = @"kStageSubjectDidChangeNotification";
-NSString *const kUploadUserPicSuccessNotification = @"kUploadUserPicSuccessNotification";
+NSString *const kUpdateHeadPortraitSuccessNotification = @"kUpdateHeadPortraitSuccessNotification";
 @interface MineDataManager()
 @property (nonatomic, strong) UpdateStageSubjectRequest *stageSubjectRequest;
 @property (nonatomic, strong) UpdateAreaRequest *areaRequest;
@@ -84,11 +84,12 @@ NSString *const kUploadUserPicSuccessNotification = @"kUploadUserPicSuccessNotif
             BLOCK_EXEC(completeBlock,error);
             return;
         }
-        [[NSNotificationCenter defaultCenter] postNotificationName:kUploadUserPicSuccessNotification
-                                                            object:nil];
         UploadHeadImgRequestItem *item = retItem;
         UserModel *model = [UserModel modelFromRawData:item.info];
         [UserManager sharedInstance].userModel = model;
+        [[NSNotificationCenter defaultCenter] postNotificationName:kUpdateHeadPortraitSuccessNotification
+                                                            object:nil];
+        BLOCK_EXEC(completeBlock,nil);
     }];
     
 }

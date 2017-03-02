@@ -11,4 +11,5 @@
 @interface LoginInputView : UIView
 @property (nonatomic, strong, readonly) UITextField *textField;
 @property (nonatomic, strong, readonly) NSString *text;
+@property (nonatomic, assign) UIKeyboardType keyboardType;
 @end

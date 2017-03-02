@@ -74,7 +74,7 @@ UIView *_sepView;
 
 - (void)setPaused {
     _playPauseState = PlayerView_State_Paused;
-    [self.playPauseButton setImage:[UIImage imageNamed:@"播放"] forState:UIControlStateNormal];
+    [self.playPauseButton setImage:[UIImage imageNamed:@"播放视频"] forState:UIControlStateNormal];
 }
 
 - (void)setBShowDefinition:(BOOL)bShowDefinition {

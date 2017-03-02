@@ -81,5 +81,14 @@
     return [self.textField.text yx_stringByTrimmingCharacters];
 }
 
+- (void)setKeyboardType:(UIKeyboardType)keyboardType
+{
+    self.textField.keyboardType = keyboardType;
+}
+
+- (UIKeyboardType)keyboardType
+{
+    return self.textField.keyboardType;
+}
 
 @end

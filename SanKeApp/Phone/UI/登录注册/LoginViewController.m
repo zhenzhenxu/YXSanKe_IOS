@@ -192,7 +192,11 @@
 - (void)registerAction {
     DDLogDebug(@"注册");
     //测试隐私政策显示
-    PrivacyPolicyViewController *vc = [[PrivacyPolicyViewController alloc]init];
-    [self.navigationController pushViewController:vc animated:YES];
+//    PrivacyPolicyViewController *vc = [[PrivacyPolicyViewController alloc]init];
+//    [self.navigationController pushViewController:vc animated:YES];
+    YXProblemItem *item = [[YXProblemItem alloc]init];
+    item.objType = @"reg";
+    item.type = YXRecordClickType;
+    [YXRecordManager addRecord:item];
 }
 @end
