@@ -76,5 +76,17 @@
     }];
 }
 
++ (void)getVerifyCodeWithMobileNumber:(NSString *)mobileNumber completeBlock:(void (^)(HttpBaseRequestItem *, NSError *))completeBlock {
+    
+}
 
++ (void)verifySMSCodeWithMobileNumber:(NSString *)mobileNumber verifyCode:(NSString *)verifyCode completeBlock:(void (^)(HttpBaseRequestItem *, NSError *))completeBlock {
+    
+}
+
++ (void)setPasswordWithMobileNumber:(NSString *)mobileNumber
+                           password:(NSString *)password
+                      completeBlock:(void(^)(HttpBaseRequestItem *item, NSError *error))completeBlock {
+    
+}
 @end

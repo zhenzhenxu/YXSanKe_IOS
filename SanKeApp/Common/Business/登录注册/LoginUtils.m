@@ -39,7 +39,7 @@
     if (![SMSCode yx_isValidString]) {
         isEmpty = YES;
     }
-    if (SMSCode.length == 4) {
+    if (SMSCode.length == 6) {
         formatIsCorrect = YES;
     }
     BLOCK_EXEC(completeBlock,isEmpty,formatIsCorrect);

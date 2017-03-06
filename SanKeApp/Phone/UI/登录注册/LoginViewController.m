@@ -11,7 +11,8 @@
 #import "LoginActionView.h"
 #import "LoginInputView.h"
 #import "LoginLogoView.h"
-#import "PrivacyPolicyViewController.h"
+#import "RegisterViewController.h"
+#import "ForgotPasswordViewController.h"
 
 @interface LoginViewController ()
 @property (nonatomic, strong) LoginInputView *usernameView;
@@ -186,17 +187,17 @@
 }
 
 - (void)forgotPasswordAction {
-    DDLogDebug(@"忘记密码");
+    ForgotPasswordViewController *vc = [[ForgotPasswordViewController alloc]init];
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 - (void)registerAction {
-    DDLogDebug(@"注册");
-    //测试隐私政策显示
-//    PrivacyPolicyViewController *vc = [[PrivacyPolicyViewController alloc]init];
-//    [self.navigationController pushViewController:vc animated:YES];
     YXProblemItem *item = [[YXProblemItem alloc]init];
     item.objType = @"reg";
     item.type = YXRecordClickType;
     [YXRecordManager addRecord:item];
+    
+    RegisterViewController *vc = [[RegisterViewController alloc]init];
+    [self.navigationController pushViewController:vc animated:YES];
 }
 @end
