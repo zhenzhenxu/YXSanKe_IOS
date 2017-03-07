@@ -84,9 +84,11 @@
     
 }
 
-+ (void)setPasswordWithMobileNumber:(NSString *)mobileNumber
-                           password:(NSString *)password
-                      completeBlock:(void(^)(HttpBaseRequestItem *item, NSError *error))completeBlock {
++ (void)resetPasswordWithMobileNumber:(NSString *)mobileNumber password:(NSString *)password completeBlock:(void (^)(HttpBaseRequestItem *, NSError *))completeBlock {
+    
+}
++ (void)registerWithInfo:(id)registerInfo completeBlock:(void (^)(HttpBaseRequestItem *, NSError *))completeBlock {
+    //注册成功之后保存用户信息
     
 }
 @end

@@ -11,6 +11,7 @@
 #import "MineViewController.h"
 #import "SideTableViewCell.h"
 #import "SideTableViewModel.h"
+#import "AboutViewController.h"
 
 @interface SideMenuViewController ()<UITableViewDelegate, UITableViewDataSource>
 
@@ -76,10 +77,12 @@
     NSMutableArray *dataArray = [NSMutableArray array];
     SideTableViewModel *model1 = [SideTableViewModel modelWithIcon:@"清除缓存" title:@"清空缓存"];
     SideTableViewModel *model2 = [SideTableViewModel modelWithIcon:@"app-store" title:@"去AppStore打分"];
-    SideTableViewModel *model3 = [SideTableViewModel modelWithIcon:@"退出" title:@"退出"];
+    SideTableViewModel *model3 = [SideTableViewModel modelWithIcon:@"退出" title:@"关于我们"];
+    SideTableViewModel *model4 = [SideTableViewModel modelWithIcon:@"退出" title:@"退出"];
     [dataArray addObject:model1];
     [dataArray addObject:model2];
     [dataArray addObject:model3];
+    [dataArray addObject:model4];
     
     self.dataArray = dataArray;
 }
@@ -122,6 +125,12 @@
         }
             break;
         case 2:
+        {
+            AboutViewController *vc = [[AboutViewController alloc]init];
+            [self.navigationController pushViewController:vc animated:YES];
+        }
+            break;
+        case 3:
         {
             [UserManager sharedInstance].loginStatus = NO;
         }

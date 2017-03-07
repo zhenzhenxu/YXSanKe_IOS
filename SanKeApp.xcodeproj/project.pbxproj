@@ -207,6 +207,13 @@
 		E9355B441E6D84BD007AE9F0 /* RegisterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E9355B431E6D84BD007AE9F0 /* RegisterViewController.m */; };
 		E9355B471E6D858B007AE9F0 /* SetPasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E9355B461E6D858B007AE9F0 /* SetPasswordViewController.m */; };
 		E9355B531E6D8852007AE9F0 /* ForgotPasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E9355B521E6D8852007AE9F0 /* ForgotPasswordViewController.m */; };
+		E9355B5F1E6E8FD1007AE9F0 /* ResetPasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E9355B5E1E6E8FD1007AE9F0 /* ResetPasswordViewController.m */; };
+		E9355B621E6E9A0D007AE9F0 /* SupplementInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E9355B611E6E9A0D007AE9F0 /* SupplementInfoViewController.m */; };
+		E9355B6E1E6EB04B007AE9F0 /* SupplementUserInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E9355B6D1E6EB04B007AE9F0 /* SupplementUserInfoViewController.m */; };
+		E9355B711E6EB0FD007AE9F0 /* UserInfoPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = E9355B701E6EB0FD007AE9F0 /* UserInfoPicker.m */; };
+		E9355B741E6EB378007AE9F0 /* UserInfoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E9355B731E6EB378007AE9F0 /* UserInfoModel.m */; };
+		E9355B771E6EB51E007AE9F0 /* UserInfoDataManger.m in Sources */ = {isa = PBXBuildFile; fileRef = E9355B761E6EB51E007AE9F0 /* UserInfoDataManger.m */; };
+		E9355B7A1E6EBDB0007AE9F0 /* AboutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E9355B791E6EBDB0007AE9F0 /* AboutViewController.m */; };
 		E9F4541C1E31B18D00860DC2 /* TouristLoginRequest.json in Resources */ = {isa = PBXBuildFile; fileRef = E9F4541B1E31B18D00860DC2 /* TouristLoginRequest.json */; };
 /* End PBXBuildFile section */
 
@@ -614,6 +621,20 @@
 		E9355B461E6D858B007AE9F0 /* SetPasswordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SetPasswordViewController.m; sourceTree = "<group>"; };
 		E9355B511E6D8852007AE9F0 /* ForgotPasswordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ForgotPasswordViewController.h; sourceTree = "<group>"; };
 		E9355B521E6D8852007AE9F0 /* ForgotPasswordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ForgotPasswordViewController.m; sourceTree = "<group>"; };
+		E9355B5D1E6E8FD1007AE9F0 /* ResetPasswordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ResetPasswordViewController.h; sourceTree = "<group>"; };
+		E9355B5E1E6E8FD1007AE9F0 /* ResetPasswordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ResetPasswordViewController.m; sourceTree = "<group>"; };
+		E9355B601E6E9A0D007AE9F0 /* SupplementInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SupplementInfoViewController.h; sourceTree = "<group>"; };
+		E9355B611E6E9A0D007AE9F0 /* SupplementInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SupplementInfoViewController.m; sourceTree = "<group>"; };
+		E9355B6C1E6EB04B007AE9F0 /* SupplementUserInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SupplementUserInfoViewController.h; sourceTree = "<group>"; };
+		E9355B6D1E6EB04B007AE9F0 /* SupplementUserInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SupplementUserInfoViewController.m; sourceTree = "<group>"; };
+		E9355B6F1E6EB0FD007AE9F0 /* UserInfoPicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserInfoPicker.h; sourceTree = "<group>"; };
+		E9355B701E6EB0FD007AE9F0 /* UserInfoPicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserInfoPicker.m; sourceTree = "<group>"; };
+		E9355B721E6EB378007AE9F0 /* UserInfoModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserInfoModel.h; sourceTree = "<group>"; };
+		E9355B731E6EB378007AE9F0 /* UserInfoModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserInfoModel.m; sourceTree = "<group>"; };
+		E9355B751E6EB51E007AE9F0 /* UserInfoDataManger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserInfoDataManger.h; sourceTree = "<group>"; };
+		E9355B761E6EB51E007AE9F0 /* UserInfoDataManger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserInfoDataManger.m; sourceTree = "<group>"; };
+		E9355B781E6EBDB0007AE9F0 /* AboutViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AboutViewController.h; sourceTree = "<group>"; };
+		E9355B791E6EBDB0007AE9F0 /* AboutViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AboutViewController.m; sourceTree = "<group>"; };
 		E9F4541B1E31B18D00860DC2 /* TouristLoginRequest.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = TouristLoginRequest.json; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -1280,6 +1301,8 @@
 				E902E6C81E2C5CA8009441B3 /* Views */,
 				E902E6AA1E2BA3BE009441B3 /* SideMenuViewController.h */,
 				E902E6AB1E2BA3BE009441B3 /* SideMenuViewController.m */,
+				E9355B781E6EBDB0007AE9F0 /* AboutViewController.h */,
+				E9355B791E6EBDB0007AE9F0 /* AboutViewController.m */,
 			);
 			path = "侧边栏";
 			sourceTree = "<group>";
@@ -1338,6 +1361,12 @@
 				E9355B521E6D8852007AE9F0 /* ForgotPasswordViewController.m */,
 				E9355B451E6D858B007AE9F0 /* SetPasswordViewController.h */,
 				E9355B461E6D858B007AE9F0 /* SetPasswordViewController.m */,
+				E9355B5D1E6E8FD1007AE9F0 /* ResetPasswordViewController.h */,
+				E9355B5E1E6E8FD1007AE9F0 /* ResetPasswordViewController.m */,
+				E9355B601E6E9A0D007AE9F0 /* SupplementInfoViewController.h */,
+				E9355B611E6E9A0D007AE9F0 /* SupplementInfoViewController.m */,
+				E9355B6C1E6EB04B007AE9F0 /* SupplementUserInfoViewController.h */,
+				E9355B6D1E6EB04B007AE9F0 /* SupplementUserInfoViewController.m */,
 			);
 			path = "登录注册";
 			sourceTree = "<group>";
@@ -1366,6 +1395,12 @@
 				7C7841BD1E2F37EB00755BC0 /* LoginDataManager.m */,
 				E9355AFF1E66AA4E007AE9F0 /* LoginUtils.h */,
 				E9355B001E66AA4E007AE9F0 /* LoginUtils.m */,
+				E9355B6F1E6EB0FD007AE9F0 /* UserInfoPicker.h */,
+				E9355B701E6EB0FD007AE9F0 /* UserInfoPicker.m */,
+				E9355B721E6EB378007AE9F0 /* UserInfoModel.h */,
+				E9355B731E6EB378007AE9F0 /* UserInfoModel.m */,
+				E9355B751E6EB51E007AE9F0 /* UserInfoDataManger.h */,
+				E9355B761E6EB51E007AE9F0 /* UserInfoDataManger.m */,
 			);
 			path = "登录注册";
 			sourceTree = "<group>";
@@ -1786,6 +1821,7 @@
 				7C1A5F4D1E15127200832DED /* PreventHangingCourseView.m in Sources */,
 				7C1A5F171E15108F00832DED /* UrlDownloader.m in Sources */,
 				7C1A5F6C1E15130200832DED /* YXFileHtmlItem.m in Sources */,
+				E9355B741E6EB378007AE9F0 /* UserInfoModel.m in Sources */,
 				E902E6BD1E2BA3E0009441B3 /* UserImageTableViewCell.m in Sources */,
 				7C1A5FE61E1637FC00832DED /* PagedListViewControllerBase.m in Sources */,
 				7C1A5EA81E14F08700832DED /* AppDelegate.m in Sources */,
@@ -1847,6 +1883,7 @@
 				7C2251CD1E1DEB32004785D5 /* SKAlertButton.m in Sources */,
 				7C1A5F141E15108F00832DED /* DownloaderEntity.m in Sources */,
 				7C18094C1E271AFC00B71863 /* CollectionViewEqualSpaceFlowLayout.m in Sources */,
+				E9355B621E6E9A0D007AE9F0 /* SupplementInfoViewController.m in Sources */,
 				7C2251C31E1CE3AC004785D5 /* UIImage+GIF.m in Sources */,
 				7C1A5F691E15130200832DED /* YXFileAudioItem.m in Sources */,
 				7C7629D51E278E16007B5698 /* UserManager.m in Sources */,
@@ -1866,6 +1903,7 @@
 				9241FFFB1E2722470015B587 /* ProjectNavRightView.m in Sources */,
 				7C6F219C1E2481D6000AB43A /* AreaDataManager.m in Sources */,
 				7C1A5F6A1E15130200832DED /* YXFilePhotoItem.m in Sources */,
+				E9355B5F1E6E8FD1007AE9F0 /* ResetPasswordViewController.m in Sources */,
 				E9355B531E6D8852007AE9F0 /* ForgotPasswordViewController.m in Sources */,
 				7C7629BB1E2731A1007B5698 /* LoginBaseViewController.m in Sources */,
 				7C7841B41E2F15DA00755BC0 /* StageSubjectDataManager.m in Sources */,
@@ -1897,6 +1935,7 @@
 				7C1A5F051E150F4B00832DED /* LePlayerView.m in Sources */,
 				30C48A921E52EACC00CCDBBE /* LogRecordEntity.m in Sources */,
 				E9355B3B1E6952F1007AE9F0 /* VerifyCodeInputView.m in Sources */,
+				E9355B7A1E6EBDB0007AE9F0 /* AboutViewController.m in Sources */,
 				7C1809381E25DEBA00B71863 /* StageSubjectCell.m in Sources */,
 				7C7841BE1E2F37EB00755BC0 /* LoginDataManager.m in Sources */,
 				7C1A5F761E15132200832DED /* FileDownloadHelper.m in Sources */,
@@ -1904,6 +1943,7 @@
 				7C1A5F681E15130200832DED /* YXFileVideoItem.m in Sources */,
 				7C1A5FFD1E16396C00832DED /* UIImage+YXImage.m in Sources */,
 				9241FFE71E25E7C90015B587 /* CourseTableViewCell.m in Sources */,
+				E9355B771E6EB51E007AE9F0 /* UserInfoDataManger.m in Sources */,
 				7C7629D91E28A9D5007B5698 /* YXInitRequest.m in Sources */,
 				7C1A5EF11E150B6A00832DED /* SKConfigManager.m in Sources */,
 				7C7841B81E2F1E2900755BC0 /* MineDataManager.m in Sources */,
@@ -1935,6 +1975,7 @@
 				E902E6AF1E2BA3BE009441B3 /* SideHeaderView.m in Sources */,
 				7C1A5EFC1E150E3400832DED /* FileLogger.m in Sources */,
 				E902E6E11E2CE1B8009441B3 /* EmptyView.m in Sources */,
+				E9355B6E1E6EB04B007AE9F0 /* SupplementUserInfoViewController.m in Sources */,
 				9241FFF21E2615B80015B587 /* PlayImageView.m in Sources */,
 				927594DF1E2F0C2800F87838 /* PlayHistoryFetch.m in Sources */,
 				30C48A941E52EACC00CCDBBE /* RegularRecordEntity.m in Sources */,
@@ -1944,6 +1985,7 @@
 				92E7D13D1E28A88600A34300 /* AloneCourseTableViewCell.m in Sources */,
 				7C2251CA1E1DEADA004785D5 /* SKAlertView.m in Sources */,
 				9241FFF71E2651390015B587 /* YXGradientView.m in Sources */,
+				E9355B711E6EB0FD007AE9F0 /* UserInfoPicker.m in Sources */,
 				E902E6BF1E2BA3E0009441B3 /* UserInfoTableViewCell.m in Sources */,
 				E9230C531E30900600AC6617 /* SideTableViewModel.m in Sources */,
 			);

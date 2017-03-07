@@ -46,6 +46,7 @@
 
 - (void)setCanEdit:(BOOL)canEdit {
     _canEdit = canEdit;
+    self.enabled = canEdit;
     [self setButtonColor];
 }
 

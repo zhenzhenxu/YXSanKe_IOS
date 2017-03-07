@@ -43,6 +43,7 @@
     
     self.textField = [[UITextField alloc] init];
     self.textField.tintColor = [UIColor colorWithHexString:@"333333"];
+    self.textField.font = [UIFont systemFontOfSize:14.0f];
     self.textField.delegate = self;
     [self.textField addTarget:self action:@selector(textEditingChanged:) forControlEvents:UIControlEventEditingChanged];
     [self addSubview:self.textField];
@@ -85,9 +86,7 @@
     if (![placeholder yx_isValidString]) {
         return;
     }
-    NSDictionary *attributes = @{NSFontAttributeName: [UIFont systemFontOfSize:14.0f],
-                                 NSForegroundColorAttributeName: [UIColor colorWithHexString:@"c6c9cc"],
-                                 };
+    NSDictionary *attributes = @{NSForegroundColorAttributeName: [UIColor colorWithHexString:@"c6c9cc"]};
     self.textField.attributedPlaceholder = [[NSAttributedString alloc] initWithString:placeholder attributes:attributes];
 }
 

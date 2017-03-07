@@ -13,6 +13,7 @@
 #import "LoginLogoView.h"
 #import "RegisterViewController.h"
 #import "ForgotPasswordViewController.h"
+#import "SupplementInfoViewController.h"
 
 @interface LoginViewController ()
 @property (nonatomic, strong) LoginInputView *usernameView;
@@ -197,7 +198,10 @@
     item.type = YXRecordClickType;
     [YXRecordManager addRecord:item];
     
-    RegisterViewController *vc = [[RegisterViewController alloc]init];
+//    RegisterViewController *vc = [[RegisterViewController alloc]init];
+//    [self.navigationController pushViewController:vc animated:YES];
+    //测试
+    SupplementInfoViewController *vc = [[SupplementInfoViewController alloc]init];
     [self.navigationController pushViewController:vc animated:YES];
 }
 @end

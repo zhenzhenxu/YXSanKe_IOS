@@ -10,7 +10,7 @@
 #import "InfoInputView.h"
 #import "VerifyCodeInputView.h"
 #import "SubmitButton.h"
-#import "SetPasswordViewController.h"
+#import "ResetPasswordViewController.h"
 
 @interface ForgotPasswordViewController ()
 @property (nonatomic, strong) UIView *topView;
@@ -37,7 +37,7 @@
 }
 
 - (void)setupUI {
-    self.title = @"重置密码";
+    self.title = @"忘记密码";
     self.view.backgroundColor = [UIColor colorWithHexString:@"e6e6e6"];
     
     self.topView = [[UIView alloc]init];
@@ -69,7 +69,7 @@
         if (text.length > 6) {
             self.verifyCodeInput.codeInputView.text = [text substringToIndex:6];
         }
-         [self resetButtonEnable];
+        [self resetButtonEnable];
     };
     [self resetSendAgainButtonTitle];
     
@@ -145,21 +145,23 @@
 }
 
 - (void)getVerifyCodeRequest {
-    if (self.timer) {
-        return;
-    }
-    [self startTimer];
-    WEAK_SELF
-    [self startLoading];
-    [LoginDataManager getVerifyCodeWithMobileNumber:self.phoneNumInput.text completeBlock:^(HttpBaseRequestItem *item, NSError *error) {
-        STRONG_SELF
-        [self stopLoading];
-        if (error) {
-            [self stopTimer];
-            [self showToast:error.localizedDescription];
-        }
-        [self showToast:@"验证码已发送至您的手机"];
-    }];
+//    if (self.timer) {
+//        return;
+//    }
+//    [self startTimer];
+//    WEAK_SELF
+//    [self startLoading];
+//    [LoginDataManager getVerifyCodeWithMobileNumber:self.phoneNumInput.text completeBlock:^(HttpBaseRequestItem *item, NSError *error) {
+//        STRONG_SELF
+//        [self stopLoading];
+//        if (error) {
+//            [self stopTimer];
+//            [self showToast:error.localizedDescription];
+//        }
+//        [self showToast:@"验证码已发送至您的手机"];
+//    }];
+    //测试
+    [self showToast:@"验证码已发送至您的手机"];
 }
 
 - (void)startTimer {
@@ -205,19 +207,20 @@
 
 
 - (void)verifySMSCode {
-//    WEAK_SELF
-//    [self startLoading];
-//    [LoginDataManager verifySMSCodeWithMobileNumber:self.phoneNumInput.text verifyCode:self.verifyCodeInput.codeInputView.text completeBlock:^(HttpBaseRequestItem *item, NSError *error) {
-//        STRONG_SELF
-//        [self stopLoading];
-//        if (error) {
-//            [self showToast:error.localizedDescription];
-//            return;
-//        }
-//         SetPasswordViewController *vc = [[SetPasswordViewController alloc]initWithType:PasswordOperationType_Reset phoneNumber:self.phoneNumInput.text];
-//        [self.navigationController pushViewController:vc animated:YES];
-//    }];
-    SetPasswordViewController *vc = [[SetPasswordViewController alloc]initWithType:PasswordOperationType_Reset phoneNumber:self.phoneNumInput.text];
-    [self.navigationController pushViewController:vc animated:YES];//测试
+    //    WEAK_SELF
+    //    [self startLoading];
+    //    [LoginDataManager verifySMSCodeWithMobileNumber:self.phoneNumInput.text verifyCode:self.verifyCodeInput.codeInputView.text completeBlock:^(HttpBaseRequestItem *item, NSError *error) {
+    //        STRONG_SELF
+    //        [self stopLoading];
+    //        if (error) {
+    //            [self showToast:error.localizedDescription];
+    //            return;
+    //        }
+    //    ResetPasswordViewController *vc = [[ResetPasswordViewController alloc]init];
+    //    [self.navigationController pushViewController:vc animated:YES];
+    //    }];
+    //测试
+    ResetPasswordViewController *vc = [[ResetPasswordViewController alloc]init];
+    [self.navigationController pushViewController:vc animated:YES];
 }
 @end

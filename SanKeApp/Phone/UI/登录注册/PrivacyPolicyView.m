@@ -15,6 +15,7 @@
 @property (nonatomic, strong) UIButton *chooseButton;
 
 @property (nonatomic, copy) ChooseBlock block;
+@property (nonatomic, copy) MarkBlock markActionBlock;
 @end
 
 
@@ -70,6 +71,11 @@
 
 - (void)markButtonAction {
     self.isMark = !self.isMark;
+    BLOCK_EXEC(self.markActionBlock);
+}
+
+-(void)setMarkBlock:(MarkBlock)block {
+    self.markActionBlock = block;
 }
 - (void)chooseButtonAction {
     BLOCK_EXEC(self.block);

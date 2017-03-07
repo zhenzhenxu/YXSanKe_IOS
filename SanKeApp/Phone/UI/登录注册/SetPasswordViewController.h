@@ -8,14 +8,8 @@
 
 #import "LoginBaseViewController.h"
 
-// 密码操作类型
-typedef NS_ENUM(NSInteger, PasswordOperationType) {
-    PasswordOperationType_FirstSet = 1,
-    PasswordOperationType_Reset 
-};
-
 @interface SetPasswordViewController : LoginBaseViewController
 
-- (instancetype)initWithType:(PasswordOperationType)type phoneNumber:(NSString *)phoneNumber;
+@property (nonatomic, strong) NSString *phoneNumber;
 
 @end

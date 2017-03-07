@@ -8,9 +8,10 @@
 
 #import <UIKit/UIKit.h>
 typedef void(^ChooseBlock)(void);
-
+typedef void(^MarkBlock)(void);
 @interface PrivacyPolicyView : UIView
 
 @property (nonatomic, assign) BOOL isMark;
 - (void)setChooseBlock:(ChooseBlock)block;
+- (void)setMarkBlock:(MarkBlock)block;
 @end

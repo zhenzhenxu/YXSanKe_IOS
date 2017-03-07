@@ -9,25 +9,17 @@
 #import "SetPasswordViewController.h"
 #import "InfoInputView.h"
 #import "SubmitButton.h"
+#import "SupplementInfoViewController.h"
 
 @interface SetPasswordViewController ()
+@property (nonatomic, strong) UIView *topView;
+@property (nonatomic, strong) InfoInputView *userNameInput;
 @property (nonatomic, strong) InfoInputView *passwordInput;
 @property (nonatomic, strong) SubmitButton *submitButton;
 
-@property (nonatomic, assign) PasswordOperationType type;
-@property (nonatomic, strong) NSString *phoneNumber;
 @end
 
 @implementation SetPasswordViewController
-
-- (instancetype)initWithType:(PasswordOperationType)type phoneNumber:(NSString *)phoneNumber
-{
-    if (self = [super init]) {
-        self.type = type;
-        self.phoneNumber = phoneNumber;
-    }
-    return self;
-}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -44,19 +36,27 @@
 
 - (void)setupUI {
     
-    if (self.type == PasswordOperationType_FirstSet) {
-        self.title = @"设置密码";
-    }else {
-        self.title = @"重置密码";
-    }
+    self.title = @"注册";
     self.view.backgroundColor = [UIColor colorWithHexString:@"e6e6e6"];
+    
+    self.topView = [[UIView alloc]init];
+    self.topView.layer.cornerRadius = 2.0f;
+    self.topView.clipsToBounds = YES;
+
+    self.userNameInput = [[InfoInputView alloc] init];
+    self.userNameInput.placeholder = @"用户名";
+    self.userNameInput.keyboardType = UIKeyboardTypeNamePhonePad;
+    WEAK_SELF
+    self.userNameInput.textChangeBlock = ^(NSString *text) {
+        STRONG_SELF
+        [self resetButtonEnable];
+    };
     
     self.passwordInput = [[InfoInputView alloc] init];
     self.passwordInput.layer.cornerRadius = 2.0f;
     self.passwordInput.clipsToBounds = YES;
     self.passwordInput.keyboardType = UIKeyboardTypeASCIICapable;
     self.passwordInput.placeholder = @"请输入6~18位密码";
-    WEAK_SELF
     self.passwordInput.textChangeBlock = ^(NSString *text) {
         STRONG_SELF
         [self resetButtonEnable];
@@ -72,18 +72,29 @@
 }
 
 - (void)setupLayout {
-    [self.contentView addSubview:self.passwordInput];
+    [self.contentView addSubview:self.topView];
+    [self.topView addSubview:self.userNameInput];
+    [self.topView addSubview:self.passwordInput];
     [self.contentView addSubview:self.submitButton];
     
-    [self.passwordInput mas_makeConstraints:^(MASConstraintMaker *make) {
+    [self.topView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.top.equalTo(self.contentView).offset(10.0f);
         make.right.equalTo(self.contentView).offset(-10.0f);
+    }];
+    [self.userNameInput mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.left.right.equalTo(self.topView);
         make.height.mas_equalTo(40.0f);
+    }];
+    [self.passwordInput mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.userNameInput.mas_bottom).offset(1.0f);
+        make.left.right.equalTo(self.userNameInput);
+        make.height.mas_equalTo(40.0f);
+        make.bottom.equalTo(self.topView);
     }];
     
     [self.submitButton mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.passwordInput.mas_bottom).offset(10.0f);
-        make.left.right.equalTo(self.passwordInput);
+        make.top.equalTo(self.topView.mas_bottom).offset(10.0f);
+        make.left.right.equalTo(self.topView);
         make.height.mas_equalTo(40.0f);
     }];
     
@@ -93,7 +104,7 @@
     __block BOOL passwordFormatIsCorrect;
     [LoginUtils verifyPasswordFormat:self.passwordInput.text completeBlock:^(BOOL isEmpty, BOOL formatIsCorrect) {
         passwordFormatIsCorrect = !isEmpty && formatIsCorrect;
-
+        
     }];
     self.submitButton.canEdit =  passwordFormatIsCorrect;
 }
@@ -102,46 +113,41 @@
 - (void)submitAction
 {
     NSString *password = self.passwordInput.text;
+    if (![self.userNameInput.text yx_isValidString]) {
+        [self showToast:@"请输入用户名"];
+        return;
+    }
     [LoginUtils verifyPasswordFormat:password completeBlock:^(BOOL isEmpty, BOOL formatIsCorrect) {
         if (!formatIsCorrect) {
             [self showToast:@"请输入6~18位数字、字母或符号"];
             return;
         }
-        [self setPasswordRequest];
+        [self registerAccount];
     }];
 }
 
-- (void)setPasswordRequest
-{
-//    [self startLoading];
+- (void)registerAccount {
+    
+   
 //    WEAK_SELF
-//    [LoginDataManager setPasswordWithMobileNumber:self.phoneNumber password:self.passwordInput.text completeBlock:^(HttpBaseRequestItem *item, NSError *error) {
+//    [self startLoading];
+//    [LoginDataManager registerWithInfo:self.registerInfo completeBlock:^(HttpBaseRequestItem *item, NSError *error) {
 //        STRONG_SELF
 //        [self stopLoading];
 //        if (error) {
 //            [self showToast:error.localizedDescription];
 //            return;
 //        }
-//      
-//        if (self.type == PasswordOperationType_FirstSet) {
-//            DDLogDebug(@"跳转到个人信息必填页");
-//            [self showToast:@"设置密码成功"];
-//        }
-//        if (self.type == PasswordOperationType_Reset) {
-//            DDLogDebug(@"跳转到登陆页");
-//            [self showToast:@"重置密码成功"];
-//            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-//                [self.navigationController popToRootViewControllerAnimated:YES];//测试
-//            });
-//        }
+//        self.registerInfo.userName = self.userNameInput.text;
+//        self.registerInfo.password = self.passwordInput.text;
+//        SupplementInfoViewController *vc = [[SupplementInfoViewController alloc]init];
+//        vc.registerInfo = self.registerInfo;
+//        [self.navigationController pushViewController:vc animated:YES];
 //    }];
     //测试
-    [self showToast:@"设置密码成功"];
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2.f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        [self.navigationController popToRootViewControllerAnimated:YES];
-    });
-
-
+    [self showToast:@"注册成功"];
+    SupplementInfoViewController *vc = [[SupplementInfoViewController alloc]init];
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 @end
