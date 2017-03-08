@@ -19,6 +19,8 @@
 #import "YXProblemItem.h"
 #import "YXImagePickerController.h"
 #import "MenuSelectionView.h"
+#import "UserInfoDataManger.h"
+#import "UserInfoPicker.h"
 
 @interface SupplementUserInfoViewController ()<UITableViewDelegate, UITableViewDataSource>
 
@@ -26,6 +28,9 @@
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) UserInfoPickerView *userInfoPickerView;
 @property (nonatomic, strong) UserAreaInfoPicker *areaInfoPicker;
+@property (nonatomic, strong) UserInfoPicker *roleInfoPicker;
+@property (nonatomic, strong) UserInfoPicker *genderInfoPicker;
+@property (nonatomic, strong) UserInfoPicker *experienceInfoPicker;
 
 @end
 
@@ -39,6 +44,7 @@
     [self setupUI];
     [self setupInfoPicker];
     [self LoadData];
+    
     // Do any additional setup after loading the view.
 }
 
@@ -110,6 +116,15 @@
 - (void)setupInfoPicker {
     self.areaInfoPicker = [[UserAreaInfoPicker alloc]init];
     self.areaInfoPicker.model = [AreaDataManager areaModel];
+    
+    self.roleInfoPicker = [[UserInfoPicker alloc]init];
+    self.roleInfoPicker.dataArray = [UserInfoDataManger userInfoData].data.role;
+    
+    self.genderInfoPicker = [[UserInfoPicker alloc]init];
+    self.genderInfoPicker.dataArray = [UserInfoDataManger userInfoData].data.gender;
+    
+    self.experienceInfoPicker = [[UserInfoPicker alloc]init];
+    self.experienceInfoPicker.dataArray = [UserInfoDataManger userInfoData].data.experience;
 }
 
 - (void)LoadData {
@@ -119,28 +134,24 @@
 
 #pragma mark -update Picker Selected Info
 - (void)updateSelectedInfo {
-    //    WEAK_SELF
-    //    if ([self.userInfoPickerView.pickerView.dataSource isKindOfClass:[UserSubjectStageInfoPicker class]]) {
-    //        [self.subjectStageInfoPicker updateStageWithCompleteBlock:^(NSError *error) {
-    //            STRONG_SELF
-    //            if (error) {
-    //                [self showToast:error.localizedDescription];
-    //                return;
-    //            }
-    //            [self updateStageSubjectInfo];//接入真实数据后用
-    //            //            [self updateMockStageSubjectInfo];//mock数据
-    //        }];
-    //    }else if ([self.userInfoPickerView.pickerView.dataSource isKindOfClass:[UserAreaInfoPicker class]]) {
-    //        [self.areaInfoPicker updateAreaWithCompleteBlock:^(NSError *error) {
-    //            STRONG_SELF
-    //            if (error) {
-    //                [self showToast:error.localizedDescription];
-    //                return;
-    //            }
-    //            [self updateAreaInfo];//待接入真实数据后使用
-    //            //            [self updateMockAreaInfo];//mock数据
-    //        }];
-    //    }
+        WEAK_SELF
+    if ([self.userInfoPickerView.pickerView.dataSource isKindOfClass:[UserAreaInfoPicker class]]) {
+            [self.areaInfoPicker updateAreaWithCompleteBlock:^(NSError *error) {
+                STRONG_SELF
+                if (error) {
+                    [self showToast:error.localizedDescription];
+                    return;
+                }
+                [self updateAreaInfo];//待接入真实数据后使用
+                //            [self updateMockAreaInfo];//mock数据
+            }];
+        }else if ([self.userInfoPickerView.pickerView.dataSource isEqual:self.roleInfoPicker]) {
+            DDLogDebug(@"更新身份");
+        }else if ([self.userInfoPickerView.pickerView.dataSource isEqual:self.genderInfoPicker]) {
+            DDLogDebug(@"更新性别");
+        }else if ([self.userInfoPickerView.pickerView.dataSource isEqual:self.experienceInfoPicker]) {
+            DDLogDebug(@"更新工作年限");
+        }
 }
 
 - (void)updateAreaInfo {
@@ -205,25 +216,41 @@
             [self showProvinceListPicker];
         }];
     }else if (indexPath.row == 1) {
-        [cell configTitle:@"身份" content:self.userModel.stage.name];
+        [cell configTitle:@"身份" content:self.userModel.role.name];
         WEAK_SELF
         [cell setSelectedButtonActionBlock:^{
             STRONG_SELF
-            DDLogDebug(@"点击选择学段学科");
+            DDLogDebug(@"点击选择身份");
+            self.userInfoPickerView.pickerView.dataSource = self.roleInfoPicker;
+            self.userInfoPickerView.pickerView.delegate = self.roleInfoPicker;
+            [self.userInfoPickerView showPickerView];
+            [self.roleInfoPicker resetSelectedInfo:self.userModel.role];
+            [self showRoleListPicker];
+
         }];
     }else if (indexPath.row == 2) {
-        [cell configTitle:@"性别" content:self.userModel.stage.name];
+        [cell configTitle:@"性别" content: self.userModel.gender.name];
         WEAK_SELF
         [cell setSelectedButtonActionBlock:^{
             STRONG_SELF
-            DDLogDebug(@"点击选择学段学科");
+            DDLogDebug(@"点击选择性别");
+            self.userInfoPickerView.pickerView.dataSource = self.genderInfoPicker;
+            self.userInfoPickerView.pickerView.delegate = self.genderInfoPicker;
+            [self.userInfoPickerView showPickerView];
+            [self.genderInfoPicker resetSelectedInfo:self.userModel.gender];
+            [self showGenderListPicker];
         }];
     }else if (indexPath.row == 3) {
-        [cell configTitle:@"入职年份" content:self.userModel.stage.name];
+        [cell configTitle:@"入职年份" content:self.userModel.experience.name];
         WEAK_SELF
         [cell setSelectedButtonActionBlock:^{
             STRONG_SELF
-            DDLogDebug(@"点击选择学段学科");
+            DDLogDebug(@"点击选择入职年份");
+            self.userInfoPickerView.pickerView.dataSource = self.experienceInfoPicker;
+            self.userInfoPickerView.pickerView.delegate = self.experienceInfoPicker;
+            [self.userInfoPickerView showPickerView];
+            [self.experienceInfoPicker resetSelectedInfo:self.userModel.experience];
+            [self showExperienceListPicker];
         }];
     }
     return cell;
@@ -248,6 +275,22 @@
     [self.userInfoPickerView.pickerView selectRow:item.selectedProvinceRow inComponent:0 animated:NO];
     [self.userInfoPickerView.pickerView selectRow:item.selectedCityRow inComponent:1 animated:NO];
     [self.userInfoPickerView.pickerView selectRow:item.selectedCountyRow inComponent:2 animated:NO];
+}
+- (void)showRoleListPicker {
+    NSInteger selectedRow = [self.roleInfoPicker selectedInfoRow];
+    [self.userInfoPickerView reloadPickerView];
+    [self.userInfoPickerView.pickerView selectRow:selectedRow inComponent:0 animated:NO];
+}
+- (void)showGenderListPicker {
+    NSInteger selectedRow = [self.genderInfoPicker selectedInfoRow];
+    [self.userInfoPickerView reloadPickerView];
+    [self.userInfoPickerView.pickerView selectRow:selectedRow inComponent:0 animated:NO];
+}
+
+- (void)showExperienceListPicker {
+    NSInteger selectedRow = [self.experienceInfoPicker selectedInfoRow];
+    [self.userInfoPickerView reloadPickerView];
+    [self.userInfoPickerView.pickerView selectRow:selectedRow inComponent:0 animated:NO];
 }
 #pragma  mark - configAreaSring
 -(NSString *)configAreaString {

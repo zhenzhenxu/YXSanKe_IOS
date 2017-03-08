@@ -8,6 +8,7 @@
 
 #import "UserInfoPicker.h"
 #import "UserInfoDataManger.h"
+#import "MineUserModel.h"
 
 @interface UserInfoPicker ()
 @property (nonatomic, strong) UserInfo *selectedInfo;
@@ -22,7 +23,7 @@
 
 - (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component
 {
-    return self.model.userInfo.count;
+    return self.dataArray.count;
 }
 
 #pragma mark - UIPickerViewDelegate
@@ -44,7 +45,7 @@
 
 - (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component
 {
-    UserInfo *info = self.model.userInfo[row];
+    UserInfo *info = self.dataArray[row];
     return info.name;
 }
 
@@ -52,8 +53,8 @@
 {
     UILabel* selectLabel = (UILabel *)[pickerView viewForRow:row forComponent:component];
     selectLabel.textColor = [UIColor colorWithHexString:@"1d878b"];
-    if (self.model.userInfo.count > row) {
-        self.selectedInfo = self.model.userInfo[row];
+    if (self.dataArray.count > row) {
+        self.selectedInfo = self.dataArray[row];
     }
 }
 
@@ -71,26 +72,25 @@
     return pickerLabel;
 }
 
-- (void)resetSelectedSubjectsWithModel:(UserModel *)userModel {
-    //    self.model.userInfo enumerateObjectsUsingBlock:^(UserInfo *obj, NSUInteger idx, BOOL * _Nonnull stop) {
-    //        if ([userModel.stage.stageID isEqualToString:stage.stageID]) {
-    //            self.selectedStage = stage;
-    //            self.selectedSubjects = self.selectedStage.subjects;
-    //            *stop = YES;
-    //        }
-    //    }];
-    //    if (!self.selectedStage) {
-    //        self.selectedStage = self.stageAndSubjectItem.data.stages.firstObject;
-    //        return;
-    //    }
+- (void)resetSelectedInfo:(UserInfo *)userInfo {
+    [self.dataArray enumerateObjectsUsingBlock:^(UserInfo * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        if ([userInfo.infoID isEqualToString:obj.infoID]) {
+            self.selectedInfo = obj;
+            *stop = YES;
+        }
+    }];
+    if(!self.selectedInfo) {
+        self.selectedInfo = self.dataArray.firstObject;
+        return;
+    }
 }
 
 
 - (NSInteger)selectedInfoRow {
     NSInteger selectedRow = 0;
-    if (self.model.userInfo.count > 0) {
-        if ([self.model.userInfo containsObject:self.selectedInfo]) {
-            selectedRow = [self.model.userInfo indexOfObject:self.selectedInfo];
+    if (self.dataArray.count > 0) {
+        if ([self.dataArray containsObject:self.selectedInfo]) {
+            selectedRow = [self.dataArray indexOfObject:self.selectedInfo];
         }
     }
     return selectedRow;

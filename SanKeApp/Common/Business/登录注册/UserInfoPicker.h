@@ -7,9 +7,14 @@
 //
 
 #import <Foundation/Foundation.h>
-@class UserInfoModel;
+@class UserInfo;
 
-@interface UserInfoPicker : NSObject
-@property (nonatomic, strong) UserInfoModel *model;
 
+@interface UserInfoPicker : NSObject<UIPickerViewDelegate,UIPickerViewDataSource>
+
+@property (nonatomic, strong) NSArray<UserInfo *> *dataArray;
+
+- (void)resetSelectedInfo:(UserInfo *)userInfo;
+
+- (NSInteger)selectedInfoRow;
 @end

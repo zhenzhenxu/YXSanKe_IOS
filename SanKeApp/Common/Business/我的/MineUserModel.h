@@ -17,6 +17,8 @@
 @property (nonatomic, strong) Area *province;
 @property (nonatomic, strong) Area *city;
 @property (nonatomic, strong) Area *district;
-
+@property (nonatomic, strong) UserInfo *role;
+@property (nonatomic, strong) UserInfo *gender;
+@property (nonatomic, strong) UserInfo *experience;
 + (MineUserModel *)mineUserModelFromRawModel:(UserModel *)model;
 @end

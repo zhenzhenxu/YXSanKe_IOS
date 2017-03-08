@@ -213,6 +213,7 @@
 		E9355B711E6EB0FD007AE9F0 /* UserInfoPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = E9355B701E6EB0FD007AE9F0 /* UserInfoPicker.m */; };
 		E9355B771E6EB51E007AE9F0 /* UserInfoDataManger.m in Sources */ = {isa = PBXBuildFile; fileRef = E9355B761E6EB51E007AE9F0 /* UserInfoDataManger.m */; };
 		E9355B7A1E6EBDB0007AE9F0 /* AboutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E9355B791E6EBDB0007AE9F0 /* AboutViewController.m */; };
+		E9355B7C1E6FF85B007AE9F0 /* userInfo.json in Resources */ = {isa = PBXBuildFile; fileRef = E9355B7B1E6FF85B007AE9F0 /* userInfo.json */; };
 		E9F4541C1E31B18D00860DC2 /* TouristLoginRequest.json in Resources */ = {isa = PBXBuildFile; fileRef = E9F4541B1E31B18D00860DC2 /* TouristLoginRequest.json */; };
 /* End PBXBuildFile section */
 
@@ -632,6 +633,7 @@
 		E9355B761E6EB51E007AE9F0 /* UserInfoDataManger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserInfoDataManger.m; sourceTree = "<group>"; };
 		E9355B781E6EBDB0007AE9F0 /* AboutViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AboutViewController.h; sourceTree = "<group>"; };
 		E9355B791E6EBDB0007AE9F0 /* AboutViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AboutViewController.m; sourceTree = "<group>"; };
+		E9355B7B1E6FF85B007AE9F0 /* userInfo.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = userInfo.json; sourceTree = "<group>"; };
 		E9F4541B1E31B18D00860DC2 /* TouristLoginRequest.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = TouristLoginRequest.json; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -855,6 +857,7 @@
 		7C1A5EEA1E15090B00832DED /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				E9355B7B1E6FF85B007AE9F0 /* userInfo.json */,
 				E9355AF71E669C06007AE9F0 /* 隐私政策.txt */,
 				30C48A6B1E52E72100CCDBBE /* Statistic */,
 				E902E6CC1E2C9FD5009441B3 /* stageAndSubject.json */,
@@ -1711,6 +1714,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7C1A5EE91E1506C500832DED /* PhoneImage.xcassets in Resources */,
+				E9355B7C1E6FF85B007AE9F0 /* userInfo.json in Resources */,
 				7C7629D21E276DBE007B5698 /* logo.gif in Resources */,
 				927594E91E2F0DA000F87838 /* playHistory_mock.json in Resources */,
 				E9230C461E2F829900AC6617 /* LoginRequest.json in Resources */,

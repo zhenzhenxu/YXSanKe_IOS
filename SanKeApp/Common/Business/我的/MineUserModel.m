@@ -32,6 +32,11 @@
         mineUserModel.city = city;
         mineUserModel.district = district;
     }];
+    [UserInfoDataManger fetchUserInfoWithRoleID:model.role genderID:model.gender experienceID:model.experience completeBlock:^(UserInfo *role, UserInfo *gender, UserInfo *experience) {
+       mineUserModel.role = role;
+       mineUserModel.gender = gender;
+       mineUserModel.experience = experience;
+   }];
     return mineUserModel;
 }
 

@@ -13,15 +13,25 @@
 @interface UserInfo:JSONModel
 @property (nonatomic, copy) NSString<Optional> *name;
 @property (nonatomic, copy) NSString<Optional> *infoID;
-@property (nonatomic ,strong) NSArray<UserInfo,Optional> *subInfo;
 @end
 
 @interface UserInfoModel:JSONModel
-@property (nonatomic ,strong)NSArray<UserInfo,Optional> *userInfo;
+@property (nonatomic ,strong)NSArray<UserInfo,Optional> *role;//身份
+@property (nonatomic ,strong)NSArray<UserInfo,Optional> *gender;//性别
+@property (nonatomic ,strong)NSArray<UserInfo,Optional> *experience;//工作年限
+
+@end
+
+
+@interface UserInfoData:JSONModel
+@property (nonatomic, strong) UserInfoModel<Optional> *data;
 @property (nonatomic, copy) NSString<Optional> *version;
 @end
 
 
 @interface UserInfoDataManger : NSObject
-+ (AreaModel *)areaModel;
+
++ (UserInfoData *)userInfoData;
+
++ (void)fetchUserInfoWithRoleID:(NSString *)roleID genderID:(NSString *)genderID experienceID:(NSString *)experienceID completeBlock:(void(^)(UserInfo *role,UserInfo *gender,UserInfo *experience))completeBlock;
 @end
