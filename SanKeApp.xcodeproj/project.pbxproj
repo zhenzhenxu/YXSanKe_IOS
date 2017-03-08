@@ -211,7 +211,6 @@
 		E9355B621E6E9A0D007AE9F0 /* SupplementInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E9355B611E6E9A0D007AE9F0 /* SupplementInfoViewController.m */; };
 		E9355B6E1E6EB04B007AE9F0 /* SupplementUserInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E9355B6D1E6EB04B007AE9F0 /* SupplementUserInfoViewController.m */; };
 		E9355B711E6EB0FD007AE9F0 /* UserInfoPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = E9355B701E6EB0FD007AE9F0 /* UserInfoPicker.m */; };
-		E9355B741E6EB378007AE9F0 /* UserInfoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E9355B731E6EB378007AE9F0 /* UserInfoModel.m */; };
 		E9355B771E6EB51E007AE9F0 /* UserInfoDataManger.m in Sources */ = {isa = PBXBuildFile; fileRef = E9355B761E6EB51E007AE9F0 /* UserInfoDataManger.m */; };
 		E9355B7A1E6EBDB0007AE9F0 /* AboutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E9355B791E6EBDB0007AE9F0 /* AboutViewController.m */; };
 		E9F4541C1E31B18D00860DC2 /* TouristLoginRequest.json in Resources */ = {isa = PBXBuildFile; fileRef = E9F4541B1E31B18D00860DC2 /* TouristLoginRequest.json */; };
@@ -629,8 +628,6 @@
 		E9355B6D1E6EB04B007AE9F0 /* SupplementUserInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SupplementUserInfoViewController.m; sourceTree = "<group>"; };
 		E9355B6F1E6EB0FD007AE9F0 /* UserInfoPicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserInfoPicker.h; sourceTree = "<group>"; };
 		E9355B701E6EB0FD007AE9F0 /* UserInfoPicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserInfoPicker.m; sourceTree = "<group>"; };
-		E9355B721E6EB378007AE9F0 /* UserInfoModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserInfoModel.h; sourceTree = "<group>"; };
-		E9355B731E6EB378007AE9F0 /* UserInfoModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserInfoModel.m; sourceTree = "<group>"; };
 		E9355B751E6EB51E007AE9F0 /* UserInfoDataManger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserInfoDataManger.h; sourceTree = "<group>"; };
 		E9355B761E6EB51E007AE9F0 /* UserInfoDataManger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserInfoDataManger.m; sourceTree = "<group>"; };
 		E9355B781E6EBDB0007AE9F0 /* AboutViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AboutViewController.h; sourceTree = "<group>"; };
@@ -1397,8 +1394,6 @@
 				E9355B001E66AA4E007AE9F0 /* LoginUtils.m */,
 				E9355B6F1E6EB0FD007AE9F0 /* UserInfoPicker.h */,
 				E9355B701E6EB0FD007AE9F0 /* UserInfoPicker.m */,
-				E9355B721E6EB378007AE9F0 /* UserInfoModel.h */,
-				E9355B731E6EB378007AE9F0 /* UserInfoModel.m */,
 				E9355B751E6EB51E007AE9F0 /* UserInfoDataManger.h */,
 				E9355B761E6EB51E007AE9F0 /* UserInfoDataManger.m */,
 			);
@@ -1821,7 +1816,6 @@
 				7C1A5F4D1E15127200832DED /* PreventHangingCourseView.m in Sources */,
 				7C1A5F171E15108F00832DED /* UrlDownloader.m in Sources */,
 				7C1A5F6C1E15130200832DED /* YXFileHtmlItem.m in Sources */,
-				E9355B741E6EB378007AE9F0 /* UserInfoModel.m in Sources */,
 				E902E6BD1E2BA3E0009441B3 /* UserImageTableViewCell.m in Sources */,
 				7C1A5FE61E1637FC00832DED /* PagedListViewControllerBase.m in Sources */,
 				7C1A5EA81E14F08700832DED /* AppDelegate.m in Sources */,

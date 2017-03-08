@@ -26,6 +26,9 @@
     model.isTaged = [rawData.is_taged isEqualToString:@"1"];
     model.isSankeUser = [rawData.is_sanke isEqualToString:@"1"];
     model.isAnonymous = [rawData.is_anonymous isEqualToString:@"1"];
+    model.experience = rawData.userInfo.experience;
+    model.role = rawData.userInfo.role;
+    model.gender = rawData.userInfo.sex;
     return model;
 }
 @end

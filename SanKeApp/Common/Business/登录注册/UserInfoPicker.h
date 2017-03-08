@@ -7,7 +7,9 @@
 //
 
 #import <Foundation/Foundation.h>
+@class UserInfoModel;
 
 @interface UserInfoPicker : NSObject
+@property (nonatomic, strong) UserInfoModel *model;
 
 @end

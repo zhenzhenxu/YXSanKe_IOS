@@ -21,6 +21,9 @@
 @property (nonatomic, strong) NSString<Optional> *subjectID;
 @property (nonatomic, strong) NSString<Optional> *truename;
 @property (nonatomic, strong) NSString<Optional> *userID;
+@property (nonatomic, strong) NSString<Optional> *experience;//工作年限
+@property (nonatomic, strong) NSString<Optional> *role;//角色
+@property (nonatomic, strong) NSString<Optional> *gender;//性别
 
 @property (nonatomic, strong) NSString<Optional> *token;
 @property (nonatomic, assign) BOOL isTaged;  //NO--未设置学段学科，YES--已设置

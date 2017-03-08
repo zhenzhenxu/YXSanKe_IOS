@@ -8,12 +8,20 @@
 
 #import <Foundation/Foundation.h>
 
+@protocol UserInfo
+@end
+@interface UserInfo:JSONModel
+@property (nonatomic, copy) NSString<Optional> *name;
+@property (nonatomic, copy) NSString<Optional> *infoID;
+@property (nonatomic ,strong) NSArray<UserInfo,Optional> *subInfo;
+@end
+
 @interface UserInfoModel:JSONModel
-@property (nonatomic ,copy)NSString<Optional> *name;
-@property (nonatomic, copy) NSString<Optional> *Id;
+@property (nonatomic ,strong)NSArray<UserInfo,Optional> *userInfo;
+@property (nonatomic, copy) NSString<Optional> *version;
 @end
 
 
 @interface UserInfoDataManger : NSObject
-
++ (AreaModel *)areaModel;
 @end
