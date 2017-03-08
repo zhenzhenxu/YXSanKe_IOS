@@ -9,7 +9,7 @@
 #import "PrivacyPolicyView.h"
 
 
-@interface PrivacyPolicyView ()
+@interface PrivacyPolicyView ()<UIGestureRecognizerDelegate>
 @property (nonatomic, strong) UIButton *markButton;
 @property (nonatomic, strong) UILabel *tipLabel;
 @property (nonatomic, strong) UIButton *chooseButton;
@@ -33,15 +33,20 @@
     self.backgroundColor = [UIColor colorWithHexString:@"e6e6e6"];
     
     self.markButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    [self.markButton addTarget:self action:@selector(markButtonAction) forControlEvents:UIControlEventTouchUpInside];
-//    [self.markButton setImage:[UIImage imageNamed:@"同意"] forState:UIControlStateNormal];
-//    [self.markButton setImage:[UIImage imageNamed:@"同意点击"] forState:UIControlStateHighlighted];
+    UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(markAction)];
+    [self.markButton addGestureRecognizer:tapGestureRecognizer];
+    tapGestureRecognizer.delegate = self;
     
     self.tipLabel = [[UILabel alloc]init];
     self.tipLabel.font = [UIFont systemFontOfSize:13.0f];
     self.tipLabel.text = @"我已阅读并接受";
     self.tipLabel.textColor = [UIColor colorWithHexString:@"999999"];
-   
+    self.tipLabel.userInteractionEnabled = YES;
+    UITapGestureRecognizer *tapGestureRecognizer1 = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(markAction)];
+    [self.tipLabel addGestureRecognizer:tapGestureRecognizer1];
+    tapGestureRecognizer.delegate = self;
+    
+     
     self.chooseButton = [UIButton buttonWithType:UIButtonTypeCustom];
     self.chooseButton.titleLabel.font = [UIFont systemFontOfSize:13.0f];
     [self.chooseButton setTitleColor:[UIColor colorWithHexString:@"4691a6"] forState:UIControlStateNormal];
@@ -69,7 +74,7 @@
     }];
 }
 
-- (void)markButtonAction {
+- (void)markAction {
     self.isMark = !self.isMark;
     BLOCK_EXEC(self.markActionBlock);
 }

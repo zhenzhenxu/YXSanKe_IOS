@@ -22,8 +22,6 @@
 @property (nonatomic, strong) PrivacyPolicyView *privacyPolicyView;
 @property (nonatomic, strong) SubmitButton *submitButton;
 
-@property (nonatomic, strong) NSTimer *timer;
-@property (nonatomic, assign) NSInteger seconds;
 
 @end
 
@@ -51,16 +49,17 @@
     self.topView.clipsToBounds = YES;
     
     self.phoneNumInput = [[InfoInputView alloc] init];
-    self.phoneNumInput.keyboardType = UIKeyboardTypeNumberPad;
-    self.phoneNumInput.placeholder = @"手机号";
+    self.phoneNumInput.textField.keyboardType = UIKeyboardTypeNumberPad;
+    NSDictionary *attributes = @{NSForegroundColorAttributeName: [UIColor colorWithHexString:@"c6c9cc"]};
+    self.phoneNumInput.textField.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@"手机号" attributes:attributes];
     WEAK_SELF
-    self.phoneNumInput.textChangeBlock = ^(NSString *text) {
+    [self.phoneNumInput setTextChangeBlock:^(NSString *text) {
         STRONG_SELF
         if (text.length > 11) {
-            self.phoneNumInput.text = [text substringToIndex:11];
+            self.phoneNumInput.textField.text = [text substringToIndex:11];
         }
         [self resetButtonEnable];
-    };
+    }];
     
     self.verifyCodeInput = [[VerifyCodeInputView alloc] init];
     [self.verifyCodeInput setRightButtonText:@"获取验证码"];
@@ -69,13 +68,13 @@
         [self sendAgainAction];
         DDLogDebug(@"获取验证码");
     }];
-    self.verifyCodeInput.codeInputView.textChangeBlock = ^(NSString *text) {
+    [self.verifyCodeInput.codeInputView setTextChangeBlock:^(NSString *text) {
         STRONG_SELF
         if (text.length > 6) {
-            self.verifyCodeInput.codeInputView.text = [text substringToIndex:6];
+            self.verifyCodeInput.codeInputView.textField.text = [text substringToIndex:6];
         }
         [self resetButtonEnable];
-    };
+    }];
     [self resetSendAgainButtonTitle];
     
     self.privacyPolicyView = [[PrivacyPolicyView alloc]init];
@@ -168,48 +167,20 @@
 }
 
 - (void)getVerifyCodeRequest {
-    //    if (self.timer) {
-    //        return;
-    //    }
-    //    [self startTimer];
-    //    WEAK_SELF
-    //    [self startLoading];
-    //    [LoginDataManager getVerifyCodeWithMobileNumber:self.phoneNumInput.text completeBlock:^(HttpBaseRequestItem *item, NSError *error) {
-    //        STRONG_SELF
-    //        [self stopLoading];
-    //        if (error) {
-    //            [self stopTimer];
-    //            [self showToast:error.localizedDescription];
-    //        }
-    //        [self showToast:@"验证码已发送至您的手机"];
-    //    }];
+        [self.verifyCodeInput startTimer];
+        WEAK_SELF
+        [self startLoading];
+        [LoginDataManager getVerifyCodeWithMobileNumber:self.phoneNumInput.text completeBlock:^(HttpBaseRequestItem *item, NSError *error) {
+            STRONG_SELF
+            [self stopLoading];
+            if (error) {
+                [self.verifyCodeInput stopTimer];
+                [self showToast:error.localizedDescription];
+            }
+            [self showToast:@"验证码已发送至您的手机"];
+        }];
     //测试
     [self showToast:@"验证码已发送至您的手机"];
-}
-
-- (void)startTimer {
-    if (!self.timer) {
-        self.seconds = 60;
-        self.timer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(countdownTimer) userInfo:nil repeats:YES];
-        [[NSRunLoop currentRunLoop] addTimer:self.timer forMode:NSRunLoopCommonModes];
-    }
-}
-
-- (void)countdownTimer {
-    if (self.seconds <= 0) {
-        [self stopTimer];
-    } else {
-        [self.verifyCodeInput resetRightButtonText:[NSString stringWithFormat:@"%@秒后重试", @(self.seconds)]];
-        self.seconds--;
-    }
-    [self.verifyCodeInput setRightButtonEnabled:self.seconds <= 0];
-}
-
-- (void)stopTimer {
-    [self resetSendAgainButtonTitle];
-    [self.timer invalidate];
-    self.timer = nil;
-    self.seconds = 0;
 }
 
 - (void)resetSendAgainButtonTitle {

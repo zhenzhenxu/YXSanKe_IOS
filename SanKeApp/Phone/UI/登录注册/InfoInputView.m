@@ -11,7 +11,8 @@
 @interface InfoInputView ()
 @property (nonatomic, strong) UITextField *textField;
 @property (nonatomic, strong) UIButton *clearButton;
-@property (nonatomic, strong) UIImageView *frontImageView;
+
+@property (nonatomic, copy) TextChangeBlock Block;
 @end
 
 
@@ -66,64 +67,58 @@
 
 #pragma mark - getter & setter
 
-- (void)setText:(NSString *)text
-{
-    self.textField.text = text;
-    self.clearButton.hidden = ![text yx_isValidString];
-    [self textEditingChanged:self.textField];
-}
 
 - (NSString *)text
 {
     return [self.textField.text yx_stringByTrimmingCharacters];
 }
 
-- (NSString *)originalText {
-    return self.textField.text;
-}
-- (void)setPlaceholder:(NSString *)placeholder
-{
-    if (![placeholder yx_isValidString]) {
-        return;
-    }
-    NSDictionary *attributes = @{NSForegroundColorAttributeName: [UIColor colorWithHexString:@"c6c9cc"]};
-    self.textField.attributedPlaceholder = [[NSAttributedString alloc] initWithString:placeholder attributes:attributes];
-}
-
-- (NSString *)placeholder
-{
-    return self.textField.placeholder;
-}
-
-- (void)setEnabled:(BOOL)enabled
-{
-    self.textField.enabled = enabled;
-}
-
-- (BOOL)enabled
-{
-    return self.textField.enabled;
-}
-
-- (void)setKeyboardType:(UIKeyboardType)keyboardType
-{
-    self.textField.keyboardType = keyboardType;
-}
-
-- (UIKeyboardType)keyboardType
-{
-    return self.textField.keyboardType;
-}
-
-- (void)setSecureTextEntry:(BOOL)secureTextEntry
-{
-    self.textField.secureTextEntry = secureTextEntry;
-}
-
-- (BOOL)secureTextEntry
-{
-    return self.textField.secureTextEntry;
-}
+//- (NSString *)originalText {
+//    return self.textField.text;
+//}
+//- (void)setPlaceholder:(NSString *)placeholder
+//{
+//    if (![placeholder yx_isValidString]) {
+//        return;
+//    }
+//    NSDictionary *attributes = @{NSForegroundColorAttributeName: [UIColor colorWithHexString:@"c6c9cc"]};
+//    self.textField.attributedPlaceholder = [[NSAttributedString alloc] initWithString:placeholder attributes:attributes];
+//}
+//
+//- (NSString *)placeholder
+//{
+//    return self.textField.placeholder;
+//}
+//
+//- (void)setEnabled:(BOOL)enabled
+//{
+//    self.textField.enabled = enabled;
+//}
+//
+//- (BOOL)enabled
+//{
+//    return self.textField.enabled;
+//}
+//
+//- (void)setKeyboardType:(UIKeyboardType)keyboardType
+//{
+//    self.textField.keyboardType = keyboardType;
+//}
+//
+//- (UIKeyboardType)keyboardType
+//{
+//    return self.textField.keyboardType;
+//}
+//
+//- (void)setSecureTextEntry:(BOOL)secureTextEntry
+//{
+//    self.textField.secureTextEntry = secureTextEntry;
+//}
+//
+//- (BOOL)secureTextEntry
+//{
+//    return self.textField.secureTextEntry;
+//}
 
 #pragma mark -
 
@@ -134,6 +129,19 @@
 }
 
 #pragma mark - UITextFieldDelegate
+- (void)textFieldDidBeginEditing:(UITextField *)textField {
+    self.clearButton.hidden = textField.text.length==0;
+}
+
+- (void)textFieldDidEndEditing:(UITextField *)textField {
+    self.clearButton.hidden = YES;
+}
+
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
+    NSString *text = [textField.text stringByReplacingCharactersInRange:range withString:string];
+    self.clearButton.hidden = text.length==0;
+    return YES;
+}
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
@@ -146,10 +154,11 @@
 - (void)textEditingChanged:(UITextField *)sender
 {
     self.clearButton.hidden = ![self.text yx_isValidString];
-    if (self.textChangeBlock) {
-        self.textChangeBlock(self.text);
-    }
+    BLOCK_EXEC(self.Block,self.text)
 }
 
+- (void)setTextChangeBlock:(TextChangeBlock)block {
+    self.Block = block;
+}
 
 @end

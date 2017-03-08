@@ -7,16 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+typedef void(^TextChangeBlock)(NSString *text);
 
 @interface InfoInputView : UIView<UITextFieldDelegate>
+@property (nonatomic, strong, readonly) UITextField *textField;
+@property (nonatomic, strong, readonly) NSString *text;
 
-@property (nonatomic, strong) NSString *text;
-@property (nonatomic, strong) NSString *originalText;
-@property (nonatomic, strong) NSString *placeholder;
-@property (nonatomic, assign) BOOL enabled;
-@property (nonatomic, assign) UIKeyboardType keyboardType;
-@property (nonatomic, assign) BOOL secureTextEntry;
-
-@property (nonatomic, copy) void(^textChangeBlock)(NSString *text);
-
+- (void)setTextChangeBlock:(TextChangeBlock)block;
 @end

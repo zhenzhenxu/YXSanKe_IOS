@@ -39,13 +39,14 @@
     self.passwordInput = [[InfoInputView alloc] init];
     self.passwordInput.layer.cornerRadius = 2.0f;
     self.passwordInput.clipsToBounds = YES;
-    self.passwordInput.keyboardType = UIKeyboardTypeASCIICapable;
-    self.passwordInput.placeholder = @"请输入6~18位密码";
+    self.passwordInput.textField.keyboardType = UIKeyboardTypeNumberPad;
+    NSDictionary *attributes = @{NSForegroundColorAttributeName: [UIColor colorWithHexString:@"c6c9cc"]};
+    self.passwordInput.textField.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@"请输入6~18位密码" attributes:attributes];
     WEAK_SELF
-    self.passwordInput.textChangeBlock = ^(NSString *text) {
+    [self.passwordInput setTextChangeBlock:^(NSString *text) {
         STRONG_SELF
         [self resetButtonEnable];
-    };
+    }];
     
     self.submitButton = [[SubmitButton alloc]init];
     self.submitButton.title = @"确认";

@@ -9,16 +9,23 @@
 #import "VerifyCodeInputView.h"
 #import "InfoInputView.h"
 
+
 @interface VerifyCodeInputView ()
 @property (nonatomic, strong) UIView *lineView;
 @property (nonatomic, strong) UIButton *getCodeButton;
 
 @property (nonatomic, copy) VerifyCodeBlock block;
+
+@property (nonatomic, strong) NSTimer *timer;
+@property (nonatomic, assign) NSInteger seconds;
 @end
 
 
 @implementation VerifyCodeInputView
 
+- (void)dealloc {
+    DDLogDebug(@"%@释放了", [self.timer class]);
+}
 - (instancetype)initWithFrame:(CGRect)frame
 {
     if (self = [super initWithFrame:frame]) {
@@ -32,8 +39,10 @@
     self.backgroundColor = [UIColor colorWithHexString:@"ffffff"];
     
     self.codeInputView = [[InfoInputView alloc]init];
-    self.codeInputView.keyboardType = UIKeyboardTypeNumberPad;
-    self.codeInputView.placeholder = @"手机验证码";
+    
+    self.codeInputView.textField.keyboardType = UIKeyboardTypeNumberPad;
+    NSDictionary *attributes = @{NSForegroundColorAttributeName: [UIColor colorWithHexString:@"c6c9cc"]};
+    self.codeInputView.textField.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@"请输入手机验证码" attributes:attributes];
     
     self.lineView = [[UIView alloc]init];
     self.lineView.backgroundColor = [UIColor colorWithHexString:@"c6c9cc"];
@@ -89,5 +98,29 @@
     self.block = block;
 }
 
+#pragma mark - timer
+- (void)startTimer {
+    if (!self.timer) {
+        self.seconds = 60;
+        self.timer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(countdownTimer) userInfo:nil repeats:YES];
+        [[NSRunLoop currentRunLoop] addTimer:self.timer forMode:NSRunLoopCommonModes];
+    }
+}
 
+- (void)countdownTimer {
+    if (self.seconds <= 0) {
+        [self stopTimer];
+    } else {
+        [self resetRightButtonText:[NSString stringWithFormat:@"%@秒后重试", @(self.seconds)]];
+        self.seconds--;
+    }
+    [self setRightButtonEnabled:self.seconds <= 0];
+}
+
+- (void)stopTimer {
+    [self setRightButtonText:@"获取验证码"];
+    [self.timer invalidate];
+    self.timer = nil;
+    self.seconds = 0;
+}
 @end

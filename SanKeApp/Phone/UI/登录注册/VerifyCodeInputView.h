@@ -14,6 +14,7 @@ typedef void(^VerifyCodeBlock)(void);
 
 @property (nonatomic, strong) InfoInputView *codeInputView;
 
+
 - (void)setRightButtonText:(NSString *)text;
 
 - (void)resetRightButtonText:(NSString *)text;
@@ -22,4 +23,6 @@ typedef void(^VerifyCodeBlock)(void);
 
 - (void)setVerifyCodeBlock:(VerifyCodeBlock)block;
 
+- (void)startTimer;
+- (void)stopTimer;
 @end
