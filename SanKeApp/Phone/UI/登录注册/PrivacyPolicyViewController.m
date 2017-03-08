@@ -8,7 +8,7 @@
 
 #import "PrivacyPolicyViewController.h"
 
-@interface PrivacyPolicyViewController ()
+@interface PrivacyPolicyViewController ()<UITextViewDelegate>
 @property (nonatomic, strong) UITextView *textView;
 @end
 
@@ -28,6 +28,8 @@
 
 - (void)setupUI {
     self.textView = [[UITextView alloc]init];
+    self.textView.delegate = self;
+    self.textView.showsVerticalScrollIndicator = NO;
     [self.view addSubview:self.textView];
     NSString * str = [NSString stringWithContentsOfFile:[[NSBundle mainBundle]pathForResource:@"隐私政策" ofType:@"txt"] encoding:NSUTF8StringEncoding error:nil];
     self.textView.text = str;
@@ -36,4 +38,12 @@
     }];
 }
 
+#pragma mark - UITextViewDelegate
+- (BOOL)textViewShouldBeginEditing:(UITextView *)textView
+{
+    if([textView isFirstResponder]){
+        return YES;
+    }
+    return NO;
+}
 @end
