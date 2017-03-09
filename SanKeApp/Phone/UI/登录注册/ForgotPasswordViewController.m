@@ -12,6 +12,8 @@
 #import "SubmitButton.h"
 #import "ResetPasswordViewController.h"
 
+static NSString *const obtainVerifyCodeType = @"password";
+
 @interface ForgotPasswordViewController ()
 @property (nonatomic, strong) UIView *topView;
 @property (nonatomic, strong) InfoInputView *phoneNumInput;
@@ -62,7 +64,7 @@
     [self.verifyCodeInput setRightButtonText:@"获取验证码"];
     [self.verifyCodeInput setVerifyCodeBlock:^{
         STRONG_SELF
-        [self sendAgainAction:nil];
+        [self sendAgainAction];
         DDLogDebug(@"获取验证码");
     }];
     [self.verifyCodeInput.codeInputView setTextChangeBlock:^(NSString *text) {
@@ -72,8 +74,6 @@
         }
         [self resetButtonEnable];
     }];
-    [self resetSendAgainButtonTitle];
-    
     
     self.submitButton = [[SubmitButton alloc]init];
     self.submitButton.title = @"下一步";
@@ -119,7 +119,6 @@
     [LoginUtils verifyMobileNumberFormat:self.phoneNumInput.text completeBlock:^(BOOL isEmpty, BOOL formatIsCorrect) {
         enableVerifyButton = !isEmpty && formatIsCorrect;
     }];
-     [self.verifyCodeInput setRightButtonEnabled:enableVerifyButton];
     
     __block BOOL verifyCodeFormatIsCorrect;
     [LoginUtils verifySMSCodeFormat:self.verifyCodeInput.codeInputView.text completeBlock:^(BOOL isEmpty, BOOL formatIsCorrect) {
@@ -132,7 +131,7 @@
     self.submitButton.canEdit =  enableRegisterButton;
 }
 
-- (void)sendAgainAction:(id)sender {
+- (void)sendAgainAction {
     [LoginUtils verifyMobileNumberFormat:self.phoneNumInput.text completeBlock:^(BOOL isEmpty, BOOL formatIsCorrect) {
         if (isEmpty) {
             [self showToast:@"请输入您的手机号码"];
@@ -142,30 +141,24 @@
             [self showToast:@"您输入的手机号码错误"];
             return;
         }
-        [self getVerifyCodeRequest];
+        [self sendVerifyCode];
     }];
 }
 
-- (void)getVerifyCodeRequest {
-    [self.verifyCodeInput startTimer];
+- (void)sendVerifyCode {
     WEAK_SELF
     [self startLoading];
-    [LoginDataManager getVerifyCodeWithMobileNumber:self.phoneNumInput.text completeBlock:^(HttpBaseRequestItem *item, NSError *error) {
+    [self.verifyCodeInput startTimer];
+    [LoginDataManager sendVerifyCodeWithMobileNumber:self.phoneNumInput.text type:obtainVerifyCodeType completeBlock:^(NSError *error) {
         STRONG_SELF
         [self stopLoading];
         if (error) {
             [self.verifyCodeInput stopTimer];
             [self showToast:error.localizedDescription];
+            return;
         }
         [self showToast:@"验证码已发送至您的手机"];
     }];
-    //测试
-    [self showToast:@"验证码已发送至您的手机"];
-}
-
-- (void)resetSendAgainButtonTitle {
-    
-    [self.verifyCodeInput setRightButtonText:@"获取验证码"];
 }
 
 - (void)submitAction {
@@ -174,27 +167,23 @@
             [self showToast:@"您输入的手机号码错误"];
             return;
         }
-        [self verifySMSCode];
+        [self checkVerifyCode];
     }];
 }
 
-
-
-- (void)verifySMSCode {
-    //    WEAK_SELF
-    //    [self startLoading];
-    //    [LoginDataManager verifySMSCodeWithMobileNumber:self.phoneNumInput.text verifyCode:self.verifyCodeInput.codeInputView.text completeBlock:^(HttpBaseRequestItem *item, NSError *error) {
-    //        STRONG_SELF
-    //        [self stopLoading];
-    //        if (error) {
-    //            [self showToast:error.localizedDescription];
-    //            return;
-    //        }
-    //    ResetPasswordViewController *vc = [[ResetPasswordViewController alloc]init];
-    //    [self.navigationController pushViewController:vc animated:YES];
-    //    }];
-    //测试
-    ResetPasswordViewController *vc = [[ResetPasswordViewController alloc]init];
-    [self.navigationController pushViewController:vc animated:YES];
-}
+- (void)checkVerifyCode {
+    WEAK_SELF
+    [self startLoading];
+    [LoginDataManager checkVerifyCodeWithMobileNumber:self.phoneNumInput.text verifyCode:self.verifyCodeInput.codeInputView.text completeBlock:^(NSError *error) {
+        STRONG_SELF
+        [self stopLoading];
+        if (error) {
+            [self showToast:error.localizedDescription];
+            return;
+        }
+        [self.verifyCodeInput stopTimer];
+        ResetPasswordViewController *vc = [[ResetPasswordViewController alloc]init];
+        [self.navigationController pushViewController:vc animated:YES];
+    }];
+ }
 @end

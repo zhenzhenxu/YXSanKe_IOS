@@ -9,10 +9,14 @@
 #import "LoginDataManager.h"
 #import "LoginRequest.h"
 #import "TouristLoginRequest.h"
+#import "SendSMSRequest.h"
+#import "CheckSMSRequest.h"
 
 @interface LoginDataManager()
 @property (nonatomic, strong) LoginRequest *loginRequest;
 @property (nonatomic, strong) TouristLoginRequest *touristLoginRequest;
+@property (nonatomic, strong) SendSMSRequest *sendSMSRequest;
+@property (nonatomic, strong) CheckSMSRequest *checkSMSRequest;
 @end
 
 @implementation LoginDataManager
@@ -76,19 +80,38 @@
     }];
 }
 
-+ (void)getVerifyCodeWithMobileNumber:(NSString *)mobileNumber completeBlock:(void (^)(HttpBaseRequestItem *, NSError *))completeBlock {
-    
++ (void)sendVerifyCodeWithMobileNumber:(NSString *)mobileNumber type:(NSString *)type completeBlock:(void (^)(NSError *))completeBlock {
+    LoginDataManager *manager = [LoginDataManager sharedInstance];
+    [manager.sendSMSRequest stopRequest];
+    manager.sendSMSRequest = [[SendSMSRequest alloc]init];
+    manager.sendSMSRequest.mobile = mobileNumber;
+    manager.sendSMSRequest.from = type;
+    WEAK_SELF
+    [manager.sendSMSRequest startRequestWithRetClass:[HttpBaseRequestItem class] andCompleteBlock:^(id retItem, NSError *error, BOOL isMock) {
+        STRONG_SELF
+        if (error) {
+            BLOCK_EXEC(completeBlock,error);
+            return;
+        }
+        BLOCK_EXEC(completeBlock,nil);
+    }];
 }
 
-+ (void)verifySMSCodeWithMobileNumber:(NSString *)mobileNumber verifyCode:(NSString *)verifyCode completeBlock:(void (^)(HttpBaseRequestItem *, NSError *))completeBlock {
-    
-}
++(void)checkVerifyCodeWithMobileNumber:(NSString *)mobileNumber verifyCode:(NSString *)verifyCode completeBlock:(void (^)(NSError *))completeBlock {
+    LoginDataManager *manager = [LoginDataManager sharedInstance];
+    [manager.checkSMSRequest stopRequest];
+    manager.checkSMSRequest = [[CheckSMSRequest alloc]init];
+    manager.checkSMSRequest.mobile = mobileNumber;
+    manager.checkSMSRequest.code = verifyCode;
+    WEAK_SELF
+    [manager.checkSMSRequest startRequestWithRetClass:[HttpBaseRequestItem class] andCompleteBlock:^(id retItem, NSError *error, BOOL isMock) {
+        STRONG_SELF
+        if (error) {
+            BLOCK_EXEC(completeBlock,error);
+            return;
+        }
+        BLOCK_EXEC(completeBlock,nil);
+    }];
 
-+ (void)resetPasswordWithMobileNumber:(NSString *)mobileNumber password:(NSString *)password completeBlock:(void (^)(HttpBaseRequestItem *, NSError *))completeBlock {
-    
-}
-+ (void)registerWithInfo:(id)registerInfo completeBlock:(void (^)(HttpBaseRequestItem *, NSError *))completeBlock {
-    //注册成功之后保存用户信息
-    
 }
 @end

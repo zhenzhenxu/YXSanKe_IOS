@@ -198,10 +198,10 @@
     item.type = YXRecordClickType;
     [YXRecordManager addRecord:item];
     
-//    RegisterViewController *vc = [[RegisterViewController alloc]init];
-//    [self.navigationController pushViewController:vc animated:YES];
-    //测试
-    SupplementInfoViewController *vc = [[SupplementInfoViewController alloc]init];
+    RegisterViewController *vc = [[RegisterViewController alloc]init];
     [self.navigationController pushViewController:vc animated:YES];
+    //测试
+//    SupplementInfoViewController *vc = [[SupplementInfoViewController alloc]init];
+//    [self.navigationController pushViewController:vc animated:YES];
 }
 @end

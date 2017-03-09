@@ -214,6 +214,8 @@
 		E9355B771E6EB51E007AE9F0 /* UserInfoDataManger.m in Sources */ = {isa = PBXBuildFile; fileRef = E9355B761E6EB51E007AE9F0 /* UserInfoDataManger.m */; };
 		E9355B7A1E6EBDB0007AE9F0 /* AboutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E9355B791E6EBDB0007AE9F0 /* AboutViewController.m */; };
 		E9355B7C1E6FF85B007AE9F0 /* userInfo.json in Resources */ = {isa = PBXBuildFile; fileRef = E9355B7B1E6FF85B007AE9F0 /* userInfo.json */; };
+		E9355B851E710DEE007AE9F0 /* SendSMSRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = E9355B841E710DEE007AE9F0 /* SendSMSRequest.m */; };
+		E9355B881E710E20007AE9F0 /* CheckSMSRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = E9355B871E710E20007AE9F0 /* CheckSMSRequest.m */; };
 		E9F4541C1E31B18D00860DC2 /* TouristLoginRequest.json in Resources */ = {isa = PBXBuildFile; fileRef = E9F4541B1E31B18D00860DC2 /* TouristLoginRequest.json */; };
 /* End PBXBuildFile section */
 
@@ -634,6 +636,10 @@
 		E9355B781E6EBDB0007AE9F0 /* AboutViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AboutViewController.h; sourceTree = "<group>"; };
 		E9355B791E6EBDB0007AE9F0 /* AboutViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AboutViewController.m; sourceTree = "<group>"; };
 		E9355B7B1E6FF85B007AE9F0 /* userInfo.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = userInfo.json; sourceTree = "<group>"; };
+		E9355B831E710DEE007AE9F0 /* SendSMSRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SendSMSRequest.h; sourceTree = "<group>"; };
+		E9355B841E710DEE007AE9F0 /* SendSMSRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SendSMSRequest.m; sourceTree = "<group>"; };
+		E9355B861E710E20007AE9F0 /* CheckSMSRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CheckSMSRequest.h; sourceTree = "<group>"; };
+		E9355B871E710E20007AE9F0 /* CheckSMSRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CheckSMSRequest.m; sourceTree = "<group>"; };
 		E9F4541B1E31B18D00860DC2 /* TouristLoginRequest.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = TouristLoginRequest.json; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -1509,6 +1515,10 @@
 				E9F4541B1E31B18D00860DC2 /* TouristLoginRequest.json */,
 				7C7841921E2E225D00755BC0 /* TouristLoginRequest.h */,
 				7C7841931E2E225D00755BC0 /* TouristLoginRequest.m */,
+				E9355B831E710DEE007AE9F0 /* SendSMSRequest.h */,
+				E9355B841E710DEE007AE9F0 /* SendSMSRequest.m */,
+				E9355B861E710E20007AE9F0 /* CheckSMSRequest.h */,
+				E9355B871E710E20007AE9F0 /* CheckSMSRequest.m */,
 			);
 			name = Network;
 			sourceTree = "<group>";
@@ -1851,6 +1861,7 @@
 				30C48A7C1E52E72100CCDBBE /* YXStatisticFileRequest.m in Sources */,
 				7C1A5FAB1E151C1C00832DED /* NavigationBarController.m in Sources */,
 				7C7629CA1E276093007B5698 /* LoginLogoView.m in Sources */,
+				E9355B881E710E20007AE9F0 /* CheckSMSRequest.m in Sources */,
 				E9355AD51E653222007AE9F0 /* YXImagePickerController.m in Sources */,
 				30C48A791E52E72100CCDBBE /* YXProblemItem.m in Sources */,
 				30C87E0E1E52F4BB000CFBAA /* NSString+YXString.m in Sources */,
@@ -1902,6 +1913,7 @@
 				7C6F219C1E2481D6000AB43A /* AreaDataManager.m in Sources */,
 				7C1A5F6A1E15130200832DED /* YXFilePhotoItem.m in Sources */,
 				E9355B5F1E6E8FD1007AE9F0 /* ResetPasswordViewController.m in Sources */,
+				E9355B851E710DEE007AE9F0 /* SendSMSRequest.m in Sources */,
 				E9355B531E6D8852007AE9F0 /* ForgotPasswordViewController.m in Sources */,
 				7C7629BB1E2731A1007B5698 /* LoginBaseViewController.m in Sources */,
 				7C7841B41E2F15DA00755BC0 /* StageSubjectDataManager.m in Sources */,

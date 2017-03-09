@@ -14,6 +14,7 @@
 #import "SubmitButton.h"
 #import "VerifyCodeInputView.h"
 
+static NSString *const obtainVerifyCodeType = @"register";
 
 @interface RegisterViewController ()
 @property (nonatomic, strong) UIView *topView;
@@ -66,7 +67,6 @@
     [self.verifyCodeInput setVerifyCodeBlock:^{
         STRONG_SELF
         [self sendAgainAction];
-        DDLogDebug(@"获取验证码");
     }];
     [self.verifyCodeInput.codeInputView setTextChangeBlock:^(NSString *text) {
         STRONG_SELF
@@ -75,7 +75,6 @@
         }
         [self resetButtonEnable];
     }];
-    [self resetSendAgainButtonTitle];
     
     self.privacyPolicyView = [[PrivacyPolicyView alloc]init];
     self.privacyPolicyView.isMark = YES;
@@ -162,29 +161,25 @@
             [self showToast:@"您输入的手机号码错误"];
             return;
         }
-        [self getVerifyCodeRequest];
+        [self sendVerifyCode];
     }];
 }
 
-- (void)getVerifyCodeRequest {
-        [self.verifyCodeInput startTimer];
-        WEAK_SELF
-        [self startLoading];
-        [LoginDataManager getVerifyCodeWithMobileNumber:self.phoneNumInput.text completeBlock:^(HttpBaseRequestItem *item, NSError *error) {
-            STRONG_SELF
-            [self stopLoading];
-            if (error) {
-                [self.verifyCodeInput stopTimer];
-                [self showToast:error.localizedDescription];
-            }
-            [self showToast:@"验证码已发送至您的手机"];
-        }];
-    //测试
-    [self showToast:@"验证码已发送至您的手机"];
-}
-
-- (void)resetSendAgainButtonTitle {
-    [self.verifyCodeInput setRightButtonText:@"获取验证码"];
+- (void)sendVerifyCode {
+    WEAK_SELF
+    [self startLoading];
+    [self.verifyCodeInput startTimer];
+    DDLogDebug(@"获取验证码");
+    [LoginDataManager sendVerifyCodeWithMobileNumber:self.phoneNumInput.text type:obtainVerifyCodeType completeBlock:^(NSError *error) {
+        STRONG_SELF
+        [self stopLoading];
+        if (error) {
+            [self.verifyCodeInput stopTimer];
+            [self showToast:error.localizedDescription];
+            return;
+        }
+        [self showToast:@"验证码已发送至您的手机"];
+    }];
 }
 
 - (void)submitAction {
@@ -193,29 +188,25 @@
             [self showToast:@"请输入正确的手机号码"];
             return;
         }
-        [self verifySMSCode];
+        [self checkVerifyCode];
     }];
 }
 
-- (void)verifySMSCode {
-    //    WEAK_SELF
-    //    [self startLoading];
-    //    [LoginDataManager verifySMSCodeWithMobileNumber:self.phoneNumInput.text verifyCode:self.verifyCodeInput.codeInputView.text completeBlock:^(HttpBaseRequestItem *item, NSError *error) {
-    //        STRONG_SELF
-    //        [self stopLoading];
-    //        if (error) {
-    //            [self showToast:error.localizedDescription];
-    //            return;
-    //        }
-    //    SetPasswordViewController *vc = [[SetPasswordViewController alloc]init];
-    //    vc.phoneNumber = self.phoneNumInput.text;
-    //    [self.navigationController pushViewController:vc animated:YES];
-    //    }];
-    //测试
-    SetPasswordViewController *vc = [[SetPasswordViewController alloc]init];
-    vc.phoneNumber = self.phoneNumInput.text;
-    [self.navigationController pushViewController:vc animated:YES];
-    
+- (void)checkVerifyCode {
+    WEAK_SELF
+    [self startLoading];
+    [LoginDataManager checkVerifyCodeWithMobileNumber:self.phoneNumInput.text verifyCode:self.verifyCodeInput.codeInputView.text completeBlock:^(NSError *error) {
+        STRONG_SELF
+        [self stopLoading];
+        if (error) {
+            [self showToast:error.localizedDescription];
+            return;
+        }
+        [self.verifyCodeInput stopTimer];
+        SetPasswordViewController *vc = [[SetPasswordViewController alloc]init];
+        vc.phoneNumber = self.phoneNumInput.text;
+        [self.navigationController pushViewController:vc animated:YES];
+    }];
 }
 
 @end

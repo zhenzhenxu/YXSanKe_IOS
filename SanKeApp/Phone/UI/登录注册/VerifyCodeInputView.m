@@ -111,16 +111,17 @@
     if (self.seconds <= 0) {
         [self stopTimer];
     } else {
-        [self resetRightButtonText:[NSString stringWithFormat:@"%@秒后重试", @(self.seconds)]];
+        [self resetRightButtonText:[NSString stringWithFormat:@"%02zd秒后重试",self.seconds]];
         self.seconds--;
     }
     [self setRightButtonEnabled:self.seconds <= 0];
 }
 
 - (void)stopTimer {
-    [self setRightButtonText:@"获取验证码"];
     [self.timer invalidate];
     self.timer = nil;
     self.seconds = 0;
+    [self setRightButtonText:@"获取验证码"];
+    [self setRightButtonEnabled:self.seconds <= 0];
 }
 @end
