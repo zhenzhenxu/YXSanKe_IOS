@@ -10,12 +10,15 @@
 #import "UpdateStageSubjectRequest.h"
 #import "UpdateAreaRequest.h"
 #import "UploadHeadImgRequest.h"
+#import "UpdateInfoRequest.h"
+
 NSString * const kStageSubjectDidChangeNotification = @"kStageSubjectDidChangeNotification";
 NSString *const kUpdateHeadPortraitSuccessNotification = @"kUpdateHeadPortraitSuccessNotification";
 @interface MineDataManager()
 @property (nonatomic, strong) UpdateStageSubjectRequest *stageSubjectRequest;
 @property (nonatomic, strong) UpdateAreaRequest *areaRequest;
 @property (nonatomic, strong) UploadHeadImgRequest *uploadHeadImgRequest;
+@property (nonatomic, strong) UpdateInfoRequest *updateInfoRequest;
 @end
 
 @implementation MineDataManager
@@ -93,7 +96,28 @@ NSString *const kUpdateHeadPortraitSuccessNotification = @"kUpdateHeadPortraitSu
     }];
 }
 
-+ (void)updateSupplementUserInfo:(SupplementUserInfo *)userInfo completeBlock:(void (^)(NSError *))completeBlock {
-    
++(void)updateSupplementUserInfo:(SupplementUserInfo *)supplementUserInfo completeBlock:(void (^)(NSError *))completeBlock {
+    MineDataManager *manager = [MineDataManager sharedInstance];
+    [manager.updateInfoRequest stopRequest];
+    manager.updateInfoRequest = [[UpdateInfoRequest alloc]init];
+    manager.updateInfoRequest.stage = supplementUserInfo.stageID;
+    manager.updateInfoRequest.subject = supplementUserInfo.subjectID;
+    manager.updateInfoRequest.area = supplementUserInfo.areaID;
+    manager.updateInfoRequest.role = supplementUserInfo.roleID;
+    manager.updateInfoRequest.sex = supplementUserInfo.genderID;
+    manager.updateInfoRequest.experience = supplementUserInfo.experienceID;
+    WEAK_SELF
+    [manager.updateInfoRequest startRequestWithRetClass:[HttpBaseRequestItem class] andCompleteBlock:^(id retItem, NSError *error, BOOL isMock) {
+        STRONG_SELF
+        if (error) {
+            BLOCK_EXEC(completeBlock,error);
+            return;
+        }
+        HttpBaseRequestItem *item = retItem;
+        UserModel *model = [UserModel modelFromRawData:item.info];
+        [UserManager sharedInstance].userModel = model;
+        [UserManager sharedInstance].loginStatus = YES;
+        BLOCK_EXEC(completeBlock,nil);
+    }];
 }
 @end

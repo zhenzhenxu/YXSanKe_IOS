@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-@class SupplementUserInfo;
+#import "SupplementUserInfo.h"
 
 extern NSString * const kStageSubjectDidChangeNotification;
 extern NSString * const kUpdateHeadPortraitSuccessNotification;
@@ -20,5 +20,5 @@ extern NSString * const kUpdateHeadPortraitSuccessNotification;
 //修改头像
 + (void)updateHeadPortrait:(UIImage *)portrait completeBlock:(void(^)(NSError *error))completeBlock;
 //设置用户信息(角色,性别,入职年份)
-+ (void)updateSupplementUserInfo:(SupplementUserInfo *)userInfo completeBlock:(void(^)(NSError *error))completeBlock;
++ (void)updateSupplementUserInfo:(SupplementUserInfo *)supplementUserInfo completeBlock:(void(^)(NSError *error))completeBlock;
 @end

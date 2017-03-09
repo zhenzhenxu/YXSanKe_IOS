@@ -10,9 +10,10 @@
 @class MineUserModel;
 
 @interface UserSubjectStageSelectedInfoItem : NSObject
-@property (nonatomic, assign) NSInteger selectedStageRow;
-@property (nonatomic, assign) NSInteger selectedSubjectRow;
-
+@property (nonatomic, assign) NSInteger stageRow;
+@property (nonatomic, assign) NSInteger subjectRow;
+@property (nonatomic, strong) FetchStageSubjectRequestItem_stage *stage;
+@property (nonatomic, strong) FetchStageSubjectRequestItem_subject *subject;
 @end
 
 @interface UserSubjectStageInfoPicker : NSObject<UIPickerViewDelegate,UIPickerViewDataSource>

@@ -14,8 +14,8 @@
 
 @interface UserSubjectStageInfoPicker ()
 @property (nonatomic, strong) NSArray *selectedSubjects;
-@property (nonatomic, strong) FetchStageSubjectRequestItem_stage *selectedStage;
-@property (nonatomic, strong) FetchStageSubjectRequestItem_subject *selectedSubject;
+@property (nonatomic, strong) FetchStageSubjectRequestItem_stage *stage;
+@property (nonatomic, strong) FetchStageSubjectRequestItem_subject *subject;
 @end
 
 @implementation UserSubjectStageInfoPicker
@@ -74,13 +74,13 @@
         case 0:
         {
             if (self.stageAndSubjectItem.data.stages.count > row) {
-                self.selectedStage = self.stageAndSubjectItem.data.stages[row];
-                if (self.selectedStage.subjects.count > 0) {
-                    self.selectedSubjects = self.selectedStage.subjects;
-                    self.selectedSubject = self.selectedSubjects[0];
+                self.stage = self.stageAndSubjectItem.data.stages[row];
+                if (self.stage.subjects.count > 0) {
+                    self.selectedSubjects = self.stage.subjects;
+                    self.subject = self.selectedSubjects[0];
                 }else {
                     self.selectedSubjects = nil;
-                    self.selectedSubject = nil;
+                    self.subject = nil;
                 }
             }
             [pickerView reloadComponent:1];
@@ -90,9 +90,9 @@
         case 1:
         {
             if (self.selectedSubjects.count > row) {
-                self.selectedSubject = self.selectedSubjects[row];
+                self.subject = self.selectedSubjects[row];
             }else {
-                self.selectedSubject = nil;
+                self.subject = nil;
             }
         }
             break;
@@ -118,29 +118,29 @@
 - (void)resetSelectedSubjectsWithUserModel:(MineUserModel *)userModel {
     [self.stageAndSubjectItem.data.stages enumerateObjectsUsingBlock:^(FetchStageSubjectRequestItem_stage *stage, NSUInteger idx, BOOL *stop) {
         if ([userModel.stage.stageID isEqualToString:stage.stageID]) {
-            self.selectedStage = stage;
-            self.selectedSubjects = self.selectedStage.subjects;
+            self.stage = stage;
+            self.selectedSubjects = self.stage.subjects;
             *stop = YES;
         }
     }];
-    if (!self.selectedStage) {
-        self.selectedStage = self.stageAndSubjectItem.data.stages.firstObject;
-        self.selectedSubjects = self.selectedStage.subjects;
-        self.selectedSubject = self.selectedSubjects.firstObject;
+    if (!self.stage) {
+        self.stage = self.stageAndSubjectItem.data.stages.firstObject;
+        self.selectedSubjects = self.stage.subjects;
+        self.subject = self.selectedSubjects.firstObject;
         return;
     }
     [self.selectedSubjects enumerateObjectsUsingBlock:^(FetchStageSubjectRequestItem_subject *subject, NSUInteger idx, BOOL *stop) {
         if ([userModel.subject.subjectID isEqualToString:subject.subjectID]) {
-            self.selectedSubject = subject;
+            self.subject = subject;
             *stop = YES;
         }
     }];
-    DDLogDebug(@"设置为选中%@学段-%@学科",self.selectedStage.name,self.selectedSubject.name);
+    DDLogDebug(@"设置为选中%@学段-%@学科",self.stage.name,self.subject.name);
 }
 
 - (void)updateStageWithCompleteBlock:(void (^)(NSError *))completeBlock {
-    DDLogDebug(@"要选择学科%@-学段%@",self.selectedStage.name,self.selectedSubject.name);
-    [MineDataManager updateStage:self.selectedStage.stageID subject:self.selectedSubject.subjectID completeBlock:^(NSError *error) {
+    DDLogDebug(@"要选择学科%@-学段%@",self.stage.name,self.subject.name);
+    [MineDataManager updateStage:self.stage.stageID subject:self.subject.subjectID completeBlock:^(NSError *error) {
         if (error) {
             BLOCK_EXEC(completeBlock,error);
             return;
@@ -151,18 +151,21 @@
 
 - (UserSubjectStageSelectedInfoItem *)selectedInfoItem {
     UserSubjectStageSelectedInfoItem *item = [[UserSubjectStageSelectedInfoItem alloc]init];
-    item.selectedStageRow = 0;
-    item.selectedSubjectRow = 0;
+    item.stageRow = 0;
+    item.subjectRow = 0;
     if (self.stageAndSubjectItem.data.stages.count > 0) {
-        if ([self.stageAndSubjectItem.data.stages containsObject:self.selectedStage]) {
-            item.selectedStageRow = [self.stageAndSubjectItem.data.stages indexOfObject:self.selectedStage];
+        if ([self.stageAndSubjectItem.data.stages containsObject:self.stage]) {
+            item.stageRow = [self.stageAndSubjectItem.data.stages indexOfObject:self.stage];
         }
     }
     if (self.selectedSubjects.count > 0) {
-        if ([self.selectedSubjects containsObject:self.selectedSubject]) {
-            item.selectedSubjectRow = [self.selectedSubjects indexOfObject:self.selectedSubject];
+        if ([self.selectedSubjects containsObject:self.subject]) {
+            item.subjectRow = [self.selectedSubjects indexOfObject:self.subject];
         }
     }
+    item.stage = self.stage;
+    item.subject = self.subject;
+    
     return item;
 }
 @end

@@ -13,14 +13,14 @@
 
 @interface UserAreaSelectedInfoItem : NSObject
 
-@property (nonatomic, assign) NSInteger selectedProvinceRow;
-@property (nonatomic, assign) NSInteger selectedCityRow;
-@property (nonatomic, assign) NSInteger selectedCountyRow;
-@property (nonatomic, strong) Area *selectedProvince;
-@property (nonatomic ,strong)NSArray<Area *> *selectedCitys;
-@property (nonatomic ,strong)NSArray<Area *> *selectedCounties;
-@property (nonatomic, strong) Area *selectedCity;
-@property (nonatomic, strong) Area *selectedCounty;
+@property (nonatomic, assign) NSInteger provinceRow;
+@property (nonatomic, assign) NSInteger cityRow;
+@property (nonatomic, assign) NSInteger districtRow;
+@property (nonatomic, strong) Area *province;
+@property (nonatomic ,strong)NSArray<Area *> *cityArray;
+@property (nonatomic ,strong)NSArray<Area *> *districtArray;
+@property (nonatomic, strong) Area *city;
+@property (nonatomic, strong) Area *district;
 @end
 
 @interface UserAreaInfoPicker : NSObject<UIPickerViewDelegate,UIPickerViewDataSource>

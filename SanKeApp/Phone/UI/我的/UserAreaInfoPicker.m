@@ -14,11 +14,11 @@
 @end
 
 @interface UserAreaInfoPicker ()
-@property (nonatomic, strong) Area *selectedProvince;
-@property (nonatomic ,strong)NSArray<Area *> *selectedCitys;
-@property (nonatomic ,strong)NSArray<Area *> *selectedCounties;
-@property (nonatomic, strong) Area *selectedCity;
-@property (nonatomic, strong) Area *selectedCounty;
+@property (nonatomic, strong) Area *province;
+@property (nonatomic ,strong)NSArray<Area *> *cityArray;
+@property (nonatomic ,strong)NSArray<Area *> *districtArray;
+@property (nonatomic, strong) Area *city;
+@property (nonatomic, strong) Area *district;
 @end
 
 @implementation UserAreaInfoPicker
@@ -35,9 +35,9 @@
         case 0:
             return self.model.areas.count;
         case 1:
-            return self.selectedCitys.count;
+            return self.cityArray.count;
         case 2:
-            return self.selectedCounties.count;
+            return self.districtArray.count;
         default:
             return 0;
     }
@@ -70,13 +70,13 @@
         }
         case 1:
         {
-            return self.selectedCitys[row].name;
+            return self.cityArray[row].name;
             
         }
         case 2:
         {
             
-            return self.selectedCounties[row].name;
+            return self.districtArray[row].name;
         }
         default:
             return nil;
@@ -91,22 +91,22 @@
         case 0:
         {
             if (self.model.areas.count > row) {
-                self.selectedProvince = self.model.areas[row];
-                if (self.selectedProvince.subAreas.count > 0) {
-                    self.selectedCitys = self.selectedProvince.subAreas;
-                    self.selectedCity = self.selectedCitys[0];
-                    if (self.selectedCity.subAreas.count > 0) {
-                        self.selectedCounties = self.selectedCity.subAreas;
-                        self.selectedCounty = self.selectedCounties[0];
+                self.province = self.model.areas[row];
+                if (self.province.subAreas.count > 0) {
+                    self.cityArray = self.province.subAreas;
+                    self.city = self.cityArray[0];
+                    if (self.city.subAreas.count > 0) {
+                        self.districtArray = self.city.subAreas;
+                        self.district = self.districtArray[0];
                     }else {
-                        self.selectedCounties = nil;
-                        self.selectedCounty = nil;
+                        self.districtArray = nil;
+                        self.district = nil;
                     }
                 }else {
-                    self.selectedCitys = nil;
-                    self.selectedCity = nil;
-                    self.selectedCounties = nil;
-                    self.selectedCounty = nil;
+                    self.cityArray = nil;
+                    self.city = nil;
+                    self.districtArray = nil;
+                    self.district = nil;
                 }
             }
             [pickerView reloadComponent:1];
@@ -117,14 +117,14 @@
             break;
         case 1:
         {
-            if (self.selectedCitys.count > row){
-                self.selectedCity = self.selectedCitys[row];
-                if (self.selectedCity.subAreas.count > 0) {
-                    self.selectedCounties = self.selectedCity.subAreas;
-                    self.selectedCounty = self.selectedCounties[0];
+            if (self.cityArray.count > row){
+                self.city = self.cityArray[row];
+                if (self.city.subAreas.count > 0) {
+                    self.districtArray = self.city.subAreas;
+                    self.district = self.districtArray[0];
                 }else{
-                    self.selectedCounties = nil;
-                    self.selectedCounty = nil;
+                    self.districtArray = nil;
+                    self.district = nil;
                 }
             }
             [pickerView reloadComponent:2];
@@ -133,10 +133,10 @@
             break;
         case 2:
         {
-            if (self.selectedCounties.count > row){
-                self.selectedCounty = self.selectedCounties[row];
+            if (self.districtArray.count > row){
+                self.district = self.districtArray[row];
             }else {
-                self.selectedCounty = nil;
+                self.district = nil;
             }
         }
             break;
@@ -162,37 +162,37 @@
 - (void)resetSelectedProvinceDataWithUserModel:(MineUserModel *)userModel {
     [self.model.areas enumerateObjectsUsingBlock:^(Area *subArea, NSUInteger idx, BOOL *stop) {
         if ([userModel.province.areaID isEqualToString:subArea.areaID]) {
-            self.selectedProvince = subArea;
-            self.selectedCitys = self.selectedProvince.subAreas;
+            self.province = subArea;
+            self.cityArray = self.province.subAreas;
             *stop = YES;
         }
     }];
-    if (!self.selectedProvince) {
-        self.selectedProvince = self.model.areas.firstObject;
-        self.selectedCitys = self.selectedProvince.subAreas;
-        self.selectedCity = self.selectedCitys.firstObject;
-        self.selectedCounties = self.selectedCity.subAreas;
-        self.selectedCounty = self.selectedCounties.firstObject;
+    if (!self.province) {
+        self.province = self.model.areas.firstObject;
+        self.cityArray = self.province.subAreas;
+        self.city = self.cityArray.firstObject;
+        self.districtArray = self.city.subAreas;
+        self.district = self.districtArray.firstObject;
         return;
     }
-    [self.selectedCitys enumerateObjectsUsingBlock:^(Area *subArea, NSUInteger idx, BOOL *stop) {
+    [self.cityArray enumerateObjectsUsingBlock:^(Area *subArea, NSUInteger idx, BOOL *stop) {
         if ([userModel.city.areaID isEqualToString:subArea.areaID]) {
-            self.selectedCity = subArea;
-            self.selectedCounties = self.selectedCity.subAreas;
+            self.city = subArea;
+            self.districtArray = self.city.subAreas;
             *stop = YES;
         }
     }];
-    [self.selectedCounties enumerateObjectsUsingBlock:^(Area *subArea, NSUInteger idx, BOOL *stop) {
+    [self.districtArray enumerateObjectsUsingBlock:^(Area *subArea, NSUInteger idx, BOOL *stop) {
         if ([userModel.district.areaID isEqualToString:subArea.areaID]) {
-            self.selectedCounty = subArea;
+            self.district = subArea;
             *stop = YES;
         }
     }];
-    DDLogDebug(@"设置选中为%@省-%@市-%@区",self.selectedProvince.name,self.selectedCity.name,self.selectedCounty.name);
+    DDLogDebug(@"设置选中为%@省-%@市-%@区",self.province.name,self.city.name,self.district.name);
 }
 
 - (void)updateAreaWithCompleteBlock:(void (^)(NSError *))completeBlock {
-    DDLogDebug(@"要选择地区:%@-%@-%@",self.selectedProvince.name,self.selectedCity.name,self.selectedCounty.name);
+    DDLogDebug(@"要选择地区:%@-%@-%@",self.province.name,self.city.name,self.district.name);
     [MineDataManager updateArea:[self configAreaID] completeBlock:^(NSError *error) {
         if (error) {
             BLOCK_EXEC(completeBlock,error);
@@ -204,12 +204,12 @@
 
 -(NSString *)configAreaID {
     NSString *areaID = [NSString string];
-    if (!isEmpty(self.selectedProvince.areaID)) {
-        areaID = self.selectedProvince.areaID;
-        if (!isEmpty(self.selectedCity.areaID)) {
-            areaID = [NSString stringWithFormat:@"%@,%@",areaID,self.selectedCity.areaID];
-            if (!isEmpty(self.selectedCounty.areaID)) {
-                areaID = [NSString stringWithFormat:@"%@,%@",areaID,self.selectedCounty.areaID];
+    if (!isEmpty(self.province.areaID)) {
+        areaID = self.province.areaID;
+        if (!isEmpty(self.city.areaID)) {
+            areaID = [NSString stringWithFormat:@"%@,%@",areaID,self.city.areaID];
+            if (!isEmpty(self.district.areaID)) {
+                areaID = [NSString stringWithFormat:@"%@,%@",areaID,self.district.areaID];
             }
         }
     }
@@ -218,24 +218,27 @@
 
 - (UserAreaSelectedInfoItem *)selectedInfoItem {
     UserAreaSelectedInfoItem *item = [[UserAreaSelectedInfoItem alloc]init];
-    item.selectedProvinceRow = 0;
-    item.selectedCityRow = 0;
-    item.selectedCountyRow = 0;
+    item.provinceRow = 0;
+    item.cityRow = 0;
+    item.districtRow = 0;
     if (self.model.areas.count > 0) {
-        if ([self.model.areas containsObject:self.selectedProvince]) {
-            item.selectedProvinceRow = [self.model.areas indexOfObject:self.selectedProvince];
+        if ([self.model.areas containsObject:self.province]) {
+            item.provinceRow = [self.model.areas indexOfObject:self.province];
         }
     }
-    if (self.selectedCitys.count > 0) {
-        if ([self.selectedCitys containsObject:self.selectedCity]) {
-            item.selectedCityRow = [self.selectedCitys indexOfObject:self.selectedCity];
+    if (self.cityArray.count > 0) {
+        if ([self.cityArray containsObject:self.city]) {
+            item.cityRow = [self.cityArray indexOfObject:self.city];
         }
     }
-    if (self.selectedCounties.count > 0) {
-        if ([self.selectedCounties containsObject:self.selectedCounty]) {
-            item.selectedCountyRow = [self.selectedCounties indexOfObject:self.selectedCounty];
+    if (self.districtArray.count > 0) {
+        if ([self.districtArray containsObject:self.district]) {
+            item.districtRow = [self.districtArray indexOfObject:self.district];
         }
     }
+    item.province = self.province;
+    item.city = self.city;
+    item.district = self.district;
     return item;
 }
 @end

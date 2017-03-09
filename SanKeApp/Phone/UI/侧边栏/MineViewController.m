@@ -29,6 +29,11 @@
 @property (nonatomic, strong) YXImagePickerController *imagePickerController;
 @property (nonatomic, strong) MenuSelectionView *menuSelectionView;
 
+@property (nonatomic, strong) Area *province;
+@property (nonatomic, strong) Area *city;
+@property (nonatomic, strong) Area *district;
+@property (nonatomic, strong) FetchStageSubjectRequestItem_stage *stage;
+@property (nonatomic, strong) FetchStageSubjectRequestItem_subject *subject;
 @end
 
 @implementation MineViewController
@@ -115,7 +120,7 @@
                 return;
             }
             [self updateAreaInfo];//待接入真实数据后使用
-            //            [self updateMockAreaInfo];//mock数据
+            //                        [self updateMockAreaInfo];//mock数据
         }];
     }
 }
@@ -141,51 +146,28 @@
 }
 
 - (void)updateMockStageSubjectInfo {
-    FetchStageSubjectRequestItem *stageSubjectItem = [StageSubjectDataManager dataForStageAndSubject];
     UserSubjectStageSelectedInfoItem *item = [self.subjectStageInfoPicker selectedInfoItem];
-    FetchStageSubjectRequestItem_stage *stage = [[FetchStageSubjectRequestItem_stage alloc]init];
-    FetchStageSubjectRequestItem_subject *subject = [[FetchStageSubjectRequestItem_subject alloc]init];
-    if (stageSubjectItem.data.stages.count > 0) {
-        stage = stageSubjectItem.data.stages[item.selectedStageRow];
-        if (stage.subjects.count > 0) {
-            subject = stage.subjects[item.selectedSubjectRow];
-        }
-    }
+    self.stage = item.stage;
+    self.subject = item.subject;
     UserInfoTableViewCell *cell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:0]];
     UserInfoTableViewCell *cell1 = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:2 inSection:0]];
-    [cell configTitle:@"学段" content:stage.name];
-    [cell1 configTitle:@"学科" content:subject.name];
+    [cell configTitle:@"学段" content:self.stage.name];
+    [cell1 configTitle:@"学科" content:self.subject.name];
 }
 
 - (void)updateMockAreaInfo {
-    AreaModel *model = [AreaDataManager areaModel];
     UserAreaSelectedInfoItem *item = [self.areaInfoPicker selectedInfoItem];
-    Area *province = [[Area alloc]init];
-    Area *city = [[Area alloc]init];
-    Area *county = [[Area alloc]init];
-    if (model.areas.count > 0) {
-        province = model.areas[item.selectedProvinceRow];
-        if (province.subAreas.count > 0) {
-            city = province.subAreas[item.selectedCityRow];
-            if (city.subAreas.count > 0) {
-                county = city.subAreas[item.selectedCountyRow];
-            }else {
-                county = nil;
-            }
-        }else {
-            city = nil;
-        }
-    }else {
-        province = nil;
-    }
+    self.province = item.province;
+    self.city = item.city;
+    self.district = item.district;
     UserInfoTableViewCell *cell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:3 inSection:0]];
     NSString *area = [NSString string];
-    if (!isEmpty(province)) {
-        area = province.name;
-        if (!isEmpty(city)) {
-            area = [area stringByAppendingString:city.name];
-            if (!isEmpty(county)) {
-                area = [area stringByAppendingString:county.name];
+    if (!isEmpty(self.province)) {
+        area = self.province.name;
+        if (!isEmpty(self.city)) {
+            area = [area stringByAppendingString:self.city.name];
+            if (!isEmpty(self.district)) {
+                area = [area stringByAppendingString:self.district.name];
             }
         }
     }
@@ -327,16 +309,16 @@
 - (void)showStageAndSubjectPicker {
     UserSubjectStageSelectedInfoItem *item = [self.subjectStageInfoPicker selectedInfoItem];
     [self.userInfoPickerView reloadPickerView];
-    [self.userInfoPickerView.pickerView selectRow:item.selectedStageRow inComponent:0 animated:NO];
-    [self.userInfoPickerView.pickerView selectRow:item.selectedSubjectRow inComponent:1 animated:NO];
+    [self.userInfoPickerView.pickerView selectRow:item.stageRow inComponent:0 animated:NO];
+    [self.userInfoPickerView.pickerView selectRow:item.subjectRow inComponent:1 animated:NO];
 }
 
 - (void)showProvinceListPicker {
     UserAreaSelectedInfoItem *item = [self.areaInfoPicker selectedInfoItem];
     [self.userInfoPickerView reloadPickerView];
-    [self.userInfoPickerView.pickerView selectRow:item.selectedProvinceRow inComponent:0 animated:NO];
-    [self.userInfoPickerView.pickerView selectRow:item.selectedCityRow inComponent:1 animated:NO];
-    [self.userInfoPickerView.pickerView selectRow:item.selectedCountyRow inComponent:2 animated:NO];
+    [self.userInfoPickerView.pickerView selectRow:item.provinceRow inComponent:0 animated:NO];
+    [self.userInfoPickerView.pickerView selectRow:item.cityRow inComponent:1 animated:NO];
+    [self.userInfoPickerView.pickerView selectRow:item.districtRow inComponent:2 animated:NO];
 }
 #pragma  mark - configAreaSring
 -(NSString *)configAreaString {

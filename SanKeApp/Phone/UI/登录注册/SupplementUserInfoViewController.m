@@ -159,6 +159,10 @@
 
 - (void)updateAreaInfo {
     DDLogDebug(@"更新地区");
+    UserAreaSelectedInfoItem *item = [self.areaInfoPicker selectedInfoItem];
+    self.province = item.province;
+    self.city = item.city;
+    self.district = item.district;
     UserInfoTableViewCell *cell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
     NSString *area = [NSString string];
     if (!isEmpty(self.province)) {
@@ -272,24 +276,44 @@
 }
 #pragma mark -  Button Actions
 - (void)confirmAction {
-    
+    SupplementUserInfo *info = [[SupplementUserInfo alloc]init];
+    info.stageID = self.stageID;
+    info.subjectID = self.subjectID;
+    info.areaID = [self configAreaID];
+    info.roleID = self.roleInfo.infoID;
+    info.genderID = self.genderInfo.infoID;
+    info.experienceID = self.experienceInfo.infoID;
+    WEAK_SELF
+    [MineDataManager updateSupplementUserInfo:info completeBlock:^(NSError *error) {
+        STRONG_SELF
+        if (error) {
+            [self showToast:error.localizedDescription];
+            return;
+        }
+    }];
 }
 
 - (void)ignoreAction {
-    
+    SupplementUserInfo *info = [[SupplementUserInfo alloc]init];
+    info.stageID = self.stageID;
+    info.subjectID = self.subjectID;
+    WEAK_SELF
+    [MineDataManager updateSupplementUserInfo:info completeBlock:^(NSError *error) {
+        STRONG_SELF
+        if (error) {
+            [self showToast:error.localizedDescription];
+            return;
+        }
+    }];
 }
 
 #pragma mark - InfoPicker
 - (void)showProvinceListPicker {
     UserAreaSelectedInfoItem *item = [self.areaInfoPicker selectedInfoItem];
-    self.province = self.areaInfoPicker.model.areas[item.selectedProvinceRow];
-    self.city = self.province.subAreas[item.selectedCityRow];
-    self.district = self.city.subAreas[item.selectedCountyRow];
-    
     [self.userInfoPickerView reloadPickerView];
-    [self.userInfoPickerView.pickerView selectRow:item.selectedProvinceRow inComponent:0 animated:NO];
-    [self.userInfoPickerView.pickerView selectRow:item.selectedCityRow inComponent:1 animated:NO];
-    [self.userInfoPickerView.pickerView selectRow:item.selectedCountyRow inComponent:2 animated:NO];
+    [self.userInfoPickerView.pickerView selectRow:item.provinceRow inComponent:0 animated:NO];
+    [self.userInfoPickerView.pickerView selectRow:item.cityRow inComponent:1 animated:NO];
+    [self.userInfoPickerView.pickerView selectRow:item.districtRow inComponent:2 animated:NO];
 }
 - (void)showRoleListPicker {
     NSInteger selectedRow = self.roleInfoPicker.selectedItem.row;
@@ -310,15 +334,29 @@
 #pragma  mark - configAreaSring
 -(NSString *)configAreaString {
     NSString *area = [NSString string];
-    if (!isEmpty(self.userModel.province)) {
-        area = self.userModel.province.name;
-        if (!isEmpty(self.userModel.city)) {
-            area = [area stringByAppendingString:self.userModel.city.name];
-            if (!isEmpty(self.userModel.district)) {
-                area = [area stringByAppendingString:self.userModel.district.name];
+    if (!isEmpty(self.province)) {
+        area = self.province.name;
+        if (!isEmpty(self.city)) {
+            area = [area stringByAppendingString:self.city.name];
+            if (!isEmpty(self.district)) {
+                area = [area stringByAppendingString:self.district.name];
             }
         }
     }
     return area;
+}
+
+-(NSString *)configAreaID {
+    NSString *areaID = [NSString string];
+    if (!isEmpty(self.province.areaID)) {
+        areaID = self.province.areaID;
+        if (!isEmpty(self.city.areaID)) {
+            areaID = [NSString stringWithFormat:@"%@,%@",areaID,self.city.areaID];
+            if (!isEmpty(self.district.areaID)) {
+                areaID = [NSString stringWithFormat:@"%@,%@",areaID,self.district.areaID];
+            }
+        }
+    }
+    return areaID;
 }
 @end

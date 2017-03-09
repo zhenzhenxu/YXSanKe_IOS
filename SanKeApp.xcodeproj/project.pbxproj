@@ -217,8 +217,9 @@
 		E9355B851E710DEE007AE9F0 /* SendSMSRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = E9355B841E710DEE007AE9F0 /* SendSMSRequest.m */; };
 		E9355B881E710E20007AE9F0 /* CheckSMSRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = E9355B871E710E20007AE9F0 /* CheckSMSRequest.m */; };
 		E9355B8B1E710FFE007AE9F0 /* RegisterRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = E9355B8A1E710FFE007AE9F0 /* RegisterRequest.m */; };
-		E9355B911E7122EF007AE9F0 /* UpdateInfoRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = E9355B901E7122EF007AE9F0 /* UpdateInfoRequest.m */; };
 		E9355B941E712445007AE9F0 /* SupplementUserInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = E9355B931E712445007AE9F0 /* SupplementUserInfo.m */; };
+		E9355B991E7153DA007AE9F0 /* UpdateInfoRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = E9355B971E7153DA007AE9F0 /* UpdateInfoRequest.m */; };
+		E9355B9B1E7153F7007AE9F0 /* UpdateInfoRequest.json in Resources */ = {isa = PBXBuildFile; fileRef = E9355B9A1E7153F7007AE9F0 /* UpdateInfoRequest.json */; };
 		E9F4541C1E31B18D00860DC2 /* TouristLoginRequest.json in Resources */ = {isa = PBXBuildFile; fileRef = E9F4541B1E31B18D00860DC2 /* TouristLoginRequest.json */; };
 /* End PBXBuildFile section */
 
@@ -645,10 +646,11 @@
 		E9355B871E710E20007AE9F0 /* CheckSMSRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CheckSMSRequest.m; sourceTree = "<group>"; };
 		E9355B891E710FFE007AE9F0 /* RegisterRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegisterRequest.h; sourceTree = "<group>"; };
 		E9355B8A1E710FFE007AE9F0 /* RegisterRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegisterRequest.m; sourceTree = "<group>"; };
-		E9355B8F1E7122EF007AE9F0 /* UpdateInfoRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UpdateInfoRequest.h; path = "../登录注册/UpdateInfoRequest.h"; sourceTree = "<group>"; };
-		E9355B901E7122EF007AE9F0 /* UpdateInfoRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UpdateInfoRequest.m; path = "../登录注册/UpdateInfoRequest.m"; sourceTree = "<group>"; };
 		E9355B921E712445007AE9F0 /* SupplementUserInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SupplementUserInfo.h; sourceTree = "<group>"; };
 		E9355B931E712445007AE9F0 /* SupplementUserInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SupplementUserInfo.m; sourceTree = "<group>"; };
+		E9355B961E7153DA007AE9F0 /* UpdateInfoRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UpdateInfoRequest.h; sourceTree = "<group>"; };
+		E9355B971E7153DA007AE9F0 /* UpdateInfoRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UpdateInfoRequest.m; sourceTree = "<group>"; };
+		E9355B9A1E7153F7007AE9F0 /* UpdateInfoRequest.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = UpdateInfoRequest.json; sourceTree = "<group>"; };
 		E9F4541B1E31B18D00860DC2 /* TouristLoginRequest.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = TouristLoginRequest.json; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -1505,12 +1507,13 @@
 		7C78419F1E2E2AE900755BC0 /* Network */ = {
 			isa = PBXGroup;
 			children = (
-				E9355B8F1E7122EF007AE9F0 /* UpdateInfoRequest.h */,
-				E9355B901E7122EF007AE9F0 /* UpdateInfoRequest.m */,
-				E9230C541E30919B00AC6617 /* UpdateAreaRequest.json */,
+				E9355B9A1E7153F7007AE9F0 /* UpdateInfoRequest.json */,
+				E9355B961E7153DA007AE9F0 /* UpdateInfoRequest.h */,
+				E9355B971E7153DA007AE9F0 /* UpdateInfoRequest.m */,
 				E9230C551E30919B00AC6617 /* UpdateStageSubjectRequest.json */,
 				7C78419B1E2E2AD900755BC0 /* UpdateStageSubjectRequest.h */,
 				7C78419C1E2E2AD900755BC0 /* UpdateStageSubjectRequest.m */,
+				E9230C541E30919B00AC6617 /* UpdateAreaRequest.json */,
 				7C7841A61E2F132700755BC0 /* UpdateAreaRequest.h */,
 				7C7841A71E2F132700755BC0 /* UpdateAreaRequest.m */,
 				E9355AE21E65574E007AE9F0 /* UploadHeadImgRequest.h */,
@@ -1744,6 +1747,7 @@
 				927594E91E2F0DA000F87838 /* playHistory_mock.json in Resources */,
 				E9230C461E2F829900AC6617 /* LoginRequest.json in Resources */,
 				7C1A5EF31E150BD100832DED /* env_config.json in Resources */,
+				E9355B9B1E7153F7007AE9F0 /* UpdateInfoRequest.json in Resources */,
 				E9230C5A1E30BAB400AC6617 /* FetchStageSubjectRequest.json in Resources */,
 				927594E81E2F0DA000F87838 /* historyRecord_mock.json in Resources */,
 				7C1A5F941E15143F00832DED /* MockConfig.plist in Resources */,
@@ -1871,7 +1875,6 @@
 				7C6F21991E237FD2000AB43A /* PlayRecordViewController.m in Sources */,
 				E9355B381E694970007AE9F0 /* PrivacyPolicyView.m in Sources */,
 				7C1A5F2D1E15111800832DED /* YXPostRequest.m in Sources */,
-				E9355B911E7122EF007AE9F0 /* UpdateInfoRequest.m in Sources */,
 				7C78419A1E2E25C800755BC0 /* HttpBaseRequestItem_info.m in Sources */,
 				7C1A60051E16396C00832DED /* UIView+ViewController.m in Sources */,
 				30C48A7C1E52E72100CCDBBE /* YXStatisticFileRequest.m in Sources */,
@@ -1966,6 +1969,7 @@
 				7C7841BE1E2F37EB00755BC0 /* LoginDataManager.m in Sources */,
 				7C1A5F761E15132200832DED /* FileDownloadHelper.m in Sources */,
 				7C1A5F751E15132200832DED /* YXFileDownloadProgressView.m in Sources */,
+				E9355B991E7153DA007AE9F0 /* UpdateInfoRequest.m in Sources */,
 				7C1A5F681E15130200832DED /* YXFileVideoItem.m in Sources */,
 				7C1A5FFD1E16396C00832DED /* UIImage+YXImage.m in Sources */,
 				9241FFE71E25E7C90015B587 /* CourseTableViewCell.m in Sources */,
