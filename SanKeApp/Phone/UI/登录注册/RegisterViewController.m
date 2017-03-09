@@ -204,7 +204,7 @@ static NSString *const obtainVerifyCodeType = @"register";
         }
         [self.verifyCodeInput stopTimer];
         SetPasswordViewController *vc = [[SetPasswordViewController alloc]init];
-        vc.phoneNumber = self.phoneNumInput.text;
+        vc.mobileNumber = self.phoneNumInput.text;
         [self.navigationController pushViewController:vc animated:YES];
     }];
 }

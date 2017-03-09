@@ -105,7 +105,7 @@
                 return;
             }
             [self updateStageSubjectInfo];//接入真实数据后用
-//            [self updateMockStageSubjectInfo];//mock数据
+            //            [self updateMockStageSubjectInfo];//mock数据
         }];
     }else if ([self.userInfoPickerView.pickerView.dataSource isKindOfClass:[UserAreaInfoPicker class]]) {
         [self.areaInfoPicker updateAreaWithCompleteBlock:^(NSError *error) {
@@ -115,14 +115,14 @@
                 return;
             }
             [self updateAreaInfo];//待接入真实数据后使用
-//            [self updateMockAreaInfo];//mock数据
+            //            [self updateMockAreaInfo];//mock数据
         }];
     }
 }
 
 - (void)updateStageSubjectInfo {
     self.userModel = [MineUserModel mineUserModelFromRawModel:[UserManager sharedInstance].userModel];
-     DDLogDebug(@"最终结果学科%@-学段%@",self.userModel.stage.name,self.userModel.subject.name);
+    DDLogDebug(@"最终结果学科%@-学段%@",self.userModel.stage.name,self.userModel.subject.name);
     NSIndexPath *stageIndexPath = [NSIndexPath indexPathForRow:1 inSection:0];
     NSIndexPath *subjectIndexPath = [NSIndexPath indexPathForRow:2 inSection:0];
     [self.tableView reloadRowsAtIndexPaths:@[stageIndexPath,subjectIndexPath] withRowAnimation:UITableViewRowAnimationNone];
@@ -256,10 +256,10 @@
 - (void)changeHeadPortrait {
     self.menuSelectionView = [[MenuSelectionView alloc]init];
     self.menuSelectionView.dataArray = @[
-                                        @"拍照",
-                                        @"从相册选择",
-                                        @"取消"
-                                        ];
+                                         @"拍照",
+                                         @"从相册选择",
+                                         @"取消"
+                                         ];
     CGFloat height = [self.menuSelectionView totalHeight];
     [self.view addSubview:self.menuSelectionView];
     AlertView *alert = [[AlertView alloc]init];
@@ -275,7 +275,7 @@
             make.bottom.equalTo(view);
         }];
         [view layoutIfNeeded];
-     }];
+    }];
     [self.menuSelectionView setChooseMenuBlock:^(NSInteger index) {
         STRONG_SELF
         [alert hide];

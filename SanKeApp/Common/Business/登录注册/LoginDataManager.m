@@ -11,12 +11,14 @@
 #import "TouristLoginRequest.h"
 #import "SendSMSRequest.h"
 #import "CheckSMSRequest.h"
+#import "RegisterRequest.h"
 
 @interface LoginDataManager()
 @property (nonatomic, strong) LoginRequest *loginRequest;
 @property (nonatomic, strong) TouristLoginRequest *touristLoginRequest;
 @property (nonatomic, strong) SendSMSRequest *sendSMSRequest;
 @property (nonatomic, strong) CheckSMSRequest *checkSMSRequest;
+@property (nonatomic, strong) RegisterRequest *registerRequest;
 @end
 
 @implementation LoginDataManager
@@ -112,6 +114,26 @@
         }
         BLOCK_EXEC(completeBlock,nil);
     }];
+}
 
++ (void)registerWithUserName:(NSString *)userName password:(NSString *)password mobileNumber:(NSString *)mobileNumber completeBlock:(void (^)(NSError *))completeBlock {
+    LoginDataManager *manager = [LoginDataManager sharedInstance];
+    [manager.registerRequest stopRequest];
+    manager.registerRequest = [[RegisterRequest alloc]init];
+    manager.registerRequest.username = userName;
+    manager.registerRequest.password = [password md5];
+    manager.registerRequest.mobile = mobileNumber;
+    WEAK_SELF
+    [manager.registerRequest startRequestWithRetClass:[HttpBaseRequestItem class] andCompleteBlock:^(id retItem, NSError *error, BOOL isMock) {
+        STRONG_SELF
+        if (error) {
+            BLOCK_EXEC(completeBlock,error);
+            return;
+        }
+        HttpBaseRequestItem *item = retItem;
+        UserModel *model = [UserModel modelFromRawData:item.info];
+        [UserManager sharedInstance].userModel = model;
+        BLOCK_EXEC(completeBlock,nil);
+    }];
 }
 @end

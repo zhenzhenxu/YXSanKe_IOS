@@ -9,12 +9,19 @@
 #import <Foundation/Foundation.h>
 @class UserInfo;
 
+@interface UserInfoItem : NSObject
+
+@property (nonatomic, strong) UserInfo *userInfo;
+@property (nonatomic, assign) NSInteger row;
+
+@end
+
 
 @interface UserInfoPicker : NSObject<UIPickerViewDelegate,UIPickerViewDataSource>
 
 @property (nonatomic, strong) NSArray<UserInfo *> *dataArray;
+@property (nonatomic, strong, readonly) UserInfoItem *selectedItem;
 
 - (void)resetSelectedInfo:(UserInfo *)userInfo;
 
-- (NSInteger)selectedInfoRow;
 @end

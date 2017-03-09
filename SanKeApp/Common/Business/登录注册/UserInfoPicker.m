@@ -10,12 +10,25 @@
 #import "UserInfoDataManger.h"
 #import "MineUserModel.h"
 
+@implementation UserInfoItem
+@end
+
 @interface UserInfoPicker ()
-@property (nonatomic, strong) UserInfo *selectedInfo;
+
+@property (nonatomic, strong) UserInfoItem *selectedItem;
+
 @end
 
 @implementation UserInfoPicker
 #pragma mark - UIPickerViewDataSource
+
+- (instancetype)init{
+    if (self = [super init]) {
+        self.selectedItem = [[UserInfoItem alloc]init];
+    }
+    return self;
+}
+
 - (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView
 {
     return 1;
@@ -54,7 +67,8 @@
     UILabel* selectLabel = (UILabel *)[pickerView viewForRow:row forComponent:component];
     selectLabel.textColor = [UIColor colorWithHexString:@"1d878b"];
     if (self.dataArray.count > row) {
-        self.selectedInfo = self.dataArray[row];
+        self.selectedItem.userInfo = self.dataArray[row];
+        self.selectedItem.row = row;
     }
 }
 
@@ -75,25 +89,14 @@
 - (void)resetSelectedInfo:(UserInfo *)userInfo {
     [self.dataArray enumerateObjectsUsingBlock:^(UserInfo * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         if ([userInfo.infoID isEqualToString:obj.infoID]) {
-            self.selectedInfo = obj;
+            self.selectedItem.userInfo = obj;
             *stop = YES;
         }
     }];
-    if(!self.selectedInfo) {
-        self.selectedInfo = self.dataArray.firstObject;
+    if(!self.selectedItem.userInfo) {
+        self.selectedItem.userInfo = self.dataArray.firstObject;
         return;
     }
-}
-
-
-- (NSInteger)selectedInfoRow {
-    NSInteger selectedRow = 0;
-    if (self.dataArray.count > 0) {
-        if ([self.dataArray containsObject:self.selectedInfo]) {
-            selectedRow = [self.dataArray indexOfObject:self.selectedInfo];
-        }
-    }
-    return selectedRow;
 }
 
 @end

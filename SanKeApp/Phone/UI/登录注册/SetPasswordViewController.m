@@ -129,27 +129,22 @@
 }
 
 - (void)registerAccount {
-    
-   
-//    WEAK_SELF
-//    [self startLoading];
-//    [LoginDataManager registerWithInfo:self.registerInfo completeBlock:^(HttpBaseRequestItem *item, NSError *error) {
-//        STRONG_SELF
-//        [self stopLoading];
-//        if (error) {
-//            [self showToast:error.localizedDescription];
-//            return;
-//        }
-//        self.registerInfo.userName = self.userNameInput.text;
-//        self.registerInfo.password = self.passwordInput.text;
-//        SupplementInfoViewController *vc = [[SupplementInfoViewController alloc]init];
-//        vc.registerInfo = self.registerInfo;
-//        [self.navigationController pushViewController:vc animated:YES];
-//    }];
-    //测试
-    [self showToast:@"注册成功"];
-    SupplementInfoViewController *vc = [[SupplementInfoViewController alloc]init];
-    [self.navigationController pushViewController:vc animated:YES];
+    WEAK_SELF
+    [self startLoading];
+    [LoginDataManager registerWithUserName:self.userNameInput.text password:self.passwordInput.text mobileNumber:self.mobileNumber completeBlock:^(NSError *error) {
+        STRONG_SELF
+        [self stopLoading];
+        if (error) {
+            [self showToast:error.localizedDescription];
+            return;
+        }
+        SupplementInfoViewController *vc = [[SupplementInfoViewController alloc]init];
+        [self.navigationController pushViewController:vc animated:YES];
+    }];
+//    //测试
+//    [self showToast:@"注册成功"];
+//    SupplementInfoViewController *vc = [[SupplementInfoViewController alloc]init];
+//    [self.navigationController pushViewController:vc animated:YES];
 }
 
 @end

@@ -16,20 +16,23 @@
 + (void)touristLoginWithCompleteBlock:(void(^)(NSError *error))completeBlock;
 /**
  发送短信验证码
-
+ 
  @param mobileNumber 手机号
  @param type 获取验证码的类型(注册：register ;忘记密码：password)
  @param completeBlock 请求的回调
  */
 + (void)sendVerifyCodeWithMobileNumber:(NSString *)mobileNumber
-                                type:(NSString *)type
-                       completeBlock:(void(^)(NSError *error))completeBlock;
+                                  type:(NSString *)type
+                         completeBlock:(void(^)(NSError *error))completeBlock;
 //验证短信验证码
 + (void)checkVerifyCodeWithMobileNumber:(NSString *)mobileNumber
-                              verifyCode:(NSString *)verifyCode
-                           completeBlock:(void(^)(NSError *error))completeBlock;
+                             verifyCode:(NSString *)verifyCode
+                          completeBlock:(void(^)(NSError *error))completeBlock;
 //注册
-//+ (void)registerWithInfo:(RegisterInfo *)registerInfo completeBlock:(void(^)(HttpBaseRequestItem *item, NSError *error))completeBlock;
++ (void)registerWithUserName:(NSString *)userName
+                    password:(NSString *)password
+                mobileNumber:(NSString *)mobileNumber
+               completeBlock:(void(^)(NSError *error))completeBlock;
 //重置密码
 //+ (void)resetPasswordWithMobileNumber:(NSString *)mobileNumber
 //                             password:(NSString *)password

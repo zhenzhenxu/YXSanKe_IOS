@@ -91,6 +91,9 @@ NSString *const kUpdateHeadPortraitSuccessNotification = @"kUpdateHeadPortraitSu
                                                             object:nil];
         BLOCK_EXEC(completeBlock,nil);
     }];
+}
+
++ (void)updateSupplementUserInfo:(SupplementUserInfo *)userInfo completeBlock:(void (^)(NSError *))completeBlock {
     
 }
 @end

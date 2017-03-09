@@ -10,6 +10,6 @@
 
 @interface SetPasswordViewController : LoginBaseViewController
 
-@property (nonatomic, strong) NSString *phoneNumber;
+@property (nonatomic, strong) NSString *mobileNumber;
 
 @end

@@ -16,12 +16,17 @@
 @property (nonatomic, assign) NSInteger selectedProvinceRow;
 @property (nonatomic, assign) NSInteger selectedCityRow;
 @property (nonatomic, assign) NSInteger selectedCountyRow;
-
+@property (nonatomic, strong) Area *selectedProvince;
+@property (nonatomic ,strong)NSArray<Area *> *selectedCitys;
+@property (nonatomic ,strong)NSArray<Area *> *selectedCounties;
+@property (nonatomic, strong) Area *selectedCity;
+@property (nonatomic, strong) Area *selectedCounty;
 @end
 
 @interface UserAreaInfoPicker : NSObject<UIPickerViewDelegate,UIPickerViewDataSource>
 
 @property (nonatomic, strong) AreaModel *model;
+@property (nonatomic, strong, readonly) UserAreaSelectedInfoItem *item;
 
 - (void)resetSelectedProvinceDataWithUserModel:(MineUserModel *)userModel;
 - (void)updateAreaWithCompleteBlock:(void(^)(NSError *error))completeBlock;

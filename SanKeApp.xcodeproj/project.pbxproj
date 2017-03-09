@@ -216,6 +216,9 @@
 		E9355B7C1E6FF85B007AE9F0 /* userInfo.json in Resources */ = {isa = PBXBuildFile; fileRef = E9355B7B1E6FF85B007AE9F0 /* userInfo.json */; };
 		E9355B851E710DEE007AE9F0 /* SendSMSRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = E9355B841E710DEE007AE9F0 /* SendSMSRequest.m */; };
 		E9355B881E710E20007AE9F0 /* CheckSMSRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = E9355B871E710E20007AE9F0 /* CheckSMSRequest.m */; };
+		E9355B8B1E710FFE007AE9F0 /* RegisterRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = E9355B8A1E710FFE007AE9F0 /* RegisterRequest.m */; };
+		E9355B911E7122EF007AE9F0 /* UpdateInfoRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = E9355B901E7122EF007AE9F0 /* UpdateInfoRequest.m */; };
+		E9355B941E712445007AE9F0 /* SupplementUserInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = E9355B931E712445007AE9F0 /* SupplementUserInfo.m */; };
 		E9F4541C1E31B18D00860DC2 /* TouristLoginRequest.json in Resources */ = {isa = PBXBuildFile; fileRef = E9F4541B1E31B18D00860DC2 /* TouristLoginRequest.json */; };
 /* End PBXBuildFile section */
 
@@ -640,6 +643,12 @@
 		E9355B841E710DEE007AE9F0 /* SendSMSRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SendSMSRequest.m; sourceTree = "<group>"; };
 		E9355B861E710E20007AE9F0 /* CheckSMSRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CheckSMSRequest.h; sourceTree = "<group>"; };
 		E9355B871E710E20007AE9F0 /* CheckSMSRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CheckSMSRequest.m; sourceTree = "<group>"; };
+		E9355B891E710FFE007AE9F0 /* RegisterRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegisterRequest.h; sourceTree = "<group>"; };
+		E9355B8A1E710FFE007AE9F0 /* RegisterRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegisterRequest.m; sourceTree = "<group>"; };
+		E9355B8F1E7122EF007AE9F0 /* UpdateInfoRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UpdateInfoRequest.h; path = "../登录注册/UpdateInfoRequest.h"; sourceTree = "<group>"; };
+		E9355B901E7122EF007AE9F0 /* UpdateInfoRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UpdateInfoRequest.m; path = "../登录注册/UpdateInfoRequest.m"; sourceTree = "<group>"; };
+		E9355B921E712445007AE9F0 /* SupplementUserInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SupplementUserInfo.h; sourceTree = "<group>"; };
+		E9355B931E712445007AE9F0 /* SupplementUserInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SupplementUserInfo.m; sourceTree = "<group>"; };
 		E9F4541B1E31B18D00860DC2 /* TouristLoginRequest.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = TouristLoginRequest.json; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -1418,6 +1427,8 @@
 				7C7841B71E2F1E2900755BC0 /* MineDataManager.m */,
 				E9230C4D1E3060FE00AC6617 /* MineUserModel.h */,
 				E9230C4E1E3060FE00AC6617 /* MineUserModel.m */,
+				E9355B921E712445007AE9F0 /* SupplementUserInfo.h */,
+				E9355B931E712445007AE9F0 /* SupplementUserInfo.m */,
 			);
 			path = "我的";
 			sourceTree = "<group>";
@@ -1494,6 +1505,8 @@
 		7C78419F1E2E2AE900755BC0 /* Network */ = {
 			isa = PBXGroup;
 			children = (
+				E9355B8F1E7122EF007AE9F0 /* UpdateInfoRequest.h */,
+				E9355B901E7122EF007AE9F0 /* UpdateInfoRequest.m */,
 				E9230C541E30919B00AC6617 /* UpdateAreaRequest.json */,
 				E9230C551E30919B00AC6617 /* UpdateStageSubjectRequest.json */,
 				7C78419B1E2E2AD900755BC0 /* UpdateStageSubjectRequest.h */,
@@ -1519,6 +1532,8 @@
 				E9355B841E710DEE007AE9F0 /* SendSMSRequest.m */,
 				E9355B861E710E20007AE9F0 /* CheckSMSRequest.h */,
 				E9355B871E710E20007AE9F0 /* CheckSMSRequest.m */,
+				E9355B891E710FFE007AE9F0 /* RegisterRequest.h */,
+				E9355B8A1E710FFE007AE9F0 /* RegisterRequest.m */,
 			);
 			name = Network;
 			sourceTree = "<group>";
@@ -1856,6 +1871,7 @@
 				7C6F21991E237FD2000AB43A /* PlayRecordViewController.m in Sources */,
 				E9355B381E694970007AE9F0 /* PrivacyPolicyView.m in Sources */,
 				7C1A5F2D1E15111800832DED /* YXPostRequest.m in Sources */,
+				E9355B911E7122EF007AE9F0 /* UpdateInfoRequest.m in Sources */,
 				7C78419A1E2E25C800755BC0 /* HttpBaseRequestItem_info.m in Sources */,
 				7C1A60051E16396C00832DED /* UIView+ViewController.m in Sources */,
 				30C48A7C1E52E72100CCDBBE /* YXStatisticFileRequest.m in Sources */,
@@ -1976,6 +1992,7 @@
 				7C2251D01E1DEB4F004785D5 /* SKAlertTitleLabel.m in Sources */,
 				7C7841AE1E2F142800755BC0 /* FetchStageSubjectRequest.m in Sources */,
 				7C1A60041E16396C00832DED /* UIButton+HighlightColor.m in Sources */,
+				E9355B941E712445007AE9F0 /* SupplementUserInfo.m in Sources */,
 				7C1A5F131E15108F00832DED /* BaseDownloader.m in Sources */,
 				7C1A5F531E15128C00832DED /* YXImageViewController.m in Sources */,
 				7C1A5FFE1E16396C00832DED /* NSDate+Utilities.m in Sources */,
@@ -1986,6 +2003,7 @@
 				7C1A5EFC1E150E3400832DED /* FileLogger.m in Sources */,
 				E902E6E11E2CE1B8009441B3 /* EmptyView.m in Sources */,
 				E9355B6E1E6EB04B007AE9F0 /* SupplementUserInfoViewController.m in Sources */,
+				E9355B8B1E710FFE007AE9F0 /* RegisterRequest.m in Sources */,
 				9241FFF21E2615B80015B587 /* PlayImageView.m in Sources */,
 				927594DF1E2F0C2800F87838 /* PlayHistoryFetch.m in Sources */,
 				30C48A941E52EACC00CCDBBE /* RegularRecordEntity.m in Sources */,
