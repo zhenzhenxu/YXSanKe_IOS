@@ -183,6 +183,7 @@ static NSString *const obtainVerifyCodeType = @"password";
         }
         [self.verifyCodeInput stopTimer];
         ResetPasswordViewController *vc = [[ResetPasswordViewController alloc]init];
+        vc.mobileNumber = self.phoneNumInput.text;
         [self.navigationController pushViewController:vc animated:YES];
     }];
  }

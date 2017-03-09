@@ -220,6 +220,7 @@
 		E9355B941E712445007AE9F0 /* SupplementUserInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = E9355B931E712445007AE9F0 /* SupplementUserInfo.m */; };
 		E9355B991E7153DA007AE9F0 /* UpdateInfoRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = E9355B971E7153DA007AE9F0 /* UpdateInfoRequest.m */; };
 		E9355B9B1E7153F7007AE9F0 /* UpdateInfoRequest.json in Resources */ = {isa = PBXBuildFile; fileRef = E9355B9A1E7153F7007AE9F0 /* UpdateInfoRequest.json */; };
+		E9355B9E1E7159AC007AE9F0 /* ChangePasswordRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = E9355B9D1E7159AC007AE9F0 /* ChangePasswordRequest.m */; };
 		E9F4541C1E31B18D00860DC2 /* TouristLoginRequest.json in Resources */ = {isa = PBXBuildFile; fileRef = E9F4541B1E31B18D00860DC2 /* TouristLoginRequest.json */; };
 /* End PBXBuildFile section */
 
@@ -651,6 +652,8 @@
 		E9355B961E7153DA007AE9F0 /* UpdateInfoRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UpdateInfoRequest.h; sourceTree = "<group>"; };
 		E9355B971E7153DA007AE9F0 /* UpdateInfoRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UpdateInfoRequest.m; sourceTree = "<group>"; };
 		E9355B9A1E7153F7007AE9F0 /* UpdateInfoRequest.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = UpdateInfoRequest.json; sourceTree = "<group>"; };
+		E9355B9C1E7159AC007AE9F0 /* ChangePasswordRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChangePasswordRequest.h; sourceTree = "<group>"; };
+		E9355B9D1E7159AC007AE9F0 /* ChangePasswordRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChangePasswordRequest.m; sourceTree = "<group>"; };
 		E9F4541B1E31B18D00860DC2 /* TouristLoginRequest.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = TouristLoginRequest.json; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -1537,6 +1540,8 @@
 				E9355B871E710E20007AE9F0 /* CheckSMSRequest.m */,
 				E9355B891E710FFE007AE9F0 /* RegisterRequest.h */,
 				E9355B8A1E710FFE007AE9F0 /* RegisterRequest.m */,
+				E9355B9C1E7159AC007AE9F0 /* ChangePasswordRequest.h */,
+				E9355B9D1E7159AC007AE9F0 /* ChangePasswordRequest.m */,
 			);
 			name = Network;
 			sourceTree = "<group>";
@@ -2009,6 +2014,7 @@
 				E9355B6E1E6EB04B007AE9F0 /* SupplementUserInfoViewController.m in Sources */,
 				E9355B8B1E710FFE007AE9F0 /* RegisterRequest.m in Sources */,
 				9241FFF21E2615B80015B587 /* PlayImageView.m in Sources */,
+				E9355B9E1E7159AC007AE9F0 /* ChangePasswordRequest.m in Sources */,
 				927594DF1E2F0C2800F87838 /* PlayHistoryFetch.m in Sources */,
 				30C48A941E52EACC00CCDBBE /* RegularRecordEntity.m in Sources */,
 				30C48A931E52EACC00CCDBBE /* RegularRecordEntity+CoreDataProperties.m in Sources */,

@@ -13,7 +13,6 @@
 @interface ResetPasswordViewController ()
 @property (nonatomic, strong) InfoInputView *passwordInput;
 @property (nonatomic, strong) SubmitButton *submitButton;
-@property (nonatomic, strong) NSString *phoneNumber;
 @end
 
 @implementation ResetPasswordViewController
@@ -93,31 +92,25 @@
             [self showToast:@"请输入6~18位数字、字母或符号"];
             return;
         }
-        [self resetPasswordRequest];
+        [self changePassword];
     }];
 }
 
-- (void)resetPasswordRequest
-{
-//        [self startLoading];
-//        WEAK_SELF
-//        [LoginDataManager resetPasswordWithMobileNumber:self.phoneNumber password:self.passwordInput.text completeBlock:^(HttpBaseRequestItem *item, NSError *error) {
-//            STRONG_SELF
-//            [self stopLoading];
-//            if (error) {
-//                [self showToast:error.localizedDescription];
-//                return;
-//            }
-//                DDLogDebug(@"跳转到登陆页");
-//                [self showToast:@"重置密码成功"];
-//                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-//                    [self.navigationController popToRootViewControllerAnimated:YES];//测试
-//                });
-//        }];
-    //测试
-    [self showToast:@"设置密码成功"];
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2.f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        [self.navigationController popToRootViewControllerAnimated:YES];
-    });
+- (void)changePassword {
+    [self startLoading];
+    WEAK_SELF
+    [LoginDataManager changePasswordWithMobileNumber:self.mobileNumber password:self.passwordInput.text completeBlock:^(NSError *error) {
+        STRONG_SELF
+        [self stopLoading];
+        if (error) {
+            [self showToast:error.localizedDescription];
+            return;
+        }
+        DDLogDebug(@"跳转到登陆页");
+        [self showToast:@"重置密码成功"];
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            [self.navigationController popToRootViewControllerAnimated:YES];//测试
+        });
+    }];
 }
 @end

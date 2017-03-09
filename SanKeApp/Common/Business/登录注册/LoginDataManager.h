@@ -33,10 +33,10 @@
                     password:(NSString *)password
                 mobileNumber:(NSString *)mobileNumber
                completeBlock:(void(^)(NSError *error))completeBlock;
-//重置密码
-//+ (void)resetPasswordWithMobileNumber:(NSString *)mobileNumber
-//                             password:(NSString *)password
-//                        completeBlock:(void(^)(HttpBaseRequestItem *item, NSError *error))completeBlock;
+//忘记密码重置
++ (void)changePasswordWithMobileNumber:(NSString *)mobileNumber
+                             password:(NSString *)password
+                        completeBlock:(void(^)(NSError *error))completeBlock;
 
 
 @end
