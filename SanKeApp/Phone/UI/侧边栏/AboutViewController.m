@@ -8,16 +8,17 @@
 
 #import "AboutViewController.h"
 #import "PrivacyPolicyViewController.h"
+#import "MenuSelectionView.h"
+#import "AboutHeaderView.h"
 
-@interface AboutViewController ()
+@interface AboutViewController ()<UITableViewDelegate,UITableViewDataSource>
 
-@property (nonatomic, strong) UIView *contentView;
-@property (nonatomic, strong) UIImageView *logoImageView;
-@property (nonatomic, strong) UIImageView *signImageView;
-@property (nonatomic, strong) UILabel *versionLabel;
-@property (nonatomic, strong) UILabel *mailLabel;
-@property (nonatomic, strong) UILabel *telephoneLabel;
+@property (nonatomic, strong) AboutHeaderView *headerview;
+@property (nonatomic, strong) UITableView *taleView;
+@property (nonatomic, copy) NSString *phoneString;
 @property (nonatomic, strong) UIButton *privacyButton;
+
+@property (nonatomic, strong) MenuSelectionView *menuSelectionView;
 @end
 
 @implementation AboutViewController
@@ -25,7 +26,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = @"关于我们";
-    
+    self.phoneString = @"010-8235169";
     [self setupUI];
     [self setupLayout];
     // Do any additional setup after loading the view.
@@ -37,34 +38,18 @@
 }
 
 - (void)setupUI {
-    self.view.backgroundColor = [UIColor colorWithHexString:@"e6e6e6"];
+    self.view.backgroundColor = [UIColor colorWithHexString:@"ffffff"];
     
-    self.contentView = [[UIView alloc]init];
-    self.contentView.backgroundColor = [UIColor colorWithHexString:@"ffffff"];
+    self.headerview = [[AboutHeaderView alloc]init];
     
-    self.logoImageView = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"logo"]];
-    
-    self.signImageView = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"i教研"]];
-    
-    self.versionLabel = [[UILabel alloc]init];
-    self.versionLabel.font = [UIFont systemFontOfSize:16.0f];
-    self.versionLabel.textColor = [UIColor colorWithHexString:@"c6c9cc"];
-    NSDictionary *infoDictionary = [[NSBundle mainBundle] infoDictionary];
-    self.versionLabel.text = [NSString stringWithFormat:@"V%@",[infoDictionary objectForKey:@"CFBundleShortVersionString"]];
-    
-    self.mailLabel = [[UILabel alloc]init];
-    self.mailLabel.textColor = [UIColor colorWithHexString:@"333333"];
-    self.mailLabel.font = [UIFont systemFontOfSize:14.0f];
-    self.mailLabel.text = @"客服邮箱  jiaoyan@ncct.gov.cn";
-    self.mailLabel.textAlignment = NSTextAlignmentCenter;
-    
-    self.telephoneLabel = [[UILabel alloc]init];
-    NSString *phoneString = @"客服电话  010-8235169";
-    NSMutableAttributedString *attributeString = [[NSMutableAttributedString alloc] initWithString:phoneString];
-    [attributeString addAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:14.0f],NSForegroundColorAttributeName:[UIColor colorWithHexString:@"333333"]} range:NSMakeRange(0, 4)];
-    [attributeString addAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:14.0f],NSForegroundColorAttributeName:[UIColor colorWithHexString:@"4691a6"]} range:NSMakeRange(6, 11)];
-    self.telephoneLabel.attributedText = attributeString;
-    self.telephoneLabel.textAlignment = NSTextAlignmentCenter;
+    self.taleView = [[UITableView alloc] initWithFrame:self.view.bounds style:UITableViewStylePlain];
+    self.taleView.delegate = self;
+    self.taleView.dataSource = self;
+    self.taleView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    self.taleView.layoutMargins = UIEdgeInsetsZero;
+    self.taleView.scrollEnabled = NO;
+    [self.taleView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"UITableViewCell"];
+    [self.view addSubview:self.taleView];
     
     self.privacyButton = [UIButton buttonWithType:UIButtonTypeCustom];
     self.privacyButton.titleLabel.font = [UIFont systemFontOfSize:14.0f];
@@ -73,47 +58,108 @@
     [self.privacyButton addTarget:self action:@selector(privacyButtonAction) forControlEvents:UIControlEventTouchUpInside];
 }
 - (void)setupLayout {
-    [self.view addSubview:self.contentView];
-    [self.contentView addSubview:self.logoImageView];
-    [self.contentView addSubview:self.signImageView];
-    [self.contentView addSubview:self.versionLabel];
-    [self.contentView addSubview:self.mailLabel];
-    [self.contentView addSubview:self.telephoneLabel];
-    [self.contentView addSubview:self.privacyButton];
+    [self.view addSubview:self.headerview];
+    [self.view addSubview:self.taleView];
+    [self.view addSubview:self.privacyButton];
     
     
-    [self.contentView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.view).offset(10.0f);
-        make.left.right.bottom.equalTo(self.view);
+     [self.headerview mas_makeConstraints:^(MASConstraintMaker *make) {
+         make.top.left.right.equalTo(self.view);
     }];
-    
-    [self.logoImageView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.contentView).offset(69.0f);
-        make.centerX.equalTo(self.contentView);
-        make.size.mas_equalTo(CGSizeMake(78, 78));
-    }];
-    [self.signImageView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.logoImageView.mas_bottom).offset(25.0f);
-        make.centerX.equalTo(self.logoImageView);
-        make.size.mas_equalTo(CGSizeMake(55, 23));
-    }];
-    
-    [self.versionLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.signImageView.mas_bottom).offset(10.0f);
-        make.centerX.equalTo(self.signImageView);
-    }];
-    [self.mailLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.versionLabel.mas_bottom).offset(82.0f);
-        make.centerX.equalTo(self.versionLabel);
-    }];
-    [self.telephoneLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.mailLabel.mas_bottom).offset(28.0f);
-        make.centerX.equalTo(self.mailLabel);
+    [self.taleView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.headerview.mas_bottom).offset(78.0f);
+        make.left.right.equalTo(self.view);
+        make.bottom.equalTo(self.privacyButton.mas_top);
     }];
     
     [self.privacyButton mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerX.equalTo(self.telephoneLabel);
-        make.bottom.equalTo(self.contentView).offset(-12.0f);
+        make.left.right.equalTo(self.view);
+        make.height.mas_equalTo(28.0f);
+        make.bottom.equalTo(self.view).offset(-12.0f);
+    }];
+}
+#pragma mark - tableView dataSorce
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+    return 2;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"UITableViewCell" forIndexPath:indexPath];
+    if (indexPath.row == 0) {
+        cell.textLabel.textColor = [UIColor colorWithHexString:@"333333"];
+        cell.textLabel.font = [UIFont systemFontOfSize:14.0f];
+        cell.textLabel.text = @"客服邮箱  jiaoyan@ncct.gov.cn";;
+        cell.textLabel.textAlignment = NSTextAlignmentCenter;
+    }else{
+        NSString *phoneString = [NSString stringWithFormat:@"客服电话  %@",self.phoneString];
+        NSMutableAttributedString *attributeString = [[NSMutableAttributedString alloc] initWithString:phoneString];
+        [attributeString addAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:14.0f],NSForegroundColorAttributeName:[UIColor colorWithHexString:@"333333"]} range:NSMakeRange(0, 4)];
+        [attributeString addAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:14.0f],NSForegroundColorAttributeName:[UIColor colorWithHexString:@"4691a6"]} range:NSMakeRange(6, 11)];
+        cell.textLabel.textColor = [UIColor colorWithHexString:@"334466"];
+        cell.textLabel.font = [UIFont systemFontOfSize:14.0f];
+        cell.textLabel.attributedText = attributeString;
+        cell.textLabel.textAlignment = NSTextAlignmentCenter;
+    }
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    return cell;
+}
+
+#pragma mark - tableView delegate
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    return 45.0f;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
+    return 0.01f;
+}
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    if (indexPath.row == 1) {
+        [self callActionWithPhoneNumber];
+    }
+}
+
+- (void)callActionWithPhoneNumber{
+    self.menuSelectionView = [[MenuSelectionView alloc]init];
+    NSString * title = [NSString stringWithFormat:@"呼叫:  %@",self.phoneString];
+    self.menuSelectionView.dataArray = @[
+                                         title,
+                                         @"取消"
+                                         ];
+    CGFloat height = [self.menuSelectionView totalHeight];
+    [self.view addSubview:self.menuSelectionView];
+    AlertView *alert = [[AlertView alloc]init];
+    alert.hideWhenMaskClicked = YES;
+    alert.maskColor = [[UIColor blackColor]colorWithAlphaComponent:0.4];
+    alert.contentView = self.menuSelectionView;
+    WEAK_SELF
+    [alert showWithLayout:^(AlertView *view) {
+        STRONG_SELF
+        [self.menuSelectionView mas_remakeConstraints:^(MASConstraintMaker *make) {
+            make.left.right.equalTo(view);
+            make.height.mas_equalTo(height);
+            make.bottom.equalTo(view);
+        }];
+        [view layoutIfNeeded];
+    }];
+    [self.menuSelectionView setChooseMenuBlock:^(NSInteger index) {
+        STRONG_SELF
+        [alert hide];
+        switch (index) {
+            case 0:{
+                NSString *telUrl = [NSString stringWithFormat:@"tel://%@",self.phoneString];
+                if (![[UIApplication sharedApplication] openURL:[NSURL URLWithString:telUrl]]) {
+                    [self showToast:@"此设备不支持通话！"];
+                }
+            }
+                break;
+            case 1:
+            {
+                [alert hide];
+            }
+                break;
+            default:
+                break;
+        }
     }];
 }
 

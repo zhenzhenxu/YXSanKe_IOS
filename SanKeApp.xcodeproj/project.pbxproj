@@ -221,6 +221,7 @@
 		E9355B991E7153DA007AE9F0 /* UpdateInfoRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = E9355B971E7153DA007AE9F0 /* UpdateInfoRequest.m */; };
 		E9355B9B1E7153F7007AE9F0 /* UpdateInfoRequest.json in Resources */ = {isa = PBXBuildFile; fileRef = E9355B9A1E7153F7007AE9F0 /* UpdateInfoRequest.json */; };
 		E9355B9E1E7159AC007AE9F0 /* ChangePasswordRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = E9355B9D1E7159AC007AE9F0 /* ChangePasswordRequest.m */; };
+		E9355BA11E724660007AE9F0 /* AboutHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = E9355BA01E724660007AE9F0 /* AboutHeaderView.m */; };
 		E9F4541C1E31B18D00860DC2 /* TouristLoginRequest.json in Resources */ = {isa = PBXBuildFile; fileRef = E9F4541B1E31B18D00860DC2 /* TouristLoginRequest.json */; };
 /* End PBXBuildFile section */
 
@@ -654,6 +655,8 @@
 		E9355B9A1E7153F7007AE9F0 /* UpdateInfoRequest.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = UpdateInfoRequest.json; sourceTree = "<group>"; };
 		E9355B9C1E7159AC007AE9F0 /* ChangePasswordRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChangePasswordRequest.h; sourceTree = "<group>"; };
 		E9355B9D1E7159AC007AE9F0 /* ChangePasswordRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChangePasswordRequest.m; sourceTree = "<group>"; };
+		E9355B9F1E724660007AE9F0 /* AboutHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AboutHeaderView.h; sourceTree = "<group>"; };
+		E9355BA01E724660007AE9F0 /* AboutHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AboutHeaderView.m; sourceTree = "<group>"; };
 		E9F4541B1E31B18D00860DC2 /* TouristLoginRequest.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = TouristLoginRequest.json; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -1623,6 +1626,8 @@
 				E902E6A91E2BA3BE009441B3 /* SideHeaderView.m */,
 				E902E6AC1E2BA3BE009441B3 /* SideTableViewCell.h */,
 				E902E6AD1E2BA3BE009441B3 /* SideTableViewCell.m */,
+				E9355B9F1E724660007AE9F0 /* AboutHeaderView.h */,
+				E9355BA01E724660007AE9F0 /* AboutHeaderView.m */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -1888,6 +1893,7 @@
 				E9355B881E710E20007AE9F0 /* CheckSMSRequest.m in Sources */,
 				E9355AD51E653222007AE9F0 /* YXImagePickerController.m in Sources */,
 				30C48A791E52E72100CCDBBE /* YXProblemItem.m in Sources */,
+				E9355BA11E724660007AE9F0 /* AboutHeaderView.m in Sources */,
 				30C87E0E1E52F4BB000CFBAA /* NSString+YXString.m in Sources */,
 				7C7629C11E27371D007B5698 /* LoginActionView.m in Sources */,
 				92E7D1391E28A83F00A34300 /* AloneCourseViewController.m in Sources */,
