@@ -38,20 +38,12 @@
     [super viewDidLoad];
     self.title = @"完善个人资料";
     self.view.backgroundColor = [UIColor colorWithHexString:@"e6e6e6"];
-    [self setupNavgationBar];
     [self setupUI];
-    [self setupInfoPicker];
+//    [self setupInfoPicker];
     
     // Do any additional setup after loading the view.
 }
 
-- (void)setupNavgationBar {
-    UINavigationBar *navigationBar = self.navigationController.navigationBar;
-    [navigationBar setBackgroundImage:[UIImage yx_imageWithColor:[UIColor colorWithHexString:@"ffffff"]]
-                       forBarPosition:UIBarPositionAny
-                           barMetrics:UIBarMetricsDefault];
-    [navigationBar setShadowImage:[UIImage new]];
-}
 - (void)setupUI {
     self.tableView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
     self.tableView.delegate = self;
@@ -110,20 +102,51 @@
     
 }
 
-- (void)setupInfoPicker {
-    self.areaInfoPicker = [[UserAreaInfoPicker alloc]init];
-    self.areaInfoPicker.model = [AreaDataManager areaModel];
-    
-    self.roleInfoPicker = [[UserInfoPicker alloc]init];
-    self.roleInfoPicker.dataArray = [UserInfoDataManger userInfoData].data.role;
-    
-    self.genderInfoPicker = [[UserInfoPicker alloc]init];
-    self.genderInfoPicker.dataArray = [UserInfoDataManger userInfoData].data.gender;
-    
-    self.experienceInfoPicker = [[UserInfoPicker alloc]init];
-    self.experienceInfoPicker.dataArray = [UserInfoDataManger userInfoData].data.experience;
+//- (void)setupInfoPicker {
+//    self.areaInfoPicker = [[UserAreaInfoPicker alloc]init];
+//    self.areaInfoPicker.model = [AreaDataManager areaModel];
+//    
+//    self.roleInfoPicker = [[UserInfoPicker alloc]init];
+//    self.roleInfoPicker.dataArray = [UserInfoDataManger userInfoData].data.role;
+//    
+//    self.genderInfoPicker = [[UserInfoPicker alloc]init];
+//    self.genderInfoPicker.dataArray = [UserInfoDataManger userInfoData].data.gender;
+//    
+//    self.experienceInfoPicker = [[UserInfoPicker alloc]init];
+//    self.experienceInfoPicker.dataArray = [UserInfoDataManger userInfoData].data.experience;
+//}
+#pragma mark - getter
+- (UserAreaInfoPicker *)areaInfoPicker {
+    if (_areaInfoPicker == nil) {
+        _areaInfoPicker = [[UserAreaInfoPicker alloc]init];
+        _areaInfoPicker.model = [AreaDataManager areaModel];
+    }
+    return _areaInfoPicker;
 }
 
+- (UserInfoPicker *)roleInfoPicker {
+    if (_roleInfoPicker == nil) {
+        _roleInfoPicker = [[UserInfoPicker alloc]init];
+        _roleInfoPicker.dataArray = [UserInfoDataManger userInfoData].data.role;
+    }
+    return _roleInfoPicker;
+}
+
+- (UserInfoPicker *)genderInfoPicker {
+    if (_genderInfoPicker == nil) {
+        _genderInfoPicker = [[UserInfoPicker alloc]init];
+        _genderInfoPicker.dataArray = [UserInfoDataManger userInfoData].data.gender;
+    }
+    return _genderInfoPicker;
+}
+
+- (UserInfoPicker *)experienceInfoPicker {
+    if (_experienceInfoPicker == nil) {
+        _experienceInfoPicker = [[UserInfoPicker alloc]init];
+        _experienceInfoPicker.dataArray = [UserInfoDataManger userInfoData].data.experience;
+    }
+    return _experienceInfoPicker;
+}
 #pragma mark -update Picker Selected Info
 - (void)updateSelectedInfo {
     

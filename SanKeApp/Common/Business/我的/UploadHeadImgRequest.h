@@ -7,19 +7,7 @@
 //
 
 #import "YXPostRequest.h"
-@interface UploadHeadImgRequestItem : HttpBaseRequestItem
 
-@property (nonatomic, copy) NSString<Optional> *url;
-@property (nonatomic, copy) NSString<Optional> *headDetail;
-
-@end
-
-// 修改头像
 @interface UploadHeadImgRequest : YXPostRequest
 
-@property (nonatomic, strong) NSString<Optional> *width;  //宽
-@property (nonatomic, strong) NSString<Optional> *height; //高
-@property (nonatomic, strong) NSString<Optional> *left;   //左坐标
-@property (nonatomic, strong) NSString<Optional> *top;    //上坐标
-@property (nonatomic, strong) NSString<Optional> *rate;   //原图缩小的比率（1表示原图大小）
 @end

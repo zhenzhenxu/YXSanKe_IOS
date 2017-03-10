@@ -11,6 +11,7 @@
 #import "UpdateAreaRequest.h"
 #import "UploadHeadImgRequest.h"
 #import "UpdateInfoRequest.h"
+#import "UIImage+YXImage.h"
 
 NSString * const kStageSubjectDidChangeNotification = @"kStageSubjectDidChangeNotification";
 NSString *const kUpdateHeadPortraitSuccessNotification = @"kUpdateHeadPortraitSuccessNotification";
@@ -80,14 +81,19 @@ NSString *const kUpdateHeadPortraitSuccessNotification = @"kUpdateHeadPortraitSu
     MineDataManager *manager = [MineDataManager sharedInstance];
     [manager.uploadHeadImgRequest stopRequest];
     manager.uploadHeadImgRequest = [[UploadHeadImgRequest alloc] init];
+    NSData *data = [UIImage compressionImage:portrait limitSize:2*1024*1024];
+    [manager.uploadHeadImgRequest.request setData:data
+                                  withFileName:@"head.jpg"
+                                andContentType:nil
+                                        forKey:@"newUpload"];
     WEAK_SELF
-    [manager.uploadHeadImgRequest startRequestWithRetClass:[UploadHeadImgRequestItem class] andCompleteBlock:^(id retItem, NSError *error, BOOL isMock) {
+    [manager.uploadHeadImgRequest startRequestWithRetClass:[HttpBaseRequestItem class] andCompleteBlock:^(id retItem, NSError *error, BOOL isMock) {
         STRONG_SELF
         if (error) {
             BLOCK_EXEC(completeBlock,error);
             return;
         }
-        UploadHeadImgRequestItem *item = retItem;
+        HttpBaseRequestItem *item = retItem;
         UserModel *model = [UserModel modelFromRawData:item.info];
         [UserManager sharedInstance].userModel = model;
         [[NSNotificationCenter defaultCenter] postNotificationName:kUpdateHeadPortraitSuccessNotification

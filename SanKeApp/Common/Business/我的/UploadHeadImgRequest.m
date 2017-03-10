@@ -7,23 +7,13 @@
 //
 
 #import "UploadHeadImgRequest.h"
-@implementation UploadHeadImgRequestItem
 
-@end
-
-@implementation UploadHeadImgRequest{
-}
+@implementation UploadHeadImgRequest
 
 - (instancetype)init
 {
     if (self = [super init]) {
-//        self.urlHead = [[YXConfigManager sharedInstance].server stringByAppendingString:@"resource/uploadheader"];
-//        self.width = @"80";
-//        self.height = @"80";
-//        self.left = @"-40";
-//        self.top = @"40";
-//        self.rate = @"1";
-//        self.token = [YXUserManager sharedManager].userModel.token;
+        self.urlHead = [[SKConfigManager sharedInstance].server stringByAppendingString:@"app/sanke/sankeUpload"];
     }
     return self;
 }
