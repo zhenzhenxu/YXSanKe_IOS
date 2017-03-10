@@ -9,6 +9,7 @@
 #import "ResetPasswordViewController.h"
 #import "InfoInputView.h"
 #import "SubmitButton.h"
+#import "LoginViewController.h"
 
 @interface ResetPasswordViewController ()
 @property (nonatomic, strong) InfoInputView *passwordInput;
@@ -38,7 +39,7 @@
     self.passwordInput = [[InfoInputView alloc] init];
     self.passwordInput.layer.cornerRadius = 2.0f;
     self.passwordInput.clipsToBounds = YES;
-    self.passwordInput.textField.keyboardType = UIKeyboardTypeNumberPad;
+    self.passwordInput.textField.keyboardType = UIKeyboardTypeASCIICapable;
     NSDictionary *attributes = @{NSForegroundColorAttributeName: [UIColor colorWithHexString:@"c6c9cc"]};
     self.passwordInput.textField.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@"请输入6~18位密码" attributes:attributes];
     WEAK_SELF
@@ -109,7 +110,8 @@
         DDLogDebug(@"跳转到登陆页");
         [self showToast:@"重置密码成功"];
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            [self.navigationController popToRootViewControllerAnimated:YES];//测试
+            LoginViewController *vc = [[LoginViewController alloc]init];
+            [self.navigationController pushViewController:vc animated:YES];
         });
     }];
 }

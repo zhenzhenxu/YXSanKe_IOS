@@ -7,19 +7,9 @@
 //
 
 #import "SupplementUserInfoViewController.h"
-#import "UserImageTableViewCell.h"
 #import "UserInfoTableViewCell.h"
 #import "UserInfoPickerView.h"
-#import "UserSubjectStageInfoPicker.h"
 #import "UserAreaInfoPicker.h"
-#import "ErrorView.h"
-#import "EmptyView.h"
-#import "MineUserModel.h"
-#import "YXRecordManager.h"
-#import "YXProblemItem.h"
-#import "YXImagePickerController.h"
-#import "MenuSelectionView.h"
-#import "UserInfoDataManger.h"
 #import "UserInfoPicker.h"
 #import "SupplementUserInfo.h"
 
@@ -46,12 +36,11 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.title = @"个人信息";
+    self.title = @"完善个人资料";
     self.view.backgroundColor = [UIColor colorWithHexString:@"e6e6e6"];
     [self setupNavgationBar];
     [self setupUI];
     [self setupInfoPicker];
-    [self LoadData];
     
     // Do any additional setup after loading the view.
 }
@@ -133,11 +122,6 @@
     
     self.experienceInfoPicker = [[UserInfoPicker alloc]init];
     self.experienceInfoPicker.dataArray = [UserInfoDataManger userInfoData].data.experience;
-}
-
-- (void)LoadData {
-    self.userModel = [MineUserModel mineUserModelFromRawModel:[UserManager sharedInstance].userModel];
-    [self.tableView reloadData];
 }
 
 #pragma mark -update Picker Selected Info

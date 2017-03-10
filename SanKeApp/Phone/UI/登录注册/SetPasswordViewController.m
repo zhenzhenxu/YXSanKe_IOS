@@ -36,7 +36,7 @@
 
 - (void)setupUI {
     
-    self.title = @"注册";
+    self.title = @"注册账号";
     self.view.backgroundColor = [UIColor colorWithHexString:@"e6e6e6"];
     
     self.topView = [[UIView alloc]init];
@@ -44,7 +44,7 @@
     self.topView.clipsToBounds = YES;
 
     self.userNameInput = [[InfoInputView alloc] init];
-    self.userNameInput.textField.keyboardType = UIKeyboardTypeNumberPad;
+    self.userNameInput.textField.keyboardType = UIKeyboardTypeASCIICapable;
     NSDictionary *attributes = @{NSForegroundColorAttributeName: [UIColor colorWithHexString:@"c6c9cc"]};
     self.userNameInput.textField.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@"用户名" attributes:attributes];
     WEAK_SELF
@@ -56,7 +56,7 @@
     self.passwordInput = [[InfoInputView alloc] init];
     self.passwordInput.layer.cornerRadius = 2.0f;
     self.passwordInput.clipsToBounds = YES;
-    self.passwordInput.textField.keyboardType = UIKeyboardTypeNumberPad;
+    self.passwordInput.textField.keyboardType = UIKeyboardTypeASCIICapable;
     NSDictionary *attributes1 = @{NSForegroundColorAttributeName: [UIColor colorWithHexString:@"c6c9cc"]};
     self.passwordInput.textField.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@"请输入6~18位密码" attributes:attributes1];
     [self.passwordInput setTextChangeBlock:^(NSString *text) {

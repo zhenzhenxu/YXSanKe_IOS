@@ -42,7 +42,7 @@ static NSString *const obtainVerifyCodeType = @"register";
 }
 
 - (void)setupUI {
-    self.title = @"注册";
+    self.title = @"注册账号";
     self.view.backgroundColor = [UIColor colorWithHexString:@"e6e6e6"];
     
     self.topView = [[UIView alloc]init];

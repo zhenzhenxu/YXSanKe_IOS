@@ -47,10 +47,20 @@ static const NSInteger kNotSelectedTag = -1;
 }
 
 - (void)naviRightAction {
-    LoginViewController *vc = [[LoginViewController alloc]init];
-    [self.navigationController pushViewController:vc animated:YES];
+    if ([UserManager sharedInstance].userModel.isAnonymous) {
+        [UserManager sharedInstance].loginStatus = NO;
+    }else {
+        LoginViewController *vc = [[LoginViewController alloc]init];
+        [self.navigationController pushViewController:vc animated:YES];
+    }
 }
 
+- (void)naviLeftAction {
+    if ([UserManager sharedInstance].userModel.isAnonymous) {
+         [UserManager sharedInstance].loginStatus = NO;
+    }
+    [self.navigationController popViewControllerAnimated:YES];
+}
 - (void)setupUI {
     CollectionViewEqualSpaceFlowLayout *flowLayout = [[CollectionViewEqualSpaceFlowLayout alloc] init];
     flowLayout.scrollDirection = UICollectionViewScrollDirectionVertical;

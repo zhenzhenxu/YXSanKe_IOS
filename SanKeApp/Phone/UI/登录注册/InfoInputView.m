@@ -31,8 +31,7 @@
     self.backgroundColor = [UIColor colorWithHexString:@"ffffff"];
     
     self.clearButton = [[UIButton alloc]init];
-    self.clearButton.backgroundColor = [UIColor redColor];
-    [self.clearButton setBackgroundImage:[UIImage imageNamed:@"删除"] forState:UIControlStateNormal];
+    [self.clearButton setBackgroundImage:[UIImage imageNamed:@"删除-拷贝"] forState:UIControlStateNormal];
     self.clearButton.hidden = YES;
     [self.clearButton addTarget:self action:@selector(clearAction) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:self.clearButton];
@@ -72,53 +71,6 @@
 {
     return [self.textField.text yx_stringByTrimmingCharacters];
 }
-
-//- (NSString *)originalText {
-//    return self.textField.text;
-//}
-//- (void)setPlaceholder:(NSString *)placeholder
-//{
-//    if (![placeholder yx_isValidString]) {
-//        return;
-//    }
-//    NSDictionary *attributes = @{NSForegroundColorAttributeName: [UIColor colorWithHexString:@"c6c9cc"]};
-//    self.textField.attributedPlaceholder = [[NSAttributedString alloc] initWithString:placeholder attributes:attributes];
-//}
-//
-//- (NSString *)placeholder
-//{
-//    return self.textField.placeholder;
-//}
-//
-//- (void)setEnabled:(BOOL)enabled
-//{
-//    self.textField.enabled = enabled;
-//}
-//
-//- (BOOL)enabled
-//{
-//    return self.textField.enabled;
-//}
-//
-//- (void)setKeyboardType:(UIKeyboardType)keyboardType
-//{
-//    self.textField.keyboardType = keyboardType;
-//}
-//
-//- (UIKeyboardType)keyboardType
-//{
-//    return self.textField.keyboardType;
-//}
-//
-//- (void)setSecureTextEntry:(BOOL)secureTextEntry
-//{
-//    self.textField.secureTextEntry = secureTextEntry;
-//}
-//
-//- (BOOL)secureTextEntry
-//{
-//    return self.textField.secureTextEntry;
-//}
 
 #pragma mark -
 
