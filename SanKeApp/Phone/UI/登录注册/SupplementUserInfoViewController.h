@@ -9,6 +9,6 @@
 #import "BaseViewController.h"
 
 @interface SupplementUserInfoViewController : BaseViewController
-@property (nonatomic, strong) NSString *stageID;
-@property (nonatomic, strong) NSString *subjectID;
+@property (nonatomic, copy) NSString *stageID;
+@property (nonatomic, copy) NSString *subjectID;
 @end

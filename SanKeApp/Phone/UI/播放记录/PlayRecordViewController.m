@@ -85,6 +85,10 @@
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     PlayHistoryRequestItem_Data_History *history = self.dataArray[indexPath.row];
+    if ([history.state isEqualToString:@"2"]) {
+        [self showToast:@"该视频不存在"];
+        return;
+    }
     YXFileVideoItem *videoItem = [[YXFileVideoItem alloc] init];
     videoItem.name = history.title;
     videoItem.url = history.videosMp4;

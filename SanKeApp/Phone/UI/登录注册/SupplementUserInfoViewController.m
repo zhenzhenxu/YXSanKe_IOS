@@ -12,10 +12,10 @@
 #import "UserAreaInfoPicker.h"
 #import "UserInfoPicker.h"
 #import "SupplementUserInfo.h"
+#import "MineUserModel.h"
 
 @interface SupplementUserInfoViewController ()<UITableViewDelegate, UITableViewDataSource>
 
-@property (nonatomic, strong) MineUserModel *userModel;
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) UserInfoPickerView *userInfoPickerView;
 @property (nonatomic, strong) UserAreaInfoPicker *areaInfoPicker;
@@ -74,7 +74,6 @@
     confirmButton.titleLabel.font = [UIFont systemFontOfSize:15.0];
     [confirmButton setBackgroundImage:[UIImage yx_imageWithColor:[[UIColor colorWithHexString:@"d65b4b"] colorWithAlphaComponent:0.2]] forState:UIControlStateNormal];
     [confirmButton setTitle:@"确定" forState:UIControlStateNormal];
-    
     [confirmButton setTitleColor:[UIColor colorWithHexString:@"d65b4b"] forState:UIControlStateNormal];
     [confirmButton addTarget:self action:@selector(confirmAction) forControlEvents:UIControlEventTouchUpInside];
     
@@ -102,19 +101,6 @@
     
 }
 
-//- (void)setupInfoPicker {
-//    self.areaInfoPicker = [[UserAreaInfoPicker alloc]init];
-//    self.areaInfoPicker.model = [AreaDataManager areaModel];
-//    
-//    self.roleInfoPicker = [[UserInfoPicker alloc]init];
-//    self.roleInfoPicker.dataArray = [UserInfoDataManger userInfoData].data.role;
-//    
-//    self.genderInfoPicker = [[UserInfoPicker alloc]init];
-//    self.genderInfoPicker.dataArray = [UserInfoDataManger userInfoData].data.gender;
-//    
-//    self.experienceInfoPicker = [[UserInfoPicker alloc]init];
-//    self.experienceInfoPicker.dataArray = [UserInfoDataManger userInfoData].data.experience;
-//}
 #pragma mark - getter
 - (UserAreaInfoPicker *)areaInfoPicker {
     if (_areaInfoPicker == nil) {
@@ -234,7 +220,11 @@
             self.userInfoPickerView.pickerView.dataSource = self.areaInfoPicker;
             self.userInfoPickerView.pickerView.delegate = self.areaInfoPicker;
             [self.userInfoPickerView showPickerView];
-            [self.areaInfoPicker resetSelectedProvinceDataWithUserModel:self.userModel];
+            MineUserModel *model = [[MineUserModel alloc]init];
+            model.province = self.province;
+            model.city = self.city;
+            model.district = self.district;
+            [self.areaInfoPicker resetSelectedProvinceDataWithUserModel:model];
             [self showProvinceListPicker];
         }];
     }else if (indexPath.row == 1) {

@@ -9,5 +9,5 @@
 #import "LoginBaseViewController.h"
 
 @interface ResetPasswordViewController : LoginBaseViewController
-@property (nonatomic, strong) NSString *mobileNumber;
+@property (nonatomic, copy) NSString *mobileNumber;
 @end

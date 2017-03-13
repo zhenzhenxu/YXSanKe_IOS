@@ -44,7 +44,6 @@
     self.view.backgroundColor = [UIColor whiteColor];
     [self setupNavgationBar];
     [self setupUI];
-    //    [self setupInfoPicker];
     [self LoadData];
     // Do any additional setup after loading the view.
 }

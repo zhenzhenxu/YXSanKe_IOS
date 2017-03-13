@@ -49,6 +49,7 @@
 }
 
 - (void)setupUI {
+    [self.window.rootViewController dismissViewControllerAnimated:NO completion:nil];
     if ([UserManager sharedInstance].loginStatus) {
         if (![UserManager sharedInstance].userModel.isTaged) {
             StageSubjectSelectViewController *selectVC = [[StageSubjectSelectViewController alloc]init];
@@ -69,7 +70,9 @@
         LoginViewController *loginVC = [[LoginViewController alloc]init];
         SKNavigationController *loginNavi = [[SKNavigationController alloc]initWithRootViewController:loginVC];
         if (self.window.rootViewController) {
-            [self.window.rootViewController presentViewController:loginNavi animated:YES completion:nil];
+            [self.window.rootViewController presentViewController:loginNavi animated:YES completion:^{
+                self.window.rootViewController.view.hidden = YES;
+            }];
         }else {
             self.window.rootViewController = loginNavi;
         }

@@ -20,6 +20,7 @@
 @property (nonatomic, copy) NSString<Optional> *watchRecord;
 @property (nonatomic, copy) NSString<Optional> *totalTime;
 @property (nonatomic, copy) NSString<Optional> *resourceId;
+@property (nonatomic, copy) NSString<Optional> *state;//1--未删除， 2--删除
 @end
 
 @interface PlayHistoryRequestItem_Data : JSONModel
