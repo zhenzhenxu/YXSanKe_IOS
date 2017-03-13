@@ -70,6 +70,7 @@
     [self.getCodeButton mas_makeConstraints:^(MASConstraintMaker *make) {
         make.right.equalTo(self).offset(-10.0f);
         make.centerY.equalTo(self);
+        make.width.mas_equalTo(76.0f);
     }];
 }
 
