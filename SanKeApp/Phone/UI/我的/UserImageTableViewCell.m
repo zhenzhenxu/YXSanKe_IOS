@@ -58,9 +58,6 @@
     self.editLabel.textColor = [UIColor colorWithHexString:@"4691a6"];
     self.editLabel.text = @"编辑头像";
     self.editLabel.userInteractionEnabled = YES;
-//    UITapGestureRecognizer *tapGestureRecognizer1 = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(editIconAction)];
-//    [self.editLabel addGestureRecognizer:tapGestureRecognizer1];
-//    tapGestureRecognizer1.delegate = self;
     
     [self.contentView addSubview:self.backgroundImageView];
     [self.backgroundImageView addSubview:effectView];
@@ -94,5 +91,22 @@
     _model = model;
     [self.iconImageView sd_setImageWithURL:[NSURL URLWithString:model.portraitUrl] placeholderImage:[UIImage imageNamed:@"大头像"]];
     [self.backgroundImageView sd_setImageWithURL:[NSURL URLWithString:model.portraitUrl] placeholderImage:[UIImage imageNamed:@"大头像"]];
+    if (model.isAnonymous) {
+        self.editLabel.hidden = YES;
+        self.iconImageView.userInteractionEnabled = NO;
+        [self.iconImageView mas_remakeConstraints:^(MASConstraintMaker *make) {
+            make.centerX.equalTo(self.contentView);
+            make.centerY.equalTo(self.contentView);
+            make.size.mas_equalTo(CGSizeMake(73, 73));
+        }];
+    }else {
+        self.editLabel.hidden = NO;
+        self.iconImageView.userInteractionEnabled = YES;
+        [self.iconImageView mas_remakeConstraints:^(MASConstraintMaker *make) {
+            make.centerX.equalTo(self.contentView);
+            make.centerY.equalTo(self.contentView).offset(-12.0f);
+            make.size.mas_equalTo(CGSizeMake(73, 73));
+        }];
+    }
 }
 @end
