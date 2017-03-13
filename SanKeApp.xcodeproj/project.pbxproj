@@ -222,6 +222,7 @@
 		E9355B9B1E7153F7007AE9F0 /* UpdateInfoRequest.json in Resources */ = {isa = PBXBuildFile; fileRef = E9355B9A1E7153F7007AE9F0 /* UpdateInfoRequest.json */; };
 		E9355B9E1E7159AC007AE9F0 /* ChangePasswordRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = E9355B9D1E7159AC007AE9F0 /* ChangePasswordRequest.m */; };
 		E9355BA11E724660007AE9F0 /* AboutHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = E9355BA01E724660007AE9F0 /* AboutHeaderView.m */; };
+		E94423C01E767A1500F8F795 /* HistoryDeleteRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = E94423BF1E767A1500F8F795 /* HistoryDeleteRequest.m */; };
 		E9F4541C1E31B18D00860DC2 /* TouristLoginRequest.json in Resources */ = {isa = PBXBuildFile; fileRef = E9F4541B1E31B18D00860DC2 /* TouristLoginRequest.json */; };
 /* End PBXBuildFile section */
 
@@ -657,6 +658,8 @@
 		E9355B9D1E7159AC007AE9F0 /* ChangePasswordRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChangePasswordRequest.m; sourceTree = "<group>"; };
 		E9355B9F1E724660007AE9F0 /* AboutHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AboutHeaderView.h; sourceTree = "<group>"; };
 		E9355BA01E724660007AE9F0 /* AboutHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AboutHeaderView.m; sourceTree = "<group>"; };
+		E94423BE1E767A1500F8F795 /* HistoryDeleteRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HistoryDeleteRequest.h; sourceTree = "<group>"; };
+		E94423BF1E767A1500F8F795 /* HistoryDeleteRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HistoryDeleteRequest.m; sourceTree = "<group>"; };
 		E9F4541B1E31B18D00860DC2 /* TouristLoginRequest.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = TouristLoginRequest.json; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -1406,6 +1409,8 @@
 				927594E01E2F0C5A00F87838 /* HistoryRecordRequest.h */,
 				927594E11E2F0C5A00F87838 /* HistoryRecordRequest.m */,
 				927594E61E2F0DA000F87838 /* historyRecord_mock.json */,
+				E94423BE1E767A1500F8F795 /* HistoryDeleteRequest.h */,
+				E94423BF1E767A1500F8F795 /* HistoryDeleteRequest.m */,
 			);
 			path = "播放记录";
 			sourceTree = "<group>";
@@ -1963,6 +1968,7 @@
 				30C48A7D1E52E72100CCDBBE /* YXStatisticRequest.m in Sources */,
 				E902E6B11E2BA3BE009441B3 /* SideTableViewCell.m in Sources */,
 				7C1A5FC81E1631DD00832DED /* UnhandledRequestData.m in Sources */,
+				E94423C01E767A1500F8F795 /* HistoryDeleteRequest.m in Sources */,
 				7C1A60021E16396C00832DED /* UIImage+Color.m in Sources */,
 				7C1A5F121E15108F00832DED /* PersistentUrlDownloader.m in Sources */,
 				9241FFEF1E26120A0015B587 /* RadianBaseCell.m in Sources */,

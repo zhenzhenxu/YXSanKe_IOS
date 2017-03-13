@@ -10,10 +10,13 @@
 #import "PlayRecordCell.h"
 #import "PlayHistoryFetch.h"
 #import "YXFileVideoItem.h"
+#import "HistoryDeleteRequest.h"
+
 @interface PlayRecordViewController ()
 @property (nonatomic, strong) PlayHistoryFetch *historyFetch;
 @property (nonatomic, assign) BOOL freshed;
 @property (nonatomic, strong) YXFileVideoItem *videoItem;
+@property (nonatomic, strong) HistoryDeleteRequest *historyDeleteRequest;
 @end
 
 @implementation PlayRecordViewController
@@ -92,4 +95,40 @@
     self.videoItem = videoItem;
     [videoItem browseFile];
 }
+
+- (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath{
+    return UITableViewCellEditingStyleDelete;
+}
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath{
+    DDLogDebug(@"编辑删除");
+    if (self.historyDeleteRequest) {
+        [self.historyDeleteRequest stopRequest];
+    }
+    self.historyDeleteRequest = [[HistoryDeleteRequest alloc] init];
+    PlayHistoryRequestItem_Data_History *history = self.dataArray[indexPath.row];
+    self.historyDeleteRequest.resourceId = history.resourceId;
+    WEAK_SELF
+    [self startLoading];
+    [self.historyDeleteRequest startRequestWithRetClass:[HttpBaseRequestItem class] andCompleteBlock:^(id retItem, NSError *error, BOOL isMock) {
+        STRONG_SELF
+        [self stopLoading];
+        if (error) {
+            [self showToast:error.localizedDescription];
+            return;
+        }
+        [self.dataArray removeObjectAtIndex:indexPath.row];
+        [tableView beginUpdates];
+        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+        [tableView endUpdates];
+        if ([self.dataArray count] == 0) {
+            [self.contentView addSubview:self.emptyView];
+            [self.emptyView mas_remakeConstraints:^(MASConstraintMaker *make) {
+                make.edges.mas_equalTo(0);
+            }];
+        } else {
+            [self.emptyView removeFromSuperview];
+        }
+    }];
+}
+
 @end
