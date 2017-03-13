@@ -12,7 +12,7 @@
 #import "SubmitButton.h"
 #import "ResetPasswordViewController.h"
 
-static NSString *const obtainVerifyCodeType = @"password";
+static NSString *const sendVerifyCodeType = @"password";
 
 @interface ForgotPasswordViewController ()
 @property (nonatomic, strong) UIView *topView;
@@ -149,7 +149,7 @@ static NSString *const obtainVerifyCodeType = @"password";
     WEAK_SELF
     [self startLoading];
     [self.verifyCodeInput startTimer];
-    [LoginDataManager sendVerifyCodeWithMobileNumber:self.phoneNumInput.text type:obtainVerifyCodeType completeBlock:^(NSError *error) {
+    [LoginDataManager sendVerifyCodeWithMobileNumber:self.phoneNumInput.text type:sendVerifyCodeType completeBlock:^(NSError *error) {
         STRONG_SELF
         [self stopLoading];
         if (error) {

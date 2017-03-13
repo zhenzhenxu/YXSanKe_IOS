@@ -44,7 +44,7 @@
     self.view.backgroundColor = [UIColor whiteColor];
     [self setupNavgationBar];
     [self setupUI];
-    [self setupInfoPicker];
+    //    [self setupInfoPicker];
     [self LoadData];
     // Do any additional setup after loading the view.
 }
@@ -71,27 +71,39 @@
         make.top.left.bottom.right.equalTo(self.view);
     }];
     
-    self.userInfoPickerView = [[UserInfoPickerView alloc]init];
-    [self.navigationController.view addSubview:self.userInfoPickerView];
-    [self.userInfoPickerView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.edges.mas_equalTo(0);
-    }];
-    [self.userInfoPickerView hidePickerView];
-    WEAK_SELF
-    [self.userInfoPickerView setConfirmButtonActionBlock:^{
-        STRONG_SELF
-        [self updateSelectedInfo];
-    }];
-    
     self.imagePickerController = [[YXImagePickerController alloc] init];
 }
+#pragma mark - getter
+- (UserInfoPickerView *)userInfoPickerView {
+    if (_userInfoPickerView == nil) {
+        _userInfoPickerView = [[UserInfoPickerView alloc]init];
+        [self.navigationController.view addSubview:_userInfoPickerView];
+        [_userInfoPickerView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.edges.mas_equalTo(0);
+        }];
+        [_userInfoPickerView hidePickerView];
+        WEAK_SELF
+        [_userInfoPickerView setConfirmButtonActionBlock:^{
+            STRONG_SELF
+            [self updateSelectedInfo];
+        }];
+    }
+    return _userInfoPickerView;
+}
+- (UserSubjectStageInfoPicker *)subjectStageInfoPicker {
+    if (_subjectStageInfoPicker == nil) {
+        _subjectStageInfoPicker = [[UserSubjectStageInfoPicker alloc]init];
+        _subjectStageInfoPicker.stageAndSubjectItem = [StageSubjectDataManager dataForStageAndSubject];
+    }
+    return _subjectStageInfoPicker;
+}
 
-- (void)setupInfoPicker {
-    self.subjectStageInfoPicker = [[UserSubjectStageInfoPicker alloc]init];
-    self.subjectStageInfoPicker.stageAndSubjectItem = [StageSubjectDataManager dataForStageAndSubject];
-    
-    self.areaInfoPicker = [[UserAreaInfoPicker alloc]init];
-    self.areaInfoPicker.model = [AreaDataManager areaModel];
+- (UserAreaInfoPicker *)areaInfoPicker {
+    if (_areaInfoPicker == nil) {
+        _areaInfoPicker = [[UserAreaInfoPicker alloc]init];
+        _areaInfoPicker.model = [AreaDataManager areaModel];
+    }
+    return _areaInfoPicker;
 }
 
 - (void)LoadData {
@@ -109,8 +121,7 @@
                 [self showToast:error.localizedDescription];
                 return;
             }
-            [self updateStageSubjectInfo];//接入真实数据后用
-            //            [self updateMockStageSubjectInfo];//mock数据
+            [self updateStageSubjectInfo];
         }];
     }else if ([self.userInfoPickerView.pickerView.dataSource isKindOfClass:[UserAreaInfoPicker class]]) {
         [self.areaInfoPicker updateAreaWithCompleteBlock:^(NSError *error) {
@@ -119,8 +130,7 @@
                 [self showToast:error.localizedDescription];
                 return;
             }
-            [self updateAreaInfo];//待接入真实数据后使用
-            //                        [self updateMockAreaInfo];//mock数据
+            [self updateAreaInfo];
         }];
     }
 }
@@ -145,34 +155,6 @@
     [self.tableView reloadRowsAtIndexPaths:@[areaIndexPath] withRowAnimation:UITableViewRowAnimationNone];
 }
 
-- (void)updateMockStageSubjectInfo {
-    UserSubjectStageSelectedInfoItem *item = [self.subjectStageInfoPicker selectedInfoItem];
-    self.stage = item.stage;
-    self.subject = item.subject;
-    UserInfoTableViewCell *cell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:0]];
-    UserInfoTableViewCell *cell1 = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:2 inSection:0]];
-    [cell configTitle:@"学段" content:self.stage.name];
-    [cell1 configTitle:@"学科" content:self.subject.name];
-}
-
-- (void)updateMockAreaInfo {
-    UserAreaSelectedInfoItem *item = [self.areaInfoPicker selectedInfoItem];
-    self.province = item.province;
-    self.city = item.city;
-    self.district = item.district;
-    UserInfoTableViewCell *cell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:3 inSection:0]];
-    NSString *area = [NSString string];
-    if (!isEmpty(self.province)) {
-        area = self.province.name;
-        if (!isEmpty(self.city)) {
-            area = [area stringByAppendingString:self.city.name];
-            if (!isEmpty(self.district)) {
-                area = [area stringByAppendingString:self.district.name];
-            }
-        }
-    }
-    [cell configTitle:@"地区" content:area];
-}
 #pragma mark - UITableViewDataSource
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     return 4;

@@ -14,7 +14,7 @@
 #import "SubmitButton.h"
 #import "VerifyCodeInputView.h"
 
-static NSString *const obtainVerifyCodeType = @"register";
+static NSString *const sendVerifyCodeType = @"register";
 
 @interface RegisterViewController ()
 @property (nonatomic, strong) UIView *topView;
@@ -170,7 +170,7 @@ static NSString *const obtainVerifyCodeType = @"register";
     [self startLoading];
     [self.verifyCodeInput startTimer];
     DDLogDebug(@"获取验证码");
-    [LoginDataManager sendVerifyCodeWithMobileNumber:self.phoneNumInput.text type:obtainVerifyCodeType completeBlock:^(NSError *error) {
+    [LoginDataManager sendVerifyCodeWithMobileNumber:self.phoneNumInput.text type:sendVerifyCodeType completeBlock:^(NSError *error) {
         STRONG_SELF
         [self stopLoading];
         if (error) {

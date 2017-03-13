@@ -70,7 +70,7 @@
         STRONG_SELF
         [self submitAction];
     }];
-    
+
 }
 
 - (void)setupLayout {
