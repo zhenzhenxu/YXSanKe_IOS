@@ -20,7 +20,10 @@
 @end
 
 @implementation PlayRecordViewController
-
+- (void)dealloc{
+    DDLogError(@"release====>%@,%@",NSStringFromClass([self class]),self.title);
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
 - (void)viewDidLoad {
     PlayHistoryFetch *fetch = [[PlayHistoryFetch alloc] init];
     self.dataFetcher = fetch;

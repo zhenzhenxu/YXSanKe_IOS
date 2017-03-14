@@ -23,7 +23,9 @@
 @implementation CourseViewController
 - (void)dealloc{
     DDLogError(@"release====>%@,%@",NSStringFromClass([self class]),self.title);
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
+
 - (void)viewDidLoad {
     CourseVideoFetch *fetcher = [[CourseVideoFetch alloc]init];
     fetcher.filterID = self.videoItem.filterID;
@@ -39,6 +41,17 @@
     if (first) {
         [YXRecordManager addRecordWithType:YXRecordPlateType];
         first = NO;
+    }
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refresh:) name:kRecordReportSuccessNotification object:nil];
+}
+
+- (void)refresh:(NSNotification *)notification{
+    NSString *resourceID = notification.userInfo[kResourceIDKey];
+    for (CourseVideoRequestItem_Data_Elements *item in self.dataArray) {
+        if ([item.resourceId isEqualToString:resourceID]) {
+            [self startLoading];
+            [self firstPageFetch];
+        }
     }
 }
 
