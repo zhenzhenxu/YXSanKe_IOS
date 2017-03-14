@@ -16,7 +16,10 @@
 
 @interface SupplementUserInfoViewController ()<UITableViewDelegate, UITableViewDataSource>
 
+@property (nonatomic, strong) UIView *contentView;
 @property (nonatomic, strong) UITableView *tableView;
+@property (nonatomic, strong) UIButton *confirmButton;
+@property (nonatomic, strong) UIButton *ignoreButton;
 @property (nonatomic, strong) UserInfoPickerView *userInfoPickerView;
 @property (nonatomic, strong) UserAreaInfoPicker *areaInfoPicker;
 @property (nonatomic, strong) UserInfoPicker *roleInfoPicker;
@@ -39,30 +42,26 @@
     self.title = @"完善个人资料";
     self.view.backgroundColor = [UIColor colorWithHexString:@"e6e6e6"];
     [self setupUI];
-//    [self setupInfoPicker];
+    [self setupLayout];
     
     // Do any additional setup after loading the view.
 }
 
 - (void)setupUI {
+    self.contentView = [[UIView alloc]init];
+    self.contentView.backgroundColor = [UIColor whiteColor];
+    self.contentView.layer.cornerRadius = 2.0f;
+    self.contentView.clipsToBounds = YES;
+    
     self.tableView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-    self.tableView.backgroundColor = [UIColor whiteColor];
     self.tableView.allowsSelection = NO;
     [self.tableView registerClass:[UserInfoTableViewCell class] forCellReuseIdentifier:@"UserInfoTableViewCell"];
-    [self.view addSubview:self.tableView];
     
-    [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.edges.mas_equalTo(UIEdgeInsetsMake(10, 10, 45, 10));
-    }];
     
     self.userInfoPickerView = [[UserInfoPickerView alloc]init];
-    [self.navigationController.view addSubview:self.userInfoPickerView];
-    [self.userInfoPickerView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.edges.mas_equalTo(0);
-    }];
     [self.userInfoPickerView hidePickerView];
     WEAK_SELF
     [self.userInfoPickerView setConfirmButtonActionBlock:^{
@@ -76,6 +75,7 @@
     [confirmButton setTitle:@"确定" forState:UIControlStateNormal];
     [confirmButton setTitleColor:[UIColor colorWithHexString:@"d65b4b"] forState:UIControlStateNormal];
     [confirmButton addTarget:self action:@selector(confirmAction) forControlEvents:UIControlEventTouchUpInside];
+    self.confirmButton = confirmButton;
     
     UIButton *ignoreButton = [[UIButton alloc]init];
     ignoreButton.titleLabel.font = [UIFont systemFontOfSize:15.0];
@@ -83,24 +83,40 @@
     [ignoreButton setTitle:@"忽略" forState:UIControlStateNormal];
     [ignoreButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [ignoreButton addTarget:self action:@selector(ignoreAction) forControlEvents:UIControlEventTouchUpInside];
-    
-    [self.view addSubview:confirmButton];
-    [self.view addSubview:ignoreButton];
-    [confirmButton mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.tableView);
-        make.top.equalTo(self.tableView.mas_bottom);
-        make.bottom.mas_equalTo(-10.0f);
-    }];
-    [ignoreButton mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(confirmButton.mas_right);
-        make.top.equalTo(confirmButton);
-        make.right.equalTo(self.tableView);
-        make.bottom.equalTo(confirmButton);
-        make.width.mas_equalTo(confirmButton.mas_width);
-    }];
+    self.ignoreButton = ignoreButton;
     
 }
 
+- (void)setupLayout {
+    [self.view addSubview:self.contentView];
+    [self.contentView addSubview:self.tableView];
+    [self.navigationController.view addSubview:self.userInfoPickerView];
+    [self.contentView addSubview:self.confirmButton];
+    [self.contentView addSubview:self.ignoreButton];
+    
+    [self.contentView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.mas_equalTo(UIEdgeInsetsMake(10, 10, 10, 10));
+    }];
+    [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.mas_equalTo(UIEdgeInsetsMake(0, 0, 35, 0));
+    }];
+    [self.userInfoPickerView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.mas_equalTo(0);
+    }];
+    [self.confirmButton mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(self.tableView);
+        make.top.equalTo(self.tableView.mas_bottom);
+        make.bottom.equalTo(self.contentView);
+    }];
+    [self.ignoreButton mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(self.confirmButton.mas_right);
+        make.top.equalTo(self.confirmButton);
+        make.right.equalTo(self.tableView);
+        make.bottom.equalTo(self.confirmButton);
+        make.width.mas_equalTo(self.confirmButton.mas_width);
+    }];
+    
+}
 #pragma mark - getter
 - (UserAreaInfoPicker *)areaInfoPicker {
     if (_areaInfoPicker == nil) {

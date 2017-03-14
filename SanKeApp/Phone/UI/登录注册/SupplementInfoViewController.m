@@ -52,6 +52,8 @@ static const NSInteger kNotSelectedTag = -1;
     self.collectionView.delegate = self;
     self.collectionView.dataSource = self;
     self.collectionView.backgroundColor = [UIColor whiteColor];
+    self.collectionView.layer.cornerRadius = 2.0f;
+    self.collectionView.clipsToBounds = YES;
     [self.collectionView registerClass:[StageSubjectCell class] forCellWithReuseIdentifier:@"StageSubjectCell"];
     [self.collectionView registerClass:[StageSubjectHeaderView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"StageSubjectHeaderView"];
     [self.view addSubview:self.collectionView];

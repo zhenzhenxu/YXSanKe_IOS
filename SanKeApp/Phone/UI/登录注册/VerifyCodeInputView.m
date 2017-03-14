@@ -112,7 +112,7 @@
     if (self.seconds <= 0) {
         [self stopTimer];
     } else {
-        [self resetRightButtonText:[NSString stringWithFormat:@"%02zd秒后重试",self.seconds]];
+        [self resetRightButtonText:[NSString stringWithFormat:@"%02zds后重试",self.seconds]];
         self.seconds--;
     }
     [self setRightButtonEnabled:self.seconds <= 0];

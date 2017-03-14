@@ -28,6 +28,8 @@
     
     self.contentView = [[UIView alloc]init];
     self.contentView.backgroundColor = [UIColor whiteColor];
+    self.contentView.layer.cornerRadius = 2.0f;
+    self.contentView.clipsToBounds = YES;
     
     self.iconView = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"哭脸"]];
     
