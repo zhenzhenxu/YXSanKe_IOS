@@ -141,10 +141,6 @@
         SupplementInfoViewController *vc = [[SupplementInfoViewController alloc]init];
         [self.navigationController pushViewController:vc animated:YES];
     }];
-//    //测试
-//    [self showToast:@"注册成功"];
-//    SupplementInfoViewController *vc = [[SupplementInfoViewController alloc]init];
-//    [self.navigationController pushViewController:vc animated:YES];
 }
 
 @end

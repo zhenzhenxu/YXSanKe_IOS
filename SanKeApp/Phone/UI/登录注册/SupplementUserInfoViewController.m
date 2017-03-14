@@ -287,6 +287,7 @@
             [self showToast:error.localizedDescription];
             return;
         }
+        [self reportRecord];
     }];
 }
 
@@ -301,9 +302,17 @@
             [self showToast:error.localizedDescription];
             return;
         }
+        [self reportRecord];
     }];
 }
 
+- (void)reportRecord {
+    YXProblemItem *item = [YXProblemItem new];
+    item.subject = self.stageID;
+    item.grade = self.subjectID;
+    item.type = YXRecordGradeType;
+    [YXRecordManager addRecord:item];
+}
 #pragma mark - InfoPicker
 - (void)showProvinceListPicker {
     UserAreaSelectedInfoItem *item = [self.areaInfoPicker selectedInfoItem];

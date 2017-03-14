@@ -137,7 +137,6 @@
         [UserManager sharedInstance].userModel = model;
         
         YXProblemItem *problemItem = [[YXProblemItem alloc]init];
-        problemItem.subject = model.userID;//?
         problemItem.type = YXRecordRegisterSuccessfulType;
         [YXRecordManager addRecord:problemItem];
         BLOCK_EXEC(completeBlock,nil);
