@@ -132,6 +132,8 @@ static NSString *const sendVerifyCodeType = @"password";
 }
 
 - (void)sendAgainAction {
+    [self.phoneNumInput resignFirstResponder];
+    [self.verifyCodeInput.codeInputView resignFirstResponder];
     [LoginUtils verifyMobileNumberFormat:self.phoneNumInput.text completeBlock:^(BOOL isEmpty, BOOL formatIsCorrect) {
         if (isEmpty) {
             [self showToast:@"请输入您的手机号码"];
@@ -162,6 +164,8 @@ static NSString *const sendVerifyCodeType = @"password";
 }
 
 - (void)submitAction {
+    [self.phoneNumInput resignFirstResponder];
+    [self.verifyCodeInput.codeInputView resignFirstResponder];
     [LoginUtils verifyMobileNumberFormat:self.phoneNumInput.text completeBlock:^(BOOL isEmpty, BOOL formatIsCorrect) {
         if (!formatIsCorrect) {
             [self showToast:@"您输入的手机号码错误"];

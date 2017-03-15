@@ -42,7 +42,7 @@
     self.topView = [[UIView alloc]init];
     self.topView.layer.cornerRadius = 2.0f;
     self.topView.clipsToBounds = YES;
-
+    
     self.userNameInput = [[InfoInputView alloc] init];
     self.userNameInput.textField.keyboardType = UIKeyboardTypeASCIICapable;
     NSDictionary *attributes = @{NSForegroundColorAttributeName: [UIColor colorWithHexString:@"c6c9cc"]};
@@ -70,7 +70,7 @@
         STRONG_SELF
         [self submitAction];
     }];
-
+    
 }
 
 - (void)setupLayout {
@@ -114,6 +114,8 @@
 
 - (void)submitAction
 {
+    [self.userNameInput resignFirstResponder];
+    [self.passwordInput resignFirstResponder];
     NSString *password = self.passwordInput.text;
     if (![self.userNameInput.text yx_isValidString]) {
         [self showToast:@"请输入用户名"];

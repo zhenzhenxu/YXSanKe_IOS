@@ -152,6 +152,8 @@ static NSString *const sendVerifyCodeType = @"register";
 }
 
 - (void)sendAgainAction {
+    [self.phoneNumInput resignFirstResponder];
+    [self.verifyCodeInput.codeInputView resignFirstResponder];
     [LoginUtils verifyMobileNumberFormat:self.phoneNumInput.text completeBlock:^(BOOL isEmpty, BOOL formatIsCorrect) {
         if (isEmpty) {
             [self showToast:@"请输入您的手机号码"];
@@ -183,6 +185,8 @@ static NSString *const sendVerifyCodeType = @"register";
 }
 
 - (void)submitAction {
+    [self.phoneNumInput resignFirstResponder];
+    [self.verifyCodeInput.codeInputView resignFirstResponder];
     [LoginUtils verifyMobileNumberFormat:self.phoneNumInput.text completeBlock:^(BOOL isEmpty, BOOL formatIsCorrect) {
         if (!formatIsCorrect) {
             [self showToast:@"请输入正确的手机号码"];

@@ -87,6 +87,7 @@
 
 - (void)submitAction
 {
+    [self.passwordInput resignFirstResponder];
     NSString *password = self.passwordInput.text;
     [LoginUtils verifyPasswordFormat:password completeBlock:^(BOOL isEmpty, BOOL formatIsCorrect) {
         if (!formatIsCorrect) {
