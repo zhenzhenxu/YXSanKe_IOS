@@ -141,8 +141,8 @@
     NSIndexPath *subjectIndexPath = [NSIndexPath indexPathForRow:2 inSection:0];
     [self.tableView reloadRowsAtIndexPaths:@[stageIndexPath,subjectIndexPath] withRowAnimation:UITableViewRowAnimationNone];
     YXProblemItem *item = [YXProblemItem new];
-    item.subject = self.userModel.stage.stageID;
-    item.grade = self.userModel.subject.subjectID;
+    item.subject = self.userModel.subject.subjectID;
+    item.grade = self.userModel.stage.stageID;
     item.type = YXRecordGradeChangeType;
     [YXRecordManager addRecord:item];
 }

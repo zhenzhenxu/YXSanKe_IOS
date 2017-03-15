@@ -324,8 +324,8 @@
 
 - (void)reportRecord {
     YXProblemItem *item = [YXProblemItem new];
-    item.subject = self.stageID;
-    item.grade = self.subjectID;
+    item.subject = self.subjectID;
+    item.grade = self.stageID;
     item.type = YXRecordGradeType;
     [YXRecordManager addRecord:item];
 }

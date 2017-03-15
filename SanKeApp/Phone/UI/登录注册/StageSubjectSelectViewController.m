@@ -127,8 +127,8 @@ static const NSInteger kNotSelectedTag = -1;
     FetchStageSubjectRequestItem_stage *stage = self.item.data.stages[self.stageSelectedIndex];
     FetchStageSubjectRequestItem_subject *subject = stage.subjects[self.subjectSelectedIndex];
     YXProblemItem *item = [YXProblemItem new];
-    item.subject = stage.stageID;
-    item.grade = subject.subjectID;
+    item.subject = subject.subjectID;
+    item.grade = stage.stageID;
     item.type = YXRecordGradeType;
     [YXRecordManager addRecord:item];
     WEAK_SELF

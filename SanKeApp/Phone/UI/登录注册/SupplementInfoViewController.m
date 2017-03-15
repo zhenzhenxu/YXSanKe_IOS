@@ -62,35 +62,6 @@ static const NSInteger kNotSelectedTag = -1;
     }];
 }
 
-#pragma mark -  Button Actions
-- (void)resetAction {
-    self.stageSelectedIndex = kNotSelectedTag;
-    self.subjectSelectedIndex = kNotSelectedTag;
-    [self.collectionView reloadData];
-}
-
-- (void)doneAction {
-    if (self.stageSelectedIndex == kNotSelectedTag || self.subjectSelectedIndex == kNotSelectedTag) {
-        [self showToast:@"请选择学段和学科"];
-        return;
-    }
-    FetchStageSubjectRequestItem_stage *stage = self.item.data.stages[self.stageSelectedIndex];
-    FetchStageSubjectRequestItem_subject *subject = stage.subjects[self.subjectSelectedIndex];
-    YXProblemItem *item = [YXProblemItem new];
-    item.subject = stage.stageID;
-    item.grade = subject.subjectID;
-    item.type = YXRecordGradeType;
-    [YXRecordManager addRecord:item];
-    WEAK_SELF
-    [MineDataManager updateStage:stage.stageID subject:subject.subjectID completeBlock:^(NSError *error) {
-        STRONG_SELF
-        if (error) {
-            [self showToast:error.localizedDescription];
-            return;
-        }
-    }];
-}
-
 #pragma mark - UICollectionViewDataSource
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView{
     if (self.stageSelectedIndex == kNotSelectedTag) {
