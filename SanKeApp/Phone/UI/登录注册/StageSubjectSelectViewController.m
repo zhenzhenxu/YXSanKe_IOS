@@ -47,12 +47,7 @@ static const NSInteger kNotSelectedTag = -1;
 }
 
 - (void)naviRightAction {
-    if ([UserManager sharedInstance].userModel.isAnonymous) {
-        [UserManager sharedInstance].loginStatus = NO;
-    }else {
-        LoginViewController *vc = [[LoginViewController alloc]init];
-        [self.navigationController pushViewController:vc animated:YES];
-    }
+    [UserManager sharedInstance].loginStatus = NO;
 }
 
 - (void)naviLeftAction {

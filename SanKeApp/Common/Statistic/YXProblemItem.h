@@ -10,11 +10,11 @@
 
 @interface YXProblemItem : YXRecordBase
 
-@property (nonatomic, copy) NSString *objType;
-@property (nonatomic, copy) NSString *objId;
-@property (nonatomic, copy) NSString *objName;
+@property (nonatomic, copy) NSString<Optional> *objType;
+@property (nonatomic, copy) NSString<Optional> *objId;
+@property (nonatomic, copy) NSString<Optional> *objName;
 
-@property (nonatomic, copy) NSString *subject;
-@property (nonatomic, copy) NSString *grade;
+@property (nonatomic, copy) NSString<Optional> *subject;
+@property (nonatomic, copy) NSString<Optional> *grade;
 
 @end

@@ -156,9 +156,6 @@
             BLOCK_EXEC(completeBlock,error);
             return;
         }
-        HttpBaseRequestItem *item = retItem;
-        UserModel *model = [UserModel modelFromRawData:item.info];
-        [UserManager sharedInstance].userModel = model;
         BLOCK_EXEC(completeBlock,nil);
     }];
 }
