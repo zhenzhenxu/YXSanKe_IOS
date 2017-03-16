@@ -64,7 +64,7 @@
     self.passwordView.textField.secureTextEntry = YES;
     
     self.usernameView = [[LoginInputView alloc]init];
-    NSAttributedString *usernamePlaceholder = [[NSMutableAttributedString alloc]initWithString:@"用户名／手机号" attributes:@{NSForegroundColorAttributeName:[UIColor whiteColor]}];
+    NSAttributedString *usernamePlaceholder = [[NSMutableAttributedString alloc]initWithString:@"请输入手机号" attributes:@{NSForegroundColorAttributeName:[UIColor whiteColor]}];
     self.usernameView.textField.attributedPlaceholder = usernamePlaceholder;
     
     self.logoView = [[LoginLogoView alloc]init];
@@ -143,8 +143,11 @@
 }
 - (void)startLogin {
     DDLogWarn(@"用户名：%@, 密码：%@",self.usernameView.text,self.passwordView.text);
+    [self.usernameView.textField resignFirstResponder];
+    [self.passwordView.textField resignFirstResponder];
+    
     if (isEmpty(self.usernameView.text)) {
-        [self showToast:@"请输入用户名"];
+        [self showToast:@"请输入手机号"];
         return;
     }
     if (isEmpty(self.passwordView.text)) {

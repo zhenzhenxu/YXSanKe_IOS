@@ -111,11 +111,11 @@
     YXProblemItem *item = [[YXProblemItem alloc]init];
     item.grade = [UserManager sharedInstance].userModel.stageID;
     item.subject = [UserManager sharedInstance].userModel.subjectID;
-    item.section_id = self.videoItem.catID;
-    item.edition_id = self.recordItem.edition_id;
-    item.volume_id = self.recordItem.volume_id;
-    item.unit_id = self.recordItem.unit_id;
-    item.course_id = self.recordItem.course_id;
+    item.section_id = self.videoItem.catID ;
+    item.edition_id = self.recordItem.edition_id ?self.recordItem.edition_id : [NSString string];
+    item.volume_id = self.recordItem.volume_id ? self.recordItem.volume_id :[NSString string];
+    item.unit_id = self.recordItem.unit_id ? self.recordItem.unit_id : [NSString string];
+    item.course_id = self.recordItem.course_id ? self.recordItem.course_id : [NSString string];
     item.object_id = videoItem.resourceID;
     item.object_name = videoItem.name;
     item.type = YXRecordClickType;

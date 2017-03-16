@@ -120,10 +120,6 @@ static const NSInteger kNotSelectedTag = -1;
 }
 
 - (void)doneAction {
-//    if (self.firstLevelSelectedIndex == kNotSelectedTag) {
-//        DDLogError(@"您尚未进行任何选择");
-//        return;
-//    }
     ChannelTabFilterRequestItem_filter *first;
     if (self.firstLevelSelectedIndex == kNotSelectedTag) {
         first = nil;
@@ -148,15 +144,19 @@ static const NSInteger kNotSelectedTag = -1;
     item.volume_id = second.filterID;
     item.unit_id = third.filterID;
     item.course_id = forth.filterID;
-    
     BLOCK_EXEC(self.completeBlock,item);
     
-    item.grade = [UserManager sharedInstance].userModel.stageID;
-    item.subject = [UserManager sharedInstance].userModel.subjectID;
-    item.section_id = self.sectionId;
-    item.objType = @"filter";
-    item.type = YXRecordClickType;
-    [YXRecordManager addRecord:item];
+    YXProblemItem *recordItem = [[YXProblemItem alloc]init];
+    recordItem.edition_id = first.filterID ? first.filterID : [NSString string];
+    recordItem.volume_id = second.filterID ? second.filterID : [NSString string];
+    recordItem.unit_id = third.filterID ? third.filterID : [NSString string];
+    recordItem.course_id = forth.filterID ? forth.filterID : [NSString string];
+    recordItem.grade = [UserManager sharedInstance].userModel.stageID;
+    recordItem.subject = [UserManager sharedInstance].userModel.subjectID;
+    recordItem.section_id = self.sectionId;
+    recordItem.objType = @"filter";
+    recordItem.type = YXRecordClickType;
+    [YXRecordManager addRecord:recordItem];
 }
 
 #pragma mark - UICollectionViewDataSource
