@@ -34,7 +34,8 @@ const CGFloat kSideLeftDrawerWidth = 600.0f;
     self.iconImageView = [[UIImageView alloc] init];
     self.iconImageView.image = [UIImage imageNamed:@"大头像"];
     self.iconImageView.layer.cornerRadius = 20.0f;
-    self.iconImageView.layer.masksToBounds = YES;
+    self.iconImageView.clipsToBounds = YES;
+    self.iconImageView.contentMode = UIViewContentModeScaleAspectFill;
     
     self.nameLabel = [[UILabel alloc] init];
     self.nameLabel.font = [UIFont boldSystemFontOfSize:15];
