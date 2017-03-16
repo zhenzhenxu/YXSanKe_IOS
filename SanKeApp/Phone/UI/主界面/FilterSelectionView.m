@@ -142,48 +142,21 @@ static const NSInteger kNotSelectedTag = -1;
             }
         }
     }
-    NSString *f1 = first? first.filterID:@"0";
-    NSString *f2 = second? second.filterID:@"0";
-    NSString *f3 = third? third.filterID:@"0";
-    NSString *f4 = forth? forth.filterID:@"0";
-    NSArray *array = @[f1,f2,f3,f4];
-    NSString *filterString = [array componentsJoinedByString:@","];
-    BLOCK_EXEC(self.completeBlock,filterString);
     
-    NSMutableString *filter = [NSMutableString new];
-    if (first.filterID.length) {
-        [filter appendString:first.filterID];
-    }
-    if (second.filterID.length) {
-        [filter appendFormat:@",%@", second.filterID];
-    }
-    if (third.filterID.length) {
-        [filter appendFormat:@",%@", third.filterID];
-    }
-    if (forth.filterID.length) {
-        [filter appendFormat:@",%@", forth.filterID];
-    }
-    if (filter.length) {
-        NSMutableString *filterName = [NSMutableString new];
-        if (first.name.length) {
-            [filterName appendString:first.name];
-        }
-        if (second.name.length) {
-            [filterName appendFormat:@",%@", second.name];
-        }
-        if (third.name.length) {
-            [filterName appendFormat:@",%@", third.name];
-        }
-        if (forth.name.length) {
-            [filterName appendFormat:@",%@", forth.name];
-        }
-        YXProblemItem *item = [YXProblemItem new];
-        item.objType = @"unit";
-        item.type = YXRecordClickType;
-        item.objId = filter;
-        item.objName = [NSString stringWithFormat:@"%@,%@,%@,%@", first.name, second.name, third.name,forth.name];
-        [YXRecordManager addRecord:item];
-    }
+    YXProblemItem *item = [[YXProblemItem alloc]init];
+    item.edition_id = first.filterID;
+    item.volume_id = second.filterID;
+    item.unit_id = third.filterID;
+    item.course_id = forth.filterID;
+    
+    BLOCK_EXEC(self.completeBlock,item);
+    
+    item.grade = [UserManager sharedInstance].userModel.stageID;
+    item.subject = [UserManager sharedInstance].userModel.subjectID;
+    item.section_id = self.sectionId;
+    item.objType = @"filter";
+    item.type = YXRecordClickType;
+    [YXRecordManager addRecord:item];
 }
 
 #pragma mark - UICollectionViewDataSource

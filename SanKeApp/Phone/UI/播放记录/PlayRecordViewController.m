@@ -101,6 +101,20 @@
     videoItem.baseViewController = self;
     self.videoItem = videoItem;
     [videoItem browseFile];
+    
+    YXProblemItem *item = [[YXProblemItem alloc]init];
+    item.grade = [UserManager sharedInstance].userModel.stageID;
+    item.subject = [UserManager sharedInstance].userModel.subjectID;
+    item.section_id = [NSString string];
+    item.edition_id = [NSString string];
+    item.volume_id = [NSString string];
+    item.unit_id = [NSString string];
+    item.course_id = [NSString string];
+    item.object_id = videoItem.resourceID;
+    item.object_name = videoItem.name;
+    item.type = YXRecordClickType;
+    item.objType = @"video";
+    [YXRecordManager addRecord:item];
 }
 
 - (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath{

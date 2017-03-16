@@ -70,13 +70,7 @@
     vc.delegate = self;
     vc.exitDelegate = self;
     [[self.baseViewController visibleViewController] presentViewController:vc animated:YES completion:nil];
-    
-    YXProblemItem *item = [YXProblemItem new];
-    item.objType = @"video";
-    item.objId = self.resourceID;
-    item.objName = self.name;
-    item.type = YXRecordClickType;
-    [YXRecordManager addRecord:item];
+
 }
 
 #pragma mark - YXPlayProgressDelegate

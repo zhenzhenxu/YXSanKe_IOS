@@ -11,10 +11,13 @@
 @interface YXProblemItem : YXRecordBase
 
 @property (nonatomic, copy) NSString<Optional> *objType;
-@property (nonatomic, copy) NSString<Optional> *objId;
-@property (nonatomic, copy) NSString<Optional> *objName;
-
-@property (nonatomic, copy) NSString<Optional> *subject;
-@property (nonatomic, copy) NSString<Optional> *grade;
-
+@property (nonatomic, copy) NSString<Optional> *grade;//学段
+@property (nonatomic, copy) NSString<Optional> *subject;//学科
+@property (nonatomic, copy) NSString<Optional> *section_id;//板块id
+@property (nonatomic, copy) NSString<Optional> *edition_id;//版本
+@property (nonatomic, copy) NSString<Optional> *volume_id;//年级&册
+@property (nonatomic, copy) NSString<Optional> *unit_id;//单元
+@property (nonatomic, copy) NSString<Optional> *course_id;//课
+@property (nonatomic, copy) NSString<Optional> *object_id;
+@property (nonatomic, copy) NSString<Optional> *object_name;
 @end

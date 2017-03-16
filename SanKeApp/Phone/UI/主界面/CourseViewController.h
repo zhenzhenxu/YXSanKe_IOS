@@ -22,5 +22,7 @@
 @property (nonatomic, strong) FilterSelectionView *selectionView;
 @property (nonatomic, strong) ProjectNavRightView *projectNavRightView;
 
+@property (nonatomic, strong) YXProblemItem *recordItem;
+
 - (void)showFilterSelectionView;
 @end

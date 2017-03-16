@@ -127,8 +127,10 @@ static const CGFloat margin = 10;
 - (void)recordUp{
     YXProblemItem *item = [YXProblemItem new];
     item.objType = @"section";
-    item.objId = self.chooseViewController.videoItem.catID;
-    item.objName = self.chooseViewController.videoItem.name;
+    item.grade = [UserManager sharedInstance].userModel.stageID;
+    item.subject = [UserManager sharedInstance].userModel.subjectID;
+    item.section_id = self.chooseViewController.videoItem.catID;
+    item.volume_id = self.chooseViewController.recordItem.volume_id ?self.chooseViewController.recordItem.volume_id : [NSString string];
     item.type = YXRecordClickType;
     [YXRecordManager addRecord:item];
 }

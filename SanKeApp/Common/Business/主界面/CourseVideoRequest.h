@@ -18,7 +18,7 @@
 @property (nonatomic ,copy) NSString<Optional> *icon;
 @property (nonatomic ,copy) NSString<Optional> *videos;
 @property (nonatomic ,copy) NSString<Optional> *videosMp4;
-@property (nonatomic ,copy) NSString<Optional> *timeWatched;
+@property (nonatomic ,copy) NSString<Optional> *watchRecord;
 @property (nonatomic ,copy) NSString<Optional> *totalTime;
 @property (nonatomic ,copy) NSString<Optional> *catid;
 @property (nonatomic ,copy) NSString<Optional> *thumb;

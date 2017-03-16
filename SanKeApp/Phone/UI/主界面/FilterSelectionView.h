@@ -10,7 +10,8 @@
 #import "ChannelTabFilterRequest.h"
 
 @interface FilterSelectionView : UIView
+@property (nonatomic, copy) NSString *sectionId;
 @property (nonatomic, strong) ChannelTabFilterRequestItem_data *data;
-@property (nonatomic, copy) void(^completeBlock)(NSString *filterString);
+@property (nonatomic, copy) void(^completeBlock)(YXProblemItem *recordItem);
 - (void)cancelReset;
 @end

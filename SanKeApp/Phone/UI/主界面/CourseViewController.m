@@ -18,6 +18,7 @@
 @interface CourseViewController ()
 @property (nonatomic, strong) ChannelTabFilterRequest *selectionRequest;
 @property (nonatomic, strong) YXFileVideoItem *fileVideoItem;
+
 @end
 
 @implementation CourseViewController
@@ -89,15 +90,6 @@
     }
     CourseVideoRequestItem_Data_Elements *element = self.dataArray[indexPath.row];
     cell.element = element;
-    //V1.1产品去掉此功能
-//    WEAK_SELF
-//    [cell setClickCourseTitleBlock:^{
-//        STRONG_SELF
-//        AloneCourseViewController *VC = [[AloneCourseViewController alloc] init];
-//        VC.title = element.title;
-//        VC.catID = element.catid;
-//        [self.navigationController pushViewController:VC animated:YES];
-//    }];
     return cell;
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -109,11 +101,26 @@
     videoItem.name = element.title;
     videoItem.url = element.videosMp4;
     videoItem.baseViewController = self;
-    videoItem.record = element.timeWatched;
+    videoItem.record = element.watchRecord;
     videoItem.duration = element.totalTime;
     videoItem.resourceID = element.resourceId;
     [videoItem browseFile];
     self.fileVideoItem = videoItem;
+    
+    
+    YXProblemItem *item = [[YXProblemItem alloc]init];
+    item.grade = [UserManager sharedInstance].userModel.stageID;
+    item.subject = [UserManager sharedInstance].userModel.subjectID;
+    item.section_id = self.videoItem.catID;
+    item.edition_id = self.recordItem.edition_id;
+    item.volume_id = self.recordItem.volume_id;
+    item.unit_id = self.recordItem.unit_id;
+    item.course_id = self.recordItem.course_id;
+    item.object_id = videoItem.resourceID;
+    item.object_name = videoItem.name;
+    item.type = YXRecordClickType;
+    item.objType = @"video";
+    [YXRecordManager addRecord:item];
 }
 
 - (void)showFilterSelectionView {
@@ -159,11 +166,21 @@
             [view layoutIfNeeded];
         }];
     }];
-    [selectionView setCompleteBlock:^(NSString *filterId) {
+    [selectionView setCompleteBlock:^(YXProblemItem *item) {
         STRONG_SELF
         [alert hide];
         CourseVideoFetch *fetcher = (CourseVideoFetch *)self.dataFetcher;
-        fetcher.filterID = filterId;
+        self.recordItem = item;
+        
+        NSString *f1 = item.edition_id? item.edition_id:@"0";
+        NSArray *arr = [item.volume_id componentsSeparatedByString:@","];
+        NSString *f2 = arr.lastObject? arr.lastObject:@"0";
+        NSString *f3 = item.unit_id? item.unit_id:@"0";
+        NSString *f4 = item.course_id? item.course_id:@"0";
+
+        NSArray *array = @[f1,f2,f3,f4];
+        NSString *filterString = [array componentsJoinedByString:@","];
+        fetcher.filterID = filterString;
         fetcher.fromType = 1;
         [self startLoading];
         [self firstPageFetch];
@@ -185,6 +202,7 @@
         ChannelTabFilterRequestItem *item = retItem;
         self.selectionView = [[FilterSelectionView alloc]init];
         self.selectionView.data = item.data;
+        self.selectionView.sectionId = self.videoItem.catID;
         [self showSelectionView];
     }];
 }

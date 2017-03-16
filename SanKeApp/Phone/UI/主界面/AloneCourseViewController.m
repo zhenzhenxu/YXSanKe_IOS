@@ -28,12 +28,12 @@
     [super viewDidLoad];
     [self setupUI];
     self.tableView.backgroundColor = [UIColor colorWithHexString:@"e6e6e6"];
-    YXProblemItem *item = [YXProblemItem new];
-    item.objType = @"course";
-    item.objId = self.catID;
-    item.type = YXRecordClickType;
-    item.objName = self.title;
-    [YXRecordManager addRecord:item];
+//    YXProblemItem *item = [YXProblemItem new];
+//    item.objType = @"course";
+//    item.objId = self.catID;
+//    item.type = YXRecordClickType;
+//    item.objName = self.title;
+//    [YXRecordManager addRecord:item];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -76,7 +76,7 @@
     videoItem.name = element.title;
     videoItem.url = element.videosMp4;
     videoItem.baseViewController = self;
-    videoItem.record = element.timeWatched;
+    videoItem.record = element.watchRecord;
     videoItem.duration = element.totalTime;
     videoItem.resourceID = element.resourceId;
     self.videoItem = videoItem;
