@@ -173,15 +173,15 @@ static const NSInteger kNotSelectedTag = -1;
     }
     ChannelTabFilterRequestItem_filter *second = first.subFilters[self.secondLevelSelectedIndex];
     if (self.thirdLevelSelectedIndex == kNotSelectedTag) {
-    if (second.subFilters.count > 0) {
-        return 3;
-    }
-    return 2;
-    }
-    ChannelTabFilterRequestItem_filter *third = first.subFilters[self.secondLevelSelectedIndex];
-        if (third.subFilters.count > 0) {
-            return 4;
+        if (second.subFilters.count > 0) {
+            return 3;
         }
+        return 2;
+    }
+    ChannelTabFilterRequestItem_filter *third = second.subFilters[self.thirdLevelSelectedIndex];
+    if (third.subFilters.count > 0) {
+        return 4;
+    }
     return 3;
 }
 
@@ -199,7 +199,7 @@ static const NSInteger kNotSelectedTag = -1;
     }
     ChannelTabFilterRequestItem_filter *thirdItem = secondItem.subFilters[self.thirdLevelSelectedIndex];
     return thirdItem.subFilters.count;
-
+    
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
