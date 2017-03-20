@@ -71,7 +71,7 @@
     [button sd_setImageWithURL:[NSURL URLWithString:icon] forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"大头像"]];
     [[[NSNotificationCenter defaultCenter]rac_addObserverForName:kUpdateHeadPortraitSuccessNotification object:nil]subscribeNext:^(id x) {
         DDLogDebug(@"主界面修改头像");
-        [button sd_setImageWithURL:[NSURL URLWithString:[UserManager sharedInstance].userModel.portraitUrl] forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"默认用户头像"]];
+        [button sd_setImageWithURL:[NSURL URLWithString:[UserManager sharedInstance].userModel.portraitUrl] forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"大头像"]];
     }];
     [[button rac_signalForControlEvents:UIControlEventTouchUpInside]subscribeNext:^(id x) {
         [YXDrawerController showDrawer];
