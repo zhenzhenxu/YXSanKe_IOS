@@ -12,6 +12,8 @@
 #import "YXFileVideoItem.h"
 #import "HistoryDeleteRequest.h"
 
+NSString * const kRecordDeletNotification = @"kRecordDeletNotification";
+
 @interface PlayRecordViewController ()
 @property (nonatomic, strong) PlayHistoryFetch *historyFetch;
 @property (nonatomic, assign) BOOL freshed;
@@ -28,6 +30,14 @@
     PlayHistoryFetch *fetch = [[PlayHistoryFetch alloc] init];
     self.dataFetcher = fetch;
     [super viewDidLoad];
+    WEAK_SELF
+    fetch.ListCompleteBlock = ^(){
+        STRONG_SELF
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            [self showToast:@"暂无播放记录"];
+        });
+    };
+
     self.title = @"播放记录";
     [self setupUI];
     self.tableView.backgroundColor = [UIColor colorWithHexString:@"e6e6e6"];
@@ -137,11 +147,14 @@
             [self showToast:error.localizedDescription];
             return;
         }
+        NSString *resourceID = self.historyDeleteRequest.resourceId;
+          [[NSNotificationCenter defaultCenter] postNotificationName:kRecordDeletNotification object:nil userInfo:@{kResourceIDKey:resourceID}];
         [self.dataArray removeObjectAtIndex:indexPath.row];
         [tableView beginUpdates];
         [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
         [tableView endUpdates];
         if ([self.dataArray count] == 0) {
+            [self showToast:@"暂无播放记录"];
             [self.contentView addSubview:self.emptyView];
             [self.emptyView mas_remakeConstraints:^(MASConstraintMaker *make) {
                 make.edges.mas_equalTo(0);

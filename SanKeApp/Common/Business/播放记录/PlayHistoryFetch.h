@@ -9,4 +9,7 @@
 #import "PagedListFetcherBase.h"
 
 @interface PlayHistoryFetch : PagedListFetcherBase
+
+@property (nonatomic, copy) void(^ListCompleteBlock)();
+
 @end

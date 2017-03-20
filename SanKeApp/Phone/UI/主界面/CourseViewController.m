@@ -13,6 +13,8 @@
 #import "CourseVideoFetch.h"
 #import "FilterSelectionView.h"
 #import "YXRecordManager.h"
+#import "PlayRecordViewController.h"
+
 @implementation CourseVideoItem
 @end
 @interface CourseViewController ()
@@ -44,6 +46,8 @@
         first = NO;
     }
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refresh:) name:kRecordReportSuccessNotification object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refresh:) name:kRecordDeletNotification object:nil];
 }
 
 - (void)refresh:(NSNotification *)notification{
@@ -85,7 +89,7 @@
         } else if (indexPath.row < self.dataArray.count - 1) {
             cell.cellStatus = RadianBaseCellStatus_Middle;
         } else {
-           cell.cellStatus = RadianBaseCellStatus_Bottom;
+            cell.cellStatus = RadianBaseCellStatus_Bottom;
         }
     }
     CourseVideoRequestItem_Data_Elements *element = self.dataArray[indexPath.row];
@@ -177,7 +181,7 @@
         NSString *f2 = arr.lastObject? arr.lastObject:@"0";
         NSString *f3 = item.unit_id? item.unit_id:@"0";
         NSString *f4 = item.course_id? item.course_id:@"0";
-
+        
         NSArray *array = @[f1,f2,f3,f4];
         NSString *filterString = [array componentsJoinedByString:@","];
         fetcher.filterID = filterString;

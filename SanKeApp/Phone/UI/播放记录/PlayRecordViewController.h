@@ -8,6 +8,8 @@
 
 #import "PagedListViewControllerBase.h"
 
+extern NSString * const kRecordDeletNotification;
+
 @interface PlayRecordViewController : PagedListViewControllerBase
 
 @end

@@ -25,6 +25,9 @@
             return;
         }
         PlayHistoryRequestItem *item = retItem;
+        if (item.data.history.count == 0) {
+            BLOCK_EXEC(self.ListCompleteBlock,nil);
+        }
         BLOCK_EXEC(aCompleteBlock,item.data.moreData.intValue,item.data.history,nil);
     }];
 }
