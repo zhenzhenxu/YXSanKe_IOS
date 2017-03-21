@@ -41,10 +41,19 @@
     [super viewDidLoad];
     self.title = @"完善个人资料";
     self.view.backgroundColor = [UIColor colorWithHexString:@"e6e6e6"];
+    [self setupNavgationBar];
     [self setupUI];
     [self setupLayout];
     
     // Do any additional setup after loading the view.
+}
+
+- (void)setupNavgationBar {
+    UINavigationBar *navigationBar = self.navigationController.navigationBar;
+    [navigationBar setBackgroundImage:[UIImage yx_imageWithColor:[UIColor colorWithHexString:@"ffffff"]]
+                       forBarPosition:UIBarPositionAny
+                           barMetrics:UIBarMetricsDefault];
+    [navigationBar setShadowImage:[UIImage new]];
 }
 
 - (void)setupUI {
