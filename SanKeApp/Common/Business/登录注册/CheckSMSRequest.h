@@ -11,4 +11,5 @@
 @interface CheckSMSRequest : YXGetRequest
 @property (nonatomic, strong) NSString *mobile;
 @property (nonatomic, strong) NSString *code;
+@property (nonatomic, strong) NSString *from;
 @end

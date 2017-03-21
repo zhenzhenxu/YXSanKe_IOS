@@ -101,12 +101,13 @@
     }];
 }
 
-+(void)checkVerifyCodeWithMobileNumber:(NSString *)mobileNumber verifyCode:(NSString *)verifyCode completeBlock:(void (^)(NSError *))completeBlock {
++ (void)checkVerifyCodeWithMobileNumber:(NSString *)mobileNumber verifyCode:(NSString *)verifyCode type:(NSString *)type completeBlock:(void (^)(NSError *))completeBlock {
     LoginDataManager *manager = [LoginDataManager sharedInstance];
     [manager.checkSMSRequest stopRequest];
     manager.checkSMSRequest = [[CheckSMSRequest alloc]init];
     manager.checkSMSRequest.mobile = mobileNumber;
     manager.checkSMSRequest.code = verifyCode;
+    manager.checkSMSRequest.from = type;
     WEAK_SELF
     [manager.checkSMSRequest startRequestWithRetClass:[HttpBaseRequestItem class] andCompleteBlock:^(id retItem, NSError *error, BOOL isMock) {
         STRONG_SELF

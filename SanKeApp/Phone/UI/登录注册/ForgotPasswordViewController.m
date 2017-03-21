@@ -12,7 +12,7 @@
 #import "SubmitButton.h"
 #import "ResetPasswordViewController.h"
 
-static NSString *const sendVerifyCodeType = @"password";
+static NSString *const kVerifyCodeType = @"password";
 
 @interface ForgotPasswordViewController ()
 @property (nonatomic, strong) UIView *topView;
@@ -151,7 +151,7 @@ static NSString *const sendVerifyCodeType = @"password";
     WEAK_SELF
     [self startLoading];
     [self.verifyCodeInput startTimer];
-    [LoginDataManager sendVerifyCodeWithMobileNumber:self.phoneNumInput.text type:sendVerifyCodeType completeBlock:^(NSError *error) {
+    [LoginDataManager sendVerifyCodeWithMobileNumber:self.phoneNumInput.text type:kVerifyCodeType completeBlock:^(NSError *error) {
         STRONG_SELF
         [self stopLoading];
         if (error) {
@@ -178,7 +178,7 @@ static NSString *const sendVerifyCodeType = @"password";
 - (void)checkVerifyCode {
     WEAK_SELF
     [self startLoading];
-    [LoginDataManager checkVerifyCodeWithMobileNumber:self.phoneNumInput.text verifyCode:self.verifyCodeInput.codeInputView.text completeBlock:^(NSError *error) {
+    [LoginDataManager checkVerifyCodeWithMobileNumber:self.phoneNumInput.text verifyCode:self.verifyCodeInput.codeInputView.text type:kVerifyCodeType completeBlock:^(NSError *error) {
         STRONG_SELF
         [self stopLoading];
         if (error) {

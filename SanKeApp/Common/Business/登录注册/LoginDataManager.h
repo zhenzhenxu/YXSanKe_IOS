@@ -24,9 +24,17 @@
 + (void)sendVerifyCodeWithMobileNumber:(NSString *)mobileNumber
                                   type:(NSString *)type
                          completeBlock:(void(^)(NSError *error))completeBlock;
-//验证短信验证码
+/**
+ 验证短信验证码
+
+ @param mobileNumber 手机号
+ @param verifyCode  验证码
+ @param type 需要验证的验证码的来源(注册：register ;忘记密码：password)
+ @param completeBlock 回调
+ */
 + (void)checkVerifyCodeWithMobileNumber:(NSString *)mobileNumber
                              verifyCode:(NSString *)verifyCode
+                                   type:(NSString *)type
                           completeBlock:(void(^)(NSError *error))completeBlock;
 //注册
 + (void)registerWithUserName:(NSString *)userName
@@ -35,8 +43,8 @@
                completeBlock:(void(^)(NSError *error))completeBlock;
 //忘记密码重置
 + (void)changePasswordWithMobileNumber:(NSString *)mobileNumber
-                             password:(NSString *)password
-                        completeBlock:(void(^)(NSError *error))completeBlock;
+                              password:(NSString *)password
+                         completeBlock:(void(^)(NSError *error))completeBlock;
 
 
 @end
