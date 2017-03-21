@@ -33,7 +33,6 @@
     // Do any additional setup after loading the view.
    
     [self setupUI];
-    [self setupLeftNavView];
     [self setupRightNavView];
     [self requestForChannelTab];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(requestForChannelTab) name:kStageSubjectDidChangeNotification object:nil];
@@ -61,24 +60,6 @@
     self.dataErrorView = [[DataErrorView alloc]init];
 }
 
-- (void)setupLeftNavView {
-    UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
-    button.frame = CGRectMake(0, 0, 32.0f, 32.0f);
-    button.layer.cornerRadius = 16;
-    [button.imageView setContentMode:UIViewContentModeScaleAspectFill];
-    button.clipsToBounds = YES;
-    NSString *icon = [UserManager sharedInstance].userModel.portraitUrl;
-    [button sd_setImageWithURL:[NSURL URLWithString:icon] forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"大头像"]];
-    [[[NSNotificationCenter defaultCenter]rac_addObserverForName:kUpdateHeadPortraitSuccessNotification object:nil]subscribeNext:^(id x) {
-        DDLogDebug(@"主界面修改头像");
-        [button sd_setImageWithURL:[NSURL URLWithString:[UserManager sharedInstance].userModel.portraitUrl] forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"大头像"]];
-    }];
-    [[button rac_signalForControlEvents:UIControlEventTouchUpInside]subscribeNext:^(id x) {
-        [YXDrawerController showDrawer];
-    }];
-    
-    [self setupLeftWithCustomView:button];
-}
 - (void)setupRightNavView {
     ProjectNavRightView *rightView = [[ProjectNavRightView alloc] init];
     self.projectNavRightView = rightView;

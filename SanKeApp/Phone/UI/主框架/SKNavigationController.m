@@ -25,6 +25,10 @@
                                                 [UIColor colorWithHexString:@"333333"], NSForegroundColorAttributeName,
                                                 [UIFont systemFontOfSize:17], NSFontAttributeName,
                                                 nil]];
+    
+    UIView *barBgView = [[UIView alloc]initWithFrame:CGRectMake(0, -20, self.view.bounds.size.width, 20)];
+    barBgView.backgroundColor = [UIColor colorWithHexString:@"4691a6"];
+    [self.navigationBar addSubview:barBgView];
 }
 
 - (void)didReceiveMemoryWarning {

@@ -114,6 +114,18 @@
 		7C1A600A1E1639BD00832DED /* UIView+YXAddtion.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C1A60091E1639BD00832DED /* UIView+YXAddtion.m */; };
 		7C1A60101E163B8800832DED /* TestsRootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C1A600D1E163B8800832DED /* TestsRootViewController.m */; };
 		7C1A60111E163B8800832DED /* YXTestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C1A600F1E163B8800832DED /* YXTestViewController.m */; };
+		7C1CBEB01E80D0B400826FE9 /* SKTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C1CBEAF1E80D0B400826FE9 /* SKTabBarController.m */; };
+		7C1CBEB51E80D1CC00826FE9 /* QAMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C1CBEB41E80D1CC00826FE9 /* QAMainViewController.m */; };
+		7C1CBEB81E80D1E600826FE9 /* TeachingMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C1CBEB71E80D1E600826FE9 /* TeachingMainViewController.m */; };
+		7C1CBEC11E80F88000826FE9 /* TencentOpenAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7C1CBEBA1E80F88000826FE9 /* TencentOpenAPI.framework */; };
+		7C1CBEC21E80F88000826FE9 /* TencentOpenApi_IOS_Bundle.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 7C1CBEBB1E80F88000826FE9 /* TencentOpenApi_IOS_Bundle.bundle */; };
+		7C1CBEC31E80F88000826FE9 /* libWeChatSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7C1CBEBD1E80F88000826FE9 /* libWeChatSDK.a */; };
+		7C1CBEC41E80F88000826FE9 /* read_me.txt in Resources */ = {isa = PBXBuildFile; fileRef = 7C1CBEBE1E80F88000826FE9 /* read_me.txt */; };
+		7C1CBED51E80F8FF00826FE9 /* YXSSOAuthManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C1CBECD1E80F8FF00826FE9 /* YXSSOAuthManager.m */; };
+		7C1CBED91E80FCE500826FE9 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 7C1CBED81E80FCE500826FE9 /* libsqlite3.tbd */; };
+		7C1CBEDD1E80FE8200826FE9 /* YXShareManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C1CBEDC1E80FE8200826FE9 /* YXShareManager.m */; };
+		7C1CBEE01E810CEE00826FE9 /* RadianCornerBaseCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C1CBEDF1E810CEE00826FE9 /* RadianCornerBaseCell.m */; };
+		7C1CBEE41E81115200826FE9 /* QAQuestionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C1CBEE31E81115200826FE9 /* QAQuestionCell.m */; };
 		7C2251C31E1CE3AC004785D5 /* UIImage+GIF.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C2251C21E1CE3AC004785D5 /* UIImage+GIF.m */; };
 		7C2251C71E1DE66E004785D5 /* AlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C2251C61E1DE66E004785D5 /* AlertView.m */; };
 		7C2251CA1E1DEADA004785D5 /* SKAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C2251C91E1DEADA004785D5 /* SKAlertView.m */; };
@@ -136,6 +148,8 @@
 		7C7629D51E278E16007B5698 /* UserManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C7629D41E278E16007B5698 /* UserManager.m */; };
 		7C7629D91E28A9D5007B5698 /* YXInitRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C7629D81E28A9D5007B5698 /* YXInitRequest.m */; };
 		7C7629DC1E28B1F2007B5698 /* UpgradeManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C7629DB1E28B1F2007B5698 /* UpgradeManager.m */; };
+		7C76849A1E88C0B9004B05F6 /* QAQuestionDetailView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C7684991E88C0B9004B05F6 /* QAQuestionDetailView.m */; };
+		7C76849D1E88E10B004B05F6 /* QAReplyCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C76849C1E88E10B004B05F6 /* QAReplyCell.m */; };
 		7C7841731E2CA73800755BC0 /* RecordManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C7841721E2CA73800755BC0 /* RecordManager.m */; };
 		7C7841911E2E221800755BC0 /* LoginRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C7841901E2E221800755BC0 /* LoginRequest.m */; };
 		7C7841941E2E225D00755BC0 /* TouristLoginRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C7841931E2E225D00755BC0 /* TouristLoginRequest.m */; };
@@ -153,6 +167,13 @@
 		7C7841D91E3214C400755BC0 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7C7841D81E3214C400755BC0 /* CoreTelephony.framework */; };
 		7C7841DB1E3214CB00755BC0 /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7C7841DA1E3214CB00755BC0 /* CoreMotion.framework */; };
 		7C7841DD1E3214F300755BC0 /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7C7841DC1E3214F300755BC0 /* AdSupport.framework */; };
+		7CAE43911E836E3500B0D460 /* QADataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CAE43901E836E3500B0D460 /* QADataManager.m */; };
+		7CAE43941E83742800B0D460 /* QAQuestionListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CAE43931E83742800B0D460 /* QAQuestionListViewController.m */; };
+		7CAE43971E83A8C100B0D460 /* QAQuestionDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CAE43961E83A8C100B0D460 /* QAQuestionDetailViewController.m */; };
+		7CAE439A1E83AA8F00B0D460 /* QAReplyDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CAE43991E83AA8F00B0D460 /* QAReplyDetailViewController.m */; };
+		7CAE439E1E84D0B300B0D460 /* CloneCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CAE439D1E84D0B300B0D460 /* CloneCategory.m */; };
+		7CAE43A11E85070000B0D460 /* QAReplyDetailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CAE43A01E85070000B0D460 /* QAReplyDetailCell.m */; };
+		7CAE43A41E85140900B0D460 /* QAReplyDetailMenuItemView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CAE43A31E85140900B0D460 /* QAReplyDetailMenuItemView.m */; };
 		7CC9ADA81E25D12A00A392EA /* StageSubjectSelectViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CC9ADA71E25D12A00A392EA /* StageSubjectSelectViewController.m */; };
 		923A4E2E1E2C9FF5001059E2 /* ChannelTabRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 923A4E2D1E2C9FF5001059E2 /* ChannelTabRequest.m */; };
 		923A4E311E2CA4E7001059E2 /* CourseVideoRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 923A4E301E2CA4E7001059E2 /* CourseVideoRequest.m */; };
@@ -455,6 +476,27 @@
 		7C1A600D1E163B8800832DED /* TestsRootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestsRootViewController.m; sourceTree = "<group>"; };
 		7C1A600E1E163B8800832DED /* YXTestViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YXTestViewController.h; sourceTree = "<group>"; };
 		7C1A600F1E163B8800832DED /* YXTestViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YXTestViewController.m; sourceTree = "<group>"; };
+		7C1CBEAE1E80D0B400826FE9 /* SKTabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKTabBarController.h; sourceTree = "<group>"; };
+		7C1CBEAF1E80D0B400826FE9 /* SKTabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKTabBarController.m; sourceTree = "<group>"; };
+		7C1CBEB31E80D1CC00826FE9 /* QAMainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QAMainViewController.h; sourceTree = "<group>"; };
+		7C1CBEB41E80D1CC00826FE9 /* QAMainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QAMainViewController.m; sourceTree = "<group>"; };
+		7C1CBEB61E80D1E600826FE9 /* TeachingMainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TeachingMainViewController.h; sourceTree = "<group>"; };
+		7C1CBEB71E80D1E600826FE9 /* TeachingMainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TeachingMainViewController.m; sourceTree = "<group>"; };
+		7C1CBEBA1E80F88000826FE9 /* TencentOpenAPI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = TencentOpenAPI.framework; sourceTree = "<group>"; };
+		7C1CBEBB1E80F88000826FE9 /* TencentOpenApi_IOS_Bundle.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = TencentOpenApi_IOS_Bundle.bundle; sourceTree = "<group>"; };
+		7C1CBEBD1E80F88000826FE9 /* libWeChatSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libWeChatSDK.a; sourceTree = "<group>"; };
+		7C1CBEBE1E80F88000826FE9 /* read_me.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = read_me.txt; sourceTree = "<group>"; };
+		7C1CBEBF1E80F88000826FE9 /* WXApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXApi.h; sourceTree = "<group>"; };
+		7C1CBEC01E80F88000826FE9 /* WXApiObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXApiObject.h; sourceTree = "<group>"; };
+		7C1CBECC1E80F8FF00826FE9 /* YXSSOAuthManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YXSSOAuthManager.h; sourceTree = "<group>"; };
+		7C1CBECD1E80F8FF00826FE9 /* YXSSOAuthManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YXSSOAuthManager.m; sourceTree = "<group>"; };
+		7C1CBED81E80FCE500826FE9 /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
+		7C1CBEDB1E80FE8200826FE9 /* YXShareManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YXShareManager.h; sourceTree = "<group>"; };
+		7C1CBEDC1E80FE8200826FE9 /* YXShareManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YXShareManager.m; sourceTree = "<group>"; };
+		7C1CBEDE1E810CEE00826FE9 /* RadianCornerBaseCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RadianCornerBaseCell.h; sourceTree = "<group>"; };
+		7C1CBEDF1E810CEE00826FE9 /* RadianCornerBaseCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RadianCornerBaseCell.m; sourceTree = "<group>"; };
+		7C1CBEE21E81115200826FE9 /* QAQuestionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QAQuestionCell.h; sourceTree = "<group>"; };
+		7C1CBEE31E81115200826FE9 /* QAQuestionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QAQuestionCell.m; sourceTree = "<group>"; };
 		7C2251C11E1CE3AC004785D5 /* UIImage+GIF.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+GIF.h"; sourceTree = "<group>"; };
 		7C2251C21E1CE3AC004785D5 /* UIImage+GIF.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+GIF.m"; sourceTree = "<group>"; };
 		7C2251C51E1DE66E004785D5 /* AlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlertView.h; sourceTree = "<group>"; };
@@ -499,6 +541,10 @@
 		7C7629D81E28A9D5007B5698 /* YXInitRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YXInitRequest.m; sourceTree = "<group>"; };
 		7C7629DA1E28B1F2007B5698 /* UpgradeManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UpgradeManager.h; sourceTree = "<group>"; };
 		7C7629DB1E28B1F2007B5698 /* UpgradeManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UpgradeManager.m; sourceTree = "<group>"; };
+		7C7684981E88C0B9004B05F6 /* QAQuestionDetailView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QAQuestionDetailView.h; sourceTree = "<group>"; };
+		7C7684991E88C0B9004B05F6 /* QAQuestionDetailView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QAQuestionDetailView.m; sourceTree = "<group>"; };
+		7C76849B1E88E10B004B05F6 /* QAReplyCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QAReplyCell.h; sourceTree = "<group>"; };
+		7C76849C1E88E10B004B05F6 /* QAReplyCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QAReplyCell.m; sourceTree = "<group>"; };
 		7C7841711E2CA73800755BC0 /* RecordManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecordManager.h; sourceTree = "<group>"; };
 		7C7841721E2CA73800755BC0 /* RecordManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecordManager.m; sourceTree = "<group>"; };
 		7C78418F1E2E221800755BC0 /* LoginRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginRequest.h; sourceTree = "<group>"; };
@@ -530,6 +576,21 @@
 		7C7841D81E3214C400755BC0 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
 		7C7841DA1E3214CB00755BC0 /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = System/Library/Frameworks/CoreMotion.framework; sourceTree = SDKROOT; };
 		7C7841DC1E3214F300755BC0 /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
+		7CAE438F1E836E3500B0D460 /* QADataManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QADataManager.h; sourceTree = "<group>"; };
+		7CAE43901E836E3500B0D460 /* QADataManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QADataManager.m; sourceTree = "<group>"; };
+		7CAE43921E83742800B0D460 /* QAQuestionListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QAQuestionListViewController.h; sourceTree = "<group>"; };
+		7CAE43931E83742800B0D460 /* QAQuestionListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QAQuestionListViewController.m; sourceTree = "<group>"; };
+		7CAE43951E83A8C100B0D460 /* QAQuestionDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QAQuestionDetailViewController.h; sourceTree = "<group>"; };
+		7CAE43961E83A8C100B0D460 /* QAQuestionDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QAQuestionDetailViewController.m; sourceTree = "<group>"; };
+		7CAE43981E83AA8F00B0D460 /* QAReplyDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QAReplyDetailViewController.h; sourceTree = "<group>"; };
+		7CAE43991E83AA8F00B0D460 /* QAReplyDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QAReplyDetailViewController.m; sourceTree = "<group>"; };
+		7CAE439B1E83BE5D00B0D460 /* PageListRequestDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PageListRequestDelegate.h; sourceTree = "<group>"; };
+		7CAE439C1E84D0B300B0D460 /* CloneCategory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CloneCategory.h; sourceTree = "<group>"; };
+		7CAE439D1E84D0B300B0D460 /* CloneCategory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CloneCategory.m; sourceTree = "<group>"; };
+		7CAE439F1E85070000B0D460 /* QAReplyDetailCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QAReplyDetailCell.h; sourceTree = "<group>"; };
+		7CAE43A01E85070000B0D460 /* QAReplyDetailCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QAReplyDetailCell.m; sourceTree = "<group>"; };
+		7CAE43A21E85140900B0D460 /* QAReplyDetailMenuItemView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QAReplyDetailMenuItemView.h; sourceTree = "<group>"; };
+		7CAE43A31E85140900B0D460 /* QAReplyDetailMenuItemView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QAReplyDetailMenuItemView.m; sourceTree = "<group>"; };
 		7CC9ADA61E25D12A00A392EA /* StageSubjectSelectViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StageSubjectSelectViewController.h; sourceTree = "<group>"; };
 		7CC9ADA71E25D12A00A392EA /* StageSubjectSelectViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StageSubjectSelectViewController.m; sourceTree = "<group>"; };
 		8CA901E0E3034091D4CACB93 /* Pods-SanKeApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SanKeApp.release.xcconfig"; path = "Pods/Target Support Files/Pods-SanKeApp/Pods-SanKeApp.release.xcconfig"; sourceTree = "<group>"; };
@@ -668,7 +729,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7C1CBED91E80FCE500826FE9 /* libsqlite3.tbd in Frameworks */,
+				7C1CBEC31E80F88000826FE9 /* libWeChatSDK.a in Frameworks */,
 				7C7841DD1E3214F300755BC0 /* AdSupport.framework in Frameworks */,
+				7C1CBEC11E80F88000826FE9 /* TencentOpenAPI.framework in Frameworks */,
 				7C7841DB1E3214CB00755BC0 /* CoreMotion.framework in Frameworks */,
 				7C7841D91E3214C400755BC0 /* CoreTelephony.framework in Frameworks */,
 				7C7841D71E3211B500755BC0 /* libTalkingData.a in Frameworks */,
@@ -745,6 +809,7 @@
 		3F85DC58A46B1352E7AE59A6 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				7C1CBED81E80FCE500826FE9 /* libsqlite3.tbd */,
 				7C7841DC1E3214F300755BC0 /* AdSupport.framework */,
 				7C7841DA1E3214CB00755BC0 /* CoreMotion.framework */,
 				7C7841D81E3214C400755BC0 /* CoreTelephony.framework */,
@@ -852,6 +917,8 @@
 		7C1A5EDD1E15041C00832DED /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				7C1CBEB11E80D1AB00826FE9 /* 互动问答 */,
+				7C1CBEB21E80D1AB00826FE9 /* 同步教学 */,
 				7C6F21831E232F2A000AB43A /* 侧边栏 */,
 				E902E6A51E2BA36C009441B3 /* 我的 */,
 				7C6F21921E237F40000AB43A /* 播放记录 */,
@@ -876,6 +943,8 @@
 				7C1A5FC71E1631DD00832DED /* UnhandledRequestData.m */,
 				7C1A5EE51E1505BF00832DED /* SKNavigationController.h */,
 				7C1A5EE61E1505BF00832DED /* SKNavigationController.m */,
+				7C1CBEAE1E80D0B400826FE9 /* SKTabBarController.h */,
+				7C1CBEAF1E80D0B400826FE9 /* SKTabBarController.m */,
 			);
 			path = "主框架";
 			sourceTree = "<group>";
@@ -1108,6 +1177,8 @@
 		7C1A5F791E1513B700832DED /* 3rdLib */ = {
 			isa = PBXGroup;
 			children = (
+				7C1CBEB91E80F88000826FE9 /* TencentSDK_2.9.2 */,
+				7C1CBEBC1E80F88000826FE9 /* WeChatSDK_1.6.1 */,
 				7C7841D41E3211B500755BC0 /* TalkingData */,
 				7C1A5F7A1E1513D600832DED /* MJRefresh */,
 			);
@@ -1163,6 +1234,8 @@
 				7C1A5FCA1E1634DE00832DED /* YXPromtController.m */,
 				7C1A5FCB1E1634DE00832DED /* YXLoadView.h */,
 				7C1A5FCC1E1634DE00832DED /* YXLoadView.m */,
+				7C1CBEDE1E810CEE00826FE9 /* RadianCornerBaseCell.h */,
+				7C1CBEDF1E810CEE00826FE9 /* RadianCornerBaseCell.m */,
 			);
 			name = "样式";
 			sourceTree = "<group>";
@@ -1204,6 +1277,8 @@
 				7C1A5FAE1E151D4E00832DED /* UIViewController+YXAddtion.m */,
 				7C1A60081E1639BD00832DED /* UIView+YXAddtion.h */,
 				7C1A60091E1639BD00832DED /* UIView+YXAddtion.m */,
+				7CAE439C1E84D0B300B0D460 /* CloneCategory.h */,
+				7CAE439D1E84D0B300B0D460 /* CloneCategory.m */,
 			);
 			path = Category;
 			sourceTree = "<group>";
@@ -1249,6 +1324,7 @@
 				7C1A5FE21E1637FC00832DED /* PagedListFetcherBase.m */,
 				7C1A5FE31E1637FC00832DED /* PagedListViewControllerBase.h */,
 				7C1A5FE41E1637FC00832DED /* PagedListViewControllerBase.m */,
+				7CAE439B1E83BE5D00B0D460 /* PageListRequestDelegate.h */,
 			);
 			name = "分页";
 			sourceTree = "<group>";
@@ -1267,6 +1343,8 @@
 		7C1A60121E163C8200832DED /* Business */ = {
 			isa = PBXGroup;
 			children = (
+				7CAE438E1E836E1C00B0D460 /* 互动问答 */,
+				7C1CBEDA1E80FE6D00826FE9 /* 分享 */,
 				E9230C501E308FC600AC6617 /* 侧边栏 */,
 				7C7629D61E28A9B3007B5698 /* 初始化 */,
 				7C6F219F1E248BDA000AB43A /* 播放记录 */,
@@ -1310,6 +1388,86 @@
 				7C2251D21E1E2626004785D5 /* GCDTimer.m */,
 			);
 			path = Utils;
+			sourceTree = "<group>";
+		};
+		7C1CBEB11E80D1AB00826FE9 /* 互动问答 */ = {
+			isa = PBXGroup;
+			children = (
+				7C1CBEE11E81107700826FE9 /* View */,
+				7C1CBEB31E80D1CC00826FE9 /* QAMainViewController.h */,
+				7C1CBEB41E80D1CC00826FE9 /* QAMainViewController.m */,
+				7CAE43921E83742800B0D460 /* QAQuestionListViewController.h */,
+				7CAE43931E83742800B0D460 /* QAQuestionListViewController.m */,
+				7CAE43951E83A8C100B0D460 /* QAQuestionDetailViewController.h */,
+				7CAE43961E83A8C100B0D460 /* QAQuestionDetailViewController.m */,
+				7CAE43981E83AA8F00B0D460 /* QAReplyDetailViewController.h */,
+				7CAE43991E83AA8F00B0D460 /* QAReplyDetailViewController.m */,
+			);
+			path = "互动问答";
+			sourceTree = "<group>";
+		};
+		7C1CBEB21E80D1AB00826FE9 /* 同步教学 */ = {
+			isa = PBXGroup;
+			children = (
+				7C1CBEB61E80D1E600826FE9 /* TeachingMainViewController.h */,
+				7C1CBEB71E80D1E600826FE9 /* TeachingMainViewController.m */,
+			);
+			path = "同步教学";
+			sourceTree = "<group>";
+		};
+		7C1CBEB91E80F88000826FE9 /* TencentSDK_2.9.2 */ = {
+			isa = PBXGroup;
+			children = (
+				7C1CBEBA1E80F88000826FE9 /* TencentOpenAPI.framework */,
+				7C1CBEBB1E80F88000826FE9 /* TencentOpenApi_IOS_Bundle.bundle */,
+			);
+			path = TencentSDK_2.9.2;
+			sourceTree = "<group>";
+		};
+		7C1CBEBC1E80F88000826FE9 /* WeChatSDK_1.6.1 */ = {
+			isa = PBXGroup;
+			children = (
+				7C1CBEBD1E80F88000826FE9 /* libWeChatSDK.a */,
+				7C1CBEBE1E80F88000826FE9 /* read_me.txt */,
+				7C1CBEBF1E80F88000826FE9 /* WXApi.h */,
+				7C1CBEC01E80F88000826FE9 /* WXApiObject.h */,
+			);
+			path = WeChatSDK_1.6.1;
+			sourceTree = "<group>";
+		};
+		7C1CBEC51E80F8FF00826FE9 /* 第三方登录 */ = {
+			isa = PBXGroup;
+			children = (
+				7C1CBECC1E80F8FF00826FE9 /* YXSSOAuthManager.h */,
+				7C1CBECD1E80F8FF00826FE9 /* YXSSOAuthManager.m */,
+			);
+			path = "第三方登录";
+			sourceTree = "<group>";
+		};
+		7C1CBEDA1E80FE6D00826FE9 /* 分享 */ = {
+			isa = PBXGroup;
+			children = (
+				7C1CBEDB1E80FE8200826FE9 /* YXShareManager.h */,
+				7C1CBEDC1E80FE8200826FE9 /* YXShareManager.m */,
+			);
+			path = "分享";
+			sourceTree = "<group>";
+		};
+		7C1CBEE11E81107700826FE9 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				7C1CBEE21E81115200826FE9 /* QAQuestionCell.h */,
+				7C1CBEE31E81115200826FE9 /* QAQuestionCell.m */,
+				7CAE439F1E85070000B0D460 /* QAReplyDetailCell.h */,
+				7CAE43A01E85070000B0D460 /* QAReplyDetailCell.m */,
+				7CAE43A21E85140900B0D460 /* QAReplyDetailMenuItemView.h */,
+				7CAE43A31E85140900B0D460 /* QAReplyDetailMenuItemView.m */,
+				7C7684981E88C0B9004B05F6 /* QAQuestionDetailView.h */,
+				7C7684991E88C0B9004B05F6 /* QAQuestionDetailView.m */,
+				7C76849B1E88E10B004B05F6 /* QAReplyCell.h */,
+				7C76849C1E88E10B004B05F6 /* QAReplyCell.m */,
+			);
+			name = View;
 			sourceTree = "<group>";
 		};
 		7C2251C41E1DE66E004785D5 /* AlertFramework */ = {
@@ -1418,6 +1576,7 @@
 		7C6F21A11E248BDA000AB43A /* 登录注册 */ = {
 			isa = PBXGroup;
 			children = (
+				7C1CBEC51E80F8FF00826FE9 /* 第三方登录 */,
 				7C7841B51E2F1DFA00755BC0 /* Network */,
 				7C7841BC1E2F37EB00755BC0 /* LoginDataManager.h */,
 				7C7841BD1E2F37EB00755BC0 /* LoginDataManager.m */,
@@ -1561,6 +1720,15 @@
 				7C7841D61E3211B500755BC0 /* TalkingData.h */,
 			);
 			path = TalkingData;
+			sourceTree = "<group>";
+		};
+		7CAE438E1E836E1C00B0D460 /* 互动问答 */ = {
+			isa = PBXGroup;
+			children = (
+				7CAE438F1E836E3500B0D460 /* QADataManager.h */,
+				7CAE43901E836E3500B0D460 /* QADataManager.m */,
+			);
+			path = "互动问答";
 			sourceTree = "<group>";
 		};
 		9241FFDE1E25D5680015B587 /* view */ = {
@@ -1762,6 +1930,7 @@
 				927594E91E2F0DA000F87838 /* playHistory_mock.json in Resources */,
 				E9230C461E2F829900AC6617 /* LoginRequest.json in Resources */,
 				7C1A5EF31E150BD100832DED /* env_config.json in Resources */,
+				7C1CBEC41E80F88000826FE9 /* read_me.txt in Resources */,
 				E9355B9B1E7153F7007AE9F0 /* UpdateInfoRequest.json in Resources */,
 				E9230C5A1E30BAB400AC6617 /* FetchStageSubjectRequest.json in Resources */,
 				927594E81E2F0DA000F87838 /* historyRecord_mock.json in Resources */,
@@ -1774,6 +1943,7 @@
 				E9F4541C1E31B18D00860DC2 /* TouristLoginRequest.json in Resources */,
 				923A4E361E2CAE1C001059E2 /* channelIndex_mock.json in Resources */,
 				E9230C561E30919B00AC6617 /* UpdateAreaRequest.json in Resources */,
+				7C1CBEC21E80F88000826FE9 /* TencentOpenApi_IOS_Bundle.bundle in Resources */,
 				7C1A5F8D1E15143400832DED /* errorcode_mock.json in Resources */,
 				7C1A5F851E1513D600832DED /* MJRefresh.bundle in Resources */,
 				7C1A5EDC1E15035100832DED /* Empty.xib in Resources */,
@@ -1863,6 +2033,7 @@
 				7C7629BE1E27351F007B5698 /* LoginViewController.m in Sources */,
 				7C1A5F4D1E15127200832DED /* PreventHangingCourseView.m in Sources */,
 				7C1A5F171E15108F00832DED /* UrlDownloader.m in Sources */,
+				7C1CBEB01E80D0B400826FE9 /* SKTabBarController.m in Sources */,
 				7C1A5F6C1E15130200832DED /* YXFileHtmlItem.m in Sources */,
 				E902E6BD1E2BA3E0009441B3 /* UserImageTableViewCell.m in Sources */,
 				7C1A5FE61E1637FC00832DED /* PagedListViewControllerBase.m in Sources */,
@@ -1883,10 +2054,13 @@
 				7C1809351E25D4A900B71863 /* StageSubjectHeaderView.m in Sources */,
 				E9230C4F1E3060FE00AC6617 /* MineUserModel.m in Sources */,
 				7C1A5EE41E15052000832DED /* BaseViewController.m in Sources */,
+				7C76849A1E88C0B9004B05F6 /* QAQuestionDetailView.m in Sources */,
+				7C1CBEE41E81115200826FE9 /* QAQuestionCell.m in Sources */,
 				7C1A60101E163B8800832DED /* TestsRootViewController.m in Sources */,
 				7C1809441E262D6200B71863 /* FilterHeaderView.m in Sources */,
 				7C7841BB1E2F211B00755BC0 /* UserModel.m in Sources */,
 				7C1A5F961E15143F00832DED /* YXMockParser.m in Sources */,
+				7C1CBEE01E810CEE00826FE9 /* RadianCornerBaseCell.m in Sources */,
 				7C6F21991E237FD2000AB43A /* PlayRecordViewController.m in Sources */,
 				E9355B381E694970007AE9F0 /* PrivacyPolicyView.m in Sources */,
 				7C1A5F2D1E15111800832DED /* YXPostRequest.m in Sources */,
@@ -1901,12 +2075,14 @@
 				E9355BA11E724660007AE9F0 /* AboutHeaderView.m in Sources */,
 				30C87E0E1E52F4BB000CFBAA /* NSString+YXString.m in Sources */,
 				7C7629C11E27371D007B5698 /* LoginActionView.m in Sources */,
+				7C1CBEB81E80D1E600826FE9 /* TeachingMainViewController.m in Sources */,
 				92E7D1391E28A83F00A34300 /* AloneCourseViewController.m in Sources */,
 				7C7841941E2E225D00755BC0 /* TouristLoginRequest.m in Sources */,
 				E9355B011E66AA4E007AE9F0 /* LoginUtils.m in Sources */,
 				7C1A5F231E1510FA00832DED /* GetRequest.m in Sources */,
 				E902E6BE1E2BA3E0009441B3 /* UserInfoPickerView.m in Sources */,
 				7C6F21901E232F8E000AB43A /* YXDrawerController.m in Sources */,
+				7CAE439A1E83AA8F00B0D460 /* QAReplyDetailViewController.m in Sources */,
 				7C1A5F771E15132200832DED /* YXFileFavorWrapper.m in Sources */,
 				7C1A60111E163B8800832DED /* YXTestViewController.m in Sources */,
 				9241FFF81E2651390015B587 /* YXTriangleView.m in Sources */,
@@ -1922,10 +2098,13 @@
 				927594E21E2F0C5A00F87838 /* HistoryRecordRequest.m in Sources */,
 				7C7841A21E2F0B2900755BC0 /* ChannelTabFilterRequest.m in Sources */,
 				7C1A5F241E1510FA00832DED /* PostRequest.m in Sources */,
+				7C1CBEB51E80D1CC00826FE9 /* QAMainViewController.m in Sources */,
 				7C1A5F891E1513D600832DED /* MJRefreshHeaderView.m in Sources */,
 				9241FFE41E25D77F0015B587 /* CourseViewController.m in Sources */,
 				7C2251CD1E1DEB32004785D5 /* SKAlertButton.m in Sources */,
+				7C1CBED51E80F8FF00826FE9 /* YXSSOAuthManager.m in Sources */,
 				7C1A5F141E15108F00832DED /* DownloaderEntity.m in Sources */,
+				7C1CBEDD1E80FE8200826FE9 /* YXShareManager.m in Sources */,
 				7C18094C1E271AFC00B71863 /* CollectionViewEqualSpaceFlowLayout.m in Sources */,
 				E9355B621E6E9A0D007AE9F0 /* SupplementInfoViewController.m in Sources */,
 				7C2251C31E1CE3AC004785D5 /* UIImage+GIF.m in Sources */,
@@ -1961,6 +2140,7 @@
 				E9355AFE1E669E70007AE9F0 /* PrivacyPolicyViewController.m in Sources */,
 				E902E6B01E2BA3BE009441B3 /* SideMenuViewController.m in Sources */,
 				7C1A5F2C1E15111800832DED /* YXGetRequest.m in Sources */,
+				7C76849D1E88E10B004B05F6 /* QAReplyCell.m in Sources */,
 				7C1A5FA71E151A9100832DED /* YXBroseWebView.m in Sources */,
 				7C1A5FC21E15212000832DED /* YXShowWebMenuView.m in Sources */,
 				30C48A9B1E52EF5100CCDBBE /* NSDictionary+Dictionarys.m in Sources */,
@@ -1970,6 +2150,7 @@
 				7C1A5FC81E1631DD00832DED /* UnhandledRequestData.m in Sources */,
 				E94423C01E767A1500F8F795 /* HistoryDeleteRequest.m in Sources */,
 				7C1A60021E16396C00832DED /* UIImage+Color.m in Sources */,
+				7CAE43A41E85140900B0D460 /* QAReplyDetailMenuItemView.m in Sources */,
 				7C1A5F121E15108F00832DED /* PersistentUrlDownloader.m in Sources */,
 				9241FFEF1E26120A0015B587 /* RadianBaseCell.m in Sources */,
 				7C1A5F6B1E15130200832DED /* YXFileDocItem.m in Sources */,
@@ -1985,6 +2166,7 @@
 				7C1809381E25DEBA00B71863 /* StageSubjectCell.m in Sources */,
 				7C7841BE1E2F37EB00755BC0 /* LoginDataManager.m in Sources */,
 				7C1A5F761E15132200832DED /* FileDownloadHelper.m in Sources */,
+				7CAE439E1E84D0B300B0D460 /* CloneCategory.m in Sources */,
 				7C1A5F751E15132200832DED /* YXFileDownloadProgressView.m in Sources */,
 				E9355B991E7153DA007AE9F0 /* UpdateInfoRequest.m in Sources */,
 				7C1A5F681E15130200832DED /* YXFileVideoItem.m in Sources */,
@@ -2015,11 +2197,14 @@
 				7C1A60041E16396C00832DED /* UIButton+HighlightColor.m in Sources */,
 				E9355B941E712445007AE9F0 /* SupplementUserInfo.m in Sources */,
 				7C1A5F131E15108F00832DED /* BaseDownloader.m in Sources */,
+				7CAE43A11E85070000B0D460 /* QAReplyDetailCell.m in Sources */,
 				7C1A5F531E15128C00832DED /* YXImageViewController.m in Sources */,
 				7C1A5FFE1E16396C00832DED /* NSDate+Utilities.m in Sources */,
 				7C1A5EF61E150E1E00832DED /* GlobalUtils.m in Sources */,
 				E9355B471E6D858B007AE9F0 /* SetPasswordViewController.m in Sources */,
+				7CAE43971E83A8C100B0D460 /* QAQuestionDetailViewController.m in Sources */,
 				7C1A5F671E15130200832DED /* YXFileItemBase.m in Sources */,
+				7CAE43941E83742800B0D460 /* QAQuestionListViewController.m in Sources */,
 				E902E6AF1E2BA3BE009441B3 /* SideHeaderView.m in Sources */,
 				7C1A5EFC1E150E3400832DED /* FileLogger.m in Sources */,
 				E902E6E11E2CE1B8009441B3 /* EmptyView.m in Sources */,
@@ -2038,6 +2223,7 @@
 				E9355B711E6EB0FD007AE9F0 /* UserInfoPicker.m in Sources */,
 				E902E6BF1E2BA3E0009441B3 /* UserInfoTableViewCell.m in Sources */,
 				E9230C531E30900600AC6617 /* SideTableViewModel.m in Sources */,
+				7CAE43911E836E3500B0D460 /* QADataManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2173,6 +2359,10 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer: xingfu liu (J63VXZH2U7)";
 				DEVELOPMENT_TEAM = P8ZS8UUN27;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/SanKeApp/Common/3rdLib/TencentSDK_2.9.2",
+				);
 				GCC_PREFIX_HEADER = "$(SRCROOT)/SanKeApp/Common/PrefixHeader.pch";
 				INFOPLIST_FILE = "$(SRCROOT)/SanKeApp/Phone/InfoPhone.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
@@ -2180,6 +2370,7 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/SanKeApp/Common/3rdLib/TalkingData",
+					"$(PROJECT_DIR)/SanKeApp/Common/3rdLib/WeChatSDK_1.6.1",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = yanxiu.com.SanKeApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -2198,6 +2389,10 @@
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Beijing Shang Rui Tong Technology Co.,Ltd. (P8ZS8UUN27)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				DEVELOPMENT_TEAM = P8ZS8UUN27;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/SanKeApp/Common/3rdLib/TencentSDK_2.9.2",
+				);
 				GCC_PREFIX_HEADER = "$(SRCROOT)/SanKeApp/Common/PrefixHeader.pch";
 				INFOPLIST_FILE = "$(SRCROOT)/SanKeApp/Phone/InfoPhone.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
@@ -2205,6 +2400,7 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/SanKeApp/Common/3rdLib/TalkingData",
+					"$(PROJECT_DIR)/SanKeApp/Common/3rdLib/WeChatSDK_1.6.1",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = yanxiu.com.SanKeApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";

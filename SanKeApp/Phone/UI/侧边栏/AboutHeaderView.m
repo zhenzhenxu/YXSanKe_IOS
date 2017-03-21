@@ -34,7 +34,7 @@
     
     self.signImageView = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"i教研"]];
     
-    self.versionImageView = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"v1.1"]];
+    self.versionImageView = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"v1.2"]];
 }
 
 - (void)setupLayout {

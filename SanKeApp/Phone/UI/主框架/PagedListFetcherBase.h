@@ -7,8 +7,9 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "PageListRequestDelegate.h"
 
-@interface PagedListFetcherBase : NSObject {
+@interface PagedListFetcherBase : NSObject<PageListRequestDelegate> {
     void(^_completeBlock)(NSInteger total, NSArray *retItemArray, NSError *error);
 }
 @property (nonatomic, assign) NSInteger pageSize;

@@ -90,4 +90,7 @@ extern int ddLogLevel;
 #import "YXRecordManager.h"
 #import "LoginUtils.h"
 #import "UserInfoDataManger.h"
+#import "YXShareManager.h"
+#import "QADataManager.h"
+#import "CloneCategory.h"
 #endif /* PrefixHeader_pch */

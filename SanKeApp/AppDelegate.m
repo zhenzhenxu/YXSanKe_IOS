@@ -14,6 +14,10 @@
 #import "LoginViewController.h"
 #import "StageSubjectSelectViewController.h"
 #import "YXRecordManager.h"
+#import "SKTabBarController.h"
+#import "QAMainViewController.h"
+#import "TeachingMainViewController.h"
+#import "YXSSOAuthManager.h"
 
 @interface AppDelegate ()
 @property (nonatomic, unsafe_unretained) UIBackgroundTaskIdentifier backgroundTaskIdentifier;
@@ -30,6 +34,8 @@
     [TalkingData sessionStarted:[SKConfigManager sharedInstance].TalkingDataAppID withChannelId:[SKConfigManager sharedInstance].channel];
     
     [GlobalUtils setupCore];
+    [[YXSSOAuthManager sharedManager] registerWXApp];
+    [[YXSSOAuthManager sharedManager] registerQQApp];
 //    [UpgradeManager checkForUpgrade];//当前版本暂不做升级界面
 //    [StageSubjectDataManager updateToLatestData];//当前版本的学科学段从本地取,不更新
     [self registerNotifications];
@@ -56,15 +62,29 @@
             SKNavigationController *selectNavi = [[SKNavigationController alloc]initWithRootViewController:selectVC];
             self.window.rootViewController = selectNavi;
         }else {
-            SideMenuViewController *menuVC = [[SideMenuViewController alloc]init];
             ProjectMainViewController *mainVC = [[ProjectMainViewController alloc]init];
             SKNavigationController *mainNavi = [[SKNavigationController alloc]initWithRootViewController:mainVC];
+            mainNavi.tabBarItem = [[UITabBarItem alloc]initWithTitle:@"跟进教研" image:[UIImage imageNamed:@"跟进教研"] selectedImage:[UIImage imageNamed:@"跟进教研-点击"]];
             
-            YXDrawerViewController *drawerVC = [[YXDrawerViewController alloc]init];
-            drawerVC.drawerViewController = menuVC;
-            drawerVC.paneViewController = mainNavi;
-            drawerVC.drawerWidth = [UIScreen mainScreen].bounds.size.width * 600/750.0f;
-            self.window.rootViewController = drawerVC;
+            QAMainViewController *qaVC = [[QAMainViewController alloc]init];
+            SKNavigationController *qaNavi = [[SKNavigationController alloc]initWithRootViewController:qaVC];
+            qaNavi.tabBarItem = [[UITabBarItem alloc]initWithTitle:@"互动问答" image:[UIImage imageNamed:@"互动问答"] selectedImage:[UIImage imageNamed:@"互动问答-点击"]];
+            
+            TeachingMainViewController *teachingVC = [[TeachingMainViewController alloc]init];
+            SKNavigationController *teachingNavi = [[SKNavigationController alloc]initWithRootViewController:teachingVC];
+            teachingNavi.tabBarItem = [[UITabBarItem alloc]initWithTitle:@"同步教学" image:[UIImage imageNamed:@"同步教学"] selectedImage:[UIImage imageNamed:@"同步教学-点击"]];
+            
+            SideMenuViewController *menuVC = [[SideMenuViewController alloc]init];
+            SKNavigationController *menuNavi = [[SKNavigationController alloc]initWithRootViewController:menuVC];
+            menuNavi.tabBarItem = [[UITabBarItem alloc]initWithTitle:@"个人中心" image:[UIImage imageNamed:@"个人中心"] selectedImage:[UIImage imageNamed:@"个人中心-点击"]];
+            
+            [[UITabBarItem appearance]setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor colorWithHexString:@"333333"]} forState:UIControlStateNormal];
+            [[UITabBarItem appearance]setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor colorWithHexString:@"4691a6"]} forState:UIControlStateSelected];
+            [[UITabBarItem appearance]setTitleTextAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:10]} forState:UIControlStateNormal];
+            
+            SKTabBarController *tabBarVC = [[SKTabBarController alloc]init];
+            tabBarVC.viewControllers = @[mainNavi,qaNavi,teachingNavi,menuNavi];
+            self.window.rootViewController = tabBarVC;
         }
     }else {
         LoginViewController *loginVC = [[LoginViewController alloc]init];
@@ -158,5 +178,17 @@
     [GlobalUtils clearCore];
 }
 
+- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation {
+    return [YXSSOAuthManager handleOpenURL:url];
+}
+
+- (void)application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification *)notification {
+    
+}
+
+// 9.0
+- (BOOL)application:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary<NSString *,id> *)options {
+    return [YXSSOAuthManager handleOpenURL:url];
+}
 
 @end

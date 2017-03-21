@@ -8,6 +8,11 @@
 
 #import "PagedListFetcherBase.h"
 
+@interface PagedListFetcherBase()
+@property (nonatomic, assign) NSInteger pre_pageNum;
+@property (nonatomic, assign) NSInteger pre_lastID;
+@end
+
 @implementation PagedListFetcherBase
 
 - (instancetype)init {
@@ -37,6 +42,31 @@
 
 - (void)saveToCache {
     
+}
+
+#pragma mark - PageListRequestDelegate
+- (void)requestWillRefresh {
+    self.pre_pageNum = self.pageNum;
+    self.pre_lastID = self.lastID;
+    self.pageNum = 0;
+    self.lastID = 0;
+}
+
+- (void)requestEndRefreshWithError:(NSError *)error {
+    if (error) {
+        self.pageNum = self.pre_pageNum;
+        self.lastID = self.pre_lastID;
+    }
+}
+
+- (void)requestWillFetchMore {
+    self.pageNum += 1;
+}
+
+- (void)requestEndFetchMoreWithError:(NSError *)error {
+    if (error) {
+        self.pageNum -= 1;
+    }
 }
 
 @end

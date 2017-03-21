@@ -9,13 +9,14 @@
 #import "BaseViewController.h"
 #import "PagedListFetcherBase.h"
 
-@interface PagedListViewControllerBase : BaseViewController
+@interface PagedListViewControllerBase : BaseViewController<UITableViewDataSource, UITableViewDelegate>
 @property (nonatomic, strong) UIView *contentView;
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, assign) BOOL bIsGroupedTableViewStyle;    // currently trick
 @property (nonatomic, strong) NSMutableArray *dataArray;        // the model
 @property (nonatomic, assign) BOOL bNeedHeader;
 @property (nonatomic, assign) BOOL bNeedFooter;
+@property (nonatomic, weak) id<PageListRequestDelegate> requestDelegate;
 
 @property (nonatomic, strong) PagedListFetcherBase *dataFetcher;
 - (void)firstPageFetch;
@@ -26,6 +27,5 @@
 
 @property (nonatomic, assign) int emptyViewTopInset;
 
-- (void)tableViewWillRefresh;
 
 @end

@@ -43,17 +43,6 @@ NSString * const kRecordDeletNotification = @"kRecordDeletNotification";
     self.tableView.backgroundColor = [UIColor colorWithHexString:@"e6e6e6"];
     self.freshed = YES;
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refresh:) name:kRecordReportSuccessNotification object:nil];
-    
-    
-    [self aspect_hookSelector:@selector(morePageFetch) withOptions:AspectPositionBefore usingBlock:^(){
-        STRONG_SELF
-        PlayHistoryFetch *fetcher = (PlayHistoryFetch *)self.dataFetcher;
-        fetcher.pageNum = self.dataArray.count/fetcher.pageSize;
-    } error:nil];
-    [self aspect_hookSelector:@selector(firstPageFetch) withOptions:AspectPositionBefore usingBlock:^(){
-        STRONG_SELF
-        ((PlayHistoryFetch *)self.dataFetcher).pageNum = 0;
-    } error:nil];
 }
 
 - (void)refresh:(NSNotification *)notification{

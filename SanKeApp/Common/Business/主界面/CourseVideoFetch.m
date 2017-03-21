@@ -31,6 +31,8 @@
             return;
         }
         CourseVideoRequestItem *item = retItem;
+        CourseVideoRequestItem_Data_Elements *element = item.data.items.lastObject;
+        self.lastID = element.itemID.integerValue;
         NSInteger total = 0;
         if (item.data.moreData.integerValue == 1) {
             total = NSIntegerMax;
@@ -38,4 +40,5 @@
         BLOCK_EXEC(aCompleteBlock,total,item.data.items,nil);
     }];
 }
+
 @end

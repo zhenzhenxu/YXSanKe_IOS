@@ -29,6 +29,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
+    self.navigationItem.title = [UserManager sharedInstance].userModel.truename;
+    self.showNaviShadowImage = YES;
     [self setupUI];
     [self setupLayout];
     [self setupTabeleViewData];
@@ -63,7 +65,7 @@
     [self.view addSubview:self.headerView];
     [self.view addSubview:self.tableView];
     [self.headerView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(20);
+        make.top.mas_equalTo(0);
         make.left.right.equalTo(self.view);
         make.height.mas_equalTo(88);
     }];

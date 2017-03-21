@@ -52,9 +52,9 @@
 + (void)setRightWithNavigationItem:(UINavigationItem *)item title:(NSString *)title action:(actionBlock)action{
     UIButton *b = [[UIButton alloc]init];
     [b setTitle:title forState:UIControlStateNormal];
-    [b setTitleColor:[UIColor colorWithHexString:@"0067be"] forState:UIControlStateNormal];
+    [b setTitleColor:[UIColor colorWithHexString:@"4691a6"] forState:UIControlStateNormal];
     //    [b setTitleColor:[UIColor colorWithHexString:@"999999"] forState:UIControlStateDisabled];
-    b.titleLabel.font = [UIFont systemFontOfSize:13];
+    b.titleLabel.font = [UIFont systemFontOfSize:14];
     CGSize size = [title sizeWithAttributes:@{NSFontAttributeName:b.titleLabel.font}];
     b.frame = CGRectMake(0, 0, ceilf(size.width)+20, ceilf(size.height)+20);
     [[b rac_signalForControlEvents:UIControlEventTouchUpInside]subscribeNext:^(id x) {

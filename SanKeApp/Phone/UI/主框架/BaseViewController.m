@@ -15,7 +15,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    self.view.backgroundColor = [UIColor whiteColor];
+    self.view.backgroundColor = [UIColor colorWithHexString:@"e6e6e6"];
     self.edgesForExtendedLayout = UIRectEdgeNone;
     NSArray *vcArray = self.navigationController.viewControllers;
     if (!isEmpty(vcArray)) {
@@ -28,6 +28,11 @@
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     NSLog(@"%@", self.class);
+    if (self.showNaviShadowImage) {
+        [self.navigationController.navigationBar setShadowImage:nil];
+    }else {
+        [self.navigationController.navigationBar setShadowImage:[UIImage new]];
+    }
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -45,17 +50,6 @@
 
 - (UIInterfaceOrientationMask)supportedInterfaceOrientations {
     return UIInterfaceOrientationMaskPortrait;
-}
-
-- (UINavigationController *)navigationController{
-    UINavigationController *navi = [super navigationController];
-    if (!navi) {
-        YXDrawerViewController *drawerVC = [YXDrawerController drawer];
-        if ([drawerVC.paneViewController isKindOfClass:[UINavigationController class]]) {
-            navi = (UINavigationController *)drawerVC.paneViewController;
-        }
-    }
-    return navi;
 }
 
 #pragma mark - Navi Left

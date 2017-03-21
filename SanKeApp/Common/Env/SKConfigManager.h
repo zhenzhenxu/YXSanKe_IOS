@@ -33,4 +33,10 @@
 
 @property (nonatomic, strong) NSString<Optional> *TalkingDataAppID;
 @property (nonatomic, strong) NSString<Optional> *channel;
+
+#pragma mark - 三方登录
+@property (nonatomic, strong) NSString<Optional> *YXSSOAuthQQAppid;
+@property (nonatomic, strong) NSString<Optional> *YXSSOAuthQQAppKey;
+@property (nonatomic, strong) NSString<Optional> *YXSSOAuthWeixinAppid;
+@property (nonatomic, strong) NSString<Optional> *YXSSOAuthWeixinAppSecret;
 @end

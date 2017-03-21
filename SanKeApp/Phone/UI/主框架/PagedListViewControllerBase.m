@@ -9,7 +9,7 @@
 #import "PagedListViewControllerBase.h"
 #import "MJRefresh.h"
 
-@interface PagedListViewControllerBase () <UITableViewDataSource, UITableViewDelegate> {
+@interface PagedListViewControllerBase ()  {
     NSInteger _total;
     
     MJRefreshFooterView *_footer;
@@ -90,6 +90,7 @@
     self.dataArray = [NSMutableArray array];
     [self.dataArray addObjectsFromArray:[self.dataFetcher cachedItemArray]];
     _total = (int)[self.dataArray count];
+    self.requestDelegate = self.dataFetcher;
     [self startLoading];
     [self firstPageFetch];
 }
@@ -99,22 +100,12 @@
     }
     
     [self.dataFetcher stop];
-    
-    // 1, load cache
-    //    [self.dataArray removeAllObjects];
-    //    [self.dataArray addObjectsFromArray:[self.dataFetcher cachedItemArray]];
-    //    _total = (int)[self.dataArray count];
-    
-    // 2, fetch
-    self.dataFetcher.lastID = 0;
-    if (!self.dataFetcher.pageSize) {
-        self.dataFetcher.pageSize = 20;
-    }
+    SAFE_CALL(self.requestDelegate, requestWillRefresh);
     @weakify(self);
     [self.dataFetcher startWithBlock:^(NSInteger total, NSArray *retItemArray, NSError *error) {
         @strongify(self); if (!self) return;
         
-        [self tableViewWillRefresh];
+        SAFE_CALL_OneParam(self.requestDelegate, requestEndRefreshWithError, error);
         [self stopLoading];
         [self stopAnimation];
         
@@ -137,11 +128,6 @@
     }];
 }
 
-- (void)tableViewWillRefresh
-{
-    
-}
-
 - (void)stopAnimation
 {
     [self->_header endRefreshing];
@@ -159,13 +145,13 @@
 
 - (void)morePageFetch {
     [self.dataFetcher stop];
-//    self.dataFetcher.lastID = self.dataFetcher.lastID + self.dataFetcher.pageSize;
+    SAFE_CALL(self.requestDelegate, requestWillFetchMore);
     @weakify(self);
     [self.dataFetcher startWithBlock:^(NSInteger total, NSArray *retItemArray, NSError *error) {
         @strongify(self); if (!self) return;
+        SAFE_CALL_OneParam(self.requestDelegate, requestEndFetchMoreWithError, error);
         [self->_footer endRefreshing];
         if (error) {
-//            self.dataFetcher.lastID = self.dataFetcher.lastID - self.dataFetcher.pageSize;
             [self showToast:error.localizedDescription];
             return;
         }

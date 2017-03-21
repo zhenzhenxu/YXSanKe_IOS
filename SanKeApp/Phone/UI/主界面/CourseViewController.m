@@ -34,30 +34,14 @@
     fetcher.filterID = self.videoItem.filterID;
     fetcher.catID = self.videoItem.catID;
     fetcher.fromType = self.videoItem.fromType;
-    fetcher.lastID = 0;
     self.dataFetcher = fetcher;
     [super viewDidLoad];
     [self setupUI];
     self.tableView.backgroundColor = [UIColor colorWithHexString:@"e6e6e6"];
     self.title = self.videoItem.name;
-    //3.24产品李剑要求去掉此埋点
-//    static BOOL first = YES;
-//    if (first) {
-//        [YXRecordManager addRecordWithType:YXRecordPlateType];
-//        first = NO;
-//    }
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refresh:) name:kRecordReportSuccessNotification object:nil];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refresh:) name:kRecordDeletNotification object:nil];
-    
-    WEAK_SELF
-    [self aspect_hookSelector:@selector(morePageFetch) withOptions:AspectPositionBefore usingBlock:^(){
-        STRONG_SELF
-        if (self.dataArray.count) {
-            CourseVideoRequestItem_Data_Elements *item = self.dataArray.lastObject;
-            ((CourseVideoFetch *)self.dataFetcher).lastID = item.itemID.integerValue;
-        }
-    } error:nil];
 }
 
 - (void)refresh:(NSNotification *)notification{

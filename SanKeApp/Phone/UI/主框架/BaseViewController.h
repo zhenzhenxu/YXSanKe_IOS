@@ -19,6 +19,8 @@
 @property (nonatomic, strong)EmptyView *emptyView;
 @property (nonatomic, strong)ErrorView *errorView;
 @property (nonatomic, strong)DataErrorView *dataErrorView;
+
+@property (nonatomic, assign) BOOL showNaviShadowImage; // default is NO
 /**
  *  设置导航右端图片
  *

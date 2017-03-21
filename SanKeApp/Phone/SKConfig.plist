@@ -27,5 +27,13 @@
 	<string>85F5F0D491AE4C4F8E9CC6D091AA8077</string>
 	<key>channel</key>
 	<string>app store</string>
+	<key>YXSSOAuthQQAppid</key>
+	<string>1104826608</string>
+	<key>YXSSOAuthQQAppKey</key>
+	<string>PsLMILpDwU6QDNOk</string>
+	<key>YXSSOAuthWeixinAppid</key>
+	<string>wxb6704ac52abcfe4c</string>
+	<key>YXSSOAuthWeixinAppSecret</key>
+	<string>943d690bd5020ae629c20281e53bc334</string>
 </dict>
 </plist>
