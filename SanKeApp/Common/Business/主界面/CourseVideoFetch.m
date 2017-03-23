@@ -31,7 +31,11 @@
             return;
         }
         CourseVideoRequestItem *item = retItem;
-        BLOCK_EXEC(aCompleteBlock,item.data.moreData.intValue,item.data.items,nil);
+        NSInteger total = 0;
+        if (item.data.moreData.integerValue == 1) {
+            total = NSIntegerMax;
+        }
+        BLOCK_EXEC(aCompleteBlock,total,item.data.items,nil);
     }];
 }
 @end

@@ -10,7 +10,7 @@
 
 @implementation PagedListFetcherBase
 
-- (void)startWithBlock:(void(^)(int total, NSArray *retItemArray, NSError *error))aCompleteBlock {
+- (void)startWithBlock:(void(^)(NSInteger total, NSArray *retItemArray, NSError *error))aCompleteBlock {
     _completeBlock = aCompleteBlock;
 }
 

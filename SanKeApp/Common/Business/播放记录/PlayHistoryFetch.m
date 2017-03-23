@@ -28,7 +28,11 @@
         if (item.data.history.count == 0) {
             BLOCK_EXEC(self.ListCompleteBlock,nil);
         }
-        BLOCK_EXEC(aCompleteBlock,item.data.moreData.intValue,item.data.history,nil);
+        NSInteger total = 0;
+        if (item.data.moreData.integerValue == 1) {
+            total = NSIntegerMax;
+        }
+        BLOCK_EXEC(aCompleteBlock,total,item.data.history,nil);
     }];
 }
 
