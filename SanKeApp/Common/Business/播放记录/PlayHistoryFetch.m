@@ -12,7 +12,7 @@
 @property (nonatomic, strong) PlayHistoryRequest *historyRequest;
 @end
 @implementation PlayHistoryFetch
-- (void)startWithBlock:(void (^)(int, NSArray *, NSError *))aCompleteBlock {
+- (void)startWithBlock:(void (^)(NSInteger, NSArray *, NSError *))aCompleteBlock {
     [self.historyRequest stopRequest];
     self.historyRequest = [[PlayHistoryRequest alloc] init];
     self.historyRequest.pageSize = self.pageSize;

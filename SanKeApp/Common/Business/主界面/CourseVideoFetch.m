@@ -12,7 +12,7 @@
 @end
 @implementation CourseVideoFetch
 
-- (void)startWithBlock:(void (^)(int, NSArray *, NSError *))aCompleteBlock {
+- (void)startWithBlock:(void (^)(NSInteger, NSArray *, NSError *))aCompleteBlock {
     [self.videoRequest stopRequest];
     self.videoRequest = [[CourseVideoRequest alloc] init];
     self.videoRequest.filterID = self.filterID.length? self.filterID: @"0,0,0,0";

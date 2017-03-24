@@ -40,11 +40,12 @@
     [self setupUI];
     self.tableView.backgroundColor = [UIColor colorWithHexString:@"e6e6e6"];
     self.title = self.videoItem.name;
-    static BOOL first = YES;
-    if (first) {
-        [YXRecordManager addRecordWithType:YXRecordPlateType];
-        first = NO;
-    }
+    //3.24产品李剑要求去掉此埋点
+//    static BOOL first = YES;
+//    if (first) {
+//        [YXRecordManager addRecordWithType:YXRecordPlateType];
+//        first = NO;
+//    }
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refresh:) name:kRecordReportSuccessNotification object:nil];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refresh:) name:kRecordDeletNotification object:nil];

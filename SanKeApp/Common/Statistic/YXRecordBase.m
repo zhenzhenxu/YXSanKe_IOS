@@ -47,7 +47,7 @@
         self.timestamp     = [self.class timestamp];
         self.clientType    = @"0";
         self.source        = @"0";
-        self.uid           = [UserManager sharedInstance].userModel.userID;
+        self.uid           = [UserManager sharedInstance].userModel.userID ? [UserManager sharedInstance].userModel.userID : @"";
         self.ip            = @"";
         self.url           = @"";
         self.resID         = @"";

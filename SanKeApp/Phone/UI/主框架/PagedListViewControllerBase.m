@@ -10,7 +10,7 @@
 #import "MJRefresh.h"
 
 @interface PagedListViewControllerBase () <UITableViewDataSource, UITableViewDelegate> {
-    int _total;
+    NSInteger _total;
     
     MJRefreshFooterView *_footer;
     MJRefreshHeaderView *_header;
