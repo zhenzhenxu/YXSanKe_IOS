@@ -1358,7 +1358,7 @@
 				7C7629D61E28A9B3007B5698 /* 初始化 */,
 				7C6F219F1E248BDA000AB43A /* 播放记录 */,
 				7C6F21A11E248BDA000AB43A /* 登录注册 */,
-				7C6F21A31E248BDA000AB43A /* 我的 */,
+				7C6F21A31E248BDA000AB43A /* 个人中心 */,
 				7C6F21A51E248BDA000AB43A /* 主界面 */,
 				7C6F219A1E2481D6000AB43A /* AreaDataManager.h */,
 				7C6F219B1E2481D6000AB43A /* AreaDataManager.m */,
@@ -1587,7 +1587,7 @@
 			path = "登录注册";
 			sourceTree = "<group>";
 		};
-		7C6F21A31E248BDA000AB43A /* 我的 */ = {
+		7C6F21A31E248BDA000AB43A /* 个人中心 */ = {
 			isa = PBXGroup;
 			children = (
 				7C78419F1E2E2AE900755BC0 /* Network */,
@@ -1601,6 +1601,7 @@
 				E9355B921E712445007AE9F0 /* SupplementUserInfo.h */,
 				E9355B931E712445007AE9F0 /* SupplementUserInfo.m */,
 			);
+			name = "个人中心";
 			path = "我的";
 			sourceTree = "<group>";
 		};
