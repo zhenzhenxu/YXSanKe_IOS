@@ -8,6 +8,9 @@
 
 #import "PlayHistoryRequest.h"
 @implementation PlayHistoryRequestItem_Data_History
++ (JSONKeyMapper *)keyMapper {
+    return [[JSONKeyMapper alloc] initWithDictionary:@{@"id":@"itemID"}];
+}
 @end
 @implementation PlayHistoryRequestItem_Data
 @end

@@ -159,13 +159,13 @@
 
 - (void)morePageFetch {
     [self.dataFetcher stop];
-    self.dataFetcher.lastID = self.dataFetcher.lastID + self.dataFetcher.pageSize;
+//    self.dataFetcher.lastID = self.dataFetcher.lastID + self.dataFetcher.pageSize;
     @weakify(self);
     [self.dataFetcher startWithBlock:^(NSInteger total, NSArray *retItemArray, NSError *error) {
         @strongify(self); if (!self) return;
         [self->_footer endRefreshing];
         if (error) {
-            self.dataFetcher.lastID = self.dataFetcher.lastID - self.dataFetcher.pageSize;
+//            self.dataFetcher.lastID = self.dataFetcher.lastID - self.dataFetcher.pageSize;
             [self showToast:error.localizedDescription];
             return;
         }

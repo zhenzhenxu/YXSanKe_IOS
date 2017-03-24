@@ -19,6 +19,7 @@
 
 @property (nonatomic, strong) PagedListFetcherBase *dataFetcher;
 - (void)firstPageFetch;
+- (void)morePageFetch;
 - (void)stopAnimation;
 - (void)setPulldownViewHidden:(BOOL)hidden;
 - (void)setPullupViewHidden:(BOOL)hidden;

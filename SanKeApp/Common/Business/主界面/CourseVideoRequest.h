@@ -23,7 +23,7 @@
 @property (nonatomic ,copy) NSString<Optional> *catid;
 @property (nonatomic ,copy) NSString<Optional> *thumb;
 @property (nonatomic ,copy) NSString<Optional> *summary;
-
+@property (nonatomic ,copy) NSString<Optional> *itemID;
 @end
 @interface CourseVideoRequestItem_Data : JSONModel
 @property (nonatomic, strong) NSArray<CourseVideoRequestItem_Data_Elements, Optional> *items;

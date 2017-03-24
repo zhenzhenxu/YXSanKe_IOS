@@ -49,6 +49,15 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refresh:) name:kRecordReportSuccessNotification object:nil];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refresh:) name:kRecordDeletNotification object:nil];
+    
+    WEAK_SELF
+    [self aspect_hookSelector:@selector(morePageFetch) withOptions:AspectPositionBefore usingBlock:^(){
+        STRONG_SELF
+        if (self.dataArray.count) {
+            CourseVideoRequestItem_Data_Elements *item = self.dataArray.lastObject;
+            ((CourseVideoFetch *)self.dataFetcher).lastID = item.itemID.integerValue;
+        }
+    } error:nil];
 }
 
 - (void)refresh:(NSNotification *)notification{
