@@ -22,7 +22,7 @@
 @implementation PlayHistoryRequest
 + (JSONKeyMapper *)keyMapper
 {
-    return [[JSONKeyMapper alloc] initWithDictionary:@{@"last_id":@"lastID",
+    return [[JSONKeyMapper alloc] initWithDictionary:@{@"page_num":@"pageNum",
                                                        @"page_size":@"pageSize"}];
 }
 

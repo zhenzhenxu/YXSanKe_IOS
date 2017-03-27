@@ -12,6 +12,7 @@
     void(^_completeBlock)(NSInteger total, NSArray *retItemArray, NSError *error);
 }
 @property (nonatomic, assign) NSInteger pageSize;
+@property (nonatomic, assign) NSInteger pageNum;
 @property (nonatomic, assign) NSInteger lastID;
 @property (nonatomic, assign) BOOL isDataArrayMerged;
 

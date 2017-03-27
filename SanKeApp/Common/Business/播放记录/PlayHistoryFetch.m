@@ -16,7 +16,7 @@
     [self.historyRequest stopRequest];
     self.historyRequest = [[PlayHistoryRequest alloc] init];
     self.historyRequest.pageSize = self.pageSize;
-    self.historyRequest.lastID = self.lastID;
+    self.historyRequest.pageNum = self.pageNum+1;
     WEAK_SELF
     [self.historyRequest startRequestWithRetClass:[PlayHistoryRequestItem class] andCompleteBlock:^(id retItem, NSError *error, BOOL isMock) {
         STRONG_SELF

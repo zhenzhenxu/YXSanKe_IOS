@@ -10,6 +10,15 @@
 
 @implementation PagedListFetcherBase
 
+- (instancetype)init {
+    if (self = [super init]) {
+        self.pageSize = 10;
+        self.pageNum = 0;
+        self.lastID = 0;
+    }
+    return self;
+}
+
 - (void)startWithBlock:(void(^)(NSInteger total, NSArray *retItemArray, NSError *error))aCompleteBlock {
     _completeBlock = aCompleteBlock;
 }

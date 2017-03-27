@@ -47,10 +47,12 @@ NSString * const kRecordDeletNotification = @"kRecordDeletNotification";
     
     [self aspect_hookSelector:@selector(morePageFetch) withOptions:AspectPositionBefore usingBlock:^(){
         STRONG_SELF
-        if (self.dataArray.count) {
-            PlayHistoryRequestItem_Data_History *item = self.dataArray.lastObject;
-            ((PlayHistoryFetch *)self.dataFetcher).lastID = item.itemID.integerValue;
-        }
+        PlayHistoryFetch *fetcher = (PlayHistoryFetch *)self.dataFetcher;
+        fetcher.pageNum = self.dataArray.count/fetcher.pageSize;
+    } error:nil];
+    [self aspect_hookSelector:@selector(firstPageFetch) withOptions:AspectPositionBefore usingBlock:^(){
+        STRONG_SELF
+        ((PlayHistoryFetch *)self.dataFetcher).pageNum = 0;
     } error:nil];
 }
 

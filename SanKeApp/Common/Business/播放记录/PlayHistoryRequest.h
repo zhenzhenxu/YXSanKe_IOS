@@ -34,5 +34,5 @@
 @end
 @interface PlayHistoryRequest : YXGetRequest
 @property (nonatomic, assign) NSInteger pageSize;
-@property (nonatomic, assign) NSInteger lastID;
+@property (nonatomic, assign) NSInteger pageNum;
 @end
