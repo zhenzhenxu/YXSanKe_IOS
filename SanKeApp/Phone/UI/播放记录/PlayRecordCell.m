@@ -78,19 +78,23 @@
     [attString addAttribute:NSParagraphStyleAttributeName value:paragraphStyle range:NSMakeRange(0, _history.title.length)];
     self.contentLabel.attributedText = attString;
     self.allTimeLabel.text = [self formatShowTime:_history.totalTime];
-    CGFloat historyTime;
-    if ([_history.totalTime isEqualToString:@"0"]) {
-        historyTime = 0;
+    
+    CGFloat watchRecord;
+    CGFloat recordTime = (_history.watchRecord.floatValue <= 0) ? 0 : _history.watchRecord.floatValue;
+    CGFloat totalTime = (_history.totalTime.floatValue <= 0) ? 0 : _history.totalTime.floatValue;
+    
+    if (totalTime == 0) {
+        watchRecord = 0;
     }else{
-        historyTime = _history.watchRecord.floatValue/_history.totalTime.floatValue * 100;
+        watchRecord = recordTime/totalTime * 100;
     }
-    if (historyTime - 100 > 0) {
-        historyTime = 100;
-    }else if (historyTime < 0){
-        historyTime = 0;
+    if (watchRecord - 100 > 0) {
+        watchRecord = 100;
+    }else if (watchRecord < 0){
+        watchRecord = 0;
     }
     NSLog(@"%@, %@", _history.watchRecord, _history.totalTime);
-    self.playTimeLabel.text = [NSString stringWithFormat:@"已观看%0.1f%%", historyTime];
+    self.playTimeLabel.text = [NSString stringWithFormat:@"已观看%0.1f%%", watchRecord];
     [self.posterImagView sd_setImageWithURL:[NSURL URLWithString:_history.thumb] placeholderImage:[UIImage imageNamed:@"默认"]];
 }
 - (NSString *)formatShowTime:(NSString *)time {
