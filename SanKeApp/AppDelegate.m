@@ -18,6 +18,7 @@
 #import "QAMainViewController.h"
 #import "TeachingMainViewController.h"
 #import "YXSSOAuthManager.h"
+#import "PersonalCenterViewController.h"
 
 @interface AppDelegate ()
 @property (nonatomic, unsafe_unretained) UIBackgroundTaskIdentifier backgroundTaskIdentifier;
@@ -36,8 +37,8 @@
     [GlobalUtils setupCore];
     [[YXSSOAuthManager sharedManager] registerWXApp];
     [[YXSSOAuthManager sharedManager] registerQQApp];
-//    [UpgradeManager checkForUpgrade];//当前版本暂不做升级界面
-//    [StageSubjectDataManager updateToLatestData];//当前版本的学科学段从本地取,不更新
+    //    [UpgradeManager checkForUpgrade];//当前版本暂不做升级界面
+    //    [StageSubjectDataManager updateToLatestData];//当前版本的学科学段从本地取,不更新
     [self registerNotifications];
     
     self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
@@ -74,16 +75,17 @@
             SKNavigationController *teachingNavi = [[SKNavigationController alloc]initWithRootViewController:teachingVC];
             teachingNavi.tabBarItem = [[UITabBarItem alloc]initWithTitle:@"同步教学" image:[UIImage imageNamed:@"同步教学"] selectedImage:[UIImage imageNamed:@"同步教学-点击"]];
             
-            SideMenuViewController *menuVC = [[SideMenuViewController alloc]init];
-            SKNavigationController *menuNavi = [[SKNavigationController alloc]initWithRootViewController:menuVC];
-            menuNavi.tabBarItem = [[UITabBarItem alloc]initWithTitle:@"个人中心" image:[UIImage imageNamed:@"个人中心"] selectedImage:[UIImage imageNamed:@"个人中心-点击"]];
+            PersonalCenterViewController *personalVC = [[PersonalCenterViewController alloc]init];
+            SKNavigationController *personalNavi = [[SKNavigationController alloc]initWithRootViewController:personalVC];
+            personalNavi.tabBarItem = [[UITabBarItem alloc]initWithTitle:@"个人中心" image:[UIImage imageNamed:@"个人中心"] selectedImage:[UIImage imageNamed:@"个人中心-点击"]];
             
             [[UITabBarItem appearance]setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor colorWithHexString:@"333333"]} forState:UIControlStateNormal];
             [[UITabBarItem appearance]setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor colorWithHexString:@"4691a6"]} forState:UIControlStateSelected];
             [[UITabBarItem appearance]setTitleTextAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:10]} forState:UIControlStateNormal];
             
             SKTabBarController *tabBarVC = [[SKTabBarController alloc]init];
-            tabBarVC.viewControllers = @[mainNavi,qaNavi,teachingNavi,menuNavi];
+            tabBarVC.viewControllers = @[mainNavi,qaNavi,teachingNavi,personalNavi];
+            tabBarVC.tabBar.tintColor = [UIColor colorWithHexString:@"4691a6"];
             self.window.rootViewController = tabBarVC;
         }
     }else {

@@ -12,14 +12,19 @@
 #import "UploadHeadImgRequest.h"
 #import "UpdateInfoRequest.h"
 #import "UIImage+YXImage.h"
+#import "UpdateUserNameRequest.h"
 
 NSString * const kStageSubjectDidChangeNotification = @"kStageSubjectDidChangeNotification";
 NSString *const kUpdateHeadPortraitSuccessNotification = @"kUpdateHeadPortraitSuccessNotification";
+NSString *const kUpdateUserNameSuccessNotification = @"kUpdateUserNameSuccessNotification";
+
 @interface MineDataManager()
 @property (nonatomic, strong) UpdateStageSubjectRequest *stageSubjectRequest;
 @property (nonatomic, strong) UpdateAreaRequest *areaRequest;
 @property (nonatomic, strong) UploadHeadImgRequest *uploadHeadImgRequest;
 @property (nonatomic, strong) UpdateInfoRequest *updateInfoRequest;
+@property (nonatomic, strong) UpdateUserNameRequest *updateUserNameRequest;
+
 @end
 
 @implementation MineDataManager
@@ -83,9 +88,9 @@ NSString *const kUpdateHeadPortraitSuccessNotification = @"kUpdateHeadPortraitSu
     manager.uploadHeadImgRequest = [[UploadHeadImgRequest alloc] init];
     NSData *data = [UIImage compressionImage:portrait limitSize:2*1024*1024];
     [manager.uploadHeadImgRequest.request setData:data
-                                  withFileName:@"head.jpg"
-                                andContentType:nil
-                                        forKey:@"newUpload"];
+                                     withFileName:@"head.jpg"
+                                   andContentType:nil
+                                           forKey:@"newUpload"];
     WEAK_SELF
     [manager.uploadHeadImgRequest startRequestWithRetClass:[HttpBaseRequestItem class] andCompleteBlock:^(id retItem, NSError *error, BOOL isMock) {
         STRONG_SELF
@@ -122,8 +127,32 @@ NSString *const kUpdateHeadPortraitSuccessNotification = @"kUpdateHeadPortraitSu
         HttpBaseRequestItem *item = retItem;
         UserModel *model = [UserModel modelFromRawData:item.info];
         [UserManager sharedInstance].userModel = model;
-        [UserManager sharedInstance].loginStatus = YES;
+        if (![UserManager sharedInstance].loginStatus) {
+            [UserManager sharedInstance].loginStatus = YES;
+        }
         BLOCK_EXEC(completeBlock,nil);
     }];
+}
+
++ (void)updateUserName:(NSString *)userName completeBlock:(void (^)(NSError *))completeBlock {
+    MineDataManager *manager = [MineDataManager sharedInstance];
+    [manager.updateUserNameRequest stopRequest];
+    manager.updateUserNameRequest = [[UpdateUserNameRequest alloc]init];
+    manager.updateUserNameRequest.username = userName;
+    WEAK_SELF
+    [manager.updateUserNameRequest startRequestWithRetClass:[HttpBaseRequestItem class] andCompleteBlock:^(id retItem, NSError *error, BOOL isMock) {
+        STRONG_SELF
+        if (error) {
+            BLOCK_EXEC(completeBlock,error);
+            return;
+        }
+        HttpBaseRequestItem *item = retItem;
+        UserModel *model = [UserModel modelFromRawData:item.info];
+        [UserManager sharedInstance].userModel = model;
+        [[NSNotificationCenter defaultCenter] postNotificationName:kUpdateUserNameSuccessNotification
+                                                            object:nil];
+        BLOCK_EXEC(completeBlock,nil);
+    }];
+    
 }
 @end

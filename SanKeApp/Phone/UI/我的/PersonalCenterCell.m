@@ -1,23 +1,22 @@
 //
-//  UserInfoTableViewCell.m
+//  PersonalCenterCell.m
 //  SanKeApp
 //
-//  Created by ZLL on 2017/1/12.
+//  Created by ZLL on 2017/3/27.
 //  Copyright © 2017年 niuzhaowang. All rights reserved.
 //
 
-#import "UserInfoTableViewCell.h"
+#import "PersonalCenterCell.h"
 
-@interface UserInfoTableViewCell ()<UIGestureRecognizerDelegate>
+
+@interface PersonalCenterCell ()<UIGestureRecognizerDelegate>
 @property (nonatomic, strong) UILabel *titleLabel;
-@property (nonatomic, strong) UILabel *contentLabel;
 @property (nonatomic, strong) UIButton *selectedButton;
 @property (nonatomic, strong) UIView *lineView;
 @property (nonatomic, copy) SelectedButtonActionBlock buttonActionBlock;
 @end
 
-
-@implementation UserInfoTableViewCell
+@implementation PersonalCenterCell
 
 - (void)awakeFromNib {
     [super awakeFromNib];
@@ -26,7 +25,7 @@
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
-
+    
     // Configure the view for the selected state
 }
 
@@ -43,10 +42,6 @@
     self.titleLabel.font = [UIFont systemFontOfSize:14];
     self.titleLabel.textColor = [UIColor colorWithHexString:@"333333"];
     
-    self.contentLabel = [[UILabel alloc]init];
-    self.contentLabel.font = [UIFont systemFontOfSize:14];
-    self.contentLabel.textColor = [UIColor colorWithHexString:@"999999"];
-    
     self.selectedButton = [UIButton buttonWithType:UIButtonTypeCustom];
     [self.selectedButton setImage:[UIImage imageNamed:@"学科"] forState:UIControlStateNormal];
     
@@ -62,7 +57,6 @@
 }
 - (void)setupLayout {
     [self.contentView addSubview:self.titleLabel];
-    [self.contentView addSubview:self.contentLabel];
     [self.contentView addSubview:self.selectedButton];
     [self.contentView addSubview:self.lineView];
     
@@ -70,13 +64,9 @@
         make.left.mas_equalTo(10);
         make.centerY.mas_equalTo(0);
     }];
-    [self.contentLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.right.equalTo(self.selectedButton.mas_left).offset(-10);
-        make.centerY.equalTo(self.titleLabel);
-    }];
     [self.selectedButton mas_makeConstraints:^(MASConstraintMaker *make) {
         make.right.mas_equalTo(-10);
-        make.centerY.equalTo(self.contentLabel);
+        make.centerY.equalTo(self.titleLabel);
         make.size.mas_equalTo(CGSizeMake(30, 30));
     }];
     [self.lineView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -86,17 +76,17 @@
     }];
 }
 
-- (void)configTitle:(NSString *)title content:(NSString *)content {
-    if (isEmpty(content)) {
-        self.contentLabel.text = @"请选择";
+- (void)configTitle:(NSString *)title hasButton:(BOOL)hasButton {
+     self.titleLabel.text = title;
+    if (hasButton) {
+        self.selectedButton.hidden = NO;
     }else {
-        
-        self.contentLabel.text = content;
+        self.selectedButton.hidden = YES;
     }
-    self.titleLabel.text = title;
 }
 
 - (void)setSelectedButtonActionBlock:(SelectedButtonActionBlock)block {
     self.buttonActionBlock = block;
 }
+
 @end

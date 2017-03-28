@@ -57,6 +57,7 @@
     self.passwordInput.layer.cornerRadius = 2.0f;
     self.passwordInput.clipsToBounds = YES;
     self.passwordInput.textField.keyboardType = UIKeyboardTypeASCIICapable;
+    self.passwordInput.textField.secureTextEntry = YES;
     NSDictionary *attributes1 = @{NSForegroundColorAttributeName: [UIColor colorWithHexString:@"c6c9cc"]};
     self.passwordInput.textField.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@"请输入6~18位密码" attributes:attributes1];
     [self.passwordInput setTextChangeBlock:^(NSString *text) {

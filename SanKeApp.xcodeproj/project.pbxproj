@@ -244,6 +244,13 @@
 		E9355B9E1E7159AC007AE9F0 /* ChangePasswordRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = E9355B9D1E7159AC007AE9F0 /* ChangePasswordRequest.m */; };
 		E9355BA11E724660007AE9F0 /* AboutHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = E9355BA01E724660007AE9F0 /* AboutHeaderView.m */; };
 		E94423C01E767A1500F8F795 /* HistoryDeleteRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = E94423BF1E767A1500F8F795 /* HistoryDeleteRequest.m */; };
+		E96EB7261E8A16160061D6C9 /* ChangePasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E96EB7211E8A16160061D6C9 /* ChangePasswordViewController.m */; };
+		E96EB7271E8A16160061D6C9 /* PersonalCenterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E96EB7231E8A16160061D6C9 /* PersonalCenterViewController.m */; };
+		E96EB7281E8A16160061D6C9 /* SettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E96EB7251E8A16160061D6C9 /* SettingViewController.m */; };
+		E96EB72D1E8A16940061D6C9 /* PersonalCenterCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E96EB72A1E8A16940061D6C9 /* PersonalCenterCell.m */; };
+		E96EB72E1E8A16940061D6C9 /* UserNameTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E96EB72C1E8A16940061D6C9 /* UserNameTableViewCell.m */; };
+		E96EB7311E8A16F40061D6C9 /* UpdateUserNameRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = E96EB7301E8A16F40061D6C9 /* UpdateUserNameRequest.m */; };
+		E96EB7341E8A17370061D6C9 /* PersonalCenterModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E96EB7331E8A17370061D6C9 /* PersonalCenterModel.m */; };
 		E9F4541C1E31B18D00860DC2 /* TouristLoginRequest.json in Resources */ = {isa = PBXBuildFile; fileRef = E9F4541B1E31B18D00860DC2 /* TouristLoginRequest.json */; };
 /* End PBXBuildFile section */
 
@@ -721,6 +728,20 @@
 		E9355BA01E724660007AE9F0 /* AboutHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AboutHeaderView.m; sourceTree = "<group>"; };
 		E94423BE1E767A1500F8F795 /* HistoryDeleteRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HistoryDeleteRequest.h; sourceTree = "<group>"; };
 		E94423BF1E767A1500F8F795 /* HistoryDeleteRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HistoryDeleteRequest.m; sourceTree = "<group>"; };
+		E96EB7201E8A16160061D6C9 /* ChangePasswordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChangePasswordViewController.h; sourceTree = "<group>"; };
+		E96EB7211E8A16160061D6C9 /* ChangePasswordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChangePasswordViewController.m; sourceTree = "<group>"; };
+		E96EB7221E8A16160061D6C9 /* PersonalCenterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PersonalCenterViewController.h; sourceTree = "<group>"; };
+		E96EB7231E8A16160061D6C9 /* PersonalCenterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PersonalCenterViewController.m; sourceTree = "<group>"; };
+		E96EB7241E8A16160061D6C9 /* SettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingViewController.h; sourceTree = "<group>"; };
+		E96EB7251E8A16160061D6C9 /* SettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingViewController.m; sourceTree = "<group>"; };
+		E96EB7291E8A16940061D6C9 /* PersonalCenterCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PersonalCenterCell.h; sourceTree = "<group>"; };
+		E96EB72A1E8A16940061D6C9 /* PersonalCenterCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PersonalCenterCell.m; sourceTree = "<group>"; };
+		E96EB72B1E8A16940061D6C9 /* UserNameTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserNameTableViewCell.h; sourceTree = "<group>"; };
+		E96EB72C1E8A16940061D6C9 /* UserNameTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserNameTableViewCell.m; sourceTree = "<group>"; };
+		E96EB72F1E8A16F40061D6C9 /* UpdateUserNameRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UpdateUserNameRequest.h; sourceTree = "<group>"; };
+		E96EB7301E8A16F40061D6C9 /* UpdateUserNameRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UpdateUserNameRequest.m; sourceTree = "<group>"; };
+		E96EB7321E8A17370061D6C9 /* PersonalCenterModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PersonalCenterModel.h; sourceTree = "<group>"; };
+		E96EB7331E8A17370061D6C9 /* PersonalCenterModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PersonalCenterModel.m; sourceTree = "<group>"; };
 		E9F4541B1E31B18D00860DC2 /* TouristLoginRequest.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = TouristLoginRequest.json; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -1599,6 +1620,8 @@
 				7C7841B71E2F1E2900755BC0 /* MineDataManager.m */,
 				E9230C4D1E3060FE00AC6617 /* MineUserModel.h */,
 				E9230C4E1E3060FE00AC6617 /* MineUserModel.m */,
+				E96EB7321E8A17370061D6C9 /* PersonalCenterModel.h */,
+				E96EB7331E8A17370061D6C9 /* PersonalCenterModel.m */,
 				E9355B921E712445007AE9F0 /* SupplementUserInfo.h */,
 				E9355B931E712445007AE9F0 /* SupplementUserInfo.m */,
 			);
@@ -1688,6 +1711,8 @@
 				7C7841A71E2F132700755BC0 /* UpdateAreaRequest.m */,
 				E9355AE21E65574E007AE9F0 /* UploadHeadImgRequest.h */,
 				E9355AE31E65574E007AE9F0 /* UploadHeadImgRequest.m */,
+				E96EB72F1E8A16F40061D6C9 /* UpdateUserNameRequest.h */,
+				E96EB7301E8A16F40061D6C9 /* UpdateUserNameRequest.m */,
 			);
 			name = Network;
 			sourceTree = "<group>";
@@ -1777,6 +1802,10 @@
 				E902E6B91E2BA3E0009441B3 /* UserInfoTableViewCell.m */,
 				E902E6B61E2BA3E0009441B3 /* UserInfoPickerView.h */,
 				E902E6B71E2BA3E0009441B3 /* UserInfoPickerView.m */,
+				E96EB7291E8A16940061D6C9 /* PersonalCenterCell.h */,
+				E96EB72A1E8A16940061D6C9 /* PersonalCenterCell.m */,
+				E96EB72B1E8A16940061D6C9 /* UserNameTableViewCell.h */,
+				E96EB72C1E8A16940061D6C9 /* UserNameTableViewCell.m */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -1784,6 +1813,12 @@
 		E902E6C71E2C5C6B009441B3 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				E96EB7201E8A16160061D6C9 /* ChangePasswordViewController.h */,
+				E96EB7211E8A16160061D6C9 /* ChangePasswordViewController.m */,
+				E96EB7221E8A16160061D6C9 /* PersonalCenterViewController.h */,
+				E96EB7231E8A16160061D6C9 /* PersonalCenterViewController.m */,
+				E96EB7241E8A16160061D6C9 /* SettingViewController.h */,
+				E96EB7251E8A16160061D6C9 /* SettingViewController.m */,
 				E9355AD31E653222007AE9F0 /* YXImagePickerController.h */,
 				E9355AD41E653222007AE9F0 /* YXImagePickerController.m */,
 				E902E6A61E2BA3BE009441B3 /* MineViewController.h */,
@@ -2041,6 +2076,7 @@
 				7C7629C71E27443F007B5698 /* LoginInputView.m in Sources */,
 				7C7629DC1E28B1F2007B5698 /* UpgradeManager.m in Sources */,
 				E9355B441E6D84BD007AE9F0 /* RegisterViewController.m in Sources */,
+				E96EB7261E8A16160061D6C9 /* ChangePasswordViewController.m in Sources */,
 				7C78419D1E2E2AD900755BC0 /* UpdateStageSubjectRequest.m in Sources */,
 				7C1A5F041E150F4B00832DED /* LePlayer.m in Sources */,
 				7C7841911E2E221800755BC0 /* LoginRequest.m in Sources */,
@@ -2083,6 +2119,7 @@
 				E902E6BE1E2BA3E0009441B3 /* UserInfoPickerView.m in Sources */,
 				7C6F21901E232F8E000AB43A /* YXDrawerController.m in Sources */,
 				7CAE439A1E83AA8F00B0D460 /* QAReplyDetailViewController.m in Sources */,
+				E96EB72D1E8A16940061D6C9 /* PersonalCenterCell.m in Sources */,
 				7C1A5F771E15132200832DED /* YXFileFavorWrapper.m in Sources */,
 				7C1A60111E163B8800832DED /* YXTestViewController.m in Sources */,
 				9241FFF81E2651390015B587 /* YXTriangleView.m in Sources */,
@@ -2091,6 +2128,7 @@
 				9241FFE11E25D5830015B587 /* ProjectContainerView.m in Sources */,
 				7C1A5FD81E1636F500832DED /* DataErrorView.m in Sources */,
 				7C1A5EE71E1505BF00832DED /* SKNavigationController.m in Sources */,
+				E96EB7341E8A17370061D6C9 /* PersonalCenterModel.m in Sources */,
 				9241FFEC1E2610C60015B587 /* PlayRecordCell.m in Sources */,
 				30C48A7A1E52E72100CCDBBE /* YXRecordBase.m in Sources */,
 				7C1A5FCD1E1634DE00832DED /* YXPromtController.m in Sources */,
@@ -2115,6 +2153,7 @@
 				30C48A951E52EACC00CCDBBE /* v1_2Model.xcdatamodeld in Sources */,
 				7C1A5F4B1E15127200832DED /* YXPlayerViewController.m in Sources */,
 				7C1A5F3B1E15126500832DED /* YXAudioSlideProgressView.m in Sources */,
+				E96EB72E1E8A16940061D6C9 /* UserNameTableViewCell.m in Sources */,
 				7C1A5F861E1513D600832DED /* MJRefreshBaseView.m in Sources */,
 				7C7841A81E2F132700755BC0 /* UpdateAreaRequest.m in Sources */,
 				7C1A5EFD1E150E3400832DED /* LogFormatter.m in Sources */,
@@ -2162,6 +2201,7 @@
 				7C1A5F051E150F4B00832DED /* LePlayerView.m in Sources */,
 				30C48A921E52EACC00CCDBBE /* LogRecordEntity.m in Sources */,
 				E9355B3B1E6952F1007AE9F0 /* VerifyCodeInputView.m in Sources */,
+				E96EB7271E8A16160061D6C9 /* PersonalCenterViewController.m in Sources */,
 				E9355B7A1E6EBDB0007AE9F0 /* AboutViewController.m in Sources */,
 				7C1809381E25DEBA00B71863 /* StageSubjectCell.m in Sources */,
 				7C7841BE1E2F37EB00755BC0 /* LoginDataManager.m in Sources */,
@@ -2169,12 +2209,14 @@
 				7CAE439E1E84D0B300B0D460 /* CloneCategory.m in Sources */,
 				7C1A5F751E15132200832DED /* YXFileDownloadProgressView.m in Sources */,
 				E9355B991E7153DA007AE9F0 /* UpdateInfoRequest.m in Sources */,
+				E96EB7281E8A16160061D6C9 /* SettingViewController.m in Sources */,
 				7C1A5F681E15130200832DED /* YXFileVideoItem.m in Sources */,
 				7C1A5FFD1E16396C00832DED /* UIImage+YXImage.m in Sources */,
 				9241FFE71E25E7C90015B587 /* CourseTableViewCell.m in Sources */,
 				E9355B771E6EB51E007AE9F0 /* UserInfoDataManger.m in Sources */,
 				7C7629D91E28A9D5007B5698 /* YXInitRequest.m in Sources */,
 				7C1A5EF11E150B6A00832DED /* SKConfigManager.m in Sources */,
+				E96EB7311E8A16F40061D6C9 /* UpdateUserNameRequest.m in Sources */,
 				7C7841B81E2F1E2900755BC0 /* MineDataManager.m in Sources */,
 				E902E6DB1E2CD109009441B3 /* UpgradeView.m in Sources */,
 				7C1A5F951E15143F00832DED /* YXMockManager.m in Sources */,

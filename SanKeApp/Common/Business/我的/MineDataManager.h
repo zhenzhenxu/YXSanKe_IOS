@@ -11,6 +11,7 @@
 
 extern NSString * const kStageSubjectDidChangeNotification;
 extern NSString * const kUpdateHeadPortraitSuccessNotification;
+extern NSString * const kUpdateUserNameSuccessNotification;
 
 @interface MineDataManager : NSObject
 //设置学科学段
@@ -21,4 +22,6 @@ extern NSString * const kUpdateHeadPortraitSuccessNotification;
 + (void)updateHeadPortrait:(UIImage *)portrait completeBlock:(void(^)(NSError *error))completeBlock;
 //设置用户信息(角色,性别,入职年份)
 + (void)updateSupplementUserInfo:(SupplementUserInfo *)supplementUserInfo completeBlock:(void(^)(NSError *error))completeBlock;
+//修改头像
++ (void)updateUserName:(NSString *)userName completeBlock:(void(^)(NSError *error))completeBlock;
 @end

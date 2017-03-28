@@ -110,4 +110,25 @@
         }];
     }
 }
+
+- (void)setCanEdit:(BOOL)canEdit {
+    _canEdit = canEdit;
+    if (!canEdit) {
+        self.editLabel.hidden = YES;
+        self.iconImageView.userInteractionEnabled = NO;
+        [self.iconImageView mas_remakeConstraints:^(MASConstraintMaker *make) {
+            make.centerX.equalTo(self.contentView);
+            make.centerY.equalTo(self.contentView);
+            make.size.mas_equalTo(CGSizeMake(73, 73));
+        }];
+    }else {
+        self.editLabel.hidden = NO;
+        self.iconImageView.userInteractionEnabled = YES;
+        [self.iconImageView mas_remakeConstraints:^(MASConstraintMaker *make) {
+            make.centerX.equalTo(self.contentView);
+            make.centerY.equalTo(self.contentView).offset(-12.0f);
+            make.size.mas_equalTo(CGSizeMake(73, 73));
+        }];
+    }
+}
 @end

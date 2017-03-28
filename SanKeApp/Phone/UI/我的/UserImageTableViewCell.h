@@ -13,5 +13,6 @@ typedef void(^EditBlock)(void);
 @interface UserImageTableViewCell : UITableViewCell
 
 @property (nonatomic, strong) UserModel *model;
+@property (nonatomic, assign) BOOL canEdit;//头像是否可以编辑
 - (void)setEditBlock:(EditBlock)block;
 @end

@@ -77,6 +77,7 @@
 - (void)clearAction
 {
     self.textField.text = @"";
+    [self textEditingChanged:self.textField];
     self.clearButton.hidden = YES;
 }
 
