@@ -8,7 +8,6 @@
 
 #import "AppDelegate.h"
 #import "YXTestViewController.h"
-#import "SideMenuViewController.h"
 #import "YXDrawerViewController.h"
 #import "ProjectMainViewController.h"
 #import "LoginViewController.h"
