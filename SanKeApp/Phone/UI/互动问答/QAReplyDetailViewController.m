@@ -9,6 +9,7 @@
 #import "QAReplyDetailViewController.h"
 #import "QAReplyDetailCell.h"
 #import "QAReplyDetailMenuItemView.h"
+#import "QAReplyQuestionViewController.h"
 
 @interface QAReplyDetailViewController ()<UITableViewDataSource,UITableViewDelegate>
 @property (nonatomic, strong) UITableView *tableView;
@@ -79,6 +80,7 @@
     QAReplyDetailMenuItemView *replyMenu = [self menuViewWithTitle:@"我来回答" image:@"我来回答" actionBlock:^{
         STRONG_SELF
         [self handleReply];
+        DDLogVerbose(@"我来回答 clicked!");
     }];
     QAReplyDetailMenuItemView *favorMenu = [self menuViewWithTitle:@"喜欢" image:@"喜欢" actionBlock:^{
         STRONG_SELF
@@ -117,7 +119,8 @@
 }
 
 - (void)handleReply {
-    
+    QAReplyQuestionViewController *vc = [[QAReplyQuestionViewController alloc]init];
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 - (void)handleFavor {

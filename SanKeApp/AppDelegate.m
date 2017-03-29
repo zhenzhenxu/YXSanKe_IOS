@@ -68,7 +68,7 @@
             
             QAMainViewController *qaVC = [[QAMainViewController alloc]init];
             SKNavigationController *qaNavi = [[SKNavigationController alloc]initWithRootViewController:qaVC];
-            qaNavi.tabBarItem = [[UITabBarItem alloc]initWithTitle:@"互动问答" image:[UIImage imageNamed:@"互动问答"] selectedImage:[UIImage imageNamed:@"互动问答-点击"]];
+            qaNavi.tabBarItem = [[UITabBarItem alloc]initWithTitle:@"互动答疑" image:[UIImage imageNamed:@"互动问答"] selectedImage:[UIImage imageNamed:@"互动问答-点击"]];
             
             TeachingMainViewController *teachingVC = [[TeachingMainViewController alloc]init];
             SKNavigationController *teachingNavi = [[SKNavigationController alloc]initWithRootViewController:teachingVC];
