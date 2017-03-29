@@ -42,6 +42,7 @@
     self.textField.textColor = [UIColor whiteColor];
     self.textField.font = [UIFont systemFontOfSize:14];
     self.textField.delegate = self;
+    self.textField.returnKeyType = UIReturnKeyDone;
     [self addSubview:self.textField];
     [self.textField mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(10);
@@ -73,6 +74,12 @@
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
     NSString *text = [textField.text stringByReplacingCharactersInRange:range withString:string];
     self.clearButton.hidden = text.length==0;
+    return YES;
+}
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    [textField resignFirstResponder];
     return YES;
 }
 

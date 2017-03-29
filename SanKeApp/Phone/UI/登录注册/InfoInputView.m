@@ -8,7 +8,7 @@
 
 #import "InfoInputView.h"
 
-@interface InfoInputView ()
+@interface InfoInputView ()<UITextFieldDelegate>
 @property (nonatomic, strong) UITextField *textField;
 @property (nonatomic, strong) UIButton *clearButton;
 
@@ -46,6 +46,7 @@
     self.textField.font = [UIFont systemFontOfSize:14.0f];
     self.textField.delegate = self;
     [self.textField addTarget:self action:@selector(textEditingChanged:) forControlEvents:UIControlEventEditingChanged];
+    self.textField.returnKeyType = UIReturnKeyDone;
     [self addSubview:self.textField];
     [self.textField mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(10);
@@ -113,5 +114,6 @@
 - (void)setTextChangeBlock:(TextChangeBlock)block {
     self.Block = block;
 }
+
 
 @end

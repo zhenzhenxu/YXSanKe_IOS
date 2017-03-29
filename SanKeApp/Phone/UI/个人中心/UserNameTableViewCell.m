@@ -126,13 +126,13 @@
     self.changeNameActionBlock = block;
 }
 
-- (void) keyboardWillHide:(NSNotification *) note {
+- (void)keyboardWillHide:(NSNotification *) note {
     [self.nameTextField resignFirstResponder];
     BLOCK_EXEC(self.changeNameActionBlock,self.nameTextField.text);
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
-    [self.nameTextField resignFirstResponder];
+    [textField resignFirstResponder];
     return YES;
 }
 @end
