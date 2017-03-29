@@ -1,0 +1,48 @@
+{
+    "code": 0,
+    "desc": "success",
+    "data": {
+        "ask": {
+            "id": 3,
+            "title": "11",
+            "content": "22",
+            "attachment": "21924921",
+            "answerNum": 200,
+            "viewNum": 10,
+            "askUserId": 8995120,
+            "userRole": 0,
+            "status": 1,
+            "bizId": "1889194",
+            "source": 101,
+            "createTime": "2016-04-07 18:31:45",
+            "updateTime": "2016-04-08 10:36:58",
+            "showUserName": "测试学员238",
+            "avatar": "http://s2.jsyxw.cn/yanxiu/h2.jpg",
+            "specialRole": null,
+            "attachmentList": [
+                               {
+                               "resId": 21924921,
+                               "resName": "1148601013@chatroom_1459933135909_76.png",
+                               "resType": "png",
+                               "fileType": "image",
+                               "resSize": 404740,
+                               "userId": null,
+                               "userName": null,
+                               "avatar": null,
+                               "downNum": null,
+                               "readNum": null,
+                               "shareType": null,
+                               "introduction": "",
+                               "isFavorite": null,
+                               "thumbnail": "http://upload.ugc.yanxiu.com/img/9954f2299e052b59558ed9ef52c8c591.png?from=107&rid=21924921",
+                               "downloadUrl": "http://upload.ugc.yanxiu.com/img/9954f2299e052b59558ed9ef52c8c591.png?from=107&rid=21924921&filename=1148601013@chatroom_1459933135909_76.png&attachment=true",
+                               "previewUrl": "http://upload.ugc.yanxiu.com/img/9954f2299e052b59558ed9ef52c8c591.png?from=107&rid=21924921",
+                               "typeId": null,
+                               "resSource": null,
+                               "replyNum": null,
+                               "uploadTime": null
+                               }
+                               ]
+        }
+    }
+}

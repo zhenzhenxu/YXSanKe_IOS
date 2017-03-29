@@ -1,0 +1,156 @@
+{
+    "code": 0,
+    "desc": "success",
+    "data": {
+        "askPage": {
+            "elements": [
+                         {
+                         "id": 6,
+                         "title": "学生的阅读能力提高很慢，该怎么办？",
+                         "content": "我在阅读教学中，已经很认真了，每篇课文都讲的很细，可是学生的阅读能力提高的还是很慢，甚至不愿意学习，问题究竟出在哪里呢？",
+                         "attachment": "21934474,21934463",
+                         "answerNum": 123,
+                         "viewNum": 245,
+                         "askUserId": 8995206,
+                         "userRole": 1,
+                         "status": 1,
+                         "bizId": "1889194",
+                         "source": 101,
+                         "createTime": "2016-04-08",
+                         "updateTime": "2016-04-08",
+                         "showUserName": "测试组长42",
+                         "avatar": "http://s2.jsyxw.cn/yanxiu/h2.jpg",
+                         "specialRole": null,
+                         "attachmentList": [
+                                            {
+                                            "resId": 21934474,
+                                            "resName": "新建文本文档.txt",
+                                            "resType": "txt",
+                                            "fileType": "text",
+                                            "resSize": 1239,
+                                            "thumbnail": "http://upload.ugc.yanxiu.com/doc/thumbnail_6ec1bcf5b784f554cf2a80b7431c96fa.jpg?from=107&rid=21934474",
+                                            "downloadUrl": "http://upload.ugc.yanxiu.com/doc/6ec1bcf5b784f554cf2a80b7431c96fa.txt?from=107&rid=21934474&filename=新建文本文档.txt&attachment=true",
+                                            "previewUrl": "http://upload.ugc.yanxiu.com/doc/6ec1bcf5b784f554cf2a80b7431c96fa.swf?from=107&rid=21934474"
+                                            }
+                                            ]
+                         },
+                         {
+                         "id": 6,
+                         "title": "学生的阅读能力提高很慢，该怎么办？",
+                         "content": "我在阅读教学中，已经很认真了，每篇课文都讲的很细，可是学生的阅读能力提高的还是很慢，甚至不愿意学习，问题究竟出在哪里呢？",
+                         "attachment": "21934474,21934463",
+                         "answerNum": 123,
+                         "viewNum": 245,
+                         "askUserId": 8995206,
+                         "userRole": 1,
+                         "status": 1,
+                         "bizId": "1889194",
+                         "source": 101,
+                         "createTime": "2016-04-08",
+                         "updateTime": "2016-04-08",
+                         "showUserName": "测试组长42",
+                         "avatar": "http://s2.jsyxw.cn/yanxiu/h2.jpg",
+                         "specialRole": null,
+                         "attachmentList": [
+                                            {
+                                            "resId": 21934474,
+                                            "resName": "新建文本文档.txt",
+                                            "resType": "txt",
+                                            "fileType": "text",
+                                            "resSize": 1239,
+                                            "thumbnail": "http://upload.ugc.yanxiu.com/doc/thumbnail_6ec1bcf5b784f554cf2a80b7431c96fa.jpg?from=107&rid=21934474",
+                                            "downloadUrl": "http://upload.ugc.yanxiu.com/doc/6ec1bcf5b784f554cf2a80b7431c96fa.txt?from=107&rid=21934474&filename=新建文本文档.txt&attachment=true",
+                                            "previewUrl": "http://upload.ugc.yanxiu.com/doc/6ec1bcf5b784f554cf2a80b7431c96fa.swf?from=107&rid=21934474"
+                                            }
+                                            ]
+                         },
+                         {
+                         "id": 6,
+                         "title": "学生的阅读能力提高很慢，该怎么办？",
+                         "content": "我在阅读教学中，已经很认真了，每篇课文都讲的很细，可是学生的阅读能力提高的还是很慢，甚至不愿意学习，问题究竟出在哪里呢？",
+                         "attachment": "21934474,21934463",
+                         "answerNum": 123,
+                         "viewNum": 245,
+                         "askUserId": 8995206,
+                         "userRole": 1,
+                         "status": 1,
+                         "bizId": "1889194",
+                         "source": 101,
+                         "createTime": "2016-04-08",
+                         "updateTime": "2016-04-08",
+                         "showUserName": "测试组长42",
+                         "avatar": "http://s2.jsyxw.cn/yanxiu/h2.jpg",
+                         "specialRole": null,
+                         "attachmentList": [
+                                            {
+                                            "resId": 21934474,
+                                            "resName": "新建文本文档.txt",
+                                            "resType": "txt",
+                                            "fileType": "text",
+                                            "resSize": 1239,
+                                            "thumbnail": "http://upload.ugc.yanxiu.com/doc/thumbnail_6ec1bcf5b784f554cf2a80b7431c96fa.jpg?from=107&rid=21934474",
+                                            "downloadUrl": "http://upload.ugc.yanxiu.com/doc/6ec1bcf5b784f554cf2a80b7431c96fa.txt?from=107&rid=21934474&filename=新建文本文档.txt&attachment=true",
+                                            "previewUrl": "http://upload.ugc.yanxiu.com/doc/6ec1bcf5b784f554cf2a80b7431c96fa.swf?from=107&rid=21934474"
+                                            }
+                                            ]
+                         },
+                         {
+                         "id": 6,
+                         "title": "学生的阅读能力提高很慢，该怎么办？",
+                         "content": "我在阅读教学中，已经很认真了，每篇课文都讲的很细，可是学生的阅读能力提高的还是很慢，甚至不愿意学习，问题究竟出在哪里呢？",
+                         "attachment": "21934474,21934463",
+                         "answerNum": 123,
+                         "viewNum": 245,
+                         "askUserId": 8995206,
+                         "userRole": 1,
+                         "status": 1,
+                         "bizId": "1889194",
+                         "source": 101,
+                         "createTime": "2016-04-08",
+                         "updateTime": "2016-04-08",
+                         "showUserName": "测试组长42",
+                         "avatar": "http://s2.jsyxw.cn/yanxiu/h2.jpg",
+                         "specialRole": null,
+                         "attachmentList": [
+                                            {
+                                            "resId": 21934474,
+                                            "resName": "新建文本文档.txt",
+                                            "resType": "txt",
+                                            "fileType": "text",
+                                            "resSize": 1239,
+                                            "thumbnail": "http://upload.ugc.yanxiu.com/doc/thumbnail_6ec1bcf5b784f554cf2a80b7431c96fa.jpg?from=107&rid=21934474",
+                                            "downloadUrl": "http://upload.ugc.yanxiu.com/doc/6ec1bcf5b784f554cf2a80b7431c96fa.txt?from=107&rid=21934474&filename=新建文本文档.txt&attachment=true",
+                                            "previewUrl": "http://upload.ugc.yanxiu.com/doc/6ec1bcf5b784f554cf2a80b7431c96fa.swf?from=107&rid=21934474"
+                                            }
+                                            ]
+                         },
+                         {
+                         "id": 1,
+                         "title": "111111111111",
+                         "content": "2222222222",
+                         "attachment": "",
+                         "answerNum": 0,
+                         "viewNum": 0,
+                         "askUserId": 8995120,
+                         "userRole": 0,
+                         "status": 1,
+                         "bizId": "1889194",
+                         "source": 101,
+                         "createTime": "2016-04-06 15:14:07",
+                         "updateTime": "2016-04-07 11:38:41",
+                         "showUserName": "测试学员238",
+                         "avatar": "http://s2.jsyxw.cn/yanxiu/h2.jpg",
+                         "specialRole": null,
+                         "attachmentList": null
+                         }
+                         ],
+            "pageSize": 20,
+            "pageNum": null,
+            "offset": 0,
+            "totalElements": 99999,
+            "lastPageNumber": null
+        }
+    },
+    "error": "",
+    "result": ""
+}

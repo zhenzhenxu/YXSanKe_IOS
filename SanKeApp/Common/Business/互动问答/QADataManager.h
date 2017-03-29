@@ -7,7 +7,10 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "QAQuestionDetailRequest.h"
+#import "QAReplyFavorRequest.h"
 
 @interface QADataManager : NSObject
-
++ (void)requestQuestionDetailWithID:(NSString *)questionID completeBlock:(void(^)(QAQuestionDetailRequestItem *item,NSError *error))completeBlock;
++ (void)requestReplyFavorWithID:(NSString *)answerID completeBlock:(void(^)(QAReplyFavorRequestItem *item,NSError *error))completeBlock;
 @end
