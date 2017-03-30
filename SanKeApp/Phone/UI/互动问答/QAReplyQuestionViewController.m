@@ -11,7 +11,6 @@
 
 @interface QAReplyQuestionViewController ()<UIGestureRecognizerDelegate>
 @property (nonatomic, strong) QAInputeTextView *textView;
-
 @end
 
 @implementation QAReplyQuestionViewController
@@ -22,8 +21,8 @@
     self.title = @"我来回答";
     [self setupNavView];
     [self setupUI];
-    [self setupGestureRecognizer];
     [self setupObservers];
+//    [self setupGestureRecognizer];
     // Do any additional setup after loading the view.
 }
 
@@ -49,17 +48,19 @@
 - (void)cancelAction {
     //弹提示框 然后反应
     DDLogDebug(@"点击取消按钮");
+    [self.view endEditing:YES];
     [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (void)naviRightAction {
     DDLogDebug(@"点击发布");
+    [self.view endEditing:YES];
 }
 
 - (void)setupUI {
     self.textView = [[QAInputeTextView alloc]initWithPlaceholder:@"请输入您的回答"];
     [self.view addSubview:self.textView];
-    self.textView.backgroundColor = [UIColor redColor];
+    
     [self.textView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.mas_equalTo(UIEdgeInsetsMake(10, 10, 10, 10));
     }];
@@ -67,7 +68,7 @@
 
 - (void)setupObservers {
     WEAK_SELF
-    [[[NSNotificationCenter defaultCenter]rac_addObserverForName:UIKeyboardWillShowNotification object:nil]subscribeNext:^(id x) {
+    [[[NSNotificationCenter defaultCenter]rac_addObserverForName:UIKeyboardWillChangeFrameNotification object:nil]subscribeNext:^(id x) {
         STRONG_SELF
         NSNotification *noti = (NSNotification *)x;
         NSDictionary *dic = noti.userInfo;
@@ -75,25 +76,7 @@
         CGRect keyboardFrame = keyboardFrameValue.CGRectValue;
         NSNumber *duration = [dic valueForKey:UIKeyboardAnimationDurationUserInfoKey];
         [UIView animateWithDuration:duration.floatValue animations:^{
-            [self.textView mas_remakeConstraints:^(MASConstraintMaker *make) {
-                make.top.left.mas_equalTo(10.0f);
-                make.bottom.mas_equalTo(-10.f - keyboardFrame.size.height);
-                make.right.mas_equalTo(-10.f);
-            }];
-            [self.view layoutIfNeeded];
-        }];
-    }];
-    
-    [[[NSNotificationCenter defaultCenter]rac_addObserverForName:UIKeyboardWillHideNotification object:nil]subscribeNext:^(id x) {
-        STRONG_SELF
-        NSNotification *noti = (NSNotification *)x;
-        NSDictionary *dic = noti.userInfo;
-        NSNumber *duration = [dic valueForKey:UIKeyboardAnimationDurationUserInfoKey];
-        [UIView animateWithDuration:duration.floatValue animations:^{
-            [self.textView mas_remakeConstraints:^(MASConstraintMaker *make) {
-                make.edges.mas_equalTo(UIEdgeInsetsMake(10, 10, 10, 10));
-            }];
-            [self.view layoutIfNeeded];
+            self.textView.contentInset = UIEdgeInsetsMake(0, 0, [UIScreen mainScreen].bounds.size.height-keyboardFrame.origin.y + 10, 0);
         }];
     }];
 }
@@ -112,16 +95,8 @@
 }
 
 - (void)handleSwipeFrom:(UISwipeGestureRecognizer *)recognizer {
-    
-    if(recognizer.direction==UISwipeGestureRecognizerDirectionDown) {
-        DDLogDebug(@"swipe down");
-        [self.textView resignFirstResponder];
-    }
-    if(recognizer.direction==UISwipeGestureRecognizerDirectionUp) {
-        
-        DDLogDebug(@"swipe up");
-        [self.textView resignFirstResponder];
-    }
+    [self.textView resignFirstResponder];
 }
+
 
 @end

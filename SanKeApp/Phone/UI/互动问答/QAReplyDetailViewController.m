@@ -10,6 +10,7 @@
 #import "QAReplyDetailCell.h"
 #import "QAReplyDetailMenuItemView.h"
 #import "QAReplyQuestionViewController.h"
+#import "QAAskQuestionViewController.h"
 
 @interface QAReplyDetailViewController ()<UITableViewDataSource,UITableViewDelegate>
 @property (nonatomic, strong) UITableView *tableView;
@@ -88,7 +89,13 @@
     }];
     QAReplyDetailMenuItemView *questionMenu = [self menuViewWithTitle:@"我要提问" image:@"我要提问" actionBlock:^{
         STRONG_SELF
+<<<<<<< HEAD
         [self handleQuestion];
+=======
+        DDLogVerbose(@"我要提问 clicked!");
+        QAAskQuestionViewController *vc = [[QAAskQuestionViewController alloc]init];
+        [self.navigationController pushViewController:vc animated:YES];
+>>>>>>> 我要提问界面
     }];
     
     [menuContainerView addSubview:replyMenu];

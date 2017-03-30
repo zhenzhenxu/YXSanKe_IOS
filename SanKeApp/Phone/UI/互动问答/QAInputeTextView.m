@@ -24,7 +24,7 @@
         NSAttributedString *placeholderAttributed = [[NSMutableAttributedString alloc]initWithString:placeholder attributes:attributes];
         self.attributedPlaceholder = placeholderAttributed;
         
-        self.textContainerInset = UIEdgeInsetsMake(15, 10, 15, 10);
+        self.textContainerInset = UIEdgeInsetsMake(15, 10, 15, 9);
     }
     return self;
 }

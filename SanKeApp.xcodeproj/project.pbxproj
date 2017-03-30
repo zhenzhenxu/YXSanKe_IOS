@@ -262,7 +262,7 @@
 		E96EB7731E8B961F0061D6C9 /* QAAskQuestionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E96EB7721E8B961F0061D6C9 /* QAAskQuestionViewController.m */; };
 		E96EB7761E8B96370061D6C9 /* QAPublishQuestionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E96EB7751E8B96370061D6C9 /* QAPublishQuestionViewController.m */; };
 		E96EB7791E8B96560061D6C9 /* QAReplyQuestionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E96EB7781E8B96560061D6C9 /* QAReplyQuestionViewController.m */; };
-		E96EB77F1E8BBAB00061D6C9 /* QAQuestionReplyBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E96EB77E1E8BBAB00061D6C9 /* QAQuestionReplyBaseViewController.m */; };
+		E96EB7881E8CE7DC0061D6C9 /* QAInputAccessoryView.m in Sources */ = {isa = PBXBuildFile; fileRef = E96EB7871E8CE7DC0061D6C9 /* QAInputAccessoryView.m */; };
 		E9F4541C1E31B18D00860DC2 /* TouristLoginRequest.json in Resources */ = {isa = PBXBuildFile; fileRef = E9F4541B1E31B18D00860DC2 /* TouristLoginRequest.json */; };
 /* End PBXBuildFile section */
 
@@ -772,8 +772,8 @@
 		E96EB7751E8B96370061D6C9 /* QAPublishQuestionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QAPublishQuestionViewController.m; sourceTree = "<group>"; };
 		E96EB7771E8B96560061D6C9 /* QAReplyQuestionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QAReplyQuestionViewController.h; sourceTree = "<group>"; };
 		E96EB7781E8B96560061D6C9 /* QAReplyQuestionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QAReplyQuestionViewController.m; sourceTree = "<group>"; };
-		E96EB77D1E8BBAB00061D6C9 /* QAQuestionReplyBaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QAQuestionReplyBaseViewController.h; sourceTree = "<group>"; };
-		E96EB77E1E8BBAB00061D6C9 /* QAQuestionReplyBaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QAQuestionReplyBaseViewController.m; sourceTree = "<group>"; };
+		E96EB7861E8CE7DC0061D6C9 /* QAInputAccessoryView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QAInputAccessoryView.h; sourceTree = "<group>"; };
+		E96EB7871E8CE7DC0061D6C9 /* QAInputAccessoryView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QAInputAccessoryView.m; sourceTree = "<group>"; };
 		E9F4541B1E31B18D00860DC2 /* TouristLoginRequest.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = TouristLoginRequest.json; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -1461,8 +1461,6 @@
 				E96EB7751E8B96370061D6C9 /* QAPublishQuestionViewController.m */,
 				E96EB7771E8B96560061D6C9 /* QAReplyQuestionViewController.h */,
 				E96EB7781E8B96560061D6C9 /* QAReplyQuestionViewController.m */,
-				E96EB77D1E8BBAB00061D6C9 /* QAQuestionReplyBaseViewController.h */,
-				E96EB77E1E8BBAB00061D6C9 /* QAQuestionReplyBaseViewController.m */,
 			);
 			name = "互动答疑";
 			path = "互动问答";
@@ -1530,6 +1528,8 @@
 				7C76849C1E88E10B004B05F6 /* QAReplyCell.m */,
 				E96EB76E1E8B88910061D6C9 /* QAInputeTextView.h */,
 				E96EB76F1E8B88910061D6C9 /* QAInputeTextView.m */,
+				E96EB7861E8CE7DC0061D6C9 /* QAInputAccessoryView.h */,
+				E96EB7871E8CE7DC0061D6C9 /* QAInputAccessoryView.m */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -2172,6 +2172,7 @@
 				7C78419D1E2E2AD900755BC0 /* UpdateStageSubjectRequest.m in Sources */,
 				7CDBFEC11E8B8D7A00C72E6F /* QAReplyListRequest.m in Sources */,
 				7CDBFEC71E8B98C000C72E6F /* QAReplyFavorRequest.m in Sources */,
+				E96EB7881E8CE7DC0061D6C9 /* QAInputAccessoryView.m in Sources */,
 				E96EB7511E8A7ADC0061D6C9 /* UserNameTableViewCell.m in Sources */,
 				7C1A5F041E150F4B00832DED /* LePlayer.m in Sources */,
 				E96EB7701E8B88910061D6C9 /* QAInputeTextView.m in Sources */,
@@ -2245,7 +2246,6 @@
 				7C2251C31E1CE3AC004785D5 /* UIImage+GIF.m in Sources */,
 				7C1A5F691E15130200832DED /* YXFileAudioItem.m in Sources */,
 				7C7629D51E278E16007B5698 /* UserManager.m in Sources */,
-				E96EB77F1E8BBAB00061D6C9 /* QAQuestionReplyBaseViewController.m in Sources */,
 				7C1A5F161E15108F00832DED /* DownloadModel.xcdatamodel in Sources */,
 				7C7841731E2CA73800755BC0 /* RecordManager.m in Sources */,
 				30C48A951E52EACC00CCDBBE /* v1_2Model.xcdatamodeld in Sources */,
