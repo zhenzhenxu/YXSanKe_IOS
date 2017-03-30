@@ -8,6 +8,12 @@
 
 #import "QAQuestionDetailView.h"
 
+typedef NS_ENUM(NSUInteger, QAAttachmentType) {
+    QAAttachmentType_None,
+    QAAttachmentType_Image,
+    QAAttachmentType_Other
+};
+
 @interface QAQuestionDetailView()
 @property (nonatomic, strong) UIView *containerView;
 @property (nonatomic, strong) UIImageView *headImageView;
@@ -41,6 +47,9 @@
         make.right.mas_equalTo(-10);
     }];
     self.headImageView = [[UIImageView alloc]init];
+    self.headImageView.contentMode = UIViewContentModeScaleAspectFill;
+    self.headImageView.layer.cornerRadius = 7.5;
+    self.headImageView.clipsToBounds = YES;
     [self.containerView addSubview:self.headImageView];
     [self.headImageView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.top.mas_equalTo(10);
@@ -136,29 +145,40 @@
         make.left.mas_equalTo(10);
         make.bottom.mas_equalTo(-10);
     }];
-    
-    [self setupMockData];
-    self.headImageView.backgroundColor = [UIColor redColor];
-    self.attachmentButton.backgroundColor = [UIColor redColor];
 }
 
-- (void)setupMockData {
+- (void)setItem:(QAQuestionListRequestItem_Element *)item {
+    _item = item;
+    self.nameLabel.text = item.showUserName;
+    self.titleLabel.text = item.title;
+    self.descLabel.text = item.content;
+    self.replyCountLabel.text = item.answerNum;
+    self.browseCountLabel.text = item.viewNum;
+    self.timeLabel.text = [NSString stringWithFormat:@"提问时间：%@",item.createTime];
+    self.replyDescLabel.text = [NSString stringWithFormat:@"回答（%@）",item.answerNum];
+    [self.headImageView sd_setImageWithURL:[NSURL URLWithString:item.avatar] placeholderImage:nil];
     
-    self.nameLabel.text = @"你瞅啥";
-    self.titleLabel.text = @"学生的阅读能力提高很慢，该怎么办？";
-    self.descLabel.text = @"我在阅读教学中，已经很认真了，每篇课文都讲的很细，可是学生的阅读能力提高的还是很慢，甚至不愿意学习，问题究竟出在哪里呢？";
-    self.replyCountLabel.text = @"566.6万";
-    self.browseCountLabel.text = @"88787";
-    self.timeLabel.text = @"提问时间：2017-03-09";
-    self.replyDescLabel.text = @"回答（100）";
+    QAAttachmentType type;
+    if (isEmpty(item.attachmentList)) {
+        type = QAAttachmentType_None;
+    }else {
+        QAQuestionListRequestItem_Attachment *attach = item.attachmentList.firstObject;
+        YXFileType fileType = [QAFileTypeMappingTable fileTypeWithString:attach.resType];
+        if (fileType == YXFileTypePhoto) {
+            type = QAAttachmentType_Image;
+        }else {
+            type = QAAttachmentType_Other;
+        }
+    }
+    [self relayoutAttachmentViewWithType:type];
 }
 
-- (void)setType:(NSInteger)type {
-    _type = type;
-    if (type == 0) {
+- (void)relayoutAttachmentViewWithType:(QAAttachmentType)type {
+    if (type == QAAttachmentType_None) {
         [self.attachmentButton removeFromSuperview];
-    }else if (type == 1) {
-        [self.attachmentButton setImage:[UIImage imageNamed:@"_等待坊主点评-弹窗"] forState:UIControlStateNormal];
+    }else if (type == QAAttachmentType_Image) {
+        QAQuestionListRequestItem_Attachment *attach = self.item.attachmentList.firstObject;
+        [self.attachmentButton sd_setImageWithURL:[NSURL URLWithString:attach.thumbnail] forState:UIControlStateNormal placeholderImage:nil];
         self.attachmentButton.imageView.contentMode = UIViewContentModeScaleAspectFill;
         self.attachmentButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentFill;
         self.attachmentButton.contentVerticalAlignment = UIControlContentHorizontalAlignmentFill;
@@ -173,10 +193,12 @@
             make.size.mas_equalTo(CGSizeMake(15, 15));
             make.top.mas_equalTo(self.attachmentButton.mas_bottom).mas_offset(8);
         }];
-    }else if (type == 2) {
+    }else {
+        QAQuestionListRequestItem_Attachment *attach = self.item.attachmentList.firstObject;
+        NSString *title = [NSString stringWithFormat:@"@%@-%@",attach.resType,attach.resName];
         self.attachmentButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
         self.attachmentButton.backgroundColor = [UIColor clearColor];
-        [self.attachmentButton setTitle:@"@这是附件" forState:UIControlStateNormal];
+        [self.attachmentButton setTitle:title forState:UIControlStateNormal];
         [self.attachmentButton mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.mas_equalTo(10);
             make.right.mas_equalTo(-10);
@@ -191,13 +213,23 @@
     }
 }
 
+- (void)updateWithReplyCount:(NSString *)replyCount browseCount:(NSString *)browseCount {
+    if (!isEmpty(replyCount)) {
+        self.replyCountLabel.text = replyCount;
+        self.replyDescLabel.text = [NSString stringWithFormat:@"回答（%@）",replyCount];
+    }
+    if (!isEmpty(browseCount)) {
+        self.browseCountLabel.text = browseCount;
+    }
+}
+
 - (void)btnAction {
     BLOCK_EXEC(self.AttachmentClickAction)
 }
 
-+ (CGFloat)heightForWidth:(CGFloat)width {
++ (CGFloat)heightForWidth:(CGFloat)width item:(QAQuestionListRequestItem_Element *)item {
     QAQuestionDetailView *v = [[QAQuestionDetailView alloc]init];
-    v.type = 1;
+    v.item = item;
     NSLayoutConstraint *widthFenceConstraint = [NSLayoutConstraint constraintWithItem:v attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1.0 constant:width];
     [v addConstraint:widthFenceConstraint];
     // Auto layout engine does its math

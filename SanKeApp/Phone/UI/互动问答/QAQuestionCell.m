@@ -84,17 +84,15 @@
         make.right.mas_equalTo(-10);
         make.centerY.mas_equalTo(replyImageView.mas_centerY);
     }];
-    
-    [self setupMockData];
 }
 
-- (void)setupMockData {
-    
-    self.titleLabel.text = @"学生的阅读能力提高很慢，该怎么办？";
-    self.descLabel.text = @"我在阅读教学中，已经很认真了，每篇课文都讲的很细，可是学生的阅读能力提高的还是很慢，甚至不愿意学习，问题究竟出在哪里呢？";
-    self.replyCountLabel.text = @"566.6万";
-    self.browseCountLabel.text = @"88787";
-    self.timeLabel.text = @"提问时间：2017-03-09";
+- (void)setItem:(QAQuestionListRequestItem_Element *)item {
+    _item = item;
+    self.titleLabel.text = item.title;
+    self.descLabel.text = item.content;
+    self.replyCountLabel.text = item.answerNum;
+    self.browseCountLabel.text = item.viewNum;
+    self.timeLabel.text = [NSString stringWithFormat:@"提问时间：%@",item.createTime];
 }
 
 @end

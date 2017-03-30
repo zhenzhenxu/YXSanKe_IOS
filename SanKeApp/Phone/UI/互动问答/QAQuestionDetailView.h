@@ -7,9 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "QAQuestionListRequest.h"
 
 @interface QAQuestionDetailView : UIView
+@property (nonatomic, strong) QAQuestionListRequestItem_Element *item;
 @property (nonatomic, copy) void(^AttachmentClickAction) ();
-@property (nonatomic, assign) NSInteger type; // for test, 0 for no attach, 1 for pic, 2 for others
-+ (CGFloat)heightForWidth:(CGFloat)width;
+
+- (void)updateWithReplyCount:(NSString *)replyCount browseCount:(NSString *)browseCount;
++ (CGFloat)heightForWidth:(CGFloat)width item:(QAQuestionListRequestItem_Element *)item;
 @end

@@ -101,6 +101,7 @@
     }];
     
     self.hotVC = [[QAQuestionListViewController alloc]init];
+    self.hotVC.sort_field = @"view_num";
     [self.mainScrollView addSubview:self.hotVC.view];
     self.latestVC = [[QAQuestionListViewController alloc]init];
     [self.mainScrollView addSubview:self.latestVC.view];

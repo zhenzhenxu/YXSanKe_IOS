@@ -47,7 +47,9 @@ NSString * const kResourceIDKey = @"kResourceIDKey";
         [request startRequestWithRetClass:[HttpBaseRequestItem class] andCompleteBlock:^(id retItem, NSError *error, BOOL isMock) {
             STRONG_SELF
             if (!error) {
-                [[NSNotificationCenter defaultCenter] postNotificationName:kRecordReportSuccessNotification object:nil userInfo:@{kResourceIDKey:resourceID}];
+                if (!isEmpty(resourceID)) {
+                    [[NSNotificationCenter defaultCenter] postNotificationName:kRecordReportSuccessNotification object:nil userInfo:@{kResourceIDKey:resourceID}];
+                }
             }
             [self.requestArray removeObjectAtIndex:0];
             if (self.requestArray.count == 0) {

@@ -6,7 +6,7 @@
             "elements": [
                          {
                          "id": 6,
-                         "title": "学生的阅读能力提高很慢，该怎么办？",
+                         "title": "学生的阅读能力提高很慢，该怎么办？：图片",
                          "content": "我在阅读教学中，已经很认真了，每篇课文都讲的很细，可是学生的阅读能力提高的还是很慢，甚至不愿意学习，问题究竟出在哪里呢？",
                          "attachment": "21934474,21934463",
                          "answerNum": 123,
@@ -24,19 +24,19 @@
                          "attachmentList": [
                                             {
                                             "resId": 21934474,
-                                            "resName": "新建文本文档.txt",
-                                            "resType": "txt",
+                                            "resName": "测试图片",
+                                            "resType": "png",
                                             "fileType": "text",
                                             "resSize": 1239,
-                                            "thumbnail": "http://upload.ugc.yanxiu.com/doc/thumbnail_6ec1bcf5b784f554cf2a80b7431c96fa.jpg?from=107&rid=21934474",
-                                            "downloadUrl": "http://upload.ugc.yanxiu.com/doc/6ec1bcf5b784f554cf2a80b7431c96fa.txt?from=107&rid=21934474&filename=新建文本文档.txt&attachment=true",
-                                            "previewUrl": "http://upload.ugc.yanxiu.com/doc/6ec1bcf5b784f554cf2a80b7431c96fa.swf?from=107&rid=21934474"
+                                            "thumbnail": "http://pic9.nipic.com/20100901/4628577_161519016775_2.jpg",
+                                            "downloadUrl": "http://upload.ugc.yanxiu.com/img/9954f2299e052b59558ed9ef52c8c591.png?from=107&rid=21924921",
+                                            "previewUrl": "http://pic9.nipic.com/20100901/4628577_161519016775_2.jpg"
                                             }
                                             ]
                          },
                          {
                          "id": 6,
-                         "title": "学生的阅读能力提高很慢，该怎么办？",
+                         "title": "学生的阅读能力提高很慢，该怎么办？：视频",
                          "content": "我在阅读教学中，已经很认真了，每篇课文都讲的很细，可是学生的阅读能力提高的还是很慢，甚至不愿意学习，问题究竟出在哪里呢？",
                          "attachment": "21934474,21934463",
                          "answerNum": 123,
@@ -54,19 +54,19 @@
                          "attachmentList": [
                                             {
                                             "resId": 21934474,
-                                            "resName": "新建文本文档.txt",
-                                            "resType": "txt",
+                                            "resName": "视频测试",
+                                            "resType": "m3u8",
                                             "fileType": "text",
                                             "resSize": 1239,
                                             "thumbnail": "http://upload.ugc.yanxiu.com/doc/thumbnail_6ec1bcf5b784f554cf2a80b7431c96fa.jpg?from=107&rid=21934474",
-                                            "downloadUrl": "http://upload.ugc.yanxiu.com/doc/6ec1bcf5b784f554cf2a80b7431c96fa.txt?from=107&rid=21934474&filename=新建文本文档.txt&attachment=true",
-                                            "previewUrl": "http://upload.ugc.yanxiu.com/doc/6ec1bcf5b784f554cf2a80b7431c96fa.swf?from=107&rid=21934474"
+                                            "downloadUrl": "http://coursecdn.teacherclub.com.cn/course/cf/xk/czsp/hgetshssyxdy-xjchgshdlnjx/video/cp1_m/cp1_m.m3u8",
+                                            "previewUrl": "http://coursecdn.teacherclub.com.cn/course/cf/xk/czsp/hgetshssyxdy-xjchgshdlnjx/video/cp1_m/cp1_m.m3u8"
                                             }
                                             ]
                          },
                          {
                          "id": 6,
-                         "title": "学生的阅读能力提高很慢，该怎么办？",
+                         "title": "学生的阅读能力提高很慢，该怎么办？:文档",
                          "content": "我在阅读教学中，已经很认真了，每篇课文都讲的很细，可是学生的阅读能力提高的还是很慢，甚至不愿意学习，问题究竟出在哪里呢？",
                          "attachment": "21934474,21934463",
                          "answerNum": 123,
@@ -84,13 +84,13 @@
                          "attachmentList": [
                                             {
                                             "resId": 21934474,
-                                            "resName": "新建文本文档.txt",
-                                            "resType": "txt",
+                                            "resName": "文档测试",
+                                            "resType": "pdf",
                                             "fileType": "text",
                                             "resSize": 1239,
                                             "thumbnail": "http://upload.ugc.yanxiu.com/doc/thumbnail_6ec1bcf5b784f554cf2a80b7431c96fa.jpg?from=107&rid=21934474",
                                             "downloadUrl": "http://upload.ugc.yanxiu.com/doc/6ec1bcf5b784f554cf2a80b7431c96fa.txt?from=107&rid=21934474&filename=新建文本文档.txt&attachment=true",
-                                            "previewUrl": "http://upload.ugc.yanxiu.com/doc/6ec1bcf5b784f554cf2a80b7431c96fa.swf?from=107&rid=21934474"
+                                            "previewUrl": "http://upload.ugc.yanxiu.com/doc/839e07f0bbafd8483df4d6b7af2d0338.pdf?from=101&rid=28659016?from=103"
                                             }
                                             ]
                          },

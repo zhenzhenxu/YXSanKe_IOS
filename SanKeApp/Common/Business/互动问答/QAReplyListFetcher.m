@@ -30,6 +30,10 @@
         QAReplyListRequestItem *item = (QAReplyListRequestItem *)retItem;
         self.lastID += item.data.answerPage.elements.count;
         BLOCK_EXEC(aCompleteBlock,item.data.answerPage.totalElements.integerValue,item.data.answerPage.elements,nil)
+        
+        NSDictionary *infoDic = @{kQAQuestionIDKey:self.ask_id,
+                                  kQAQuestionReplyCountKey:item.data.answerPage.totalElements};
+        [[NSNotificationCenter defaultCenter]postNotificationName:kQAQuestionInfoUpdateNotification object:nil userInfo:infoDic];
     }];
 }
 @end

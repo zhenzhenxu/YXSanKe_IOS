@@ -62,15 +62,14 @@
         make.right.mas_equalTo(-10);
         make.centerY.mas_equalTo(favorImageView.mas_centerY);
     }];
-    
-    [self setupMock];
 }
 
-- (void)setupMock {
-    self.nameLabel.text = @"你瞅啥";
-    self.commentLabel.text = @"北京市规划国土委相关负责人介绍，同时存在上述三个方面问题，又无法提供合法审批证明文件的，不动产登记部门停止办理不动产登记手续。也就是说，擅自将不具有实际居住意义的异常形态房屋进行交易并要求按“住宅”用途进行转移登记，属于擅自改变规划用途，不符合登记要求，因此不予办理不动产登记。";
-    self.favorLabel.text = @"123";
-    self.timeLabel.text = @"21 hours ago";
+- (void)setItem:(QAReplyListRequestItem_Element *)item {
+    _item = item;
+    self.nameLabel.text = item.showUserName;
+    self.commentLabel.text = item.answer;
+    self.favorLabel.text = item.likeInfo.likeNum;
+    self.timeLabel.text = item.updateTime;
 }
 
 @end

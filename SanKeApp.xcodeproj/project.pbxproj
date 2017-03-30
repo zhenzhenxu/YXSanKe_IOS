@@ -185,6 +185,7 @@
 		7CDBFED01E8B9EF100C72E6F /* replylist_mock.json in Resources */ = {isa = PBXBuildFile; fileRef = 7CDBFECD1E8B9EF100C72E6F /* replylist_mock.json */; };
 		7CDBFED31E8BB09500C72E6F /* QAQuestionListFetcher.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CDBFED21E8BB09500C72E6F /* QAQuestionListFetcher.m */; };
 		7CDBFED61E8BB34B00C72E6F /* QAReplyListFetcher.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CDBFED51E8BB34B00C72E6F /* QAReplyListFetcher.m */; };
+		7CDBFED91E8CEA5E00C72E6F /* QAFileTypeMappingTable.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CDBFED81E8CEA5E00C72E6F /* QAFileTypeMappingTable.m */; };
 		923A4E2E1E2C9FF5001059E2 /* ChannelTabRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 923A4E2D1E2C9FF5001059E2 /* ChannelTabRequest.m */; };
 		923A4E311E2CA4E7001059E2 /* CourseVideoRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 923A4E301E2CA4E7001059E2 /* CourseVideoRequest.m */; };
 		923A4E351E2CAE1C001059E2 /* channelTab_mock.json in Resources */ = {isa = PBXBuildFile; fileRef = 923A4E331E2CAE1C001059E2 /* channelTab_mock.json */; };
@@ -622,6 +623,8 @@
 		7CDBFED21E8BB09500C72E6F /* QAQuestionListFetcher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QAQuestionListFetcher.m; sourceTree = "<group>"; };
 		7CDBFED41E8BB34B00C72E6F /* QAReplyListFetcher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QAReplyListFetcher.h; sourceTree = "<group>"; };
 		7CDBFED51E8BB34B00C72E6F /* QAReplyListFetcher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QAReplyListFetcher.m; sourceTree = "<group>"; };
+		7CDBFED71E8CEA5E00C72E6F /* QAFileTypeMappingTable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QAFileTypeMappingTable.h; sourceTree = "<group>"; };
+		7CDBFED81E8CEA5E00C72E6F /* QAFileTypeMappingTable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QAFileTypeMappingTable.m; sourceTree = "<group>"; };
 		8CA901E0E3034091D4CACB93 /* Pods-SanKeApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SanKeApp.release.xcconfig"; path = "Pods/Target Support Files/Pods-SanKeApp/Pods-SanKeApp.release.xcconfig"; sourceTree = "<group>"; };
 		923A4E2C1E2C9FF5001059E2 /* ChannelTabRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChannelTabRequest.h; sourceTree = "<group>"; };
 		923A4E2D1E2C9FF5001059E2 /* ChannelTabRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChannelTabRequest.m; sourceTree = "<group>"; };
@@ -1760,6 +1763,8 @@
 				7CDBFED21E8BB09500C72E6F /* QAQuestionListFetcher.m */,
 				7CDBFED41E8BB34B00C72E6F /* QAReplyListFetcher.h */,
 				7CDBFED51E8BB34B00C72E6F /* QAReplyListFetcher.m */,
+				7CDBFED71E8CEA5E00C72E6F /* QAFileTypeMappingTable.h */,
+				7CDBFED81E8CEA5E00C72E6F /* QAFileTypeMappingTable.m */,
 			);
 			path = "互动问答";
 			sourceTree = "<group>";
@@ -2207,6 +2212,7 @@
 				E96EB74E1E8A7ADC0061D6C9 /* UserImageTableViewCell.m in Sources */,
 				7C18094C1E271AFC00B71863 /* CollectionViewEqualSpaceFlowLayout.m in Sources */,
 				E9355B621E6E9A0D007AE9F0 /* SupplementInfoViewController.m in Sources */,
+				7CDBFED91E8CEA5E00C72E6F /* QAFileTypeMappingTable.m in Sources */,
 				7C2251C31E1CE3AC004785D5 /* UIImage+GIF.m in Sources */,
 				7C1A5F691E15130200832DED /* YXFileAudioItem.m in Sources */,
 				7C7629D51E278E16007B5698 /* UserManager.m in Sources */,

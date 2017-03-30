@@ -8,6 +8,16 @@
 
 #import "QADataManager.h"
 
+NSString * const kQAQuestionInfoUpdateNotification = @"kQAQuestionInfoUpdateNotification";
+NSString * const kQAReplyInfoUpdateNotification = @"kQAReplyInfoUpdateNotification";
+
+NSString * const kQAQuestionIDKey = @"kQAQuestionIDKey";
+NSString * const kQAQuestionReplyCountKey = @"kQAQuestionReplyCountKey";
+NSString * const kQAQuestionBrowseCountKey = @"kQAQuestionBrowseCountKey";
+
+NSString * const kQAReplyIDKey = @"kQAReplyIDKey";
+NSString * const kQAReplyFavorCountKey = @"kQAReplyFavorCountKey";
+
 @interface QADataManager()
 @property (nonatomic, strong) QAQuestionDetailRequest *questionDetailRequest;
 @property (nonatomic, strong) QAReplyFavorRequest *replyFavorRequest;
@@ -37,6 +47,11 @@
             return;
         }
         BLOCK_EXEC(completeBlock,retItem,nil)
+        QAQuestionDetailRequestItem *item = (QAQuestionDetailRequestItem *)retItem;
+        NSDictionary *infoDic = @{kQAQuestionIDKey:questionID,
+                                  kQAQuestionReplyCountKey:item.data.ask.answerNum,
+                                  kQAQuestionBrowseCountKey:item.data.ask.viewNum};
+        [[NSNotificationCenter defaultCenter]postNotificationName:kQAQuestionInfoUpdateNotification object:nil userInfo:infoDic];
     }];
 }
 
@@ -53,6 +68,8 @@
             return;
         }
         BLOCK_EXEC(completeBlock,retItem,nil)
+        QAReplyFavorRequestItem *item = (QAReplyFavorRequestItem *)retItem;
+        [[NSNotificationCenter defaultCenter]postNotificationName:kQAReplyInfoUpdateNotification object:nil userInfo:@{kQAReplyIDKey:answerID,kQAReplyFavorCountKey:item.data.likeNum}];
     }];
 }
 

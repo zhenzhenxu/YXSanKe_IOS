@@ -7,7 +7,8 @@
 //
 
 #import "RadianCornerBaseCell.h"
+#import "QAQuestionListRequest.h"
 
 @interface QAQuestionCell : RadianCornerBaseCell
-
+@property (nonatomic, strong) QAQuestionListRequestItem_Element *item;
 @end

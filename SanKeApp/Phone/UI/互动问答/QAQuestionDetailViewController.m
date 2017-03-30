@@ -10,31 +10,74 @@
 #import "QAReplyDetailViewController.h"
 #import "QAQuestionDetailView.h"
 #import "QAReplyCell.h"
+#import "QAReplyListFetcher.h"
 
 @interface QAQuestionDetailViewController ()
 @property (nonatomic, strong) QAQuestionDetailView *headerView;
+@property (nonatomic, strong) YXFileItemBase *fileItem;
 @end
 
 @implementation QAQuestionDetailViewController
 
 - (void)viewDidLoad {
+    QAReplyListFetcher *fetcher = [[QAReplyListFetcher alloc]init];
+    fetcher.ask_id = self.item.elementID;
+    fetcher.pageSize = 20;
+    self.dataFetcher = fetcher;
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     [self setupTitle];
     [self setupUI];
+    [self setupObserver];
     if ([YXShareManager isQQSupport]||[YXShareManager isWXAppSupport]) {
         [self setupRightWithImageNamed:@"分享" highlightImageNamed:nil];
     }
-    WEAK_SELF
-    [[[NSNotificationCenter defaultCenter]rac_addObserverForName:kStageSubjectDidChangeNotification object:nil]subscribeNext:^(id x) {
-        STRONG_SELF
-        [self setupTitle];
-    }];
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)setupObserver {
+    WEAK_SELF
+    [[[NSNotificationCenter defaultCenter]rac_addObserverForName:kStageSubjectDidChangeNotification object:nil]subscribeNext:^(id x) {
+        STRONG_SELF
+        [self setupTitle];
+    }];
+    [[[NSNotificationCenter defaultCenter]rac_addObserverForName:kQAReplyInfoUpdateNotification object:nil]subscribeNext:^(id x) {
+        STRONG_SELF
+        NSNotification *noti = (NSNotification *)x;
+        NSDictionary *dic = noti.userInfo;
+        NSString *replyID = dic[kQAReplyIDKey];
+        NSString *favorCount = dic[kQAReplyFavorCountKey];
+        NSMutableArray *indexPathArray = [NSMutableArray array];
+        [self.dataArray enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+            QAReplyListRequestItem_Element *item = (QAReplyListRequestItem_Element *)obj;
+            if ([item.elementID isEqualToString:replyID]) {
+                item.likeInfo.likeNum = favorCount;
+                [indexPathArray addObject:[NSIndexPath indexPathForRow:idx inSection:0]];
+            }
+        }];
+        [self.tableView reloadRowsAtIndexPaths:indexPathArray withRowAnimation:UITableViewRowAnimationNone];
+    }];
+    [[[NSNotificationCenter defaultCenter]rac_addObserverForName:kQAQuestionInfoUpdateNotification object:nil]subscribeNext:^(id x) {
+        STRONG_SELF
+        NSNotification *noti = (NSNotification *)x;
+        NSDictionary *dic = noti.userInfo;
+        NSString *questionID = dic[kQAQuestionIDKey];
+        NSString *replyCount = dic[kQAQuestionReplyCountKey];
+        NSString *browseCount = dic[kQAQuestionBrowseCountKey];
+        if ([self.item.elementID isEqualToString:questionID]) {
+            if (!isEmpty(replyCount)) {
+                self.item.answerNum = replyCount;
+            }
+            if (!isEmpty(browseCount)) {
+                self.item.viewNum = browseCount;
+            }
+            [self.headerView updateWithReplyCount:replyCount browseCount:browseCount];
+        }
+    }];
 }
 
 - (void)setupTitle {
@@ -45,18 +88,19 @@
     }];
 }
 
-- (void)firstPageFetch {
-    [self stopLoading];
-}
-
 - (void)naviRightAction {
     [[YXShareManager shareManager]yx_shareMessageWithImageIcon:nil title:@"分享标题" message:nil url:@"www.baidu.com" shareType:YXShareType_WeChat];
 }
 
 - (void)setupUI {
     self.headerView = [[QAQuestionDetailView alloc]init];
-    self.headerView.type = 1;
-    CGFloat height = [QAQuestionDetailView heightForWidth:self.view.width];
+    self.headerView.item = self.item;
+    WEAK_SELF
+    [self.headerView setAttachmentClickAction:^{
+        STRONG_SELF
+        [self previewAttachment];
+    }];
+    CGFloat height = [QAQuestionDetailView heightForWidth:self.view.width item:self.item];
     self.headerView.frame = CGRectMake(0, 0, self.view.width, height);
     self.tableView.tableHeaderView = self.headerView;
     self.tableView.backgroundColor = [UIColor clearColor];
@@ -65,19 +109,39 @@
     [self.tableView registerClass:[QAReplyCell class] forCellReuseIdentifier:@"QAReplyCell"];
 }
 
-#pragma mark - tableview datasource
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 5;
+- (void)previewAttachment {
+    QAQuestionListRequestItem_Attachment *attach = self.item.attachmentList.firstObject;
+    YXFileType type = [QAFileTypeMappingTable fileTypeWithString:attach.resType];
+    self.fileItem = [FileBrowserFactory browserWithFileType:type];
+    self.fileItem.name = attach.resName;
+    self.fileItem.url = attach.previewUrl;
+    self.fileItem.baseViewController = self;
+    [self.fileItem browseFile];
 }
 
+// 本页上方是问题详情，不应该有任何错误或为空界面覆盖，所以只需要弹个toast提示即可
+- (BOOL)handleRequestData:(UnhandledRequestData *)data inView:(UIView *)view {
+    if (data.error) {
+        [self showToast:data.error.localizedDescription];
+        return YES;
+    }
+    return NO;
+}
+
+#pragma mark - tableview datasource
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     QAReplyCell *cell = [tableView dequeueReusableCellWithIdentifier:@"QAReplyCell"];
+    QAReplyListRequestItem_Element *item = self.dataArray[indexPath.row];
+    cell.item = item;
     return cell;
 }
 
 #pragma tableview delegate
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    QAReplyListRequestItem_Element *item = self.dataArray[indexPath.row];
     QAReplyDetailViewController *vc = [[QAReplyDetailViewController alloc]init];
+    vc.item = item;
+    vc.questionTitle = self.item.title;
     [self.navigationController pushViewController:vc animated:YES];
 }
 

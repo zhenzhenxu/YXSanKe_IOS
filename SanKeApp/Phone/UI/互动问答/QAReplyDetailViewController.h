@@ -7,7 +7,9 @@
 //
 
 #import "BaseViewController.h"
+#import "QAReplyListRequest.h"
 
 @interface QAReplyDetailViewController : BaseViewController
-
+@property (nonatomic, strong) NSString *questionTitle;
+@property (nonatomic, strong) QAReplyListRequestItem_Element *item;
 @end

@@ -12,6 +12,7 @@
 
 @interface QAReplyDetailViewController ()<UITableViewDataSource,UITableViewDelegate>
 @property (nonatomic, strong) UITableView *tableView;
+@property (nonatomic, strong) QAReplyDetailCell *detailCell;
 @end
 
 @implementation QAReplyDetailViewController
@@ -19,11 +20,12 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    self.navigationItem.title = @"你瞅啥";
-    [self setupUI];
+    self.navigationItem.title = self.questionTitle;
     if ([YXShareManager isQQSupport]||[YXShareManager isWXAppSupport]) {
         [self setupRightWithImageNamed:@"分享" highlightImageNamed:nil];
     }
+    [self setupUI];
+    [self setupObserver];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -33,6 +35,19 @@
 
 - (void)naviRightAction {
     [[YXShareManager shareManager]yx_shareMessageWithImageIcon:nil title:@"分享标题" message:nil url:@"www.baidu.com" shareType:YXShareType_WeChat];
+}
+
+- (void)setupObserver {
+    WEAK_SELF
+    [[[NSNotificationCenter defaultCenter]rac_addObserverForName:kQAReplyInfoUpdateNotification object:nil]subscribeNext:^(id x) {
+        STRONG_SELF
+        NSNotification *noti = (NSNotification *)x;
+        NSDictionary *dic = noti.userInfo;
+        if ([dic[kQAReplyIDKey] isEqualToString:self.item.elementID]) {
+            self.item.likeInfo.likeNum = dic[kQAReplyFavorCountKey];
+            self.detailCell.item = self.item;
+        }
+    }];
 }
 
 - (void)setupUI {
@@ -63,15 +78,15 @@
     WEAK_SELF
     QAReplyDetailMenuItemView *replyMenu = [self menuViewWithTitle:@"我来回答" image:@"我来回答" actionBlock:^{
         STRONG_SELF
-        DDLogVerbose(@"我来回答 clicked!");
+        [self handleReply];
     }];
     QAReplyDetailMenuItemView *favorMenu = [self menuViewWithTitle:@"喜欢" image:@"喜欢" actionBlock:^{
         STRONG_SELF
-        DDLogVerbose(@"喜欢 clicked!");
+        [self handleFavor];
     }];
     QAReplyDetailMenuItemView *questionMenu = [self menuViewWithTitle:@"我要提问" image:@"我要提问" actionBlock:^{
         STRONG_SELF
-        DDLogVerbose(@"我要提问 clicked!");
+        [self handleQuestion];
     }];
     
     [menuContainerView addSubview:replyMenu];
@@ -101,6 +116,27 @@
     return menuView;
 }
 
+- (void)handleReply {
+    
+}
+
+- (void)handleFavor {
+    [self startLoading];
+    WEAK_SELF
+    [QADataManager requestReplyFavorWithID:self.item.elementID completeBlock:^(QAReplyFavorRequestItem *item, NSError *error) {
+        STRONG_SELF
+        [self stopLoading];
+        if (error) {
+            [self showToast:error.localizedDescription];
+            return;
+        }
+    }];
+}
+
+- (void)handleQuestion {
+
+}
+
 #pragma makr - UITableViewDataSource
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return 1;
@@ -108,6 +144,8 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     QAReplyDetailCell *cell = [tableView dequeueReusableCellWithIdentifier:@"QAReplyDetailCell"];
+    cell.item = self.item;
+    self.detailCell = cell;
     return cell;
 }
 

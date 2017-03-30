@@ -93,4 +93,6 @@ extern int ddLogLevel;
 #import "YXShareManager.h"
 #import "QADataManager.h"
 #import "CloneCategory.h"
+#import "QAFileTypeMappingTable.h"
+#import "FileBrowserFactory.h"
 #endif /* PrefixHeader_pch */
