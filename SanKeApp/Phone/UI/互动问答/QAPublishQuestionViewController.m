@@ -13,7 +13,7 @@
 #import "UIImage+YXImage.h"
 #import "QATextView.h"
 
-static CGFloat const kTextViewHeight = 150.0f;
+static CGFloat const kTextViewHeight = 130.0f;
 
 @interface QAPublishQuestionViewController ()<UIGestureRecognizerDelegate>
 
@@ -32,6 +32,7 @@ static CGFloat const kTextViewHeight = 150.0f;
     [self setupRightWithTitle:@"发布"];
     [self setupUI];
     [self setupLayout];
+    [self setupObservers];
     // Do any additional setup after loading the view.
 }
 
@@ -43,6 +44,7 @@ static CGFloat const kTextViewHeight = 150.0f;
 - (void)naviRightAction {
     DDLogDebug(@"click to publish question");
     [self.view endEditing:YES];
+    [self publishQuestion];
 }
 
 - (void)setupUI {
@@ -55,7 +57,7 @@ static CGFloat const kTextViewHeight = 150.0f;
     
     self.textView = [[QATextView alloc]init];
     self.textView.placeholedr = @"请输入您的内容描述…（选填)";
-    self.textView.backgroundColor = [UIColor redColor];
+//        self.textView.backgroundColor = [UIColor redColor];
     QAInputAccessoryView *customView = [[QAInputAccessoryView alloc] initWithFrame:CGRectMake(0, 0, 320, 39)];
     customView.backgroundColor = [UIColor colorWithHexString:@"f8f8f8"];
     WEAK_SELF
@@ -78,20 +80,12 @@ static CGFloat const kTextViewHeight = 150.0f;
     self.textView.inputAccessoryView = customView;
     self.customView = customView;
     
-    self.imageView = [[UIImageView alloc]init];
-    self.imageView.backgroundColor = [UIColor yellowColor];
-    self.imageView.userInteractionEnabled = YES;
-    self.imageView.contentMode = UIViewContentModeScaleAspectFit;
-    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(selectedImage:)];
-    [self.imageView addGestureRecognizer:tap];
-    
     self.imagePickerController = [[YXImagePickerController alloc] init];
 }
 
 - (void)setupLayout {
     [self.view addSubview:self.contentView];
     [self.contentView addSubview:self.textView];
-    [self.contentView addSubview:self.imageView];
     
     [self.view addSubview:self.textView];
     
@@ -99,13 +93,7 @@ static CGFloat const kTextViewHeight = 150.0f;
         make.edges.mas_equalTo(UIEdgeInsetsMake(10, 10, 10, 10));
     }];
     [self.textView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.left.right.equalTo(self.contentView);
-        make.height.mas_equalTo(kTextViewHeight);
-    }];
-    [self.imageView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.mas_equalTo(15.0f);
-        make.top.equalTo(self.textView.mas_bottom).offset(14.0f);
-        make.size.mas_equalTo(CGSizeMake(100, 100));
+        make.edges.equalTo(self.contentView);
     }];
 }
 
@@ -114,6 +102,18 @@ static CGFloat const kTextViewHeight = 150.0f;
     [self.imagePickerController pickImageWithSourceType:type completion:^(UIImage *selectedImage) {
         STRONG_SELF
         self.imageView.image = selectedImage;
+        
+        [self.contentView addSubview:self.imageView];
+        [self.imageView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.mas_equalTo(15.0f);
+            make.top.equalTo(self.textView.mas_bottom).offset(14.0f);
+            make.size.mas_equalTo(CGSizeMake(100, 100));
+        }];
+        [self.textView mas_remakeConstraints:^(MASConstraintMaker *make) {
+            make.top.left.right.equalTo(self.contentView);
+            make.height.mas_equalTo(kTextViewHeight);
+        }];
+        [self.view layoutIfNeeded];
     }];
 }
 
@@ -122,15 +122,60 @@ static CGFloat const kTextViewHeight = 150.0f;
 }
 
 - (void)selectedImage:(UITapGestureRecognizer *) recognizer {
-    if (!self.imageView.image ) {
+    if (!self.imageView.image && !self.imageView ) {
         return;
     }
     QADeleteImageViewController *vc = [[QADeleteImageViewController alloc]init];
     vc.image = self.imageView.image;
     [vc setDeleteBlock:^{
         self.imageView.image = nil;
+        [self.imageView removeFromSuperview];
+        [self.textView mas_remakeConstraints:^(MASConstraintMaker *make) {
+             make.edges.equalTo(self.contentView);
+        }];
+         [self.view layoutIfNeeded];
     }];
     [self.navigationController pushViewController:vc animated:YES];
+}
+
+- (UIImageView *)imageView {
+    if (_imageView == nil) {
+        _imageView = [[UIImageView alloc]init];
+        _imageView.userInteractionEnabled = YES;
+        _imageView.contentMode = UIViewContentModeScaleAspectFit;
+//                _imageView.backgroundColor = [UIColor blueColor];
+        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(selectedImage:)];
+        [_imageView addGestureRecognizer:tap];
+    }
+    return _imageView;
+}
+
+- (void)setupObservers {
+    WEAK_SELF
+    [[[NSNotificationCenter defaultCenter]rac_addObserverForName:UIKeyboardWillChangeFrameNotification object:nil]subscribeNext:^(id x) {
+        STRONG_SELF
+        if (self.imageView.image) {
+            return;
+        }
+        NSNotification *noti = (NSNotification *)x;
+        NSDictionary *dic = noti.userInfo;
+        NSValue *keyboardFrameValue = [dic valueForKey:UIKeyboardFrameEndUserInfoKey];
+        CGRect keyboardFrame = keyboardFrameValue.CGRectValue;
+        NSNumber *duration = [dic valueForKey:UIKeyboardAnimationDurationUserInfoKey];
+        [UIView animateWithDuration:duration.floatValue animations:^{
+            [self.textView mas_remakeConstraints:^(MASConstraintMaker *make) {
+                make.left.top.equalTo(self.view).offset(10.0f);
+                make.right.equalTo(self.view).offset(-10.0f);
+                make.bottom.mas_equalTo(keyboardFrame.origin.y - [UIScreen mainScreen].bounds.size.height - 10);
+            }];
+            [self.view layoutIfNeeded];
+        }];
+    }];
+}
+
+#pragma mark - publishAnswer
+- (void)publishQuestion {
+    //发布成功之后弹toast然后返回互动答疑界面
 }
 
 @end

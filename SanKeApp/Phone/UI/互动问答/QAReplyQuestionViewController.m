@@ -55,13 +55,13 @@
 - (void)naviRightAction {
     DDLogDebug(@"click to publish answer");
     [self.view endEditing:YES];
-    
+    [self publishAnswer];
 }
 
 - (void)setupUI {
     self.textView = [[QATextView alloc]init];
     self.textView.placeholedr = @"请输入您的回答";
-    self.textView.backgroundColor = [UIColor yellowColor];
+//    self.textView.backgroundColor = [UIColor yellowColor];
     
     [self.view addSubview:self.textView];
     [self.textView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -153,5 +153,10 @@
         default:
             break;
     }
+}
+
+#pragma mark - publishAnswer
+- (void)publishAnswer {
+    //发布成功之后弹toast然后返回问题详情页面
 }
 @end

@@ -9,6 +9,7 @@
 #import "QAMainViewController.h"
 #import "QAQuestionCell.h"
 #import "QAQuestionListViewController.h"
+#import "QAAskQuestionViewController.h"
 
 @interface QAMainViewController ()<UIScrollViewDelegate>
 @property (nonatomic, strong) UIButton *hotButton;
@@ -47,7 +48,8 @@
 }
 
 - (void)naviRightAction {
-    
+    QAAskQuestionViewController *vc = [[QAAskQuestionViewController alloc]init];
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 - (void)setupUI {

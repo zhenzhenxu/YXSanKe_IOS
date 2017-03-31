@@ -75,7 +75,7 @@
     self.textView = [[QATextView alloc]init];
     self.textView.placeholedr = @"请写下您的问题并用问号结尾（30字以内)";
     self.textView.delegate = self;
-    self.textView.backgroundColor = [UIColor yellowColor];
+//    self.textView.backgroundColor = [UIColor yellowColor];
     
     [self.view addSubview:self.textView];
     [self.textView mas_makeConstraints:^(MASConstraintMaker *make) {

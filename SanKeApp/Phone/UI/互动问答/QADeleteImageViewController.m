@@ -44,9 +44,9 @@
 
 - (void)setupNavView {
     UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
-    button.frame = CGRectMake(0, 0, 30.0f, 30.0f);
-    button.backgroundColor = [UIColor redColor];
-    [button setImage:[UIImage imageNamed:@""] forState:UIControlStateNormal];
+    button.titleLabel.font = [UIFont systemFontOfSize:14];
+    [button setTitle:@"删除" forState:UIControlStateNormal];
+    [button sizeToFit];
     [[button rac_signalForControlEvents:UIControlEventTouchUpInside]subscribeNext:^(id x) {
         [self deletelAction];
     }];
