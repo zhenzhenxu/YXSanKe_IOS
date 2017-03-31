@@ -122,7 +122,8 @@
 
 - (void)handleReply {
     QAReplyQuestionViewController *vc = [[QAReplyQuestionViewController alloc]init];
-    [self.navigationController pushViewController:vc animated:YES];
+    SKNavigationController *navVc = [[SKNavigationController alloc]initWithRootViewController:vc];
+    [self presentViewController:navVc animated:YES completion:nil];
 }
 
 - (void)handleFavor {
@@ -140,7 +141,8 @@
 
 - (void)handleQuestion {
     QAAskQuestionViewController *vc = [[QAAskQuestionViewController alloc]init];
-    [self.navigationController pushViewController:vc animated:YES];
+    SKNavigationController *navVc = [[SKNavigationController alloc]initWithRootViewController:vc];
+    [self presentViewController:navVc animated:YES completion:nil];
 }
 
 #pragma makr - UITableViewDataSource

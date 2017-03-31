@@ -49,7 +49,8 @@
 
 - (void)naviRightAction {
     QAAskQuestionViewController *vc = [[QAAskQuestionViewController alloc]init];
-    [self.navigationController pushViewController:vc animated:YES];
+    SKNavigationController *navVc = [[SKNavigationController alloc]initWithRootViewController:vc];
+    [self presentViewController:navVc animated:YES completion:nil];
 }
 
 - (void)setupUI {

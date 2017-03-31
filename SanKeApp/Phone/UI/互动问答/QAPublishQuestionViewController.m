@@ -57,7 +57,6 @@ static CGFloat const kTextViewHeight = 130.0f;
     
     self.textView = [[QATextView alloc]init];
     self.textView.placeholedr = @"请输入您的内容描述…（选填)";
-//        self.textView.backgroundColor = [UIColor redColor];
     QAInputAccessoryView *customView = [[QAInputAccessoryView alloc] initWithFrame:CGRectMake(0, 0, 320, 39)];
     customView.backgroundColor = [UIColor colorWithHexString:@"f8f8f8"];
     WEAK_SELF
@@ -143,7 +142,6 @@ static CGFloat const kTextViewHeight = 130.0f;
         _imageView = [[UIImageView alloc]init];
         _imageView.userInteractionEnabled = YES;
         _imageView.contentMode = UIViewContentModeScaleAspectFit;
-//                _imageView.backgroundColor = [UIColor blueColor];
         UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(selectedImage:)];
         [_imageView addGestureRecognizer:tap];
     }

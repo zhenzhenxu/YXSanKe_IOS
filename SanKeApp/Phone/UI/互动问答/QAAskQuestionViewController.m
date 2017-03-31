@@ -32,6 +32,18 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
+    self.navigationController.navigationBar.translucent = NO;
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    
+    self.navigationController.navigationBar.translucent = YES;
+}
+
 - (void)setupNavView {
     UIButton *leftButton = [UIButton buttonWithType:UIButtonTypeCustom];
     [leftButton setTitle:@"取消" forState:UIControlStateNormal];
@@ -75,7 +87,6 @@
     self.textView = [[QATextView alloc]init];
     self.textView.placeholedr = @"请写下您的问题并用问号结尾（30字以内)";
     self.textView.delegate = self;
-//    self.textView.backgroundColor = [UIColor yellowColor];
     
     [self.view addSubview:self.textView];
     [self.textView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -164,7 +175,7 @@
     switch (index) {
         case 0:
         {
-            [self.navigationController popViewControllerAnimated:YES];
+            [self dismissViewControllerAnimated:YES completion:nil];
         }
             break;
         case 1:{

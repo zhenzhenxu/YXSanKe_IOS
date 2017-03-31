@@ -153,7 +153,8 @@
 
 - (void)answerButtonAction:(UIButton *)sender {
     QAReplyQuestionViewController *vc = [[QAReplyQuestionViewController alloc]init];
-    [self.navigationController pushViewController:vc animated:YES];
+    SKNavigationController *navVc = [[SKNavigationController alloc]initWithRootViewController:vc];
+    [self presentViewController:navVc animated:YES completion:nil];
 }
 - (void)previewAttachment {
     QAQuestionListRequestItem_Attachment *attach = self.item.attachmentList.firstObject;
