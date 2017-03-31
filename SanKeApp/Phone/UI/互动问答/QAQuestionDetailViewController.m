@@ -11,10 +11,12 @@
 #import "QAQuestionDetailView.h"
 #import "QAReplyCell.h"
 #import "QAReplyListFetcher.h"
+#import "QAReplyQuestionViewController.h"
 
 @interface QAQuestionDetailViewController ()
 @property (nonatomic, strong) QAQuestionDetailView *headerView;
 @property (nonatomic, strong) YXFileItemBase *fileItem;
+@property (nonatomic, strong) UIView *bottomView;
 @end
 
 @implementation QAQuestionDetailViewController
@@ -107,8 +109,52 @@
     self.tableView.rowHeight = 112;
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     [self.tableView registerClass:[QAReplyCell class] forCellReuseIdentifier:@"QAReplyCell"];
+    
+    [self setupBottomView];
+    [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.right.top.mas_equalTo(0);
+        make.bottom.equalTo(self.bottomView.mas_top);
+    }];
+    
 }
 
+- (void)setupBottomView {
+    UIView *bottomView = [[UIView alloc]init];
+    bottomView.backgroundColor = [UIColor whiteColor];
+    self.bottomView = bottomView;
+    
+    UIView *lineView = [[UIView alloc]init];
+    lineView.backgroundColor = [UIColor colorWithHexString:@"e6e6e6"];
+    
+    UIButton *viewCommentsButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    viewCommentsButton.titleLabel.font = [UIFont systemFontOfSize:14];
+    [viewCommentsButton setTitle:@"我来回答" forState:UIControlStateNormal];
+    [viewCommentsButton setTitleColor:[UIColor colorWithHexString:@"4691a6"] forState:UIControlStateNormal];
+    [viewCommentsButton setTitleColor:[UIColor whiteColor] forState:UIControlStateHighlighted];
+    [viewCommentsButton setBackgroundImage:[UIImage yx_imageWithColor:[UIColor colorWithHexString:@"4691a6"]] forState:UIControlStateHighlighted];
+    [viewCommentsButton addTarget:self action:@selector(answerButtonAction:) forControlEvents:UIControlEventTouchUpInside];
+    
+    [self.view addSubview:self.bottomView];
+    [self.bottomView addSubview:lineView];
+    [self.bottomView addSubview:viewCommentsButton];
+    [self.bottomView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.right.bottom.equalTo(self.view);
+        make.height.mas_equalTo(49);
+    }];
+    [lineView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.right.top.equalTo(self.bottomView);
+        make.height.mas_equalTo(1/[UIScreen mainScreen].scale);
+    }];
+    [viewCommentsButton mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(lineView.mas_bottom);
+        make.left.right.bottom.equalTo(bottomView);
+    }];
+}
+
+- (void)answerButtonAction:(UIButton *)sender {
+    QAReplyQuestionViewController *vc = [[QAReplyQuestionViewController alloc]init];
+    [self.navigationController pushViewController:vc animated:YES];
+}
 - (void)previewAttachment {
     QAQuestionListRequestItem_Attachment *attach = self.item.attachmentList.firstObject;
     YXFileType type = [QAFileTypeMappingTable fileTypeWithString:attach.resType];
