@@ -7,13 +7,11 @@
 //
 
 #import "QAAskQuestionViewController.h"
-#import "QAInputeTextView.h"
 #import "QAPublishQuestionViewController.h"
+#import "QATextView.h"
 
 @interface QAAskQuestionViewController ()<UITextViewDelegate>
-@property (nonatomic, strong) UIScrollView *scrollView;
-@property (nonatomic, strong) UIView *contentView;
-@property (nonatomic, strong) QAInputeTextView *textView;
+@property (nonatomic, strong) QATextView *textView;
 @end
 
 @implementation QAAskQuestionViewController
@@ -23,7 +21,6 @@
     self.title = @"我要提问";
     [self setupNavView];
     [self setupUI];
-    [self setupLayout];
     [self setupObservers];
     // Do any additional setup after loading the view.
 }
@@ -33,7 +30,6 @@
     // Dispose of any resources that can be recreated.
 }
 
-#pragma mark - setupNavView
 - (void)setupNavView {
     UIButton *leftButton = [UIButton buttonWithType:UIButtonTypeCustom];
     [leftButton setTitle:@"取消" forState:UIControlStateNormal];
@@ -57,13 +53,13 @@
 }
 
 - (void)cancelAction {
-    DDLogDebug(@"点击取消按钮");
+    DDLogDebug(@"click to cancel");
     [self.view endEditing:YES];
     [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (void)nextAction {
-    DDLogDebug(@"点击下一步");
+    DDLogDebug(@"click to next step");
     [self.view endEditing:YES];
     if (![self.textView.text yx_isValidString]) {
         [self showToast:@"空"];
@@ -74,36 +70,14 @@
 }
 
 - (void)setupUI {
-    self.scrollView = [[UIScrollView alloc]init];
-    self.scrollView.showsVerticalScrollIndicator = NO;
-    self.scrollView.backgroundColor = [UIColor redColor];
-    self.scrollView.delegate = self;
-    
-    self.contentView = [[UIView alloc]init];
-    self.contentView.backgroundColor = [UIColor whiteColor];
-    self.contentView.layer.cornerRadius = 2.0f;
-    self.contentView.clipsToBounds = YES;
-    
-    self.textView = [[QAInputeTextView alloc]initWithPlaceholder:@"请写下您的问题并用问号结尾（30字以内)"];
+    self.textView = [[QATextView alloc]init];
+    self.textView.placeholedr = @"请写下您的问题并用问号结尾（30字以内)";
     self.textView.delegate = self;
     self.textView.backgroundColor = [UIColor yellowColor];
-}
-
-- (void)setupLayout {
-    [self.view addSubview:self.scrollView];
-    [self.scrollView addSubview:self.contentView];
-    [self.contentView addSubview:self.textView];
     
-    [self.scrollView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.edges.mas_equalTo(UIEdgeInsetsMake(10, 10, 10, 10));
-    }];
-    [self.contentView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.edges.mas_equalTo(0);
-        make.width.mas_equalTo(self.scrollView.mas_width);
-        make.height.mas_equalTo(self.scrollView.mas_height);
-    }];
+    [self.view addSubview:self.textView];
     [self.textView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.edges.mas_equalTo(0);
+        make.edges.mas_equalTo(UIEdgeInsetsMake(10, 10, 10, 10));
     }];
 }
 
@@ -117,7 +91,12 @@
         CGRect keyboardFrame = keyboardFrameValue.CGRectValue;
         NSNumber *duration = [dic valueForKey:UIKeyboardAnimationDurationUserInfoKey];
         [UIView animateWithDuration:duration.floatValue animations:^{
-            self.scrollView.contentInset = UIEdgeInsetsMake(0, 0, [UIScreen mainScreen].bounds.size.height-keyboardFrame.origin.y + 10, 0);
+            [self.textView mas_remakeConstraints:^(MASConstraintMaker *make) {
+                make.left.top.equalTo(self.view).offset(10.0f);
+                make.right.equalTo(self.view).offset(-10.0f);
+                make.bottom.mas_equalTo(keyboardFrame.origin.y - [UIScreen mainScreen].bounds.size.height - 10);
+            }];
+            [self.view layoutIfNeeded];
         }];
     }];
 }
@@ -130,10 +109,4 @@
     }
 }
 
-- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
-    [self.view endEditing:YES];
-}
-- (void)scrollViewWillBeginDecelerating:(UIScrollView *)scrollView {
-    [self.view endEditing:YES];
-}
 @end

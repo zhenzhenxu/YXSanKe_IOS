@@ -7,22 +7,20 @@
 //
 
 #import "QAPublishQuestionViewController.h"
-#import "QAInputeTextView.h"
 #import "QAInputAccessoryView.h"
 #import "YXImagePickerController.h"
 #import "QADeleteImageViewController.h"
 #import "UIImage+YXImage.h"
+#import "QATextView.h"
 
 static CGFloat const kTextViewHeight = 150.0f;
 
 @interface QAPublishQuestionViewController ()<UIGestureRecognizerDelegate>
 
-@property (nonatomic, strong) UIScrollView *scrollView;
 @property (nonatomic, strong) UIView *contentView;
-@property (nonatomic, strong) QAInputeTextView *textView;
+@property (nonatomic, strong) QATextView *textView;
 @property (nonatomic, strong) QAInputAccessoryView *customView;
 @property (nonatomic, strong) UIImageView *imageView;
-@property (nonatomic, strong) UIImage *image;
 @property (nonatomic, strong) YXImagePickerController *imagePickerController;
 
 @end
@@ -34,7 +32,6 @@ static CGFloat const kTextViewHeight = 150.0f;
     [self setupRightWithTitle:@"发布"];
     [self setupUI];
     [self setupLayout];
-    [self setupObservers];
     // Do any additional setup after loading the view.
 }
 
@@ -44,23 +41,21 @@ static CGFloat const kTextViewHeight = 150.0f;
 }
 
 - (void)naviRightAction {
-    DDLogDebug(@"点击发布问题");
+    DDLogDebug(@"click to publish question");
     [self.view endEditing:YES];
-    
 }
 
 - (void)setupUI {
-    self.scrollView = [[UIScrollView alloc]init];
-    self.scrollView.showsVerticalScrollIndicator = NO;
-    
     self.contentView = [[UIView alloc]init];
     self.contentView.backgroundColor = [UIColor whiteColor];
     self.contentView.layer.cornerRadius = 2.0f;
     self.contentView.clipsToBounds = YES;
+    UITapGestureRecognizer *clickTap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(clickTapAction:)];
+    [self.contentView addGestureRecognizer:clickTap];
     
-    self.textView = [[QAInputeTextView alloc]initWithPlaceholder:@"请输入您的内容描述…（选填)"];
+    self.textView = [[QATextView alloc]init];
+    self.textView.placeholedr = @"请输入您的内容描述…（选填)";
     self.textView.backgroundColor = [UIColor redColor];
-    
     QAInputAccessoryView *customView = [[QAInputAccessoryView alloc] initWithFrame:CGRectMake(0, 0, 320, 39)];
     customView.backgroundColor = [UIColor colorWithHexString:@"f8f8f8"];
     WEAK_SELF
@@ -94,18 +89,14 @@ static CGFloat const kTextViewHeight = 150.0f;
 }
 
 - (void)setupLayout {
-    [self.view addSubview:self.scrollView];
-    [self.scrollView addSubview:self.contentView];
+    [self.view addSubview:self.contentView];
     [self.contentView addSubview:self.textView];
     [self.contentView addSubview:self.imageView];
     
-    [self.scrollView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.edges.mas_equalTo(UIEdgeInsetsMake(10, 10, 10, 10));
-    }];
+    [self.view addSubview:self.textView];
+    
     [self.contentView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.edges.mas_equalTo(0);
-        make.width.mas_equalTo(self.scrollView.mas_width);
-        make.height.mas_equalTo(self.scrollView.mas_height);
+        make.edges.mas_equalTo(UIEdgeInsetsMake(10, 10, 10, 10));
     }];
     [self.textView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.left.right.equalTo(self.contentView);
@@ -122,38 +113,24 @@ static CGFloat const kTextViewHeight = 150.0f;
     WEAK_SELF
     [self.imagePickerController pickImageWithSourceType:type completion:^(UIImage *selectedImage) {
         STRONG_SELF
-//        NSData *data = [UIImage compressionImage:selectedImage limitSize:2*1024*1024];
         self.imageView.image = selectedImage;
-        self.image = selectedImage;
     }];
 }
 
+- (void)clickTapAction:(UITapGestureRecognizer *)recognizer {
+    [self.textView becomeFirstResponder];
+}
+
 - (void)selectedImage:(UITapGestureRecognizer *) recognizer {
-    if (!self.imageView.image || !self.image) {
+    if (!self.imageView.image ) {
         return;
     }
     QADeleteImageViewController *vc = [[QADeleteImageViewController alloc]init];
     vc.image = self.imageView.image;
     [vc setDeleteBlock:^{
         self.imageView.image = nil;
-        self.image = nil;
     }];
     [self.navigationController pushViewController:vc animated:YES];
 }
-- (void)setupObservers {
-    WEAK_SELF
-    [[[NSNotificationCenter defaultCenter]rac_addObserverForName:UIKeyboardWillChangeFrameNotification object:nil]subscribeNext:^(id x) {
-        STRONG_SELF
-        NSNotification *noti = (NSNotification *)x;
-        NSDictionary *dic = noti.userInfo;
-        NSValue *keyboardFrameValue = [dic valueForKey:UIKeyboardFrameEndUserInfoKey];
-        CGRect keyboardFrame = keyboardFrameValue.CGRectValue;
-        NSNumber *duration = [dic valueForKey:UIKeyboardAnimationDurationUserInfoKey];
-        [UIView animateWithDuration:duration.floatValue animations:^{
-            self.scrollView.contentInset = UIEdgeInsetsMake(0, 0, [UIScreen mainScreen].bounds.size.height-keyboardFrame.origin.y + 10, 0);
-        }];
-    }];
-}
-
 
 @end

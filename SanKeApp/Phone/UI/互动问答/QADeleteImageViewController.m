@@ -10,7 +10,6 @@
 #import "UIImage+YXImage.h"
 
 @interface QADeleteImageViewController ()
-//@property (nonatomic, strong) UIView *contentView;
 @property (nonatomic, strong) UIImageView *imageView;
 
 @property (nonatomic, copy) DeleteBlock deleteButtonBlock;
@@ -34,15 +33,13 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
-     [self.navigationController.navigationBar setBackgroundImage:[UIImage yx_imageWithColor:[UIColor blackColor]] forBarMetrics:UIBarMetricsDefault];
-    self.navigationController.navigationBar.translucent = NO;
+    [self.navigationController.navigationBar setBackgroundImage:[UIImage yx_imageWithColor:[UIColor blackColor]] forBarMetrics:UIBarMetricsDefault];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
     
     [self.navigationController.navigationBar setBackgroundImage:[UIImage yx_imageWithColor:[UIColor whiteColor]] forBarMetrics:UIBarMetricsDefault];
-    self.navigationController.navigationBar.translucent = YES;
 }
 
 - (void)setupNavView {
@@ -50,7 +47,6 @@
     button.frame = CGRectMake(0, 0, 30.0f, 30.0f);
     button.backgroundColor = [UIColor redColor];
     [button setImage:[UIImage imageNamed:@""] forState:UIControlStateNormal];
-//    [button sizeToFit];
     [[button rac_signalForControlEvents:UIControlEventTouchUpInside]subscribeNext:^(id x) {
         [self deletelAction];
     }];
@@ -58,7 +54,7 @@
 }
 
 - (void)deletelAction {
-    DDLogDebug(@"点击删除按钮");
+    DDLogDebug(@"click to delete image");
     self.imageView.image = nil;
     [self.navigationController popViewControllerAnimated:YES];
     BLOCK_EXEC(self.deleteButtonBlock);
