@@ -33,7 +33,7 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
-    [self.navigationController.navigationBar setBackgroundImage:[UIImage yx_imageWithColor:[UIColor blackColor]] forBarMetrics:UIBarMetricsDefault];
+     [self.navigationController.navigationBar setBackgroundImage:[UIImage yx_imageWithColor:[UIColor blackColor]] forBarMetrics:UIBarMetricsDefault];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {

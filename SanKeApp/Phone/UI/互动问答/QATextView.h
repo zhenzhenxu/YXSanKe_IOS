@@ -12,6 +12,5 @@
 
 @property (nonatomic, copy) NSString *placeholedr;
 
-//- (instancetype)initWithPlaceholder:(NSString *)placeholder;
 
 @end

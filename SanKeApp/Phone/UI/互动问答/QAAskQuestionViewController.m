@@ -9,9 +9,11 @@
 #import "QAAskQuestionViewController.h"
 #import "QAPublishQuestionViewController.h"
 #import "QATextView.h"
+#import "MenuSelectionView.h"
 
 @interface QAAskQuestionViewController ()<UITextViewDelegate>
 @property (nonatomic, strong) QATextView *textView;
+@property (nonatomic, strong) MenuSelectionView *menuSelectionView;
 @end
 
 @implementation QAAskQuestionViewController
@@ -55,14 +57,14 @@
 - (void)cancelAction {
     DDLogDebug(@"click to cancel");
     [self.view endEditing:YES];
-    [self.navigationController popViewControllerAnimated:YES];
+    [self handleCancelAction];
 }
 
 - (void)nextAction {
     DDLogDebug(@"click to next step");
     [self.view endEditing:YES];
     if (![self.textView.text yx_isValidString]) {
-        [self showToast:@"空"];
+        [self showToast:@"内容不可为空!"];
     }else {
         QAPublishQuestionViewController *vc = [[QAPublishQuestionViewController alloc]init];
         [self.navigationController pushViewController:vc animated:YES];
@@ -106,6 +108,72 @@
     NSString *content = textView.text;
     if (content.length > 30) {
         textView.text =  [content substringToIndex:30];
+    }
+}
+
+#pragma mark - CancelAction
+- (void)handleCancelAction {
+    self.menuSelectionView = [[MenuSelectionView alloc]init];
+    self.menuSelectionView.dataArray = @[
+                                         @"确定",
+                                         @"取消"
+                                         ];
+    CGFloat height = [self.menuSelectionView totalHeight];
+    [self.view addSubview:self.menuSelectionView];
+    AlertView *alert = [[AlertView alloc]init];
+    alert.hideWhenMaskClicked = YES;
+    alert.maskColor = [[UIColor blackColor]colorWithAlphaComponent:0.4];
+    alert.contentView = self.menuSelectionView;
+    WEAK_SELF
+    [alert setHideBlock:^(AlertView *view) {
+        STRONG_SELF
+        [UIView animateWithDuration:0.3f animations:^{
+            [view.contentView mas_remakeConstraints:^(MASConstraintMaker *make) {
+                make.left.right.equalTo(view);
+                make.top.equalTo(view.mas_bottom).offset(0);
+            }];
+            [view layoutIfNeeded];
+        } completion:^(BOOL finished) {
+            [view removeFromSuperview];
+        }];
+    }];
+    [alert showWithLayout:^(AlertView *view) {
+        STRONG_SELF
+        [view.contentView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.right.equalTo(view);
+            make.top.equalTo(view.mas_bottom).offset(0);
+        }];
+        [view layoutIfNeeded];
+        [UIView animateWithDuration:0.3f animations:^{
+            [view.contentView mas_remakeConstraints:^(MASConstraintMaker *make) {
+                make.left.right.equalTo(view);
+                make.height.mas_equalTo(height);
+                make.bottom.equalTo(view);
+            }];
+            [view layoutIfNeeded];
+        }];
+    }];
+    [self.menuSelectionView setChooseMenuBlock:^(NSInteger index) {
+        STRONG_SELF
+        [alert hide];
+        [self chooseMenuWithIndex:index];
+    }];
+}
+
+- (void)chooseMenuWithIndex:(NSInteger)index {
+    switch (index) {
+        case 0:
+        {
+            [self.navigationController popViewControllerAnimated:YES];
+        }
+            break;
+        case 1:{
+            return;
+        }
+            break;
+            
+        default:
+            break;
     }
 }
 
