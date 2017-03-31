@@ -11,6 +11,8 @@
 #import "QAPublishQuestionViewController.h"
 
 @interface QAAskQuestionViewController ()<UITextViewDelegate>
+@property (nonatomic, strong) UIScrollView *scrollView;
+@property (nonatomic, strong) UIView *contentView;
 @property (nonatomic, strong) QAInputeTextView *textView;
 @end
 
@@ -21,8 +23,8 @@
     self.title = @"我要提问";
     [self setupNavView];
     [self setupUI];
+    [self setupLayout];
     [self setupObservers];
-    [self setupGestureRecognizer];
     // Do any additional setup after loading the view.
 }
 
@@ -55,7 +57,6 @@
 }
 
 - (void)cancelAction {
-    //弹提示框 然后反应
     DDLogDebug(@"点击取消按钮");
     [self.view endEditing:YES];
     [self.navigationController popViewControllerAnimated:YES];
@@ -73,13 +74,36 @@
 }
 
 - (void)setupUI {
-    self.textView = [[QAInputeTextView alloc]initWithPlaceholder:@"请写下您的问题并用问号结尾（30字以内)"];
-    [self.view addSubview:self.textView];
-    //    self.textView.backgroundColor = [UIColor redColor];
-    self.textView.delegate = self;
+    self.scrollView = [[UIScrollView alloc]init];
+    self.scrollView.showsVerticalScrollIndicator = NO;
+    self.scrollView.backgroundColor = [UIColor redColor];
+    self.scrollView.delegate = self;
     
-    [self.textView mas_makeConstraints:^(MASConstraintMaker *make) {
+    self.contentView = [[UIView alloc]init];
+    self.contentView.backgroundColor = [UIColor whiteColor];
+    self.contentView.layer.cornerRadius = 2.0f;
+    self.contentView.clipsToBounds = YES;
+    
+    self.textView = [[QAInputeTextView alloc]initWithPlaceholder:@"请写下您的问题并用问号结尾（30字以内)"];
+    self.textView.delegate = self;
+    self.textView.backgroundColor = [UIColor yellowColor];
+}
+
+- (void)setupLayout {
+    [self.view addSubview:self.scrollView];
+    [self.scrollView addSubview:self.contentView];
+    [self.contentView addSubview:self.textView];
+    
+    [self.scrollView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.mas_equalTo(UIEdgeInsetsMake(10, 10, 10, 10));
+    }];
+    [self.contentView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.mas_equalTo(0);
+        make.width.mas_equalTo(self.scrollView.mas_width);
+        make.height.mas_equalTo(self.scrollView.mas_height);
+    }];
+    [self.textView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.mas_equalTo(0);
     }];
 }
 
@@ -93,41 +117,23 @@
         CGRect keyboardFrame = keyboardFrameValue.CGRectValue;
         NSNumber *duration = [dic valueForKey:UIKeyboardAnimationDurationUserInfoKey];
         [UIView animateWithDuration:duration.floatValue animations:^{
-            self.textView.contentInset = UIEdgeInsetsMake(0, 0, [UIScreen mainScreen].bounds.size.height-keyboardFrame.origin.y + 10, 0);
+            self.scrollView.contentInset = UIEdgeInsetsMake(0, 0, [UIScreen mainScreen].bounds.size.height-keyboardFrame.origin.y + 10, 0);
         }];
     }];
 }
 
+#pragma mark - delegate
 - (void)textViewDidChange:(UITextView *)textView {
     NSString *content = textView.text;
     if (content.length > 30) {
         textView.text =  [content substringToIndex:30];
     }
 }
-#pragma mark - GestureRecognizer
-- (void)setupGestureRecognizer {
-    UISwipeGestureRecognizer *upRecognizer;
-    upRecognizer = [[UISwipeGestureRecognizer alloc]initWithTarget:self action:@selector(handleSwipeFrom:)];
-    upRecognizer.direction = UISwipeGestureRecognizerDirectionUp;
-    [self.textView addGestureRecognizer:upRecognizer];
-    
-    UISwipeGestureRecognizer *downRecognizer;
-    downRecognizer = [[UISwipeGestureRecognizer alloc]initWithTarget:self action:@selector(handleSwipeFrom:)];
-    downRecognizer.direction = UISwipeGestureRecognizerDirectionDown;
-    [self.textView addGestureRecognizer:downRecognizer];
-}
 
-- (void)handleSwipeFrom:(UISwipeGestureRecognizer *)recognizer {
-    
-    if(recognizer.direction==UISwipeGestureRecognizerDirectionDown) {
-        DDLogDebug(@"swipe down");
-        [self.textView resignFirstResponder];
-    }
-    if(recognizer.direction==UISwipeGestureRecognizerDirectionUp) {
-        
-        DDLogDebug(@"swipe up");
-        [self.textView resignFirstResponder];
-    }
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+    [self.view endEditing:YES];
 }
-
+- (void)scrollViewWillBeginDecelerating:(UIScrollView *)scrollView {
+    [self.view endEditing:YES];
+}
 @end

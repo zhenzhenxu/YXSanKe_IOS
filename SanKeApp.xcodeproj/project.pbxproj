@@ -263,6 +263,7 @@
 		E96EB7761E8B96370061D6C9 /* QAPublishQuestionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E96EB7751E8B96370061D6C9 /* QAPublishQuestionViewController.m */; };
 		E96EB7791E8B96560061D6C9 /* QAReplyQuestionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E96EB7781E8B96560061D6C9 /* QAReplyQuestionViewController.m */; };
 		E96EB7881E8CE7DC0061D6C9 /* QAInputAccessoryView.m in Sources */ = {isa = PBXBuildFile; fileRef = E96EB7871E8CE7DC0061D6C9 /* QAInputAccessoryView.m */; };
+		E96EB78E1E8D08940061D6C9 /* QADeleteImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E96EB78D1E8D08940061D6C9 /* QADeleteImageViewController.m */; };
 		E9F4541C1E31B18D00860DC2 /* TouristLoginRequest.json in Resources */ = {isa = PBXBuildFile; fileRef = E9F4541B1E31B18D00860DC2 /* TouristLoginRequest.json */; };
 /* End PBXBuildFile section */
 
@@ -774,6 +775,8 @@
 		E96EB7781E8B96560061D6C9 /* QAReplyQuestionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QAReplyQuestionViewController.m; sourceTree = "<group>"; };
 		E96EB7861E8CE7DC0061D6C9 /* QAInputAccessoryView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QAInputAccessoryView.h; sourceTree = "<group>"; };
 		E96EB7871E8CE7DC0061D6C9 /* QAInputAccessoryView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QAInputAccessoryView.m; sourceTree = "<group>"; };
+		E96EB78C1E8D08940061D6C9 /* QADeleteImageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QADeleteImageViewController.h; sourceTree = "<group>"; };
+		E96EB78D1E8D08940061D6C9 /* QADeleteImageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QADeleteImageViewController.m; sourceTree = "<group>"; };
 		E9F4541B1E31B18D00860DC2 /* TouristLoginRequest.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = TouristLoginRequest.json; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -1461,6 +1464,8 @@
 				E96EB7751E8B96370061D6C9 /* QAPublishQuestionViewController.m */,
 				E96EB7771E8B96560061D6C9 /* QAReplyQuestionViewController.h */,
 				E96EB7781E8B96560061D6C9 /* QAReplyQuestionViewController.m */,
+				E96EB78C1E8D08940061D6C9 /* QADeleteImageViewController.h */,
+				E96EB78D1E8D08940061D6C9 /* QADeleteImageViewController.m */,
 			);
 			name = "互动答疑";
 			path = "互动问答";
@@ -2206,6 +2211,7 @@
 				30C87E0E1E52F4BB000CFBAA /* NSString+YXString.m in Sources */,
 				7C7629C11E27371D007B5698 /* LoginActionView.m in Sources */,
 				7C1CBEB81E80D1E600826FE9 /* TeachingMainViewController.m in Sources */,
+				E96EB78E1E8D08940061D6C9 /* QADeleteImageViewController.m in Sources */,
 				92E7D1391E28A83F00A34300 /* AloneCourseViewController.m in Sources */,
 				E96EB75B1E8A7B610061D6C9 /* PersonalCenterViewController.m in Sources */,
 				7C7841941E2E225D00755BC0 /* TouristLoginRequest.m in Sources */,

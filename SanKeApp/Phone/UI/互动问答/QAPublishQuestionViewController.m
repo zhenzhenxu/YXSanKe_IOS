@@ -10,16 +10,19 @@
 #import "QAInputeTextView.h"
 #import "QAInputAccessoryView.h"
 #import "YXImagePickerController.h"
+#import "QADeleteImageViewController.h"
+#import "UIImage+YXImage.h"
 
 static CGFloat const kTextViewHeight = 150.0f;
 
-@interface QAPublishQuestionViewController ()
+@interface QAPublishQuestionViewController ()<UIGestureRecognizerDelegate>
 
 @property (nonatomic, strong) UIScrollView *scrollView;
 @property (nonatomic, strong) UIView *contentView;
 @property (nonatomic, strong) QAInputeTextView *textView;
 @property (nonatomic, strong) QAInputAccessoryView *customView;
 @property (nonatomic, strong) UIImageView *imageView;
+@property (nonatomic, strong) UIImage *image;
 @property (nonatomic, strong) YXImagePickerController *imagePickerController;
 
 @end
@@ -82,6 +85,10 @@ static CGFloat const kTextViewHeight = 150.0f;
     
     self.imageView = [[UIImageView alloc]init];
     self.imageView.backgroundColor = [UIColor yellowColor];
+    self.imageView.userInteractionEnabled = YES;
+    self.imageView.contentMode = UIViewContentModeScaleAspectFit;
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(selectedImage:)];
+    [self.imageView addGestureRecognizer:tap];
     
     self.imagePickerController = [[YXImagePickerController alloc] init];
 }
@@ -115,10 +122,24 @@ static CGFloat const kTextViewHeight = 150.0f;
     WEAK_SELF
     [self.imagePickerController pickImageWithSourceType:type completion:^(UIImage *selectedImage) {
         STRONG_SELF
+//        NSData *data = [UIImage compressionImage:selectedImage limitSize:2*1024*1024];
         self.imageView.image = selectedImage;
+        self.image = selectedImage;
     }];
 }
 
+- (void)selectedImage:(UITapGestureRecognizer *) recognizer {
+    if (!self.imageView.image || !self.image) {
+        return;
+    }
+    QADeleteImageViewController *vc = [[QADeleteImageViewController alloc]init];
+    vc.image = self.imageView.image;
+    [vc setDeleteBlock:^{
+        self.imageView.image = nil;
+        self.image = nil;
+    }];
+    [self.navigationController pushViewController:vc animated:YES];
+}
 - (void)setupObservers {
     WEAK_SELF
     [[[NSNotificationCenter defaultCenter]rac_addObserverForName:UIKeyboardWillChangeFrameNotification object:nil]subscribeNext:^(id x) {
@@ -133,4 +154,6 @@ static CGFloat const kTextViewHeight = 150.0f;
         }];
     }];
 }
+
+
 @end
