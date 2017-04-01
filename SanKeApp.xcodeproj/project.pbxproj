@@ -264,6 +264,7 @@
 		E96EB7881E8CE7DC0061D6C9 /* QAInputAccessoryView.m in Sources */ = {isa = PBXBuildFile; fileRef = E96EB7871E8CE7DC0061D6C9 /* QAInputAccessoryView.m */; };
 		E96EB78E1E8D08940061D6C9 /* QADeleteImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E96EB78D1E8D08940061D6C9 /* QADeleteImageViewController.m */; };
 		E96EB7911E8DEE8F0061D6C9 /* QATextView.m in Sources */ = {isa = PBXBuildFile; fileRef = E96EB7901E8DEE8F0061D6C9 /* QATextView.m */; };
+		E96EB79D1E8F9F500061D6C9 /* ImagePickerUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = E96EB79C1E8F9F500061D6C9 /* ImagePickerUtils.m */; };
 		E9F4541C1E31B18D00860DC2 /* TouristLoginRequest.json in Resources */ = {isa = PBXBuildFile; fileRef = E9F4541B1E31B18D00860DC2 /* TouristLoginRequest.json */; };
 /* End PBXBuildFile section */
 
@@ -777,6 +778,8 @@
 		E96EB78D1E8D08940061D6C9 /* QADeleteImageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QADeleteImageViewController.m; sourceTree = "<group>"; };
 		E96EB78F1E8DEE8F0061D6C9 /* QATextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QATextView.h; sourceTree = "<group>"; };
 		E96EB7901E8DEE8F0061D6C9 /* QATextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QATextView.m; sourceTree = "<group>"; };
+		E96EB79B1E8F9F500061D6C9 /* ImagePickerUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImagePickerUtils.h; sourceTree = "<group>"; };
+		E96EB79C1E8F9F500061D6C9 /* ImagePickerUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImagePickerUtils.m; sourceTree = "<group>"; };
 		E9F4541B1E31B18D00860DC2 /* TouristLoginRequest.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = TouristLoginRequest.json; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -1937,6 +1940,8 @@
 			children = (
 				E96EB7531E8A7B320061D6C9 /* YXImagePickerController.h */,
 				E96EB7541E8A7B320061D6C9 /* YXImagePickerController.m */,
+				E96EB79B1E8F9F500061D6C9 /* ImagePickerUtils.h */,
+				E96EB79C1E8F9F500061D6C9 /* ImagePickerUtils.m */,
 			);
 			name = "相机";
 			sourceTree = "<group>";
@@ -2219,6 +2224,7 @@
 				7C1A5F231E1510FA00832DED /* GetRequest.m in Sources */,
 				E96EB7551E8A7B320061D6C9 /* YXImagePickerController.m in Sources */,
 				7C6F21901E232F8E000AB43A /* YXDrawerController.m in Sources */,
+				E96EB79D1E8F9F500061D6C9 /* ImagePickerUtils.m in Sources */,
 				E96EB75E1E8A7B7E0061D6C9 /* PersonalCenterCell.m in Sources */,
 				7CAE439A1E83AA8F00B0D460 /* QAReplyDetailViewController.m in Sources */,
 				7C1A5F771E15132200832DED /* YXFileFavorWrapper.m in Sources */,

@@ -80,6 +80,7 @@ static CGFloat const kTextViewHeight = 130.0f;
     self.customView = customView;
     
     self.imagePickerController = [[YXImagePickerController alloc] init];
+    self.imagePickerController.allowsEditing = NO;
 }
 
 - (void)setupLayout {
@@ -98,8 +99,11 @@ static CGFloat const kTextViewHeight = 130.0f;
 
 - (void)pickImageWithSourceType:(UIImagePickerControllerSourceType)type {
     WEAK_SELF
-    [self.imagePickerController pickImageWithSourceType:type completion:^(UIImage *selectedImage) {
+    [self.imagePickerController presentFromViewController:self pickImageWithSourceType:type completion:^(UIImage *selectedImage) {
         STRONG_SELF
+        if (!selectedImage) {
+            return;
+        }
         self.imageView.image = selectedImage;
         
         [self.contentView addSubview:self.imageView];
@@ -141,7 +145,8 @@ static CGFloat const kTextViewHeight = 130.0f;
     if (_imageView == nil) {
         _imageView = [[UIImageView alloc]init];
         _imageView.userInteractionEnabled = YES;
-        _imageView.contentMode = UIViewContentModeScaleAspectFit;
+        _imageView.contentMode = UIViewContentModeScaleAspectFill;
+        _imageView.clipsToBounds = YES;
         UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(selectedImage:)];
         [_imageView addGestureRecognizer:tap];
     }
