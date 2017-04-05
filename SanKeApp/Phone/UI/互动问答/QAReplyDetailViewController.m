@@ -11,10 +11,12 @@
 #import "QAReplyDetailMenuItemView.h"
 #import "QAReplyQuestionViewController.h"
 #import "QAAskQuestionViewController.h"
+#import "QAShareView.h"
 
 @interface QAReplyDetailViewController ()<UITableViewDataSource,UITableViewDelegate>
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) QAReplyDetailCell *detailCell;
+@property (nonatomic, strong) QAShareView *shareView;
 @end
 
 @implementation QAReplyDetailViewController
@@ -36,7 +38,51 @@
 }
 
 - (void)naviRightAction {
-    [[YXShareManager shareManager]yx_shareMessageWithImageIcon:nil title:@"分享标题" message:nil url:@"www.baidu.com" shareType:YXShareType_WeChat];
+    [self shareAction];
+}
+
+- (void)shareAction {
+    self.shareView = [[QAShareView alloc]init];
+    [self.view addSubview:self.shareView];
+    AlertView *alert = [[AlertView alloc]init];
+    alert.hideWhenMaskClicked = YES;
+    alert.maskColor = [[UIColor blackColor]colorWithAlphaComponent:0.4];
+    alert.contentView = self.shareView;
+    WEAK_SELF
+    [alert setHideBlock:^(AlertView *view) {
+        STRONG_SELF
+        [UIView animateWithDuration:0.3f animations:^{
+            [view.contentView mas_remakeConstraints:^(MASConstraintMaker *make) {
+                make.left.right.equalTo(view);
+                make.top.equalTo(view.mas_bottom).offset(0);
+                make.height.mas_equalTo(153.0f);
+            }];
+            [view layoutIfNeeded];
+        } completion:^(BOOL finished) {
+            [view removeFromSuperview];
+        }];
+    }];
+    [alert showWithLayout:^(AlertView *view) {
+        STRONG_SELF
+        [view.contentView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.right.equalTo(view);
+            make.top.equalTo(view.mas_bottom).offset(0);
+            make.height.mas_equalTo(153.0f);
+        }];
+        [view layoutIfNeeded];
+        [UIView animateWithDuration:0.3f animations:^{
+            [view.contentView mas_remakeConstraints:^(MASConstraintMaker *make) {
+                make.left.right.equalTo(view);
+                make.height.mas_equalTo(153.0f);
+                make.bottom.equalTo(view);
+            }];
+            [view layoutIfNeeded];
+        }];
+    }];
+    [self.shareView setCancelActionBlock:^{
+        STRONG_SELF
+        [alert hide];
+    }];
 }
 
 - (void)setupObserver {

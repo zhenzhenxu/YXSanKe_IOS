@@ -265,6 +265,9 @@
 		E96EB78E1E8D08940061D6C9 /* QADeleteImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E96EB78D1E8D08940061D6C9 /* QADeleteImageViewController.m */; };
 		E96EB7911E8DEE8F0061D6C9 /* QATextView.m in Sources */ = {isa = PBXBuildFile; fileRef = E96EB7901E8DEE8F0061D6C9 /* QATextView.m */; };
 		E96EB79D1E8F9F500061D6C9 /* ImagePickerUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = E96EB79C1E8F9F500061D6C9 /* ImagePickerUtils.m */; };
+		E96EB7A01E94947C0061D6C9 /* QAShareView.m in Sources */ = {isa = PBXBuildFile; fileRef = E96EB79F1E94947C0061D6C9 /* QAShareView.m */; };
+		E96EB7A31E949A4C0061D6C9 /* QAShareCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E96EB7A21E949A4C0061D6C9 /* QAShareCell.m */; };
+		E96EB7A61E94C1F30061D6C9 /* QAShareHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = E96EB7A51E94C1F20061D6C9 /* QAShareHeaderView.m */; };
 		E9F4541C1E31B18D00860DC2 /* TouristLoginRequest.json in Resources */ = {isa = PBXBuildFile; fileRef = E9F4541B1E31B18D00860DC2 /* TouristLoginRequest.json */; };
 /* End PBXBuildFile section */
 
@@ -780,6 +783,12 @@
 		E96EB7901E8DEE8F0061D6C9 /* QATextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QATextView.m; sourceTree = "<group>"; };
 		E96EB79B1E8F9F500061D6C9 /* ImagePickerUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImagePickerUtils.h; sourceTree = "<group>"; };
 		E96EB79C1E8F9F500061D6C9 /* ImagePickerUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImagePickerUtils.m; sourceTree = "<group>"; };
+		E96EB79E1E94947C0061D6C9 /* QAShareView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QAShareView.h; sourceTree = "<group>"; };
+		E96EB79F1E94947C0061D6C9 /* QAShareView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QAShareView.m; sourceTree = "<group>"; };
+		E96EB7A11E949A4C0061D6C9 /* QAShareCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QAShareCell.h; sourceTree = "<group>"; };
+		E96EB7A21E949A4C0061D6C9 /* QAShareCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QAShareCell.m; sourceTree = "<group>"; };
+		E96EB7A41E94C1F20061D6C9 /* QAShareHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QAShareHeaderView.h; sourceTree = "<group>"; };
+		E96EB7A51E94C1F20061D6C9 /* QAShareHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QAShareHeaderView.m; sourceTree = "<group>"; };
 		E9F4541B1E31B18D00860DC2 /* TouristLoginRequest.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = TouristLoginRequest.json; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -1524,6 +1533,7 @@
 		7C1CBEE11E81107700826FE9 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				E96EB7A71E94CE370061D6C9 /* Share */,
 				7C1CBEE21E81115200826FE9 /* QAQuestionCell.h */,
 				7C1CBEE31E81115200826FE9 /* QAQuestionCell.m */,
 				7CAE439F1E85070000B0D460 /* QAReplyDetailCell.h */,
@@ -1946,6 +1956,19 @@
 			name = "相机";
 			sourceTree = "<group>";
 		};
+		E96EB7A71E94CE370061D6C9 /* Share */ = {
+			isa = PBXGroup;
+			children = (
+				E96EB79E1E94947C0061D6C9 /* QAShareView.h */,
+				E96EB79F1E94947C0061D6C9 /* QAShareView.m */,
+				E96EB7A41E94C1F20061D6C9 /* QAShareHeaderView.h */,
+				E96EB7A51E94C1F20061D6C9 /* QAShareHeaderView.m */,
+				E96EB7A11E949A4C0061D6C9 /* QAShareCell.h */,
+				E96EB7A21E949A4C0061D6C9 /* QAShareCell.m */,
+			);
+			name = Share;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -2266,6 +2289,7 @@
 				7C1A5F3B1E15126500832DED /* YXAudioSlideProgressView.m in Sources */,
 				7C1A5F861E1513D600832DED /* MJRefreshBaseView.m in Sources */,
 				7C7841A81E2F132700755BC0 /* UpdateAreaRequest.m in Sources */,
+				E96EB7A01E94947C0061D6C9 /* QAShareView.m in Sources */,
 				7C1A5EFD1E150E3400832DED /* LogFormatter.m in Sources */,
 				7C1809471E262DAA00B71863 /* FilterCell.m in Sources */,
 				7C1A5EA51E14F08700832DED /* main.m in Sources */,
@@ -2298,6 +2322,7 @@
 				7C1A5FA71E151A9100832DED /* YXBroseWebView.m in Sources */,
 				7C1A5FC21E15212000832DED /* YXShowWebMenuView.m in Sources */,
 				30C48A9B1E52EF5100CCDBBE /* NSDictionary+Dictionarys.m in Sources */,
+				E96EB7A31E949A4C0061D6C9 /* QAShareCell.m in Sources */,
 				7C1A5F781E15132200832DED /* FileBrowserFactory.m in Sources */,
 				30C48A7D1E52E72100CCDBBE /* YXStatisticRequest.m in Sources */,
 				7C1A5FC81E1631DD00832DED /* UnhandledRequestData.m in Sources */,
@@ -2343,6 +2368,7 @@
 				927594DC1E2F0C1400F87838 /* PlayHistoryRequest.m in Sources */,
 				7C1A60071E16396D00832DED /* UIImage+YXResize.m in Sources */,
 				7C1A5F491E15127200832DED /* YXPlayerBufferingView.m in Sources */,
+				E96EB7A61E94C1F30061D6C9 /* QAShareHeaderView.m in Sources */,
 				7C1A5F481E15127200832DED /* YXPlayerBottomView.m in Sources */,
 				7C2251D01E1DEB4F004785D5 /* SKAlertTitleLabel.m in Sources */,
 				7C7841AE1E2F142800755BC0 /* FetchStageSubjectRequest.m in Sources */,

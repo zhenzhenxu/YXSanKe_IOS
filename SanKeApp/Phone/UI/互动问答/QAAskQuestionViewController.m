@@ -142,6 +142,7 @@
             [view.contentView mas_remakeConstraints:^(MASConstraintMaker *make) {
                 make.left.right.equalTo(view);
                 make.top.equalTo(view.mas_bottom).offset(0);
+                make.height.mas_equalTo(height);
             }];
             [view layoutIfNeeded];
         } completion:^(BOOL finished) {
@@ -153,6 +154,7 @@
         [view.contentView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.right.equalTo(view);
             make.top.equalTo(view.mas_bottom).offset(0);
+            make.height.mas_equalTo(height);
         }];
         [view layoutIfNeeded];
         [UIView animateWithDuration:0.3f animations:^{
