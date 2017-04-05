@@ -22,6 +22,8 @@ NSString * const kQAReplyUserFavorKey = @"kQAReplyUserFavorKey";
 @interface QADataManager()
 @property (nonatomic, strong) QAQuestionDetailRequest *questionDetailRequest;
 @property (nonatomic, strong) QAReplyFavorRequest *replyFavorRequest;
+@property (nonatomic, strong) QACreateAskRequest *createAskRequest;
+@property (nonatomic, strong) QACreateAnswerRequest *createAnswerRequest;
 @end
 
 @implementation QADataManager
@@ -74,4 +76,39 @@ NSString * const kQAReplyUserFavorKey = @"kQAReplyUserFavorKey";
     }];
 }
 
++ (void)createAskWithTitle:(NSString *)title content:(NSString *)content attachmentID:(NSString *)attachmentID completeBlock:(void (^)(HttpBaseRequestItem *, NSError *))completeBlock {
+    QADataManager *manager = [QADataManager sharedInstance];
+    [manager.createAskRequest stopRequest];
+    manager.createAskRequest = [[QACreateAskRequest alloc]init];
+    manager.createAskRequest.title = title;
+    manager.createAskRequest.content = content;
+    manager.createAskRequest.attachment = attachmentID;
+    WEAK_SELF
+    [manager.createAskRequest startRequestWithRetClass:[HttpBaseRequestItem class] andCompleteBlock:^(id retItem, NSError *error, BOOL isMock) {
+        STRONG_SELF
+        if (error) {
+            BLOCK_EXEC(completeBlock,nil,error)
+            return;
+        }
+        BLOCK_EXEC(completeBlock,retItem,nil)
+    }];
+}
+
++ (void)createAnswerWithAskID:(NSString *)askID answer:(NSString *)answer completeBlock:(void (^)(HttpBaseRequestItem *, NSError *))completeBlock {
+    QADataManager *manager = [QADataManager sharedInstance];
+    [manager.createAnswerRequest stopRequest];
+    manager.createAnswerRequest = [[QACreateAnswerRequest alloc]init];
+    manager.createAnswerRequest.ask_id = askID;
+    manager.createAnswerRequest.answer = answer;
+    WEAK_SELF
+    [manager.createAnswerRequest startRequestWithRetClass:[HttpBaseRequestItem class] andCompleteBlock:^(id retItem, NSError *error, BOOL isMock) {
+        STRONG_SELF
+        if (error) {
+            BLOCK_EXEC(completeBlock,nil,error);
+            return;
+        }
+        BLOCK_EXEC(completeBlock,retItem,nil);
+    }];
+
+}
 @end

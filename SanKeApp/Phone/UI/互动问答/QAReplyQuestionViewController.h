@@ -9,5 +9,5 @@
 #import "BaseViewController.h"
 
 @interface QAReplyQuestionViewController : BaseViewController
-
+@property (nonatomic, copy) NSString *questionID;
 @end

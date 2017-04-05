@@ -169,6 +169,7 @@
 
 - (void)handleReply {
     QAReplyQuestionViewController *vc = [[QAReplyQuestionViewController alloc]init];
+    vc.questionID = self.item.elementID;
     SKNavigationController *navVc = [[SKNavigationController alloc]initWithRootViewController:vc];
     [self presentViewController:navVc animated:YES completion:nil];
 }

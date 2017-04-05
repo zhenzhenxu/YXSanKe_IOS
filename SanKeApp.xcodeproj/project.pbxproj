@@ -268,6 +268,10 @@
 		E96EB7A01E94947C0061D6C9 /* QAShareView.m in Sources */ = {isa = PBXBuildFile; fileRef = E96EB79F1E94947C0061D6C9 /* QAShareView.m */; };
 		E96EB7A31E949A4C0061D6C9 /* QAShareCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E96EB7A21E949A4C0061D6C9 /* QAShareCell.m */; };
 		E96EB7A61E94C1F30061D6C9 /* QAShareHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = E96EB7A51E94C1F20061D6C9 /* QAShareHeaderView.m */; };
+		E96EB7AA1E94D20E0061D6C9 /* QACreateAskRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = E96EB7A91E94D20E0061D6C9 /* QACreateAskRequest.m */; };
+		E96EB7AD1E94D2E50061D6C9 /* QACreateAnswerRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = E96EB7AC1E94D2E50061D6C9 /* QACreateAnswerRequest.m */; };
+		E96EB7B01E94E02C0061D6C9 /* createAnswerRequest.json in Resources */ = {isa = PBXBuildFile; fileRef = E96EB7AE1E94E02C0061D6C9 /* createAnswerRequest.json */; };
+		E96EB7B11E94E02C0061D6C9 /* createAskRequest.json in Resources */ = {isa = PBXBuildFile; fileRef = E96EB7AF1E94E02C0061D6C9 /* createAskRequest.json */; };
 		E9F4541C1E31B18D00860DC2 /* TouristLoginRequest.json in Resources */ = {isa = PBXBuildFile; fileRef = E9F4541B1E31B18D00860DC2 /* TouristLoginRequest.json */; };
 /* End PBXBuildFile section */
 
@@ -789,6 +793,12 @@
 		E96EB7A21E949A4C0061D6C9 /* QAShareCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QAShareCell.m; sourceTree = "<group>"; };
 		E96EB7A41E94C1F20061D6C9 /* QAShareHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QAShareHeaderView.h; sourceTree = "<group>"; };
 		E96EB7A51E94C1F20061D6C9 /* QAShareHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QAShareHeaderView.m; sourceTree = "<group>"; };
+		E96EB7A81E94D20E0061D6C9 /* QACreateAskRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QACreateAskRequest.h; sourceTree = "<group>"; };
+		E96EB7A91E94D20E0061D6C9 /* QACreateAskRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QACreateAskRequest.m; sourceTree = "<group>"; };
+		E96EB7AB1E94D2E50061D6C9 /* QACreateAnswerRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QACreateAnswerRequest.h; sourceTree = "<group>"; };
+		E96EB7AC1E94D2E50061D6C9 /* QACreateAnswerRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QACreateAnswerRequest.m; sourceTree = "<group>"; };
+		E96EB7AE1E94E02C0061D6C9 /* createAnswerRequest.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = createAnswerRequest.json; sourceTree = "<group>"; };
+		E96EB7AF1E94E02C0061D6C9 /* createAskRequest.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = createAskRequest.json; sourceTree = "<group>"; };
 		E9F4541B1E31B18D00860DC2 /* TouristLoginRequest.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = TouristLoginRequest.json; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -1829,6 +1839,12 @@
 				7CDBFEC51E8B98C000C72E6F /* QAReplyFavorRequest.h */,
 				7CDBFEC61E8B98C000C72E6F /* QAReplyFavorRequest.m */,
 				7CDBFECC1E8B9EF100C72E6F /* replyfavor_mock.json */,
+				E96EB7A81E94D20E0061D6C9 /* QACreateAskRequest.h */,
+				E96EB7A91E94D20E0061D6C9 /* QACreateAskRequest.m */,
+				E96EB7AF1E94E02C0061D6C9 /* createAskRequest.json */,
+				E96EB7AB1E94D2E50061D6C9 /* QACreateAnswerRequest.h */,
+				E96EB7AC1E94D2E50061D6C9 /* QACreateAnswerRequest.m */,
+				E96EB7AE1E94E02C0061D6C9 /* createAnswerRequest.json */,
 			);
 			name = requests;
 			sourceTree = "<group>";
@@ -2083,6 +2099,7 @@
 				7C1A5EE91E1506C500832DED /* PhoneImage.xcassets in Resources */,
 				E9355B7C1E6FF85B007AE9F0 /* userInfo.json in Resources */,
 				7CDBFECE1E8B9EF100C72E6F /* questionlist_mock.json in Resources */,
+				E96EB7B01E94E02C0061D6C9 /* createAnswerRequest.json in Resources */,
 				7C7629D21E276DBE007B5698 /* logo.gif in Resources */,
 				927594E91E2F0DA000F87838 /* playHistory_mock.json in Resources */,
 				E9230C461E2F829900AC6617 /* LoginRequest.json in Resources */,
@@ -2103,6 +2120,7 @@
 				E9230C561E30919B00AC6617 /* UpdateAreaRequest.json in Resources */,
 				7CDBFECF1E8B9EF100C72E6F /* replyfavor_mock.json in Resources */,
 				7C1CBEC21E80F88000826FE9 /* TencentOpenApi_IOS_Bundle.bundle in Resources */,
+				E96EB7B11E94E02C0061D6C9 /* createAskRequest.json in Resources */,
 				7C1A5F8D1E15143400832DED /* errorcode_mock.json in Resources */,
 				7C1A5F851E1513D600832DED /* MJRefresh.bundle in Resources */,
 				7C1A5EDC1E15035100832DED /* Empty.xib in Resources */,
@@ -2326,6 +2344,7 @@
 				7C1A5F781E15132200832DED /* FileBrowserFactory.m in Sources */,
 				30C48A7D1E52E72100CCDBBE /* YXStatisticRequest.m in Sources */,
 				7C1A5FC81E1631DD00832DED /* UnhandledRequestData.m in Sources */,
+				E96EB7AD1E94D2E50061D6C9 /* QACreateAnswerRequest.m in Sources */,
 				E94423C01E767A1500F8F795 /* HistoryDeleteRequest.m in Sources */,
 				7C1A60021E16396C00832DED /* UIImage+Color.m in Sources */,
 				7CAE43A41E85140900B0D460 /* QAReplyDetailMenuItemView.m in Sources */,
@@ -2365,6 +2384,7 @@
 				7C1A5F4C1E15127200832DED /* YXSlideProgressView.m in Sources */,
 				30C48A911E52EACC00CCDBBE /* LogRecordEntity+CoreDataProperties.m in Sources */,
 				7C1809411E26285B00B71863 /* FilterSelectionView.m in Sources */,
+				E96EB7AA1E94D20E0061D6C9 /* QACreateAskRequest.m in Sources */,
 				927594DC1E2F0C1400F87838 /* PlayHistoryRequest.m in Sources */,
 				7C1A60071E16396D00832DED /* UIImage+YXResize.m in Sources */,
 				7C1A5F491E15127200832DED /* YXPlayerBufferingView.m in Sources */,

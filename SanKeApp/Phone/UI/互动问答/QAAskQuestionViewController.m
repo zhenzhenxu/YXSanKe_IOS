@@ -79,6 +79,7 @@
         [self showToast:@"内容不可为空!"];
     }else {
         QAPublishQuestionViewController *vc = [[QAPublishQuestionViewController alloc]init];
+        vc.questionTitle = self.textView.text;
         [self.navigationController pushViewController:vc animated:YES];
     }
 }

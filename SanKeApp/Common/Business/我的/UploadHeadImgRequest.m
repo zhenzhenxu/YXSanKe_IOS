@@ -10,8 +10,7 @@
 
 @implementation UploadHeadImgRequest
 
-- (instancetype)init
-{
+- (instancetype)init {
     if (self = [super init]) {
         self.urlHead = [[SKConfigManager sharedInstance].server stringByAppendingString:@"app/sanke/sankeUpload"];
     }

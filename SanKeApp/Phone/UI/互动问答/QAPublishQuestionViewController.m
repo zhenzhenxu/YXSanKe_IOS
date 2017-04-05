@@ -12,6 +12,7 @@
 #import "QADeleteImageViewController.h"
 #import "UIImage+YXImage.h"
 #import "QATextView.h"
+#import "ProjectMainViewController.h"
 
 static CGFloat const kTextViewHeight = 130.0f;
 
@@ -134,9 +135,9 @@ static CGFloat const kTextViewHeight = 130.0f;
         self.imageView.image = nil;
         [self.imageView removeFromSuperview];
         [self.textView mas_remakeConstraints:^(MASConstraintMaker *make) {
-             make.edges.equalTo(self.contentView);
+            make.edges.equalTo(self.contentView);
         }];
-         [self.view layoutIfNeeded];
+        [self.view layoutIfNeeded];
     }];
     [self.navigationController pushViewController:vc animated:YES];
 }
@@ -176,9 +177,18 @@ static CGFloat const kTextViewHeight = 130.0f;
     }];
 }
 
-#pragma mark - publishAnswer
+#pragma mark - publishQuestion
 - (void)publishQuestion {
-    //发布成功之后弹toast然后返回互动答疑界面
+    [QADataManager createAskWithTitle:self.questionTitle content:self.textView.text attachmentID:nil completeBlock:^(HttpBaseRequestItem *item, NSError *error) {
+        if (error) {
+            [self showToast:error.localizedDescription];
+            return ;
+        }
+        [self showToast:@"发布问题成功"];
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            [self dismissViewControllerAnimated:YES completion:nil];
+        });
+    }];
 }
 
 @end

@@ -9,5 +9,5 @@
 #import "BaseViewController.h"
 
 @interface QAPublishQuestionViewController : BaseViewController
-
+@property (nonatomic, copy) NSString *questionTitle;
 @end
