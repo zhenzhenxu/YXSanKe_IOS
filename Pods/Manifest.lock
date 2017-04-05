@@ -65,9 +65,6 @@ PODS:
   - IBActionSheet (0.0.2)
   - IQKeyboardManager (4.0.3)
   - JSONModel (1.2.0)
-  - JSPatch (1.0):
-    - JSPatch/Core (= 1.0)
-  - JSPatch/Core (1.0)
   - MagicalRecord (2.3.2):
     - MagicalRecord/Core (= 2.3.2)
   - MagicalRecord/Core (2.3.2)
@@ -125,7 +122,6 @@ DEPENDENCIES:
   - IBActionSheet (= 0.0.2)
   - IQKeyboardManager
   - JSONModel (~> 1.2.0)
-  - JSPatch
   - MagicalRecord (~> 2.0)
   - Masonry (~> 0.0)
   - MBProgressHUD (= 0.9)
@@ -169,7 +165,6 @@ SPEC CHECKSUMS:
   IBActionSheet: 4028206b0561772c3674a339fb4a7265d55a6f8b
   IQKeyboardManager: be9695ffc5a52077deb4847608f338771022d6d1
   JSONModel: 12523685c4b623553ccf844bbbf7007624317b2c
-  JSPatch: c689ea4dde17441f2f4a95d40dfedb8900c20099
   MagicalRecord: 53bed74b4323b930992a725be713e53b37d19755
   Masonry: 281802d04d787ea2973179ee8bcb50500579ede2
   MBProgressHUD: d8e7ea388dc1549a42e0d219067cf5f2c898fb66
@@ -198,6 +193,6 @@ SPEC CHECKSUMS:
   UITableView+FDTemplateLayoutCell: 234e1582bcc4e18461af91155123bb96538ed030
   uiview-frame-helpers: c3feade603cca5c805dd857e64692c7e7e01d5ec
 
-PODFILE CHECKSUM: dac8bcc6632c9ee3985dab93c13789ca50ae52b9
+PODFILE CHECKSUM: 45adf3b2859b6b40ca03d323f7756048928344d6
 
 COCOAPODS: 1.1.1
