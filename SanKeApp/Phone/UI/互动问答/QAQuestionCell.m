@@ -90,8 +90,17 @@
     _item = item;
     self.titleLabel.text = item.title;
     self.descLabel.text = item.content;
+    
+    if (item.answerNum.integerValue >= 10000) {
+        item.answerNum = @"9999+";
+    }
     self.replyCountLabel.text = item.answerNum;
+    
+    if (item.viewNum.integerValue >= 10000) {
+        item.viewNum = @"9999+";
+    }
     self.browseCountLabel.text = item.viewNum;
+    
     self.timeLabel.text = [NSString stringWithFormat:@"提问时间：%@",item.createTime];
 }
 

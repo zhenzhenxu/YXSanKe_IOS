@@ -152,8 +152,16 @@ typedef NS_ENUM(NSUInteger, QAAttachmentType) {
     self.nameLabel.text = item.showUserName;
     self.titleLabel.text = item.title;
     self.descLabel.text = item.content;
+    if (item.answerNum.integerValue >= 10000) {
+        item.answerNum = @"9999+";
+    }
     self.replyCountLabel.text = item.answerNum;
+    
+    if (item.viewNum.integerValue >= 10000) {
+        item.viewNum = @"9999+";
+    }
     self.browseCountLabel.text = item.viewNum;
+    
     self.timeLabel.text = [NSString stringWithFormat:@"提问时间：%@",item.createTime];
     self.replyDescLabel.text = [NSString stringWithFormat:@"回答（%@）",item.answerNum];
     [self.headImageView sd_setImageWithURL:[NSURL URLWithString:item.avatar] placeholderImage:nil];
@@ -215,10 +223,16 @@ typedef NS_ENUM(NSUInteger, QAAttachmentType) {
 
 - (void)updateWithReplyCount:(NSString *)replyCount browseCount:(NSString *)browseCount {
     if (!isEmpty(replyCount)) {
+        if (replyCount.integerValue >= 10000) {
+            replyCount = @"9999+";
+        }
         self.replyCountLabel.text = replyCount;
         self.replyDescLabel.text = [NSString stringWithFormat:@"回答（%@）",replyCount];
     }
     if (!isEmpty(browseCount)) {
+        if (browseCount.integerValue >= 10000) {
+            browseCount = @"9999+";
+        }
         self.browseCountLabel.text = browseCount;
     }
 }

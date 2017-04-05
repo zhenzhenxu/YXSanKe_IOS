@@ -13,6 +13,7 @@
 #import "QAReplyListFetcher.h"
 #import "QAReplyQuestionViewController.h"
 
+static CGFloat const kBottomViewHeight = 49.0f;
 @interface QAQuestionDetailViewController ()
 @property (nonatomic, strong) QAQuestionDetailView *headerView;
 @property (nonatomic, strong) YXFileItemBase *fileItem;
@@ -53,11 +54,13 @@
         NSDictionary *dic = noti.userInfo;
         NSString *replyID = dic[kQAReplyIDKey];
         NSString *favorCount = dic[kQAReplyFavorCountKey];
+        NSString *userFavor = dic[kQAReplyUserFavorKey];
         NSMutableArray *indexPathArray = [NSMutableArray array];
         [self.dataArray enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
             QAReplyListRequestItem_Element *item = (QAReplyListRequestItem_Element *)obj;
             if ([item.elementID isEqualToString:replyID]) {
                 item.likeInfo.likeNum = favorCount;
+                item.likeInfo.isLike = userFavor;
                 [indexPathArray addObject:[NSIndexPath indexPathForRow:idx inSection:0]];
             }
         }];
@@ -110,12 +113,22 @@
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     [self.tableView registerClass:[QAReplyCell class] forCellReuseIdentifier:@"QAReplyCell"];
     
-    [self setupBottomView];
     [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.top.mas_equalTo(0);
-        make.bottom.equalTo(self.bottomView.mas_top);
+        make.bottom.mas_equalTo(-kBottomViewHeight);
     }];
     
+    [self setupBottomView];
+}
+
+- (void)previewAttachment {
+    QAQuestionListRequestItem_Attachment *attach = self.item.attachmentList.firstObject;
+    YXFileType type = [QAFileTypeMappingTable fileTypeWithString:attach.resType];
+    self.fileItem = [FileBrowserFactory browserWithFileType:type];
+    self.fileItem.name = attach.resName;
+    self.fileItem.url = attach.previewUrl;
+    self.fileItem.baseViewController = self;
+    [self.fileItem browseFile];
 }
 
 - (void)setupBottomView {
@@ -139,7 +152,7 @@
     [self.bottomView addSubview:viewCommentsButton];
     [self.bottomView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.bottom.equalTo(self.view);
-        make.height.mas_equalTo(49);
+        make.height.mas_equalTo(kBottomViewHeight);
     }];
     [lineView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.top.equalTo(self.bottomView);
@@ -155,15 +168,6 @@
     QAReplyQuestionViewController *vc = [[QAReplyQuestionViewController alloc]init];
     SKNavigationController *navVc = [[SKNavigationController alloc]initWithRootViewController:vc];
     [self presentViewController:navVc animated:YES completion:nil];
-}
-- (void)previewAttachment {
-    QAQuestionListRequestItem_Attachment *attach = self.item.attachmentList.firstObject;
-    YXFileType type = [QAFileTypeMappingTable fileTypeWithString:attach.resType];
-    self.fileItem = [FileBrowserFactory browserWithFileType:type];
-    self.fileItem.name = attach.resName;
-    self.fileItem.url = attach.previewUrl;
-    self.fileItem.baseViewController = self;
-    [self.fileItem browseFile];
 }
 
 // 本页上方是问题详情，不应该有任何错误或为空界面覆盖，所以只需要弹个toast提示即可

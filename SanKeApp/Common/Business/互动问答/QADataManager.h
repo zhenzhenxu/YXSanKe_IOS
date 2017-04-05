@@ -21,6 +21,7 @@ extern NSString * const kQAQuestionBrowseCountKey;
 // 回复信息通知的key
 extern NSString * const kQAReplyIDKey;
 extern NSString * const kQAReplyFavorCountKey;
+extern NSString * const kQAReplyUserFavorKey;
 
 @interface QADataManager : NSObject
 + (void)requestQuestionDetailWithID:(NSString *)questionID completeBlock:(void(^)(QAQuestionDetailRequestItem *item,NSError *error))completeBlock;

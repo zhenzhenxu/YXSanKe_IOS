@@ -56,10 +56,18 @@
             QAQuestionListRequestItem_Element *item = (QAQuestionListRequestItem_Element *)obj;
             if ([item.elementID isEqualToString:questionID]) {
                 if (!isEmpty(replyCount)) {
-                    item.answerNum = replyCount;
+                    if (replyCount.integerValue >= 10000) {
+                        item.answerNum = @"9999+";
+                    }else {
+                        item.answerNum = replyCount;
+                    }
                 }
                 if (!isEmpty(browseCount)) {
-                    item.viewNum = browseCount;
+                    if (browseCount.integerValue >= 10000) {
+                        item.viewNum = @"9999+";
+                    }else {
+                        item.viewNum = browseCount;
+                    }
                 }
                 [indexPathArray addObject:[NSIndexPath indexPathForRow:idx inSection:0]];
             }

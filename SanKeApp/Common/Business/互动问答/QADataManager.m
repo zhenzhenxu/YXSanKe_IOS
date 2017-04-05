@@ -17,6 +17,7 @@ NSString * const kQAQuestionBrowseCountKey = @"kQAQuestionBrowseCountKey";
 
 NSString * const kQAReplyIDKey = @"kQAReplyIDKey";
 NSString * const kQAReplyFavorCountKey = @"kQAReplyFavorCountKey";
+NSString * const kQAReplyUserFavorKey = @"kQAReplyUserFavorKey";
 
 @interface QADataManager()
 @property (nonatomic, strong) QAQuestionDetailRequest *questionDetailRequest;
@@ -69,7 +70,7 @@ NSString * const kQAReplyFavorCountKey = @"kQAReplyFavorCountKey";
         }
         BLOCK_EXEC(completeBlock,retItem,nil)
         QAReplyFavorRequestItem *item = (QAReplyFavorRequestItem *)retItem;
-        [[NSNotificationCenter defaultCenter]postNotificationName:kQAReplyInfoUpdateNotification object:nil userInfo:@{kQAReplyIDKey:answerID,kQAReplyFavorCountKey:item.data.likeNum}];
+        [[NSNotificationCenter defaultCenter]postNotificationName:kQAReplyInfoUpdateNotification object:nil userInfo:@{kQAReplyIDKey:answerID,kQAReplyFavorCountKey:item.data.likeNum,kQAReplyUserFavorKey:item.data.isLike}];
     }];
 }
 

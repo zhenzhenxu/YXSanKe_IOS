@@ -47,6 +47,7 @@
         NSDictionary *dic = noti.userInfo;
         if ([dic[kQAReplyIDKey] isEqualToString:self.item.elementID]) {
             self.item.likeInfo.likeNum = dic[kQAReplyFavorCountKey];
+            self.item.likeInfo.isLike = dic[kQAReplyUserFavorKey];
             self.detailCell.item = self.item;
         }
     }];
@@ -127,6 +128,10 @@
 }
 
 - (void)handleFavor {
+    if (self.detailCell.item.likeInfo.isLike.integerValue == 1) {
+        [self showToast:@"您已经赞过了哦"];
+        return;
+    }
     [self startLoading];
     WEAK_SELF
     [QADataManager requestReplyFavorWithID:self.item.elementID completeBlock:^(QAReplyFavorRequestItem *item, NSError *error) {

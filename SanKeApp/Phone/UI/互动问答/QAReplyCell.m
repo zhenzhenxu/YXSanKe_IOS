@@ -13,6 +13,7 @@
 @property (nonatomic, strong) UILabel *commentLabel;
 @property (nonatomic, strong) UILabel *favorLabel;
 @property (nonatomic, strong) UILabel *timeLabel;
+@property (nonatomic, strong) UIImageView *favorImageView;
 @end
 
 @implementation QAReplyCell
@@ -47,6 +48,8 @@
         make.bottom.mas_equalTo(-10);
         make.size.mas_equalTo(CGSizeMake(15, 15));
     }];
+    self.favorImageView = favorImageView;
+    
     self.favorLabel = [[UILabel alloc]init];
     self.favorLabel.font = [UIFont systemFontOfSize:11];
     self.favorLabel.textColor = [UIColor colorWithHexString:@"999999"];
@@ -68,7 +71,18 @@
     _item = item;
     self.nameLabel.text = item.showUserName;
     self.commentLabel.text = item.answer;
+    
+    if (item.likeInfo.isLike.integerValue == 0) {
+        self.favorImageView.image = [UIImage imageNamed:@"心"];
+    }else {
+        self.favorImageView.image = [UIImage imageNamed:@"红心"];
+    }
+    
+    if (item.likeInfo.likeNum.integerValue >= 10000) {
+        item.likeInfo.likeNum = @"9999+";
+    }
     self.favorLabel.text = item.likeInfo.likeNum;
+    
     self.timeLabel.text = item.updateTime;
 }
 
