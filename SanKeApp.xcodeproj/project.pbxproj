@@ -272,6 +272,7 @@
 		E96EB7AD1E94D2E50061D6C9 /* QACreateAnswerRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = E96EB7AC1E94D2E50061D6C9 /* QACreateAnswerRequest.m */; };
 		E96EB7B01E94E02C0061D6C9 /* createAnswerRequest.json in Resources */ = {isa = PBXBuildFile; fileRef = E96EB7AE1E94E02C0061D6C9 /* createAnswerRequest.json */; };
 		E96EB7B11E94E02C0061D6C9 /* createAskRequest.json in Resources */ = {isa = PBXBuildFile; fileRef = E96EB7AF1E94E02C0061D6C9 /* createAskRequest.json */; };
+		E99630871E95EF4700C4BF62 /* QAUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = E99630861E95EF4700C4BF62 /* QAUtils.m */; };
 		E9F4541C1E31B18D00860DC2 /* TouristLoginRequest.json in Resources */ = {isa = PBXBuildFile; fileRef = E9F4541B1E31B18D00860DC2 /* TouristLoginRequest.json */; };
 /* End PBXBuildFile section */
 
@@ -799,6 +800,8 @@
 		E96EB7AC1E94D2E50061D6C9 /* QACreateAnswerRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QACreateAnswerRequest.m; sourceTree = "<group>"; };
 		E96EB7AE1E94E02C0061D6C9 /* createAnswerRequest.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = createAnswerRequest.json; sourceTree = "<group>"; };
 		E96EB7AF1E94E02C0061D6C9 /* createAskRequest.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = createAskRequest.json; sourceTree = "<group>"; };
+		E99630851E95EF4700C4BF62 /* QAUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QAUtils.h; sourceTree = "<group>"; };
+		E99630861E95EF4700C4BF62 /* QAUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QAUtils.m; sourceTree = "<group>"; };
 		E9F4541B1E31B18D00860DC2 /* TouristLoginRequest.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = TouristLoginRequest.json; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -1813,6 +1816,8 @@
 				7CDBFEC81E8B9A3F00C72E6F /* requests */,
 				7CAE438F1E836E3500B0D460 /* QADataManager.h */,
 				7CAE43901E836E3500B0D460 /* QADataManager.m */,
+				E99630851E95EF4700C4BF62 /* QAUtils.h */,
+				E99630861E95EF4700C4BF62 /* QAUtils.m */,
 				7CDBFED11E8BB09500C72E6F /* QAQuestionListFetcher.h */,
 				7CDBFED21E8BB09500C72E6F /* QAQuestionListFetcher.m */,
 				7CDBFED41E8BB34B00C72E6F /* QAReplyListFetcher.h */,
@@ -2261,6 +2266,7 @@
 				92E7D1391E28A83F00A34300 /* AloneCourseViewController.m in Sources */,
 				E96EB75B1E8A7B610061D6C9 /* PersonalCenterViewController.m in Sources */,
 				7C7841941E2E225D00755BC0 /* TouristLoginRequest.m in Sources */,
+				E99630871E95EF4700C4BF62 /* QAUtils.m in Sources */,
 				E9355B011E66AA4E007AE9F0 /* LoginUtils.m in Sources */,
 				7C1A5F231E1510FA00832DED /* GetRequest.m in Sources */,
 				E96EB7551E8A7B320061D6C9 /* YXImagePickerController.m in Sources */,

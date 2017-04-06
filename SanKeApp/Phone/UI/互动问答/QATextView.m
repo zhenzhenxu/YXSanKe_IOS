@@ -48,7 +48,7 @@
 }
 
 - (void)handleTextChange {
-    if ([self.text yx_isValidString]) {
+    if (!isEmpty(self.text)) {
         self.placeholedrLabel.hidden = YES;
     }else {
         self.placeholedrLabel.hidden = NO;

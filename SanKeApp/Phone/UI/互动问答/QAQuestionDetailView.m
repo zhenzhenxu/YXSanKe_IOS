@@ -162,7 +162,8 @@ typedef NS_ENUM(NSUInteger, QAAttachmentType) {
     }
     self.browseCountLabel.text = item.viewNum;
     
-    self.timeLabel.text = [NSString stringWithFormat:@"提问时间：%@",item.createTime];
+    NSString *time = [QAUtils formatTimeWithOriginal:item.createTime];
+    self.timeLabel.text = [NSString stringWithFormat:@"提问时间：%@",time];
     self.replyDescLabel.text = [NSString stringWithFormat:@"回答（%@）",item.answerNum];
     [self.headImageView sd_setImageWithURL:[NSURL URLWithString:item.avatar] placeholderImage:nil];
     

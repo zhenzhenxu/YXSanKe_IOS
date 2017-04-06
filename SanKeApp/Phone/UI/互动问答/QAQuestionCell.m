@@ -101,7 +101,9 @@
     }
     self.browseCountLabel.text = item.viewNum;
     
-    self.timeLabel.text = [NSString stringWithFormat:@"提问时间：%@",item.createTime];
+//    self.timeLabel.text = [NSString stringWithFormat:@"提问时间：%@",item.createTime];
+    NSString *time = [QAUtils formatTimeWithOriginal:item.createTime];
+    self.timeLabel.text = [NSString stringWithFormat:@"提问时间：%@",time];
 }
 
 @end

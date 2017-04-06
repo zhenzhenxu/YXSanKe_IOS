@@ -77,6 +77,7 @@
     [self.titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(10);
         make.centerY.mas_equalTo(0);
+        make.width.mas_equalTo(50);
     }];
     [self.nameTextField mas_makeConstraints:^(MASConstraintMaker *make) {
         make.right.equalTo(self.selectedButton.mas_left).offset(-10);

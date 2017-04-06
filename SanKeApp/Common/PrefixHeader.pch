@@ -95,4 +95,5 @@ extern int ddLogLevel;
 #import "CloneCategory.h"
 #import "QAFileTypeMappingTable.h"
 #import "FileBrowserFactory.h"
+#import "QAUtils.h"
 #endif /* PrefixHeader_pch */
