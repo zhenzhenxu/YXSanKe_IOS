@@ -76,7 +76,7 @@
     DDLogDebug(@"click to next step");
     [self.view endEditing:YES];
     if (![self.textView.text yx_isValidString]) {
-        [self showToast:@"内容不可为空!"];
+        [self showToast:@"请输入标题!"];
     }else {
         QAPublishQuestionViewController *vc = [[QAPublishQuestionViewController alloc]init];
         vc.questionTitle = self.textView.text;

@@ -144,12 +144,13 @@
     }];
 }
 
-+ (void)changePasswordWithMobileNumber:(NSString *)mobileNumber password:(NSString *)password completeBlock:(void (^)(NSError *))completeBlock {
++ (void)changePasswordWithMobileNumber:(NSString *)mobileNumber password:(NSString *)password type:(NSString *)type completeBlock:(void (^)(NSError *))completeBlock {
     LoginDataManager *manager = [LoginDataManager sharedInstance];
     [manager.changePasswordRequest stopRequest];
     manager.changePasswordRequest = [[ChangePasswordRequest alloc]init];
     manager.changePasswordRequest.mobile = mobileNumber;
     manager.changePasswordRequest.password = [password md5];
+    manager.changePasswordRequest.from = type;
     WEAK_SELF
     [manager.changePasswordRequest startRequestWithRetClass:[HttpBaseRequestItem class] andCompleteBlock:^(id retItem, NSError *error, BOOL isMock) {
         STRONG_SELF

@@ -11,6 +11,8 @@
 #import "SubmitButton.h"
 #import "LoginViewController.h"
 
+static NSString *const kChangePasswordType = @"0";
+
 @interface ResetPasswordViewController ()
 @property (nonatomic, strong) InfoInputView *passwordInput;
 @property (nonatomic, strong) SubmitButton *submitButton;
@@ -102,7 +104,7 @@
 - (void)changePassword {
     [self startLoading];
     WEAK_SELF
-    [LoginDataManager changePasswordWithMobileNumber:self.mobileNumber password:self.passwordInput.text completeBlock:^(NSError *error) {
+    [LoginDataManager changePasswordWithMobileNumber:self.mobileNumber password:self.passwordInput.text type:kChangePasswordType completeBlock:^(NSError *error) {
         STRONG_SELF
         [self stopLoading];
         if (error) {

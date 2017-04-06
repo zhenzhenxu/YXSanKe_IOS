@@ -9,6 +9,7 @@
 #import "YXPostRequest.h"
 
 @interface QACreateAskRequest : YXPostRequest
+
 @property (nonatomic, strong) NSString *biz_id;
 @property (nonatomic, strong) NSString *title;
 @property (nonatomic, strong) NSString *content;

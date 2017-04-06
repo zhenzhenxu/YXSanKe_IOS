@@ -26,13 +26,16 @@ extern NSString * const kQAReplyFavorCountKey;
 extern NSString * const kQAReplyUserFavorKey;
 
 @interface QADataManager : NSObject
+//获取问题详情
 + (void)requestQuestionDetailWithID:(NSString *)questionID completeBlock:(void(^)(QAQuestionDetailRequestItem *item,NSError *error))completeBlock;
+//喜欢某个回答
 + (void)requestReplyFavorWithID:(NSString *)answerID completeBlock:(void(^)(QAReplyFavorRequestItem *item,NSError *error))completeBlock;
-
+//发表问题
 + (void)createAskWithTitle:(NSString *)title
                    content:(NSString *)content
                 attachmentID:(NSString *)attachmentID
              completeBlock:(void(^)(HttpBaseRequestItem *item,NSError *error))completeBlock;
+//回答问题
 + (void)createAnswerWithAskID:(NSString *)askID
                    answer:(NSString *)answer
              completeBlock:(void(^)(HttpBaseRequestItem *item,NSError *error))completeBlock;

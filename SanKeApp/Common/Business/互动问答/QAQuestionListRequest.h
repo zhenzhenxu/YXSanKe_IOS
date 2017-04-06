@@ -53,9 +53,9 @@
 @end
 
 @interface QAQuestionListRequest : YXGetRequest
-@property (nonatomic, strong) NSString<Optional> *biz_id;
-@property (nonatomic, strong) NSString<Optional> *from;
-@property (nonatomic, strong) NSString<Optional> *m;
-@property (nonatomic, strong) NSString<Optional> *sort_field;
+@property (nonatomic, strong) NSString<Optional> *biz_id;// 业务id
+@property (nonatomic, strong) NSString<Optional> *from;//起始位置，默认0
+@property (nonatomic, strong) NSString<Optional> *m;//每次返回数据量：默认-50
+@property (nonatomic, strong) NSString<Optional> *sort_field;//排序字段：默认-发表时间， view_num-热度
 @property (nonatomic, strong) NSString<Optional> *order;
 @end

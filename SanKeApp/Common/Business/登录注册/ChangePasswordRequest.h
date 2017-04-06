@@ -11,4 +11,5 @@
 @interface ChangePasswordRequest : YXGetRequest
 @property (nonatomic, strong) NSString *mobile;
 @property (nonatomic, strong) NSString *password;
+@property (nonatomic, strong) NSString *from;
 @end

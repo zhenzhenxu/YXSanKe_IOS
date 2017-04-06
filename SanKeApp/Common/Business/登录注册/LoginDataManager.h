@@ -41,9 +41,17 @@
                     password:(NSString *)password
                 mobileNumber:(NSString *)mobileNumber
                completeBlock:(void(^)(NSError *error))completeBlock;
-//忘记密码重置
+/**
+ 忘记密码/修改密码
+
+ @param mobileNumber 手机号
+ @param password 新密码
+ @param type 重置密码的类型  0–忘记密码(默认) 1--修改密码
+ @param completeBlock 完成的回调
+ */
 + (void)changePasswordWithMobileNumber:(NSString *)mobileNumber
                               password:(NSString *)password
+                              type:(NSString *)type
                          completeBlock:(void(^)(NSError *error))completeBlock;
 
 

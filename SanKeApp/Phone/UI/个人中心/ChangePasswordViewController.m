@@ -10,6 +10,7 @@
 #import "InfoInputView.h"
 #import "SubmitButton.h"
 
+static NSString *const kChangePasswordType = @"1";
 @interface ChangePasswordViewController ()
 
 @property (nonatomic, strong) InfoInputView *passwordInput;
@@ -121,26 +122,24 @@
             [self showToast:@"新密码与确认密码不一致，请重新填写"];
             return;
         }
-        [self resetPassword];
+        [self changePassword];
     }];
 }
 
-- (void)resetPassword {
-    //    [self startLoading];
-    DDLogDebug(@"请求修改密码");
-    [self.navigationController popViewControllerAnimated:YES];
-    //    WEAK_SELF
-    //    [LoginDataManager resetPasswordWithMobileNumber:self.phoneNumber password:self.passwordInput.text completeBlock:^(HttpBaseRequestItem *item, NSError *error) {
-    //        STRONG_SELF
-    //        [self stopLoading];
-    //        if (error) {
-    //            [self showToast:error.localizedDescription];
-    //        } else {
-    //            [self showToast:@"重置密码成功"];
-    //            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-    //                [self.navigationController popToRootViewControllerAnimated:YES];
-    //            });
-    //        }
-    //    }];
+- (void)changePassword {
+    [self startLoading];
+    WEAK_SELF
+    [LoginDataManager changePasswordWithMobileNumber:[UserManager sharedInstance].userModel.name password:self.passwordInput.text type:kChangePasswordType completeBlock:^(NSError *error) {
+        STRONG_SELF
+        [self stopLoading];
+        if (error) {
+            [self showToast:error.localizedDescription];
+            return;
+        }
+        [self showToast:@"修改密码成功"];
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            [self.navigationController popViewControllerAnimated:YES];
+        });
+    }];
 }
 @end
