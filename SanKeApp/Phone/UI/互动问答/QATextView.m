@@ -10,7 +10,7 @@
 
 @interface QATextView ()<UIGestureRecognizerDelegate>
 
-@property (nonatomic, strong) UILabel *placeholedrLabel;
+@property (nonatomic, strong) UILabel *placeholderLabel;
 @end
 
 @implementation QATextView
@@ -37,21 +37,21 @@
     self.textColor = [UIColor colorWithHexString:@"333333"];
     self.textContainerInset = UIEdgeInsetsMake(15, 10, 20, 9);
     
-    self.placeholedrLabel = [[UILabel alloc]init];
-    self.placeholedrLabel.font = [UIFont systemFontOfSize:14.0f];
-    self.placeholedrLabel.textColor = [UIColor colorWithHexString:@"999999"];
-    [self addSubview:self.placeholedrLabel];
+    self.placeholderLabel = [[UILabel alloc]init];
+    self.placeholderLabel.font = [UIFont systemFontOfSize:14.0f];
+    self.placeholderLabel.textColor = [UIColor colorWithHexString:@"999999"];
+    [self addSubview:self.placeholderLabel];
     
-    [self.placeholedrLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+    [self.placeholderLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.left.equalTo(self).offset(15.0f);
     }];
 }
 
 - (void)handleTextChange {
     if (!isEmpty(self.text)) {
-        self.placeholedrLabel.hidden = YES;
+        self.placeholderLabel.hidden = YES;
     }else {
-        self.placeholedrLabel.hidden = NO;
+        self.placeholderLabel.hidden = NO;
     }
 }
 
@@ -77,8 +77,9 @@
 }
 
 #pragma mark - setter
-- (void)setPlaceholedr:(NSString *)placeholedr {
-    _placeholedr = placeholedr;
-    self.placeholedrLabel.text = placeholedr;
+- (void)setPlaceholder:(NSString *)placeholder {
+    _placeholder = placeholder;
+    self.placeholderLabel.text = placeholder;
 }
+
 @end

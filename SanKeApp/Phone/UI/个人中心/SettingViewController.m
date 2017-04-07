@@ -211,7 +211,7 @@
     [self.tableView reloadRowsAtIndexPaths:@[areaIndexPath] withRowAnimation:UITableViewRowAnimationNone];
 }
 
-#pragma mark - UITableViewDataSource
+#pragma mark - TableView DataSource
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return 3;
 }
@@ -308,7 +308,7 @@
         return cell;
     }
 }
-#pragma mark - TabelViewDelegate
+#pragma mark - TabelView Delegate
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section == 0) {
         return 150;
@@ -437,7 +437,7 @@
     }];
 }
 
-#pragma mark - InfoPicker
+#pragma mark - show InfoPicker
 - (void)showGenderListPicker {
     NSInteger selectedRow = self.genderInfoPicker.selectedItem.row;
     [self.userInfoPickerView reloadPickerView];

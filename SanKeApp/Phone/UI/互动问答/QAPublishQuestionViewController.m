@@ -21,8 +21,8 @@ static CGFloat const kTextViewHeight = 130.0f;
 @property (nonatomic, strong) UIView *contentView;
 @property (nonatomic, strong) QATextView *textView;
 @property (nonatomic, strong) QAInputAccessoryView *customView;
-@property (nonatomic, strong) UIImageView *imageView;
 @property (nonatomic, strong) YXImagePickerController *imagePickerController;
+@property (nonatomic, strong) UIImageView *imageView;
 
 @end
 
@@ -42,12 +42,7 @@ static CGFloat const kTextViewHeight = 130.0f;
     // Dispose of any resources that can be recreated.
 }
 
-- (void)naviRightAction {
-    DDLogDebug(@"click to publish question");
-    [self.view endEditing:YES];
-    [self publishQuestion];
-}
-
+#pragma mark - setupUI
 - (void)setupUI {
     self.contentView = [[UIView alloc]init];
     self.contentView.backgroundColor = [UIColor whiteColor];
@@ -57,7 +52,19 @@ static CGFloat const kTextViewHeight = 130.0f;
     [self.contentView addGestureRecognizer:clickTap];
     
     self.textView = [[QATextView alloc]init];
-    self.textView.placeholedr = @"请输入您的内容描述…（选填)";
+    self.textView.placeholder = @"请输入您的内容描述…（选填)";
+    
+    [self setupInputAccessoryView];
+    
+    self.imagePickerController = [[YXImagePickerController alloc] init];
+    self.imagePickerController.allowsEditing = NO;
+}
+
+- (void)clickTapAction:(UITapGestureRecognizer *)recognizer {
+    [self.textView becomeFirstResponder];
+}
+
+- (void)setupInputAccessoryView {
     QAInputAccessoryView *customView = [[QAInputAccessoryView alloc] initWithFrame:CGRectMake(0, 0, 320, 39)];
     customView.backgroundColor = [UIColor colorWithHexString:@"f8f8f8"];
     WEAK_SELF
@@ -79,23 +86,6 @@ static CGFloat const kTextViewHeight = 130.0f;
     }];
     self.textView.inputAccessoryView = customView;
     self.customView = customView;
-    
-    self.imagePickerController = [[YXImagePickerController alloc] init];
-    self.imagePickerController.allowsEditing = NO;
-}
-
-- (void)setupLayout {
-    [self.view addSubview:self.contentView];
-    [self.contentView addSubview:self.textView];
-    
-    [self.view addSubview:self.textView];
-    
-    [self.contentView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.edges.mas_equalTo(UIEdgeInsetsMake(10, 10, 10, 10));
-    }];
-    [self.textView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.edges.equalTo(self.contentView);
-    }];
 }
 
 - (void)pickImageWithSourceType:(UIImagePickerControllerSourceType)type {
@@ -121,39 +111,22 @@ static CGFloat const kTextViewHeight = 130.0f;
     }];
 }
 
-- (void)clickTapAction:(UITapGestureRecognizer *)recognizer {
-    [self.textView becomeFirstResponder];
-}
-
-- (void)selectedImage:(UITapGestureRecognizer *) recognizer {
-    if (!self.imageView.image && !self.imageView ) {
-        return;
-    }
-    QADeleteImageViewController *vc = [[QADeleteImageViewController alloc]init];
-    vc.image = self.imageView.image;
-    [vc setDeleteBlock:^{
-        self.imageView.image = nil;
-        [self.imageView removeFromSuperview];
-        [self.textView mas_remakeConstraints:^(MASConstraintMaker *make) {
-            make.edges.equalTo(self.contentView);
-        }];
-        [self.view layoutIfNeeded];
+#pragma mark - setupLayout
+- (void)setupLayout {
+    [self.view addSubview:self.contentView];
+    [self.contentView addSubview:self.textView];
+    
+    [self.view addSubview:self.textView];
+    
+    [self.contentView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.mas_equalTo(UIEdgeInsetsMake(10, 10, 10, 10));
     }];
-    [self.navigationController pushViewController:vc animated:YES];
+    [self.textView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.equalTo(self.contentView);
+    }];
 }
 
-- (UIImageView *)imageView {
-    if (_imageView == nil) {
-        _imageView = [[UIImageView alloc]init];
-        _imageView.userInteractionEnabled = YES;
-        _imageView.contentMode = UIViewContentModeScaleAspectFill;
-        _imageView.clipsToBounds = YES;
-        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(selectedImage:)];
-        [_imageView addGestureRecognizer:tap];
-    }
-    return _imageView;
-}
-
+#pragma mark - setupObservers
 - (void)setupObservers {
     WEAK_SELF
     [[[NSNotificationCenter defaultCenter]rac_addObserverForName:UIKeyboardWillChangeFrameNotification object:nil]subscribeNext:^(id x) {
@@ -177,7 +150,13 @@ static CGFloat const kTextViewHeight = 130.0f;
     }];
 }
 
-#pragma mark - publishQuestion
+#pragma mark - naviRightAction-publishQuestion
+- (void)naviRightAction {
+    DDLogDebug(@"click to publish question");
+    [self.view endEditing:YES];
+    [self publishQuestion];
+}
+
 - (void)publishQuestion {
     [QADataManager createAskWithTitle:self.questionTitle content:self.textView.text attachmentID:nil completeBlock:^(HttpBaseRequestItem *item, NSError *error) {
         if (error) {
@@ -191,4 +170,33 @@ static CGFloat const kTextViewHeight = 130.0f;
     }];
 }
 
+#pragma mark - getter-imageView
+- (UIImageView *)imageView {
+    if (_imageView == nil) {
+        _imageView = [[UIImageView alloc]init];
+        _imageView.userInteractionEnabled = YES;
+        _imageView.contentMode = UIViewContentModeScaleAspectFill;
+        _imageView.clipsToBounds = YES;
+        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(selectedImage:)];
+        [_imageView addGestureRecognizer:tap];
+    }
+    return _imageView;
+}
+
+- (void)selectedImage:(UITapGestureRecognizer *) recognizer {
+    if (!self.imageView.image && !self.imageView ) {
+        return;
+    }
+    QADeleteImageViewController *vc = [[QADeleteImageViewController alloc]init];
+    vc.image = self.imageView.image;
+    [vc setDeleteBlock:^{
+        self.imageView.image = nil;
+        [self.imageView removeFromSuperview];
+        [self.textView mas_remakeConstraints:^(MASConstraintMaker *make) {
+            make.edges.equalTo(self.contentView);
+        }];
+        [self.view layoutIfNeeded];
+    }];
+    [self.navigationController pushViewController:vc animated:YES];
+}
 @end

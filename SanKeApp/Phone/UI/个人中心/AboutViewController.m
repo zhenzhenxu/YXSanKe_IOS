@@ -57,6 +57,12 @@
     [self.privacyButton setTitleColor:[UIColor colorWithHexString:@"4691a6"] forState:UIControlStateNormal];
     [self.privacyButton addTarget:self action:@selector(privacyButtonAction) forControlEvents:UIControlEventTouchUpInside];
 }
+
+- (void)privacyButtonAction {
+    PrivacyPolicyViewController *vc = [[PrivacyPolicyViewController alloc]init];
+    [self.navigationController pushViewController:vc animated:YES];
+}
+
 - (void)setupLayout {
     [self.view addSubview:self.headerview];
     [self.view addSubview:self.taleView];
@@ -163,8 +169,4 @@
     }];
 }
 
-- (void)privacyButtonAction {
-    PrivacyPolicyViewController *vc = [[PrivacyPolicyViewController alloc]init];
-    [self.navigationController pushViewController:vc animated:YES];
-}
 @end

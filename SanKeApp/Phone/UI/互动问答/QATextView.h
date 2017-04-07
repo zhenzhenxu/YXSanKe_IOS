@@ -10,7 +10,7 @@
 
 @interface QATextView : UITextView
 
-@property (nonatomic, copy) NSString *placeholedr;
+@property (nonatomic, copy) NSString *placeholder;
 
 
 @end

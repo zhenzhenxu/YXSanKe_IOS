@@ -165,7 +165,7 @@ typedef NS_ENUM(NSUInteger, QAAttachmentType) {
     NSString *time = [QAUtils formatTimeWithOriginal:item.createTime];
     self.timeLabel.text = [NSString stringWithFormat:@"提问时间：%@",time];
     self.replyDescLabel.text = [NSString stringWithFormat:@"回答（%@）",item.answerNum];
-    [self.headImageView sd_setImageWithURL:[NSURL URLWithString:item.avatar] placeholderImage:nil];
+    [self.headImageView sd_setImageWithURL:[NSURL URLWithString:item.avatar] placeholderImage:[UIImage imageNamed:@"大头像"]];
     
     QAAttachmentType type;
     if (isEmpty(item.attachmentList)) {

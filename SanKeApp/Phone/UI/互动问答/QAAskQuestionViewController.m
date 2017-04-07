@@ -21,9 +21,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = @"我要提问";
-    [self setupNavView];
     [self setupUI];
     [self setupObservers];
+    [self setupNavView];
     // Do any additional setup after loading the view.
 }
 
@@ -44,6 +44,40 @@
     self.navigationController.navigationBar.translucent = YES;
 }
 
+#pragma mark - setupUI
+- (void)setupUI {
+    self.textView = [[QATextView alloc]init];
+    self.textView.placeholder = @"请写下您的问题并用问号结尾（30字以内)";
+    self.textView.delegate = self;
+    
+    [self.view addSubview:self.textView];
+    [self.textView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.mas_equalTo(UIEdgeInsetsMake(10, 10, 10, 10));
+    }];
+}
+
+#pragma mark - setupObservers
+- (void)setupObservers {
+    WEAK_SELF
+    [[[NSNotificationCenter defaultCenter]rac_addObserverForName:UIKeyboardWillChangeFrameNotification object:nil]subscribeNext:^(id x) {
+        STRONG_SELF
+        NSNotification *noti = (NSNotification *)x;
+        NSDictionary *dic = noti.userInfo;
+        NSValue *keyboardFrameValue = [dic valueForKey:UIKeyboardFrameEndUserInfoKey];
+        CGRect keyboardFrame = keyboardFrameValue.CGRectValue;
+        NSNumber *duration = [dic valueForKey:UIKeyboardAnimationDurationUserInfoKey];
+        [UIView animateWithDuration:duration.floatValue animations:^{
+            [self.textView mas_remakeConstraints:^(MASConstraintMaker *make) {
+                make.left.top.equalTo(self.view).offset(10.0f);
+                make.right.equalTo(self.view).offset(-10.0f);
+                make.bottom.mas_equalTo(keyboardFrame.origin.y - [UIScreen mainScreen].bounds.size.height - 10);
+            }];
+            [self.view layoutIfNeeded];
+        }];
+    }];
+}
+
+#pragma mark - setupNavView
 - (void)setupNavView {
     UIButton *leftButton = [UIButton buttonWithType:UIButtonTypeCustom];
     [leftButton setTitle:@"取消" forState:UIControlStateNormal];
@@ -72,58 +106,6 @@
     [self handleCancelAction];
 }
 
-- (void)nextAction {
-    DDLogDebug(@"click to next step");
-    [self.view endEditing:YES];
-    if (![self.textView.text yx_isValidString]) {
-        [self showToast:@"请输入标题!"];
-    }else {
-        QAPublishQuestionViewController *vc = [[QAPublishQuestionViewController alloc]init];
-        vc.questionTitle = self.textView.text;
-        [self.navigationController pushViewController:vc animated:YES];
-    }
-}
-
-- (void)setupUI {
-    self.textView = [[QATextView alloc]init];
-    self.textView.placeholedr = @"请写下您的问题并用问号结尾（30字以内)";
-    self.textView.delegate = self;
-    
-    [self.view addSubview:self.textView];
-    [self.textView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.edges.mas_equalTo(UIEdgeInsetsMake(10, 10, 10, 10));
-    }];
-}
-
-- (void)setupObservers {
-    WEAK_SELF
-    [[[NSNotificationCenter defaultCenter]rac_addObserverForName:UIKeyboardWillChangeFrameNotification object:nil]subscribeNext:^(id x) {
-        STRONG_SELF
-        NSNotification *noti = (NSNotification *)x;
-        NSDictionary *dic = noti.userInfo;
-        NSValue *keyboardFrameValue = [dic valueForKey:UIKeyboardFrameEndUserInfoKey];
-        CGRect keyboardFrame = keyboardFrameValue.CGRectValue;
-        NSNumber *duration = [dic valueForKey:UIKeyboardAnimationDurationUserInfoKey];
-        [UIView animateWithDuration:duration.floatValue animations:^{
-            [self.textView mas_remakeConstraints:^(MASConstraintMaker *make) {
-                make.left.top.equalTo(self.view).offset(10.0f);
-                make.right.equalTo(self.view).offset(-10.0f);
-                make.bottom.mas_equalTo(keyboardFrame.origin.y - [UIScreen mainScreen].bounds.size.height - 10);
-            }];
-            [self.view layoutIfNeeded];
-        }];
-    }];
-}
-
-#pragma mark - delegate
-- (void)textViewDidChange:(UITextView *)textView {
-    NSString *content = textView.text;
-    if (content.length > 30) {
-        textView.text =  [content substringToIndex:30];
-    }
-}
-
-#pragma mark - CancelAction
 - (void)handleCancelAction {
     self.menuSelectionView = [[MenuSelectionView alloc]init];
     self.menuSelectionView.dataArray = @[
@@ -190,5 +172,26 @@
             break;
     }
 }
+
+- (void)nextAction {
+    DDLogDebug(@"click to next step");
+    [self.view endEditing:YES];
+    if (![self.textView.text yx_isValidString]) {
+        [self showToast:@"请输入标题!"];
+    }else {
+        QAPublishQuestionViewController *vc = [[QAPublishQuestionViewController alloc]init];
+        vc.questionTitle = self.textView.text;
+        [self.navigationController pushViewController:vc animated:YES];
+    }
+}
+
+#pragma mark - textView delegate
+- (void)textViewDidChange:(UITextView *)textView {
+    NSString *content = textView.text;
+    if (content.length > 30) {
+        textView.text =  [content substringToIndex:30];
+    }
+}
+
 
 @end

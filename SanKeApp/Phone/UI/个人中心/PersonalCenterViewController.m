@@ -59,18 +59,6 @@
     }];
 }
 
-- (void)setupObserver {
-    [[[NSNotificationCenter defaultCenter]rac_addObserverForName:kUpdateHeadPortraitSuccessNotification object:nil]subscribeNext:^(id x) {
-        DDLogDebug(@"%@修改头像",[self class]);
-        UserImageTableViewCell *cell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
-        [cell setModel:[UserManager sharedInstance].userModel];
-        cell.canEdit = NO;
-    }];
-    [[[NSNotificationCenter defaultCenter]rac_addObserverForName:kUpdateUserNameSuccessNotification object:nil]subscribeNext:^(id x) {
-        DDLogDebug(@"%@更新用户名",[self class]);
-        self.navigationItem.title = [UserManager sharedInstance].userModel.truename;
-    }];
-}
 - (void)setupTabeleViewData {
     PersonalCenterModel *model0 = [PersonalCenterModel modelWithTitle:@"修改密码" hasButton:YES];
     PersonalCenterModel *model1 = [PersonalCenterModel modelWithTitle:@"清空缓存" hasButton:NO];
@@ -86,6 +74,19 @@
         dataArray = [NSMutableArray arrayWithObjects:model0,model1,model2,model3,model4,model5, nil];
     }
     self.dataArray = dataArray.copy;
+}
+
+- (void)setupObserver {
+    [[[NSNotificationCenter defaultCenter]rac_addObserverForName:kUpdateHeadPortraitSuccessNotification object:nil]subscribeNext:^(id x) {
+        DDLogDebug(@"%@修改头像",[self class]);
+        UserImageTableViewCell *cell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
+        [cell setModel:[UserManager sharedInstance].userModel];
+        cell.canEdit = NO;
+    }];
+    [[[NSNotificationCenter defaultCenter]rac_addObserverForName:kUpdateUserNameSuccessNotification object:nil]subscribeNext:^(id x) {
+        DDLogDebug(@"%@更新用户名",[self class]);
+        self.navigationItem.title = [UserManager sharedInstance].userModel.truename;
+    }];
 }
 
 #pragma mark - UITableViewDataSource

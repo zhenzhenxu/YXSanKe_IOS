@@ -22,9 +22,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = @"我来回答";
-    [self setupNavView];
     [self setupUI];
     [self setupObservers];
+    [self setupNavView];
     // Do any additional setup after loading the view.
 }
 
@@ -35,45 +35,18 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    
     self.navigationController.navigationBar.translucent = NO;
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
-    
     self.navigationController.navigationBar.translucent = YES;
 }
 
-- (void)setupNavView {
-    UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
-    [button setTitle:@"取消" forState:UIControlStateNormal];
-    [button setTitleColor:[UIColor colorWithHexString:@"333333"] forState:UIControlStateNormal];
-    button.titleLabel.font = [UIFont systemFontOfSize:14.0f];
-    [button sizeToFit];
-    [[button rac_signalForControlEvents:UIControlEventTouchUpInside]subscribeNext:^(id x) {
-        [self cancelAction];
-    }];
-    [self setupLeftWithCustomView:button];
-    
-    [self setupRightWithTitle:@"发布"];
-}
-
-- (void)cancelAction {
-    DDLogDebug(@"click to cancel");
-    [self.view endEditing:YES];
-    [self handleCancelAction];
-}
-
-- (void)naviRightAction {
-    DDLogDebug(@"click to publish answer");
-    [self.view endEditing:YES];
-    [self publishAnswer];
-}
-
+#pragma mark - setupUI
 - (void)setupUI {
     self.textView = [[QATextView alloc]init];
-    self.textView.placeholedr = @"请输入您的回答";
+    self.textView.placeholder = @"请输入您的回答";
     
     [self.view addSubview:self.textView];
     [self.textView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -81,6 +54,7 @@
     }];
 }
 
+#pragma mark - setupObservers
 - (void)setupObservers {
     WEAK_SELF
     [[[NSNotificationCenter defaultCenter]rac_addObserverForName:UIKeyboardWillChangeFrameNotification object:nil]subscribeNext:^(id x) {
@@ -101,7 +75,27 @@
     }];
 }
 
-#pragma mark - CancelAction
+#pragma mark - setupNavView
+- (void)setupNavView {
+    UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
+    [button setTitle:@"取消" forState:UIControlStateNormal];
+    [button setTitleColor:[UIColor colorWithHexString:@"333333"] forState:UIControlStateNormal];
+    button.titleLabel.font = [UIFont systemFontOfSize:14.0f];
+    [button sizeToFit];
+    [[button rac_signalForControlEvents:UIControlEventTouchUpInside]subscribeNext:^(id x) {
+        [self cancelAction];
+    }];
+    [self setupLeftWithCustomView:button];
+    
+    [self setupRightWithTitle:@"发布"];
+}
+
+- (void)cancelAction {
+    DDLogDebug(@"click to cancel");
+    [self.view endEditing:YES];
+    [self handleCancelAction];
+}
+
 - (void)handleCancelAction {
     self.menuSelectionView = [[MenuSelectionView alloc]init];
     self.menuSelectionView.dataArray = @[
@@ -169,7 +163,12 @@
     }
 }
 
-#pragma mark - publishAnswer
+- (void)naviRightAction {
+    DDLogDebug(@"click to publish answer");
+    [self.view endEditing:YES];
+    [self publishAnswer];
+}
+
 - (void)publishAnswer {
     if (isEmpty(self.textView.text)) {
         [self showToast:@"内容不可为空!"];
@@ -185,6 +184,7 @@
             [self dismissViewControllerAnimated:YES completion:nil];
         });
     }];
-
+    
 }
+
 @end

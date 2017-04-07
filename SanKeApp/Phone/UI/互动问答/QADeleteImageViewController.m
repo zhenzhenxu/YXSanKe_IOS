@@ -42,6 +42,7 @@
     [self.navigationController.navigationBar setBackgroundImage:[UIImage yx_imageWithColor:[UIColor whiteColor]] forBarMetrics:UIBarMetricsDefault];
 }
 
+#pragma mark - setupNavView
 - (void)setupNavView {
     UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
     button.titleLabel.font = [UIFont systemFontOfSize:14];
@@ -60,7 +61,7 @@
     BLOCK_EXEC(self.deleteButtonBlock);
 }
 
-
+#pragma mark - setupUI
 - (void)setupUI {
     self.imageView = [[UIImageView alloc]init];
     self.imageView.contentMode = UIViewContentModeScaleAspectFit;
@@ -73,6 +74,7 @@
     }];
 }
 
+#pragma mark - setDeleteBlock
 - (void)setDeleteBlock:(DeleteBlock)block {
     self.deleteButtonBlock = block;
 }

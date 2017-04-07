@@ -93,7 +93,7 @@
     self.favorLabel.text = item.likeInfo.likeNum;
     
     self.timeLabel.text = item.updateTime;
-    [self.headImageView sd_setImageWithURL:[NSURL URLWithString:item.avatar] placeholderImage:nil];
+    [self.headImageView sd_setImageWithURL:[NSURL URLWithString:item.avatar] placeholderImage:[UIImage imageNamed:@"大头像"]];
 }
 
 @end
