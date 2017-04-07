@@ -171,7 +171,7 @@
 
 - (void)publishAnswer {
     if (isEmpty(self.textView.text)) {
-        [self showToast:@"内容不可为空!"];
+        [self showToast:@"内容不能为空"];
         return;
     }
     [QADataManager createAnswerWithAskID:self.questionID answer:self.textView.text completeBlock:^(HttpBaseRequestItem *item, NSError *error) {
@@ -179,7 +179,7 @@
             [self showToast:error.localizedDescription];
             return ;
         }
-        [self showToast:@"发布回答成功"];
+        [self showToast:@"发布成功"];
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             [self dismissViewControllerAnimated:YES completion:nil];
         });

@@ -17,7 +17,7 @@
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>1.1</string>
+	<string>1.2</string>
 	<key>CFBundleVersion</key>
 	<string>2</string>
 	<key>LSApplicationQueriesSchemes</key>
@@ -58,7 +58,7 @@
 			<string>tencentopenapi</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>tencent1104826608</string>
+				<string>tencent1106015819</string>
 			</array>
 		</dict>
 	</array>

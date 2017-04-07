@@ -24,7 +24,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    self.navigationItem.title = self.questionTitle;
+    self.navigationItem.title = self.questionItem.title;
     if ([YXShareManager isQQSupport]||[YXShareManager isWXAppSupport]) {
         [self setupRightWithImageNamed:@"分享" highlightImageNamed:nil];
     }
@@ -38,10 +38,6 @@
 }
 
 - (void)naviRightAction {
-    [self shareAction];
-}
-
-- (void)shareAction {
     self.shareView = [[QAShareView alloc]init];
     [self.view addSubview:self.shareView];
     AlertView *alert = [[AlertView alloc]init];
@@ -78,6 +74,11 @@
             }];
             [view layoutIfNeeded];
         }];
+    }];
+    [self.shareView setShareActionBlock:^(YXShareType type) {
+        STRONG_SELF
+        NSString *url = [NSString stringWithFormat:@"http://main.zgjiaoyan.com/hddy/view?id=%@&biz_id=%@_%@_720175",self.questionItem.elementID,[UserManager sharedInstance].userModel.stageID,[UserManager sharedInstance].userModel.subjectID];
+        [[YXShareManager shareManager]yx_shareMessageWithImageIcon:nil title:self.questionItem.title message:self.questionItem.content url:url shareType:type];
     }];
     [self.shareView setCancelActionBlock:^{
         STRONG_SELF

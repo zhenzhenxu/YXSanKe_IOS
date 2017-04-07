@@ -96,10 +96,6 @@ static CGFloat const kBottomViewHeight = 49.0f;
 }
 
 - (void)naviRightAction {
-    [self shareAction];
-}
-
-- (void)shareAction {
     self.shareView = [[QAShareView alloc]init];
     [self.view addSubview:self.shareView];
     AlertView *alert = [[AlertView alloc]init];
@@ -136,6 +132,11 @@ static CGFloat const kBottomViewHeight = 49.0f;
             }];
             [view layoutIfNeeded];
         }];
+    }];
+    [self.shareView setShareActionBlock:^(YXShareType type) {
+        STRONG_SELF
+        NSString *url = [NSString stringWithFormat:@"http://main.zgjiaoyan.com/hddy/view?id=%@&biz_id=%@_%@_720175",self.item.elementID,[UserManager sharedInstance].userModel.stageID,[UserManager sharedInstance].userModel.subjectID];
+        [[YXShareManager shareManager]yx_shareMessageWithImageIcon:nil title:self.item.title message:self.item.content url:url shareType:type];
     }];
     [self.shareView setCancelActionBlock:^{
         STRONG_SELF
@@ -238,7 +239,7 @@ static CGFloat const kBottomViewHeight = 49.0f;
     QAReplyListRequestItem_Element *item = self.dataArray[indexPath.row];
     QAReplyDetailViewController *vc = [[QAReplyDetailViewController alloc]init];
     vc.item = item;
-    vc.questionTitle = self.item.title;
+    vc.questionItem = self.item;
     [self.navigationController pushViewController:vc animated:YES];
 }
 

@@ -163,7 +163,7 @@ static CGFloat const kTextViewHeight = 130.0f;
             [self showToast:error.localizedDescription];
             return ;
         }
-        [self showToast:@"发布问题成功"];
+        [self showToast:@"发布成功"];
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             [self dismissViewControllerAnimated:YES completion:nil];
         });

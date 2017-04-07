@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 typedef void(^CancelActionBlock)(void);
-
+typedef void(^ShareActionBlock)(YXShareType type);
 @interface QAShareModel : NSObject
 @property (nonatomic, assign) YXShareType type;
 @end
@@ -16,4 +16,5 @@ typedef void(^CancelActionBlock)(void);
 @interface QAShareView : UIView
 
 - (void)setCancelActionBlock:(CancelActionBlock)block;
+- (void)setShareActionBlock:(ShareActionBlock)block;
 @end

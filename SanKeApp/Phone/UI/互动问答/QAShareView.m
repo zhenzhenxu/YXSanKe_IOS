@@ -18,6 +18,7 @@
 @property (nonatomic, strong) UICollectionView *collectionView;
 
 @property (nonatomic, copy) CancelActionBlock buttonActionBlock;
+@property (nonatomic, copy) ShareActionBlock shareBlock;
 @end
 @implementation QAShareView
 
@@ -106,7 +107,7 @@
     [cell setActionBlock:^{
         STRONG_SELF
         DDLogDebug(@"点击%@cell",@(model.type));
-        [[YXShareManager shareManager]yx_shareMessageWithImageIcon:nil title:@"分享标题" message:nil url:@"www.baidu.com" shareType:model.type];
+        BLOCK_EXEC(self.shareBlock,model.type);
     }];
     return cell;
 }
@@ -128,5 +129,9 @@
 
 - (void)setCancelActionBlock:(CancelActionBlock)block {
     self.buttonActionBlock = block;
+}
+
+- (void)setShareActionBlock:(ShareActionBlock)block {
+    self.shareBlock = block;
 }
 @end
