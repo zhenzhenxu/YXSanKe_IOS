@@ -51,7 +51,7 @@
     self.confirmButton.titleLabel.font = self.cancelButton.titleLabel.font;
     
     self.bottomLineView = [[UIView alloc] init];
-    self.bottomLineView.backgroundColor = [UIColor colorWithHexString:@"cdcdcd"];
+    self.bottomLineView.backgroundColor = [UIColor colorWithHexString:@"e6e6e6"];
     
     self.pickerView = [[UIPickerView alloc] init];
 }
@@ -73,7 +73,7 @@
     }];
     [self.cancelButton mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(@0);
-        make.height.equalTo(@40);
+        make.height.equalTo(@44);
         make.left.mas_equalTo(self.contentView.mas_left).offset(40);
     }];
     [self.confirmButton mas_makeConstraints:^(MASConstraintMaker *make) {

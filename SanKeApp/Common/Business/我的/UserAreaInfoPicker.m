@@ -19,6 +19,8 @@
 @property (nonatomic ,strong)NSArray<Area *> *districtArray;
 @property (nonatomic, strong) Area *city;
 @property (nonatomic, strong) Area *district;
+
+@property (nonatomic, copy) UpdateAreaBlock block;
 @end
 
 @implementation UserAreaInfoPicker
@@ -156,6 +158,9 @@
     }
     // Fill the label text here
     pickerLabel.text=[self pickerView:pickerView titleForRow:row forComponent:component];
+    ((UILabel *)[pickerView.subviews objectAtIndex:1]).backgroundColor = [UIColor colorWithHexString:@"e6e6e6"];
+    ((UILabel *)[pickerView.subviews objectAtIndex:2]).backgroundColor = [UIColor colorWithHexString:@"e6e6e6"];
+    
     return pickerLabel;
 }
 
@@ -191,15 +196,12 @@
     DDLogDebug(@"设置选中为%@省-%@市-%@区",self.province.name,self.city.name,self.district.name);
 }
 
-- (void)updateAreaWithCompleteBlock:(void (^)(NSError *))completeBlock {
-    DDLogDebug(@"要选择地区:%@-%@-%@",self.province.name,self.city.name,self.district.name);
-    [MineDataManager updateArea:[self configAreaID] completeBlock:^(NSError *error) {
-        if (error) {
-            BLOCK_EXEC(completeBlock,error);
-            return;
-        }
-        BLOCK_EXEC(completeBlock,nil);
-    }];
+- (void)setUpdateAreaBlock:(UpdateAreaBlock)block {
+    self.block = block;
+}
+
+- (void)updateArea {
+    BLOCK_EXEC(self.block,[self configAreaID]);
 }
 
 -(NSString *)configAreaID {
@@ -241,4 +243,5 @@
     item.district = self.district;
     return item;
 }
+
 @end

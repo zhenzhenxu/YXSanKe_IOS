@@ -197,7 +197,7 @@
 
 - (void)updateRoleInfo {
     DDLogDebug(@"更新身份");
-    self.roleInfo = self.roleInfoPicker.selectedItem.userInfo;
+    self.roleInfo = [self.roleInfoPicker selectedInfoItem].userInfo;
     UserInfoTableViewCell *cell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:0]];
     NSString *role = [NSString string];
     if (!isEmpty(self.roleInfo)) {
@@ -208,7 +208,7 @@
 
 - (void)updateGenderInfo {
     DDLogDebug(@"更新性别");
-    self.genderInfo = self.genderInfoPicker.selectedItem.userInfo;
+    self.genderInfo = [self.genderInfoPicker selectedInfoItem].userInfo;
     UserInfoTableViewCell *cell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:2 inSection:0]];
     NSString *gender = [NSString string];
     if (!isEmpty(self.genderInfo)) {
@@ -219,7 +219,7 @@
 
 - (void)updateExperienceInfo {
     DDLogDebug(@"更新工作年限");
-    self.experienceInfo = self.experienceInfoPicker.selectedItem.userInfo;
+    self.experienceInfo = [self.experienceInfoPicker selectedInfoItem].userInfo;
     UserInfoTableViewCell *cell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:3 inSection:0]];
     NSString *experience = [NSString string];
     if (!isEmpty(self.experienceInfo)) {
@@ -347,18 +347,18 @@
     [self.userInfoPickerView.pickerView selectRow:item.districtRow inComponent:2 animated:NO];
 }
 - (void)showRoleListPicker {
-    NSInteger selectedRow = self.roleInfoPicker.selectedItem.row;
+    NSInteger selectedRow = [self.roleInfoPicker selectedInfoItem].row;
     [self.userInfoPickerView reloadPickerView];
     [self.userInfoPickerView.pickerView selectRow:selectedRow inComponent:0 animated:NO];
 }
 - (void)showGenderListPicker {
-    NSInteger selectedRow = self.genderInfoPicker.selectedItem.row;
+    NSInteger selectedRow = [self.genderInfoPicker selectedInfoItem].row;
     [self.userInfoPickerView reloadPickerView];
     [self.userInfoPickerView.pickerView selectRow:selectedRow inComponent:0 animated:NO];
 }
 
 - (void)showExperienceListPicker {
-    NSInteger selectedRow = self.experienceInfoPicker.selectedItem.row;
+    NSInteger selectedRow = [self.experienceInfoPicker selectedInfoItem].row;
     [self.userInfoPickerView reloadPickerView];
     [self.userInfoPickerView.pickerView selectRow:selectedRow inComponent:0 animated:NO];
 }

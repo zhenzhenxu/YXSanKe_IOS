@@ -7,10 +7,9 @@
 //
 
 #import "SettingViewController.h"
-#import "UserImageTableViewCell.h"
 #import "UserInfoTableViewCell.h"
 #import "UserInfoPickerView.h"
-#import "UserSubjectStageInfoPicker.h"
+#import "UserStageSubjectInfoPicker.h"
 #import "UserAreaInfoPicker.h"
 #import "ErrorView.h"
 #import "EmptyView.h"
@@ -21,13 +20,15 @@
 #import "MenuSelectionView.h"
 #import "UserInfoPicker.h"
 #import "UserNameTableViewCell.h"
+#import "UserInfoHeaderView.h"
 
 @interface SettingViewController ()<UITableViewDelegate, UITableViewDataSource>
 
 @property (nonatomic, strong) MineUserModel *userModel;
+@property (nonatomic, strong) UserInfoHeaderView *headerView;
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) UserInfoPickerView *userInfoPickerView;
-@property (nonatomic, strong) UserSubjectStageInfoPicker *subjectStageInfoPicker;
+@property (nonatomic, strong) UserStageSubjectInfoPicker *stageSubjectInfoPicker;
 @property (nonatomic, strong) UserAreaInfoPicker *areaInfoPicker;
 @property (nonatomic, strong) YXImagePickerController *imagePickerController;
 @property (nonatomic, strong) MenuSelectionView *menuSelectionView;
@@ -66,13 +67,23 @@
     [navigationBar setShadowImage:[UIImage new]];
 }
 - (void)setupUI {
-    self.tableView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStyleGrouped];
+    self.headerView = [[UserInfoHeaderView alloc]initWithFrame:CGRectMake(0, 0, self.view.width, 150.0f)];
+    self.headerView.model = [UserManager sharedInstance].userModel;
+    WEAK_SELF
+    [self.headerView setEditBlock:^{
+        STRONG_SELF
+        [self.view endEditing:YES];
+        DDLogDebug(@"%@修改头像",[self class]);
+        [self changeHeadPortrait];
+    }];
+    
+    self.tableView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
+    self.tableView.tableHeaderView = self.headerView;
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.tableView.backgroundColor = [UIColor whiteColor];
     self.tableView.allowsSelection = NO;
-    [self.tableView registerClass:[UserImageTableViewCell class] forCellReuseIdentifier:@"UserImageTableViewCell"];
     [self.tableView registerClass:[UserInfoTableViewCell class] forCellReuseIdentifier:@"UserInfoTableViewCell"];
     [self.tableView registerClass:[UserNameTableViewCell class] forCellReuseIdentifier:@"UserNameTableViewCell"];
     [self.view addSubview:self.tableView];
@@ -121,22 +132,66 @@
     if (_genderInfoPicker == nil) {
         _genderInfoPicker = [[UserInfoPicker alloc]init];
         _genderInfoPicker.dataArray = [UserInfoDataManger userInfoData].data.gender;
+        WEAK_SELF
+        [_genderInfoPicker setUpdateUserInfoBlock:^(UserInfo *userInfo) {
+            STRONG_SELF
+            [self startLoading];
+            SupplementUserInfo *supplementUserInfo = [[SupplementUserInfo alloc]init];
+            supplementUserInfo.genderID = userInfo.infoID;
+            [MineDataManager updateSupplementUserInfo:supplementUserInfo completeBlock:^(NSError *error) {
+                STRONG_SELF
+                [self stopLoading];
+                if (error) {
+                    [self showToast:error.localizedDescription];
+                    return ;
+                }
+                [self updateStageSubjectInfo];
+            }];
+        }];
     }
     return _genderInfoPicker;
 }
 
-- (UserSubjectStageInfoPicker *)subjectStageInfoPicker {
-    if (_subjectStageInfoPicker == nil) {
-        _subjectStageInfoPicker = [[UserSubjectStageInfoPicker alloc]init];
-        _subjectStageInfoPicker.stageAndSubjectItem = [StageSubjectDataManager dataForStageAndSubject];
+- (UserStageSubjectInfoPicker *)stageSubjectInfoPicker {
+    if (_stageSubjectInfoPicker == nil) {
+        _stageSubjectInfoPicker = [[UserStageSubjectInfoPicker alloc]init];
+        _stageSubjectInfoPicker.stageSubjectItem = [StageSubjectDataManager dataForStageAndSubject];
+        WEAK_SELF
+        [_stageSubjectInfoPicker setUpdateStageSubjectBlock:^(NSString *stageID, NSString *subjectID) {
+            STRONG_SELF
+            [self startLoading];
+            [MineDataManager updateStage:stageID subject:subjectID completeBlock:^(NSError *error) {
+                STRONG_SELF
+                [self stopLoading];
+                if (error) {
+                    [self showToast:error.localizedDescription];
+                    return;
+                }
+                [self updateStageSubjectInfo];
+            }];
+        }];
     }
-    return _subjectStageInfoPicker;
+    return _stageSubjectInfoPicker;
 }
 
 - (UserAreaInfoPicker *)areaInfoPicker {
     if (_areaInfoPicker == nil) {
         _areaInfoPicker = [[UserAreaInfoPicker alloc]init];
         _areaInfoPicker.model = [AreaDataManager areaModel];
+        WEAK_SELF
+        [_areaInfoPicker setUpdateAreaBlock:^(NSString *areaID) {
+            STRONG_SELF
+            [self startLoading];
+            [MineDataManager updateArea:areaID completeBlock:^(NSError *error) {
+                STRONG_SELF
+                [self stopLoading];
+                if (error) {
+                    [self showToast:error.localizedDescription];
+                    return;
+                }
+                [self updateAreaInfo];
+            }];
+        }];
     }
     return _areaInfoPicker;
 }
@@ -148,54 +203,22 @@
 
 #pragma mark - update Picker Selected Info
 - (void)updateSelectedInfo {
-    WEAK_SELF
     if ([self.userInfoPickerView.pickerView.dataSource isEqual:self.genderInfoPicker]) {
-        [self updateGenderInfo];
-        
+        [self.genderInfoPicker updateUserInfo];
     }
-    if ([self.userInfoPickerView.pickerView.dataSource isKindOfClass:[UserSubjectStageInfoPicker class]]) {
-        [self.subjectStageInfoPicker updateStageWithCompleteBlock:^(NSError *error) {
-            STRONG_SELF
-            if (error) {
-                [self showToast:error.localizedDescription];
-                return;
-            }
-            [self updateStageSubjectInfo];
-        }];
+    if ([self.userInfoPickerView.pickerView.dataSource isKindOfClass:[UserStageSubjectInfoPicker class]]) {
+        [self.stageSubjectInfoPicker updateStageSubject];
     }
     if ([self.userInfoPickerView.pickerView.dataSource isKindOfClass:[UserAreaInfoPicker class]]) {
-        [self.areaInfoPicker updateAreaWithCompleteBlock:^(NSError *error) {
-            STRONG_SELF
-            if (error) {
-                [self showToast:error.localizedDescription];
-                return;
-            }
-            [self updateAreaInfo];
-        }];
+        [self.areaInfoPicker updateArea];
     }
-}
-
-- (void)updateGenderInfo {
-    DDLogDebug(@"更新性别");
-    SupplementUserInfo *info = [[SupplementUserInfo alloc]init];
-    info.genderID = self.genderInfoPicker.selectedItem.userInfo.infoID;
-    [MineDataManager updateSupplementUserInfo:info completeBlock:^(NSError *error) {
-        if (error) {
-            [self showToast:error.localizedDescription];
-            return ;
-        }
-        self.userModel = [MineUserModel mineUserModelFromRawModel:[UserManager sharedInstance].userModel];
-        NSIndexPath *nameIndexPath = [NSIndexPath indexPathForRow:0 inSection:2];
-        [self.tableView reloadRowsAtIndexPaths:@[nameIndexPath] withRowAnimation:UITableViewRowAnimationNone];
-
-    }];
 }
 
 - (void)updateStageSubjectInfo {
     self.userModel = [MineUserModel mineUserModelFromRawModel:[UserManager sharedInstance].userModel];
     DDLogDebug(@"最终结果学科%@-学段%@",self.userModel.stage.name,self.userModel.subject.name);
-    NSIndexPath *stageIndexPath = [NSIndexPath indexPathForRow:1 inSection:2];
-    NSIndexPath *subjectIndexPath = [NSIndexPath indexPathForRow:2 inSection:2];
+    NSIndexPath *stageIndexPath = [NSIndexPath indexPathForRow:1 inSection:1];
+    NSIndexPath *subjectIndexPath = [NSIndexPath indexPathForRow:2 inSection:1];
     [self.tableView reloadRowsAtIndexPaths:@[stageIndexPath,subjectIndexPath] withRowAnimation:UITableViewRowAnimationNone];
     YXProblemItem *item = [YXProblemItem new];
     item.subject = self.userModel.subject.subjectID;
@@ -207,19 +230,17 @@
 - (void)updateAreaInfo {
     self.userModel = [MineUserModel mineUserModelFromRawModel:[UserManager sharedInstance].userModel];
     DDLogDebug(@"最终结果地区:%@-%@-%@",self.userModel.province.name,self.userModel.city.name,self.userModel.district.name);
-    NSIndexPath *areaIndexPath = [NSIndexPath indexPathForRow:3 inSection:2];
+    NSIndexPath *areaIndexPath = [NSIndexPath indexPathForRow:3 inSection:1];
     [self.tableView reloadRowsAtIndexPaths:@[areaIndexPath] withRowAnimation:UITableViewRowAnimationNone];
 }
 
 #pragma mark - TableView DataSource
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 3;
+    return 2;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     if (section == 0) {
-        return 1;
-    }else if (section == 1) {
         if ([UserManager sharedInstance].userModel.isAnonymous) {
             return 0;
         }else {
@@ -230,18 +251,7 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    if (indexPath.section== 0) {
-        UserImageTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"UserImageTableViewCell" forIndexPath:indexPath];
-        cell.model = [UserManager sharedInstance].userModel;
-        WEAK_SELF
-        [cell setEditBlock:^{
-            STRONG_SELF
-            [self.view endEditing:YES];
-            DDLogDebug(@"%@修改头像",[self class]);
-            [self changeHeadPortrait];
-        }];
-        return cell;
-    }else if (indexPath.section == 1){
+    if (indexPath.section == 0){
         if (![UserManager sharedInstance].userModel.isAnonymous) {
             UserNameTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"UserNameTableViewCell" forIndexPath:indexPath];
             [cell configTitle:@"用户名:" content:self.userModel.name];
@@ -284,10 +294,10 @@
                 STRONG_SELF
                 [self.view endEditing:YES];
                 DDLogDebug(@"点击选择学段学科");
-                self.userInfoPickerView.pickerView.dataSource = self.subjectStageInfoPicker;
-                self.userInfoPickerView.pickerView.delegate = self.subjectStageInfoPicker;
+                self.userInfoPickerView.pickerView.dataSource = self.stageSubjectInfoPicker;
+                self.userInfoPickerView.pickerView.delegate = self.stageSubjectInfoPicker;
                 [self.userInfoPickerView showPickerView];
-                [self.subjectStageInfoPicker resetSelectedSubjectsWithUserModel:self.userModel];
+                [self.stageSubjectInfoPicker resetSelectedStageSubjectsWithUserModel:self.userModel];
                 [self showStageAndSubjectPicker];
             }];
         }else {
@@ -310,11 +320,7 @@
 }
 #pragma mark - TabelView Delegate
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.section == 0) {
-        return 150;
-    }else {
-        return 50;
-    }
+    return 50;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
@@ -407,14 +413,15 @@
     if (!image) {
         return;
     }
+    [self startLoading];
     WEAK_SELF
     [MineDataManager updateHeadPortrait:image completeBlock:^(NSError *error) {
         STRONG_SELF
+        [self stopLoading];
         if (error) {
             [self showToast:error.localizedDescription];
         }
-        NSIndexPath *nameIndexPath = [NSIndexPath indexPathForRow:0 inSection:0];
-        [self.tableView reloadRowsAtIndexPaths:@[nameIndexPath] withRowAnimation:UITableViewRowAnimationNone];
+        self.headerView.model = [UserManager sharedInstance].userModel;
     }];
 }
 
@@ -424,27 +431,28 @@
     if ([name isEqualToString:self.userModel.name]) {
         return;
     }
+    [self startLoading];
     WEAK_SELF
     [MineDataManager updateUserName:name completeBlock:^(NSError *error) {
         STRONG_SELF
+        [self stopLoading];
         if (error) {
             [self showToast:error.localizedDescription];
-            return ;
         }
         self.userModel = [MineUserModel mineUserModelFromRawModel:[UserManager sharedInstance].userModel];
-        NSIndexPath *nameIndexPath = [NSIndexPath indexPathForRow:0 inSection:1];
+        NSIndexPath *nameIndexPath = [NSIndexPath indexPathForRow:0 inSection:0];
         [self.tableView reloadRowsAtIndexPaths:@[nameIndexPath] withRowAnimation:UITableViewRowAnimationNone];
     }];
 }
 
 #pragma mark - show InfoPicker
 - (void)showGenderListPicker {
-    NSInteger selectedRow = self.genderInfoPicker.selectedItem.row;
+    NSInteger selectedRow = [self.genderInfoPicker selectedInfoItem].row;
     [self.userInfoPickerView reloadPickerView];
     [self.userInfoPickerView.pickerView selectRow:selectedRow inComponent:0 animated:NO];
 }
 - (void)showStageAndSubjectPicker {
-    UserSubjectStageSelectedInfoItem *item = [self.subjectStageInfoPicker selectedInfoItem];
+    UserStageSubjectSelectedInfoItem *item = [self.stageSubjectInfoPicker selectedInfoItem];
     [self.userInfoPickerView reloadPickerView];
     [self.userInfoPickerView.pickerView selectRow:item.stageRow inComponent:0 animated:NO];
     [self.userInfoPickerView.pickerView selectRow:item.subjectRow inComponent:1 animated:NO];

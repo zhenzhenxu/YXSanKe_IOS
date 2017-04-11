@@ -1,24 +1,28 @@
 //
-//  UserSubjectStageInfoPicker.m
+//  UserStageSubjectInfoPicker.m
 //  SanKeApp
 //
-//  Created by ZLL on 2017/1/12.
+//  Created by ZLL on 2017/4/11.
 //  Copyright © 2017年 niuzhaowang. All rights reserved.
 //
 
-#import "UserSubjectStageInfoPicker.h"
+#import "UserStageSubjectInfoPicker.h"
+
 #import "MineUserModel.h"
 
-@implementation UserSubjectStageSelectedInfoItem
+@implementation UserStageSubjectSelectedInfoItem
 @end
 
-@interface UserSubjectStageInfoPicker ()
+@interface UserStageSubjectInfoPicker ()
 @property (nonatomic, strong) NSArray *selectedSubjects;
 @property (nonatomic, strong) FetchStageSubjectRequestItem_stage *stage;
 @property (nonatomic, strong) FetchStageSubjectRequestItem_subject *subject;
+@property (nonatomic, copy) UpdateStageSubjectBlock block;
 @end
 
-@implementation UserSubjectStageInfoPicker
+
+@implementation UserStageSubjectInfoPicker
+
 #pragma mark - UIPickerViewDataSource
 - (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView
 {
@@ -29,7 +33,7 @@
 {
     switch (component) {
         case 0:
-            return self.stageAndSubjectItem.data.stages.count;
+            return self.stageSubjectItem.data.stages.count;
         case 1:
             return self.selectedSubjects.count;
         default:
@@ -58,7 +62,7 @@
 {
     switch (component) {
         case 0:
-            return ((FetchStageSubjectRequestItem_stage *)self.stageAndSubjectItem.data.stages[row]).name;
+            return ((FetchStageSubjectRequestItem_stage *)self.stageSubjectItem.data.stages[row]).name;
         case 1:
             return ((FetchStageSubjectRequestItem_subject *)self.selectedSubjects[row]).name;
         default:
@@ -73,8 +77,8 @@
     switch (component) {
         case 0:
         {
-            if (self.stageAndSubjectItem.data.stages.count > row) {
-                self.stage = self.stageAndSubjectItem.data.stages[row];
+            if (self.stageSubjectItem.data.stages.count > row) {
+                self.stage = self.stageSubjectItem.data.stages[row];
                 if (self.stage.subjects.count > 0) {
                     self.selectedSubjects = self.stage.subjects;
                     self.subject = self.selectedSubjects[0];
@@ -112,11 +116,13 @@
     }
     // Fill the label text here
     pickerLabel.text=[self pickerView:pickerView titleForRow:row forComponent:component];
+    ((UILabel *)[pickerView.subviews objectAtIndex:1]).backgroundColor = [UIColor colorWithHexString:@"e6e6e6"];
+    ((UILabel *)[pickerView.subviews objectAtIndex:2]).backgroundColor = [UIColor colorWithHexString:@"e6e6e6"];
     return pickerLabel;
 }
 
-- (void)resetSelectedSubjectsWithUserModel:(MineUserModel *)userModel {
-    [self.stageAndSubjectItem.data.stages enumerateObjectsUsingBlock:^(FetchStageSubjectRequestItem_stage *stage, NSUInteger idx, BOOL *stop) {
+- (void)resetSelectedStageSubjectsWithUserModel:(MineUserModel *)userModel {
+    [self.stageSubjectItem.data.stages enumerateObjectsUsingBlock:^(FetchStageSubjectRequestItem_stage *stage, NSUInteger idx, BOOL *stop) {
         if ([userModel.stage.stageID isEqualToString:stage.stageID]) {
             self.stage = stage;
             self.selectedSubjects = self.stage.subjects;
@@ -124,7 +130,7 @@
         }
     }];
     if (!self.stage) {
-        self.stage = self.stageAndSubjectItem.data.stages.firstObject;
+        self.stage = self.stageSubjectItem.data.stages.firstObject;
         self.selectedSubjects = self.stage.subjects;
         self.subject = self.selectedSubjects.firstObject;
         return;
@@ -138,24 +144,20 @@
     DDLogDebug(@"设置为选中%@学段-%@学科",self.stage.name,self.subject.name);
 }
 
-- (void)updateStageWithCompleteBlock:(void (^)(NSError *))completeBlock {
-    DDLogDebug(@"要选择学科%@-学段%@",self.stage.name,self.subject.name);
-    [MineDataManager updateStage:self.stage.stageID subject:self.subject.subjectID completeBlock:^(NSError *error) {
-        if (error) {
-            BLOCK_EXEC(completeBlock,error);
-            return;
-        }
-        BLOCK_EXEC(completeBlock,nil);
-    }];
+- (void)setUpdateStageSubjectBlock:(UpdateStageSubjectBlock)block {
+    self.block = block;
 }
 
-- (UserSubjectStageSelectedInfoItem *)selectedInfoItem {
-    UserSubjectStageSelectedInfoItem *item = [[UserSubjectStageSelectedInfoItem alloc]init];
+- (void)updateStageSubject {
+    BLOCK_EXEC(self.block,self.stage.stageID,self.subject.subjectID);
+}
+- (UserStageSubjectSelectedInfoItem *)selectedInfoItem {
+    UserStageSubjectSelectedInfoItem *item = [[UserStageSubjectSelectedInfoItem alloc]init];
     item.stageRow = 0;
     item.subjectRow = 0;
-    if (self.stageAndSubjectItem.data.stages.count > 0) {
-        if ([self.stageAndSubjectItem.data.stages containsObject:self.stage]) {
-            item.stageRow = [self.stageAndSubjectItem.data.stages indexOfObject:self.stage];
+    if (self.stageSubjectItem.data.stages.count > 0) {
+        if ([self.stageSubjectItem.data.stages containsObject:self.stage]) {
+            item.stageRow = [self.stageSubjectItem.data.stages indexOfObject:self.stage];
         }
     }
     if (self.selectedSubjects.count > 0) {
@@ -168,4 +170,5 @@
     
     return item;
 }
+
 @end

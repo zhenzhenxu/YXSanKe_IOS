@@ -15,19 +15,13 @@
 
 @interface UserInfoPicker ()
 
-@property (nonatomic, strong) UserInfoItem *selectedItem;
-
+@property (nonatomic, strong) UserInfo *userInfo;
+@property (nonatomic, copy) UpdateUserInfoBlock block;
 @end
 
 @implementation UserInfoPicker
 #pragma mark - UIPickerViewDataSource
 
-- (instancetype)init{
-    if (self = [super init]) {
-        self.selectedItem = [[UserInfoItem alloc]init];
-    }
-    return self;
-}
 
 - (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView
 {
@@ -67,8 +61,9 @@
     UILabel* selectLabel = (UILabel *)[pickerView viewForRow:row forComponent:component];
     selectLabel.textColor = [UIColor colorWithHexString:@"1d878b"];
     if (self.dataArray.count > row) {
-        self.selectedItem.userInfo = self.dataArray[row];
-        self.selectedItem.row = row;
+        self.userInfo = self.dataArray[row];
+    }else {
+        self.userInfo = nil;
     }
 }
 
@@ -83,20 +78,42 @@
     }
     // Fill the label text here
     pickerLabel.text=[self pickerView:pickerView titleForRow:row forComponent:component];
+    ((UILabel *)[pickerView.subviews objectAtIndex:1]).backgroundColor = [UIColor colorWithHexString:@"e6e6e6"];
+    ((UILabel *)[pickerView.subviews objectAtIndex:2]).backgroundColor = [UIColor colorWithHexString:@"e6e6e6"];
     return pickerLabel;
 }
 
 - (void)resetSelectedInfo:(UserInfo *)userInfo {
     [self.dataArray enumerateObjectsUsingBlock:^(UserInfo * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         if ([userInfo.infoID isEqualToString:obj.infoID]) {
-            self.selectedItem.userInfo = obj;
+            self.userInfo = obj;
             *stop = YES;
         }
     }];
-    if(!self.selectedItem.userInfo) {
-        self.selectedItem.userInfo = self.dataArray.firstObject;
+    if(!self.userInfo) {
+        self.userInfo = self.dataArray.firstObject;
         return;
     }
+}
+
+- (void)setUpdateUserInfoBlock:(UpdateUserInfoBlock)block {
+    self.block = block;
+}
+
+- (void)updateUserInfo {
+    BLOCK_EXEC(self.block,self.userInfo);
+}
+
+- (UserInfoItem *)selectedInfoItem {
+    UserInfoItem *item = [[UserInfoItem alloc]init];
+    item.row = 0;
+    if (self.dataArray.count > 0) {
+        if ([self.dataArray containsObject:self.userInfo]) {
+            item.row = [self.dataArray indexOfObject:self.userInfo];
+        }
+    }
+    item.userInfo = self.userInfo;
+    return item;
 }
 
 @end

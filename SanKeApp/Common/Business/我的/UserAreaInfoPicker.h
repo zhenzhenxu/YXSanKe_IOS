@@ -11,6 +11,7 @@
 @class UserInfoPickerView;
 @class MineUserModel;
 
+typedef void(^UpdateAreaBlock)(NSString *areaID);
 @interface UserAreaSelectedInfoItem : NSObject
 
 @property (nonatomic, assign) NSInteger provinceRow;
@@ -29,7 +30,7 @@
 @property (nonatomic, strong, readonly) UserAreaSelectedInfoItem *item;
 
 - (void)resetSelectedProvinceDataWithUserModel:(MineUserModel *)userModel;
-- (void)updateAreaWithCompleteBlock:(void(^)(NSError *error))completeBlock;
-
+- (void)setUpdateAreaBlock:(UpdateAreaBlock)block;
+- (void)updateArea;
 - (UserAreaSelectedInfoItem *)selectedInfoItem;
 @end

@@ -1,35 +1,24 @@
 //
-//  UserImageTableViewCell.m
+//  UserInfoHeaderView.m
 //  SanKeApp
 //
-//  Created by ZLL on 2017/1/12.
+//  Created by ZLL on 2017/4/11.
 //  Copyright © 2017年 niuzhaowang. All rights reserved.
 //
 
-#import "UserImageTableViewCell.h"
-#import "MineUserModel.h"
+#import "UserInfoHeaderView.h"
 
-@interface UserImageTableViewCell ()<UIGestureRecognizerDelegate>
+@interface UserInfoHeaderView ()<UIGestureRecognizerDelegate>
 @property (nonatomic, strong) UIImageView *backgroundImageView;
 @property (nonatomic, strong) UIImageView *iconImageView;
 @property (nonatomic, strong) UILabel *editLabel;
 @property (nonatomic, copy) EditBlock block;
 @end
 
-@implementation UserImageTableViewCell
-
-- (void)awakeFromNib {
-    [super awakeFromNib];
-    // Initialization code
-}
-
-- (void)setSelected:(BOOL)selected animated:(BOOL)animated {
-    [super setSelected:selected animated:animated];
-    
-    // Configure the view for the selected state
-}
-- (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier{
-    if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
+@implementation UserInfoHeaderView
+-(instancetype)initWithFrame:(CGRect)frame{
+    self = [super initWithFrame:frame];
+    if (self) {
         [self setupUI];
     }
     return self;
@@ -60,19 +49,19 @@
     self.editLabel.text = @"编辑头像";
     self.editLabel.userInteractionEnabled = YES;
     
-    [self.contentView addSubview:self.backgroundImageView];
+    [self addSubview:self.backgroundImageView];
     [self.backgroundImageView addSubview:effectView];
     [self.backgroundImageView addSubview:self.iconImageView];
     [self.backgroundImageView addSubview:self.editLabel];
     [self.backgroundImageView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.right.top.bottom.equalTo(self.contentView);
+        make.left.right.top.bottom.equalTo(self);
     }];
     [effectView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.top.bottom.equalTo(self.backgroundImageView);
     }];
     [self.iconImageView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerX.equalTo(self.contentView);
-        make.centerY.equalTo(self.contentView).offset(-12.0f);
+        make.centerX.equalTo(self);
+        make.centerY.equalTo(self).offset(-12.0f);
         make.size.mas_equalTo(CGSizeMake(73, 73));
     }];
     [self.editLabel mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -96,39 +85,20 @@
         self.editLabel.hidden = YES;
         self.iconImageView.userInteractionEnabled = NO;
         [self.iconImageView mas_remakeConstraints:^(MASConstraintMaker *make) {
-            make.centerX.equalTo(self.contentView);
-            make.centerY.equalTo(self.contentView);
+            make.centerX.equalTo(self);
+            make.centerY.equalTo(self);
             make.size.mas_equalTo(CGSizeMake(73, 73));
         }];
     }else {
         self.editLabel.hidden = NO;
         self.iconImageView.userInteractionEnabled = YES;
         [self.iconImageView mas_remakeConstraints:^(MASConstraintMaker *make) {
-            make.centerX.equalTo(self.contentView);
-            make.centerY.equalTo(self.contentView).offset(-12.0f);
+            make.centerX.equalTo(self);
+            make.centerY.equalTo(self).offset(-12.0f);
             make.size.mas_equalTo(CGSizeMake(73, 73));
         }];
     }
 }
 
-- (void)setCanEdit:(BOOL)canEdit {
-    _canEdit = canEdit;
-    if (!canEdit) {
-        self.editLabel.hidden = YES;
-        self.iconImageView.userInteractionEnabled = NO;
-        [self.iconImageView mas_remakeConstraints:^(MASConstraintMaker *make) {
-            make.centerX.equalTo(self.contentView);
-            make.centerY.equalTo(self.contentView);
-            make.size.mas_equalTo(CGSizeMake(73, 73));
-        }];
-    }else {
-        self.editLabel.hidden = NO;
-        self.iconImageView.userInteractionEnabled = YES;
-        [self.iconImageView mas_remakeConstraints:^(MASConstraintMaker *make) {
-            make.centerX.equalTo(self.contentView);
-            make.centerY.equalTo(self.contentView).offset(-12.0f);
-            make.size.mas_equalTo(CGSizeMake(73, 73));
-        }];
-    }
-}
+
 @end
