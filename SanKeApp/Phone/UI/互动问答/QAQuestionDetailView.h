@@ -7,12 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "QAQuestionListRequest.h"
+#import "QAQuestionDetailRequest.h"
 
 @interface QAQuestionDetailView : UIView
-@property (nonatomic, strong) QAQuestionListRequestItem_Element *item;
+@property (nonatomic, strong) QAQuestionDetailRequestItem_Ask *item;
 @property (nonatomic, copy) void(^AttachmentClickAction) ();
 
 - (void)updateWithReplyCount:(NSString *)replyCount browseCount:(NSString *)browseCount;
-+ (CGFloat)heightForWidth:(CGFloat)width item:(QAQuestionListRequestItem_Element *)item;
++ (CGFloat)heightForWidth:(CGFloat)width item:(QAQuestionDetailRequestItem_Ask *)item;
 @end

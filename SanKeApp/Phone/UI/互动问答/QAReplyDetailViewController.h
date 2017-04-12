@@ -8,9 +8,9 @@
 
 #import "BaseViewController.h"
 #import "QAReplyListRequest.h"
-#import "QAQuestionListRequest.h"
+#import "QAQuestionDetailRequest.h"
 
 @interface QAReplyDetailViewController : BaseViewController
 @property (nonatomic, strong) QAReplyListRequestItem_Element *item;
-@property (nonatomic, strong) QAQuestionListRequestItem_Element *questionItem;
+@property (nonatomic, strong) QAQuestionDetailRequestItem_Ask *questionItem;
 @end

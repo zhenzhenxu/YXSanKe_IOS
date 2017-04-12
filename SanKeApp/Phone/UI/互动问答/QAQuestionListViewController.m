@@ -80,10 +80,7 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     QAQuestionListRequestItem_Element *item = self.dataArray[indexPath.row];
     QAQuestionDetailViewController *vc = [[QAQuestionDetailViewController alloc]init];
-    vc.item = item;
+    vc.askID = item.elementID;
     [self.navigationController pushViewController:vc animated:YES];
-    
-    //问题详情数据在问题列表接口的返回中都有了，所以不需要关心问题详情接口的返回，详情接口仅用于上报浏览数和更新字段值
-    [QADataManager requestQuestionDetailWithID:item.elementID completeBlock:nil];
 }
 @end

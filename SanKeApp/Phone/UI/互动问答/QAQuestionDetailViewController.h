@@ -7,8 +7,7 @@
 //
 
 #import "PagedListViewControllerBase.h"
-#import "QAQuestionListRequest.h"
 
 @interface QAQuestionDetailViewController : PagedListViewControllerBase
-@property (nonatomic, strong) QAQuestionListRequestItem_Element *item;
+@property (nonatomic, copy) NSString *askID;
 @end

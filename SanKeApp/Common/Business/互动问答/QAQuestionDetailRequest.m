@@ -8,6 +8,9 @@
 
 #import "QAQuestionDetailRequest.h"
 
+@implementation QAQuestionDetailRequestItem_Attachment
+@end
+
 @implementation QAQuestionDetailRequestItem_Ask
 + (JSONKeyMapper *)keyMapper {
     return [[JSONKeyMapper alloc] initWithDictionary:@{@"id":@"askID"}];

@@ -13,35 +13,147 @@
 #import "QAReplyListFetcher.h"
 #import "QAReplyQuestionViewController.h"
 #import "QAShareView.h"
-
+#import "QAQuestionDetailRequest.h"
 static CGFloat const kBottomViewHeight = 49.0f;
 @interface QAQuestionDetailViewController ()
+@property (nonatomic, strong) QAQuestionDetailRequestItem_Ask *item;
 @property (nonatomic, strong) QAQuestionDetailView *headerView;
 @property (nonatomic, strong) YXFileItemBase *fileItem;
 @property (nonatomic, strong) UIView *bottomView;
 @property (nonatomic, strong) QAShareView *shareView;
+@property (nonatomic, assign) BOOL isWaitBool;
+@property (nonatomic, assign) CGFloat headerHeight;
 @end
 
 @implementation QAQuestionDetailViewController
 
 - (void)viewDidLoad {
-    QAReplyListFetcher *fetcher = [[QAReplyListFetcher alloc]init];
-    fetcher.ask_id = self.item.elementID;
-    fetcher.pageSize = 20;
-    self.dataFetcher = fetcher;
+    [self setupQuestionData];
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    WEAK_SELF
+    [self.errorView setRetryBlock:^{
+        STRONG_SELF
+        [self setupQuestionData];
+    }];
+    self.tableView.hidden = YES;
     [self setupTitle];
-    [self setupUI];
     [self setupObserver];
     if ([YXShareManager isQQSupport]||[YXShareManager isWXAppSupport]) {
         [self setupRightWithImageNamed:@"分享" highlightImageNamed:nil];
     }
 }
 
+- (void)firstPageFetch {
+    if (!self.isWaitBool) {
+        return;
+    }
+    [super firstPageFetch];
+}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)setupQuestionData{
+    [self startLoading];
+    WEAK_SELF
+    [QADataManager requestQuestionDetailWithID:self.askID completeBlock:^(QAQuestionDetailRequestItem *item, NSError *error) {
+        STRONG_SELF
+        [self stopLoading];
+        if (error) {
+            if (error.code == ASIConnectionFailureErrorType || error.code == ASIRequestTimedOutErrorType) {//网络错误/请求超时
+                [self.contentView addSubview:self.errorView];
+                [self.errorView mas_makeConstraints:^(MASConstraintMaker *make) {
+                    make.edges.mas_equalTo(0);
+                }];
+            }else {
+                [self.contentView addSubview:self.dataErrorView];
+                [self.dataErrorView mas_makeConstraints:^(MASConstraintMaker *make) {
+                    make.edges.mas_equalTo(0);
+                }];
+            }
+            return;
+        }
+        [self.errorView removeFromSuperview];
+        [self.dataErrorView removeFromSuperview];
+
+        self.item = item.data.ask;
+        QAReplyListFetcher *fetcher = [[QAReplyListFetcher alloc]init];
+        fetcher.ask_id = self.item.askID;
+        fetcher.pageSize = 20;
+        self.dataFetcher = fetcher;
+        self.isWaitBool = YES;
+        self.requestDelegate = self.dataFetcher;
+        [self firstPageFetch];
+        
+        self.tableView.hidden = NO;
+        self.headerHeight = [QAQuestionDetailView heightForWidth:self.view.width item:self.item];
+        [self setupUI];
+    }];
+}
+
+- (void)setupUI {
+    self.tableView.backgroundColor = [UIColor clearColor];
+    self.tableView.rowHeight = 112;
+    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    [self.tableView registerClass:[QAReplyCell class] forCellReuseIdentifier:@"QAReplyCell"];
+    
+    [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.right.top.mas_equalTo(0);
+        make.bottom.mas_equalTo(-kBottomViewHeight);
+    }];
+    
+    [self setupBottomView];
+}
+
+- (void)setupBottomView {
+    UIView *bottomView = [[UIView alloc]init];
+    bottomView.backgroundColor = [UIColor whiteColor];
+    self.bottomView = bottomView;
+    
+    UIView *lineView = [[UIView alloc]init];
+    lineView.backgroundColor = [UIColor colorWithHexString:@"e6e6e6"];
+    
+    UIButton *viewCommentsButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    viewCommentsButton.titleLabel.font = [UIFont systemFontOfSize:14];
+    [viewCommentsButton setTitle:@"我来回答" forState:UIControlStateNormal];
+    [viewCommentsButton setTitleColor:[UIColor colorWithHexString:@"4691a6"] forState:UIControlStateNormal];
+    [viewCommentsButton setTitleColor:[UIColor whiteColor] forState:UIControlStateHighlighted];
+    [viewCommentsButton setBackgroundImage:[UIImage yx_imageWithColor:[UIColor colorWithHexString:@"4691a6"]] forState:UIControlStateHighlighted];
+    [viewCommentsButton addTarget:self action:@selector(answerButtonAction:) forControlEvents:UIControlEventTouchUpInside];
+    
+    [self.view addSubview:self.bottomView];
+    [self.bottomView addSubview:lineView];
+    [self.bottomView addSubview:viewCommentsButton];
+    [self.bottomView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.right.bottom.equalTo(self.view);
+        make.height.mas_equalTo(kBottomViewHeight);
+    }];
+    [lineView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.right.top.equalTo(self.bottomView);
+        make.height.mas_equalTo(1/[UIScreen mainScreen].scale);
+    }];
+    [viewCommentsButton mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(lineView.mas_bottom);
+        make.left.right.bottom.equalTo(bottomView);
+    }];
+}
+
+- (void)answerButtonAction:(UIButton *)sender {
+    QAReplyQuestionViewController *vc = [[QAReplyQuestionViewController alloc]init];
+    vc.questionID = self.item.askID;
+    SKNavigationController *navVc = [[SKNavigationController alloc]initWithRootViewController:vc];
+    [self presentViewController:navVc animated:YES completion:nil];
+}
+
+- (void)setupTitle {
+    UserModel *model = [UserManager sharedInstance].userModel;
+    [StageSubjectDataManager fetchStageSubjectWithStageID:model.stageID subjectID:model.subjectID completeBlock:^(FetchStageSubjectRequestItem_stage *stage, FetchStageSubjectRequestItem_subject *subject) {
+        NSString *title = [stage.name stringByAppendingString:subject.name];
+        self.navigationItem.title = title;
+    }];
 }
 
 - (void)setupObserver {
@@ -75,7 +187,7 @@ static CGFloat const kBottomViewHeight = 49.0f;
         NSString *questionID = dic[kQAQuestionIDKey];
         NSString *replyCount = dic[kQAQuestionReplyCountKey];
         NSString *browseCount = dic[kQAQuestionBrowseCountKey];
-        if ([self.item.elementID isEqualToString:questionID]) {
+        if ([self.item.askID isEqualToString:questionID]) {
             if (!isEmpty(replyCount)) {
                 self.item.answerNum = replyCount;
             }
@@ -84,14 +196,6 @@ static CGFloat const kBottomViewHeight = 49.0f;
             }
             [self.headerView updateWithReplyCount:replyCount browseCount:browseCount];
         }
-    }];
-}
-
-- (void)setupTitle {
-    UserModel *model = [UserManager sharedInstance].userModel;
-    [StageSubjectDataManager fetchStageSubjectWithStageID:model.stageID subjectID:model.subjectID completeBlock:^(FetchStageSubjectRequestItem_stage *stage, FetchStageSubjectRequestItem_subject *subject) {
-        NSString *title = [stage.name stringByAppendingString:subject.name];
-        self.navigationItem.title = title;
     }];
 }
 
@@ -135,86 +239,13 @@ static CGFloat const kBottomViewHeight = 49.0f;
     }];
     [self.shareView setShareActionBlock:^(YXShareType type) {
         STRONG_SELF
-        NSString *url = [NSString stringWithFormat:@"http://main.zgjiaoyan.com/hddy/view?id=%@&biz_id=%@_%@_720175",self.item.elementID,[UserManager sharedInstance].userModel.stageID,[UserManager sharedInstance].userModel.subjectID];
+        NSString *url = [NSString stringWithFormat:@"http://main.zgjiaoyan.com/hddy/view?id=%@&biz_id=%@_%@_720175",self.item.askID,[UserManager sharedInstance].userModel.stageID,[UserManager sharedInstance].userModel.subjectID];
         [[YXShareManager shareManager]yx_shareMessageWithImageIcon:nil title:self.item.title message:self.item.content url:url shareType:type];
     }];
     [self.shareView setCancelActionBlock:^{
         STRONG_SELF
         [alert hide];
     }];
-}
-- (void)setupUI {
-    self.headerView = [[QAQuestionDetailView alloc]init];
-    self.headerView.item = self.item;
-    WEAK_SELF
-    [self.headerView setAttachmentClickAction:^{
-        STRONG_SELF
-        [self previewAttachment];
-    }];
-    CGFloat height = [QAQuestionDetailView heightForWidth:self.view.width item:self.item];
-    self.headerView.frame = CGRectMake(0, 0, self.view.width, height);
-    self.tableView.tableHeaderView = self.headerView;
-    self.tableView.backgroundColor = [UIColor clearColor];
-    self.tableView.rowHeight = 112;
-    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-    [self.tableView registerClass:[QAReplyCell class] forCellReuseIdentifier:@"QAReplyCell"];
-    
-    [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.right.top.mas_equalTo(0);
-        make.bottom.mas_equalTo(-kBottomViewHeight);
-    }];
-    
-    [self setupBottomView];
-}
-
-- (void)previewAttachment {
-    QAQuestionListRequestItem_Attachment *attach = self.item.attachmentList.firstObject;
-    YXFileType type = [QAFileTypeMappingTable fileTypeWithString:attach.resType];
-    self.fileItem = [FileBrowserFactory browserWithFileType:type];
-    self.fileItem.name = attach.resName;
-    self.fileItem.url = attach.previewUrl;
-    self.fileItem.baseViewController = self;
-    [self.fileItem browseFile];
-}
-
-- (void)setupBottomView {
-    UIView *bottomView = [[UIView alloc]init];
-    bottomView.backgroundColor = [UIColor whiteColor];
-    self.bottomView = bottomView;
-    
-    UIView *lineView = [[UIView alloc]init];
-    lineView.backgroundColor = [UIColor colorWithHexString:@"e6e6e6"];
-    
-    UIButton *viewCommentsButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    viewCommentsButton.titleLabel.font = [UIFont systemFontOfSize:14];
-    [viewCommentsButton setTitle:@"我来回答" forState:UIControlStateNormal];
-    [viewCommentsButton setTitleColor:[UIColor colorWithHexString:@"4691a6"] forState:UIControlStateNormal];
-    [viewCommentsButton setTitleColor:[UIColor whiteColor] forState:UIControlStateHighlighted];
-    [viewCommentsButton setBackgroundImage:[UIImage yx_imageWithColor:[UIColor colorWithHexString:@"4691a6"]] forState:UIControlStateHighlighted];
-    [viewCommentsButton addTarget:self action:@selector(answerButtonAction:) forControlEvents:UIControlEventTouchUpInside];
-    
-    [self.view addSubview:self.bottomView];
-    [self.bottomView addSubview:lineView];
-    [self.bottomView addSubview:viewCommentsButton];
-    [self.bottomView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.right.bottom.equalTo(self.view);
-        make.height.mas_equalTo(kBottomViewHeight);
-    }];
-    [lineView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.right.top.equalTo(self.bottomView);
-        make.height.mas_equalTo(1/[UIScreen mainScreen].scale);
-    }];
-    [viewCommentsButton mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(lineView.mas_bottom);
-        make.left.right.bottom.equalTo(bottomView);
-    }];
-}
-
-- (void)answerButtonAction:(UIButton *)sender {
-    QAReplyQuestionViewController *vc = [[QAReplyQuestionViewController alloc]init];
-    vc.questionID = self.item.elementID;
-    SKNavigationController *navVc = [[SKNavigationController alloc]initWithRootViewController:vc];
-    [self presentViewController:navVc animated:YES completion:nil];
 }
 
 // 本页上方是问题详情，不应该有任何错误或为空界面覆盖，所以只需要弹个toast提示即可
@@ -243,4 +274,33 @@ static CGFloat const kBottomViewHeight = 49.0f;
     [self.navigationController pushViewController:vc animated:YES];
 }
 
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
+    self.headerView = [[QAQuestionDetailView alloc]init];
+    self.headerView.item = self.item;
+    WEAK_SELF
+    [self.headerView setAttachmentClickAction:^{
+        STRONG_SELF
+        [self previewAttachment];
+    }];
+    return self.headerView;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
+    return self.headerHeight;
+}
+
+#pragma mark - previewAttachment
+- (void)previewAttachment {
+    QAQuestionDetailRequestItem_Attachment *attach = self.item.attachmentList.firstObject;
+    YXFileType type = [QAFileTypeMappingTable fileTypeWithString:attach.resType];
+    if(type == YXFileTypeUnknown) {
+        [self showToast:@"暂不支持该格式文件预览"];
+        return;
+    }
+    self.fileItem = [FileBrowserFactory browserWithFileType:type];
+    self.fileItem.name = attach.resName;
+    self.fileItem.url = attach.previewUrl;
+    self.fileItem.baseViewController = self;
+    [self.fileItem browseFile];
+}
 @end

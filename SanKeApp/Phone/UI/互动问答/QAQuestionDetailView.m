@@ -38,6 +38,8 @@ typedef NS_ENUM(NSUInteger, QAAttachmentType) {
 }
 
 - (void)setupUI {
+    self.backgroundColor = [UIColor colorWithHexString:@"e6e6e6"];
+    
     self.containerView = [[UIView alloc]init];
     self.containerView.backgroundColor = [UIColor whiteColor];
     self.containerView.layer.cornerRadius = 2;
@@ -147,7 +149,7 @@ typedef NS_ENUM(NSUInteger, QAAttachmentType) {
     }];
 }
 
-- (void)setItem:(QAQuestionListRequestItem_Element *)item {
+- (void)setItem:(QAQuestionDetailRequestItem_Ask *)item {
     _item = item;
     self.nameLabel.text = item.showUserName;
     self.titleLabel.text = item.title;
@@ -171,7 +173,7 @@ typedef NS_ENUM(NSUInteger, QAAttachmentType) {
     if (isEmpty(item.attachmentList)) {
         type = QAAttachmentType_None;
     }else {
-        QAQuestionListRequestItem_Attachment *attach = item.attachmentList.firstObject;
+        QAQuestionDetailRequestItem_Attachment *attach = item.attachmentList.firstObject;
         YXFileType fileType = [QAFileTypeMappingTable fileTypeWithString:attach.resType];
         if (fileType == YXFileTypePhoto) {
             type = QAAttachmentType_Image;
@@ -186,7 +188,7 @@ typedef NS_ENUM(NSUInteger, QAAttachmentType) {
     if (type == QAAttachmentType_None) {
         [self.attachmentButton removeFromSuperview];
     }else if (type == QAAttachmentType_Image) {
-        QAQuestionListRequestItem_Attachment *attach = self.item.attachmentList.firstObject;
+        QAQuestionDetailRequestItem_Attachment *attach = self.item.attachmentList.firstObject;
         [self.attachmentButton sd_setImageWithURL:[NSURL URLWithString:attach.thumbnail] forState:UIControlStateNormal placeholderImage:nil];
         self.attachmentButton.imageView.contentMode = UIViewContentModeScaleAspectFill;
         self.attachmentButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentFill;
@@ -203,7 +205,7 @@ typedef NS_ENUM(NSUInteger, QAAttachmentType) {
             make.top.mas_equalTo(self.attachmentButton.mas_bottom).mas_offset(8);
         }];
     }else {
-        QAQuestionListRequestItem_Attachment *attach = self.item.attachmentList.firstObject;
+        QAQuestionDetailRequestItem_Attachment *attach = self.item.attachmentList.firstObject;
         NSString *title = [NSString stringWithFormat:@"@%@-%@",attach.resType,attach.resName];
         self.attachmentButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
         self.attachmentButton.backgroundColor = [UIColor clearColor];
@@ -242,7 +244,7 @@ typedef NS_ENUM(NSUInteger, QAAttachmentType) {
     BLOCK_EXEC(self.AttachmentClickAction)
 }
 
-+ (CGFloat)heightForWidth:(CGFloat)width item:(QAQuestionListRequestItem_Element *)item {
++ (CGFloat)heightForWidth:(CGFloat)width item:(QAQuestionDetailRequestItem_Ask *)item {
     QAQuestionDetailView *v = [[QAQuestionDetailView alloc]init];
     v.item = item;
     NSLayoutConstraint *widthFenceConstraint = [NSLayoutConstraint constraintWithItem:v attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1.0 constant:width];
