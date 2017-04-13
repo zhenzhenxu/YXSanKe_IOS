@@ -12,7 +12,7 @@
 @property (nonatomic, assign) BOOL allowsEditing;//是否对照片进行裁剪,默认裁剪,传NO表示不裁剪
 
 /**
- 照片选择器
+ 照片选择器(适用于当前根控制器不为UITabBarController的情况)
 
  @param sourceType 要打开的类型(相册/相机)
  @param completion 回调

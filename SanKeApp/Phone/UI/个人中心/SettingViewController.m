@@ -157,7 +157,7 @@
                     [self showToast:error.localizedDescription];
                     return ;
                 }
-                [self updateStageSubjectInfo];
+                [self updateGenderInfo];
             }];
         }];
     }
@@ -224,6 +224,13 @@
     if ([self.userInfoPickerView.pickerView.dataSource isKindOfClass:[UserAreaInfoPicker class]]) {
         [self.areaInfoPicker updateArea];
     }
+}
+
+- (void)updateGenderInfo {
+    DDLogDebug(@"更新性别");
+    self.userModel = [MineUserModel mineUserModelFromRawModel:[UserManager sharedInstance].userModel];
+    NSIndexPath *genderIndexPath = [NSIndexPath indexPathForRow:0 inSection:1];
+    [self.tableView reloadRowsAtIndexPaths:@[genderIndexPath] withRowAnimation:UITableViewRowAnimationNone];
 }
 
 - (void)updateStageSubjectInfo {
@@ -399,7 +406,7 @@
         case 0:
         {
             WEAK_SELF
-            [self.imagePickerController pickImageWithSourceType:UIImagePickerControllerSourceTypeCamera completion:^(UIImage *selectedImage) {
+            [self.imagePickerController presentFromViewController:self pickImageWithSourceType:UIImagePickerControllerSourceTypeCamera completion:^(UIImage *selectedImage) {
                 STRONG_SELF
                 [self updateHeadPortrait:selectedImage];
             }];
@@ -407,11 +414,10 @@
             break;
         case 1:{
             WEAK_SELF
-            [self.imagePickerController pickImageWithSourceType:UIImagePickerControllerSourceTypePhotoLibrary completion:^(UIImage *selectedImage) {
+            [self.imagePickerController presentFromViewController:self pickImageWithSourceType:UIImagePickerControllerSourceTypePhotoLibrary completion:^(UIImage *selectedImage) {
                 STRONG_SELF
                 [self updateHeadPortrait:selectedImage];
             }];
-            
         }
             break;
             
@@ -463,6 +469,7 @@
     [self.userInfoPickerView reloadPickerView];
     [self.userInfoPickerView.pickerView selectRow:selectedRow inComponent:0 animated:NO];
 }
+
 - (void)showStageAndSubjectPicker {
     UserStageSubjectSelectedInfoItem *item = [self.stageSubjectInfoPicker selectedInfoItem];
     [self.userInfoPickerView reloadPickerView];

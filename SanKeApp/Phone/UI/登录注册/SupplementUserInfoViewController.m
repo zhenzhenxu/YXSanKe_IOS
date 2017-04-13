@@ -361,7 +361,7 @@
     NSInteger selectedRow = [self.experienceInfoPicker selectedInfoItem].row;
     [self.userInfoPickerView reloadPickerView];
     [self.userInfoPickerView.pickerView selectRow:selectedRow inComponent:0 animated:NO];
-}
+}    
 #pragma  mark - configAreaSring
 -(NSString *)configAreaString {
     NSString *area = [NSString string];
