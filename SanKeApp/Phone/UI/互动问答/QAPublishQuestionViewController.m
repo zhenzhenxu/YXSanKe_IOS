@@ -158,7 +158,11 @@ static CGFloat const kTextViewHeight = 130.0f;
 }
 
 - (void)publishQuestion {
+    [self startLoading];
+    WEAK_SELF
     [QADataManager createAskWithTitle:self.questionTitle content:self.textView.text attachmentID:nil completeBlock:^(HttpBaseRequestItem *item, NSError *error) {
+        STRONG_SELF
+        [self stopLoading];
         if (error) {
             [self showToast:error.localizedDescription];
             return ;

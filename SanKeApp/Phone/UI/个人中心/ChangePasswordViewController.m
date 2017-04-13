@@ -35,6 +35,18 @@ static NSString *const kChangePasswordType = @"1";
     // Dispose of any resources that can be recreated.
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
+    self.navigationController.navigationBar.translucent = NO;
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    
+    self.navigationController.navigationBar.translucent = YES;
+}
+
 - (void)setupUI {
     self.view.backgroundColor = [UIColor colorWithHexString:@"e6e6e6"];
     

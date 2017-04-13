@@ -66,6 +66,11 @@
         }];
         [self.tableView reloadRowsAtIndexPaths:indexPathArray withRowAnimation:UITableViewRowAnimationNone];
     }];
+    [[[NSNotificationCenter defaultCenter]rac_addObserverForName:kQACreateQuestionSuccessNotification object:nil]subscribeNext:^(id x) {
+        STRONG_SELF
+        [self startLoading];
+        [self firstPageFetch];
+    }];
 }
 
 #pragma mark - tableview datasource

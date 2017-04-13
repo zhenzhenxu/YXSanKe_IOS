@@ -22,7 +22,6 @@ static CGFloat const kBottomViewHeight = 49.0f;
 @property (nonatomic, strong) UIView *bottomView;
 @property (nonatomic, strong) QAShareView *shareView;
 @property (nonatomic, assign) BOOL isWaitBool;
-@property (nonatomic, assign) CGFloat headerHeight;
 @end
 
 @implementation QAQuestionDetailViewController
@@ -78,23 +77,35 @@ static CGFloat const kBottomViewHeight = 49.0f;
         }
         [self.errorView removeFromSuperview];
         [self.dataErrorView removeFromSuperview];
-
+        
         self.item = item.data.ask;
+        self.tableView.hidden = NO;
+        
         QAReplyListFetcher *fetcher = [[QAReplyListFetcher alloc]init];
         fetcher.ask_id = self.item.askID;
         fetcher.pageSize = 20;
         self.dataFetcher = fetcher;
         self.isWaitBool = YES;
         self.requestDelegate = self.dataFetcher;
+        [self startLoading];
         [self firstPageFetch];
         
-        self.tableView.hidden = NO;
-        self.headerHeight = [QAQuestionDetailView heightForWidth:self.view.width item:self.item];
         [self setupUI];
     }];
 }
 
 - (void)setupUI {
+    self.headerView = [[QAQuestionDetailView alloc]init];
+    self.headerView.item = self.item;
+    WEAK_SELF
+    [self.headerView setAttachmentClickAction:^{
+        STRONG_SELF
+        [self previewAttachment];
+    }];
+    CGFloat height = [QAQuestionDetailView heightForWidth:self.view.width item:self.item];
+    self.headerView.frame = CGRectMake(0, 0, self.view.width, height);
+    self.tableView.tableHeaderView = self.headerView;
+    
     self.tableView.backgroundColor = [UIColor clearColor];
     self.tableView.rowHeight = 112;
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
@@ -106,6 +117,20 @@ static CGFloat const kBottomViewHeight = 49.0f;
     }];
     
     [self setupBottomView];
+}
+
+- (void)previewAttachment {
+    QAQuestionDetailRequestItem_Attachment *attach = self.item.attachmentList.firstObject;
+    YXFileType type = [QAFileTypeMappingTable fileTypeWithString:attach.resType];
+    if(type == YXFileTypeUnknown) {
+        [self showToast:@"暂不支持该格式文件预览"];
+        return;
+    }
+    self.fileItem = [FileBrowserFactory browserWithFileType:type];
+    self.fileItem.name = attach.resName;
+    self.fileItem.url = attach.previewUrl;
+    self.fileItem.baseViewController = self;
+    [self.fileItem browseFile];
 }
 
 - (void)setupBottomView {
@@ -201,6 +226,11 @@ static CGFloat const kBottomViewHeight = 49.0f;
             [self.headerView updateWithReplyCount:replyCount browseCount:browseCount];
         }
     }];
+    [[[NSNotificationCenter defaultCenter]rac_addObserverForName:kQACreateReplySuccessNotification object:nil]subscribeNext:^(id x) {
+        STRONG_SELF
+        [self startLoading];
+        [self firstPageFetch];
+    }];
 }
 
 - (void)naviRightAction {
@@ -278,33 +308,4 @@ static CGFloat const kBottomViewHeight = 49.0f;
     [self.navigationController pushViewController:vc animated:YES];
 }
 
-- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
-    self.headerView = [[QAQuestionDetailView alloc]init];
-    self.headerView.item = self.item;
-    WEAK_SELF
-    [self.headerView setAttachmentClickAction:^{
-        STRONG_SELF
-        [self previewAttachment];
-    }];
-    return self.headerView;
-}
-
-- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-    return self.headerHeight;
-}
-
-#pragma mark - previewAttachment
-- (void)previewAttachment {
-    QAQuestionDetailRequestItem_Attachment *attach = self.item.attachmentList.firstObject;
-    YXFileType type = [QAFileTypeMappingTable fileTypeWithString:attach.resType];
-    if(type == YXFileTypeUnknown) {
-        [self showToast:@"暂不支持该格式文件预览"];
-        return;
-    }
-    self.fileItem = [FileBrowserFactory browserWithFileType:type];
-    self.fileItem.name = attach.resName;
-    self.fileItem.url = attach.previewUrl;
-    self.fileItem.baseViewController = self;
-    [self.fileItem browseFile];
-}
 @end

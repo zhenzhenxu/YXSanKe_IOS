@@ -14,7 +14,8 @@
 
 extern NSString * const kQAQuestionInfoUpdateNotification; // 问题信息更新通知
 extern NSString * const kQAReplyInfoUpdateNotification; // 回复信息更新通知
-
+extern NSString * const kQACreateQuestionSuccessNotification; // 发布问题成功的通知
+extern NSString * const kQACreateReplySuccessNotification; // 发布回答成功的通知
 // 问题信息通知的key
 extern NSString * const kQAQuestionIDKey;
 extern NSString * const kQAQuestionReplyCountKey;

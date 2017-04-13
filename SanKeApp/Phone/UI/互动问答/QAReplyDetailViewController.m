@@ -174,7 +174,7 @@
         return;
     }
     QAReplyQuestionViewController *vc = [[QAReplyQuestionViewController alloc]init];
-    vc.questionID = self.item.elementID;
+    vc.questionID = self.questionItem.askID;
     SKNavigationController *navVc = [[SKNavigationController alloc]initWithRootViewController:vc];
     [self presentViewController:navVc animated:YES completion:nil];
 }

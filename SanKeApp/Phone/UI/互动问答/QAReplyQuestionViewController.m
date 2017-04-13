@@ -174,7 +174,11 @@
         [self showToast:@"内容不能为空"];
         return;
     }
+    [self startLoading];
+    WEAK_SELF
     [QADataManager createAnswerWithAskID:self.questionID answer:self.textView.text completeBlock:^(HttpBaseRequestItem *item, NSError *error) {
+        STRONG_SELF
+        [self stopLoading];
         if (error) {
             [self showToast:error.localizedDescription];
             return ;

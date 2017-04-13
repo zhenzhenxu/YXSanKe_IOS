@@ -10,6 +10,8 @@
 
 NSString * const kQAQuestionInfoUpdateNotification = @"kQAQuestionInfoUpdateNotification";
 NSString * const kQAReplyInfoUpdateNotification = @"kQAReplyInfoUpdateNotification";
+NSString * const kQACreateQuestionSuccessNotification = @"kQACreateQuestionSuccessNotification";
+NSString * const kQACreateReplySuccessNotification = @"kQACreateReplySuccessNotification";
 
 NSString * const kQAQuestionIDKey = @"kQAQuestionIDKey";
 NSString * const kQAQuestionReplyCountKey = @"kQAQuestionReplyCountKey";
@@ -90,6 +92,7 @@ NSString * const kQAReplyUserFavorKey = @"kQAReplyUserFavorKey";
             BLOCK_EXEC(completeBlock,nil,error)
             return;
         }
+         [[NSNotificationCenter defaultCenter]postNotificationName:kQACreateQuestionSuccessNotification object:nil];
         BLOCK_EXEC(completeBlock,retItem,nil)
     }];
 }
@@ -108,6 +111,7 @@ NSString * const kQAReplyUserFavorKey = @"kQAReplyUserFavorKey";
             return;
         }
         BLOCK_EXEC(completeBlock,retItem,nil);
+        [[NSNotificationCenter defaultCenter]postNotificationName:kQACreateReplySuccessNotification object:nil];
     }];
 
 }

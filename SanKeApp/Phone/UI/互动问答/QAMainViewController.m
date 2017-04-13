@@ -31,6 +31,8 @@
     [[[NSNotificationCenter defaultCenter]rac_addObserverForName:kStageSubjectDidChangeNotification object:nil]subscribeNext:^(id x) {
         STRONG_SELF
         [self setupTitle];
+        [self.hotVC firstPageFetch];
+        [self.latestVC firstPageFetch];
     }];
 }
 
