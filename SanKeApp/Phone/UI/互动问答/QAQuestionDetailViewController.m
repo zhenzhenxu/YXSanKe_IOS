@@ -142,6 +142,10 @@ static CGFloat const kBottomViewHeight = 49.0f;
 }
 
 - (void)answerButtonAction:(UIButton *)sender {
+    if ([UserManager sharedInstance].userModel.isAnonymous) {
+        [self showToast:@"请先登录"];
+        return;
+    }
     QAReplyQuestionViewController *vc = [[QAReplyQuestionViewController alloc]init];
     vc.questionID = self.item.askID;
     SKNavigationController *navVc = [[SKNavigationController alloc]initWithRootViewController:vc];

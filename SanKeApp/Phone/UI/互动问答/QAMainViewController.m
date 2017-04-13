@@ -48,6 +48,10 @@
 }
 
 - (void)naviRightAction {
+    if ([UserManager sharedInstance].userModel.isAnonymous) {
+        [self showToast:@"请先登录"];
+        return;
+    }
     QAAskQuestionViewController *vc = [[QAAskQuestionViewController alloc]init];
     SKNavigationController *navVc = [[SKNavigationController alloc]initWithRootViewController:vc];
     [self presentViewController:navVc animated:YES completion:nil];

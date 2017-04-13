@@ -169,6 +169,10 @@
 }
 
 - (void)handleReply {
+    if ([UserManager sharedInstance].userModel.isAnonymous) {
+        [self showToast:@"请先登录"];
+        return;
+    }
     QAReplyQuestionViewController *vc = [[QAReplyQuestionViewController alloc]init];
     vc.questionID = self.item.elementID;
     SKNavigationController *navVc = [[SKNavigationController alloc]initWithRootViewController:vc];
@@ -176,6 +180,10 @@
 }
 
 - (void)handleFavor {
+    if ([UserManager sharedInstance].userModel.isAnonymous) {
+        [self showToast:@"请先登录"];
+        return;
+    }
     if (self.detailCell.item.likeInfo.isLike.integerValue == 1) {
         [self showToast:@"您已经赞过了哦"];
         return;
@@ -193,6 +201,10 @@
 }
 
 - (void)handleQuestion {
+    if ([UserManager sharedInstance].userModel.isAnonymous) {
+        [self showToast:@"请先登录"];
+        return;
+    }
     QAAskQuestionViewController *vc = [[QAAskQuestionViewController alloc]init];
     SKNavigationController *navVc = [[SKNavigationController alloc]initWithRootViewController:vc];
     [self presentViewController:navVc animated:YES completion:nil];
