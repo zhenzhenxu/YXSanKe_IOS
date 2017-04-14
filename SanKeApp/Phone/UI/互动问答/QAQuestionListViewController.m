@@ -75,6 +75,11 @@
         [self startLoading];
         [self firstPageFetch];
     }];
+    [[[NSNotificationCenter defaultCenter]rac_addObserverForName:kQACreateReplySuccessNotification object:nil]subscribeNext:^(id x) {
+        STRONG_SELF
+        [self startLoading];
+        [self firstPageFetch];
+    }];
 }
 
 #pragma mark - tableview datasource

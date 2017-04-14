@@ -77,8 +77,8 @@ static CGFloat const kBottomViewHeight = 49.0f;
         [self.dataErrorView removeFromSuperview];
         
         self.item = item.data.ask;
-        self.tableView.hidden = NO;
         [self setupUI];
+        self.tableView.hidden = NO;
         
         QAReplyListFetcher *fetcher = [[QAReplyListFetcher alloc]init];
         fetcher.ask_id = self.item.askID;

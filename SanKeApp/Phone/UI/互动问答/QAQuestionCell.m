@@ -89,7 +89,12 @@
 - (void)setItem:(QAQuestionListRequestItem_Element *)item {
     _item = item;
     self.titleLabel.text = item.title;
-    self.descLabel.text = item.content;
+    
+    NSString *htmlString = item.content;
+    NSMutableAttributedString  *attrStr = [[NSMutableAttributedString alloc] initWithData:[htmlString dataUsingEncoding:NSUnicodeStringEncoding] options:@{ NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType } documentAttributes:nil error:nil];
+    self.descLabel.attributedText = attrStr;
+    self.descLabel.text = [self.descLabel.text stringByReplacingOccurrencesOfString:@" " withString:@""];
+//    self.descLabel.text = item.content;
     
     if (item.answerNum.integerValue >= 10000) {
         item.answerNum = @"9999+";
