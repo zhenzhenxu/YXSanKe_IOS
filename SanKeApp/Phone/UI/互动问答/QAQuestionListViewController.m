@@ -51,6 +51,7 @@
         NSString *questionID = dic[kQAQuestionIDKey];
         NSString *replyCount = dic[kQAQuestionReplyCountKey];
         NSString *browseCount = dic[kQAQuestionBrowseCountKey];
+        NSString *updateTime = dic[kQAQuestionUpdateTimeKey];
         NSMutableArray *indexPathArray = [NSMutableArray array];
         [self.dataArray enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
             QAQuestionListRequestItem_Element *item = (QAQuestionListRequestItem_Element *)obj;
@@ -60,6 +61,9 @@
                 }
                 if (!isEmpty(browseCount)) {
                     item.viewNum = browseCount;
+                }
+                if (!isEmpty(updateTime)) {
+                    item.updateTime = updateTime;
                 }
                 [indexPathArray addObject:[NSIndexPath indexPathForRow:idx inSection:0]];
             }

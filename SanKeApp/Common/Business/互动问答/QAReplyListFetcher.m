@@ -31,8 +31,16 @@
         self.lastID += item.data.answerPage.elements.count;
         BLOCK_EXEC(aCompleteBlock,item.data.answerPage.totalElements.integerValue,item.data.answerPage.elements,nil)
         
-        NSDictionary *infoDic = @{kQAQuestionIDKey:self.ask_id,
-                                  kQAQuestionReplyCountKey:item.data.answerPage.totalElements};
+        NSDictionary *infoDic;
+        if (item.data.answerPage.elements.count > 0) {
+          QAReplyListRequestItem_Element *element = item.data.answerPage.elements.firstObject;
+            infoDic = @{kQAQuestionIDKey:self.ask_id,
+                        kQAQuestionReplyCountKey:item.data.answerPage.totalElements,
+                        kQAQuestionUpdateTimeKey:element.updateTime};
+        }else {
+            infoDic = @{kQAQuestionIDKey:self.ask_id,
+                        kQAQuestionReplyCountKey:item.data.answerPage.totalElements};
+        }
         [[NSNotificationCenter defaultCenter]postNotificationName:kQAQuestionInfoUpdateNotification object:nil userInfo:infoDic];
     }];
 }

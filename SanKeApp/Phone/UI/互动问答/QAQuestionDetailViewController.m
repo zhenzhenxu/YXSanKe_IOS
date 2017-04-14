@@ -56,11 +56,9 @@ static CGFloat const kBottomViewHeight = 49.0f;
 }
 
 - (void)setupQuestionData{
-    [self startLoading];
     WEAK_SELF
     [QADataManager requestQuestionDetailWithID:self.askID completeBlock:^(QAQuestionDetailRequestItem *item, NSError *error) {
         STRONG_SELF
-        [self stopLoading];
         if (error) {
             if (error.code == ASIConnectionFailureErrorType || error.code == ASIRequestTimedOutErrorType) {//网络错误/请求超时
                 [self.contentView addSubview:self.errorView];
@@ -80,6 +78,7 @@ static CGFloat const kBottomViewHeight = 49.0f;
         
         self.item = item.data.ask;
         self.tableView.hidden = NO;
+        [self setupUI];
         
         QAReplyListFetcher *fetcher = [[QAReplyListFetcher alloc]init];
         fetcher.ask_id = self.item.askID;
@@ -89,8 +88,6 @@ static CGFloat const kBottomViewHeight = 49.0f;
         self.requestDelegate = self.dataFetcher;
         [self startLoading];
         [self firstPageFetch];
-        
-        [self setupUI];
     }];
 }
 
@@ -216,6 +213,7 @@ static CGFloat const kBottomViewHeight = 49.0f;
         NSString *questionID = dic[kQAQuestionIDKey];
         NSString *replyCount = dic[kQAQuestionReplyCountKey];
         NSString *browseCount = dic[kQAQuestionBrowseCountKey];
+        NSString *updateTime = dic[kQAQuestionUpdateTimeKey];
         if ([self.item.askID isEqualToString:questionID]) {
             if (!isEmpty(replyCount)) {
                 self.item.answerNum = replyCount;
@@ -223,7 +221,10 @@ static CGFloat const kBottomViewHeight = 49.0f;
             if (!isEmpty(browseCount)) {
                 self.item.viewNum = browseCount;
             }
-            [self.headerView updateWithReplyCount:replyCount browseCount:browseCount];
+            if (!isEmpty(updateTime)) {
+                self.item.updateTime = updateTime;
+            }
+            [self.headerView updateWithReplyCount:replyCount browseCount:browseCount updateTime:updateTime];
         }
     }];
     [[[NSNotificationCenter defaultCenter]rac_addObserverForName:kQACreateReplySuccessNotification object:nil]subscribeNext:^(id x) {

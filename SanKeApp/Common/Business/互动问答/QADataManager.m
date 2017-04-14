@@ -16,6 +16,7 @@ NSString * const kQACreateReplySuccessNotification = @"kQACreateReplySuccessNoti
 NSString * const kQAQuestionIDKey = @"kQAQuestionIDKey";
 NSString * const kQAQuestionReplyCountKey = @"kQAQuestionReplyCountKey";
 NSString * const kQAQuestionBrowseCountKey = @"kQAQuestionBrowseCountKey";
+NSString * const kQAQuestionUpdateTimeKey = @"kQAQuestionUpdateTimeKey";
 
 NSString * const kQAReplyIDKey = @"kQAReplyIDKey";
 NSString * const kQAReplyFavorCountKey = @"kQAReplyFavorCountKey";

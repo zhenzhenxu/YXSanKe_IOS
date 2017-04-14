@@ -20,6 +20,7 @@ extern NSString * const kQACreateReplySuccessNotification; // 发布回答成功
 extern NSString * const kQAQuestionIDKey;
 extern NSString * const kQAQuestionReplyCountKey;
 extern NSString * const kQAQuestionBrowseCountKey;
+extern NSString * const kQAQuestionUpdateTimeKey;
 
 // 回复信息通知的key
 extern NSString * const kQAReplyIDKey;

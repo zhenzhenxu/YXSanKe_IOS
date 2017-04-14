@@ -13,6 +13,6 @@
 @property (nonatomic, strong) QAQuestionDetailRequestItem_Ask *item;
 @property (nonatomic, copy) void(^AttachmentClickAction) ();
 
-- (void)updateWithReplyCount:(NSString *)replyCount browseCount:(NSString *)browseCount;
+- (void)updateWithReplyCount:(NSString *)replyCount browseCount:(NSString *)browseCount updateTime:(NSString *)updateTime;
 + (CGFloat)heightForWidth:(CGFloat)width item:(QAQuestionDetailRequestItem_Ask *)item;
 @end
