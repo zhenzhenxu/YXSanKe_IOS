@@ -210,7 +210,7 @@ typedef NS_ENUM(NSUInteger, QAAttachmentType) {
         }];
     }else {
         QAQuestionDetailRequestItem_Attachment *attach = self.item.attachmentList.firstObject;
-        NSString *title = [NSString stringWithFormat:@"@%@-%@",attach.resType,attach.resName];
+        NSString *title = [NSString stringWithFormat:@"%@",attach.resName];
         self.attachmentButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
         self.attachmentButton.backgroundColor = [UIColor clearColor];
         [self.attachmentButton setTitle:title forState:UIControlStateNormal];
