@@ -126,8 +126,9 @@ NSString *const kUpdateUserNameSuccessNotification = @"kUpdateUserNameSuccessNot
         }
         HttpBaseRequestItem *item = retItem;
         UserModel *model = [UserModel modelFromRawData:item.info];
+        UserModel *oldModel = [UserManager sharedInstance].userModel;
         [UserManager sharedInstance].userModel = model;
-        if (![UserManager sharedInstance].loginStatus) {
+        if (!oldModel.isTaged && model.isTaged) {
             [UserManager sharedInstance].loginStatus = YES;
         }
         BLOCK_EXEC(completeBlock,nil);
