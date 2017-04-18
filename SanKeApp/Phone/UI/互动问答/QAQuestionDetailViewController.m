@@ -71,6 +71,7 @@ static CGFloat const kBottomViewHeight = 49.0f;
                     make.edges.mas_equalTo(0);
                 }];
             }
+            [self stopLoading];
             return;
         }
         [self.errorView removeFromSuperview];

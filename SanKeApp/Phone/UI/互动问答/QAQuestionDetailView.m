@@ -69,6 +69,7 @@ typedef NS_ENUM(NSUInteger, QAAttachmentType) {
     self.titleLabel = [[UILabel alloc]init];
     self.titleLabel.font = [UIFont boldSystemFontOfSize:14];
     self.titleLabel.textColor = [UIColor colorWithHexString:@"333333"];
+    self.titleLabel.numberOfLines = 0;
     [self.containerView addSubview:self.titleLabel];
     [self.titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(10);
@@ -178,7 +179,7 @@ typedef NS_ENUM(NSUInteger, QAAttachmentType) {
         type = QAAttachmentType_None;
     }else {
         QAQuestionDetailRequestItem_Attachment *attach = item.attachmentList.firstObject;
-        YXFileType fileType = [QAFileTypeMappingTable fileTypeWithString:attach.resType];
+        YXFileType fileType = [QAFileTypeMappingTable fileTypeWithString:attach.fileType];
         if (fileType == YXFileTypePhoto) {
             type = QAAttachmentType_Image;
         }else {

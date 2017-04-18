@@ -37,7 +37,7 @@
     UIView *headerView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 100, 10)];
     self.tableView.tableHeaderView = headerView;
     self.tableView.backgroundColor = [UIColor clearColor];
-    self.tableView.rowHeight = 112;
+    self.tableView.rowHeight = 112 + 16;
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     [self.tableView registerClass:[QAQuestionCell class] forCellReuseIdentifier:@"QAQuestionCell"];
 }

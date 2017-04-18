@@ -449,6 +449,13 @@
     if ([name isEqualToString:self.userModel.name]) {
         return;
     }
+    if (isEmpty(name)) {
+        [self.view endEditing:YES];
+        [self showToast:@"用户名不能为空"];
+        UserNameTableViewCell *cell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
+        [cell configTitle:@"用户名:"content:self.userModel.name];
+        return;
+    }
     [self startLoading];
     WEAK_SELF
     [MineDataManager updateUserName:name completeBlock:^(NSError *error) {

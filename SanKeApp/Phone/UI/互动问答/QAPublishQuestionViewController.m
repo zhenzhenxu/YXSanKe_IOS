@@ -76,11 +76,13 @@ static CGFloat const kTextViewHeight = 130.0f;
     [customView setCameraBlock:^{
         STRONG_SELF
         DDLogDebug(@"click cameraButton");
+        [self.view endEditing:YES];
         [self pickImageWithSourceType:UIImagePickerControllerSourceTypeCamera];
     }];
     [customView setAlbumBlock:^{
         STRONG_SELF
         DDLogDebug(@"click albumButton");
+        [self.view endEditing:YES];
         [self pickImageWithSourceType:UIImagePickerControllerSourceTypePhotoLibrary];
         
     }];
