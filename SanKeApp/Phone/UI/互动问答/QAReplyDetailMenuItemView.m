@@ -53,4 +53,12 @@
     BLOCK_EXEC(self.ActionBlock)
 }
 
+- (void)setupAnimation {
+    self.menuButton.imageView.transform = CGAffineTransformIdentity;
+    [UIView animateKeyframesWithDuration:0.5 delay:0 options:0 animations:^{
+        self.menuButton.imageView.transform = CGAffineTransformMakeScale(1.1, 1.1);
+    } completion:^(BOOL finished) {
+        self.menuButton.imageView.transform = CGAffineTransformMakeScale(1.0, 1.0);
+    }];
+}
 @end

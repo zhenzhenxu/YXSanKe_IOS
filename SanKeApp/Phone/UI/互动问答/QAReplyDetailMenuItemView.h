@@ -13,4 +13,5 @@
 @property (nonatomic, strong) NSString *title;
 @property (nonatomic, copy) void(^ActionBlock) ();
 - (void)updateWithImage:(UIImage *)image highlightImage:(UIImage *)highlightImage title:(NSString *)title;
+- (void)setupAnimation;
 @end

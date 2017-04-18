@@ -17,6 +17,7 @@
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) QAReplyDetailCell *detailCell;
 @property (nonatomic, strong) QAShareView *shareView;
+@property (nonatomic, strong) QAReplyDetailMenuItemView *favorMenu;
 @end
 
 @implementation QAReplyDetailViewController
@@ -135,6 +136,11 @@
         STRONG_SELF
         [self handleFavor];
     }];
+    if (self.item.likeInfo.isLike.integerValue == 1) {
+        [favorMenu updateWithImage:[UIImage imageNamed:@"喜欢-点击"] highlightImage:[UIImage imageNamed:@"喜欢-点击"] title:@"喜欢"];
+    }
+    self.favorMenu = favorMenu;
+    
     QAReplyDetailMenuItemView *questionMenu = [self menuViewWithTitle:@"我要提问" image:@"我要提问" actionBlock:^{
         STRONG_SELF
         [self handleQuestion];
@@ -189,11 +195,15 @@
         return;
     }
     [self startLoading];
+    [self.favorMenu updateWithImage:[UIImage imageNamed:@"喜欢-点击"] highlightImage:[UIImage imageNamed:@"喜欢-点击"] title:@"喜欢"];
+    [self.favorMenu setupAnimation];
+
     WEAK_SELF
     [QADataManager requestReplyFavorWithID:self.item.elementID completeBlock:^(QAReplyFavorRequestItem *item, NSError *error) {
         STRONG_SELF
         [self stopLoading];
         if (error) {
+            [self.favorMenu updateWithImage:[UIImage imageNamed:@"喜欢"] highlightImage:[UIImage imageNamed:@"喜欢"] title:@"喜欢"];
             [self showToast:error.localizedDescription];
             return;
         }
