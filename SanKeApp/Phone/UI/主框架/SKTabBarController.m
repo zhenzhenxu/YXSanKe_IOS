@@ -7,15 +7,18 @@
 //
 
 #import "SKTabBarController.h"
+#import "TeachingMainViewController.h"
 
-@interface SKTabBarController ()
+@interface SKTabBarController ()<UITabBarControllerDelegate>
 
+@property (nonatomic, assign) NSUInteger oldSelectedIndex;
 @end
 
 @implementation SKTabBarController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.delegate = self;
     // Do any additional setup after loading the view.
 }
 
@@ -46,4 +49,18 @@
     return [[self topViewController] prefersStatusBarHidden];
 }
 
+#pragma mark - UITabBarControllerDelegate
+- (BOOL)tabBarController:(UITabBarController *)tabBarController shouldSelectViewController:(UIViewController *)viewController {
+    UIViewController *vc = (SKNavigationController *)viewController.childViewControllers.firstObject;
+    if ([vc isKindOfClass:[TeachingMainViewController class]]) {
+        BaseViewController *oldVc = self.viewControllers[self.oldSelectedIndex].childViewControllers.firstObject;
+        [oldVc showToast:@"该功能暂未开放"];
+        return NO;
+    }
+    return YES;
+}
+
+- (void)tabBarController:(UITabBarController *)tabBarController didSelectViewController:(UIViewController *)viewController {
+    self.oldSelectedIndex = self.selectedIndex;
+}
 @end
