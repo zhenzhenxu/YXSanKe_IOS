@@ -79,7 +79,7 @@
     [self.shareView setShareActionBlock:^(YXShareType type) {
         STRONG_SELF
         NSString *url = [NSString stringWithFormat:@"http://main.zgjiaoyan.com/hddy/view?id=%@&biz_id=%@_%@_720175",self.questionItem.askID,[UserManager sharedInstance].userModel.stageID,[UserManager sharedInstance].userModel.subjectID];
-        [[YXShareManager shareManager]yx_shareMessageWithImageIcon:nil title:self.questionItem.title message:self.questionItem.content url:url shareType:type];
+        [[YXShareManager shareManager]yx_shareMessageWithImageIcon:[UIImage imageNamed:@"logo"] title:self.questionItem.title message:@"深度解读部编三科，互动答疑专业解答" url:url shareType:type];
     }];
     [self.shareView setCancelActionBlock:^{
         STRONG_SELF
