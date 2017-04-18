@@ -111,7 +111,7 @@ typedef NS_ENUM(NSUInteger, QAAttachmentType) {
     [self.replyCountLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(replyImageView.mas_right).mas_offset(5);
         make.centerY.mas_equalTo(replyImageView.mas_centerY);
-        make.width.mas_equalTo(45);
+        make.width.mas_equalTo(40);
     }];
     
     UIImageView *browseImageView = [[UIImageView alloc]init];
