@@ -86,8 +86,8 @@ static CGFloat const kTextViewHeight = 130.0f;
         [self pickImageWithSourceType:UIImagePickerControllerSourceTypePhotoLibrary];
         
     }];
-    self.textView.inputAccessoryView = customView;
-    self.customView = customView;
+//    self.textView.inputAccessoryView = customView;//4.20提问上传图片的功能暂时屏蔽掉
+//    self.customView = customView;
 }
 
 - (void)pickImageWithSourceType:(UIImagePickerControllerSourceType)type {
