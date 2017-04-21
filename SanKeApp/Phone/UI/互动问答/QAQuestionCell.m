@@ -91,11 +91,7 @@
     _item = item;
     self.titleLabel.text = item.title;
     
-    NSString *htmlString = item.content;
-    NSMutableAttributedString  *attrStr = [[NSMutableAttributedString alloc] initWithData:[htmlString dataUsingEncoding:NSUnicodeStringEncoding] options:@{ NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType } documentAttributes:nil error:nil];
-    self.descLabel.attributedText = attrStr;
-    self.descLabel.text = [self.descLabel.text stringByReplacingOccurrencesOfString:@" " withString:@""];
-//    self.descLabel.text = item.content;
+    self.descLabel.text = [item.content stringByReplacingOccurrencesOfString:@" " withString:@""];
     
     if (item.answerNum.integerValue >= 10000) {
         item.answerNum = @"9999+";
