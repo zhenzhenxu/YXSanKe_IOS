@@ -81,7 +81,7 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
+//    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
     self.qlNavigationBar = [self getNavigationBarFromView:self.view];
     self.overlayNavigationBar = [[UINavigationBar alloc] initWithFrame:[self navigationBarFrameForOrientation:[[UIApplication sharedApplication] statusBarOrientation]]];
     self.overlayNavigationBar.autoresizingMask = UIViewAutoresizingFlexibleWidth;
@@ -105,6 +105,14 @@
     self.overlayNavigationItem.rightBarButtonItems = [NavigationBarController barButtonItemsForView:rightButton];
     
     [self.overlayNavigationBar pushNavigationItem:self.overlayNavigationItem animated:NO];
+    UIView *barBgView = [[UIView alloc]init];
+    barBgView.backgroundColor = [UIColor colorWithHexString:@"4691a6"];
+    [self.overlayNavigationBar addSubview:barBgView];
+    [barBgView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.right.mas_equalTo(0);
+        make.top.mas_equalTo(0);
+        make.height.mas_equalTo(20);
+    }];
 //     [self.overlayNavigationBar setBackgroundImage:[UIImage yx_imageWithColor:[UIColor blueColor]] forBarMetrics:UIBarMetricsDefault];
 }
 
