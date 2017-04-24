@@ -191,7 +191,7 @@ typedef NS_ENUM(NSUInteger, QAAttachmentType) {
         [self.attachmentButton removeFromSuperview];
     }else if (type == QAAttachmentType_Image) {
         QAQuestionDetailRequestItem_Attachment *attach = self.item.attachmentList.firstObject;
-        [self.attachmentButton sd_setImageWithURL:[NSURL URLWithString:attach.thumbnail] forState:UIControlStateNormal placeholderImage:nil];
+        [self.attachmentButton sd_setImageWithURL:[NSURL URLWithString:attach.thumbnail] forState:UIControlStateNormal placeholderImage:[UIImage yx_imageWithColor:[UIColor colorWithHexString:@"f2f2f2"]]];
         self.attachmentButton.imageView.contentMode = UIViewContentModeScaleAspectFill;
         self.attachmentButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentFill;
         self.attachmentButton.contentVerticalAlignment = UIControlContentHorizontalAlignmentFill;
