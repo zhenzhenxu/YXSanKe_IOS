@@ -170,7 +170,7 @@
 }
 
 - (void)publishAnswer {
-    if (isEmpty(self.textView.text)) {
+    if (![self.textView.text yx_isValidString]) {
         [self showToast:@"内容不能为空"];
         return;
     }
