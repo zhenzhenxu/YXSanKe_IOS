@@ -78,7 +78,7 @@ typedef NS_ENUM(NSUInteger, QAAttachmentType) {
     }];
     
     self.descLabel = [[UILabel alloc]init];
-    self.descLabel.font = [UIFont systemFontOfSize:12];
+    self.descLabel.font = [UIFont systemFontOfSize:14];
     self.descLabel.textColor = [UIColor colorWithHexString:@"333333"];
     self.descLabel.numberOfLines = 0;
     [self.containerView addSubview:self.descLabel];
