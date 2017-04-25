@@ -35,8 +35,9 @@
 
 @implementation YXQLPreviewController
 
-- (void)dealloc
-{
+- (void)viewWillDisappear:(BOOL)animated {
+    
+    [super viewWillDisappear:animated];
     [self.qlNavigationBar removeObserver:self forKeyPath:@"hidden" context:nil];
 }
 
