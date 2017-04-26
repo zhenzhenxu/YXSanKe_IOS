@@ -26,7 +26,7 @@
     // Do any additional setup after loading the view.
     [self setupTitle];
     [self setupUI];
-    [self setupRightWithTitle:@"提问"];
+    [self setupRightWithTitle:@"我要提问"];
     WEAK_SELF
     [[[NSNotificationCenter defaultCenter]rac_addObserverForName:kStageSubjectDidChangeNotification object:nil]subscribeNext:^(id x) {
         STRONG_SELF
