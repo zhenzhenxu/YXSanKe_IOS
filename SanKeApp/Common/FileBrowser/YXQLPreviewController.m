@@ -31,14 +31,13 @@
 @property (nonatomic, strong) UINavigationItem *overlayNavigationItem;
 @property (nonatomic, strong) YXQLPreviewItem *previewItem;
 @property (nonatomic, strong) NSDate *beginDate;
+
 @end
 
 @implementation YXQLPreviewController
 
-- (void)viewWillDisappear:(BOOL)animated {
-    
-    [super viewWillDisappear:animated];
-    [self.qlNavigationBar removeObserver:self forKeyPath:@"hidden" context:nil];
+- (void)dealloc {
+     [self.qlNavigationBar removeObserver:self forKeyPath:@"hidden" context:nil];
 }
 
 - (instancetype)init{
@@ -82,6 +81,9 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    if (self.qlNavigationBar) {
+        return;
+    }
 //    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
     self.qlNavigationBar = [self getNavigationBarFromView:self.view];
     self.overlayNavigationBar = [[UINavigationBar alloc] initWithFrame:[self navigationBarFrameForOrientation:[[UIApplication sharedApplication] statusBarOrientation]]];
