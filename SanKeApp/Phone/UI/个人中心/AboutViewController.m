@@ -26,7 +26,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = @"关于我们";
-    self.phoneString = @"010-8235169";
+    self.phoneString = @"010-82235169";
     [self setupUI];
     [self setupLayout];
     // Do any additional setup after loading the view.
