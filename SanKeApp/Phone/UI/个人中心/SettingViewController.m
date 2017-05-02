@@ -273,7 +273,7 @@
     if (indexPath.section == 0){
         if (![UserManager sharedInstance].userModel.isAnonymous) {
             UserNameTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"UserNameTableViewCell" forIndexPath:indexPath];
-            [cell configTitle:@"用户名:" content:self.userModel.name];
+            [cell configTitle:@"用户名" content:self.userModel.name];
             WEAK_SELF
             [cell setClickBlock:^(UITextField *nameTextField) {
                 STRONG_SELF
@@ -453,7 +453,7 @@
         [self.view endEditing:YES];
         [self showToast:@"用户名不能为空"];
         UserNameTableViewCell *cell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
-        [cell configTitle:@"用户名:"content:self.userModel.name];
+        [cell configTitle:@"用户名"content:self.userModel.name];
         return;
     }
     [self startLoading];
