@@ -112,7 +112,7 @@
         NSString *phoneString = [NSString stringWithFormat:@"客服电话  %@",self.phoneString];
         NSMutableAttributedString *attributeString = [[NSMutableAttributedString alloc] initWithString:phoneString];
         [attributeString addAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:14.0f],NSForegroundColorAttributeName:[UIColor colorWithHexString:@"333333"]} range:NSMakeRange(0, 4)];
-        [attributeString addAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:14.0f],NSForegroundColorAttributeName:[UIColor colorWithHexString:@"4691a6"]} range:NSMakeRange(6, 11)];
+        [attributeString addAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:14.0f],NSForegroundColorAttributeName:[UIColor colorWithHexString:@"4691a6"]} range:NSMakeRange(6, 12)];
         cell.textLabel.textColor = [UIColor colorWithHexString:@"334466"];
         cell.textLabel.font = [UIFont systemFontOfSize:14.0f];
         cell.textLabel.attributedText = attributeString;
