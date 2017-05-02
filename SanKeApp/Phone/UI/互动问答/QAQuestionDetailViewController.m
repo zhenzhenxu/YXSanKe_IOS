@@ -38,9 +38,6 @@ static CGFloat const kBottomViewHeight = 49.0f;
     self.tableView.hidden = YES;
     [self setupTitle];
     [self setupObserver];
-    if ([YXShareManager isQQSupport]||[YXShareManager isWXAppSupport]) {
-        [self setupRightWithImageNamed:@"分享" highlightImageNamed:nil];
-    }
 }
 
 - (void)firstPageFetch {
@@ -93,6 +90,10 @@ static CGFloat const kBottomViewHeight = 49.0f;
 }
 
 - (void)setupUI {
+    if ([YXShareManager isQQSupport]||[YXShareManager isWXAppSupport]) {
+        [self setupRightWithImageNamed:@"分享" highlightImageNamed:nil];
+    }
+    
     self.headerView = [[QAQuestionDetailView alloc]init];
     self.headerView.item = self.item;
     WEAK_SELF
