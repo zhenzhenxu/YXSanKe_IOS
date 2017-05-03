@@ -95,7 +95,6 @@
     self.tableView.dataSource = self;
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.tableView.backgroundColor = [UIColor whiteColor];
-    self.tableView.allowsSelection = NO;
     [self.tableView registerClass:[UserInfoTableViewCell class] forCellReuseIdentifier:@"UserInfoTableViewCell"];
     [self.tableView registerClass:[UserNameTableViewCell class] forCellReuseIdentifier:@"UserNameTableViewCell"];
     [self.view addSubview:self.tableView];

@@ -80,10 +80,7 @@
 - (void)setItem:(QAReplyListRequestItem_Element *)item {
     _item = item;
     self.nameLabel.text = item.showUserName;
-//    self.commentLabel.text = item.answer;
-    NSString *htmlString = item.answer;
-    NSMutableAttributedString  *attrStr = [[NSMutableAttributedString alloc] initWithData:[htmlString dataUsingEncoding:NSUnicodeStringEncoding] options:@{ NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType } documentAttributes:nil error:nil];
-    self.commentLabel.attributedText = attrStr;
+    self.commentLabel.text = item.answer;
     
     if (item.likeInfo.isLike.integerValue == 0) {
         self.favorImageView.image = [UIImage imageNamed:@"心"];

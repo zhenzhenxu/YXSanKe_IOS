@@ -29,6 +29,7 @@
     [self.nameLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.top.mas_equalTo(10);
         make.right.mas_equalTo(-10);
+        make.height.mas_greaterThanOrEqualTo(12);
     }];
     self.commentLabel = [[UILabel alloc]init];
     self.commentLabel.font = [UIFont systemFontOfSize:12];
@@ -70,7 +71,7 @@
 - (void)setItem:(QAReplyListRequestItem_Element *)item {
     _item = item;
     self.nameLabel.text = item.showUserName;
-    self.commentLabel.text = item.answer;
+    self.commentLabel.text = [item.answer stringByReplacingOccurrencesOfString:@" " withString:@""];
     
     if (item.likeInfo.isLike.integerValue == 0) {
         self.favorImageView.image = [UIImage imageNamed:@"心"];
