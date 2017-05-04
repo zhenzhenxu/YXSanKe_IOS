@@ -14,6 +14,7 @@
 @property (nonatomic, strong) UILabel *favorLabel;
 @property (nonatomic, strong) UILabel *timeLabel;
 @property (nonatomic, strong) UIImageView *favorImageView;
+@property (nonatomic, copy) NSString *oldAnswer;
 @end
 
 @implementation QAReplyCell
@@ -71,7 +72,13 @@
 - (void)setItem:(QAReplyListRequestItem_Element *)item {
     _item = item;
     self.nameLabel.text = item.showUserName;
-    self.commentLabel.text = [item.answer stringByReplacingOccurrencesOfString:@" " withString:@""];
+    
+    if (![item.answer isEqualToString:self.oldAnswer]) {
+        NSMutableAttributedString  *attrStr = [[NSMutableAttributedString alloc] initWithData:[item.answer ?:@"" dataUsingEncoding:NSUnicodeStringEncoding] options:@{ NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType } documentAttributes:nil error:nil];
+        self.commentLabel.attributedText = attrStr;
+        self.commentLabel.text = [self.commentLabel.text stringByReplacingOccurrencesOfString:@" " withString:@""];
+        self.oldAnswer = item.answer;
+    }
     
     if (item.likeInfo.isLike.integerValue == 0) {
         self.favorImageView.image = [UIImage imageNamed:@"心"];

@@ -16,10 +16,7 @@
 + (JSONKeyMapper *)keyMapper {
     return [[JSONKeyMapper alloc] initWithDictionary:@{@"id":@"elementID"}];
 }
-- (void)setContent:(NSString<Optional> *)content {
-    NSMutableAttributedString  *attrStr = [[NSMutableAttributedString alloc] initWithData:[content?:@"" dataUsingEncoding:NSUnicodeStringEncoding] options:@{ NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType } documentAttributes:nil error:nil];
-    _content = attrStr.string;
-}
+
 @end
 
 @implementation QAQuestionListRequestItem_AskPage

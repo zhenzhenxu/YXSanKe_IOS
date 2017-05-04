@@ -17,10 +17,6 @@
     return [[JSONKeyMapper alloc] initWithDictionary:@{@"id":@"elementID"}];
 }
 
-- (void)setAnswer:(NSString<Optional> *)answer {
-    NSMutableAttributedString  *attrStr = [[NSMutableAttributedString alloc] initWithData:[answer dataUsingEncoding:NSUnicodeStringEncoding] options:@{ NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType } documentAttributes:nil error:nil];
-    _answer = attrStr.string;
-}
 @end
 
 @implementation QAReplyListRequestItem_AnswerPage

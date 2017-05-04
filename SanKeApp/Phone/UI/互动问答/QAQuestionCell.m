@@ -14,6 +14,7 @@
 @property (nonatomic, strong) UILabel *replyCountLabel;
 @property (nonatomic, strong) UILabel *browseCountLabel;
 @property (nonatomic, strong) UILabel *timeLabel;
+@property (nonatomic, copy) NSString *oldContent;
 @end
 
 @implementation QAQuestionCell
@@ -91,7 +92,12 @@
     _item = item;
     self.titleLabel.text = item.title;
     
-    self.descLabel.text = [item.content stringByReplacingOccurrencesOfString:@" " withString:@""];
+    if (![item.content isEqualToString:self.oldContent]) {
+        NSMutableAttributedString  *attrStr = [[NSMutableAttributedString alloc] initWithData:[item.content?:@"" dataUsingEncoding:NSUnicodeStringEncoding] options:@{ NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType } documentAttributes:nil error:nil];
+        self.descLabel.attributedText = attrStr;
+        self.descLabel.text = [self.descLabel.text stringByReplacingOccurrencesOfString:@" " withString:@""];
+        self.oldContent = item.content;
+    }
     
     if (item.answerNum.integerValue >= 10000) {
         item.answerNum = @"9999+";
