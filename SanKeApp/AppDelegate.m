@@ -19,15 +19,43 @@
 #import "YXSSOAuthManager.h"
 #import "PersonalCenterViewController.h"
 
+#import "StepOneRequest.h"
+#import "StepTwoRequest.h"
 @interface AppDelegate ()
 @property (nonatomic, unsafe_unretained) UIBackgroundTaskIdentifier backgroundTaskIdentifier;
 @property (nonatomic, strong) NSTimer *backgroundTimer;
 @end
 
-@implementation AppDelegate
+@implementation AppDelegate {
+    StepOneRequest *_oneRequest;
+    StepTwoRequest *_twoRequest;
+}
 
+- (void)testUpload {
+    NSString *filePath = [[NSBundle mainBundle] pathForResource:@"readme_helloworld" ofType:@"pdf"];
+    NSData *data = [NSData dataWithContentsOfFile:filePath];
+    NSString *sizeStr = [NSString stringWithFormat:@"%@", @(data.length)];
+    NSString *md5 = [GlobalUtils fileMD5:filePath];
+    
+    _oneRequest = [[StepOneRequest alloc] init];
+    _oneRequest.size = sizeStr;
+    _oneRequest.chunkSize = sizeStr;
+    _oneRequest.md5 = md5;
+    _oneRequest.data = data;
+    [_oneRequest startRequestWithRetClass:[NSObject class]
+                         andCompleteBlock:^(id retItem, NSError *error, BOOL isMock) {
+                             _twoRequest = [[StepTwoRequest alloc] init];
+                             _twoRequest.md5 = md5;
+                             [_twoRequest startRequestWithRetClass:[NSObject class]
+                                                  andCompleteBlock:^(id retItem, NSError *error, BOOL isMock) {
+                                                      
+                                                  }];
+                         }];
+}
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    [self testUpload];
+    
     // Override point for customization after application launch.
     [TalkingData setExceptionReportEnabled:YES];
     [TalkingData setSignalReportEnabled:YES];

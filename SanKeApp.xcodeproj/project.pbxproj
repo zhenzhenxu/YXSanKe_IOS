@@ -275,6 +275,9 @@
 		E996308D1E9CB69000C4BF62 /* PersonalHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = E996308C1E9CB69000C4BF62 /* PersonalHeaderView.m */; };
 		E99630901E9CC2F000C4BF62 /* UserInfoHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = E996308F1E9CC2F000C4BF62 /* UserInfoHeaderView.m */; };
 		E9F4541C1E31B18D00860DC2 /* TouristLoginRequest.json in Resources */ = {isa = PBXBuildFile; fileRef = E9F4541B1E31B18D00860DC2 /* TouristLoginRequest.json */; };
+		F72118561EC01E8800B2D1BE /* StepOneRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = F72118551EC01E8800B2D1BE /* StepOneRequest.m */; };
+		F721185B1EC021E900B2D1BE /* readme_helloworld.pdf in Resources */ = {isa = PBXBuildFile; fileRef = F721185A1EC021E900B2D1BE /* readme_helloworld.pdf */; };
+		F721185E1EC03B9400B2D1BE /* StepTwoRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = F721185D1EC03B9400B2D1BE /* StepTwoRequest.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -806,6 +809,11 @@
 		E996308E1E9CC2F000C4BF62 /* UserInfoHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserInfoHeaderView.h; sourceTree = "<group>"; };
 		E996308F1E9CC2F000C4BF62 /* UserInfoHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserInfoHeaderView.m; sourceTree = "<group>"; };
 		E9F4541B1E31B18D00860DC2 /* TouristLoginRequest.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = TouristLoginRequest.json; sourceTree = "<group>"; };
+		F72118541EC01E8800B2D1BE /* StepOneRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = StepOneRequest.h; path = SanKeApp/UploadDemoCode/StepOneRequest.h; sourceTree = "<group>"; };
+		F72118551EC01E8800B2D1BE /* StepOneRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = StepOneRequest.m; path = SanKeApp/UploadDemoCode/StepOneRequest.m; sourceTree = "<group>"; };
+		F721185A1EC021E900B2D1BE /* readme_helloworld.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = readme_helloworld.pdf; sourceTree = "<group>"; };
+		F721185C1EC03B9400B2D1BE /* StepTwoRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = StepTwoRequest.h; path = SanKeApp/UploadDemoCode/StepTwoRequest.h; sourceTree = "<group>"; };
+		F721185D1EC03B9400B2D1BE /* StepTwoRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = StepTwoRequest.m; path = SanKeApp/UploadDemoCode/StepTwoRequest.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -943,6 +951,7 @@
 		7C1A5E971E14F08700832DED = {
 			isa = PBXGroup;
 			children = (
+				F72118531EC01E1E00B2D1BE /* UploadDemoCode */,
 				7C1A5EEA1E15090B00832DED /* Common */,
 				7C1A5ED61E14FF2500832DED /* Phone */,
 				7C1A5EA61E14F08700832DED /* AppDelegate.h */,
@@ -1995,6 +2004,18 @@
 			name = Share;
 			sourceTree = "<group>";
 		};
+		F72118531EC01E1E00B2D1BE /* UploadDemoCode */ = {
+			isa = PBXGroup;
+			children = (
+				F721185A1EC021E900B2D1BE /* readme_helloworld.pdf */,
+				F72118541EC01E8800B2D1BE /* StepOneRequest.h */,
+				F72118551EC01E8800B2D1BE /* StepOneRequest.m */,
+				F721185C1EC03B9400B2D1BE /* StepTwoRequest.h */,
+				F721185D1EC03B9400B2D1BE /* StepTwoRequest.m */,
+			);
+			name = UploadDemoCode;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -2135,6 +2156,7 @@
 				7C1A5F851E1513D600832DED /* MJRefresh.bundle in Resources */,
 				7C1A5EDC1E15035100832DED /* Empty.xib in Resources */,
 				E902E6CD1E2C9FD5009441B3 /* stageAndSubject.json in Resources */,
+				F721185B1EC021E900B2D1BE /* readme_helloworld.pdf in Resources */,
 				923A4E351E2CAE1C001059E2 /* channelTab_mock.json in Resources */,
 				30E70FC01E3482E8001B9BA4 /* ChannelTabFilterRequest.json in Resources */,
 			);
@@ -2243,6 +2265,7 @@
 				7C1A5FC51E15214A00832DED /* YXShowWebMenuTableViewCell.m in Sources */,
 				7C1A5FAF1E151D4E00832DED /* UIViewController+YXAddtion.m in Sources */,
 				7C1A5F871E1513D600832DED /* MJRefreshConst.m in Sources */,
+				F721185E1EC03B9400B2D1BE /* StepTwoRequest.m in Sources */,
 				7C1A5F561E15129600832DED /* YXQLPreviewController.m in Sources */,
 				7C1809351E25D4A900B71863 /* StageSubjectHeaderView.m in Sources */,
 				E9230C4F1E3060FE00AC6617 /* MineUserModel.m in Sources */,
@@ -2366,6 +2389,7 @@
 				7CC9ADA81E25D12A00A392EA /* StageSubjectSelectViewController.m in Sources */,
 				7C1A5F211E1510FA00832DED /* HttpBaseRequest.m in Sources */,
 				923A4E391E2CB310001059E2 /* CourseVideoFetch.m in Sources */,
+				F72118561EC01E8800B2D1BE /* StepOneRequest.m in Sources */,
 				7C1A5F051E150F4B00832DED /* LePlayerView.m in Sources */,
 				30C48A921E52EACC00CCDBBE /* LogRecordEntity.m in Sources */,
 				E9355B3B1E6952F1007AE9F0 /* VerifyCodeInputView.m in Sources */,

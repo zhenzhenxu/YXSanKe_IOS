@@ -16,6 +16,7 @@
 + (void)clearCore;
 
 + (void)deliverSelector:(SEL)selector fromObject:(id)fromObj toObject:(id)toObj;
++ (NSString*)fileMD5:(NSString*)path;
 @end
 
 #ifdef __cplusplus
