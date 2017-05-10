@@ -243,6 +243,11 @@
 		E9355B9B1E7153F7007AE9F0 /* UpdateInfoRequest.json in Resources */ = {isa = PBXBuildFile; fileRef = E9355B9A1E7153F7007AE9F0 /* UpdateInfoRequest.json */; };
 		E9355B9E1E7159AC007AE9F0 /* ChangePasswordRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = E9355B9D1E7159AC007AE9F0 /* ChangePasswordRequest.m */; };
 		E94423C01E767A1500F8F795 /* HistoryDeleteRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = E94423BF1E767A1500F8F795 /* HistoryDeleteRequest.m */; };
+		E94976FA1EC1A34200A4642A /* TeachingMainCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E94976F91EC1A34200A4642A /* TeachingMainCell.m */; };
+		E94976FD1EC1B4A000A4642A /* TeachingFilterView.m in Sources */ = {isa = PBXBuildFile; fileRef = E94976FC1EC1B4A000A4642A /* TeachingFilterView.m */; };
+		E94977001EC1B4CC00A4642A /* TeachingFilterCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E94976FF1EC1B4CC00A4642A /* TeachingFilterCell.m */; };
+		E94977031EC1B53E00A4642A /* TeachingFilterBackgroundView.m in Sources */ = {isa = PBXBuildFile; fileRef = E94977021EC1B53E00A4642A /* TeachingFilterBackgroundView.m */; };
+		E949770C1EC2F37900A4642A /* TeachingFiterModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E949770B1EC2F37900A4642A /* TeachingFiterModel.m */; };
 		E96EB7311E8A16F40061D6C9 /* UpdateUserNameRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = E96EB7301E8A16F40061D6C9 /* UpdateUserNameRequest.m */; };
 		E96EB7341E8A17370061D6C9 /* PersonalCenterModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E96EB7331E8A17370061D6C9 /* PersonalCenterModel.m */; };
 		E96EB7401E8A79FD0061D6C9 /* AboutHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = E96EB73D1E8A79FD0061D6C9 /* AboutHeaderView.m */; };
@@ -748,6 +753,16 @@
 		E9355B9D1E7159AC007AE9F0 /* ChangePasswordRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChangePasswordRequest.m; sourceTree = "<group>"; };
 		E94423BE1E767A1500F8F795 /* HistoryDeleteRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HistoryDeleteRequest.h; sourceTree = "<group>"; };
 		E94423BF1E767A1500F8F795 /* HistoryDeleteRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HistoryDeleteRequest.m; sourceTree = "<group>"; };
+		E94976F81EC1A34200A4642A /* TeachingMainCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TeachingMainCell.h; sourceTree = "<group>"; };
+		E94976F91EC1A34200A4642A /* TeachingMainCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TeachingMainCell.m; sourceTree = "<group>"; };
+		E94976FB1EC1B4A000A4642A /* TeachingFilterView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TeachingFilterView.h; sourceTree = "<group>"; };
+		E94976FC1EC1B4A000A4642A /* TeachingFilterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TeachingFilterView.m; sourceTree = "<group>"; };
+		E94976FE1EC1B4CC00A4642A /* TeachingFilterCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TeachingFilterCell.h; sourceTree = "<group>"; };
+		E94976FF1EC1B4CC00A4642A /* TeachingFilterCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TeachingFilterCell.m; sourceTree = "<group>"; };
+		E94977011EC1B53E00A4642A /* TeachingFilterBackgroundView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TeachingFilterBackgroundView.h; sourceTree = "<group>"; };
+		E94977021EC1B53E00A4642A /* TeachingFilterBackgroundView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TeachingFilterBackgroundView.m; sourceTree = "<group>"; };
+		E949770A1EC2F37900A4642A /* TeachingFiterModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TeachingFiterModel.h; sourceTree = "<group>"; };
+		E949770B1EC2F37900A4642A /* TeachingFiterModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TeachingFiterModel.m; sourceTree = "<group>"; };
 		E96EB72F1E8A16F40061D6C9 /* UpdateUserNameRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UpdateUserNameRequest.h; sourceTree = "<group>"; };
 		E96EB7301E8A16F40061D6C9 /* UpdateUserNameRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UpdateUserNameRequest.m; sourceTree = "<group>"; };
 		E96EB7321E8A17370061D6C9 /* PersonalCenterModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PersonalCenterModel.h; sourceTree = "<group>"; };
@@ -1511,6 +1526,7 @@
 		7C1CBEB21E80D1AB00826FE9 /* 同步教学 */ = {
 			isa = PBXGroup;
 			children = (
+				E94976F71EC1A30A00A4642A /* View */,
 				7C1CBEB61E80D1E600826FE9 /* TeachingMainViewController.h */,
 				7C1CBEB71E80D1E600826FE9 /* TeachingMainViewController.m */,
 			);
@@ -1903,6 +1919,23 @@
 			path = "侧边栏";
 			sourceTree = "<group>";
 		};
+		E94976F71EC1A30A00A4642A /* View */ = {
+			isa = PBXGroup;
+			children = (
+				E94976F81EC1A34200A4642A /* TeachingMainCell.h */,
+				E94976F91EC1A34200A4642A /* TeachingMainCell.m */,
+				E94976FB1EC1B4A000A4642A /* TeachingFilterView.h */,
+				E94976FC1EC1B4A000A4642A /* TeachingFilterView.m */,
+				E94976FE1EC1B4CC00A4642A /* TeachingFilterCell.h */,
+				E94976FF1EC1B4CC00A4642A /* TeachingFilterCell.m */,
+				E94977011EC1B53E00A4642A /* TeachingFilterBackgroundView.h */,
+				E94977021EC1B53E00A4642A /* TeachingFilterBackgroundView.m */,
+				E949770A1EC2F37900A4642A /* TeachingFiterModel.h */,
+				E949770B1EC2F37900A4642A /* TeachingFiterModel.m */,
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
 		E96EB7351E8A78F50061D6C9 /* 个人中心 */ = {
 			isa = PBXGroup;
 			children = (
@@ -2236,6 +2269,7 @@
 				7C2251D31E1E2626004785D5 /* GCDTimer.m in Sources */,
 				7C1A5F4A1E15127200832DED /* YXPlayerTopView.m in Sources */,
 				E9355AEA1E6674B4007AE9F0 /* MenuSelectionView.m in Sources */,
+				E94977031EC1B53E00A4642A /* TeachingFilterBackgroundView.m in Sources */,
 				7C1A5FE51E1637FC00832DED /* PagedListFetcherBase.m in Sources */,
 				30C87E111E52F4CF000CFBAA /* NSMutableDictionary+YXDictionarys.m in Sources */,
 				7C2251C71E1DE66E004785D5 /* AlertView.m in Sources */,
@@ -2292,9 +2326,11 @@
 				7C7629C11E27371D007B5698 /* LoginActionView.m in Sources */,
 				7C1CBEB81E80D1E600826FE9 /* TeachingMainViewController.m in Sources */,
 				E96EB78E1E8D08940061D6C9 /* QADeleteImageViewController.m in Sources */,
+				E94977001EC1B4CC00A4642A /* TeachingFilterCell.m in Sources */,
 				92E7D1391E28A83F00A34300 /* AloneCourseViewController.m in Sources */,
 				E96EB75B1E8A7B610061D6C9 /* PersonalCenterViewController.m in Sources */,
 				7C7841941E2E225D00755BC0 /* TouristLoginRequest.m in Sources */,
+				E94976FA1EC1A34200A4642A /* TeachingMainCell.m in Sources */,
 				E99630871E95EF4700C4BF62 /* QAUtils.m in Sources */,
 				E9355B011E66AA4E007AE9F0 /* LoginUtils.m in Sources */,
 				7C1A5F231E1510FA00832DED /* GetRequest.m in Sources */,
@@ -2337,6 +2373,7 @@
 				7C1A5F161E15108F00832DED /* DownloadModel.xcdatamodel in Sources */,
 				7C7841731E2CA73800755BC0 /* RecordManager.m in Sources */,
 				30C48A951E52EACC00CCDBBE /* v1_2Model.xcdatamodeld in Sources */,
+				E949770C1EC2F37900A4642A /* TeachingFiterModel.m in Sources */,
 				7CDBFED31E8BB09500C72E6F /* QAQuestionListFetcher.m in Sources */,
 				7C1A5F4B1E15127200832DED /* YXPlayerViewController.m in Sources */,
 				7C1A5F3B1E15126500832DED /* YXAudioSlideProgressView.m in Sources */,
@@ -2419,6 +2456,7 @@
 				7C1A5F4C1E15127200832DED /* YXSlideProgressView.m in Sources */,
 				30C48A911E52EACC00CCDBBE /* LogRecordEntity+CoreDataProperties.m in Sources */,
 				7C1809411E26285B00B71863 /* FilterSelectionView.m in Sources */,
+				E94976FD1EC1B4A000A4642A /* TeachingFilterView.m in Sources */,
 				E96EB7AA1E94D20E0061D6C9 /* QACreateAskRequest.m in Sources */,
 				927594DC1E2F0C1400F87838 /* PlayHistoryRequest.m in Sources */,
 				7C1A60071E16396D00832DED /* UIImage+YXResize.m in Sources */,
