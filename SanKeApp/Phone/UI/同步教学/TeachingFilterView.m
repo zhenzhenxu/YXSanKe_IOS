@@ -12,12 +12,12 @@
 
 static const NSUInteger kTagBase = 876;
 
-@interface TeachingFilterItem:NSObject
+@interface TeachingFilterView_Item:NSObject
 @property (nonatomic, strong) NSString *typeName;
 @property (nonatomic, strong) NSArray *filterArray;
 @property (nonatomic, assign) NSInteger currentIndex;
 @end
-@implementation TeachingFilterItem
+@implementation TeachingFilterView_Item
 
 @end
 @interface TeachingFilterView()<UITableViewDataSource,UITableViewDelegate>
@@ -26,7 +26,7 @@ static const NSUInteger kTagBase = 876;
 @property (nonatomic, strong) UITableView *selectionTableView;
 
 @property (nonatomic, strong) NSMutableArray *filterItemArray;
-@property (nonatomic, strong) TeachingFilterItem *currentFilterItem;
+@property (nonatomic, strong) TeachingFilterView_Item *currentFilterItem;
 @property (nonatomic, assign) BOOL layoutComplete;
 @property (nonatomic, assign) BOOL isAnimating;
 @end
@@ -72,7 +72,7 @@ static const NSUInteger kTagBase = 876;
 }
 
 - (void)addFilters:(NSArray *)filters forKey:(NSString *)key{
-    TeachingFilterItem *item = [[TeachingFilterItem alloc]init];
+    TeachingFilterView_Item *item = [[TeachingFilterView_Item alloc]init];
     item.typeName = key;
     item.filterArray = filters;
     item.currentIndex = 0;
@@ -80,8 +80,8 @@ static const NSUInteger kTagBase = 876;
 }
 
 - (void)setCurrentIndex:(NSInteger)index forKey:(NSString *)key{
-    TeachingFilterItem *item = nil;
-    for (TeachingFilterItem *f in self.filterItemArray) {
+    TeachingFilterView_Item *item = nil;
+    for (TeachingFilterView_Item *f in self.filterItemArray) {
         if ([f.typeName isEqualToString:key]) {
             item = f;
             break;
@@ -97,7 +97,7 @@ static const NSUInteger kTagBase = 876;
     CGFloat btnWidth = self.typeContainerView.bounds.size.width/self.filterItemArray.count;
     CGFloat lineWidth = 1/[UIScreen mainScreen].scale;
     [self.filterItemArray enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-        TeachingFilterItem *item = (TeachingFilterItem *)obj;
+        TeachingFilterView_Item *item = (TeachingFilterView_Item *)obj;
         UIButton *b = [self typeButtonWithName:[self currentFilterNameForItem:item]];
         b.frame = CGRectMake(btnWidth*idx, 0, btnWidth, self.typeContainerView.bounds.size.height);
         b.tag = kTagBase + idx;
@@ -117,7 +117,8 @@ static const NSUInteger kTagBase = 876;
     self.layoutComplete = YES;
 }
 
-- (NSString *)currentFilterNameForItem:(TeachingFilterItem *)item{
+
+- (NSString *)currentFilterNameForItem:(TeachingFilterView_Item *)item{
     return item.filterArray[item.currentIndex];
 }
 
@@ -200,6 +201,32 @@ static const NSUInteger kTagBase = 876;
     UIButton *b = [self.typeContainerView viewWithTag:index+kTagBase];
     [self changeButton:b foldStatus:YES];
 }
+- (void)refreshUnitFilters:(NSArray *)filters forKey:(NSString *)key {
+    TeachingFilterView_Item *item = [[TeachingFilterView_Item alloc]init];
+    item.typeName = key;
+    item.filterArray = filters;
+    item.currentIndex = 0;
+    [self.filterItemArray replaceObjectAtIndex:1 withObject:item];
+    UIButton *b = [self.typeContainerView viewWithTag:kTagBase+1];
+    [b setTitle:[self currentFilterNameForItem:item] forState:UIControlStateNormal];
+    [self changeButton:b foldStatus:YES];
+    [self changeButton:b selectedStatus:NO];
+    [self exchangeTitleImagePositionForButton:b];
+}
+
+- (void)refreshCourseFilters:(NSArray *)filters forKey:(NSString *)key {
+    TeachingFilterView_Item *item = [[TeachingFilterView_Item alloc]init];
+    item.typeName = key;
+    item.filterArray = filters;
+    item.currentIndex = 0;
+    [self.filterItemArray replaceObjectAtIndex:2 withObject:item];
+    UIButton *b = [self.typeContainerView viewWithTag:kTagBase+2];
+    [b setTitle:[self currentFilterNameForItem:item] forState:UIControlStateNormal];
+    [self changeButton:b foldStatus:NO];
+    [self changeButton:b selectedStatus:NO];
+    [self exchangeTitleImagePositionForButton:b];
+    [self filterItemArrayChanged];
+}
 
 #pragma mark - UITableViewDataSource
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
@@ -228,11 +255,10 @@ static const NSUInteger kTagBase = 876;
     [self exchangeTitleImagePositionForButton:b];
 }
 
-#pragma mark - TeachingFilterViewDelegate
 - (void)filterItemArrayChanged {
     NSMutableArray *array = [NSMutableArray array];
     [self.filterItemArray enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-        TeachingFilterItem *item = (TeachingFilterItem *)obj;
+        TeachingFilterView_Item *item = (TeachingFilterView_Item *)obj;
         NSInteger index = MAX(item.currentIndex, 0);
         [array addObject:@(index)];
     }];

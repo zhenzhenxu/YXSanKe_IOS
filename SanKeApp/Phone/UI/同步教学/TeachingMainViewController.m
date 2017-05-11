@@ -10,6 +10,7 @@
 #import "TeachingMainCell.h"
 #import "TeachingFilterView.h"
 #import "TeachingFiterModel.h"
+#import "GetBookInfoRequest.h"
 
 @interface TeachingMainViewController ()<UITableViewDataSource,UITableViewDelegate,MWPhotoBrowserDelegate,TeachingFilterViewDelegate>
 @property (nonatomic, strong) UITableView *tableView;
@@ -18,7 +19,7 @@
 @property (nonatomic, strong) UIButton *testButton;
 @property (nonatomic, strong) MWPhotoBrowser *photoBrowser;
 @property (nonatomic, strong) TeachingFilterView *filterView;
-@property (nonatomic, strong) NSArray <NSArray *>*filterDataArray;
+@property (nonatomic, strong) TeachingFiterModel *filterModel;
 @end
 
 @implementation TeachingMainViewController
@@ -34,9 +35,8 @@
         [self setupTitle];
     }];
     
-    [self setupMockFilterData];
-    [self setupFilterView];
-//     [self dealWithFilterModel:[TeachingFiterModel mockFilterData]];
+    self.filterModel = [TeachingFiterModel modelFromRawData:[GetBookInfoRequestItem mockGetBookInfoRequestItem]];
+    [self dealWithFilterModel:self.filterModel];
     [self setupMockData];
 }
 
@@ -71,81 +71,108 @@
     }];
 }
 
-- (void)setupMockFilterData {
-    // 学科
-    NSArray *volumeArray = @[
-                             @"七年级上",
-                             @"七年级下"
-                             ];
-    NSArray *unitArray = @[
-                           @"第一单元 阅读",
-                           @"第一单元 写作",
-                           @"第二单元 阅读",
-                           @"第二单元 写作",
-                           @"第二单元 综合性学习",
-                           @"第三单元 阅读",
-                           @"第三单元 写作",
-                           @"第三单元 名著导读",
-                           @"第三单元 课外古诗词诵读",
-                           @"第四单元 阅读",
-                           @"第四单元 写作",
-                           @"第四单元 综合性学习",
-                           @"第五单元 阅读",
-                           @"第五单元 写作",
-                           @"第六单元 阅读",
-                           @"第六单元 写作",
-                           @"第六单元 综合性学习",
-                           @"第六单元 名著导读",
-                           @"第六单元 课外古诗词诵读"
-                           ];
-    NSArray *courseArray = @[
-                             @"全部",
-                             @"1 春/朱自清",
-                             @"2 济南的春天/老舍",
-                             @"第三课",
-                             @"第四课",
-                             @"第五课"
-                             ];
-    self.filterDataArray = [NSArray arrayWithObjects:volumeArray,unitArray,courseArray, nil];
-}
-
-- (void)setupFilterView {
-    TeachingFilterView *filterView = [[TeachingFilterView alloc]initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, 44)];
-    self.filterView = filterView;
-    for (NSArray *group in self.filterDataArray) {
-        NSMutableArray *array = [NSMutableArray array];
-        for (NSString *filter in group) {
-            [array addObject:filter];
-        }
-        [filterView addFilters:array forKey:group.firstObject];
-    }
-    [self setupWithCurrentFilters];
-    filterView.delegate = self;
-    [self.view addSubview:filterView];
-}
-
 - (void)dealWithFilterModel:(TeachingFiterModel *)model{
     TeachingFilterView *filterView = [[TeachingFilterView alloc]initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, 44)];
     self.filterView = filterView;
-    for (TeachingFiterGroup *group in model.groupArray) {
-        NSMutableArray *array = [NSMutableArray array];
-        for (TeachingFilter *filter in group.filterArray) {
-            [array addObject:filter.name];
-        }
-        [filterView addFilters:array forKey:group.name];
+    [self.view addSubview:filterView];
+
+    NSMutableArray *array0 = [NSMutableArray array];
+    for (GetBookInfoRequestItem_Volum *filter in model.volums) {
+        [array0 addObject:filter.name];
     }
-    [self setupWithCurrentFilters];
+    [self.filterView addFilters:array0 forKey:model.volumName];
+
+    NSMutableArray *array1 = [NSMutableArray array];
+    for (GetBookInfoRequestItem_Unit *filter in model.units) {
+        [array1 addObject:filter.name];
+    }
+    [self.filterView addFilters:array1 forKey:model.unitName];
+    
+    NSMutableArray *array2 = [NSMutableArray array];
+    for (GetBookInfoRequestItem_Course *filter in model.courses) {
+        [array2 addObject:filter.name];
+    }
+    [self.filterView addFilters:array2 forKey:model.courseName];
+
     filterView.delegate = self;
     [self.view addSubview:filterView];
 }
 
-#pragma mark - YXCourseFilterViewDelegate
+#pragma mark - TeachingFilterViewDelegate
 - (void)filterChanged:(NSArray *)filterArray{
-    DDLogDebug(@"滚动到筛选的位置");
+    //MARK:0.首先当册变了之后,单元和课也要变化
+    NSNumber *num0 = filterArray[0];
+    
+    NSNumber *num1 = [NSNumber numberWithInteger:0];
+    if (num0.integerValue != self.filterModel.volumChooseInteger) {
+        self.filterModel.volumChooseInteger = num0.integerValue;
+        self.filterModel.unitChooseInteger = 0;
+        self.filterModel.courseChooseInteger = 0;
+        [self refreshUnitWithFilterModel];//更新单元
+        return;
+    }else {
+        num1 = filterArray[1];
+    }
+    
+    NSNumber *num2 = [NSNumber numberWithInteger:0];
+    if (num1.integerValue != self.filterModel.unitChooseInteger) {
+        self.filterModel.unitChooseInteger = num1.integerValue;
+        self.filterModel.courseChooseInteger = 0;
+        [self refreshCourseWithFilterModel];//更新课
+        return;
+    }else {
+        // 学科
+        num2 = filterArray[2];
+        self.filterModel.courseChooseInteger = num2.integerValue;
+    }
+    //MARK:1.其次,筛选完成后,要滚动到当前筛选的位置
+    //获取到当前的册-->单元-->课的id,然后又一个fetcher来返回应该滚动到的位置(索引以及url)
+    //    BeijingCourseListFetcher *fetcher = (BeijingCourseListFetcher *)self.dataFetcher;
+    //    //服务端数据返回空的处理:"0"-全部,即不做筛选
+    //    if (self.filterModel.segment.count >0){
+    //        fetcher.segid = self.filterModel.segment[num0.integerValue].filterID?:@"0";
+    //    }
+    //    if (self.filterModel.study.count > 0) {
+    //        fetcher.studyid = self.filterModel.study[num1.integerValue].filterID?:@"0";
+    //    }
+    //    if (self.filterModel.stage.count) {
+    //        fetcher.stageid = self.filterModel.stage[num2.integerValue].filterID?:@"0";
+    //    }
+    //筛选完成后,要滚动到当前筛选的位置
+    [self scrollToFilterPosition];
+
+}
+
+- (void)scrollToFilterPosition {
+    
+    GetBookInfoRequestItem_Volum *volum = self.filterModel.volums[self.filterModel.volumChooseInteger];
+    GetBookInfoRequestItem_Unit *unit = self.filterModel.units[self.filterModel.unitChooseInteger];
+    GetBookInfoRequestItem_Course *course = self.filterModel.courses[self.filterModel.courseChooseInteger];
+    DDLogDebug(@"课程选择%@;---%@,单元选择%@----%@,课程选择%@----%@",@(self.filterModel.volumChooseInteger),volum.volumID,@(self.filterModel.unitChooseInteger),unit.unitID,@(self.filterModel.courseChooseInteger),course.courseID);
+
+}
+- (void)refreshUnitWithFilterModel{
+    NSMutableArray *array = [NSMutableArray array];
+    for (GetBookInfoRequestItem_Unit *filter in self.filterModel.units) {
+        [array addObject:filter.name];
+    }
+    [self.filterView refreshUnitFilters:array forKey:self.filterModel.unitName];
+    [self.filterView setCurrentIndex:0 forKey:self.filterModel.unitName];
+    [self refreshCourseWithFilterModel];
+}
+
+- (void)refreshCourseWithFilterModel{
+    NSMutableArray *array = [NSMutableArray array];
+    for (GetBookInfoRequestItem_Course *filter in self.filterModel.courses) {
+        [array addObject:filter.name];
+    }
+    [self.filterView refreshCourseFilters:array forKey:self.filterModel.courseName];
 }
 
 - (void)setupWithCurrentFilters{
-    //在上下滑动浏览/图片浏览器左右滑动的时候,滑动到相应的课程的时候要重置筛选框显示的内容.
+    //0.首先,第一次进来的时候(第一次安装/退出app后再进来/切换学科学段),要设置默认的册和单元,课设置为全部;
+    //1.其次,在上下滑动的过程中,筛选条件要随着变化到相应的位置;
+    //2.还有,在点击图片全屏浏览的时候.也需要将筛选条件变化到相应的位置.
     [self.dataArray enumerateObjectsUsingBlock:^(NSArray * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         [self.filterView setCurrentIndex:0 forKey:obj.firstObject];
     }];

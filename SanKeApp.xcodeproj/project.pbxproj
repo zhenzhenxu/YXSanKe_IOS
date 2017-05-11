@@ -247,7 +247,10 @@
 		E94976FD1EC1B4A000A4642A /* TeachingFilterView.m in Sources */ = {isa = PBXBuildFile; fileRef = E94976FC1EC1B4A000A4642A /* TeachingFilterView.m */; };
 		E94977001EC1B4CC00A4642A /* TeachingFilterCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E94976FF1EC1B4CC00A4642A /* TeachingFilterCell.m */; };
 		E94977031EC1B53E00A4642A /* TeachingFilterBackgroundView.m in Sources */ = {isa = PBXBuildFile; fileRef = E94977021EC1B53E00A4642A /* TeachingFilterBackgroundView.m */; };
-		E949770C1EC2F37900A4642A /* TeachingFiterModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E949770B1EC2F37900A4642A /* TeachingFiterModel.m */; };
+		E94977101EC41C3800A4642A /* TeachingDataManger.m in Sources */ = {isa = PBXBuildFile; fileRef = E949770F1EC41C3800A4642A /* TeachingDataManger.m */; };
+		E949771A1EC5496200A4642A /* GetBookInfo.json in Resources */ = {isa = PBXBuildFile; fileRef = E94977191EC5496200A4642A /* GetBookInfo.json */; };
+		E949771D1EC549A800A4642A /* GetBookInfoRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = E949771C1EC549A800A4642A /* GetBookInfoRequest.m */; };
+		E94977201EC5705100A4642A /* TeachingFiterModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E949771F1EC5705100A4642A /* TeachingFiterModel.m */; };
 		E96EB7311E8A16F40061D6C9 /* UpdateUserNameRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = E96EB7301E8A16F40061D6C9 /* UpdateUserNameRequest.m */; };
 		E96EB7341E8A17370061D6C9 /* PersonalCenterModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E96EB7331E8A17370061D6C9 /* PersonalCenterModel.m */; };
 		E96EB7401E8A79FD0061D6C9 /* AboutHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = E96EB73D1E8A79FD0061D6C9 /* AboutHeaderView.m */; };
@@ -761,8 +764,13 @@
 		E94976FF1EC1B4CC00A4642A /* TeachingFilterCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TeachingFilterCell.m; sourceTree = "<group>"; };
 		E94977011EC1B53E00A4642A /* TeachingFilterBackgroundView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TeachingFilterBackgroundView.h; sourceTree = "<group>"; };
 		E94977021EC1B53E00A4642A /* TeachingFilterBackgroundView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TeachingFilterBackgroundView.m; sourceTree = "<group>"; };
-		E949770A1EC2F37900A4642A /* TeachingFiterModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TeachingFiterModel.h; sourceTree = "<group>"; };
-		E949770B1EC2F37900A4642A /* TeachingFiterModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TeachingFiterModel.m; sourceTree = "<group>"; };
+		E949770E1EC41C3800A4642A /* TeachingDataManger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TeachingDataManger.h; sourceTree = "<group>"; };
+		E949770F1EC41C3800A4642A /* TeachingDataManger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TeachingDataManger.m; sourceTree = "<group>"; };
+		E94977191EC5496200A4642A /* GetBookInfo.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = GetBookInfo.json; sourceTree = "<group>"; };
+		E949771B1EC549A800A4642A /* GetBookInfoRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GetBookInfoRequest.h; sourceTree = "<group>"; };
+		E949771C1EC549A800A4642A /* GetBookInfoRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GetBookInfoRequest.m; sourceTree = "<group>"; };
+		E949771E1EC5705100A4642A /* TeachingFiterModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TeachingFiterModel.h; sourceTree = "<group>"; };
+		E949771F1EC5705100A4642A /* TeachingFiterModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TeachingFiterModel.m; sourceTree = "<group>"; };
 		E96EB72F1E8A16F40061D6C9 /* UpdateUserNameRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UpdateUserNameRequest.h; sourceTree = "<group>"; };
 		E96EB7301E8A16F40061D6C9 /* UpdateUserNameRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UpdateUserNameRequest.m; sourceTree = "<group>"; };
 		E96EB7321E8A17370061D6C9 /* PersonalCenterModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PersonalCenterModel.h; sourceTree = "<group>"; };
@@ -1451,6 +1459,7 @@
 		7C1A60121E163C8200832DED /* Business */ = {
 			isa = PBXGroup;
 			children = (
+				E949770D1EC41BEE00A4642A /* 同步教学 */,
 				7CAE438E1E836E1C00B0D460 /* 互动答疑 */,
 				7C1CBEDA1E80FE6D00826FE9 /* 分享 */,
 				E9230C501E308FC600AC6617 /* 侧边栏 */,
@@ -1930,10 +1939,22 @@
 				E94976FF1EC1B4CC00A4642A /* TeachingFilterCell.m */,
 				E94977011EC1B53E00A4642A /* TeachingFilterBackgroundView.h */,
 				E94977021EC1B53E00A4642A /* TeachingFilterBackgroundView.m */,
-				E949770A1EC2F37900A4642A /* TeachingFiterModel.h */,
-				E949770B1EC2F37900A4642A /* TeachingFiterModel.m */,
 			);
 			name = View;
+			sourceTree = "<group>";
+		};
+		E949770D1EC41BEE00A4642A /* 同步教学 */ = {
+			isa = PBXGroup;
+			children = (
+				E94977191EC5496200A4642A /* GetBookInfo.json */,
+				E949771B1EC549A800A4642A /* GetBookInfoRequest.h */,
+				E949771C1EC549A800A4642A /* GetBookInfoRequest.m */,
+				E949771E1EC5705100A4642A /* TeachingFiterModel.h */,
+				E949771F1EC5705100A4642A /* TeachingFiterModel.m */,
+				E949770E1EC41C3800A4642A /* TeachingDataManger.h */,
+				E949770F1EC41C3800A4642A /* TeachingDataManger.m */,
+			);
+			path = "同步教学";
 			sourceTree = "<group>";
 		};
 		E96EB7351E8A78F50061D6C9 /* 个人中心 */ = {
@@ -2168,6 +2189,7 @@
 				927594E91E2F0DA000F87838 /* playHistory_mock.json in Resources */,
 				E9230C461E2F829900AC6617 /* LoginRequest.json in Resources */,
 				7C1A5EF31E150BD100832DED /* env_config.json in Resources */,
+				E949771A1EC5496200A4642A /* GetBookInfo.json in Resources */,
 				7CDBFED01E8B9EF100C72E6F /* replylist_mock.json in Resources */,
 				7C1CBEC41E80F88000826FE9 /* read_me.txt in Resources */,
 				E9355B9B1E7153F7007AE9F0 /* UpdateInfoRequest.json in Resources */,
@@ -2347,7 +2369,9 @@
 				E9355B2F1E693F74007AE9F0 /* InfoInputView.m in Sources */,
 				9241FFE11E25D5830015B587 /* ProjectContainerView.m in Sources */,
 				7C1A5FD81E1636F500832DED /* DataErrorView.m in Sources */,
+				E949771D1EC549A800A4642A /* GetBookInfoRequest.m in Sources */,
 				7C1A5EE71E1505BF00832DED /* SKNavigationController.m in Sources */,
+				E94977201EC5705100A4642A /* TeachingFiterModel.m in Sources */,
 				E96EB7761E8B96370061D6C9 /* QAPublishQuestionViewController.m in Sources */,
 				E96EB7341E8A17370061D6C9 /* PersonalCenterModel.m in Sources */,
 				9241FFEC1E2610C60015B587 /* PlayRecordCell.m in Sources */,
@@ -2373,7 +2397,6 @@
 				7C1A5F161E15108F00832DED /* DownloadModel.xcdatamodel in Sources */,
 				7C7841731E2CA73800755BC0 /* RecordManager.m in Sources */,
 				30C48A951E52EACC00CCDBBE /* v1_2Model.xcdatamodeld in Sources */,
-				E949770C1EC2F37900A4642A /* TeachingFiterModel.m in Sources */,
 				7CDBFED31E8BB09500C72E6F /* QAQuestionListFetcher.m in Sources */,
 				7C1A5F4B1E15127200832DED /* YXPlayerViewController.m in Sources */,
 				7C1A5F3B1E15126500832DED /* YXAudioSlideProgressView.m in Sources */,
@@ -2446,6 +2469,7 @@
 				E96EB7311E8A16F40061D6C9 /* UpdateUserNameRequest.m in Sources */,
 				7C7841B81E2F1E2900755BC0 /* MineDataManager.m in Sources */,
 				E902E6DB1E2CD109009441B3 /* UpgradeView.m in Sources */,
+				E94977101EC41C3800A4642A /* TeachingDataManger.m in Sources */,
 				7C1A5F951E15143F00832DED /* YXMockManager.m in Sources */,
 				7C1A600A1E1639BD00832DED /* UIView+YXAddtion.m in Sources */,
 				7C1A5F3A1E15126500832DED /* YXAudioPlayerViewController.m in Sources */,
