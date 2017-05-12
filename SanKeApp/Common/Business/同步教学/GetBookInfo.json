@@ -13,7 +13,7 @@
                             "id": 45212,
                             "name": "第一单元 阅读",
                             "idx": 1,
-                            "pages": "1,32",
+                            "pages": "1,16",
                             "url": [
                                     {
                                     "idx": "1",
@@ -50,7 +50,7 @@
                                       {
                                       "id": 45213,
                                       "name": "2 济南的春天/老舍",
-                                      "idx": 1,
+                                      "idx": 2,
                                       "pages": "6,9",
                                       "url": [
                                               {
@@ -73,6 +73,111 @@
                                       "label": [
                                                 {
                                                 "id": 70,
+                                                "name": "教学插图"
+                                                },
+                                                {
+                                                "id": 71,
+                                                "name": "教学课件"
+                                                },
+                                                {
+                                                "id": 72,
+                                                "name": "课堂实录"
+                                                }
+                                                ]
+                                      },
+                                      {
+                                      "id": 45213,
+                                      "name": "3 雨的四季",
+                                      "idx": 3,
+                                      "pages": "10,13",
+                                      "url": [
+                                              {
+                                              "idx": "10",
+                                              "pageUrl": "http://userfile.sanke.zgjiaoyan.com/upload/storage/public/sanke/tbook/2017_03_08/1488968694_288389035/image/slide10.jpg"
+                                              },
+                                              {
+                                              "idx": "11",
+                                              "pageUrl": "http://userfile.sanke.zgjiaoyan.com/upload/storage/public/sanke/tbook/2017_03_08/1488968694_288389035/image/slide11.jpg"
+                                              },
+                                              {
+                                              "idx": "12",
+                                              "pageUrl": "http://userfile.sanke.zgjiaoyan.com/upload/storage/public/sanke/tbook/2017_03_08/1488968694_288389035/image/slide12.jpg"
+                                              },
+                                              {
+                                              "idx": "13",
+                                              "pageUrl": "http://userfile.sanke.zgjiaoyan.com/upload/storage/public/sanke/tbook/2017_03_08/1488968694_288389035/image/slide13.jpg"
+                                              }
+                                              ],
+                                      "label": [
+                                                {
+                                                "id": 70,
+                                                "name": "教学设计"
+                                                },
+                                                {
+                                                "id": 71,
+                                                "name": "教学课件"
+                                                }
+                                                ]
+                                      }
+                                      ]
+                            },
+                            {
+                            "id": 45212,
+                            "name": "第一单元 写作",
+                            "idx": 2,
+                            "pages": 33,
+                            "url": [
+                                    {
+                                    "idx": "17",
+                                    "pageUrl": "http://userfile.sanke.zgjiaoyan.com/upload/storage/public/sanke/tbook/2017_03_08/1488968694_288389035/image/slide17.jpg"
+                                    },
+                                    {
+                                    "idx": "18",
+                                    "pageUrl": "http://userfile.sanke.zgjiaoyan.com/upload/storage/public/sanke/tbook/2017_03_08/1488968694_288389035/image/slide18.jpg"
+                                    }
+                                    ],
+                            "label": []
+                            },
+                            {
+                            "id": 45212,
+                            "name": "第二单元 阅读",
+                            "idx": 3,
+                            "pages": 19,
+                            "url": [
+                                    {
+                                    "idx": "19",
+                                    "pageUrl": "http://userfile.sanke.zgjiaoyan.com/upload/storage/public/sanke/tbook/2017_03_08/1488968694_288389035/image/slide19.jpg"
+                                    }
+                                    ],
+                            "label": [
+                                      {
+                                      "id": 67,
+                                      "name": "单元解读"
+                                      }
+                                      ],
+                            "items": [
+                                      {
+                                      "id": 45213,
+                                      "name": "5 秋天的怀念/史铁生",
+                                      "idx": 1,
+                                      "pages": "20,22",
+                                      "url": [
+                                              {
+                                              "idx": "20",
+                                              "pageUrl": "http://userfile.sanke.zgjiaoyan.com/upload/storage/public/sanke/tbook/2017_03_08/1488968694_288389035/image/slide20.jpg"
+                                              },
+                                              {
+                                              "idx": "21",
+                                              "pageUrl": "http://userfile.sanke.zgjiaoyan.com/upload/storage/public/sanke/tbook/2017_03_08/1488968694_288389035/image/slide21.jpg"
+                                              },
+                                              {
+                                              "idx": "22",
+                                              "pageUrl": "http://userfile.sanke.zgjiaoyan.com/upload/storage/public/sanke/tbook/2017_03_08/1488968694_288389035/image/slide22.jpg"
+                                              }
+                                              ],
+                                      "label": [
+                                                {
+                                                "id": 70,
                                                 "name": "教学设计"
                                                 },
                                                 {
@@ -83,13 +188,21 @@
                                       },
                                       {
                                       "id": 45213,
-                                      "name": "第三课 青春的记忆",
-                                      "idx": 1,
-                                      "pages": "2",
+                                      "name": "6 散步/莫怀戚",
+                                      "idx": 2,
+                                      "pages": "23,25",
                                       "url": [
                                               {
-                                              "idx": "2",
-                                              "pageUrl": "http://userfile.sanke.zgjiaoyan.com/upload/storage/public/sanke/tbook/2017_03_08/1488968694_288389035/image/slide2.jpg"
+                                              "idx": "23",
+                                              "pageUrl": "http://userfile.sanke.zgjiaoyan.com/upload/storage/public/sanke/tbook/2017_03_08/1488968694_288389035/image/slide23.jpg"
+                                              },
+                                              {
+                                              "idx": "24",
+                                              "pageUrl": "http://userfile.sanke.zgjiaoyan.com/upload/storage/public/sanke/tbook/2017_03_08/1488968694_288389035/image/slide24.jpg"
+                                              },
+                                              {
+                                              "idx": "25",
+                                              "pageUrl": "http://userfile.sanke.zgjiaoyan.com/upload/storage/public/sanke/tbook/2017_03_08/1488968694_288389035/image/slide25.jpg"
                                               }
                                               ],
                                       "label": [
@@ -107,119 +220,61 @@
                             },
                             {
                             "id": 45212,
-                            "name": "第二单元",
-                            "idx": 1,
-                            "pages": "1,32",
+                            "name": "第二单元 写作",
+                            "idx": 4,
+                            "pages": "32,33",
                             "url": [
                                     {
-                                    "idx": "1",
-                                    "pageUrl": "http://userfile.sanke.zgjiaoyan.com/upload/storage/public/sanke/tbook/2017_03_08/1488968694_288389035/image/slide1.jpg"
+                                    "idx": "32",
+                                    "pageUrl": "http://userfile.sanke.zgjiaoyan.com/upload/storage/public/sanke/tbook/2017_03_08/1488968694_288389035/image/slide32.jpg"
+                                    },
+                                    {
+                                    "idx": "33",
+                                    "pageUrl": "http://userfile.sanke.zgjiaoyan.com/upload/storage/public/sanke/tbook/2017_03_08/1488968694_288389035/image/slide33.jpg"
                                     }
                                     ],
                             "label": [
                                       {
                                       "id": 67,
                                       "name": "单元解读"
-                                      }
-                                      ],
-                            "items": [
-                                      {
-                                      "id": 45213,
-                                      "name": "第一课 青春的邀约",
-                                      "idx": 1,
-                                      "pages": "2",
-                                      "url": [
-                                              {
-                                              "idx": "2",
-                                              "pageUrl": "http://userfile.sanke.zgjiaoyan.com/upload/storage/public/sanke/tbook/2017_03_08/1488968694_288389035/image/slide2.jpg"
-                                              }
-                                              ],
-                                      "label": [
-                                                {
-                                                "id": 70,
-                                                "name": "教学设计"
-                                                },
-                                                {
-                                                "id": 71,
-                                                "name": "教学课件"
-                                                }
-                                                ]
-                                      },
-                                      {
-                                      "id": 45213,
-                                      "name": "第二课 哈哈",
-                                      "idx": 1,
-                                      "pages": "2",
-                                      "url": [
-                                              {
-                                              "idx": "2",
-                                              "pageUrl": "http://userfile.sanke.zgjiaoyan.com/upload/storage/public/sanke/tbook/2017_03_08/1488968694_288389035/image/slide2.jpg"
-                                              }
-                                              ],
-                                      "label": [
-                                                {
-                                                "id": 70,
-                                                "name": "教学设计"
-                                                },
-                                                {
-                                                "id": 71,
-                                                "name": "教学课件"
-                                                }
-                                                ]
                                       }
                                       ]
                             },
                             {
                             "id": 45212,
-                            "name": "第三单元",
-                            "idx": 1,
-                            "pages": "1,32",
+                            "name": "第二单元 综合性学习",
+                            "idx": 5,
+                            "pages": "34,36",
                             "url": [
                                     {
-                                    "idx": "1",
-                                    "pageUrl": "http://userfile.sanke.zgjiaoyan.com/upload/storage/public/sanke/tbook/2017_03_08/1488968694_288389035/image/slide1.jpg"
+                                    "idx": "34",
+                                    "pageUrl": "http://userfile.sanke.zgjiaoyan.com/upload/storage/public/sanke/tbook/2017_03_08/1488968694_288389035/image/slide34.jpg"
+                                    },
+                                    {
+                                    "idx": "35",
+                                    "pageUrl": "http://userfile.sanke.zgjiaoyan.com/upload/storage/public/sanke/tbook/2017_03_08/1488968694_288389035/image/slide35.jpg"
+                                    },
+                                    {
+                                    "idx": "36",
+                                    "pageUrl": "http://userfile.sanke.zgjiaoyan.com/upload/storage/public/sanke/tbook/2017_03_08/1488968694_288389035/image/slide36.jpg"
                                     }
                                     ],
                             "label": [
                                       {
                                       "id": 67,
                                       "name": "单元解读"
-                                      }
-                                      ],
-                            "items": [
-                                      {
-                                      "id": 45213,
-                                      "name": "第一课 我的青春",
-                                      "idx": 1,
-                                      "pages": "2",
-                                      "url": [
-                                              {
-                                              "idx": "2",
-                                              "pageUrl": "http://userfile.sanke.zgjiaoyan.com/upload/storage/public/sanke/tbook/2017_03_08/1488968694_288389035/image/slide2.jpg"
-                                              }
-                                              ],
-                                      "label": [
-                                                {
-                                                "id": 70,
-                                                "name": "教学设计"
-                                                },
-                                                {
-                                                "id": 71,
-                                                "name": "教学课件"
-                                                }
-                                                ]
                                       }
                                       ]
                             },
                             {
                             "id": 45212,
-                            "name": "第三单元",
-                            "idx": 1,
-                            "pages": "1,32",
+                            "name": "第三单元 阅读",
+                            "idx": 6,
+                            "pages": "37,58",
                             "url": [
                                     {
-                                    "idx": "1",
-                                    "pageUrl": "http://userfile.sanke.zgjiaoyan.com/upload/storage/public/sanke/tbook/2017_03_08/1488968694_288389035/image/slide1.jpg"
+                                    "idx": "37",
+                                    "pageUrl": "http://userfile.sanke.zgjiaoyan.com/upload/storage/public/sanke/tbook/2017_03_08/1488968694_288389035/image/slide37.jpg"
                                     }
                                     ],
                             "label": [
@@ -231,55 +286,37 @@
                             "items": [
                                       {
                                       "id": 45213,
-                                      "name": "第一课 我的青春",
+                                      "name": "9 从百草园到三味书屋/鲁迅",
                                       "idx": 1,
-                                      "pages": "2",
+                                      "pages": "38,44",
                                       "url": [
                                               {
-                                              "idx": "2",
-                                              "pageUrl": "http://userfile.sanke.zgjiaoyan.com/upload/storage/public/sanke/tbook/2017_03_08/1488968694_288389035/image/slide2.jpg"
-                                              }
-                                              ],
-                                      "label": [
-                                                {
-                                                "id": 70,
-                                                "name": "教学设计"
-                                                },
-                                                {
-                                                "id": 71,
-                                                "name": "教学课件"
-                                                }
-                                                ]
-                                      }
-                                      ]
-                            },
-                            {
-                            "id": 45212,
-                            "name": "第三单元",
-                            "idx": 1,
-                            "pages": "1,32",
-                            "url": [
-                                    {
-                                    "idx": "1",
-                                    "pageUrl": "http://userfile.sanke.zgjiaoyan.com/upload/storage/public/sanke/tbook/2017_03_08/1488968694_288389035/image/slide1.jpg"
-                                    }
-                                    ],
-                            "label": [
-                                      {
-                                      "id": 67,
-                                      "name": "单元解读"
-                                      }
-                                      ],
-                            "items": [
-                                      {
-                                      "id": 45213,
-                                      "name": "第一课 我的青春",
-                                      "idx": 1,
-                                      "pages": "2",
-                                      "url": [
+                                              "idx": "38",
+                                              "pageUrl": "http://userfile.sanke.zgjiaoyan.com/upload/storage/public/sanke/tbook/2017_03_08/1488968694_288389035/image/slide38.jpg"
+                                              },
                                               {
-                                              "idx": "2",
-                                              "pageUrl": "http://userfile.sanke.zgjiaoyan.com/upload/storage/public/sanke/tbook/2017_03_08/1488968694_288389035/image/slide2.jpg"
+                                              "idx": "39",
+                                              "pageUrl": "http://userfile.sanke.zgjiaoyan.com/upload/storage/public/sanke/tbook/2017_03_08/1488968694_288389035/image/slide39.jpg"
+                                              },
+                                              {
+                                              "idx": "40",
+                                              "pageUrl": "http://userfile.sanke.zgjiaoyan.com/upload/storage/public/sanke/tbook/2017_03_08/1488968694_288389035/image/slide40.jpg"
+                                              },
+                                              {
+                                              "idx": "41",
+                                              "pageUrl": "http://userfile.sanke.zgjiaoyan.com/upload/storage/public/sanke/tbook/2017_03_08/1488968694_288389035/image/slide41.jpg"
+                                              },
+                                              {
+                                              "idx": "42",
+                                              "pageUrl": "http://userfile.sanke.zgjiaoyan.com/upload/storage/public/sanke/tbook/2017_03_08/1488968694_288389035/image/slide42.jpg"
+                                              },
+                                              {
+                                              "idx": "43",
+                                              "pageUrl": "http://userfile.sanke.zgjiaoyan.com/upload/storage/public/sanke/tbook/2017_03_08/1488968694_288389035/image/slide43.jpg"
+                                              },
+                                              {
+                                              "idx": "44",
+                                              "pageUrl": "http://userfile.sanke.zgjiaoyan.com/upload/storage/public/sanke/tbook/2017_03_08/1488968694_288389035/image/slide44.jpg"
                                               }
                                               ],
                                       "label": [
@@ -305,72 +342,133 @@
                   "items": [
                             {
                             "id": 45312,
-                            "name": "第一单元",
+                            "name": "第一单元 阅读",
                             "idx": 1,
-                            "pages": "1,32",
+                            "pages": "1,23",
                             "url": [
                                     {
                                     "idx": "1",
-                                    "pageUrl": "http://userfile.sanke.zgjiaoyan.com/upload/storage/public/sanke/tbook/2017_03_08/1488968694_288389035/image/slide1.jpg"
+                                    "pageUrl": "http://userfile.sanke.zgjiaoyan.com/upload/storage/public/sanke/tbook/2017_02_24/1487924278_011819320/image/slide1.jpg"
                                     }
                                     ],
                             "label": [
                                       {
                                       "id": 67,
-                                      "name": "单元解读"
+                                      "name": "单元解读(视频)"
+                                      },
+                                      {
+                                      "id": 67,
+                                      "name": "单元解读(文本)"
                                       }
                                       ],
                             "items": [
                                       {
                                       "id": 45313,
-                                      "name": "第一课 青春的邀约",
+                                      "name": "1 邓稼先/杨振宁",
                                       "idx": 1,
-                                      "pages": "2",
+                                      "pages": "2,8",
                                       "url": [
                                               {
                                               "idx": "2",
-                                              "pageUrl": "http://userfile.sanke.zgjiaoyan.com/upload/storage/public/sanke/tbook/2017_03_08/1488968694_288389035/image/slide2.jpg"
+                                              "pageUrl": "http://userfile.sanke.zgjiaoyan.com/upload/storage/public/sanke/tbook/2017_02_24/1487924278_011819320/image/slide2.jpg"
+                                              },
+                                              {
+                                              "idx": "3",
+                                              "pageUrl": "http://userfile.sanke.zgjiaoyan.com/upload/storage/public/sanke/tbook/2017_02_24/1487924278_011819320/image/slide3.jpg"
+                                              },
+                                              {
+                                              "idx": "4",
+                                              "pageUrl": "http://userfile.sanke.zgjiaoyan.com/upload/storage/public/sanke/tbook/2017_02_24/1487924278_011819320/image/slide4.jpg"
+                                              },
+                                              {
+                                              "idx": "5",
+                                              "pageUrl": "http://userfile.sanke.zgjiaoyan.com/upload/storage/public/sanke/tbook/2017_02_24/1487924278_011819320/image/slide5.jpg"
+                                              },
+                                              {
+                                              "idx": "6",
+                                              "pageUrl": "http://userfile.sanke.zgjiaoyan.com/upload/storage/public/sanke/tbook/2017_02_24/1487924278_011819320/image/slide6.jpg"
+                                              },
+                                              {
+                                              "idx": "7",
+                                              "pageUrl": "http://userfile.sanke.zgjiaoyan.com/upload/storage/public/sanke/tbook/2017_02_24/1487924278_011819320/image/slide7.jpg"
+                                              },
+                                              {
+                                              "idx": "8",
+                                              "pageUrl": "http://userfile.sanke.zgjiaoyan.com/upload/storage/public/sanke/tbook/2017_02_24/1487924278_011819320/image/slide8.jpg"
                                               }
                                               ],
                                       "label": [
                                                 {
                                                 "id": 70,
-                                                "name": "教学设计"
+                                                "name": "单课解读"
                                                 },
                                                 {
                                                 "id": 71,
+                                                "name": "教学设计"
+                                                },
+                                                {
+                                                "id": 72,
                                                 "name": "教学课件"
+                                                },
+                                                {
+                                                "id": 73,
+                                                "name": "导学案"
+                                                },
+                                                {
+                                                "id": 74,
+                                                "name": "课堂实录"
+                                                },
+                                                {
+                                                "id": 75,
+                                                "name": "说课"
+                                                },
+                                                {
+                                                "id": 76,
+                                                "name": "同步检测"
+                                                },
+                                                {
+                                                "id": 76,
+                                                "name": "素材"
+                                                },
+                                                {
+                                                "id": 76,
+                                                "name": "教材插图"
                                                 }
                                                 ]
-                                      },
+                                      }
+                                      ]
+                            },
+                            {
+                            "id": 45312,
+                            "name": "第一单元 写作",
+                            "idx": 1,
+                            "pages": "24,26",
+                            "url": [
+                                    {
+                                    "idx": "24",
+                                    "pageUrl": "http://userfile.sanke.zgjiaoyan.com/upload/storage/public/sanke/tbook/2017_02_24/1487924278_011819320/image/slide24.jpg"
+                                    }
+                                    ],
+                            "items": [
                                       {
-                                      "id": 45314,
-                                      "name": "悄悄变化的我",
-                                      "idx": 2,
-                                      "pages": "3,7",
+                                      "id": 45313,
+                                      "name": "写出人物的精神",
+                                      "idx": 1,
+                                      "pages": "24,26",
                                       "url": [
                                               {
-                                              "idx": "3",
-                                              "pageUrl": "http://userfile.sanke.zgjiaoyan.com/upload/storage/public/sanke/tbook/2017_03_08/1488968694_288389035/image/slide3.jpg"
+                                              "idx": "24",
+                                              "pageUrl": "http://userfile.sanke.zgjiaoyan.com/upload/storage/public/sanke/tbook/2017_02_24/1487924278_011819320/image/slide24.jpg"
                                               },
                                               {
-                                              "idx": "4",
-                                              "pageUrl": "http://userfile.sanke.zgjiaoyan.com/upload/storage/public/sanke/tbook/2017_03_08/1488968694_288389035/image/slide4.jpg"
+                                              "idx": "25",
+                                              "pageUrl": "http://userfile.sanke.zgjiaoyan.com/upload/storage/public/sanke/tbook/2017_02_24/1487924278_011819320/image/slide25.jpg"
                                               },
                                               {
-                                              "idx": "5",
-                                              "pageUrl": "http://userfile.sanke.zgjiaoyan.com/upload/storage/public/sanke/tbook/2017_03_08/1488968694_288389035/image/slide5.jpg"
-                                              },
-                                              {
-                                              "idx": "6",
-                                              "pageUrl": "http://userfile.sanke.zgjiaoyan.com/upload/storage/public/sanke/tbook/2017_03_08/1488968694_288389035/image/slide6.jpg"
-                                              },
-                                              {
-                                              "idx": "7",
-                                              "pageUrl": "http://userfile.sanke.zgjiaoyan.com/upload/storage/public/sanke/tbook/2017_03_08/1488968694_288389035/image/slide7.jpg"
+                                              "idx": "26",
+                                              "pageUrl": "http://userfile.sanke.zgjiaoyan.com/upload/storage/public/sanke/tbook/2017_02_24/1487924278_011819320/image/slide26.jpg"
                                               }
-                                              ],
-                                      "label": []
+                                              ]
                                       }
                                       ]
                             }

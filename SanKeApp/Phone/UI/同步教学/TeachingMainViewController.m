@@ -12,13 +12,15 @@
 #import "TeachingFiterModel.h"
 #import "GetBookInfoRequest.h"
 #import "TeachingPageModel.h"
+#import "TeachingMutiTabView.h"
 
 @interface TeachingMainViewController ()<UITableViewDataSource,UITableViewDelegate,MWPhotoBrowserDelegate,TeachingFilterViewDelegate>
+@property (nonatomic, strong) TeachingFilterView *filterView;
+@property (nonatomic, strong) TeachingMutiTabView *mutiTabView;
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) NSArray <NSArray<TeachingPageModel *> *>*dataArray;
 @property (nonatomic, strong) NSArray<TeachingPageModel *> *currentVolumDataArray;
 @property (nonatomic, strong) MWPhotoBrowser *photoBrowser;
-@property (nonatomic, strong) TeachingFilterView *filterView;
 @property (nonatomic, strong) TeachingFiterModel *filterModel;
 @end
 
@@ -28,6 +30,10 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     [self setupTitle];
+    self.filterModel = [TeachingFiterModel modelFromRawData:[GetBookInfoRequestItem mockGetBookInfoRequestItem]];
+    [self dealWithFilterModel:self.filterModel];
+    
+    self.dataArray = [TeachingPageModel TeachingPageModelsFromRawData:[GetBookInfoRequestItem mockGetBookInfoRequestItem]];
     [self setupUI];
     WEAK_SELF
     [[[NSNotificationCenter defaultCenter]rac_addObserverForName:kStageSubjectDidChangeNotification object:nil]subscribeNext:^(id x) {
@@ -35,11 +41,6 @@
         [self setupTitle];
     }];
     
-    self.filterModel = [TeachingFiterModel modelFromRawData:[GetBookInfoRequestItem mockGetBookInfoRequestItem]];
-    [self dealWithFilterModel:self.filterModel];
-    [self setupMockData];
-    
-    self.dataArray = [TeachingPageModel TeachingPageModelsFromRawData:[GetBookInfoRequestItem mockGetBookInfoRequestItem]];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -69,7 +70,19 @@
     [self.view addSubview:self.tableView];
     [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.bottom.mas_equalTo(0);
-        make.top.mas_equalTo(44.0f);
+        make.top.mas_equalTo(44.0f + 44.0f);
+    }];
+    
+    [self setupMutiTabView];
+}
+
+- (void)setupMutiTabView {
+    self.mutiTabView = [[TeachingMutiTabView alloc]initWithFrame:CGRectMake(0, 44, self.view.width, 44)];
+    [self.view addSubview:self.mutiTabView];
+    WEAK_SELF
+    [self.mutiTabView setClickTabButtonBlock:^(GetBookInfoRequestItem_Label *label) {
+        STRONG_SELF
+        DDLogDebug(@"点击啦%@的标签",label.labelID);
     }];
 }
 
@@ -111,6 +124,7 @@
         self.filterModel.unitChooseInteger = 0;
         self.filterModel.courseChooseInteger = 0;
         [self refreshUnitWithFilterModel];//更新单元
+        [self.tableView reloadData];
         return;
     }else {
         num1 = filterArray[1];
@@ -142,7 +156,6 @@
     //    }
     //筛选完成后,要滚动到当前筛选的位置
     [self scrollToFilterPosition];
-
 }
 
 - (void)scrollToFilterPosition {
@@ -180,39 +193,6 @@
 //    }];
 }
 
-
-- (void)setupMockData {
-    NSArray *array0 = @[
-                        @"http://userfile.sanke.zgjiaoyan.com/upload/storage/public/sanke/tbook/2017_03_08/1488968694_288389035/image/slide1.jpg",//第一单元
-                        @"http://userfile.sanke.zgjiaoyan.com/upload/storage/public/sanke/tbook/2017_03_08/1488968694_288389035/image/slide2.jpg",
-                        @"http://userfile.sanke.zgjiaoyan.com/upload/storage/public/sanke/tbook/2017_03_08/1488968694_288389035/image/slide3.jpg",
-                        @"http://userfile.sanke.zgjiaoyan.com/upload/storage/public/sanke/tbook/2017_03_08/1488968694_288389035/image/slide4.jpg",
-                        @"http://userfile.sanke.zgjiaoyan.com/upload/storage/public/sanke/tbook/2017_03_08/1488968694_288389035/image/slide5.jpg",
-                        @"http://userfile.sanke.zgjiaoyan.com/upload/storage/public/sanke/tbook/2017_03_08/1488968694_288389035/image/slide6.jpg",
-                        @"http://userfile.sanke.zgjiaoyan.com/upload/storage/public/sanke/tbook/2017_03_08/1488968694_288389035/image/slide7.jpg",
-                        @"http://userfile.sanke.zgjiaoyan.com/upload/storage/public/sanke/tbook/2017_03_08/1488968694_288389035/image/slide8.jpg",
-                        @"http://userfile.sanke.zgjiaoyan.com/upload/storage/public/sanke/tbook/2017_03_08/1488968694_288389035/image/slide9.jpg"
-                        ];
-    NSArray *array1 = @[
-                        @"http://userfile.sanke.zgjiaoyan.com/upload/storage/public/sanke/tbook/2017_03_08/1488968694_288389035/image/slide17.jpg",
-                        @"http://userfile.sanke.zgjiaoyan.com/upload/storage/public/sanke/tbook/2017_03_08/1488968694_288389035/image/slide17.jpg",
-                        @"http://userfile.sanke.zgjiaoyan.com/upload/storage/public/sanke/tbook/2017_03_08/1488968694_288389035/image/slide18.jpg"
-                        ];
-    NSArray *array2 = @[
-                        @"http://userfile.sanke.zgjiaoyan.com/upload/storage/public/sanke/tbook/2017_03_08/1488968694_288389035/image/slide19.jpg",
-                        @"http://userfile.sanke.zgjiaoyan.com/upload/storage/public/sanke/tbook/2017_03_08/1488968694_288389035/image/slide20.jpg",
-                        @"http://userfile.sanke.zgjiaoyan.com/upload/storage/public/sanke/tbook/2017_03_08/1488968694_288389035/image/slide21.jpg",
-                        @"http://userfile.sanke.zgjiaoyan.com/upload/storage/public/sanke/tbook/2017_03_08/1488968694_288389035/image/slide22.jpg"
-                        ];
-    NSArray *array3 = @[
-                        @"http://userfile.sanke.zgjiaoyan.com/upload/storage/public/sanke/tbook/2017_03_08/1488968694_288389035/image/slide32.jpg",
-                        @"http://userfile.sanke.zgjiaoyan.com/upload/storage/public/sanke/tbook/2017_03_08/1488968694_288389035/image/slide33.jpg"
-                        ];
-    NSMutableArray *array = [NSMutableArray arrayWithObjects:array0,array1,array2,array3, nil];
-    self.dataArray = array.copy;
-    
-}
-
 #pragma mark - UITableViewDataSource & Delegate
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     NSArray *array = self.dataArray[self.filterModel.volumChooseInteger];
@@ -222,6 +202,12 @@
     TeachingMainCell *cell = [tableView dequeueReusableCellWithIdentifier:@"TeachingMainCell"];
     TeachingPageModel *model = self.currentVolumDataArray[indexPath.row];
     cell.model = model;
+    if (model.pageLabel.count > 0) {
+        self.mutiTabView.hidden = NO;
+        self.mutiTabView.tabArray = model.pageLabel;
+    }else {
+        self.mutiTabView.hidden = YES;
+    }
     WEAK_SELF
     [cell setSelectedButtonActionBlock:^{
         STRONG_SELF
@@ -266,7 +252,6 @@
     }
     return nil;
 }
-
 
 - (NSArray<TeachingPageModel *> *)currentVolumDataArray {
     return self.dataArray[self.filterModel.volumChooseInteger];

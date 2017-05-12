@@ -252,6 +252,7 @@
 		E949771D1EC549A800A4642A /* GetBookInfoRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = E949771C1EC549A800A4642A /* GetBookInfoRequest.m */; };
 		E94977201EC5705100A4642A /* TeachingFiterModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E949771F1EC5705100A4642A /* TeachingFiterModel.m */; };
 		E94977231EC599BD00A4642A /* TeachingPageModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E94977221EC599BD00A4642A /* TeachingPageModel.m */; };
+		E949772C1EC5BCF600A4642A /* TeachingMutiTabView.m in Sources */ = {isa = PBXBuildFile; fileRef = E949772B1EC5BCF600A4642A /* TeachingMutiTabView.m */; };
 		E96EB7311E8A16F40061D6C9 /* UpdateUserNameRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = E96EB7301E8A16F40061D6C9 /* UpdateUserNameRequest.m */; };
 		E96EB7341E8A17370061D6C9 /* PersonalCenterModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E96EB7331E8A17370061D6C9 /* PersonalCenterModel.m */; };
 		E96EB7401E8A79FD0061D6C9 /* AboutHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = E96EB73D1E8A79FD0061D6C9 /* AboutHeaderView.m */; };
@@ -774,6 +775,8 @@
 		E949771F1EC5705100A4642A /* TeachingFiterModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TeachingFiterModel.m; sourceTree = "<group>"; };
 		E94977211EC599BD00A4642A /* TeachingPageModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TeachingPageModel.h; sourceTree = "<group>"; };
 		E94977221EC599BD00A4642A /* TeachingPageModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TeachingPageModel.m; sourceTree = "<group>"; };
+		E949772A1EC5BCF600A4642A /* TeachingMutiTabView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TeachingMutiTabView.h; sourceTree = "<group>"; };
+		E949772B1EC5BCF600A4642A /* TeachingMutiTabView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TeachingMutiTabView.m; sourceTree = "<group>"; };
 		E96EB72F1E8A16F40061D6C9 /* UpdateUserNameRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UpdateUserNameRequest.h; sourceTree = "<group>"; };
 		E96EB7301E8A16F40061D6C9 /* UpdateUserNameRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UpdateUserNameRequest.m; sourceTree = "<group>"; };
 		E96EB7321E8A17370061D6C9 /* PersonalCenterModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PersonalCenterModel.h; sourceTree = "<group>"; };
@@ -1942,6 +1945,8 @@
 				E94976FF1EC1B4CC00A4642A /* TeachingFilterCell.m */,
 				E94977011EC1B53E00A4642A /* TeachingFilterBackgroundView.h */,
 				E94977021EC1B53E00A4642A /* TeachingFilterBackgroundView.m */,
+				E949772A1EC5BCF600A4642A /* TeachingMutiTabView.h */,
+				E949772B1EC5BCF600A4642A /* TeachingMutiTabView.m */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -2441,6 +2446,7 @@
 				30C48A9B1E52EF5100CCDBBE /* NSDictionary+Dictionarys.m in Sources */,
 				E96EB7A31E949A4C0061D6C9 /* QAShareCell.m in Sources */,
 				7C1A5F781E15132200832DED /* FileBrowserFactory.m in Sources */,
+				E949772C1EC5BCF600A4642A /* TeachingMutiTabView.m in Sources */,
 				30C48A7D1E52E72100CCDBBE /* YXStatisticRequest.m in Sources */,
 				7C1A5FC81E1631DD00832DED /* UnhandledRequestData.m in Sources */,
 				E96EB7AD1E94D2E50061D6C9 /* QACreateAnswerRequest.m in Sources */,
