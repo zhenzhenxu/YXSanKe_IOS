@@ -7,14 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "TeachingPageModel.h"
 
 typedef void(^SelectedButtonActionBlock)(void);
 
 @interface TeachingMainCell : UITableViewCell
 
-@property (nonatomic, copy) NSString *url;
-@property (nonatomic, assign) NSInteger *index;
-
+@property (nonatomic, strong) TeachingPageModel *model;
 - (void)setSelectedButtonActionBlock:(SelectedButtonActionBlock)block;
 
 @end

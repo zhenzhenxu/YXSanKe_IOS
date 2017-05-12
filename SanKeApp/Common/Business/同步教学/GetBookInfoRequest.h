@@ -13,11 +13,11 @@
 @property (nonatomic, strong) NSString<Optional> *pageIndex;
 @property (nonatomic, strong) NSString<Optional> *pageUrl;
 //target
-//@property (nonatomic, strong) NSString<Optional> *pageVolum;
-//@property (nonatomic, strong) NSString<Optional> *pageUnit;
-//@property (nonatomic, strong) NSString<Optional> *pageCourse;
-//@property (nonatomic, strong) NSString<Optional> *isStart;
-//@property (nonatomic, strong) NSString<Optional> *isEnd;
+@property (nonatomic, strong) NSString<Optional> *pageVolum;
+@property (nonatomic, strong) NSString<Optional> *pageUnit;
+@property (nonatomic, strong) NSString<Optional> *pageCourse;
+@property (nonatomic, strong) NSString<Optional> *isStart;
+@property (nonatomic, strong) NSString<Optional> *isEnd;
 @end
 
 @protocol GetBookInfoRequestItem_Label <NSObject>

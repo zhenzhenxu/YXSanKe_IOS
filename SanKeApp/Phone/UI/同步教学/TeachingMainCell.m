@@ -64,9 +64,14 @@
     BLOCK_EXEC(self.buttonActionBlock);;
 }
 
-- (void)setUrl:(NSString *)url {
-    _url = url;
-    [self.contentImageView sd_setImageWithURL:[NSURL URLWithString:url] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+- (void)setSelectedButtonActionBlock:(SelectedButtonActionBlock)block {
+    self.buttonActionBlock = block;
+}
+
+- (void)setModel:(TeachingPageModel *)model {
+    _model = model;
+    
+    [self.contentImageView sd_setImageWithURL:[NSURL URLWithString:model.pageUrl] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
         if (error) {
             self.errorLabel.hidden = NO;
         }else {
@@ -74,12 +79,4 @@
         }
     }];
 }
-
-- (void)setIndex:(NSInteger *)index {
-    _index = index;
-}
-- (void)setSelectedButtonActionBlock:(SelectedButtonActionBlock)block {
-    self.buttonActionBlock = block;
-}
-
 @end

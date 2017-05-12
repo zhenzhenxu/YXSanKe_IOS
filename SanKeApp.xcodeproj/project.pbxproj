@@ -251,6 +251,7 @@
 		E949771A1EC5496200A4642A /* GetBookInfo.json in Resources */ = {isa = PBXBuildFile; fileRef = E94977191EC5496200A4642A /* GetBookInfo.json */; };
 		E949771D1EC549A800A4642A /* GetBookInfoRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = E949771C1EC549A800A4642A /* GetBookInfoRequest.m */; };
 		E94977201EC5705100A4642A /* TeachingFiterModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E949771F1EC5705100A4642A /* TeachingFiterModel.m */; };
+		E94977231EC599BD00A4642A /* TeachingPageModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E94977221EC599BD00A4642A /* TeachingPageModel.m */; };
 		E96EB7311E8A16F40061D6C9 /* UpdateUserNameRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = E96EB7301E8A16F40061D6C9 /* UpdateUserNameRequest.m */; };
 		E96EB7341E8A17370061D6C9 /* PersonalCenterModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E96EB7331E8A17370061D6C9 /* PersonalCenterModel.m */; };
 		E96EB7401E8A79FD0061D6C9 /* AboutHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = E96EB73D1E8A79FD0061D6C9 /* AboutHeaderView.m */; };
@@ -771,6 +772,8 @@
 		E949771C1EC549A800A4642A /* GetBookInfoRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GetBookInfoRequest.m; sourceTree = "<group>"; };
 		E949771E1EC5705100A4642A /* TeachingFiterModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TeachingFiterModel.h; sourceTree = "<group>"; };
 		E949771F1EC5705100A4642A /* TeachingFiterModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TeachingFiterModel.m; sourceTree = "<group>"; };
+		E94977211EC599BD00A4642A /* TeachingPageModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TeachingPageModel.h; sourceTree = "<group>"; };
+		E94977221EC599BD00A4642A /* TeachingPageModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TeachingPageModel.m; sourceTree = "<group>"; };
 		E96EB72F1E8A16F40061D6C9 /* UpdateUserNameRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UpdateUserNameRequest.h; sourceTree = "<group>"; };
 		E96EB7301E8A16F40061D6C9 /* UpdateUserNameRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UpdateUserNameRequest.m; sourceTree = "<group>"; };
 		E96EB7321E8A17370061D6C9 /* PersonalCenterModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PersonalCenterModel.h; sourceTree = "<group>"; };
@@ -1951,6 +1954,8 @@
 				E949771C1EC549A800A4642A /* GetBookInfoRequest.m */,
 				E949771E1EC5705100A4642A /* TeachingFiterModel.h */,
 				E949771F1EC5705100A4642A /* TeachingFiterModel.m */,
+				E94977211EC599BD00A4642A /* TeachingPageModel.h */,
+				E94977221EC599BD00A4642A /* TeachingPageModel.m */,
 				E949770E1EC41C3800A4642A /* TeachingDataManger.h */,
 				E949770F1EC41C3800A4642A /* TeachingDataManger.m */,
 			);
@@ -2521,6 +2526,7 @@
 				E96EB7631E8A7BD70061D6C9 /* UserAreaInfoPicker.m in Sources */,
 				E9230C531E30900600AC6617 /* SideTableViewModel.m in Sources */,
 				7CAE43911E836E3500B0D460 /* QADataManager.m in Sources */,
+				E94977231EC599BD00A4642A /* TeachingPageModel.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
