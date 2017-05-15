@@ -148,7 +148,7 @@
     for (GetBookInfoRequestItem_Unit *filter in self.filterModel.units) {
         [array addObject:filter.name];
     }
-    [self.filterView refreshUnitFilters:array forKey:self.filterModel.unitName];
+    [self.filterView refreshFilters:array forKey:self.filterModel.unitName isReset:NO];
     [self.filterView setCurrentIndex:0 forKey:self.filterModel.unitName];
     [self refreshCourseWithFilterModel];
 }
@@ -158,7 +158,7 @@
     for (GetBookInfoRequestItem_Course *filter in self.filterModel.courses) {
         [array addObject:filter.name];
     }
-    [self.filterView refreshCourseFilters:array forKey:self.filterModel.courseName];
+    [self.filterView refreshFilters:array forKey:self.filterModel.courseName isReset:YES];
 }
 
 - (void)scrollToFilterPosition {
@@ -186,12 +186,54 @@
     //0.首先,第一次进来的时候(第一次安装/退出app后再进来/切换学科学段),要设置默认的册和单元,课设置为全部;
     //1.其次,在上下滑动的过程中,筛选条件要随着变化到相应的位置;
     //2.还有,在点击图片全屏浏览的时候.也需要将筛选条件变化到相应的位置.
+//    if (!model.isStart && !model.isEnd) {
+//        return;
+//    }
     GetBookInfoRequestItem_Volum *volum = self.filterModel.volums[self.filterModel.volumChooseInteger];
-    GetBookInfoRequestItem_Unit *unit = self.filterModel.units[self.filterModel.unitChooseInteger];
-    GetBookInfoRequestItem_Course *course = self.filterModel.courses[self.filterModel.courseChooseInteger];
     
     NSString *target = model.pageTarget;
-    NSArray *array = [target componentsSeparatedByString:@","];
+    NSString *volumStr = [NSString stringWithFormat:@"%@,",volum.volumID];
+    
+    NSRange range = [target rangeOfString:volumStr]; //现获取要截取的字符串位置
+    NSString * result = [target substringFromIndex:range.location + range.length]; //截取字符串
+    NSArray *array = [result componentsSeparatedByString:@","];
+    if (array.count > 0) {
+        if (array.count == 1) {
+            [self.filterModel.units enumerateObjectsUsingBlock:^(GetBookInfoRequestItem_Unit * _Nonnull unit, NSUInteger idx, BOOL * _Nonnull stop) {
+                if ([array.firstObject isEqualToString:unit.unitID]) {
+                    self.filterModel.unitChooseInteger = idx;
+                    self.filterModel.courseChooseInteger = 0;
+                    NSMutableArray *array = [NSMutableArray array];
+                    for (GetBookInfoRequestItem_Course *filter in self.filterModel.courses) {
+                        [array addObject:filter.name];
+                    }
+                    [self.filterView refreshFilters:array forKey:self.filterModel.courseName isReset:NO];
+                    *stop = YES;
+                }
+            }];
+        }
+        if (array.count == 2) {
+            [self.filterModel.units enumerateObjectsUsingBlock:^(GetBookInfoRequestItem_Unit * _Nonnull unit, NSUInteger idx, BOOL * _Nonnull stop) {
+                if ([array.firstObject isEqualToString:unit.unitID]) {
+                    self.filterModel.unitChooseInteger = idx;
+                    self.filterModel.courseChooseInteger = 0;
+                    NSMutableArray *array = [NSMutableArray array];
+                    for (GetBookInfoRequestItem_Course *filter in self.filterModel.courses) {
+                        [array addObject:filter.name];
+                    }
+                    [self.filterView refreshFilters:array forKey:self.filterModel.courseName isReset:NO];
+                    *stop = YES;
+                }
+            }];
+            [self.filterModel.courses enumerateObjectsUsingBlock:^(GetBookInfoRequestItem_Course * _Nonnull course, NSUInteger idx, BOOL * _Nonnull stop) {
+                if ([array.lastObject isEqualToString:course.courseID]) {
+                    self.filterModel.courseChooseInteger = idx;
+                }
+            }];
+        }
+        [self.filterView setCurrentIndex:self.filterModel.unitChooseInteger forKey:self.filterModel.unitName];
+        [self.filterView setCurrentIndex:self.filterModel.courseChooseInteger forKey:self.filterModel.courseName];
+    }
 }
 
 #pragma mark - UITableViewDataSource & Delegate
@@ -270,7 +312,15 @@
     return self.dataArray[self.filterModel.volumChooseInteger];
 }
 
-- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
+    [self getCurrentPageModel];
+}
+
+- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate {
+    [self getCurrentPageModel];
+}
+
+- (void)getCurrentPageModel {
     TeachingMainCell *cell = [self.tableView cellForRowAtIndexPath:[self minVisibleIndexPath]];
     TeachingPageModel *model = cell.model;
     if (model.pageLabel.count > 0) {
