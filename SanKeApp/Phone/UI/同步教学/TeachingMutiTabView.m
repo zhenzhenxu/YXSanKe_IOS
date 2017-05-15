@@ -52,7 +52,6 @@ static const CGFloat margin = 10;
         [self addSubview:b];
         if (idx == 0) {
             self.contentOffset = CGPointMake(0, 0);
-            b.selected = YES;
             self.currentTab = obj;
         }
         if (idx < tabArray.count - 1) {
@@ -79,18 +78,9 @@ static const CGFloat margin = 10;
 
 - (void)chooseButtonAction:(UIButton *)sender {
     NSInteger index = sender.tag - kTagBase;
-    if (sender.selected) {
-        BLOCK_EXEC(self.buttonActionBlock,self.tabArray[index]);
-    }
-    for (UIButton *b in self.subviews) {
-        if ([b isKindOfClass:[UIButton class]]) {
-            b.selected = NO;
-        }
-    }
-    
-    sender.selected = YES;
     self.currentTab = self.tabArray[index];
     [self scrollTitleWithIndex:index];
+    BLOCK_EXEC(self.buttonActionBlock,self.tabArray[index]);
 }
 
 - (void)scrollTitleWithIndex:(NSInteger)index{
