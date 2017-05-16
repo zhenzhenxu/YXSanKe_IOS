@@ -280,6 +280,7 @@
 		E96EB7AD1E94D2E50061D6C9 /* QACreateAnswerRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = E96EB7AC1E94D2E50061D6C9 /* QACreateAnswerRequest.m */; };
 		E96EB7B01E94E02C0061D6C9 /* createAnswerRequest.json in Resources */ = {isa = PBXBuildFile; fileRef = E96EB7AE1E94E02C0061D6C9 /* createAnswerRequest.json */; };
 		E96EB7B11E94E02C0061D6C9 /* createAskRequest.json in Resources */ = {isa = PBXBuildFile; fileRef = E96EB7AF1E94E02C0061D6C9 /* createAskRequest.json */; };
+		E98ABD991ECAE44F0049435E /* TeachingPhotoBrowser.m in Sources */ = {isa = PBXBuildFile; fileRef = E98ABD981ECAE44F0049435E /* TeachingPhotoBrowser.m */; };
 		E99630871E95EF4700C4BF62 /* QAUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = E99630861E95EF4700C4BF62 /* QAUtils.m */; };
 		E996308A1E9C8C0A00C4BF62 /* UserStageSubjectInfoPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = E99630891E9C8C0A00C4BF62 /* UserStageSubjectInfoPicker.m */; };
 		E996308D1E9CB69000C4BF62 /* PersonalHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = E996308C1E9CB69000C4BF62 /* PersonalHeaderView.m */; };
@@ -829,6 +830,8 @@
 		E96EB7AC1E94D2E50061D6C9 /* QACreateAnswerRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QACreateAnswerRequest.m; sourceTree = "<group>"; };
 		E96EB7AE1E94E02C0061D6C9 /* createAnswerRequest.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = createAnswerRequest.json; sourceTree = "<group>"; };
 		E96EB7AF1E94E02C0061D6C9 /* createAskRequest.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = createAskRequest.json; sourceTree = "<group>"; };
+		E98ABD971ECAE44F0049435E /* TeachingPhotoBrowser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TeachingPhotoBrowser.h; sourceTree = "<group>"; };
+		E98ABD981ECAE44F0049435E /* TeachingPhotoBrowser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TeachingPhotoBrowser.m; sourceTree = "<group>"; };
 		E99630851E95EF4700C4BF62 /* QAUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QAUtils.h; sourceTree = "<group>"; };
 		E99630861E95EF4700C4BF62 /* QAUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QAUtils.m; sourceTree = "<group>"; };
 		E99630881E9C8C0A00C4BF62 /* UserStageSubjectInfoPicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserStageSubjectInfoPicker.h; sourceTree = "<group>"; };
@@ -1947,6 +1950,8 @@
 				E94977021EC1B53E00A4642A /* TeachingFilterBackgroundView.m */,
 				E949772A1EC5BCF600A4642A /* TeachingMutiTabView.h */,
 				E949772B1EC5BCF600A4642A /* TeachingMutiTabView.m */,
+				E98ABD971ECAE44F0049435E /* TeachingPhotoBrowser.h */,
+				E98ABD981ECAE44F0049435E /* TeachingPhotoBrowser.m */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -2336,6 +2341,7 @@
 				7C1809351E25D4A900B71863 /* StageSubjectHeaderView.m in Sources */,
 				E9230C4F1E3060FE00AC6617 /* MineUserModel.m in Sources */,
 				7C1A5EE41E15052000832DED /* BaseViewController.m in Sources */,
+				E98ABD991ECAE44F0049435E /* TeachingPhotoBrowser.m in Sources */,
 				7C76849A1E88C0B9004B05F6 /* QAQuestionDetailView.m in Sources */,
 				7C1CBEE41E81115200826FE9 /* QAQuestionCell.m in Sources */,
 				7C1A60101E163B8800832DED /* TestsRootViewController.m in Sources */,

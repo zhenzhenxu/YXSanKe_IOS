@@ -13,6 +13,7 @@
 #import "GetBookInfoRequest.h"
 #import "TeachingPageModel.h"
 #import "TeachingMutiTabView.h"
+#import "TeachingPhotoBrowser.h"
 
 @interface TeachingMainViewController ()<UITableViewDataSource,UITableViewDelegate,MWPhotoBrowserDelegate,TeachingFilterViewDelegate>
 @property (nonatomic, strong) TeachingFilterView *filterView;
@@ -20,7 +21,7 @@
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) NSArray <NSArray<TeachingPageModel *> *>*dataArray;
 @property (nonatomic, strong) NSArray<TeachingPageModel *> *currentVolumDataArray;
-@property (nonatomic, strong) MWPhotoBrowser *photoBrowser;
+@property (nonatomic, strong) TeachingPhotoBrowser *photoBrowser;
 @property (nonatomic, strong) TeachingFiterModel *filterModel;
 @property (nonatomic, assign) CGFloat lastContentOffset;
 @property (nonatomic, assign) BOOL isScrollTop;
@@ -42,6 +43,21 @@
     [[[NSNotificationCenter defaultCenter]rac_addObserverForName:kStageSubjectDidChangeNotification object:nil]subscribeNext:^(id x) {
         STRONG_SELF
         [self setupTitle];
+    }];
+    
+    [[[NSNotificationCenter defaultCenter]rac_addObserverForName:kTeachingPhotoBrowserExitNotification object:nil]subscribeNext:^(id x) {
+        STRONG_SELF
+        NSNotification *noti = (NSNotification *)x;
+        NSDictionary *dic = noti.userInfo;
+        NSString *indexStr = dic[kPhotoIndexKey];
+        NSInteger currentIndex = indexStr.integerValue;
+        
+        NSIndexPath *currentIndexPath = [NSIndexPath indexPathForRow:currentIndex inSection:0];
+        [self.tableView scrollToRowAtIndexPath:currentIndexPath atScrollPosition:UITableViewScrollPositionTop animated:NO];
+        TeachingMainCell *cell = [self.tableView cellForRowAtIndexPath:currentIndexPath];
+        TeachingPageModel *model = cell.model;
+        [self setupCurrentPageTargetLabel:model];
+        [self setupCurrentFiltersWithPageModel:model];
     }];
 }
 
@@ -251,25 +267,13 @@
     if (indexPath.row == 0) {
         [self setupCurrentPageTargetLabel:model];
     }
-        WEAK_SELF
+    WEAK_SELF
     [cell setSelectedButtonActionBlock:^{
         STRONG_SELF
-        MWPhotoBrowser *browser = [[MWPhotoBrowser alloc] initWithDelegate:self];
-        
-        //            browser.displayActionButton = NO; //分享保存等的功能,默认是
-        //        browser.displayNavArrows = NO;//左右分页切换(底部显示左右的三角按钮来翻页,同时若此时分享按钮显示,则也在底部显示),默认否
-        //        browser.displaySelectionButtons = NO;//是否显示选择按钮在图片上(右上角的对勾),默认否
-        browser.alwaysShowControls = NO;//顶部的导航条以及页数是否一直显示(no则点击时显示-->隐藏->显示;yes则一直显示),默认否
-        browser.zoomPhotosToFill = YES;//是否全屏(图片整张占满导航),默认是
-        //        browser.enableGrid = NO;//是否允许用网格查看所有图片,默认是(yes查看所有 no逐个加载)
-        //        browser.startOnGrid = NO;//是否第一张,默认否(目前并没有发现这个有什么用)
-        //        browser.enableSwipeToDismiss = YES;//是否开始对缩略图网格代替第一张照片.
-        
+        TeachingPhotoBrowser *browser = [[TeachingPhotoBrowser alloc] initWithDelegate:self];
+        browser.displayActionButton = NO;
         self.photoBrowser = browser;
-        //设置当前要显示的图片
-        [self.photoBrowser setCurrentPhotoIndex:model.pageIndex.integerValue - 1];
-        
-        //push到MWPhotoBrowser
+        [self.photoBrowser setCurrentPhotoIndex:indexPath.row];
         [self.navigationController pushViewController:self.photoBrowser animated:YES];
     }];
     return cell;
@@ -294,6 +298,11 @@
         return ptoto;
     }
     return nil;
+}
+
+- (NSString *)photoBrowser:(MWPhotoBrowser *)photoBrowser titleForPhotoAtIndex:(NSUInteger)index {
+    DDLogDebug(@"self.photoBrowser.currentIndex == %@",@(self.photoBrowser.currentIndex));
+    return [NSString stringWithFormat:@"%@/%@",@(index),@(self.currentVolumDataArray.count)];
 }
 
 - (NSArray<TeachingPageModel *> *)currentVolumDataArray {
@@ -387,4 +396,13 @@
     return maxIndexPath;
 }
 
+//- (TeachingPhotoBrowser *)photoBrowser {
+//    if (_photoBrowser == nil) {
+//        _photoBrowser = [[TeachingPhotoBrowser alloc]init];
+//        _photoBrowser.alwaysShowControls = NO;//顶部的导航条以及页数是否一直显示(no则点击时显示-->隐藏->显示;yes则一直显示),默认否
+//        _photoBrowser.zoomPhotosToFill = YES;
+//        _photoBrowser.displayActionButton = NO;
+//    }
+//    return _photoBrowser;
+//}
 @end

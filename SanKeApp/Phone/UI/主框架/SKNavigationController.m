@@ -49,8 +49,28 @@
     if (self.viewControllers.count == 1) {
         viewController.hidesBottomBarWhenPushed = YES;
     }
+    
+    if ([self respondsToSelector:@selector(interactivePopGestureRecognizer)]) {
+        self.interactivePopGestureRecognizer.enabled = NO;
+    }
+    
     self.topViewController.view.userInteractionEnabled = NO;
     [super pushViewController:viewController animated:YES];
+}
+
+- (void)navigationController:(UINavigationController *)navigationController didShowViewController:(UIViewController *)viewController animated:(BOOL)animated
+{
+    if ([self respondsToSelector:@selector(interactivePopGestureRecognizer)]) {
+        self.interactivePopGestureRecognizer.enabled = NO;
+        if (navigationController.viewControllers.count ==1) {
+            self.interactivePopGestureRecognizer.enabled =NO;
+        }
+    }
+}
+
+- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer
+{
+    return YES;
 }
 
 @end
