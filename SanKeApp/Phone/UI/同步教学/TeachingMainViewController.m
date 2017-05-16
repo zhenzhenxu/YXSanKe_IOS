@@ -22,6 +22,8 @@
 @property (nonatomic, strong) NSArray<TeachingPageModel *> *currentVolumDataArray;
 @property (nonatomic, strong) MWPhotoBrowser *photoBrowser;
 @property (nonatomic, strong) TeachingFiterModel *filterModel;
+@property (nonatomic, assign) CGFloat lastContentOffset;
+@property (nonatomic, assign) BOOL isScrollTop;
 @end
 
 @implementation TeachingMainViewController
@@ -29,12 +31,13 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    self.isScrollTop = YES;
     [self setupTitle];
+    
+    self.dataArray = [TeachingPageModel TeachingPageModelsFromRawData:[GetBookInfoRequestItem mockGetBookInfoRequestItem]];//在实际数据请求的回调里面
+    [self setupUI];
     self.filterModel = [TeachingFiterModel modelFromRawData:[GetBookInfoRequestItem mockGetBookInfoRequestItem]];
     [self dealWithFilterModel:self.filterModel];
-    
-    self.dataArray = [TeachingPageModel TeachingPageModelsFromRawData:[GetBookInfoRequestItem mockGetBookInfoRequestItem]];
-    [self setupUI];
     WEAK_SELF
     [[[NSNotificationCenter defaultCenter]rac_addObserverForName:kStageSubjectDidChangeNotification object:nil]subscribeNext:^(id x) {
         STRONG_SELF
@@ -135,7 +138,6 @@
         [self refreshCourseWithFilterModel];//更新课
         return;
     }else {
-        // 学科
         num2 = filterArray[2];
         self.filterModel.courseChooseInteger = num2.integerValue;
     }
@@ -148,7 +150,7 @@
     for (GetBookInfoRequestItem_Unit *filter in self.filterModel.units) {
         [array addObject:filter.name];
     }
-    [self.filterView refreshFilters:array forKey:self.filterModel.unitName isReset:NO];
+    [self.filterView refreshFilters:array forKey:self.filterModel.unitName isFilter:NO];
     [self.filterView setCurrentIndex:0 forKey:self.filterModel.unitName];
     [self refreshCourseWithFilterModel];
 }
@@ -158,7 +160,7 @@
     for (GetBookInfoRequestItem_Course *filter in self.filterModel.courses) {
         [array addObject:filter.name];
     }
-    [self.filterView refreshFilters:array forKey:self.filterModel.courseName isReset:YES];
+    [self.filterView refreshFilters:array forKey:self.filterModel.courseName isFilter:YES];
 }
 
 - (void)scrollToFilterPosition {
@@ -177,6 +179,7 @@
     [self.currentVolumDataArray enumerateObjectsUsingBlock:^(TeachingPageModel * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         if ([obj.pageTarget isEqualToString:filter] && obj.isStart) {
             [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:idx inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:NO];
+            [self setupCurrentPageTargetLabel:obj];
             *stop = YES;
         }
     }];
@@ -186,9 +189,9 @@
     //0.首先,第一次进来的时候(第一次安装/退出app后再进来/切换学科学段),要设置默认的册和单元,课设置为全部;
     //1.其次,在上下滑动的过程中,筛选条件要随着变化到相应的位置;
     //2.还有,在点击图片全屏浏览的时候.也需要将筛选条件变化到相应的位置.
-//    if (!model.isStart && !model.isEnd) {
-//        return;
-//    }
+    //    if (!model.isStart && !model.isEnd) {
+    //        return;
+    //    }
     GetBookInfoRequestItem_Volum *volum = self.filterModel.volums[self.filterModel.volumChooseInteger];
     
     NSString *target = model.pageTarget;
@@ -207,7 +210,7 @@
                     for (GetBookInfoRequestItem_Course *filter in self.filterModel.courses) {
                         [array addObject:filter.name];
                     }
-                    [self.filterView refreshFilters:array forKey:self.filterModel.courseName isReset:NO];
+                    [self.filterView refreshFilters:array forKey:self.filterModel.courseName isFilter:NO];
                     *stop = YES;
                 }
             }];
@@ -221,7 +224,7 @@
                     for (GetBookInfoRequestItem_Course *filter in self.filterModel.courses) {
                         [array addObject:filter.name];
                     }
-                    [self.filterView refreshFilters:array forKey:self.filterModel.courseName isReset:NO];
+                    [self.filterView refreshFilters:array forKey:self.filterModel.courseName isFilter:NO];
                     *stop = YES;
                 }
             }];
@@ -245,25 +248,10 @@
     TeachingMainCell *cell = [tableView dequeueReusableCellWithIdentifier:@"TeachingMainCell"];
     TeachingPageModel *model = self.currentVolumDataArray[indexPath.row];
     cell.model = model;
-    NSIndexPath *minIndexiPath = [self minVisibleIndexPath];
-    BOOL isEqual = ([minIndexiPath compare:indexPath] == NSOrderedSame) ? YES : NO;
-    if (isEqual) {
-        if (model.pageLabel.count > 0) {
-            self.mutiTabView.hidden = NO;
-            self.mutiTabView.tabArray = model.pageLabel;
-            [self.tableView mas_remakeConstraints:^(MASConstraintMaker *make) {
-                make.left.right.bottom.mas_equalTo(0);
-                make.top.mas_equalTo(44.0f + 44.0f);
-            }];
-        }else {
-            self.mutiTabView.hidden = YES;
-            [self.tableView mas_remakeConstraints:^(MASConstraintMaker *make) {
-                make.left.right.bottom.mas_equalTo(0);
-                make.top.mas_equalTo(44.0f);
-            }];
-        }
+    if (indexPath.row == 0) {
+        [self setupCurrentPageTargetLabel:model];
     }
-    WEAK_SELF
+        WEAK_SELF
     [cell setSelectedButtonActionBlock:^{
         STRONG_SELF
         MWPhotoBrowser *browser = [[MWPhotoBrowser alloc] initWithDelegate:self];
@@ -312,17 +300,44 @@
     return self.dataArray[self.filterModel.volumChooseInteger];
 }
 
+- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView{
+    self.lastContentOffset = scrollView.contentOffset.y;
+}
+
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
-    [self getCurrentPageModel];
+    if (self.lastContentOffset - scrollView.contentOffset.y > 30) {
+        self.isScrollTop = NO;
+    }
+    if (scrollView.contentOffset.y - self.lastContentOffset > 30) {
+        self.isScrollTop = YES;
+    }
+    [self setupCurrentPageModel];
 }
 
 - (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate {
-    [self getCurrentPageModel];
+    if (self.lastContentOffset - scrollView.contentOffset.y > 30) {
+        self.isScrollTop = NO;
+    }
+    if (scrollView.contentOffset.y - self.lastContentOffset > 30) {
+        self.isScrollTop = YES;
+    }
+    [self setupCurrentPageModel];
 }
 
-- (void)getCurrentPageModel {
-    TeachingMainCell *cell = [self.tableView cellForRowAtIndexPath:[self minVisibleIndexPath]];
+- (void)setupCurrentPageModel {
+    NSIndexPath *currentIndexPath;
+    if (self.isScrollTop) {
+        currentIndexPath = [self minVisibleIndexPath];
+    }else {
+        currentIndexPath = [self maxVisibleIndexPath];
+    }
+    TeachingMainCell *cell = [self.tableView cellForRowAtIndexPath:currentIndexPath];
     TeachingPageModel *model = cell.model;
+    [self setupCurrentPageTargetLabel:model];
+    [self setupCurrentFiltersWithPageModel:model];
+}
+
+- (void)setupCurrentPageTargetLabel:(TeachingPageModel *)model {
     if (model.pageLabel.count > 0) {
         self.mutiTabView.hidden = NO;
         self.mutiTabView.tabArray = model.pageLabel;
@@ -337,8 +352,8 @@
             make.top.mas_equalTo(44.0f);
         }];
     }
-    [self setupCurrentFiltersWithPageModel:model];
 }
+
 - (NSIndexPath *)minVisibleIndexPath {
     NSIndexPath *minIndexPath;
     NSArray *array = [self.tableView indexPathsForVisibleRows];
@@ -352,6 +367,24 @@
         }
     }
     return minIndexPath;
+}
+
+- (NSIndexPath *)maxVisibleIndexPath {
+    NSIndexPath *maxIndexPath;
+    NSArray *array = [self.tableView indexPathsForVisibleRows];
+    if (array.count > 0) {
+        maxIndexPath = array.firstObject;
+        for (NSIndexPath *indexPath in array) {
+            NSComparisonResult result = [maxIndexPath compare:indexPath];
+            if (result == NSOrderedAscending) {
+                if (indexPath.row == 1) {
+                    break ;
+                }
+                maxIndexPath = indexPath;
+            }
+        }
+    }
+    return maxIndexPath;
 }
 
 @end

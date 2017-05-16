@@ -97,8 +97,8 @@ static const NSUInteger kTagBase = 876;
     
     UIButton *b = [self.typeContainerView viewWithTag:kTagBase+itemIndex];
     [b setTitle:[self currentFilterNameForItem:item] forState:UIControlStateNormal];
-    [self changeButton:b foldStatus:NO];
-    [self changeButton:b selectedStatus:NO];
+    [self changeButton:b foldStatus:YES];
+    [self changeButton:b selectedStatus:YES];
     [self exchangeTitleImagePositionForButton:b];
 }
 
@@ -213,34 +213,8 @@ static const NSUInteger kTagBase = 876;
     UIButton *b = [self.typeContainerView viewWithTag:index+kTagBase];
     [self changeButton:b foldStatus:YES];
 }
-//- (void)refreshUnitFilters:(NSArray *)filters forKey:(NSString *)key {
-//    TeachingFilterView_Item *item = [[TeachingFilterView_Item alloc]init];
-//    item.typeName = key;
-//    item.filterArray = filters;
-//    item.currentIndex = 0;
-//    [self.filterItemArray replaceObjectAtIndex:1 withObject:item];
-//    UIButton *b = [self.typeContainerView viewWithTag:kTagBase+1];
-//    [b setTitle:[self currentFilterNameForItem:item] forState:UIControlStateNormal];
-//    [self changeButton:b foldStatus:YES];
-//    [self changeButton:b selectedStatus:NO];
-//    [self exchangeTitleImagePositionForButton:b];
-//}
-//
-//- (void)refreshCourseFilters:(NSArray *)filters forKey:(NSString *)key {
-//    TeachingFilterView_Item *item = [[TeachingFilterView_Item alloc]init];
-//    item.typeName = key;
-//    item.filterArray = filters;
-//    item.currentIndex = 0;
-//    [self.filterItemArray replaceObjectAtIndex:2 withObject:item];
-//    UIButton *b = [self.typeContainerView viewWithTag:kTagBase+2];
-//    [b setTitle:[self currentFilterNameForItem:item] forState:UIControlStateNormal];
-//    [self changeButton:b foldStatus:NO];
-//    [self changeButton:b selectedStatus:NO];
-//    [self exchangeTitleImagePositionForButton:b];
-//    [self filterItemArrayChanged];
-//}
 
-- (void)refreshFilters:(NSArray *)filters forKey:(NSString *)key isReset:(BOOL)isReset {
+- (void)refreshFilters:(NSArray *)filters forKey:(NSString *)key isFilter:(BOOL)isFilter {
     __block TeachingFilterView_Item *item = [[TeachingFilterView_Item alloc]init];
     item.typeName = key;
     item.filterArray = filters;
@@ -259,13 +233,14 @@ static const NSUInteger kTagBase = 876;
     [self.filterItemArray replaceObjectAtIndex:itemIndex withObject:item];
     UIButton *b = [self.typeContainerView viewWithTag:kTagBase+itemIndex];
     [b setTitle:[self currentFilterNameForItem:item] forState:UIControlStateNormal];
-    [self changeButton:b foldStatus:NO];
-    [self changeButton:b selectedStatus:NO];
+    [self changeButton:b foldStatus:YES];
+    [self changeButton:b selectedStatus:YES];
     [self exchangeTitleImagePositionForButton:b];
-    if (isReset) {
+    if (isFilter) {
         [self filterItemArrayChanged];
     }
 }
+
 #pragma mark - UITableViewDataSource
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     return self.currentFilterItem.filterArray.count;

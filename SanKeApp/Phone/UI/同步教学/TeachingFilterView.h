@@ -23,10 +23,13 @@
 
 - (void)setCurrentIndex:(NSInteger)index forKey:(NSString *)key;
 
-//- (void)refreshUnitFilters:(NSArray *)filters forKey:(NSString *)key;
-//
-//- (void)refreshCourseFilters:(NSArray *)filters forKey:(NSString *)key;
+/**
+ 更新筛选条件
 
-- (void)refreshFilters:(NSArray *)filters forKey:(NSString *)key isReset:(BOOL)isReset;
+ @param filters 要更新的筛选条件的名字的数组
+ @param key 要更新的筛选条件的类型名字
+ @param isFilter 更新筛选条件后是否重新进行筛选
+ */
+- (void)refreshFilters:(NSArray *)filters forKey:(NSString *)key isFilter:(BOOL)isFilter;
 
 @end
