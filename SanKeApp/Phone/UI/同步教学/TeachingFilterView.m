@@ -220,22 +220,25 @@ static const NSUInteger kTagBase = 876;
     item.filterArray = filters;
     item.currentIndex = 0;
     
-    __block NSInteger itemIndex;
-    WEAK_SELF
-    [self.filterItemArray enumerateObjectsUsingBlock:^(TeachingFilterView_Item *f, NSUInteger idx, BOOL * _Nonnull stop) {
-        if ([f.typeName isEqualToString:key]) {
-            STRONG_SELF
-            itemIndex = idx;
-            *stop = YES;
-        }
-    }];
     
-    [self.filterItemArray replaceObjectAtIndex:itemIndex withObject:item];
-    UIButton *b = [self.typeContainerView viewWithTag:kTagBase+itemIndex];
-    [b setTitle:[self currentFilterNameForItem:item] forState:UIControlStateNormal];
-    [self changeButton:b foldStatus:YES];
-    [self changeButton:b selectedStatus:YES];
-    [self exchangeTitleImagePositionForButton:b];
+    if (self.filterItemArray.count > 0) {
+        __block NSInteger itemIndex = 0;
+        WEAK_SELF
+        [self.filterItemArray enumerateObjectsUsingBlock:^(TeachingFilterView_Item *f, NSUInteger idx, BOOL * _Nonnull stop) {
+            if ([f.typeName isEqualToString:key]) {
+                STRONG_SELF
+                itemIndex = idx;
+                *stop = YES;
+            }
+        }];
+        
+        [self.filterItemArray replaceObjectAtIndex:itemIndex withObject:item];
+        UIButton *b = [self.typeContainerView viewWithTag:kTagBase+itemIndex];
+        [b setTitle:[self currentFilterNameForItem:item] forState:UIControlStateNormal];
+        [self changeButton:b foldStatus:YES];
+        [self changeButton:b selectedStatus:YES];
+        [self exchangeTitleImagePositionForButton:b];
+    }
     if (isFilter) {
         [self filterItemArrayChanged];
     }

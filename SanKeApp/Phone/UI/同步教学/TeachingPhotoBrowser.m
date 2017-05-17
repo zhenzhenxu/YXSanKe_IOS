@@ -24,13 +24,11 @@ NSString * const kPhotoIndexKey = @"kPhotoIndexKey";
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self setupLeftBack];
-    
     self.navigationController.navigationBar.barTintColor = [UIColor whiteColor];
     self.navigationController.navigationBar.titleTextAttributes = [NSDictionary dictionaryWithObjectsAndKeys:
                                                                    [UIColor colorWithHexString:@"ffffff"], NSForegroundColorAttributeName,
                                                                    [UIFont systemFontOfSize:17], NSFontAttributeName,
                                                                    nil];
-    // Do any additional setup after loading the view.
     [self addLongPressToSaveImage];
 }
 
@@ -58,6 +56,7 @@ NSString * const kPhotoIndexKey = @"kPhotoIndexKey";
     [[NSNotificationCenter defaultCenter] postNotificationName:kTeachingPhotoBrowserExitNotification object:nil userInfo:infoDic];
 }
 
+#pragma mark - LongPressToSaveImage
 - (void)addLongPressToSaveImage
 {
     UILongPressGestureRecognizer *longPressGesture = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(longPressToSaveImage:)];
@@ -174,6 +173,10 @@ NSString * const kPhotoIndexKey = @"kPhotoIndexKey";
 
 - (void)loadImageFinished:(UIImage *)image
 {
+    if (image == nil) {
+        [YXPromtController showToast:@"保存失败" inView:self.view];
+        return;
+    }
     UIImageWriteToSavedPhotosAlbum(image, self, @selector(image:didFinishSavingWithError:contextInfo:), (__bridge void *)self);
 }
 
@@ -182,7 +185,7 @@ NSString * const kPhotoIndexKey = @"kPhotoIndexKey";
     if (error) {
         [YXPromtController showToast:@"保存失败" inView:self.view];
     }else{
-        [YXPromtController showToast:@"保存成功" inView:self.view];
+        [YXPromtController showToast:@"已经保存成功" inView:self.view];
     }
 }
 

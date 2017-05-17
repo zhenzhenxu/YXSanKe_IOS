@@ -177,7 +177,7 @@
 		<key>QAQuestionListRequest</key>
 		<dict>
 			<key>mockEnable</key>
-			<true/>
+			<false/>
 			<key>mockFile</key>
 			<array>
 				<dict>
@@ -191,7 +191,7 @@
 		<key>QAReplyListRequest</key>
 		<dict>
 			<key>mockEnable</key>
-			<true/>
+			<false/>
 			<key>mockFile</key>
 			<array>
 				<dict>
@@ -205,7 +205,7 @@
 		<key>QAQuestionDetailRequest</key>
 		<dict>
 			<key>mockEnable</key>
-			<true/>
+			<false/>
 			<key>mockFile</key>
 			<array>
 				<dict>
@@ -219,7 +219,7 @@
 		<key>QAReplyFavorRequest</key>
 		<dict>
 			<key>mockEnable</key>
-			<true/>
+			<false/>
 			<key>mockFile</key>
 			<array>
 				<dict>
@@ -233,7 +233,7 @@
 		<key>QACreateAskRequest</key>
 		<dict>
 			<key>mockEnable</key>
-			<true/>
+			<false/>
 			<key>mockFile</key>
 			<array>
 				<dict>
@@ -247,12 +247,26 @@
 		<key>QACreateAnswerRequest</key>
 		<dict>
 			<key>mockEnable</key>
-			<true/>
+			<false/>
 			<key>mockFile</key>
 			<array>
 				<dict>
 					<key>fileName</key>
 					<string>createAnswerRequest.json</string>
+					<key>percent</key>
+					<integer>100</integer>
+				</dict>
+			</array>
+		</dict>
+		<key>GetBookInfoRequest</key>
+		<dict>
+			<key>mockEnable</key>
+			<true/>
+			<key>mockFile</key>
+			<array>
+				<dict>
+					<key>fileName</key>
+					<string>GetBookInfo.json</string>
 					<key>percent</key>
 					<integer>100</integer>
 				</dict>

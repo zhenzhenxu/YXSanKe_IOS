@@ -49,14 +49,21 @@
 @end
 
 @implementation GetBookInfoRequestItem
-+ (GetBookInfoRequestItem *)mockGetBookInfoRequestItem {
-    NSString *filepath = [[NSBundle mainBundle] pathForResource:@"GetBookInfo.json" ofType:nil];
-    NSString *json = [NSString stringWithContentsOfFile:filepath encoding:NSUTF8StringEncoding error:nil];
-    JSONModelError *err = nil;
-    return [[GetBookInfoRequestItem alloc] initWithString:json error:&err];
-}
+//+ (GetBookInfoRequestItem *)mockGetBookInfoRequestItem {
+//    NSString *filepath = [[NSBundle mainBundle] pathForResource:@"GetBookInfo.json" ofType:nil];
+//    NSString *json = [NSString stringWithContentsOfFile:filepath encoding:NSUTF8StringEncoding error:nil];
+//    JSONModelError *err = nil;
+//    return [[GetBookInfoRequestItem alloc] initWithString:json error:&err];
+//}
 @end
 
 @implementation GetBookInfoRequest
+- (instancetype)init {
+    if (self = [super init]) {
+        self.urlHead = [[SKConfigManager sharedInstance].server stringByAppendingString:@"app/get_book_info"];
+        self.biz_id = [NSString stringWithFormat:@"%@_%@",[UserManager sharedInstance].userModel.stageID,[UserManager sharedInstance].userModel.subjectID];
+    }
+    return self;
+}
 
 @end

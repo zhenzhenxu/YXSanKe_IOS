@@ -16,13 +16,17 @@
 #import "TeachingPhotoBrowser.h"
 
 @interface TeachingMainViewController ()<UITableViewDataSource,UITableViewDelegate,MWPhotoBrowserDelegate,TeachingFilterViewDelegate>
+#pragma mark - data
+@property (nonatomic, strong) GetBookInfoRequest *getBookInfoRequest;
+@property (nonatomic, strong) NSArray <NSArray<TeachingPageModel *> *>*dataArray;
+@property (nonatomic, strong) NSArray<TeachingPageModel *> *currentVolumDataArray;
+@property (nonatomic, strong) TeachingFiterModel *filterModel;
+#pragma mark - view
 @property (nonatomic, strong) TeachingFilterView *filterView;
 @property (nonatomic, strong) TeachingMutiTabView *mutiTabView;
 @property (nonatomic, strong) UITableView *tableView;
-@property (nonatomic, strong) NSArray <NSArray<TeachingPageModel *> *>*dataArray;
-@property (nonatomic, strong) NSArray<TeachingPageModel *> *currentVolumDataArray;
 @property (nonatomic, strong) TeachingPhotoBrowser *photoBrowser;
-@property (nonatomic, strong) TeachingFiterModel *filterModel;
+#pragma mark - other
 @property (nonatomic, assign) CGFloat lastContentOffset;
 @property (nonatomic, assign) BOOL isScrollTop;
 @end
@@ -31,18 +35,74 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    
+    self.emptyView = [[EmptyView alloc]init];
+    self.errorView = [[ErrorView alloc]init];
+    WEAK_SELF
+    [self.errorView setRetryBlock:^{
+        STRONG_SELF
+        [self startLoading];
+        [self setupCurrentContent];
+    }];
+    self.dataErrorView = [[DataErrorView alloc]init];
+    
     self.isScrollTop = YES;
     [self setupTitle];
+    [self setupCurrentContent];
+    [self setupObserver];
+}
+
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
+
+- (void)setupTitle {
+    UserModel *model = [UserManager sharedInstance].userModel;
+    [StageSubjectDataManager fetchStageSubjectWithStageID:model.stageID subjectID:model.subjectID completeBlock:^(FetchStageSubjectRequestItem_stage *stage, FetchStageSubjectRequestItem_subject *subject) {
+        NSString *title = [stage.name stringByAppendingString:subject.name];
+        self.navigationItem.title = title;
+    }];
+}
+
+- (void)setupCurrentContent {
+    NSArray *array = self.view.subviews;
+    [array enumerateObjectsUsingBlock:^(UIView *  _Nonnull subView, NSUInteger idx, BOOL * _Nonnull stop) {
+        [subView removeFromSuperview];
+    }];
     
-    self.dataArray = [TeachingPageModel TeachingPageModelsFromRawData:[GetBookInfoRequestItem mockGetBookInfoRequestItem]];//在实际数据请求的回调里面
-    [self setupUI];
-    self.filterModel = [TeachingFiterModel modelFromRawData:[GetBookInfoRequestItem mockGetBookInfoRequestItem]];
-    [self dealWithFilterModel:self.filterModel];
+    if (self.getBookInfoRequest) {
+        [self.getBookInfoRequest stopRequest];
+    }
+    self.getBookInfoRequest = [[GetBookInfoRequest alloc]init];
+    WEAK_SELF
+    [self startLoading];
+    [self.getBookInfoRequest startRequestWithRetClass:[GetBookInfoRequestItem class] andCompleteBlock:^(id retItem, NSError *error, BOOL isMock) {
+        STRONG_SELF
+        [self stopLoading];
+        
+        GetBookInfoRequestItem *item = retItem;
+        UnhandledRequestData *data = [[UnhandledRequestData alloc]init];
+        data.requestDataExist = !isEmpty(item);
+        data.localDataExist = NO;
+        data.error = error;
+        if ([self handleRequestData:data inView:self.view]) {
+            return;
+        }
+       
+        self.dataArray = [TeachingPageModel TeachingPageModelsFromRawData:item];
+        [self setupUI];
+        self.filterModel = [TeachingFiterModel modelFromRawData:item];
+        [self dealWithFilterModel:self.filterModel];
+    }];
+}
+
+- (void)setupObserver {
     WEAK_SELF
     [[[NSNotificationCenter defaultCenter]rac_addObserverForName:kStageSubjectDidChangeNotification object:nil]subscribeNext:^(id x) {
         STRONG_SELF
         [self setupTitle];
+        [self setupCurrentContent];
     }];
     
     [[[NSNotificationCenter defaultCenter]rac_addObserverForName:kTeachingPhotoBrowserExitNotification object:nil]subscribeNext:^(id x) {
@@ -56,21 +116,8 @@
         [self.tableView scrollToRowAtIndexPath:currentIndexPath atScrollPosition:UITableViewScrollPositionTop animated:NO];
         TeachingMainCell *cell = [self.tableView cellForRowAtIndexPath:currentIndexPath];
         TeachingPageModel *model = cell.model;
-        [self setupCurrentPageTargetLabel:model];
+        [self setupCurrentPageTabWithPageModel:model];
         [self setupCurrentFiltersWithPageModel:model];
-    }];
-}
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
-- (void)setupTitle {
-    UserModel *model = [UserManager sharedInstance].userModel;
-    [StageSubjectDataManager fetchStageSubjectWithStageID:model.stageID subjectID:model.subjectID completeBlock:^(FetchStageSubjectRequestItem_stage *stage, FetchStageSubjectRequestItem_subject *subject) {
-        NSString *title = [stage.name stringByAppendingString:subject.name];
-        self.navigationItem.title = title;
     }];
 }
 
@@ -100,6 +147,7 @@
     [self.mutiTabView setClickTabButtonBlock:^(GetBookInfoRequestItem_Label *label) {
         STRONG_SELF
         DDLogDebug(@"点击啦%@的标签",label.labelID);
+        //跳转到标签页并选中相应的标签
     }];
 }
 
@@ -127,8 +175,8 @@
     [self.filterView addFilters:array2 forKey:model.courseName];
     
     filterView.delegate = self;
-    [self.view addSubview:filterView];
 }
+
 
 #pragma mark - TeachingFilterViewDelegate
 - (void)filterChanged:(NSArray *)filterArray{
@@ -195,7 +243,7 @@
     [self.currentVolumDataArray enumerateObjectsUsingBlock:^(TeachingPageModel * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         if ([obj.pageTarget isEqualToString:filter] && obj.isStart) {
             [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:idx inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:NO];
-            [self setupCurrentPageTargetLabel:obj];
+            [self setupCurrentPageTabWithPageModel:obj];
             *stop = YES;
         }
     }];
@@ -257,15 +305,14 @@
 
 #pragma mark - UITableViewDataSource & Delegate
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    NSArray *array = self.dataArray[self.filterModel.volumChooseInteger];
-    return array.count;
+    return self.currentVolumDataArray.count;
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     TeachingMainCell *cell = [tableView dequeueReusableCellWithIdentifier:@"TeachingMainCell"];
     TeachingPageModel *model = self.currentVolumDataArray[indexPath.row];
     cell.model = model;
     if (indexPath.row == 0) {
-        [self setupCurrentPageTargetLabel:model];
+        [self setupCurrentPageTabWithPageModel:model];
     }
     WEAK_SELF
     [cell setSelectedButtonActionBlock:^{
@@ -291,7 +338,6 @@
 }
 
 - (id <MWPhoto>)photoBrowser:(MWPhotoBrowser *)photoBrowser photoAtIndex:(NSUInteger)index {
-    DDLogDebug(@"%@", @(index));
     if (index < self.currentVolumDataArray.count) {
         NSString *url = self.currentVolumDataArray[index].pageUrl;
         MWPhoto *ptoto = [MWPhoto photoWithURL:[NSURL URLWithString:url]];
@@ -301,14 +347,10 @@
 }
 
 - (NSString *)photoBrowser:(MWPhotoBrowser *)photoBrowser titleForPhotoAtIndex:(NSUInteger)index {
-    DDLogDebug(@"self.photoBrowser.currentIndex == %@",@(self.photoBrowser.currentIndex));
-    return [NSString stringWithFormat:@"%@/%@",@(index),@(self.currentVolumDataArray.count)];
+    return [NSString stringWithFormat:@"%@/%@",@(index + 1),@(self.currentVolumDataArray.count)];
 }
 
-- (NSArray<TeachingPageModel *> *)currentVolumDataArray {
-    return self.dataArray[self.filterModel.volumChooseInteger];
-}
-
+#pragma mark - scrollViewDelegate
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView{
     self.lastContentOffset = scrollView.contentOffset.y;
 }
@@ -333,6 +375,7 @@
     [self setupCurrentPageModel];
 }
 
+#pragma mark - setupCurrentPageModel
 - (void)setupCurrentPageModel {
     NSIndexPath *currentIndexPath;
     if (self.isScrollTop) {
@@ -342,11 +385,11 @@
     }
     TeachingMainCell *cell = [self.tableView cellForRowAtIndexPath:currentIndexPath];
     TeachingPageModel *model = cell.model;
-    [self setupCurrentPageTargetLabel:model];
+    [self setupCurrentPageTabWithPageModel:model];
     [self setupCurrentFiltersWithPageModel:model];
 }
 
-- (void)setupCurrentPageTargetLabel:(TeachingPageModel *)model {
+- (void)setupCurrentPageTabWithPageModel:(TeachingPageModel *)model {
     if (model.pageLabel.count > 0) {
         self.mutiTabView.hidden = NO;
         self.mutiTabView.tabArray = model.pageLabel;
@@ -396,4 +439,8 @@
     return maxIndexPath;
 }
 
+#pragma mark - getter
+- (NSArray<TeachingPageModel *> *)currentVolumDataArray {
+    return self.dataArray[self.filterModel.volumChooseInteger];
+}
 @end

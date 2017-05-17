@@ -10,7 +10,6 @@
 
 @interface TeachingMainCell ()
 @property (nonatomic, strong) UIImageView *contentImageView;
-@property (nonatomic, strong) UILabel *errorLabel;
 @property (nonatomic, copy) SelectedButtonActionBlock buttonActionBlock;
 @end
 
@@ -23,7 +22,7 @@
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
-
+    
     // Configure the view for the selected state
 }
 
@@ -36,7 +35,7 @@
 
 - (void)setupUI {
     self.contentView.backgroundColor = [UIColor colorWithHexString:@"e6e6e6"];
-
+    
     self.contentImageView = [[UIImageView alloc]init];
     self.contentImageView.contentMode = UIViewContentModeScaleAspectFit;
     self.contentImageView.backgroundColor = [UIColor whiteColor];
@@ -50,20 +49,10 @@
     UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(selectedAction)];
     [self.contentView addGestureRecognizer:tapGestureRecognizer];
     tapGestureRecognizer.delegate = self;
-    
-    
-    self.errorLabel = [[UILabel alloc]init];
-    self.errorLabel.text = @"图片加载失败";
-    [self.contentImageView addSubview:self.errorLabel];
-    self.errorLabel.hidden = YES;
-    [self.errorLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerX.equalTo(self.contentImageView.mas_centerX);
-        make.centerY.equalTo(self.contentImageView.mas_centerY);
-    }];
 }
 
 - (void)selectedAction {
-    BLOCK_EXEC(self.buttonActionBlock);;
+    BLOCK_EXEC(self.buttonActionBlock);
 }
 
 - (void)setSelectedButtonActionBlock:(SelectedButtonActionBlock)block {
@@ -73,11 +62,11 @@
 - (void)setModel:(TeachingPageModel *)model {
     _model = model;
     
-    [self.contentImageView sd_setImageWithURL:[NSURL URLWithString:model.pageUrl] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+    [self.contentImageView sd_setImageWithURL:[NSURL URLWithString:model.pageUrl] placeholderImage:[UIImage imageNamed:@"图片加载中"] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
         if (error) {
-            self.errorLabel.hidden = NO;
+            self.contentImageView.image = [UIImage imageNamed:@"图片加载失败"];
         }else {
-            self.errorLabel.hidden = YES;
+            self.contentImageView.image = image;
         }
     }];
 }

@@ -67,10 +67,10 @@
 
 @interface GetBookInfoRequestItem : HttpBaseRequestItem
 @property (nonatomic, strong) GetBookInfoRequestItem_Data<Optional> *data;
-+ (GetBookInfoRequestItem *)mockGetBookInfoRequestItem;
+//+ (GetBookInfoRequestItem *)mockGetBookInfoRequestItem;
 @end
 
 
 @interface GetBookInfoRequest : YXPostRequest
-
+@property (nonatomic, strong) NSString<Optional> *biz_id;// 业务id
 @end
