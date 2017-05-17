@@ -39,6 +39,7 @@
 
     self.contentImageView = [[UIImageView alloc]init];
     self.contentImageView.contentMode = UIViewContentModeScaleAspectFit;
+    self.contentImageView.backgroundColor = [UIColor whiteColor];
     [self.contentView addSubview:self.contentImageView];
     
     [self.contentImageView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -60,6 +61,7 @@
         make.centerY.equalTo(self.contentImageView.mas_centerY);
     }];
 }
+
 - (void)selectedAction {
     BLOCK_EXEC(self.buttonActionBlock);;
 }

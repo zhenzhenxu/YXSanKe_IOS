@@ -213,8 +213,8 @@
     NSString *target = model.pageTarget;
     NSString *volumStr = [NSString stringWithFormat:@"%@,",volum.volumID];
     
-    NSRange range = [target rangeOfString:volumStr]; //现获取要截取的字符串位置
-    NSString * result = [target substringFromIndex:range.location + range.length]; //截取字符串
+    NSRange range = [target rangeOfString:volumStr];
+    NSString * result = [target substringFromIndex:range.location + range.length];
     NSArray *array = [result componentsSeparatedByString:@","];
     if (array.count > 0) {
         if (array.count == 1) {
@@ -396,13 +396,4 @@
     return maxIndexPath;
 }
 
-//- (TeachingPhotoBrowser *)photoBrowser {
-//    if (_photoBrowser == nil) {
-//        _photoBrowser = [[TeachingPhotoBrowser alloc]init];
-//        _photoBrowser.alwaysShowControls = NO;//顶部的导航条以及页数是否一直显示(no则点击时显示-->隐藏->显示;yes则一直显示),默认否
-//        _photoBrowser.zoomPhotosToFill = YES;
-//        _photoBrowser.displayActionButton = NO;
-//    }
-//    return _photoBrowser;
-//}
 @end

@@ -8,13 +8,15 @@
 
 #import "TeachingPhotoBrowser.h"
 #import "NavigationBarController.h"
+#import "MenuSelectionView.h"
+#import "MWPhotoBrowserPrivate.h"
+#import "YXPromtController.h"
 
 NSString * const kTeachingPhotoBrowserExitNotification = @"kTeachingPhotoBrowserExitNotification";
 NSString * const kPhotoIndexKey = @"kPhotoIndexKey";
 
-@interface TeachingPhotoBrowser ()
-@property(nonatomic, assign) BOOL deleteHidden;
-
+@interface TeachingPhotoBrowser ()<UIGestureRecognizerDelegate>
+@property (nonatomic, strong) MenuSelectionView *menuSelectionView;
 @end
 
 @implementation TeachingPhotoBrowser
@@ -22,26 +24,16 @@ NSString * const kPhotoIndexKey = @"kPhotoIndexKey";
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self setupLeftBack];
-    self.navigationController.navigationBar.barTintColor = [UIColor whiteColor];
     
-    //设置导航栏文字颜色
+    self.navigationController.navigationBar.barTintColor = [UIColor whiteColor];
     self.navigationController.navigationBar.titleTextAttributes = [NSDictionary dictionaryWithObjectsAndKeys:
                                                                    [UIColor colorWithHexString:@"ffffff"], NSForegroundColorAttributeName,
                                                                    [UIFont systemFontOfSize:17], NSFontAttributeName,
                                                                    nil];
     // Do any additional setup after loading the view.
+    [self addLongPressToSaveImage];
 }
 
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
-    
-}
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
-#pragma mark - Navi Left
 - (void)setupLeftBack{
     [self setupLeftWithImageNamed:@"返回按钮" highlightImageNamed:@"返回按钮"];
 }
@@ -58,7 +50,6 @@ NSString * const kPhotoIndexKey = @"kPhotoIndexKey";
     [self.navigationController popViewControllerAnimated:YES];
     [self.navigationController.navigationBar setBackgroundImage:[UIImage yx_imageWithColor:[UIColor whiteColor]] forBarMetrics:UIBarMetricsDefault];
     self.navigationController.navigationBar.translucent = YES;
-    // 标题样式
     [self.navigationController.navigationBar setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:
                                                                      [UIColor colorWithHexString:@"333333"], NSForegroundColorAttributeName,
                                                                      [UIFont systemFontOfSize:17], NSFontAttributeName,
@@ -66,4 +57,133 @@ NSString * const kPhotoIndexKey = @"kPhotoIndexKey";
     NSDictionary *infoDic = @{kPhotoIndexKey:@(self.currentIndex)};
     [[NSNotificationCenter defaultCenter] postNotificationName:kTeachingPhotoBrowserExitNotification object:nil userInfo:infoDic];
 }
+
+- (void)addLongPressToSaveImage
+{
+    UILongPressGestureRecognizer *longPressGesture = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(longPressToSaveImage:)];
+    longPressGesture.delegate = self;
+    [self.view addGestureRecognizer:longPressGesture];
+}
+
+- (void)longPressToSaveImage:(UILongPressGestureRecognizer *)sender
+{
+    if (sender.state == UIGestureRecognizerStateBegan) {
+        [self handleSaveImage];
+    }
+}
+
+- (void)handleSaveImage {
+    self.menuSelectionView = [[MenuSelectionView alloc]init];
+    self.menuSelectionView.dataArray = @[
+                                         @"保存图片",
+                                         @"取消"
+                                         ];
+    CGFloat height = [self.menuSelectionView totalHeight];
+    [self.view addSubview:self.menuSelectionView];
+    AlertView *alert = [[AlertView alloc]init];
+    alert.hideWhenMaskClicked = YES;
+    alert.maskColor = [[UIColor blackColor]colorWithAlphaComponent:0.4];
+    alert.contentView = self.menuSelectionView;
+    WEAK_SELF
+    [alert setHideBlock:^(AlertView *view) {
+        STRONG_SELF
+        [UIView animateWithDuration:0.3f animations:^{
+            [view.contentView mas_remakeConstraints:^(MASConstraintMaker *make) {
+                make.left.right.equalTo(view);
+                make.top.equalTo(view.mas_bottom).offset(0);
+                make.height.mas_equalTo(height);
+            }];
+            [view layoutIfNeeded];
+        } completion:^(BOOL finished) {
+            [view removeFromSuperview];
+        }];
+    }];
+    [alert showWithLayout:^(AlertView *view) {
+        STRONG_SELF
+        [view.contentView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.right.equalTo(view);
+            make.top.equalTo(view.mas_bottom).offset(0);
+            make.height.mas_equalTo(height);
+        }];
+        [view layoutIfNeeded];
+        [UIView animateWithDuration:0.3f animations:^{
+            [view.contentView mas_remakeConstraints:^(MASConstraintMaker *make) {
+                make.left.right.equalTo(view);
+                make.height.mas_equalTo(height);
+                make.bottom.equalTo(view);
+            }];
+            [view layoutIfNeeded];
+        }];
+    }];
+    [self.menuSelectionView setChooseMenuBlock:^(NSInteger index) {
+        STRONG_SELF
+        [alert hide];
+        [self chooseMenuWithIndex:index];
+    }];
+}
+
+- (void)chooseMenuWithIndex:(NSInteger)index {
+    switch (index) {
+        case 0:
+        {
+            id <MWPhoto> photo = [self photoAtIndex:self.currentIndex];
+            UIImage *img = [self imageForPhoto:photo];
+            [self saveImage:img];
+        }
+            break;
+        case 1:{
+            return;
+        }
+            break;
+            
+        default:
+            break;
+    }
+}
+
+- (void)saveImage:(UIImage *)image {
+    PHAuthorizationStatus status = [PHPhotoLibrary authorizationStatus];
+    switch (status) {
+        case PHAuthorizationStatusDenied:
+        case PHAuthorizationStatusRestricted:
+            [YXPromtController showToast:@"相册权限受限\n请在设置-隐私-相册中开启" inView:self.view];
+            break;
+        case PHAuthorizationStatusNotDetermined:
+        {
+            [PHPhotoLibrary requestAuthorization:^(PHAuthorizationStatus status) {
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    if (status == PHAuthorizationStatusRestricted || status == PHAuthorizationStatusDenied)
+                    {
+                        [YXPromtController showToast:@"相册权限受限\n请在设置-隐私-相册中开启" inView:self.view];
+                    }
+                    else if (status == PHAuthorizationStatusAuthorized)
+                    {
+                        [self loadImageFinished:image];
+                    }
+                });
+            }];
+        }
+            break;
+        case PHAuthorizationStatusAuthorized:
+            [self loadImageFinished:image];
+            break;
+        default:
+            break;
+    }
+}
+
+- (void)loadImageFinished:(UIImage *)image
+{
+    UIImageWriteToSavedPhotosAlbum(image, self, @selector(image:didFinishSavingWithError:contextInfo:), (__bridge void *)self);
+}
+
+- (void)image:(UIImage *)image didFinishSavingWithError:(NSError *)error contextInfo:(void *)contextInfo
+{
+    if (error) {
+        [YXPromtController showToast:@"保存失败" inView:self.view];
+    }else{
+        [YXPromtController showToast:@"保存成功" inView:self.view];
+    }
+}
+
 @end
