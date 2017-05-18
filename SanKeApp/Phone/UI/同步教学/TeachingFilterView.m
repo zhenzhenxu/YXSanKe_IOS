@@ -157,18 +157,17 @@ static const NSUInteger kTagBase = 876;
 }
 
 - (void)changeButton:(UIButton *)b foldStatus:(BOOL)isFold{
-    b.imageView.backgroundColor = [UIColor redColor];
     if (isFold) {
-        [b setImage:[UIImage imageNamed:@"学段类型展开箭头"] forState:UIControlStateNormal];
+        [b setImage:[UIImage imageNamed:@"下拉"] forState:UIControlStateNormal];
     }else{
-        [b setImage:[UIImage imageNamed:@"学段类型收起箭头"] forState:UIControlStateNormal];
+        [b setImage:[UIImage imageNamed:@"上拉"] forState:UIControlStateNormal];
     }
 }
 
 - (void)changeButton:(UIButton *)b selectedStatus:(BOOL)isSelected{
     if (isSelected) {
         [b setTitleColor:[UIColor colorWithHexString:@"4691a6"] forState:UIControlStateNormal];
-        [b setImage:[UIImage imageNamed:@"筛选项目，选择后箭头"] forState:UIControlStateNormal];
+        [b setImage:[UIImage imageNamed:@"点击后"] forState:UIControlStateNormal];
     }else{
         [b setTitleColor:[UIColor colorWithHexString:@"333333"] forState:UIControlStateNormal];
     }

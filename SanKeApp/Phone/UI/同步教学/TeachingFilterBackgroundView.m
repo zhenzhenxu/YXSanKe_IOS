@@ -26,7 +26,6 @@
 - (void)setupUI{
     self.backgroundColor = [UIColor clearColor];
     UIImageView *imageView = [[UIImageView alloc]init];
-    imageView.backgroundColor = [UIColor redColor];
     imageView.image = [UIImage imageNamed:@"切换项目名称的弹窗-尖角"];
     imageView.frame = CGRectMake(self.triangleX-9, 0, 18, 8);
     [self addSubview:imageView];

@@ -81,7 +81,7 @@ NSString * const kPhotoIndexKey = @"kPhotoIndexKey";
     [self.view addSubview:self.menuSelectionView];
     AlertView *alert = [[AlertView alloc]init];
     alert.hideWhenMaskClicked = YES;
-    alert.maskColor = [[UIColor blackColor]colorWithAlphaComponent:0.4];
+    alert.maskColor = [[UIColor blackColor]colorWithAlphaComponent:0.2];
     alert.contentView = self.menuSelectionView;
     WEAK_SELF
     [alert setHideBlock:^(AlertView *view) {
