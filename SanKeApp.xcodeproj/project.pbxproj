@@ -211,6 +211,7 @@
 		E902E6DB1E2CD109009441B3 /* UpgradeView.m in Sources */ = {isa = PBXBuildFile; fileRef = E902E6DA1E2CD109009441B3 /* UpgradeView.m */; };
 		E902E6DE1E2CE19D009441B3 /* ErrorView.m in Sources */ = {isa = PBXBuildFile; fileRef = E902E6DD1E2CE19D009441B3 /* ErrorView.m */; };
 		E902E6E11E2CE1B8009441B3 /* EmptyView.m in Sources */ = {isa = PBXBuildFile; fileRef = E902E6E01E2CE1B8009441B3 /* EmptyView.m */; };
+		E9062AB01ECD392200531472 /* ImageZoomView.m in Sources */ = {isa = PBXBuildFile; fileRef = E9062AAF1ECD392200531472 /* ImageZoomView.m */; };
 		E9230C461E2F829900AC6617 /* LoginRequest.json in Resources */ = {isa = PBXBuildFile; fileRef = E9230C451E2F829900AC6617 /* LoginRequest.json */; };
 		E9230C4F1E3060FE00AC6617 /* MineUserModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E9230C4E1E3060FE00AC6617 /* MineUserModel.m */; };
 		E9230C531E30900600AC6617 /* SideTableViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E9230C521E30900600AC6617 /* SideTableViewModel.m */; };
@@ -702,6 +703,8 @@
 		E902E6DD1E2CE19D009441B3 /* ErrorView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ErrorView.m; sourceTree = "<group>"; };
 		E902E6DF1E2CE1B8009441B3 /* EmptyView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EmptyView.h; sourceTree = "<group>"; };
 		E902E6E01E2CE1B8009441B3 /* EmptyView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EmptyView.m; sourceTree = "<group>"; };
+		E9062AAE1ECD392200531472 /* ImageZoomView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageZoomView.h; sourceTree = "<group>"; };
+		E9062AAF1ECD392200531472 /* ImageZoomView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageZoomView.m; sourceTree = "<group>"; };
 		E9230C451E2F829900AC6617 /* LoginRequest.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = LoginRequest.json; sourceTree = "<group>"; };
 		E9230C4D1E3060FE00AC6617 /* MineUserModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MineUserModel.h; sourceTree = "<group>"; };
 		E9230C4E1E3060FE00AC6617 /* MineUserModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MineUserModel.m; sourceTree = "<group>"; };
@@ -1503,6 +1506,8 @@
 				9241FFF61E2651390015B587 /* YXTriangleView.m */,
 				E9355AE81E6674B4007AE9F0 /* MenuSelectionView.h */,
 				E9355AE91E6674B4007AE9F0 /* MenuSelectionView.m */,
+				E9062AAE1ECD392200531472 /* ImageZoomView.h */,
+				E9062AAF1ECD392200531472 /* ImageZoomView.m */,
 			);
 			path = CustomView;
 			sourceTree = "<group>";
@@ -2329,6 +2334,7 @@
 				7CDBFEC71E8B98C000C72E6F /* QAReplyFavorRequest.m in Sources */,
 				E96EB7881E8CE7DC0061D6C9 /* QAInputAccessoryView.m in Sources */,
 				E96EB7511E8A7ADC0061D6C9 /* UserNameTableViewCell.m in Sources */,
+				E9062AB01ECD392200531472 /* ImageZoomView.m in Sources */,
 				7C1A5F041E150F4B00832DED /* LePlayer.m in Sources */,
 				7C7841911E2E221800755BC0 /* LoginRequest.m in Sources */,
 				7C6F21911E232F8E000AB43A /* YXDrawerViewController.m in Sources */,

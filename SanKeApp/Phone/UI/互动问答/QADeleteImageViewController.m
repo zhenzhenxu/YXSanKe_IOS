@@ -8,10 +8,10 @@
 
 #import "QADeleteImageViewController.h"
 #import "UIImage+YXImage.h"
+#import "ImageZoomView.h"
 
 @interface QADeleteImageViewController ()
-@property (nonatomic, strong) UIImageView *imageView;
-
+@property (nonatomic, strong) ImageZoomView *imageView;
 @property (nonatomic, copy) DeleteBlock deleteButtonBlock;
 @end
 
@@ -63,8 +63,7 @@
 
 #pragma mark - setupUI
 - (void)setupUI {
-    self.imageView = [[UIImageView alloc]init];
-    self.imageView.contentMode = UIViewContentModeScaleAspectFit;
+    self.imageView = [[ImageZoomView alloc]init];
     self.imageView.image = self.image;
     [self.view addSubview:self.imageView];
     [self.imageView sizeToFit];

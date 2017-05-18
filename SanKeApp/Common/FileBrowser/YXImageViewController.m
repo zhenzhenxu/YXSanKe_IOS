@@ -8,8 +8,10 @@
 
 #import "YXImageViewController.h"
 #import "NavigationBarController.h"
+#import "ImageZoomView.h"
 
 @interface YXImageViewController()
+@property (nonatomic, strong) ImageZoomView *imageView;
 @end
 
 @implementation YXImageViewController
@@ -19,11 +21,7 @@
     [self setupLeftBack];
     self.navigationItem.rightBarButtonItems = [NavigationBarController barButtonItemsForView:self.favorWrapper.favorButton];
 
-    UIImageView *imageView = [[UIImageView alloc] init];
-    
-    if (self.image) {
-        imageView.image = self.image;
-    }
+    ImageZoomView *imageView = [[ImageZoomView alloc] init];
     
     imageView.contentMode = UIViewContentModeScaleAspectFit;
     [self.view addSubview:imageView];
@@ -31,6 +29,10 @@
         make.top.mas_equalTo(@0);
         make.bottom.left.right.mas_equalTo(@0);
     }];
+    
+    if (self.image) {
+        imageView.image = self.image;
+    }
 }
 
 - (BOOL)prefersStatusBarHidden

@@ -54,7 +54,7 @@ static CGFloat const kTextViewHeight = 130.0f;
     self.textView = [[QATextView alloc]init];
     self.textView.placeholder = @"请输入您的内容描述…（选填)";
     
-//    [self setupInputAccessoryView];//4.20提问上传图片的功能暂时屏蔽掉
+    [self setupInputAccessoryView];//4.20提问上传图片的功能暂时屏蔽掉
     
     self.imagePickerController = [[YXImagePickerController alloc] init];
     self.imagePickerController.allowsEditing = NO;
