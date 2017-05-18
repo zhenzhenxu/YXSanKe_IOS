@@ -10,7 +10,6 @@
 
 @interface DataErrorView ()
 @property (nonatomic, strong) UIView *contentView;
-@property (nonatomic, strong) UIImageView *iconView;
 @property (nonatomic, strong) UILabel *retryLabel;
 @end
 
@@ -31,28 +30,19 @@
     self.contentView.layer.cornerRadius = 2.0f;
     self.contentView.clipsToBounds = YES;
     
-    self.iconView = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"哭脸"]];
-    
     self.retryLabel = [[UILabel alloc]init];
     self.retryLabel.font = [UIFont systemFontOfSize:14];
     self.retryLabel.textColor = [UIColor colorWithHexString:@"999999"];
     self.retryLabel.text = @"数据错误";
     
     [self addSubview:self.contentView];
-    [self addSubview:self.iconView];
     [self addSubview:self.retryLabel];
     
     [self.contentView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.mas_equalTo(UIEdgeInsetsMake(10, 10, 10, 10));
     }];
-    [self.iconView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerX.equalTo(self);
-        make.centerY.equalTo(self).offset(-55);
-        make.size.mas_equalTo(CGSizeMake(75, 75));
-    }];
     [self.retryLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerX.equalTo(self);
-        make.top.equalTo(self.iconView.mas_bottom).offset(10);
+        make.center.equalTo(self);
     }];
 }
 
