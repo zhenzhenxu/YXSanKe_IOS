@@ -44,37 +44,38 @@
         make.right.mas_equalTo(-10);
     }];
     
-    UIImageView *replyImageView = [[UIImageView alloc]init];
-    replyImageView.image = [UIImage imageNamed:@"回复"];
-    [self.containerView addSubview:replyImageView];
-    [replyImageView mas_makeConstraints:^(MASConstraintMaker *make) {
+    UILabel *replyLabel = [[UILabel alloc]init];
+    replyLabel.font = [UIFont systemFontOfSize:11];
+    replyLabel.textColor = [UIColor colorWithHexString:@"999999"];
+    replyLabel.text = @"回答";
+    [self.containerView addSubview:replyLabel];
+    [replyLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(10);
         make.bottom.mas_equalTo(-10);
-        make.size.mas_equalTo(CGSizeMake(15, 15));
     }];
     self.replyCountLabel = [[UILabel alloc]init];
     self.replyCountLabel.font = [UIFont systemFontOfSize:11];
     self.replyCountLabel.textColor = [UIColor colorWithHexString:@"999999"];
     [self.containerView addSubview:self.replyCountLabel];
     [self.replyCountLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.mas_equalTo(replyImageView.mas_right).mas_offset(5);
-        make.centerY.mas_equalTo(replyImageView.mas_centerY);
+        make.left.mas_equalTo(replyLabel.mas_right).mas_offset(5);
+        make.centerY.mas_equalTo(replyLabel.mas_centerY);
         make.width.mas_equalTo(40);
     }];
     
-    UIImageView *browseImageView = [[UIImageView alloc]init];
-    browseImageView.image = [UIImage imageNamed:@"浏览"];
-    [self.containerView addSubview:browseImageView];
-    [browseImageView mas_makeConstraints:^(MASConstraintMaker *make) {
+    UILabel *browseLabel = [replyLabel clone];
+    browseLabel.text = @"浏览";
+    [self.containerView addSubview:browseLabel];
+    [browseLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(self.replyCountLabel.mas_right).mas_offset(5);
-        make.centerY.mas_equalTo(replyImageView.mas_centerY);
-        make.size.mas_equalTo(CGSizeMake(15, 15));
+        make.centerY.mas_equalTo(replyLabel.mas_centerY);
     }];
+    
     self.browseCountLabel = [self.replyCountLabel clone];
     [self.containerView addSubview:self.browseCountLabel];
     [self.browseCountLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.mas_equalTo(browseImageView.mas_right).mas_offset(5);
-        make.centerY.mas_equalTo(replyImageView.mas_centerY);
+        make.left.mas_equalTo(browseLabel.mas_right).mas_offset(5);
+        make.centerY.mas_equalTo(replyLabel.mas_centerY);
     }];
     
     self.timeLabel = [[UILabel alloc]init];
@@ -84,7 +85,7 @@
     [self.containerView addSubview:self.timeLabel];
     [self.timeLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.right.mas_equalTo(-10);
-        make.centerY.mas_equalTo(replyImageView.mas_centerY);
+        make.centerY.mas_equalTo(replyLabel.mas_centerY);
     }];
 }
 

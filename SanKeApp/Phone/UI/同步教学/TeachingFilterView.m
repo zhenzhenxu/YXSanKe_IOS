@@ -158,7 +158,7 @@ static const NSUInteger kTagBase = 876;
 
 - (void)changeButton:(UIButton *)b foldStatus:(BOOL)isFold{
     if (isFold) {
-        [b setImage:[UIImage imageNamed:@"下拉"] forState:UIControlStateNormal];
+        [b setImage:[UIImage imageNamed:@"未点击"] forState:UIControlStateNormal];
     }else{
         [b setImage:[UIImage imageNamed:@"上拉"] forState:UIControlStateNormal];
     }

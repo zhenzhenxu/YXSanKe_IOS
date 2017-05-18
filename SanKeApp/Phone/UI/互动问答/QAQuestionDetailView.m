@@ -20,7 +20,7 @@ typedef NS_ENUM(NSUInteger, QAAttachmentType) {
 @property (nonatomic, strong) UILabel *nameLabel;
 @property (nonatomic, strong) UILabel *titleLabel;
 @property (nonatomic, strong) UILabel *descLabel;
-@property (nonatomic, strong) UIImageView *replyImageView;
+@property (nonatomic, strong) UILabel *replyLabel;
 @property (nonatomic, strong) UILabel *replyCountLabel;
 @property (nonatomic, strong) UILabel *browseCountLabel;
 @property (nonatomic, strong) UILabel *timeLabel;
@@ -94,39 +94,40 @@ typedef NS_ENUM(NSUInteger, QAAttachmentType) {
     [self.attachmentButton addTarget:self action:@selector(btnAction) forControlEvents:UIControlEventTouchUpInside];
     [self.containerView addSubview:self.attachmentButton];
     
-    UIImageView *replyImageView = [[UIImageView alloc]init];
-    replyImageView.image = [UIImage imageNamed:@"回复"];
-    self.replyImageView = replyImageView;
-    [self.containerView addSubview:replyImageView];
-    [replyImageView mas_makeConstraints:^(MASConstraintMaker *make) {
+    UILabel *replyLabel = [[UILabel alloc]init];
+    replyLabel.font = [UIFont systemFontOfSize:11];
+    replyLabel.textColor = [UIColor colorWithHexString:@"999999"];
+    replyLabel.text = @"回答";
+    self.replyLabel = replyLabel;
+    [self.containerView addSubview:replyLabel];
+    [replyLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(10);
         make.bottom.mas_equalTo(-10);
-        make.size.mas_equalTo(CGSizeMake(15, 15));
         make.top.mas_equalTo(self.descLabel.mas_bottom).mas_offset(8);
     }];
+
     self.replyCountLabel = [[UILabel alloc]init];
     self.replyCountLabel.font = [UIFont systemFontOfSize:11];
     self.replyCountLabel.textColor = [UIColor colorWithHexString:@"999999"];
     [self.containerView addSubview:self.replyCountLabel];
     [self.replyCountLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.mas_equalTo(replyImageView.mas_right).mas_offset(5);
-        make.centerY.mas_equalTo(replyImageView.mas_centerY);
+        make.left.mas_equalTo(replyLabel.mas_right).mas_offset(5);
+        make.centerY.mas_equalTo(replyLabel.mas_centerY);
         make.width.mas_equalTo(40);
     }];
     
-    UIImageView *browseImageView = [[UIImageView alloc]init];
-    browseImageView.image = [UIImage imageNamed:@"浏览"];
-    [self.containerView addSubview:browseImageView];
-    [browseImageView mas_makeConstraints:^(MASConstraintMaker *make) {
+    UILabel *browseLabel = [replyLabel clone];
+    browseLabel.text = @"浏览";
+    [self.containerView addSubview:browseLabel];
+    [browseLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(self.replyCountLabel.mas_right).mas_offset(5);
-        make.centerY.mas_equalTo(replyImageView.mas_centerY);
-        make.size.mas_equalTo(CGSizeMake(15, 15));
+        make.centerY.mas_equalTo(replyLabel.mas_centerY);
     }];
     self.browseCountLabel = [self.replyCountLabel clone];
     [self.containerView addSubview:self.browseCountLabel];
     [self.browseCountLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.mas_equalTo(browseImageView.mas_right).mas_offset(5);
-        make.centerY.mas_equalTo(replyImageView.mas_centerY);
+        make.left.mas_equalTo(browseLabel.mas_right).mas_offset(5);
+        make.centerY.mas_equalTo(replyLabel.mas_centerY);
     }];
     
     self.timeLabel = [[UILabel alloc]init];
@@ -136,7 +137,7 @@ typedef NS_ENUM(NSUInteger, QAAttachmentType) {
     [self.containerView addSubview:self.timeLabel];
     [self.timeLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.right.mas_equalTo(-10);
-        make.centerY.mas_equalTo(replyImageView.mas_centerY);
+        make.centerY.mas_equalTo(replyLabel.mas_centerY);
     }];
     
     self.replyDescLabel = [[UILabel alloc]init];
@@ -200,10 +201,9 @@ typedef NS_ENUM(NSUInteger, QAAttachmentType) {
             make.top.mas_equalTo(self.descLabel.mas_bottom).mas_offset(8);
             make.size.mas_equalTo(CGSizeMake(100, 100));
         }];
-        [self.replyImageView mas_remakeConstraints:^(MASConstraintMaker *make) {
+        [self.replyLabel mas_remakeConstraints:^(MASConstraintMaker *make) {
             make.left.mas_equalTo(10);
             make.bottom.mas_equalTo(-10);
-            make.size.mas_equalTo(CGSizeMake(15, 15));
             make.top.mas_equalTo(self.attachmentButton.mas_bottom).mas_offset(8);
         }];
     }else {
@@ -217,10 +217,9 @@ typedef NS_ENUM(NSUInteger, QAAttachmentType) {
             make.right.mas_equalTo(-10);
             make.top.mas_equalTo(self.descLabel.mas_bottom).mas_offset(2);
         }];
-        [self.replyImageView mas_remakeConstraints:^(MASConstraintMaker *make) {
+        [self.replyLabel mas_remakeConstraints:^(MASConstraintMaker *make) {
             make.left.mas_equalTo(10);
             make.bottom.mas_equalTo(-10);
-            make.size.mas_equalTo(CGSizeMake(15, 15));
             make.top.mas_equalTo(self.attachmentButton.mas_bottom).mas_offset(2);
         }];
     }
