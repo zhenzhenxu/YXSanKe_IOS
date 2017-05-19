@@ -20,15 +20,16 @@ NSString * const kPhotoIndexKey = @"kPhotoIndexKey";
 @end
 
 @implementation TeachingPhotoBrowser
-
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self setupLeftBack];
+//    self.navigationController.navigationBar.translucent = NO;
     self.navigationController.navigationBar.barTintColor = [UIColor whiteColor];
     self.navigationController.navigationBar.titleTextAttributes = [NSDictionary dictionaryWithObjectsAndKeys:
                                                                    [UIColor colorWithHexString:@"ffffff"], NSForegroundColorAttributeName,
                                                                    [UIFont systemFontOfSize:17], NSFontAttributeName,
                                                                    nil];
+    
     [self addLongPressToSaveImage];
 }
 
@@ -47,11 +48,11 @@ NSString * const kPhotoIndexKey = @"kPhotoIndexKey";
 - (void)naviLeftAction{
     [self.navigationController popViewControllerAnimated:YES];
     [self.navigationController.navigationBar setBackgroundImage:[UIImage yx_imageWithColor:[UIColor whiteColor]] forBarMetrics:UIBarMetricsDefault];
-    self.navigationController.navigationBar.translucent = YES;
     [self.navigationController.navigationBar setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:
                                                                      [UIColor colorWithHexString:@"333333"], NSForegroundColorAttributeName,
                                                                      [UIFont systemFontOfSize:17], NSFontAttributeName,
                                                                      nil]];
+//    self.navigationController.navigationBar.translucent = YES;
     NSDictionary *infoDic = @{kPhotoIndexKey:@(self.currentIndex)};
     [[NSNotificationCenter defaultCenter] postNotificationName:kTeachingPhotoBrowserExitNotification object:nil userInfo:infoDic];
 }

@@ -9,11 +9,11 @@
 #import <UIKit/UIKit.h>
 #import "GetBookInfoRequest.h"
 
-typedef void(^ClickTabButtonBlock)(GetBookInfoRequestItem_Label *label);
+typedef void(^ClickTabButtonBlock)(void);
 
 @interface TeachingMutiTabView : UIScrollView
 @property (nonatomic, strong) NSArray<GetBookInfoRequestItem_Label *> *tabArray;
-@property (nonatomic, strong) GetBookInfoRequestItem_Label *currentTab;
-
+//@property (nonatomic, strong) GetBookInfoRequestItem_Label *currentTab;
+@property (nonatomic, assign) NSInteger currentTabIndex;
 - (void)setClickTabButtonBlock:(ClickTabButtonBlock)block;
 @end

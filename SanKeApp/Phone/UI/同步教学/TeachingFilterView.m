@@ -11,6 +11,7 @@
 #import "TeachingFilterBackgroundView.h"
 
 static const NSUInteger kTagBase = 876;
+static const CGFloat kTableViewRowHeight = 44;
 
 @interface TeachingFilterView_Item:NSObject
 @property (nonatomic, strong) NSString *typeName;
@@ -45,11 +46,11 @@ static const NSUInteger kTagBase = 876;
 - (void)setupUI{
     self.typeContainerView = [[UIView alloc]initWithFrame:self.bounds];
     self.typeContainerView.backgroundColor = [UIColor whiteColor];
-        CGFloat lineHeight = 1/[UIScreen mainScreen].scale;
+    CGFloat lineHeight = 1/[UIScreen mainScreen].scale;
     UIView *topLine = [[UIView alloc]initWithFrame:CGRectMake(0, 0, self.typeContainerView.frame.size.width, lineHeight)];
     topLine.backgroundColor = [UIColor colorWithHexString:@"e6e6e6"];
     [self.typeContainerView addSubview:topLine];
-
+    
     UIView *bottomlLine = [[UIView alloc]initWithFrame:CGRectMake(0, self.typeContainerView.bounds.size.height-lineHeight, self.typeContainerView.frame.size.width, lineHeight)];
     bottomlLine.backgroundColor = [UIColor colorWithHexString:@"e6e6e6"];
     [self.typeContainerView addSubview:bottomlLine];
@@ -63,7 +64,7 @@ static const NSUInteger kTagBase = 876;
     self.selectionTableView = [[UITableView alloc]init];
     self.selectionTableView.backgroundColor = [UIColor clearColor];
     self.selectionTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-    self.selectionTableView.rowHeight = 44;
+    self.selectionTableView.rowHeight = kTableViewRowHeight;
     self.selectionTableView.dataSource = self;
     self.selectionTableView.delegate = self;
     self.selectionTableView.layer.cornerRadius = 2.0f;
@@ -82,7 +83,7 @@ static const NSUInteger kTagBase = 876;
 - (void)setCurrentIndex:(NSInteger)index forKey:(NSString *)key{
     __block TeachingFilterView_Item *item = nil;
     __block NSInteger itemIndex;
-
+    
     WEAK_SELF
     [self.filterItemArray enumerateObjectsUsingBlock:^(TeachingFilterView_Item *f, NSUInteger idx, BOOL * _Nonnull stop) {
         if ([f.typeName isEqualToString:key]) {
@@ -194,15 +195,24 @@ static const NSUInteger kTagBase = 876;
     CGRect rect = [self convertRect:self.bounds toView:superview];
     CGFloat tableHeight;
     if (self.currentFilterItem.filterArray.count == 0) {//服务端数据返回为空时 显示
-        tableHeight = 44;
+        tableHeight = kTableViewRowHeight;
     }else {
-        tableHeight = MIN(self.currentFilterItem.filterArray.count*self.selectionTableView.rowHeight , 44 *4);
+        tableHeight = MIN(self.currentFilterItem.filterArray.count*kTableViewRowHeight , kTableViewRowHeight *4);
     }
     TeachingFilterBackgroundView *bgView = [[TeachingFilterBackgroundView alloc]initWithFrame:CGRectMake(6, rect.origin.y+rect.size.height-5, rect.size.width-6-6, tableHeight+8) triangleX:self.bounds.size.width/(self.filterItemArray.count * 2)*(1+2*index)-6];
     self.selectionTableView.frame = CGRectMake(0, 8, bgView.bounds.size.width, tableHeight);
     [bgView addSubview:self.selectionTableView];
     [superview addSubview:bgView];
     [self.selectionTableView reloadData];
+    if (self.currentFilterItem.filterArray.count > 4) {
+        if (self.currentFilterItem.currentIndex > 1 &&  self.currentFilterItem.currentIndex < (self.currentFilterItem.filterArray.count - 1)) {
+            NSIndexPath *indexPath = [NSIndexPath indexPathForRow:self.currentFilterItem.currentIndex inSection:0];
+            CGRect rectintableview=[self.selectionTableView rectForRowAtIndexPath:indexPath];
+            [self.selectionTableView setContentOffset:CGPointMake(self.selectionTableView.contentOffset.x,(rectintableview.origin.y - kTableViewRowHeight * 2)) animated:NO];
+        }else {
+            [self.selectionTableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:self.currentFilterItem.currentIndex inSection:0] atScrollPosition:UITableViewScrollPositionNone animated:NO];
+        }
+    }
 }
 
 - (void)hideFilterSelectionView{

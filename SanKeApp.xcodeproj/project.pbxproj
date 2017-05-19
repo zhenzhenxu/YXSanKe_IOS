@@ -212,6 +212,9 @@
 		E902E6DE1E2CE19D009441B3 /* ErrorView.m in Sources */ = {isa = PBXBuildFile; fileRef = E902E6DD1E2CE19D009441B3 /* ErrorView.m */; };
 		E902E6E11E2CE1B8009441B3 /* EmptyView.m in Sources */ = {isa = PBXBuildFile; fileRef = E902E6E01E2CE1B8009441B3 /* EmptyView.m */; };
 		E9062AB01ECD392200531472 /* ImageZoomView.m in Sources */ = {isa = PBXBuildFile; fileRef = E9062AAF1ECD392200531472 /* ImageZoomView.m */; };
+		E9062AD41ECD9E4400531472 /* TabViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E9062AD31ECD9E4400531472 /* TabViewController.m */; };
+		E9062AD71ECD9F1800531472 /* TabContainerView.m in Sources */ = {isa = PBXBuildFile; fileRef = E9062AD61ECD9F1800531472 /* TabContainerView.m */; };
+		E9062ADA1ECDA01E00531472 /* TabListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E9062AD91ECDA01E00531472 /* TabListViewController.m */; };
 		E9230C461E2F829900AC6617 /* LoginRequest.json in Resources */ = {isa = PBXBuildFile; fileRef = E9230C451E2F829900AC6617 /* LoginRequest.json */; };
 		E9230C4F1E3060FE00AC6617 /* MineUserModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E9230C4E1E3060FE00AC6617 /* MineUserModel.m */; };
 		E9230C531E30900600AC6617 /* SideTableViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E9230C521E30900600AC6617 /* SideTableViewModel.m */; };
@@ -705,6 +708,12 @@
 		E902E6E01E2CE1B8009441B3 /* EmptyView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EmptyView.m; sourceTree = "<group>"; };
 		E9062AAE1ECD392200531472 /* ImageZoomView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageZoomView.h; sourceTree = "<group>"; };
 		E9062AAF1ECD392200531472 /* ImageZoomView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageZoomView.m; sourceTree = "<group>"; };
+		E9062AD21ECD9E4400531472 /* TabViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TabViewController.h; sourceTree = "<group>"; };
+		E9062AD31ECD9E4400531472 /* TabViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TabViewController.m; sourceTree = "<group>"; };
+		E9062AD51ECD9F1800531472 /* TabContainerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TabContainerView.h; sourceTree = "<group>"; };
+		E9062AD61ECD9F1800531472 /* TabContainerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TabContainerView.m; sourceTree = "<group>"; };
+		E9062AD81ECDA01E00531472 /* TabListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TabListViewController.h; sourceTree = "<group>"; };
+		E9062AD91ECDA01E00531472 /* TabListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TabListViewController.m; sourceTree = "<group>"; };
 		E9230C451E2F829900AC6617 /* LoginRequest.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = LoginRequest.json; sourceTree = "<group>"; };
 		E9230C4D1E3060FE00AC6617 /* MineUserModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MineUserModel.h; sourceTree = "<group>"; };
 		E9230C4E1E3060FE00AC6617 /* MineUserModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MineUserModel.m; sourceTree = "<group>"; };
@@ -1552,6 +1561,10 @@
 				E94976F71EC1A30A00A4642A /* View */,
 				7C1CBEB61E80D1E600826FE9 /* TeachingMainViewController.h */,
 				7C1CBEB71E80D1E600826FE9 /* TeachingMainViewController.m */,
+				E9062AD81ECDA01E00531472 /* TabListViewController.h */,
+				E9062AD91ECDA01E00531472 /* TabListViewController.m */,
+				E9062AD21ECD9E4400531472 /* TabViewController.h */,
+				E9062AD31ECD9E4400531472 /* TabViewController.m */,
 			);
 			path = "同步教学";
 			sourceTree = "<group>";
@@ -1957,6 +1970,8 @@
 				E949772B1EC5BCF600A4642A /* TeachingMutiTabView.m */,
 				E98ABD971ECAE44F0049435E /* TeachingPhotoBrowser.h */,
 				E98ABD981ECAE44F0049435E /* TeachingPhotoBrowser.m */,
+				E9062AD51ECD9F1800531472 /* TabContainerView.h */,
+				E9062AD61ECD9F1800531472 /* TabContainerView.m */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -2336,6 +2351,7 @@
 				E96EB7511E8A7ADC0061D6C9 /* UserNameTableViewCell.m in Sources */,
 				E9062AB01ECD392200531472 /* ImageZoomView.m in Sources */,
 				7C1A5F041E150F4B00832DED /* LePlayer.m in Sources */,
+				E9062AD41ECD9E4400531472 /* TabViewController.m in Sources */,
 				7C7841911E2E221800755BC0 /* LoginRequest.m in Sources */,
 				7C6F21911E232F8E000AB43A /* YXDrawerViewController.m in Sources */,
 				923A4E2E1E2C9FF5001059E2 /* ChannelTabRequest.m in Sources */,
@@ -2410,6 +2426,7 @@
 				7C1CBED51E80F8FF00826FE9 /* YXSSOAuthManager.m in Sources */,
 				7C1A5F141E15108F00832DED /* DownloaderEntity.m in Sources */,
 				7C1CBEDD1E80FE8200826FE9 /* YXShareManager.m in Sources */,
+				E9062ADA1ECDA01E00531472 /* TabListViewController.m in Sources */,
 				7C18094C1E271AFC00B71863 /* CollectionViewEqualSpaceFlowLayout.m in Sources */,
 				E9355B621E6E9A0D007AE9F0 /* SupplementInfoViewController.m in Sources */,
 				7CDBFED91E8CEA5E00C72E6F /* QAFileTypeMappingTable.m in Sources */,
@@ -2437,6 +2454,7 @@
 				7C6F219C1E2481D6000AB43A /* AreaDataManager.m in Sources */,
 				7C1A5F6A1E15130200832DED /* YXFilePhotoItem.m in Sources */,
 				E9355B5F1E6E8FD1007AE9F0 /* ResetPasswordViewController.m in Sources */,
+				E9062AD71ECD9F1800531472 /* TabContainerView.m in Sources */,
 				E9355B851E710DEE007AE9F0 /* SendSMSRequest.m in Sources */,
 				E9355B531E6D8852007AE9F0 /* ForgotPasswordViewController.m in Sources */,
 				E96EB7411E8A79FD0061D6C9 /* AboutViewController.m in Sources */,

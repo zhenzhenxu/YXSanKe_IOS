@@ -14,6 +14,7 @@
 #import "TeachingPageModel.h"
 #import "TeachingMutiTabView.h"
 #import "TeachingPhotoBrowser.h"
+#import "TabListViewController.h"
 
 @interface TeachingMainViewController ()<UITableViewDataSource,UITableViewDelegate,MWPhotoBrowserDelegate,TeachingFilterViewDelegate>
 #pragma mark - data
@@ -144,10 +145,13 @@
     self.mutiTabView = [[TeachingMutiTabView alloc]initWithFrame:CGRectMake(0, 44, self.view.width, 44)];
     [self.view addSubview:self.mutiTabView];
     WEAK_SELF
-    [self.mutiTabView setClickTabButtonBlock:^(GetBookInfoRequestItem_Label *label) {
+    [self.mutiTabView setClickTabButtonBlock:^{
         STRONG_SELF
-        DDLogDebug(@"点击啦%@的标签",label.labelID);
         //跳转到标签页并选中相应的标签
+        TabListViewController *vc = [[TabListViewController alloc]init];
+        vc.tabArray = self.mutiTabView.tabArray;
+        vc.currentTabIndex = self.mutiTabView.currentTabIndex;
+        [self.navigationController pushViewController:vc animated:YES];
     }];
 }
 
@@ -188,7 +192,7 @@
         self.filterModel.volumChooseInteger = num0.integerValue;
         self.filterModel.unitChooseInteger = 0;
         self.filterModel.courseChooseInteger = 0;
-        [self refreshUnitWithFilterModel];//更新单元
+        [self refreshUnitFilter];//更新单元
         [self.tableView reloadData];
         return;
     }else {
@@ -199,7 +203,7 @@
     if (num1.integerValue != self.filterModel.unitChooseInteger) {
         self.filterModel.unitChooseInteger = num1.integerValue;
         self.filterModel.courseChooseInteger = 0;
-        [self refreshCourseWithFilterModel];//更新课
+        [self refreshCourseFilter];//更新课
         return;
     }else {
         num2 = filterArray[2];
@@ -209,17 +213,17 @@
     [self scrollToFilterPosition];
 }
 
-- (void)refreshUnitWithFilterModel{
+- (void)refreshUnitFilter{
     NSMutableArray *array = [NSMutableArray array];
     for (GetBookInfoRequestItem_Unit *filter in self.filterModel.units) {
         [array addObject:filter.name];
     }
     [self.filterView refreshFilters:array forKey:self.filterModel.unitName isFilter:NO];
     [self.filterView setCurrentIndex:0 forKey:self.filterModel.unitName];
-    [self refreshCourseWithFilterModel];
+    [self refreshCourseFilter];
 }
 
-- (void)refreshCourseWithFilterModel{
+- (void)refreshCourseFilter{
     NSMutableArray *array = [NSMutableArray array];
     for (GetBookInfoRequestItem_Course *filter in self.filterModel.courses) {
         [array addObject:filter.name];
@@ -249,60 +253,6 @@
     }];
 }
 
-- (void)setupCurrentFiltersWithPageModel:(TeachingPageModel *)model{
-    //0.首先,第一次进来的时候(第一次安装/退出app后再进来/切换学科学段),要设置默认的册和单元,课设置为全部;
-    //1.其次,在上下滑动的过程中,筛选条件要随着变化到相应的位置;
-    //2.还有,在点击图片全屏浏览的时候.也需要将筛选条件变化到相应的位置.
-    //    if (!model.isStart && !model.isEnd) {
-    //        return;
-    //    }
-    GetBookInfoRequestItem_Volum *volum = self.filterModel.volums[self.filterModel.volumChooseInteger];
-    
-    NSString *target = model.pageTarget;
-    NSString *volumStr = [NSString stringWithFormat:@"%@,",volum.volumID];
-    
-    NSRange range = [target rangeOfString:volumStr];
-    NSString * result = [target substringFromIndex:range.location + range.length];
-    NSArray *array = [result componentsSeparatedByString:@","];
-    if (array.count > 0) {
-        if (array.count == 1) {
-            [self.filterModel.units enumerateObjectsUsingBlock:^(GetBookInfoRequestItem_Unit * _Nonnull unit, NSUInteger idx, BOOL * _Nonnull stop) {
-                if ([array.firstObject isEqualToString:unit.unitID]) {
-                    self.filterModel.unitChooseInteger = idx;
-                    self.filterModel.courseChooseInteger = 0;
-                    NSMutableArray *array = [NSMutableArray array];
-                    for (GetBookInfoRequestItem_Course *filter in self.filterModel.courses) {
-                        [array addObject:filter.name];
-                    }
-                    [self.filterView refreshFilters:array forKey:self.filterModel.courseName isFilter:NO];
-                    *stop = YES;
-                }
-            }];
-        }
-        if (array.count == 2) {
-            [self.filterModel.units enumerateObjectsUsingBlock:^(GetBookInfoRequestItem_Unit * _Nonnull unit, NSUInteger idx, BOOL * _Nonnull stop) {
-                if ([array.firstObject isEqualToString:unit.unitID]) {
-                    self.filterModel.unitChooseInteger = idx;
-                    self.filterModel.courseChooseInteger = 0;
-                    NSMutableArray *array = [NSMutableArray array];
-                    for (GetBookInfoRequestItem_Course *filter in self.filterModel.courses) {
-                        [array addObject:filter.name];
-                    }
-                    [self.filterView refreshFilters:array forKey:self.filterModel.courseName isFilter:NO];
-                    *stop = YES;
-                }
-            }];
-            [self.filterModel.courses enumerateObjectsUsingBlock:^(GetBookInfoRequestItem_Course * _Nonnull course, NSUInteger idx, BOOL * _Nonnull stop) {
-                if ([array.lastObject isEqualToString:course.courseID]) {
-                    self.filterModel.courseChooseInteger = idx;
-                }
-            }];
-        }
-        [self.filterView setCurrentIndex:self.filterModel.unitChooseInteger forKey:self.filterModel.unitName];
-        [self.filterView setCurrentIndex:self.filterModel.courseChooseInteger forKey:self.filterModel.courseName];
-    }
-}
-
 #pragma mark - UITableViewDataSource & Delegate
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return self.currentVolumDataArray.count;
@@ -321,7 +271,7 @@
         browser.displayActionButton = NO;
         self.photoBrowser = browser;
         [self.photoBrowser setCurrentPhotoIndex:indexPath.row];
-        [self.navigationController pushViewController:self.photoBrowser animated:YES];
+        [self.navigationController pushViewController:self.photoBrowser animated:NO];
     }];
     return cell;
 }
@@ -389,23 +339,6 @@
     [self setupCurrentFiltersWithPageModel:model];
 }
 
-- (void)setupCurrentPageTabWithPageModel:(TeachingPageModel *)model {
-    if (model.pageLabel.count > 0) {
-        self.mutiTabView.hidden = NO;
-        self.mutiTabView.tabArray = model.pageLabel;
-        [self.tableView mas_remakeConstraints:^(MASConstraintMaker *make) {
-            make.left.right.bottom.mas_equalTo(0);
-            make.top.mas_equalTo(44.0f + 44.0f);
-        }];
-    }else {
-        self.mutiTabView.hidden = YES;
-        [self.tableView mas_remakeConstraints:^(MASConstraintMaker *make) {
-            make.left.right.bottom.mas_equalTo(0);
-            make.top.mas_equalTo(44.0f);
-        }];
-    }
-}
-
 - (NSIndexPath *)minVisibleIndexPath {
     NSIndexPath *minIndexPath;
     NSArray *array = [self.tableView indexPathsForVisibleRows];
@@ -437,6 +370,80 @@
         }
     }
     return maxIndexPath;
+}
+
+- (void)setupCurrentPageTabWithPageModel:(TeachingPageModel *)model {
+    if (model.pageLabel.count > 0) {
+        self.mutiTabView.hidden = NO;
+        self.mutiTabView.tabArray = model.pageLabel;
+        [self.tableView mas_remakeConstraints:^(MASConstraintMaker *make) {
+            make.left.right.bottom.mas_equalTo(0);
+            make.top.mas_equalTo(44.0f + 44.0f);
+        }];
+    }else {
+        self.mutiTabView.hidden = YES;
+        [self.tableView mas_remakeConstraints:^(MASConstraintMaker *make) {
+            make.left.right.bottom.mas_equalTo(0);
+            make.top.mas_equalTo(44.0f);
+        }];
+    }
+}
+
+- (void)setupCurrentFiltersWithPageModel:(TeachingPageModel *)model{
+    //0.首先,第一次进来的时候(第一次安装/退出app后再进来/切换学科学段),要设置默认的册和单元,课设置为全部;
+    //1.其次,在上下滑动的过程中,筛选条件要随着变化到相应的位置;
+    //2.还有,在点击图片全屏浏览的时候.也需要将筛选条件变化到相应的位置.
+    //    if (!model.isStart && !model.isEnd) {
+    //        return;
+    //    }
+    GetBookInfoRequestItem_Volum *volum = self.filterModel.volums[self.filterModel.volumChooseInteger];
+    
+    NSString *target = model.pageTarget;
+    NSString *volumStr = [NSString stringWithFormat:@"%@,",volum.volumID];
+    
+    if (![target containsString:volumStr]) {
+        return;
+    }
+    NSRange range = [target rangeOfString:volumStr];
+    NSString * result = [target substringFromIndex:range.location + range.length];
+    NSArray *array = [result componentsSeparatedByString:@","];
+    if (array.count > 0) {
+        if (array.count == 1) {
+            [self.filterModel.units enumerateObjectsUsingBlock:^(GetBookInfoRequestItem_Unit * _Nonnull unit, NSUInteger idx, BOOL * _Nonnull stop) {
+                if ([array.firstObject isEqualToString:unit.unitID]) {
+                    self.filterModel.unitChooseInteger = idx;
+                    self.filterModel.courseChooseInteger = 0;
+                    NSMutableArray *array = [NSMutableArray array];
+                    for (GetBookInfoRequestItem_Course *filter in self.filterModel.courses) {
+                        [array addObject:filter.name];
+                    }
+                    [self.filterView refreshFilters:array forKey:self.filterModel.courseName isFilter:NO];
+                    *stop = YES;
+                }
+            }];
+        }
+        if (array.count == 2) {
+            [self.filterModel.units enumerateObjectsUsingBlock:^(GetBookInfoRequestItem_Unit * _Nonnull unit, NSUInteger idx, BOOL * _Nonnull stop) {
+                if ([array.firstObject isEqualToString:unit.unitID]) {
+                    self.filterModel.unitChooseInteger = idx;
+                    self.filterModel.courseChooseInteger = 0;
+                    NSMutableArray *array = [NSMutableArray array];
+                    for (GetBookInfoRequestItem_Course *filter in self.filterModel.courses) {
+                        [array addObject:filter.name];
+                    }
+                    [self.filterView refreshFilters:array forKey:self.filterModel.courseName isFilter:NO];
+                    *stop = YES;
+                }
+            }];
+            [self.filterModel.courses enumerateObjectsUsingBlock:^(GetBookInfoRequestItem_Course * _Nonnull course, NSUInteger idx, BOOL * _Nonnull stop) {
+                if ([array.lastObject isEqualToString:course.courseID]) {
+                    self.filterModel.courseChooseInteger = idx;
+                }
+            }];
+        }
+        [self.filterView setCurrentIndex:self.filterModel.unitChooseInteger forKey:self.filterModel.unitName];
+        [self.filterView setCurrentIndex:self.filterModel.courseChooseInteger forKey:self.filterModel.courseName];
+    }
 }
 
 #pragma mark - getter
