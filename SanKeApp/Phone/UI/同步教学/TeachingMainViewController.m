@@ -12,9 +12,9 @@
 #import "TeachingFiterModel.h"
 #import "GetBookInfoRequest.h"
 #import "TeachingPageModel.h"
-#import "TeachingMutiTabView.h"
+#import "TeachingMutiLabelView.h"
 #import "TeachingPhotoBrowser.h"
-#import "TabListViewController.h"
+#import "LabelListViewController.h"
 
 @interface TeachingMainViewController ()<UITableViewDataSource,UITableViewDelegate,MWPhotoBrowserDelegate,TeachingFilterViewDelegate>
 #pragma mark - data
@@ -24,7 +24,7 @@
 @property (nonatomic, strong) TeachingFiterModel *filterModel;
 #pragma mark - view
 @property (nonatomic, strong) TeachingFilterView *filterView;
-@property (nonatomic, strong) TeachingMutiTabView *mutiTabView;
+@property (nonatomic, strong) TeachingMutiLabelView *mutiTabView;
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) TeachingPhotoBrowser *photoBrowser;
 #pragma mark - other
@@ -142,13 +142,13 @@
 }
 
 - (void)setupMutiTabView {
-    self.mutiTabView = [[TeachingMutiTabView alloc]initWithFrame:CGRectMake(0, 44, self.view.width, 44)];
+    self.mutiTabView = [[TeachingMutiLabelView alloc]initWithFrame:CGRectMake(0, 44, self.view.width, 44)];
     [self.view addSubview:self.mutiTabView];
     WEAK_SELF
     [self.mutiTabView setClickTabButtonBlock:^{
         STRONG_SELF
         //跳转到标签页并选中相应的标签
-        TabListViewController *vc = [[TabListViewController alloc]init];
+        LabelListViewController *vc = [[LabelListViewController alloc]init];
         vc.tabArray = self.mutiTabView.tabArray;
         vc.currentTabIndex = self.mutiTabView.currentTabIndex;
         [self.navigationController pushViewController:vc animated:YES];
@@ -276,11 +276,11 @@
     return cell;
 }
 
-- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
-    UIView *view = [[UIView alloc]initWithFrame:CGRectMake(0, 0, self.view.width, 40)];
-    view.backgroundColor = [UIColor blueColor];
-    return view;
-}
+//- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
+//    UIView *view = [[UIView alloc]initWithFrame:CGRectMake(0, 0, self.view.width, 40)];
+//    view.backgroundColor = [UIColor blueColor];
+//    return view;
+//}
 
 #pragma mark - MWPhotoBrowserDelegate
 - (NSUInteger)numberOfPhotosInPhotoBrowser:(MWPhotoBrowser *)photoBrowser {

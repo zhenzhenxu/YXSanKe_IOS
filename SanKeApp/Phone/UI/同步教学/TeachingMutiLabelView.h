@@ -1,8 +1,8 @@
 //
-//  TeachingMutiTabView.h
+//  TeachingMutiLabelView.h
 //  SanKeApp
 //
-//  Created by ZLL on 2017/5/12.
+//  Created by ZLL on 2017/5/22.
 //  Copyright © 2017年 niuzhaowang. All rights reserved.
 //
 
@@ -11,9 +11,8 @@
 
 typedef void(^ClickTabButtonBlock)(void);
 
-@interface TeachingMutiTabView : UIScrollView
+@interface TeachingMutiLabelView : UIScrollView
 @property (nonatomic, strong) NSArray<GetBookInfoRequestItem_Label *> *tabArray;
-//@property (nonatomic, strong) GetBookInfoRequestItem_Label *currentTab;
 @property (nonatomic, assign) NSInteger currentTabIndex;
 - (void)setClickTabButtonBlock:(ClickTabButtonBlock)block;
 @end

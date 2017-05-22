@@ -1,12 +1,12 @@
 //
-//  TeachingMutiTabView.m
+//  TeachingMutiLabelView.m
 //  SanKeApp
 //
-//  Created by ZLL on 2017/5/12.
+//  Created by ZLL on 2017/5/22.
 //  Copyright © 2017年 niuzhaowang. All rights reserved.
 //
 
-#import "TeachingMutiTabView.h"
+#import "TeachingMutiLabelView.h"
 
 #define kScreenHeight [UIScreen mainScreen].bounds.size.height
 #define kScreenWidth   [UIScreen mainScreen].bounds.size.width
@@ -14,12 +14,12 @@ static const NSUInteger kTagBase = 10086;
 static const CGFloat margin = 10;
 
 
-@interface TeachingMutiTabView ()
+@interface TeachingMutiLabelView ()
 @property (nonatomic, copy) ClickTabButtonBlock buttonActionBlock;
 @end
 
 
-@implementation TeachingMutiTabView
+@implementation TeachingMutiLabelView
 
 - (instancetype)initWithFrame:(CGRect)frame {
     if (self = [super initWithFrame:frame]) {
@@ -39,7 +39,7 @@ static const CGFloat margin = 10;
         [v removeFromSuperview];
     }
     _tabArray = tabArray;
-
+    
     __block CGFloat x = margin;
     
     [tabArray enumerateObjectsUsingBlock:^(GetBookInfoRequestItem_Label *obj, NSUInteger idx, BOOL * _Nonnull stop) {
@@ -52,7 +52,7 @@ static const CGFloat margin = 10;
         [self addSubview:b];
         if (idx == 0) {
             self.contentOffset = CGPointMake(0, 0);
-//            self.currentTab = obj;
+            //            self.currentTab = obj;
         }
         if (idx < tabArray.count - 1) {
             CGFloat lineHeight = 9.0f;  CGFloat lineWidth = 1.0f;
@@ -82,7 +82,7 @@ static const CGFloat margin = 10;
 
 - (void)chooseButtonAction:(UIButton *)sender {
     NSInteger index = sender.tag - kTagBase;
-//    self.currentTab = self.tabArray[index];
+    //    self.currentTab = self.tabArray[index];
     [self scrollTitleWithIndex:index];
     self.currentTabIndex = index;
     BLOCK_EXEC(self.buttonActionBlock);
@@ -115,10 +115,12 @@ static const CGFloat margin = 10;
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView{
     NSInteger index = scrollView.contentOffset.x/scrollView.frame.size.width;
     [self scrollTitleWithIndex:index];
-//    self.currentTab = self.tabArray[index];
+    //    self.currentTab = self.tabArray[index];
 }
 
 -(void)setClickTabButtonBlock:(ClickTabButtonBlock)block {
     self.buttonActionBlock = block;
 }
+
+
 @end

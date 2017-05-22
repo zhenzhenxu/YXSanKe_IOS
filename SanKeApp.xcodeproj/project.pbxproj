@@ -212,9 +212,13 @@
 		E902E6DE1E2CE19D009441B3 /* ErrorView.m in Sources */ = {isa = PBXBuildFile; fileRef = E902E6DD1E2CE19D009441B3 /* ErrorView.m */; };
 		E902E6E11E2CE1B8009441B3 /* EmptyView.m in Sources */ = {isa = PBXBuildFile; fileRef = E902E6E01E2CE1B8009441B3 /* EmptyView.m */; };
 		E9062AB01ECD392200531472 /* ImageZoomView.m in Sources */ = {isa = PBXBuildFile; fileRef = E9062AAF1ECD392200531472 /* ImageZoomView.m */; };
-		E9062AD41ECD9E4400531472 /* TabViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E9062AD31ECD9E4400531472 /* TabViewController.m */; };
-		E9062AD71ECD9F1800531472 /* TabContainerView.m in Sources */ = {isa = PBXBuildFile; fileRef = E9062AD61ECD9F1800531472 /* TabContainerView.m */; };
-		E9062ADA1ECDA01E00531472 /* TabListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E9062AD91ECDA01E00531472 /* TabListViewController.m */; };
+		E9062ADE1ED294EE00531472 /* GetLabelListRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = E9062ADD1ED294EE00531472 /* GetLabelListRequest.m */; };
+		E9062AE41ED29DA500531472 /* TeachingMutiLabelView.m in Sources */ = {isa = PBXBuildFile; fileRef = E9062AE31ED29DA500531472 /* TeachingMutiLabelView.m */; };
+		E9062AE71ED29E8500531472 /* LabelListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E9062AE61ED29E8500531472 /* LabelListViewController.m */; };
+		E9062AEA1ED29F2900531472 /* LabelViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E9062AE91ED29F2900531472 /* LabelViewController.m */; };
+		E9062AF01ED2B2CC00531472 /* LabelListContainerView.m in Sources */ = {isa = PBXBuildFile; fileRef = E9062AEF1ED2B2CC00531472 /* LabelListContainerView.m */; };
+		E9062AF61ED2B37500531472 /* LabelTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E9062AF51ED2B37500531472 /* LabelTableViewCell.m */; };
+		E9062AF91ED2B9F500531472 /* LabelHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = E9062AF81ED2B9F500531472 /* LabelHeaderView.m */; };
 		E9230C461E2F829900AC6617 /* LoginRequest.json in Resources */ = {isa = PBXBuildFile; fileRef = E9230C451E2F829900AC6617 /* LoginRequest.json */; };
 		E9230C4F1E3060FE00AC6617 /* MineUserModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E9230C4E1E3060FE00AC6617 /* MineUserModel.m */; };
 		E9230C531E30900600AC6617 /* SideTableViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E9230C521E30900600AC6617 /* SideTableViewModel.m */; };
@@ -256,7 +260,6 @@
 		E949771D1EC549A800A4642A /* GetBookInfoRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = E949771C1EC549A800A4642A /* GetBookInfoRequest.m */; };
 		E94977201EC5705100A4642A /* TeachingFiterModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E949771F1EC5705100A4642A /* TeachingFiterModel.m */; };
 		E94977231EC599BD00A4642A /* TeachingPageModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E94977221EC599BD00A4642A /* TeachingPageModel.m */; };
-		E949772C1EC5BCF600A4642A /* TeachingMutiTabView.m in Sources */ = {isa = PBXBuildFile; fileRef = E949772B1EC5BCF600A4642A /* TeachingMutiTabView.m */; };
 		E96EB7311E8A16F40061D6C9 /* UpdateUserNameRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = E96EB7301E8A16F40061D6C9 /* UpdateUserNameRequest.m */; };
 		E96EB7341E8A17370061D6C9 /* PersonalCenterModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E96EB7331E8A17370061D6C9 /* PersonalCenterModel.m */; };
 		E96EB7401E8A79FD0061D6C9 /* AboutHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = E96EB73D1E8A79FD0061D6C9 /* AboutHeaderView.m */; };
@@ -708,12 +711,20 @@
 		E902E6E01E2CE1B8009441B3 /* EmptyView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EmptyView.m; sourceTree = "<group>"; };
 		E9062AAE1ECD392200531472 /* ImageZoomView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageZoomView.h; sourceTree = "<group>"; };
 		E9062AAF1ECD392200531472 /* ImageZoomView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageZoomView.m; sourceTree = "<group>"; };
-		E9062AD21ECD9E4400531472 /* TabViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TabViewController.h; sourceTree = "<group>"; };
-		E9062AD31ECD9E4400531472 /* TabViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TabViewController.m; sourceTree = "<group>"; };
-		E9062AD51ECD9F1800531472 /* TabContainerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TabContainerView.h; sourceTree = "<group>"; };
-		E9062AD61ECD9F1800531472 /* TabContainerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TabContainerView.m; sourceTree = "<group>"; };
-		E9062AD81ECDA01E00531472 /* TabListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TabListViewController.h; sourceTree = "<group>"; };
-		E9062AD91ECDA01E00531472 /* TabListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TabListViewController.m; sourceTree = "<group>"; };
+		E9062ADC1ED294EE00531472 /* GetLabelListRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GetLabelListRequest.h; sourceTree = "<group>"; };
+		E9062ADD1ED294EE00531472 /* GetLabelListRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GetLabelListRequest.m; sourceTree = "<group>"; };
+		E9062AE21ED29DA500531472 /* TeachingMutiLabelView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TeachingMutiLabelView.h; sourceTree = "<group>"; };
+		E9062AE31ED29DA500531472 /* TeachingMutiLabelView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TeachingMutiLabelView.m; sourceTree = "<group>"; };
+		E9062AE51ED29E8500531472 /* LabelListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LabelListViewController.h; sourceTree = "<group>"; };
+		E9062AE61ED29E8500531472 /* LabelListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LabelListViewController.m; sourceTree = "<group>"; };
+		E9062AE81ED29F2900531472 /* LabelViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LabelViewController.h; sourceTree = "<group>"; };
+		E9062AE91ED29F2900531472 /* LabelViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LabelViewController.m; sourceTree = "<group>"; };
+		E9062AEE1ED2B2CC00531472 /* LabelListContainerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LabelListContainerView.h; sourceTree = "<group>"; };
+		E9062AEF1ED2B2CC00531472 /* LabelListContainerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LabelListContainerView.m; sourceTree = "<group>"; };
+		E9062AF41ED2B37500531472 /* LabelTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LabelTableViewCell.h; sourceTree = "<group>"; };
+		E9062AF51ED2B37500531472 /* LabelTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LabelTableViewCell.m; sourceTree = "<group>"; };
+		E9062AF71ED2B9F500531472 /* LabelHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LabelHeaderView.h; sourceTree = "<group>"; };
+		E9062AF81ED2B9F500531472 /* LabelHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LabelHeaderView.m; sourceTree = "<group>"; };
 		E9230C451E2F829900AC6617 /* LoginRequest.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = LoginRequest.json; sourceTree = "<group>"; };
 		E9230C4D1E3060FE00AC6617 /* MineUserModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MineUserModel.h; sourceTree = "<group>"; };
 		E9230C4E1E3060FE00AC6617 /* MineUserModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MineUserModel.m; sourceTree = "<group>"; };
@@ -788,8 +799,6 @@
 		E949771F1EC5705100A4642A /* TeachingFiterModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TeachingFiterModel.m; sourceTree = "<group>"; };
 		E94977211EC599BD00A4642A /* TeachingPageModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TeachingPageModel.h; sourceTree = "<group>"; };
 		E94977221EC599BD00A4642A /* TeachingPageModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TeachingPageModel.m; sourceTree = "<group>"; };
-		E949772A1EC5BCF600A4642A /* TeachingMutiTabView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TeachingMutiTabView.h; sourceTree = "<group>"; };
-		E949772B1EC5BCF600A4642A /* TeachingMutiTabView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TeachingMutiTabView.m; sourceTree = "<group>"; };
 		E96EB72F1E8A16F40061D6C9 /* UpdateUserNameRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UpdateUserNameRequest.h; sourceTree = "<group>"; };
 		E96EB7301E8A16F40061D6C9 /* UpdateUserNameRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UpdateUserNameRequest.m; sourceTree = "<group>"; };
 		E96EB7321E8A17370061D6C9 /* PersonalCenterModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PersonalCenterModel.h; sourceTree = "<group>"; };
@@ -1561,10 +1570,10 @@
 				E94976F71EC1A30A00A4642A /* View */,
 				7C1CBEB61E80D1E600826FE9 /* TeachingMainViewController.h */,
 				7C1CBEB71E80D1E600826FE9 /* TeachingMainViewController.m */,
-				E9062AD81ECDA01E00531472 /* TabListViewController.h */,
-				E9062AD91ECDA01E00531472 /* TabListViewController.m */,
-				E9062AD21ECD9E4400531472 /* TabViewController.h */,
-				E9062AD31ECD9E4400531472 /* TabViewController.m */,
+				E9062AE51ED29E8500531472 /* LabelListViewController.h */,
+				E9062AE61ED29E8500531472 /* LabelListViewController.m */,
+				E9062AE81ED29F2900531472 /* LabelViewController.h */,
+				E9062AE91ED29F2900531472 /* LabelViewController.m */,
 			);
 			path = "同步教学";
 			sourceTree = "<group>";
@@ -1946,6 +1955,18 @@
 			name = view;
 			sourceTree = "<group>";
 		};
+		E9062ADB1ED2946400531472 /* requests */ = {
+			isa = PBXGroup;
+			children = (
+				E94977191EC5496200A4642A /* GetBookInfo.json */,
+				E949771B1EC549A800A4642A /* GetBookInfoRequest.h */,
+				E949771C1EC549A800A4642A /* GetBookInfoRequest.m */,
+				E9062ADC1ED294EE00531472 /* GetLabelListRequest.h */,
+				E9062ADD1ED294EE00531472 /* GetLabelListRequest.m */,
+			);
+			name = requests;
+			sourceTree = "<group>";
+		};
 		E9230C501E308FC600AC6617 /* 侧边栏 */ = {
 			isa = PBXGroup;
 			children = (
@@ -1966,12 +1987,16 @@
 				E94976FF1EC1B4CC00A4642A /* TeachingFilterCell.m */,
 				E94977011EC1B53E00A4642A /* TeachingFilterBackgroundView.h */,
 				E94977021EC1B53E00A4642A /* TeachingFilterBackgroundView.m */,
-				E949772A1EC5BCF600A4642A /* TeachingMutiTabView.h */,
-				E949772B1EC5BCF600A4642A /* TeachingMutiTabView.m */,
+				E9062AE21ED29DA500531472 /* TeachingMutiLabelView.h */,
+				E9062AE31ED29DA500531472 /* TeachingMutiLabelView.m */,
 				E98ABD971ECAE44F0049435E /* TeachingPhotoBrowser.h */,
 				E98ABD981ECAE44F0049435E /* TeachingPhotoBrowser.m */,
-				E9062AD51ECD9F1800531472 /* TabContainerView.h */,
-				E9062AD61ECD9F1800531472 /* TabContainerView.m */,
+				E9062AEE1ED2B2CC00531472 /* LabelListContainerView.h */,
+				E9062AEF1ED2B2CC00531472 /* LabelListContainerView.m */,
+				E9062AF41ED2B37500531472 /* LabelTableViewCell.h */,
+				E9062AF51ED2B37500531472 /* LabelTableViewCell.m */,
+				E9062AF71ED2B9F500531472 /* LabelHeaderView.h */,
+				E9062AF81ED2B9F500531472 /* LabelHeaderView.m */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -1979,9 +2004,7 @@
 		E949770D1EC41BEE00A4642A /* 同步教学 */ = {
 			isa = PBXGroup;
 			children = (
-				E94977191EC5496200A4642A /* GetBookInfo.json */,
-				E949771B1EC549A800A4642A /* GetBookInfoRequest.h */,
-				E949771C1EC549A800A4642A /* GetBookInfoRequest.m */,
+				E9062ADB1ED2946400531472 /* requests */,
 				E949771E1EC5705100A4642A /* TeachingFiterModel.h */,
 				E949771F1EC5705100A4642A /* TeachingFiterModel.m */,
 				E94977211EC599BD00A4642A /* TeachingPageModel.h */,
@@ -2351,7 +2374,6 @@
 				E96EB7511E8A7ADC0061D6C9 /* UserNameTableViewCell.m in Sources */,
 				E9062AB01ECD392200531472 /* ImageZoomView.m in Sources */,
 				7C1A5F041E150F4B00832DED /* LePlayer.m in Sources */,
-				E9062AD41ECD9E4400531472 /* TabViewController.m in Sources */,
 				7C7841911E2E221800755BC0 /* LoginRequest.m in Sources */,
 				7C6F21911E232F8E000AB43A /* YXDrawerViewController.m in Sources */,
 				923A4E2E1E2C9FF5001059E2 /* ChannelTabRequest.m in Sources */,
@@ -2362,6 +2384,7 @@
 				7C1A5F561E15129600832DED /* YXQLPreviewController.m in Sources */,
 				7C1809351E25D4A900B71863 /* StageSubjectHeaderView.m in Sources */,
 				E9230C4F1E3060FE00AC6617 /* MineUserModel.m in Sources */,
+				E9062AF61ED2B37500531472 /* LabelTableViewCell.m in Sources */,
 				7C1A5EE41E15052000832DED /* BaseViewController.m in Sources */,
 				E98ABD991ECAE44F0049435E /* TeachingPhotoBrowser.m in Sources */,
 				7C76849A1E88C0B9004B05F6 /* QAQuestionDetailView.m in Sources */,
@@ -2426,7 +2449,6 @@
 				7C1CBED51E80F8FF00826FE9 /* YXSSOAuthManager.m in Sources */,
 				7C1A5F141E15108F00832DED /* DownloaderEntity.m in Sources */,
 				7C1CBEDD1E80FE8200826FE9 /* YXShareManager.m in Sources */,
-				E9062ADA1ECDA01E00531472 /* TabListViewController.m in Sources */,
 				7C18094C1E271AFC00B71863 /* CollectionViewEqualSpaceFlowLayout.m in Sources */,
 				E9355B621E6E9A0D007AE9F0 /* SupplementInfoViewController.m in Sources */,
 				7CDBFED91E8CEA5E00C72E6F /* QAFileTypeMappingTable.m in Sources */,
@@ -2439,6 +2461,7 @@
 				7CDBFED31E8BB09500C72E6F /* QAQuestionListFetcher.m in Sources */,
 				7C1A5F4B1E15127200832DED /* YXPlayerViewController.m in Sources */,
 				7C1A5F3B1E15126500832DED /* YXAudioSlideProgressView.m in Sources */,
+				E9062AE71ED29E8500531472 /* LabelListViewController.m in Sources */,
 				7C1A5F861E1513D600832DED /* MJRefreshBaseView.m in Sources */,
 				7C7841A81E2F132700755BC0 /* UpdateAreaRequest.m in Sources */,
 				E96EB7A01E94947C0061D6C9 /* QAShareView.m in Sources */,
@@ -2454,7 +2477,6 @@
 				7C6F219C1E2481D6000AB43A /* AreaDataManager.m in Sources */,
 				7C1A5F6A1E15130200832DED /* YXFilePhotoItem.m in Sources */,
 				E9355B5F1E6E8FD1007AE9F0 /* ResetPasswordViewController.m in Sources */,
-				E9062AD71ECD9F1800531472 /* TabContainerView.m in Sources */,
 				E9355B851E710DEE007AE9F0 /* SendSMSRequest.m in Sources */,
 				E9355B531E6D8852007AE9F0 /* ForgotPasswordViewController.m in Sources */,
 				E96EB7411E8A79FD0061D6C9 /* AboutViewController.m in Sources */,
@@ -2470,15 +2492,16 @@
 				E9355AFE1E669E70007AE9F0 /* PrivacyPolicyViewController.m in Sources */,
 				7C1A5F2C1E15111800832DED /* YXGetRequest.m in Sources */,
 				7C76849D1E88E10B004B05F6 /* QAReplyCell.m in Sources */,
+				E9062ADE1ED294EE00531472 /* GetLabelListRequest.m in Sources */,
 				7CDBFEBE1E8B831D00C72E6F /* QAQuestionListRequest.m in Sources */,
 				7C1A5FA71E151A9100832DED /* YXBroseWebView.m in Sources */,
 				7C1A5FC21E15212000832DED /* YXShowWebMenuView.m in Sources */,
 				30C48A9B1E52EF5100CCDBBE /* NSDictionary+Dictionarys.m in Sources */,
 				E96EB7A31E949A4C0061D6C9 /* QAShareCell.m in Sources */,
 				7C1A5F781E15132200832DED /* FileBrowserFactory.m in Sources */,
-				E949772C1EC5BCF600A4642A /* TeachingMutiTabView.m in Sources */,
 				30C48A7D1E52E72100CCDBBE /* YXStatisticRequest.m in Sources */,
 				7C1A5FC81E1631DD00832DED /* UnhandledRequestData.m in Sources */,
+				E9062AF01ED2B2CC00531472 /* LabelListContainerView.m in Sources */,
 				E96EB7AD1E94D2E50061D6C9 /* QACreateAnswerRequest.m in Sources */,
 				E94423C01E767A1500F8F795 /* HistoryDeleteRequest.m in Sources */,
 				7C1A60021E16396C00832DED /* UIImage+Color.m in Sources */,
@@ -2495,6 +2518,7 @@
 				30C48A921E52EACC00CCDBBE /* LogRecordEntity.m in Sources */,
 				E9355B3B1E6952F1007AE9F0 /* VerifyCodeInputView.m in Sources */,
 				7C1809381E25DEBA00B71863 /* StageSubjectCell.m in Sources */,
+				E9062AE41ED29DA500531472 /* TeachingMutiLabelView.m in Sources */,
 				7C7841BE1E2F37EB00755BC0 /* LoginDataManager.m in Sources */,
 				7C1A5F761E15132200832DED /* FileDownloadHelper.m in Sources */,
 				7CAE439E1E84D0B300B0D460 /* CloneCategory.m in Sources */,
@@ -2539,6 +2563,7 @@
 				7C1A5F531E15128C00832DED /* YXImageViewController.m in Sources */,
 				7C1A5FFE1E16396C00832DED /* NSDate+Utilities.m in Sources */,
 				7C1A5EF61E150E1E00832DED /* GlobalUtils.m in Sources */,
+				E9062AF91ED2B9F500531472 /* LabelHeaderView.m in Sources */,
 				E9355B471E6D858B007AE9F0 /* SetPasswordViewController.m in Sources */,
 				7CAE43971E83A8C100B0D460 /* QAQuestionDetailViewController.m in Sources */,
 				7C1A5F671E15130200832DED /* YXFileItemBase.m in Sources */,
@@ -2555,6 +2580,7 @@
 				30C48A931E52EACC00CCDBBE /* RegularRecordEntity+CoreDataProperties.m in Sources */,
 				30C48A7B1E52E72100CCDBBE /* YXRecordManager.m in Sources */,
 				923A4E311E2CA4E7001059E2 /* CourseVideoRequest.m in Sources */,
+				E9062AEA1ED29F2900531472 /* LabelViewController.m in Sources */,
 				92E7D13D1E28A88600A34300 /* AloneCourseTableViewCell.m in Sources */,
 				7C2251CA1E1DEADA004785D5 /* SKAlertView.m in Sources */,
 				9241FFF71E2651390015B587 /* YXGradientView.m in Sources */,
