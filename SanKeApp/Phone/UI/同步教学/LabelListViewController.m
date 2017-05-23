@@ -66,7 +66,7 @@
     [self.containerView setClickTabButtonBlock:^{
         STRONG_SELF
         //请求标签资源列表
-        
+        [self.containerView.chooseViewController refershLabelList];
     }];
     self.containerView.childViewControllers = self.childViewControllers;
     self.containerView.chooseIndex = self.currentTabIndex;

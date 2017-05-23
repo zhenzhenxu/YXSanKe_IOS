@@ -181,7 +181,6 @@
     filterView.delegate = self;
 }
 
-
 #pragma mark - TeachingFilterViewDelegate
 - (void)filterChanged:(NSArray *)filterArray{
     //MARK:0.首先当册变了之后,单元和课也要变化
@@ -275,12 +274,6 @@
     }];
     return cell;
 }
-
-//- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
-//    UIView *view = [[UIView alloc]initWithFrame:CGRectMake(0, 0, self.view.width, 40)];
-//    view.backgroundColor = [UIColor blueColor];
-//    return view;
-//}
 
 #pragma mark - MWPhotoBrowserDelegate
 - (NSUInteger)numberOfPhotosInPhotoBrowser:(MWPhotoBrowser *)photoBrowser {

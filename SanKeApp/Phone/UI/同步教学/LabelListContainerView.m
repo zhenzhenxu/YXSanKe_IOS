@@ -17,7 +17,8 @@ static const NSUInteger kTagBase = 10010;
 static const CGFloat margin = 10;
 
 @interface LabelListContainerView ()<UIScrollViewDelegate>
-@property (nonatomic, strong) UIView *lineView;
+@property (nonatomic, strong) UIView *topLineView;
+//@property (nonatomic, strong) UIView *bottomLineView;
 @property (nonatomic, strong) UIScrollView *topScrollView;
 @property (nonatomic, strong) UIScrollView *bottomScrollView;
 @end
@@ -33,18 +34,24 @@ static const CGFloat margin = 10;
 }
 #pragma mark
 - (void)setupUI {
-    self.lineView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, kScreenWidth, 1/[UIScreen mainScreen].scale)];
-    self.lineView.backgroundColor = [UIColor colorWithHexString:@"e6e6e6"];
-    [self addSubview:self.lineView];
+    self.topLineView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, kScreenWidth, 1/[UIScreen mainScreen].scale)];
+    self.topLineView.backgroundColor = [UIColor colorWithHexString:@"e6e6e6"];
+    [self addSubview:self.topLineView];
     
-    CGFloat y = CGRectGetMaxY(self.lineView.frame);
+    CGFloat y = CGRectGetMaxY(self.topLineView.frame);
     self.topScrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(0, y, kScreenWidth, 44)];
     self.topScrollView.backgroundColor = [UIColor colorWithHexString:@"ffffff"];
     self.topScrollView.showsHorizontalScrollIndicator = NO;
     self.topScrollView.showsVerticalScrollIndicator = NO;
     [self addSubview:self.topScrollView];
     
-    self.bottomScrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(0, self.topScrollView.frame.origin.y+self.topScrollView.frame.size.height, self.frame.size.width, self.frame.size.height-self.topScrollView.frame.size.height)];
+    y = CGRectGetMaxY(self.topScrollView.frame);
+//    self.bottomLineView = [[UIView alloc]initWithFrame:CGRectMake(0, y, kScreenWidth, 1/[UIScreen mainScreen].scale)];
+//    self.bottomLineView.backgroundColor = [UIColor colorWithHexString:@"e6e6e6"];
+//    [self addSubview:self.bottomLineView];
+//    
+//    y = CGRectGetMaxY(self.bottomLineView.frame);
+    self.bottomScrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(0, y, self.frame.size.width, self.frame.size.height-self.topScrollView.frame.size.height)];
     self.bottomScrollView.autoresizingMask = UIViewAutoresizingFlexibleHeight;
     self.bottomScrollView.pagingEnabled = YES;
     self.bottomScrollView.showsHorizontalScrollIndicator = NO;

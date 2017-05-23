@@ -11,4 +11,6 @@
 
 @interface LabelViewController : BaseViewController
 @property (nonatomic, strong)  GetBookInfoRequestItem_Label *label;
+
+- (void)refershLabelList;
 @end

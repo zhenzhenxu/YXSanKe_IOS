@@ -9,12 +9,13 @@
 #import "LabelViewController.h"
 #import "GetLabelListRequest.h"
 #import "LabelHeaderView.h"
-#import "LabelTableViewCell.h"
+#import "LabelTreeCell.h"
+#import <RATreeView/RATreeView.h>
 
-@interface LabelViewController ()<UITableViewDataSource,UITableViewDelegate>
+@interface LabelViewController ()<RATreeViewDataSource, RATreeViewDelegate>
 @property (nonatomic, strong) GetLabelListRequest *selectionRequest;
-@property (nonatomic, strong) GetLabelListRequestItem *dataSourceItem;
-@property (nonatomic, strong) UITableView *tableView;
+@property (nonatomic, strong) NSArray *treeNodes;
+@property (nonatomic, strong) RATreeView *treeView;
 
 @end
 
@@ -23,13 +24,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    [self setupTitle];
     [self setupUI];
-//    UILabel *label = [[UILabel alloc]init];
-//    label.text = self.label.name;
-//    [self.view addSubview:label];
-//    [label mas_makeConstraints:^(MASConstraintMaker *make) {
-//        make.center.mas_equalTo(0);
-//    }];
+    [self requestSelection];
     // Do any additional setup after loading the view.
 }
 
@@ -38,31 +35,37 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (void)setupTitle {
+    UserModel *model = [UserManager sharedInstance].userModel;
+    [StageSubjectDataManager fetchStageSubjectWithStageID:model.stageID subjectID:model.subjectID completeBlock:^(FetchStageSubjectRequestItem_stage *stage, FetchStageSubjectRequestItem_subject *subject) {
+        NSString *title = [stage.name stringByAppendingString:subject.name];
+        self.navigationItem.title = title;
+    }];
+}
 
 - (void)setupUI {
     self.emptyView = [[EmptyView alloc]init];
-    self.emptyView.backgroundColor = [UIColor whiteColor];
+    self.emptyView.title = @"很抱歉,该标签下暂无资源";
+    
     self.errorView = [[ErrorView alloc]init];
     WEAK_SELF
     [self.errorView setRetryBlock:^{
         STRONG_SELF
         [self requestSelection];
     }];
+    
     self.dataErrorView = [[DataErrorView alloc]init];
     
-    self.tableView = [[UITableView alloc]initWithFrame:self.view.bounds style:UITableViewStylePlain];
-    self.tableView.backgroundColor = [UIColor redColor];
-    self.tableView.dataSource = self;
-    self.tableView.delegate = self;
-    self.tableView.rowHeight = 335.0f;
-    self.tableView.allowsSelection = NO;
-    self.tableView.showsVerticalScrollIndicator = NO;
-    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-    [self.tableView registerClass:[LabelTableViewCell class] forCellReuseIdentifier:@"LabelTableViewCell"];
-    [self.tableView registerClass:[LabelHeaderView class] forHeaderFooterViewReuseIdentifier:@"LabelHeaderView"];
-    [self.view addSubview:self.tableView];
-    [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.left.right.bottom.mas_equalTo(0);
+    self.treeView = [[RATreeView alloc] initWithFrame:CGRectZero style:RATreeViewStylePlain];
+    self.treeView.delegate = self;
+    self.treeView.dataSource = self;
+    self.treeView.showsVerticalScrollIndicator = NO;
+    self.treeView.separatorStyle = RATreeViewCellSeparatorStyleNone;
+    self.treeView.rowHeight = UITableViewAutomaticDimension;
+    [self.treeView registerClass:[LabelTreeCell class] forCellReuseIdentifier:@"LabelTreeCell"];
+    [self.view addSubview:self.treeView];
+    [self.treeView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.mas_equalTo(0);
     }];
 }
 
@@ -75,47 +78,81 @@
     [self.selectionRequest startRequestWithRetClass:[GetLabelListRequestItem class] andCompleteBlock:^(id retItem, NSError *error, BOOL isMock) {
         STRONG_SELF
         [self stopLoading];
-        if (error) {
-            [self showToast:error.localizedDescription];
-            return;
-        }
         GetLabelListRequestItem *item = retItem;
         UnhandledRequestData *data = [[UnhandledRequestData alloc]init];
         data.requestDataExist = item.data.elements.count > 0 ? YES : NO;
-        data.localDataExist = NO;//等等
+        data.localDataExist = self.treeNodes.count> 0 ? YES : NO;
         data.error = error;
         if ([self handleRequestData:data inView:self.view]) {
             return;
         }
-        
-        //刷新tableView
+        self.treeNodes = item.data.elements;
+        [self.treeView reloadData];
     }];
 }
 
-#pragma mark - UITableViewDataSource & Delegate
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return self.dataSourceItem.data.elements.count;
+#pragma mark - RATreeViewDataSource
+- (NSInteger)treeView:(RATreeView *)treeView numberOfChildrenOfItem:(id)item {
+    if (!item) {
+        return self.treeNodes.count;
+    }
+    id<TreeNodeProtocol> node = item;
+    return [node subNodes].count;
 }
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    GetLabelListRequestItem_Element *element = self.dataSourceItem.data.elements[section];
-    return element.items.count;
+- (id)treeView:(RATreeView *)treeView child:(NSInteger)index ofItem:(id)item {
+    if (!item) {
+        return self.treeNodes[index];
+    }
+    id<TreeNodeProtocol> node = item;
+    return [node subNodes][index];
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    LabelTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"LabelTableViewCell"];
-    cell.textLabel.text = @"测试测试";
+- (UITableViewCell *)treeView:(RATreeView *)treeView cellForItem:(id)item {
+    NSInteger level = [treeView levelForCellForItem:item];
+    BOOL isExpand = [treeView isCellForItemExpanded:item];
+    GetLabelListRequestItem_Element *element = item;
+    
+    LabelTreeCell *cell = [treeView dequeueReusableCellWithIdentifier:@"LabelTreeCell"];
+    cell.isExpand = isExpand;
+    cell.level = level;
+    cell.element = element;
+    WEAK_SELF
+    [cell setTreeExpandBlock:^(LabelTreeCell *cell) {
+        STRONG_SELF
+        if (cell.isExpand) {
+            [self.treeView collapseRowForItem:item];
+        }else {
+            [self.treeView expandRowForItem:item];
+        }
+        cell.isExpand = !cell.isExpand;
+    }];
+    [cell setTreeClickBlock:^(LabelTreeCell *cell) {
+        GetLabelListRequestItem_Element *element = nil;
+        if (level == 0) {
+            return ;
+        }
+        element = cell.element;
+        //跳转到资源详情页
+        DDLogDebug(@"跳转到资源详情页");
+    }];
     return cell;
 }
 
-#pragma mark - UITableViewDelegate
-- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
-    LabelHeaderView *header = (LabelHeaderView *)[tableView dequeueReusableHeaderFooterViewWithIdentifier:@"LabelHeaderView"];
-    return header;
+- (BOOL)treeView:(RATreeView *)treeView canEditRowForItem:(id)item {
+    return NO;
 }
 
-- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
-    return 50;
+#pragma mark - RATreeViewDelegate
+- (BOOL)treeView:(RATreeView *)treeView shouldExpandRowForItem:(id)item {
+    return NO;
 }
 
+- (BOOL)treeView:(RATreeView *)treeView shouldCollapaseRowForItem:(id)item {
+    return NO;
+}
+
+- (void)refershLabelList {
+    [self requestSelection];
+}
 @end

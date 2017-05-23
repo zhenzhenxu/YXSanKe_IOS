@@ -217,8 +217,9 @@
 		E9062AE71ED29E8500531472 /* LabelListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E9062AE61ED29E8500531472 /* LabelListViewController.m */; };
 		E9062AEA1ED29F2900531472 /* LabelViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E9062AE91ED29F2900531472 /* LabelViewController.m */; };
 		E9062AF01ED2B2CC00531472 /* LabelListContainerView.m in Sources */ = {isa = PBXBuildFile; fileRef = E9062AEF1ED2B2CC00531472 /* LabelListContainerView.m */; };
-		E9062AF61ED2B37500531472 /* LabelTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E9062AF51ED2B37500531472 /* LabelTableViewCell.m */; };
 		E9062AF91ED2B9F500531472 /* LabelHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = E9062AF81ED2B9F500531472 /* LabelHeaderView.m */; };
+		E9062B041ED2D68E00531472 /* GetLabelListRequest.json in Resources */ = {isa = PBXBuildFile; fileRef = E9062B031ED2D68E00531472 /* GetLabelListRequest.json */; };
+		E9062B071ED2E66200531472 /* LabelTreeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E9062B061ED2E66200531472 /* LabelTreeCell.m */; };
 		E9230C461E2F829900AC6617 /* LoginRequest.json in Resources */ = {isa = PBXBuildFile; fileRef = E9230C451E2F829900AC6617 /* LoginRequest.json */; };
 		E9230C4F1E3060FE00AC6617 /* MineUserModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E9230C4E1E3060FE00AC6617 /* MineUserModel.m */; };
 		E9230C531E30900600AC6617 /* SideTableViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E9230C521E30900600AC6617 /* SideTableViewModel.m */; };
@@ -721,10 +722,12 @@
 		E9062AE91ED29F2900531472 /* LabelViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LabelViewController.m; sourceTree = "<group>"; };
 		E9062AEE1ED2B2CC00531472 /* LabelListContainerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LabelListContainerView.h; sourceTree = "<group>"; };
 		E9062AEF1ED2B2CC00531472 /* LabelListContainerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LabelListContainerView.m; sourceTree = "<group>"; };
-		E9062AF41ED2B37500531472 /* LabelTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LabelTableViewCell.h; sourceTree = "<group>"; };
-		E9062AF51ED2B37500531472 /* LabelTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LabelTableViewCell.m; sourceTree = "<group>"; };
 		E9062AF71ED2B9F500531472 /* LabelHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LabelHeaderView.h; sourceTree = "<group>"; };
 		E9062AF81ED2B9F500531472 /* LabelHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LabelHeaderView.m; sourceTree = "<group>"; };
+		E9062AFC1ED2C7BC00531472 /* TreeNodeProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TreeNodeProtocol.h; sourceTree = "<group>"; };
+		E9062B031ED2D68E00531472 /* GetLabelListRequest.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = GetLabelListRequest.json; sourceTree = "<group>"; };
+		E9062B051ED2E66200531472 /* LabelTreeCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LabelTreeCell.h; sourceTree = "<group>"; };
+		E9062B061ED2E66200531472 /* LabelTreeCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LabelTreeCell.m; sourceTree = "<group>"; };
 		E9230C451E2F829900AC6617 /* LoginRequest.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = LoginRequest.json; sourceTree = "<group>"; };
 		E9230C4D1E3060FE00AC6617 /* MineUserModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MineUserModel.h; sourceTree = "<group>"; };
 		E9230C4E1E3060FE00AC6617 /* MineUserModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MineUserModel.m; sourceTree = "<group>"; };
@@ -1961,6 +1964,7 @@
 				E94977191EC5496200A4642A /* GetBookInfo.json */,
 				E949771B1EC549A800A4642A /* GetBookInfoRequest.h */,
 				E949771C1EC549A800A4642A /* GetBookInfoRequest.m */,
+				E9062B031ED2D68E00531472 /* GetLabelListRequest.json */,
 				E9062ADC1ED294EE00531472 /* GetLabelListRequest.h */,
 				E9062ADD1ED294EE00531472 /* GetLabelListRequest.m */,
 			);
@@ -1993,10 +1997,10 @@
 				E98ABD981ECAE44F0049435E /* TeachingPhotoBrowser.m */,
 				E9062AEE1ED2B2CC00531472 /* LabelListContainerView.h */,
 				E9062AEF1ED2B2CC00531472 /* LabelListContainerView.m */,
-				E9062AF41ED2B37500531472 /* LabelTableViewCell.h */,
-				E9062AF51ED2B37500531472 /* LabelTableViewCell.m */,
 				E9062AF71ED2B9F500531472 /* LabelHeaderView.h */,
 				E9062AF81ED2B9F500531472 /* LabelHeaderView.m */,
+				E9062B051ED2E66200531472 /* LabelTreeCell.h */,
+				E9062B061ED2E66200531472 /* LabelTreeCell.m */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -2011,6 +2015,7 @@
 				E94977221EC599BD00A4642A /* TeachingPageModel.m */,
 				E949770E1EC41C3800A4642A /* TeachingDataManger.h */,
 				E949770F1EC41C3800A4642A /* TeachingDataManger.m */,
+				E9062AFC1ED2C7BC00531472 /* TreeNodeProtocol.h */,
 			);
 			path = "同步教学";
 			sourceTree = "<group>";
@@ -2254,6 +2259,7 @@
 				E9230C5A1E30BAB400AC6617 /* FetchStageSubjectRequest.json in Resources */,
 				927594E81E2F0DA000F87838 /* historyRecord_mock.json in Resources */,
 				7C1A5F941E15143F00832DED /* MockConfig.plist in Resources */,
+				E9062B041ED2D68E00531472 /* GetLabelListRequest.json in Resources */,
 				7C6F219E1E24838C000AB43A /* area_data.json in Resources */,
 				E9230C571E30919B00AC6617 /* UpdateStageSubjectRequest.json in Resources */,
 				7C1A5F8E1E15143400832DED /* neterror_mock.json in Resources */,
@@ -2384,7 +2390,6 @@
 				7C1A5F561E15129600832DED /* YXQLPreviewController.m in Sources */,
 				7C1809351E25D4A900B71863 /* StageSubjectHeaderView.m in Sources */,
 				E9230C4F1E3060FE00AC6617 /* MineUserModel.m in Sources */,
-				E9062AF61ED2B37500531472 /* LabelTableViewCell.m in Sources */,
 				7C1A5EE41E15052000832DED /* BaseViewController.m in Sources */,
 				E98ABD991ECAE44F0049435E /* TeachingPhotoBrowser.m in Sources */,
 				7C76849A1E88C0B9004B05F6 /* QAQuestionDetailView.m in Sources */,
@@ -2492,6 +2497,7 @@
 				E9355AFE1E669E70007AE9F0 /* PrivacyPolicyViewController.m in Sources */,
 				7C1A5F2C1E15111800832DED /* YXGetRequest.m in Sources */,
 				7C76849D1E88E10B004B05F6 /* QAReplyCell.m in Sources */,
+				E9062B071ED2E66200531472 /* LabelTreeCell.m in Sources */,
 				E9062ADE1ED294EE00531472 /* GetLabelListRequest.m in Sources */,
 				7CDBFEBE1E8B831D00C72E6F /* QAQuestionListRequest.m in Sources */,
 				7C1A5FA71E151A9100832DED /* YXBroseWebView.m in Sources */,

@@ -52,7 +52,6 @@ static const CGFloat margin = 10;
         [self addSubview:b];
         if (idx == 0) {
             self.contentOffset = CGPointMake(0, 0);
-            //            self.currentTab = obj;
         }
         if (idx < tabArray.count - 1) {
             CGFloat lineHeight = 9.0f;  CGFloat lineWidth = 1.0f;
@@ -74,7 +73,7 @@ static const CGFloat margin = 10;
     UIButton *b = [UIButton buttonWithType:UIButtonTypeCustom];
     [b setTitle:title forState:UIControlStateNormal];
     [b setTitleColor:[UIColor colorWithHexString:@"333333"] forState:UIControlStateNormal];
-    [b setTitleColor:[UIColor colorWithHexString:@"4691a6"] forState:UIControlStateSelected];
+    [b setTitleColor:[UIColor colorWithHexString:@"4691a6"] forState:UIControlStateHighlighted];
     b.titleLabel.font = [UIFont systemFontOfSize:13.0f];
     [b addTarget:self action:@selector(chooseButtonAction:) forControlEvents:UIControlEventTouchUpInside];
     return b;
@@ -82,7 +81,6 @@ static const CGFloat margin = 10;
 
 - (void)chooseButtonAction:(UIButton *)sender {
     NSInteger index = sender.tag - kTagBase;
-    //    self.currentTab = self.tabArray[index];
     [self scrollTitleWithIndex:index];
     self.currentTabIndex = index;
     BLOCK_EXEC(self.buttonActionBlock);
@@ -94,7 +92,6 @@ static const CGFloat margin = 10;
         if ([b isKindOfClass:[UIButton class]]) {
             b.selected = NO;
             if (b.tag-kTagBase == index) {
-                b.selected = YES;
                 offsetx = b.center.x - self.frame.size.width * 0.5;
             }
         }
@@ -115,7 +112,6 @@ static const CGFloat margin = 10;
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView{
     NSInteger index = scrollView.contentOffset.x/scrollView.frame.size.width;
     [self scrollTitleWithIndex:index];
-    //    self.currentTab = self.tabArray[index];
 }
 
 -(void)setClickTabButtonBlock:(ClickTabButtonBlock)block {

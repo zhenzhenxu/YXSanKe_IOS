@@ -1,0 +1,56 @@
+{
+    "code": 0,
+    "desc": "success",
+    "data": {
+        "elements": [
+                     {
+                     "ebookId": 76,
+                     "id": 70,
+                     "labelType": 0,
+                     "name": "教学设计",
+                     "items": [
+                               {
+                               "id":1001,
+                               "name": "教学设计资源1.flv"
+                               },
+                               {
+                               "id":1002,
+                               "name": "王晓-隋朝的统一与灭亡隋朝的统一与灭亡之教学设计资源2.jpg"
+                               }
+                               ]
+                     },
+                     {
+                     "ebookId": 76,
+                     "id": 71,
+                     "labelType": 0,
+                     "name": "教学课件",
+                     "items": [
+                               {
+                               "id":1001,
+                               "name": "教学课件资源3.flv"
+                               },
+                               {
+                               "id":1002,
+                               "name": "教学课件资源4.jpg"
+                               }
+                               ]
+                     },
+                     {
+                     "ebookId": 76,
+                     "id": 71,
+                     "labelType": 0,
+                     "name": "同步教学",
+                     "items": [
+                               {
+                               "id":1001,
+                               "name": "同步教学课件资源3.flv"
+                               },
+                               {
+                               "id":1002,
+                               "name": "同步教学课件资源4.jpg"
+                               }
+                               ]
+                     }
+                     ]
+    }
+}

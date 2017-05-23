@@ -7,19 +7,21 @@
 //
 
 #import "GetLabelListRequest.h"
-@implementation GetLabelListRequestItem_Resource
-+ (JSONKeyMapper *)keyMapper {
-    return [[JSONKeyMapper alloc] initWithDictionary:@{@"id":@"resourceID"}];
-}
-@end
 
 @implementation GetLabelListRequestItem_Element
 + (JSONKeyMapper *)keyMapper {
     return [[JSONKeyMapper alloc] initWithDictionary:@{@"id":@"elementID"}];
 }
+
+- (NSArray *)subNodes{
+    return self.items;
+}
 @end
 
 @implementation GetLabelListRequestItem_Data
+- (NSArray *)subNodes{
+    return self.elements;
+}
 @end
 
 @implementation GetLabelListRequestItem
