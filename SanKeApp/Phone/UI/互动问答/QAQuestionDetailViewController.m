@@ -121,7 +121,7 @@ static CGFloat const kBottomViewHeight = 49.0f;
 - (void)previewAttachment {
     QAQuestionDetailRequestItem_Attachment *attach = self.item.attachmentList.firstObject;
     YXFileType type = [QAFileTypeMappingTable fileTypeWithString:attach.fileType];
-    if(type == YXFileTypeUnknown) {
+    if(type == YXFileTypeUnknown || type == YXFileTypeAudio || type == YXFileTypeVideo) {
         [self showToast:@"暂不支持该格式文件预览"];
         return;
     }

@@ -9,13 +9,6 @@
 #import "YXPostRequest.h"
 #import "TreeNodeProtocol.h"
 
-//@protocol GetLabelListRequestItem_Resource <NSObject>
-//@end
-//@interface GetLabelListRequestItem_Resource : JSONModel
-//@property (nonatomic, strong) NSString<Optional> *resourceID;
-//@property (nonatomic, strong) NSString<Optional> *name;
-//@end
-
 @protocol GetLabelListRequestItem_Element <NSObject>
 @end
 @interface GetLabelListRequestItem_Element : JSONModel

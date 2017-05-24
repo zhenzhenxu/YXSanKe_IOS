@@ -62,6 +62,8 @@
     self.treeView.showsVerticalScrollIndicator = NO;
     self.treeView.separatorStyle = RATreeViewCellSeparatorStyleNone;
     self.treeView.rowHeight = UITableViewAutomaticDimension;
+    self.treeView.rowsCollapsingAnimation = RATreeViewRowAnimationFade;
+    self.treeView.rowsExpandingAnimation = RATreeViewRowAnimationFade;
     [self.treeView registerClass:[LabelTreeCell class] forCellReuseIdentifier:@"LabelTreeCell"];
     [self.view addSubview:self.treeView];
     [self.treeView mas_makeConstraints:^(MASConstraintMaker *make) {

@@ -15,8 +15,8 @@
                                  @"ppt":@(YXFileTypeDoc),
                                  @"pdf":@(YXFileTypeDoc),
                                  @"text":@(YXFileTypeDoc),
-                                 @"video":@(YXFileTypeUnknown),
-                                 @"audio":@(YXFileTypeUnknown),
+                                 @"video":@(YXFileTypeVideo),
+                                 @"audio":@(YXFileTypeAudio),
                                  @"image":@(YXFileTypePhoto),
                                  @"unknown":@(YXFileTypeUnknown)
                                  };
