@@ -107,6 +107,7 @@
     }
     
     self.titleLabel.font = [UIFont boldSystemFontOfSize:16];
+    self.titleLabel.numberOfLines = 1;
     self.titleLabel.lineBreakMode = NSLineBreakByTruncatingTail;
 }
 

@@ -15,6 +15,7 @@ static const CGFloat margin = 10;
 
 
 @interface TeachingMutiLabelView ()
+@property (nonatomic, strong) UIView *bottomLineView;
 @property (nonatomic, copy) ClickTabButtonBlock buttonActionBlock;
 @end
 
@@ -32,6 +33,10 @@ static const CGFloat margin = 10;
     self.backgroundColor = [UIColor colorWithHexString:@"ffffff"];
     self.showsHorizontalScrollIndicator = NO;
     self.showsVerticalScrollIndicator = NO;
+    
+    self.bottomLineView = [[UIView alloc]initWithFrame:CGRectMake(0, 44, kScreenWidth, 1/[UIScreen mainScreen].scale)];
+    self.bottomLineView.backgroundColor = [UIColor colorWithHexString:@"e6e6e6"];
+    [self addSubview:self.bottomLineView];
 }
 
 - (void)setTabArray:(NSArray<GetBookInfoRequestItem_Label *> *)tabArray {
@@ -40,6 +45,7 @@ static const CGFloat margin = 10;
     }
     _tabArray = tabArray;
     
+    [self addSubview:self.bottomLineView];
     __block CGFloat x = margin;
     
     [tabArray enumerateObjectsUsingBlock:^(GetBookInfoRequestItem_Label *obj, NSUInteger idx, BOOL * _Nonnull stop) {

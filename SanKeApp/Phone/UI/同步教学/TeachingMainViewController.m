@@ -141,7 +141,7 @@
 }
 
 - (void)setupMutiTabView {
-    self.mutiTabView = [[TeachingMutiLabelView alloc]initWithFrame:CGRectMake(0, 44, self.view.width, 44)];
+    self.mutiTabView = [[TeachingMutiLabelView alloc]initWithFrame:CGRectMake(0, 44, self.view.width, 44 + 1/[UIScreen mainScreen].scale)];
     [self.view addSubview:self.mutiTabView];
     WEAK_SELF
     [self.mutiTabView setClickTabButtonBlock:^{

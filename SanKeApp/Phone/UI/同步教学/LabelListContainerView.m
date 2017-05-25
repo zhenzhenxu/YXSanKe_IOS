@@ -18,7 +18,7 @@ static const CGFloat margin = 10;
 
 @interface LabelListContainerView ()<UIScrollViewDelegate>
 @property (nonatomic, strong) UIView *topLineView;
-//@property (nonatomic, strong) UIView *bottomLineView;
+@property (nonatomic, strong) UIView *bottomLineView;
 @property (nonatomic, strong) UIScrollView *topScrollView;
 @property (nonatomic, strong) UIScrollView *bottomScrollView;
 @end
@@ -46,11 +46,11 @@ static const CGFloat margin = 10;
     [self addSubview:self.topScrollView];
     
     y = CGRectGetMaxY(self.topScrollView.frame);
-//    self.bottomLineView = [[UIView alloc]initWithFrame:CGRectMake(0, y, kScreenWidth, 1/[UIScreen mainScreen].scale)];
-//    self.bottomLineView.backgroundColor = [UIColor colorWithHexString:@"e6e6e6"];
-//    [self addSubview:self.bottomLineView];
-//    
-//    y = CGRectGetMaxY(self.bottomLineView.frame);
+    self.bottomLineView = [[UIView alloc]initWithFrame:CGRectMake(0, y, kScreenWidth, 1/[UIScreen mainScreen].scale)];
+    self.bottomLineView.backgroundColor = [UIColor colorWithHexString:@"e6e6e6"];
+    [self addSubview:self.bottomLineView];
+    
+    y = CGRectGetMaxY(self.bottomLineView.frame);
     self.bottomScrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(0, y, self.frame.size.width, self.frame.size.height-self.topScrollView.frame.size.height)];
     self.bottomScrollView.autoresizingMask = UIViewAutoresizingFlexibleHeight;
     self.bottomScrollView.pagingEnabled = YES;
