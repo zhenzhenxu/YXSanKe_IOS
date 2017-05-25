@@ -7,10 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
-typedef void(^EditBlock)(void);
 
 @interface UserInfoHeaderView : UIView
 @property (nonatomic, strong) UserModel *model;
-- (void)setEditBlock:(EditBlock)block;
 
 @end

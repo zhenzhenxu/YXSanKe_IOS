@@ -56,6 +56,10 @@
     [self setupNavgationBar];
     [self setupUI];
     [self LoadData];
+    [[[NSNotificationCenter defaultCenter]rac_addObserverForName:kUpdateHeadPortraitSuccessNotification object:nil]subscribeNext:^(id x) {
+        DDLogDebug(@"%@修改头像",[self class]);
+        self.headerView.model = [UserManager sharedInstance].userModel;
+    }];
     // Do any additional setup after loading the view.
 }
 
@@ -79,15 +83,8 @@
     [navigationBar setShadowImage:[UIImage new]];
 }
 - (void)setupUI {
-    self.headerView = [[UserInfoHeaderView alloc]initWithFrame:CGRectMake(0, 0, self.view.width, 150.0f)];
+    self.headerView = [[UserInfoHeaderView alloc]initWithFrame:CGRectMake(0, 0, self.view.width, 150.0f * kScreenHeightScale(1.0f))];
     self.headerView.model = [UserManager sharedInstance].userModel;
-    WEAK_SELF
-    [self.headerView setEditBlock:^{
-        STRONG_SELF
-        [self.view endEditing:YES];
-        DDLogDebug(@"%@修改头像",[self class]);
-        [self changeHeadPortrait];
-    }];
     
     self.tableView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
     self.tableView.tableHeaderView = self.headerView;
@@ -347,99 +344,6 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
     return 0.1f;
-}
-#pragma mark - change HeadPortrait
-- (void)changeHeadPortrait {
-    self.menuSelectionView = [[MenuSelectionView alloc]init];
-    self.menuSelectionView.dataArray = @[
-                                         @"拍照",
-                                         @"从相册选择",
-                                         @"取消"
-                                         ];
-    CGFloat height = [self.menuSelectionView totalHeight];
-    [self.view addSubview:self.menuSelectionView];
-    AlertView *alert = [[AlertView alloc]init];
-    alert.hideWhenMaskClicked = YES;
-    alert.maskColor = [[UIColor blackColor]colorWithAlphaComponent:0.4];
-    alert.contentView = self.menuSelectionView;
-    WEAK_SELF
-    [alert setHideBlock:^(AlertView *view) {
-        STRONG_SELF
-        [UIView animateWithDuration:0.3f animations:^{
-            [view.contentView mas_remakeConstraints:^(MASConstraintMaker *make) {
-                make.left.right.equalTo(view);
-                make.top.equalTo(view.mas_bottom).offset(0);
-                make.height.mas_equalTo(height);
-            }];
-            [view layoutIfNeeded];
-        } completion:^(BOOL finished) {
-            [view removeFromSuperview];
-        }];
-    }];
-    [alert showWithLayout:^(AlertView *view) {
-        STRONG_SELF
-        [view.contentView mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.right.equalTo(view);
-            make.top.equalTo(view.mas_bottom).offset(0);
-            make.height.mas_equalTo(height);
-        }];
-        [view layoutIfNeeded];
-        [UIView animateWithDuration:0.3f animations:^{
-            [view.contentView mas_remakeConstraints:^(MASConstraintMaker *make) {
-                make.left.right.equalTo(view);
-                make.height.mas_equalTo(height);
-                make.bottom.equalTo(view);
-            }];
-            [view layoutIfNeeded];
-        }];
-    }];
-    [self.menuSelectionView setChooseMenuBlock:^(NSInteger index) {
-        STRONG_SELF
-        [alert hide];
-        [self chooseMenuWithIndex:index];
-    }];
-}
-
-- (void)chooseMenuWithIndex:(NSInteger)index {
-    switch (index) {
-        case 0:
-        {
-            WEAK_SELF
-            [self.imagePickerController presentFromViewController:self pickImageWithSourceType:UIImagePickerControllerSourceTypeCamera completion:^(UIImage *selectedImage) {
-                STRONG_SELF
-                [self updateHeadPortrait:selectedImage];
-            }];
-        }
-            break;
-        case 1:{
-            WEAK_SELF
-            [self.imagePickerController presentFromViewController:self pickImageWithSourceType:UIImagePickerControllerSourceTypePhotoLibrary completion:^(UIImage *selectedImage) {
-                STRONG_SELF
-                [self updateHeadPortrait:selectedImage];
-            }];
-        }
-            break;
-            
-        default:
-            break;
-    }
-}
-
-- (void)updateHeadPortrait:(UIImage *)image {
-    DDLogDebug(@"更新头像%@",image);
-    if (!image) {
-        return;
-    }
-    [self startLoading];
-    WEAK_SELF
-    [MineDataManager updateHeadPortrait:image completeBlock:^(NSError *error) {
-        STRONG_SELF
-        [self stopLoading];
-        if (error) {
-            [self showToast:error.localizedDescription];
-        }
-        self.headerView.model = [UserManager sharedInstance].userModel;
-    }];
 }
 
 #pragma mark - update UserName

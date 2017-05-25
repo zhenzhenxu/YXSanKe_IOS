@@ -126,7 +126,7 @@
     self.tableView.backgroundColor = [UIColor colorWithHexString:@"e6e6e6"];
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
-    self.tableView.rowHeight = 335.0f;
+    self.tableView.rowHeight = 385.0f * kScreenHeightScale(1.0f);
     self.tableView.allowsSelection = NO;
     self.tableView.showsVerticalScrollIndicator = NO;
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;

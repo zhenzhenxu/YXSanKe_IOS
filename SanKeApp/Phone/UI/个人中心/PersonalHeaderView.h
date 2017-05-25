@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+typedef void(^EditBlock)(void);
 
 @interface PersonalHeaderView : UIView
 @property (nonatomic, strong) UserModel *model;
+
+- (void)setEditBlock:(EditBlock)block;
 @end
