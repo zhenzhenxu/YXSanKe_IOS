@@ -118,6 +118,40 @@
                                                 "name": "教学课件"
                                                 }
                                                 ]
+                                      },
+                                      {
+                                      "id": 45215,
+                                      "name": "3 雨的四季11",
+                                      "idx": 3,
+                                      "pages": "10,13",
+                                      "url": [
+                                              {
+                                              "idx": "10",
+                                              "pageUrl": "http://userfile.sanke.zgjiaoyan.com/upload/storage/public/sanke/tbook/2017_03_08/1488968694_288389035/image/slide10.jpg"
+                                              },
+                                              {
+                                              "idx": "11",
+                                              "pageUrl": "http://userfile.sanke.zgjiaoyan.com/upload/storage/public/sanke/tbook/2017_03_08/1488968694_288389035/image/slide11.jpg"
+                                              },
+                                              {
+                                              "idx": "12",
+                                              "pageUrl": "http://userfile.sanke.zgjiaoyan.com/upload/storage/public/sanke/tbook/2017_03_08/1488968694_288389035/image/slide12.jpg"
+                                              },
+                                              {
+                                              "idx": "13",
+                                              "pageUrl": "http://userfile.sanke.zgjiaoyan.com/upload/storage/public/sanke/tbook/2017_03_08/1488968694_288389035/image/slide13.jpg"
+                                              }
+                                              ],
+                                      "label": [
+                                                {
+                                                "id": 70,
+                                                "name": "教学设计"
+                                                },
+                                                {
+                                                "id": 71,
+                                                "name": "教学课件"
+                                                }
+                                                ]
                                       }
                                       ]
                             },

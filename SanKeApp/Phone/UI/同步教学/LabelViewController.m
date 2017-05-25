@@ -8,7 +8,6 @@
 
 #import "LabelViewController.h"
 #import "GetLabelListRequest.h"
-#import "LabelHeaderView.h"
 #import "LabelTreeCell.h"
 #import <RATreeView/RATreeView.h>
 
@@ -135,7 +134,6 @@
             return ;
         }
         element = cell.element;
-        //跳转到资源详情页
         DDLogDebug(@"跳转到资源详情页");
     }];
     return cell;

@@ -42,7 +42,6 @@
     WEAK_SELF
     [self.errorView setRetryBlock:^{
         STRONG_SELF
-        [self startLoading];
         [self setupCurrentContent];
     }];
     self.dataErrorView = [[DataErrorView alloc]init];
@@ -84,17 +83,17 @@
         
         GetBookInfoRequestItem *item = retItem;
         UnhandledRequestData *data = [[UnhandledRequestData alloc]init];
-        data.requestDataExist = !isEmpty(item);
+        data.requestDataExist = item.data.volums.count > 0 ? YES : NO;
         data.localDataExist = NO;
         data.error = error;
         if ([self handleRequestData:data inView:self.view]) {
             return;
         }
        
-        self.dataArray = [TeachingPageModel TeachingPageModelsFromRawData:item];
-        [self setupUI];
         self.filterModel = [TeachingFiterModel modelFromRawData:item];
         [self dealWithFilterModel:self.filterModel];
+        self.dataArray = [TeachingPageModel TeachingPageModelsFromRawData:item];
+        [self setupUI];
     }];
 }
 
@@ -117,7 +116,7 @@
         [self.tableView scrollToRowAtIndexPath:currentIndexPath atScrollPosition:UITableViewScrollPositionTop animated:NO];
         TeachingMainCell *cell = [self.tableView cellForRowAtIndexPath:currentIndexPath];
         TeachingPageModel *model = cell.model;
-        [self setupCurrentPageTabWithPageModel:model];
+        [self setupCurrentPageLabelWithPageModel:model];
         [self setupCurrentFiltersWithPageModel:model];
     }];
 }
@@ -183,7 +182,6 @@
 
 #pragma mark - TeachingFilterViewDelegate
 - (void)filterChanged:(NSArray *)filterArray{
-    //MARK:0.首先当册变了之后,单元和课也要变化
     NSNumber *num0 = filterArray[0];
     
     NSNumber *num1 = [NSNumber numberWithInteger:0];
@@ -191,7 +189,7 @@
         self.filterModel.volumChooseInteger = num0.integerValue;
         self.filterModel.unitChooseInteger = 0;
         self.filterModel.courseChooseInteger = 0;
-        [self refreshUnitFilter];//更新单元
+        [self refreshUnitFilter];
         [self.tableView reloadData];
         return;
     }else {
@@ -202,13 +200,12 @@
     if (num1.integerValue != self.filterModel.unitChooseInteger) {
         self.filterModel.unitChooseInteger = num1.integerValue;
         self.filterModel.courseChooseInteger = 0;
-        [self refreshCourseFilter];//更新课
+        [self refreshCourseFilter];
         return;
     }else {
         num2 = filterArray[2];
         self.filterModel.courseChooseInteger = num2.integerValue;
     }
-    //MARK:1.其次,筛选完成后,要滚动到当前筛选的位置
     [self scrollToFilterPosition];
 }
 
@@ -235,8 +232,6 @@
     GetBookInfoRequestItem_Volum *volum = self.filterModel.volums[self.filterModel.volumChooseInteger];
     GetBookInfoRequestItem_Unit *unit = self.filterModel.units[self.filterModel.unitChooseInteger];
     GetBookInfoRequestItem_Course *course = self.filterModel.courses[self.filterModel.courseChooseInteger];
-    DDLogDebug(@"课程选择%@;---%@,单元选择%@----%@,课程选择%@----%@",@(self.filterModel.volumChooseInteger),volum.volumID,@(self.filterModel.unitChooseInteger),unit.unitID,@(self.filterModel.courseChooseInteger),course.courseID);
-    
     NSString *filter;
     if (isEmpty(course.courseID)) {
         filter = [NSString stringWithFormat:@"%@,%@",volum.volumID,unit.unitID];
@@ -246,7 +241,7 @@
     [self.currentVolumDataArray enumerateObjectsUsingBlock:^(TeachingPageModel * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         if ([obj.pageTarget isEqualToString:filter] && obj.isStart) {
             [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:idx inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:NO];
-            [self setupCurrentPageTabWithPageModel:obj];
+            [self setupCurrentPageLabelWithPageModel:obj];
             *stop = YES;
         }
     }];
@@ -261,7 +256,7 @@
     TeachingPageModel *model = self.currentVolumDataArray[indexPath.row];
     cell.model = model;
     if (indexPath.row == 0) {
-        [self setupCurrentPageTabWithPageModel:model];
+        [self setupCurrentPageLabelWithPageModel:model];
     }
     WEAK_SELF
     [cell setSelectedButtonActionBlock:^{
@@ -328,7 +323,7 @@
     }
     TeachingMainCell *cell = [self.tableView cellForRowAtIndexPath:currentIndexPath];
     TeachingPageModel *model = cell.model;
-    [self setupCurrentPageTabWithPageModel:model];
+    [self setupCurrentPageLabelWithPageModel:model];
     [self setupCurrentFiltersWithPageModel:model];
 }
 
@@ -365,7 +360,7 @@
     return maxIndexPath;
 }
 
-- (void)setupCurrentPageTabWithPageModel:(TeachingPageModel *)model {
+- (void)setupCurrentPageLabelWithPageModel:(TeachingPageModel *)model {
     if (model.pageLabel.count > 0) {
         self.mutiTabView.hidden = NO;
         self.mutiTabView.tabArray = model.pageLabel;
@@ -383,12 +378,6 @@
 }
 
 - (void)setupCurrentFiltersWithPageModel:(TeachingPageModel *)model{
-    //0.首先,第一次进来的时候(第一次安装/退出app后再进来/切换学科学段),要设置默认的册和单元,课设置为全部;
-    //1.其次,在上下滑动的过程中,筛选条件要随着变化到相应的位置;
-    //2.还有,在点击图片全屏浏览的时候.也需要将筛选条件变化到相应的位置.
-    //    if (!model.isStart && !model.isEnd) {
-    //        return;
-    //    }
     GetBookInfoRequestItem_Volum *volum = self.filterModel.volums[self.filterModel.volumChooseInteger];
     
     NSString *target = model.pageTarget;

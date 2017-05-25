@@ -217,7 +217,6 @@
 		E9062AE71ED29E8500531472 /* LabelListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E9062AE61ED29E8500531472 /* LabelListViewController.m */; };
 		E9062AEA1ED29F2900531472 /* LabelViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E9062AE91ED29F2900531472 /* LabelViewController.m */; };
 		E9062AF01ED2B2CC00531472 /* LabelListContainerView.m in Sources */ = {isa = PBXBuildFile; fileRef = E9062AEF1ED2B2CC00531472 /* LabelListContainerView.m */; };
-		E9062AF91ED2B9F500531472 /* LabelHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = E9062AF81ED2B9F500531472 /* LabelHeaderView.m */; };
 		E9062B041ED2D68E00531472 /* GetLabelListRequest.json in Resources */ = {isa = PBXBuildFile; fileRef = E9062B031ED2D68E00531472 /* GetLabelListRequest.json */; };
 		E9062B071ED2E66200531472 /* LabelTreeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E9062B061ED2E66200531472 /* LabelTreeCell.m */; };
 		E9230C461E2F829900AC6617 /* LoginRequest.json in Resources */ = {isa = PBXBuildFile; fileRef = E9230C451E2F829900AC6617 /* LoginRequest.json */; };
@@ -256,7 +255,6 @@
 		E94976FD1EC1B4A000A4642A /* TeachingFilterView.m in Sources */ = {isa = PBXBuildFile; fileRef = E94976FC1EC1B4A000A4642A /* TeachingFilterView.m */; };
 		E94977001EC1B4CC00A4642A /* TeachingFilterCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E94976FF1EC1B4CC00A4642A /* TeachingFilterCell.m */; };
 		E94977031EC1B53E00A4642A /* TeachingFilterBackgroundView.m in Sources */ = {isa = PBXBuildFile; fileRef = E94977021EC1B53E00A4642A /* TeachingFilterBackgroundView.m */; };
-		E94977101EC41C3800A4642A /* TeachingDataManger.m in Sources */ = {isa = PBXBuildFile; fileRef = E949770F1EC41C3800A4642A /* TeachingDataManger.m */; };
 		E949771A1EC5496200A4642A /* GetBookInfo.json in Resources */ = {isa = PBXBuildFile; fileRef = E94977191EC5496200A4642A /* GetBookInfo.json */; };
 		E949771D1EC549A800A4642A /* GetBookInfoRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = E949771C1EC549A800A4642A /* GetBookInfoRequest.m */; };
 		E94977201EC5705100A4642A /* TeachingFiterModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E949771F1EC5705100A4642A /* TeachingFiterModel.m */; };
@@ -722,8 +720,6 @@
 		E9062AE91ED29F2900531472 /* LabelViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LabelViewController.m; sourceTree = "<group>"; };
 		E9062AEE1ED2B2CC00531472 /* LabelListContainerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LabelListContainerView.h; sourceTree = "<group>"; };
 		E9062AEF1ED2B2CC00531472 /* LabelListContainerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LabelListContainerView.m; sourceTree = "<group>"; };
-		E9062AF71ED2B9F500531472 /* LabelHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LabelHeaderView.h; sourceTree = "<group>"; };
-		E9062AF81ED2B9F500531472 /* LabelHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LabelHeaderView.m; sourceTree = "<group>"; };
 		E9062AFC1ED2C7BC00531472 /* TreeNodeProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TreeNodeProtocol.h; sourceTree = "<group>"; };
 		E9062B031ED2D68E00531472 /* GetLabelListRequest.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = GetLabelListRequest.json; sourceTree = "<group>"; };
 		E9062B051ED2E66200531472 /* LabelTreeCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LabelTreeCell.h; sourceTree = "<group>"; };
@@ -793,8 +789,6 @@
 		E94976FF1EC1B4CC00A4642A /* TeachingFilterCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TeachingFilterCell.m; sourceTree = "<group>"; };
 		E94977011EC1B53E00A4642A /* TeachingFilterBackgroundView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TeachingFilterBackgroundView.h; sourceTree = "<group>"; };
 		E94977021EC1B53E00A4642A /* TeachingFilterBackgroundView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TeachingFilterBackgroundView.m; sourceTree = "<group>"; };
-		E949770E1EC41C3800A4642A /* TeachingDataManger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TeachingDataManger.h; sourceTree = "<group>"; };
-		E949770F1EC41C3800A4642A /* TeachingDataManger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TeachingDataManger.m; sourceTree = "<group>"; };
 		E94977191EC5496200A4642A /* GetBookInfo.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = GetBookInfo.json; sourceTree = "<group>"; };
 		E949771B1EC549A800A4642A /* GetBookInfoRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GetBookInfoRequest.h; sourceTree = "<group>"; };
 		E949771C1EC549A800A4642A /* GetBookInfoRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GetBookInfoRequest.m; sourceTree = "<group>"; };
@@ -1997,8 +1991,6 @@
 				E98ABD981ECAE44F0049435E /* TeachingPhotoBrowser.m */,
 				E9062AEE1ED2B2CC00531472 /* LabelListContainerView.h */,
 				E9062AEF1ED2B2CC00531472 /* LabelListContainerView.m */,
-				E9062AF71ED2B9F500531472 /* LabelHeaderView.h */,
-				E9062AF81ED2B9F500531472 /* LabelHeaderView.m */,
 				E9062B051ED2E66200531472 /* LabelTreeCell.h */,
 				E9062B061ED2E66200531472 /* LabelTreeCell.m */,
 			);
@@ -2013,8 +2005,6 @@
 				E949771F1EC5705100A4642A /* TeachingFiterModel.m */,
 				E94977211EC599BD00A4642A /* TeachingPageModel.h */,
 				E94977221EC599BD00A4642A /* TeachingPageModel.m */,
-				E949770E1EC41C3800A4642A /* TeachingDataManger.h */,
-				E949770F1EC41C3800A4642A /* TeachingDataManger.m */,
 				E9062AFC1ED2C7BC00531472 /* TreeNodeProtocol.h */,
 			);
 			path = "同步教学";
@@ -2540,7 +2530,6 @@
 				E96EB7311E8A16F40061D6C9 /* UpdateUserNameRequest.m in Sources */,
 				7C7841B81E2F1E2900755BC0 /* MineDataManager.m in Sources */,
 				E902E6DB1E2CD109009441B3 /* UpgradeView.m in Sources */,
-				E94977101EC41C3800A4642A /* TeachingDataManger.m in Sources */,
 				7C1A5F951E15143F00832DED /* YXMockManager.m in Sources */,
 				7C1A600A1E1639BD00832DED /* UIView+YXAddtion.m in Sources */,
 				7C1A5F3A1E15126500832DED /* YXAudioPlayerViewController.m in Sources */,
@@ -2569,7 +2558,6 @@
 				7C1A5F531E15128C00832DED /* YXImageViewController.m in Sources */,
 				7C1A5FFE1E16396C00832DED /* NSDate+Utilities.m in Sources */,
 				7C1A5EF61E150E1E00832DED /* GlobalUtils.m in Sources */,
-				E9062AF91ED2B9F500531472 /* LabelHeaderView.m in Sources */,
 				E9355B471E6D858B007AE9F0 /* SetPasswordViewController.m in Sources */,
 				7CAE43971E83A8C100B0D460 /* QAQuestionDetailViewController.m in Sources */,
 				7C1A5F671E15130200832DED /* YXFileItemBase.m in Sources */,

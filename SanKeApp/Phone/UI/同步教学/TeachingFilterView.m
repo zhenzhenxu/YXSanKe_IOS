@@ -29,7 +29,6 @@ static const CGFloat kTableViewRowHeight = 44;
 @property (nonatomic, strong) NSMutableArray *filterItemArray;
 @property (nonatomic, strong) TeachingFilterView_Item *currentFilterItem;
 @property (nonatomic, assign) BOOL layoutComplete;
-@property (nonatomic, assign) BOOL isAnimating;
 @end
 
 

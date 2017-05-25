@@ -95,7 +95,7 @@
     
     [self.titleLabel mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.top.left.mas_equalTo(15);
-        make.right.mas_equalTo(35);
+        make.right.mas_equalTo(-35);
         make.centerY.mas_equalTo(0);
         make.bottom.mas_equalTo(-15);
     }];
@@ -107,7 +107,6 @@
     }
     
     self.titleLabel.font = [UIFont boldSystemFontOfSize:16];
-    self.titleLabel.numberOfLines = 1;
     self.titleLabel.lineBreakMode = NSLineBreakByTruncatingTail;
 }
 
