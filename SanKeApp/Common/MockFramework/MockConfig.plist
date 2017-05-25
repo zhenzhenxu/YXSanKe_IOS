@@ -286,6 +286,46 @@
 				</dict>
 			</array>
 		</dict>
+		<key>ResourceAskListRequest</key>
+		<dict>
+			<key>mockEnable</key>
+			<true/>
+			<key>mockFile</key>
+			<array>
+				<dict>
+					<key>fileName</key>
+					<string>resourceAskList_mock.json</string>
+					<key>percent</key>
+					<integer>100</integer>
+				</dict>
+			</array>
+		</dict>
+		<key>ResourceDetailRequest</key>
+		<dict>
+			<key>mockEnable</key>
+			<true/>
+			<key>mockFile</key>
+			<array>
+				<dict>
+					<key>fileName</key>
+					<string>resourceDetailImage_mock.json</string>
+					<key>percent</key>
+					<integer>33</integer>
+				</dict>
+				<dict>
+					<key>fileName</key>
+					<string>resourceDetailVideo_mock.json</string>
+					<key>percent</key>
+					<integer>33</integer>
+				</dict>
+				<dict>
+					<key>fileName</key>
+					<string>resourceDetailText_mock.json</string>
+					<key>percent</key>
+					<integer>33</integer>
+				</dict>
+			</array>
+		</dict>
 	</dict>
 </dict>
 </plist>

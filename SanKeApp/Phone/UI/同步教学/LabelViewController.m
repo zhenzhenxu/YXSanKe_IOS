@@ -10,6 +10,7 @@
 #import "GetLabelListRequest.h"
 #import "LabelTreeCell.h"
 #import <RATreeView/RATreeView.h>
+#import "ResourceDetailViewController.h"
 
 @interface LabelViewController ()<RATreeViewDataSource, RATreeViewDelegate>
 @property (nonatomic, strong) GetLabelListRequest *selectionRequest;
@@ -135,6 +136,9 @@
         }
         element = cell.element;
         DDLogDebug(@"跳转到资源详情页");
+        ResourceDetailViewController *resourceDetailVC = [[ResourceDetailViewController alloc] init];
+        resourceDetailVC.resourceID = @"28270372";
+        [self.navigationController pushViewController:resourceDetailVC animated:YES];
     }];
     return cell;
 }

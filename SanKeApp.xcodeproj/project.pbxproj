@@ -25,6 +25,19 @@
 		30C87E0E1E52F4BB000CFBAA /* NSString+YXString.m in Sources */ = {isa = PBXBuildFile; fileRef = 30C87E0D1E52F4BB000CFBAA /* NSString+YXString.m */; };
 		30C87E111E52F4CF000CFBAA /* NSMutableDictionary+YXDictionarys.m in Sources */ = {isa = PBXBuildFile; fileRef = 30C87E101E52F4CF000CFBAA /* NSMutableDictionary+YXDictionarys.m */; };
 		30E70FC01E3482E8001B9BA4 /* ChannelTabFilterRequest.json in Resources */ = {isa = PBXBuildFile; fileRef = 30E70FBF1E3482E8001B9BA4 /* ChannelTabFilterRequest.json */; };
+		4364513F1ED6639B009D168D /* CommentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4364513C1ED6639B009D168D /* CommentCell.m */; };
+		436451401ED6639B009D168D /* ResourceDetailHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4364513E1ED6639B009D168D /* ResourceDetailHeaderView.m */; };
+		436451451ED663AA009D168D /* MakeCommentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 436451421ED663AA009D168D /* MakeCommentViewController.m */; };
+		436451461ED663AA009D168D /* ResourceDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 436451441ED663AA009D168D /* ResourceDetailViewController.m */; };
+		4364514F1ED663D8009D168D /* CreateResourceAskRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 436451481ED663D8009D168D /* CreateResourceAskRequest.m */; };
+		436451501ED663D8009D168D /* resourceAskList_mock.json in Resources */ = {isa = PBXBuildFile; fileRef = 436451491ED663D8009D168D /* resourceAskList_mock.json */; };
+		436451511ED663D8009D168D /* ResourceAskListRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 4364514B1ED663D8009D168D /* ResourceAskListRequest.m */; };
+		436451521ED663D8009D168D /* resourceDetailImage_mock.json in Resources */ = {isa = PBXBuildFile; fileRef = 4364514C1ED663D8009D168D /* resourceDetailImage_mock.json */; };
+		436451531ED663D8009D168D /* ResourceDetailRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 4364514E1ED663D8009D168D /* ResourceDetailRequest.m */; };
+		436451581ED663ED009D168D /* ResourceAskListFetcher.m in Sources */ = {isa = PBXBuildFile; fileRef = 436451551ED663ED009D168D /* ResourceAskListFetcher.m */; };
+		436451591ED663ED009D168D /* ResourceDataManger.m in Sources */ = {isa = PBXBuildFile; fileRef = 436451571ED663ED009D168D /* ResourceDataManger.m */; };
+		4364515C1ED673F0009D168D /* resourceDetailText_mock.json in Resources */ = {isa = PBXBuildFile; fileRef = 4364515A1ED673F0009D168D /* resourceDetailText_mock.json */; };
+		4364515D1ED673F0009D168D /* resourceDetailVideo_mock.json in Resources */ = {isa = PBXBuildFile; fileRef = 4364515B1ED673F0009D168D /* resourceDetailVideo_mock.json */; };
 		7C1809351E25D4A900B71863 /* StageSubjectHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C1809341E25D4A900B71863 /* StageSubjectHeaderView.m */; };
 		7C1809381E25DEBA00B71863 /* StageSubjectCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C1809371E25DEBA00B71863 /* StageSubjectCell.m */; };
 		7C1809411E26285B00B71863 /* FilterSelectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C1809401E26285B00B71863 /* FilterSelectionView.m */; };
@@ -348,6 +361,28 @@
 		30C87E0F1E52F4CF000CFBAA /* NSMutableDictionary+YXDictionarys.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSMutableDictionary+YXDictionarys.h"; sourceTree = "<group>"; };
 		30C87E101E52F4CF000CFBAA /* NSMutableDictionary+YXDictionarys.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSMutableDictionary+YXDictionarys.m"; sourceTree = "<group>"; };
 		30E70FBF1E3482E8001B9BA4 /* ChannelTabFilterRequest.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = ChannelTabFilterRequest.json; sourceTree = "<group>"; };
+		4364513B1ED6639B009D168D /* CommentCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommentCell.h; sourceTree = "<group>"; };
+		4364513C1ED6639B009D168D /* CommentCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommentCell.m; sourceTree = "<group>"; };
+		4364513D1ED6639B009D168D /* ResourceDetailHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ResourceDetailHeaderView.h; sourceTree = "<group>"; };
+		4364513E1ED6639B009D168D /* ResourceDetailHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ResourceDetailHeaderView.m; sourceTree = "<group>"; };
+		436451411ED663AA009D168D /* MakeCommentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MakeCommentViewController.h; sourceTree = "<group>"; };
+		436451421ED663AA009D168D /* MakeCommentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MakeCommentViewController.m; sourceTree = "<group>"; };
+		436451431ED663AA009D168D /* ResourceDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ResourceDetailViewController.h; sourceTree = "<group>"; };
+		436451441ED663AA009D168D /* ResourceDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ResourceDetailViewController.m; sourceTree = "<group>"; };
+		436451471ED663D8009D168D /* CreateResourceAskRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CreateResourceAskRequest.h; sourceTree = "<group>"; };
+		436451481ED663D8009D168D /* CreateResourceAskRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CreateResourceAskRequest.m; sourceTree = "<group>"; };
+		436451491ED663D8009D168D /* resourceAskList_mock.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = resourceAskList_mock.json; sourceTree = "<group>"; };
+		4364514A1ED663D8009D168D /* ResourceAskListRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ResourceAskListRequest.h; sourceTree = "<group>"; };
+		4364514B1ED663D8009D168D /* ResourceAskListRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ResourceAskListRequest.m; sourceTree = "<group>"; };
+		4364514C1ED663D8009D168D /* resourceDetailImage_mock.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = resourceDetailImage_mock.json; sourceTree = "<group>"; };
+		4364514D1ED663D8009D168D /* ResourceDetailRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ResourceDetailRequest.h; sourceTree = "<group>"; };
+		4364514E1ED663D8009D168D /* ResourceDetailRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ResourceDetailRequest.m; sourceTree = "<group>"; };
+		436451541ED663ED009D168D /* ResourceAskListFetcher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ResourceAskListFetcher.h; sourceTree = "<group>"; };
+		436451551ED663ED009D168D /* ResourceAskListFetcher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ResourceAskListFetcher.m; sourceTree = "<group>"; };
+		436451561ED663ED009D168D /* ResourceDataManger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ResourceDataManger.h; sourceTree = "<group>"; };
+		436451571ED663ED009D168D /* ResourceDataManger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ResourceDataManger.m; sourceTree = "<group>"; };
+		4364515A1ED673F0009D168D /* resourceDetailText_mock.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = resourceDetailText_mock.json; sourceTree = "<group>"; };
+		4364515B1ED673F0009D168D /* resourceDetailVideo_mock.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = resourceDetailVideo_mock.json; sourceTree = "<group>"; };
 		7C1809331E25D4A900B71863 /* StageSubjectHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StageSubjectHeaderView.h; sourceTree = "<group>"; };
 		7C1809341E25D4A900B71863 /* StageSubjectHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StageSubjectHeaderView.m; sourceTree = "<group>"; };
 		7C1809361E25DEBA00B71863 /* StageSubjectCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StageSubjectCell.h; sourceTree = "<group>"; };
@@ -1571,6 +1606,10 @@
 				E9062AE61ED29E8500531472 /* LabelListViewController.m */,
 				E9062AE81ED29F2900531472 /* LabelViewController.h */,
 				E9062AE91ED29F2900531472 /* LabelViewController.m */,
+				436451411ED663AA009D168D /* MakeCommentViewController.h */,
+				436451421ED663AA009D168D /* MakeCommentViewController.m */,
+				436451431ED663AA009D168D /* ResourceDetailViewController.h */,
+				436451441ED663AA009D168D /* ResourceDetailViewController.m */,
 			);
 			path = "同步教学";
 			sourceTree = "<group>";
@@ -1955,6 +1994,16 @@
 		E9062ADB1ED2946400531472 /* requests */ = {
 			isa = PBXGroup;
 			children = (
+				436451471ED663D8009D168D /* CreateResourceAskRequest.h */,
+				436451481ED663D8009D168D /* CreateResourceAskRequest.m */,
+				436451491ED663D8009D168D /* resourceAskList_mock.json */,
+				4364514A1ED663D8009D168D /* ResourceAskListRequest.h */,
+				4364514B1ED663D8009D168D /* ResourceAskListRequest.m */,
+				4364514C1ED663D8009D168D /* resourceDetailImage_mock.json */,
+				4364515A1ED673F0009D168D /* resourceDetailText_mock.json */,
+				4364515B1ED673F0009D168D /* resourceDetailVideo_mock.json */,
+				4364514D1ED663D8009D168D /* ResourceDetailRequest.h */,
+				4364514E1ED663D8009D168D /* ResourceDetailRequest.m */,
 				E94977191EC5496200A4642A /* GetBookInfo.json */,
 				E949771B1EC549A800A4642A /* GetBookInfoRequest.h */,
 				E949771C1EC549A800A4642A /* GetBookInfoRequest.m */,
@@ -1977,6 +2026,10 @@
 		E94976F71EC1A30A00A4642A /* View */ = {
 			isa = PBXGroup;
 			children = (
+				4364513B1ED6639B009D168D /* CommentCell.h */,
+				4364513C1ED6639B009D168D /* CommentCell.m */,
+				4364513D1ED6639B009D168D /* ResourceDetailHeaderView.h */,
+				4364513E1ED6639B009D168D /* ResourceDetailHeaderView.m */,
 				E94976F81EC1A34200A4642A /* TeachingMainCell.h */,
 				E94976F91EC1A34200A4642A /* TeachingMainCell.m */,
 				E94976FB1EC1B4A000A4642A /* TeachingFilterView.h */,
@@ -2006,6 +2059,10 @@
 				E94977211EC599BD00A4642A /* TeachingPageModel.h */,
 				E94977221EC599BD00A4642A /* TeachingPageModel.m */,
 				E9062AFC1ED2C7BC00531472 /* TreeNodeProtocol.h */,
+				436451541ED663ED009D168D /* ResourceAskListFetcher.h */,
+				436451551ED663ED009D168D /* ResourceAskListFetcher.m */,
+				436451561ED663ED009D168D /* ResourceDataManger.h */,
+				436451571ED663ED009D168D /* ResourceDataManger.m */,
 			);
 			path = "同步教学";
 			sourceTree = "<group>";
@@ -2234,6 +2291,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7CDBFECA1E8B9EE600C72E6F /* questiondetail_mock.json in Resources */,
+				4364515D1ED673F0009D168D /* resourceDetailVideo_mock.json in Resources */,
 				7C1A5EE91E1506C500832DED /* PhoneImage.xcassets in Resources */,
 				E9355B7C1E6FF85B007AE9F0 /* userInfo.json in Resources */,
 				7CDBFECE1E8B9EF100C72E6F /* questionlist_mock.json in Resources */,
@@ -2250,6 +2308,7 @@
 				927594E81E2F0DA000F87838 /* historyRecord_mock.json in Resources */,
 				7C1A5F941E15143F00832DED /* MockConfig.plist in Resources */,
 				E9062B041ED2D68E00531472 /* GetLabelListRequest.json in Resources */,
+				436451501ED663D8009D168D /* resourceAskList_mock.json in Resources */,
 				7C6F219E1E24838C000AB43A /* area_data.json in Resources */,
 				E9230C571E30919B00AC6617 /* UpdateStageSubjectRequest.json in Resources */,
 				7C1A5F8E1E15143400832DED /* neterror_mock.json in Resources */,
@@ -2257,6 +2316,7 @@
 				E9355AF81E669C06007AE9F0 /* 隐私政策.txt in Resources */,
 				E9F4541C1E31B18D00860DC2 /* TouristLoginRequest.json in Resources */,
 				923A4E361E2CAE1C001059E2 /* channelIndex_mock.json in Resources */,
+				4364515C1ED673F0009D168D /* resourceDetailText_mock.json in Resources */,
 				E9230C561E30919B00AC6617 /* UpdateAreaRequest.json in Resources */,
 				7CDBFECF1E8B9EF100C72E6F /* replyfavor_mock.json in Resources */,
 				7C1CBEC21E80F88000826FE9 /* TencentOpenApi_IOS_Bundle.bundle in Resources */,
@@ -2264,6 +2324,7 @@
 				7C1A5F8D1E15143400832DED /* errorcode_mock.json in Resources */,
 				7C1A5F851E1513D600832DED /* MJRefresh.bundle in Resources */,
 				7C1A5EDC1E15035100832DED /* Empty.xib in Resources */,
+				436451521ED663D8009D168D /* resourceDetailImage_mock.json in Resources */,
 				E902E6CD1E2C9FD5009441B3 /* stageAndSubject.json in Resources */,
 				F721185B1EC021E900B2D1BE /* readme_helloworld.pdf in Resources */,
 				923A4E351E2CAE1C001059E2 /* channelTab_mock.json in Resources */,
@@ -2352,7 +2413,10 @@
 				7C7629BE1E27351F007B5698 /* LoginViewController.m in Sources */,
 				7C1A5F4D1E15127200832DED /* PreventHangingCourseView.m in Sources */,
 				7C1A5F171E15108F00832DED /* UrlDownloader.m in Sources */,
+				436451511ED663D8009D168D /* ResourceAskListRequest.m in Sources */,
 				7C1CBEB01E80D0B400826FE9 /* SKTabBarController.m in Sources */,
+				4364514F1ED663D8009D168D /* CreateResourceAskRequest.m in Sources */,
+				4364513F1ED6639B009D168D /* CommentCell.m in Sources */,
 				7C1A5F6C1E15130200832DED /* YXFileHtmlItem.m in Sources */,
 				7C1A5FE61E1637FC00832DED /* PagedListViewControllerBase.m in Sources */,
 				7C1A5EA81E14F08700832DED /* AppDelegate.m in Sources */,
@@ -2411,6 +2475,7 @@
 				E94976FA1EC1A34200A4642A /* TeachingMainCell.m in Sources */,
 				E99630871E95EF4700C4BF62 /* QAUtils.m in Sources */,
 				E9355B011E66AA4E007AE9F0 /* LoginUtils.m in Sources */,
+				436451531ED663D8009D168D /* ResourceDetailRequest.m in Sources */,
 				7C1A5F231E1510FA00832DED /* GetRequest.m in Sources */,
 				E96EB7551E8A7B320061D6C9 /* YXImagePickerController.m in Sources */,
 				7C6F21901E232F8E000AB43A /* YXDrawerController.m in Sources */,
@@ -2449,6 +2514,7 @@
 				7CDBFED91E8CEA5E00C72E6F /* QAFileTypeMappingTable.m in Sources */,
 				7C2251C31E1CE3AC004785D5 /* UIImage+GIF.m in Sources */,
 				7C1A5F691E15130200832DED /* YXFileAudioItem.m in Sources */,
+				436451401ED6639B009D168D /* ResourceDetailHeaderView.m in Sources */,
 				7C7629D51E278E16007B5698 /* UserManager.m in Sources */,
 				7C1A5F161E15108F00832DED /* DownloadModel.xcdatamodel in Sources */,
 				7C7841731E2CA73800755BC0 /* RecordManager.m in Sources */,
@@ -2512,10 +2578,13 @@
 				F72118561EC01E8800B2D1BE /* StepOneRequest.m in Sources */,
 				7C1A5F051E150F4B00832DED /* LePlayerView.m in Sources */,
 				30C48A921E52EACC00CCDBBE /* LogRecordEntity.m in Sources */,
+				436451451ED663AA009D168D /* MakeCommentViewController.m in Sources */,
 				E9355B3B1E6952F1007AE9F0 /* VerifyCodeInputView.m in Sources */,
+				436451591ED663ED009D168D /* ResourceDataManger.m in Sources */,
 				7C1809381E25DEBA00B71863 /* StageSubjectCell.m in Sources */,
 				E9062AE41ED29DA500531472 /* TeachingMutiLabelView.m in Sources */,
 				7C7841BE1E2F37EB00755BC0 /* LoginDataManager.m in Sources */,
+				436451461ED663AA009D168D /* ResourceDetailViewController.m in Sources */,
 				7C1A5F761E15132200832DED /* FileDownloadHelper.m in Sources */,
 				7CAE439E1E84D0B300B0D460 /* CloneCategory.m in Sources */,
 				7C1A5F751E15132200832DED /* YXFileDownloadProgressView.m in Sources */,
@@ -2571,6 +2640,7 @@
 				927594DF1E2F0C2800F87838 /* PlayHistoryFetch.m in Sources */,
 				E96EB7731E8B961F0061D6C9 /* QAAskQuestionViewController.m in Sources */,
 				30C48A941E52EACC00CCDBBE /* RegularRecordEntity.m in Sources */,
+				436451581ED663ED009D168D /* ResourceAskListFetcher.m in Sources */,
 				30C48A931E52EACC00CCDBBE /* RegularRecordEntity+CoreDataProperties.m in Sources */,
 				30C48A7B1E52E72100CCDBBE /* YXRecordManager.m in Sources */,
 				923A4E311E2CA4E7001059E2 /* CourseVideoRequest.m in Sources */,
