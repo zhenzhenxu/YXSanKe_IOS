@@ -24,7 +24,8 @@
 
 - (void)setupUI {
     self.backgroundImageView = [[UIImageView alloc]init];
-    self.backgroundImageView.contentMode = UIViewContentModeScaleToFill;
+    self.backgroundImageView.contentMode = UIViewContentModeScaleAspectFill;
+    self.backgroundImageView.clipsToBounds = YES;
     self.backgroundImageView.userInteractionEnabled = YES;
     
     UIBlurEffect *effect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleLight];
