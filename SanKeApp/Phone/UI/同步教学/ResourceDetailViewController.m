@@ -116,18 +116,15 @@
         [self setupPhotoBrowser];
         return;
     }
-    self.fileItem.name = self.item.resName;
-    self.fileItem.url = self.item.resThumb;
-    if (type == YXFileTypeVideo) {
-        self.fileItem.record = self.fileItem.record;
-    }
-    self.fileItem.baseViewController = self;
     [self.fileItem browseFile];
 }
 
 - (YXFileItemBase *)fileItem {
     if (_fileItem == nil) {
         _fileItem = [FileBrowserFactory browserWithFileType:[QAFileTypeMappingTable fileTypeWithString:self.item.resType]];
+        _fileItem.name = self.item.resName;
+        _fileItem.url = self.item.resThumb;
+        _fileItem.baseViewController = self;
     }
     return _fileItem;
 }
