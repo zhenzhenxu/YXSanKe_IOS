@@ -89,6 +89,7 @@
             return;
         }
         self.treeNodes = item.data.elements;
+        self.treeView.contentOffset = CGPointZero;
         [self.treeView reloadData];
     }];
 }

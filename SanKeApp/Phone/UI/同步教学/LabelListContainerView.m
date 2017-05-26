@@ -91,7 +91,7 @@ static const CGFloat margin = 10;
         }
     }];
     self.topScrollView.contentSize = CGSizeMake( x, 44);
-    self.bottomScrollView.contentSize = CGSizeMake(self.bottomScrollView.frame.size.width*self.childViewControllers.count, self.bottomScrollView.frame.size.height);
+    self.bottomScrollView.contentSize = CGSizeMake(self.bottomScrollView.frame.size.width*self.childViewControllers.count, 0);
 }
 
 - (UIButton *)buttonWithTitle:(NSString *)title {
