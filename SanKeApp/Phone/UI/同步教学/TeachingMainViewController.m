@@ -26,6 +26,7 @@
 #pragma mark - view
 @property (nonatomic, strong) TeachingFilterView *filterView;
 @property (nonatomic, strong) TeachingMutiLabelView *mutiTabView;
+@property (nonatomic, strong) UIView *lineView;
 @property (nonatomic, strong) UITableView *tableView;
 #pragma mark - other
 @property (nonatomic, assign) CGFloat lastContentOffset;
@@ -142,6 +143,7 @@
     UIView *lineView = [[UIView alloc]init];
     lineView.backgroundColor = [UIColor colorWithHexString:@"e6e6e6"];
     [self.view addSubview:lineView];
+    self.lineView = lineView;
     [lineView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(self.mutiTabView.mas_bottom);
         make.left.right.mas_equalTo(0);
@@ -377,6 +379,7 @@
 - (void)setupCurrentPageLabelWithPageModel:(TeachingPageModel *)model {
     if (model.pageLabel.count > 0) {
         self.mutiTabView.hidden = NO;
+        self.lineView.hidden = NO;
         self.mutiTabView.tabArray = model.pageLabel;
         [self.tableView mas_remakeConstraints:^(MASConstraintMaker *make) {
             make.left.right.bottom.mas_equalTo(0);
@@ -384,6 +387,7 @@
         }];
     }else {
         self.mutiTabView.hidden = YES;
+        self.lineView.hidden = YES;
         [self.tableView mas_remakeConstraints:^(MASConstraintMaker *make) {
             make.left.right.bottom.mas_equalTo(0);
             make.top.mas_equalTo(44.0f);
