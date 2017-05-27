@@ -138,10 +138,19 @@
     }];
     
     [self setupMutiTabView];
+    
+    UIView *lineView = [[UIView alloc]init];
+    lineView.backgroundColor = [UIColor colorWithHexString:@"e6e6e6"];
+    [self.view addSubview:lineView];
+    [lineView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.mas_equalTo(self.mutiTabView.mas_bottom);
+        make.left.right.mas_equalTo(0);
+        make.height.mas_equalTo(1/[UIScreen mainScreen].scale);
+    }];
 }
 
 - (void)setupMutiTabView {
-    self.mutiTabView = [[TeachingMutiLabelView alloc]initWithFrame:CGRectMake(0, 44, self.view.width, 44 + 1/[UIScreen mainScreen].scale)];
+    self.mutiTabView = [[TeachingMutiLabelView alloc]initWithFrame:CGRectMake(0, 44, self.view.width, 44)];
     [self.view addSubview:self.mutiTabView];
     WEAK_SELF
     [self.mutiTabView setClickTabButtonBlock:^{
@@ -291,9 +300,14 @@
 #pragma mark - scrollViewDelegate
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView{
     self.lastContentOffset = scrollView.contentOffset.y;
+    self.filterView.userInteractionEnabled = NO;
 }
 
+- (void)scrollViewWillBeginDecelerating:(UIScrollView *)scrollView {
+    self.filterView.userInteractionEnabled = NO;
+}
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
+    self.filterView.userInteractionEnabled = YES;
     if (self.lastContentOffset - scrollView.contentOffset.y > 30) {
         self.isScrollTop = NO;
     }
@@ -304,6 +318,7 @@
 }
 
 - (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate {
+    self.filterView.userInteractionEnabled = YES;
     if (self.lastContentOffset - scrollView.contentOffset.y > 30) {
         self.isScrollTop = NO;
     }

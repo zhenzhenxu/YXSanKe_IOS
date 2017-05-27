@@ -46,7 +46,7 @@ static const CGFloat margin = 10;
     [self addSubview:self.topScrollView];
     
     y = CGRectGetMaxY(self.topScrollView.frame);
-    self.bottomLineView = [[UIView alloc]initWithFrame:CGRectMake(0, y, kScreenWidth, 1/[UIScreen mainScreen].scale)];
+    self.bottomLineView = [[UIView alloc]initWithFrame:CGRectMake(0, y - 1/[UIScreen mainScreen].scale, kScreenWidth, 1/[UIScreen mainScreen].scale)];
     self.bottomLineView.backgroundColor = [UIColor colorWithHexString:@"e6e6e6"];
     [self addSubview:self.bottomLineView];
     
