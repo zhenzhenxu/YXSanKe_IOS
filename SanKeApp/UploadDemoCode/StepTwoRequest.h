@@ -8,6 +8,17 @@
 
 #import "GetRequest.h"
 
+@interface StepTwoRequestItem_result : JSONModel
+@property (nonatomic, copy) NSString<Optional> *resid;
+@end
+
+
+@interface StepTwoRequestItem : HttpBaseRequestItem
+@property (nonatomic, strong) StepTwoRequestItem_result<Optional> *result;
+//@property (nonatomic, copy) NSString<Optional> *code;
+@end
+
+
 @interface StepTwoRequest : GetRequest
 @property (nonatomic, copy) NSString *md5;
 @end

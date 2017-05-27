@@ -20,6 +20,7 @@
 @property (nonatomic, strong) NSString<Optional> *stageID;
 @property (nonatomic, strong) NSString<Optional> *subjectID;
 @property (nonatomic, strong) NSString<Optional> *truename;
+@property (nonatomic, strong) NSString<Optional> *oldUserId;//用户中心id
 @property (nonatomic, strong) NSString<Optional> *userID;
 @property (nonatomic, strong) NSString<Optional> *experience;//工作年限
 @property (nonatomic, strong) NSString<Optional> *role;//角色

@@ -21,6 +21,7 @@
     model.stageID = rawData.userInfo.stage;
     model.subjectID = rawData.userInfo.subject;
     model.truename = rawData.userInfo.truename;
+    model.oldUserId = rawData.userInfo.olduserid;
     model.userID = rawData.userInfo.userid;
     model.token = rawData.token;
     model.isTaged = [rawData.is_taged isEqualToString:@"1"];

@@ -7,6 +7,8 @@
 //
 
 #import "QADataManager.h"
+#import "NSString+YXString.h"
+#import "UIImage+YXImage.h"
 
 NSString * const kQAQuestionInfoUpdateNotification = @"kQAQuestionInfoUpdateNotification";
 NSString * const kQAReplyInfoUpdateNotification = @"kQAReplyInfoUpdateNotification";
@@ -27,6 +29,8 @@ NSString * const kQAReplyUserFavorKey = @"kQAReplyUserFavorKey";
 @property (nonatomic, strong) QAReplyFavorRequest *replyFavorRequest;
 @property (nonatomic, strong) QACreateAskRequest *createAskRequest;
 @property (nonatomic, strong) QACreateAnswerRequest *createAnswerRequest;
+@property (nonatomic, strong) QAFileUploadFirstStepRequest *fileUploadFirstStepRequest;
+@property (nonatomic, strong) QAFileUploadSecondStepRequest *fileUploadSecondStepRequest;
 @end
 
 @implementation QADataManager
@@ -93,7 +97,7 @@ NSString * const kQAReplyUserFavorKey = @"kQAReplyUserFavorKey";
             BLOCK_EXEC(completeBlock,nil,error)
             return;
         }
-         [[NSNotificationCenter defaultCenter]postNotificationName:kQACreateQuestionSuccessNotification object:nil];
+        [[NSNotificationCenter defaultCenter]postNotificationName:kQACreateQuestionSuccessNotification object:nil];
         BLOCK_EXEC(completeBlock,retItem,nil)
     }];
 }
@@ -114,6 +118,50 @@ NSString * const kQAReplyUserFavorKey = @"kQAReplyUserFavorKey";
         BLOCK_EXEC(completeBlock,retItem,nil);
         [[NSNotificationCenter defaultCenter]postNotificationName:kQACreateReplySuccessNotification object:nil];
     }];
-
+    
 }
+
++ (void)uploadFile:(UIImage *)image completeBlock:(void (^)(QAFileUploadSecondStepRequestItem *, NSError *))completeBlock {
+    QADataManager *manager = [QADataManager sharedInstance];
+    [manager.fileUploadFirstStepRequest stopRequest];
+    manager.fileUploadFirstStepRequest = [[QAFileUploadFirstStepRequest alloc]init];
+    
+    NSData* data = UIImageJPEGRepresentation(image, 1.0);
+    NSString *sizeStr = [NSString stringWithFormat:@"%@", @(data.length)];
+//    manager.fileUploadFirstStepRequest.chunks = @"1";
+    manager.fileUploadFirstStepRequest.size = sizeStr;
+    manager.fileUploadFirstStepRequest.chunkSize = sizeStr;
+    
+    NSDate *date = [NSDate dateWithTimeIntervalSinceNow:0];
+    NSTimeInterval time=[date timeIntervalSince1970];
+    NSString*dateStr = [NSString stringWithFormat:@"%0.f", time];
+    NSString *userId = [UserManager sharedInstance].userModel.oldUserId;//@"23246746";
+    NSString *infoStr = [NSString stringWithFormat:@"%@%@%@",userId,dateStr,sizeStr];
+    NSString *md5 = [infoStr yx_md5];
+    manager.fileUploadFirstStepRequest.md5 = md5;
+    
+    manager.fileUploadFirstStepRequest.file = data;
+    manager.fileUploadFirstStepRequest.userId = userId;
+    manager.fileUploadFirstStepRequest.lastModifiedDate = dateStr;
+    WEAK_SELF
+    [manager.fileUploadFirstStepRequest startRequestWithRetClass:[NSObject class] andCompleteBlock:^(id retItem, NSError *error, BOOL isMock) {
+        STRONG_SELF
+        if (error) {
+            BLOCK_EXEC(completeBlock,nil,error);
+            return;
+        }
+        [manager.fileUploadSecondStepRequest stopRequest];
+        manager.fileUploadSecondStepRequest = [[QAFileUploadSecondStepRequest alloc]init];
+        manager.fileUploadSecondStepRequest.md5 = md5;
+        [manager.fileUploadSecondStepRequest startRequestWithRetClass:[QAFileUploadSecondStepRequestItem class] andCompleteBlock:^(id retItem, NSError *error, BOOL isMock) {
+            STRONG_SELF
+            if (error) {
+                BLOCK_EXEC(completeBlock,nil,error);
+                return;
+            }
+            BLOCK_EXEC(completeBlock,retItem,nil);
+        }];
+    }];
+}
+
 @end

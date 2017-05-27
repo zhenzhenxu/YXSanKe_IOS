@@ -13,6 +13,8 @@
 #import "UIImage+YXImage.h"
 #import "QATextView.h"
 #import "ProjectMainViewController.h"
+#import "StepOneRequest.h"
+#import "StepTwoRequest.h"
 
 static CGFloat const kTextViewHeight = 130.0f;
 
@@ -24,6 +26,8 @@ static CGFloat const kTextViewHeight = 130.0f;
 @property (nonatomic, strong) YXImagePickerController *imagePickerController;
 @property (nonatomic, strong) UIImageView *imageView;
 
+@property (nonatomic, strong) StepOneRequest *oneRequest;
+@property (nonatomic, strong) StepTwoRequest *twoRequest;
 @end
 
 @implementation QAPublishQuestionViewController
@@ -160,20 +164,104 @@ static CGFloat const kTextViewHeight = 130.0f;
 }
 
 - (void)publishQuestion {
-    [self startLoading];
+//    [self testUpload];
+    [self uploadFile];
+//    [self startLoading];
+//    WEAK_SELF
+//    [QADataManager createAskWithTitle:self.questionTitle content:self.textView.text attachmentID:nil completeBlock:^(HttpBaseRequestItem *item, NSError *error) {
+//        STRONG_SELF
+//        [self stopLoading];
+//        if (error) {
+//            [self showToast:error.localizedDescription];
+//            return ;
+//        }
+//        [self showToast:@"发布成功"];
+//        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+//            [self dismissViewControllerAnimated:YES completion:nil];
+//        });
+//    }];
+    
+    }
+- (void)uploadFile {
+    if (!isEmpty(self.imageView.image)) {
+        WEAK_SELF
+        [QADataManager uploadFile:self.imageView.image completeBlock:^(QAFileUploadSecondStepRequestItem *item, NSError *error) {
+            STRONG_SELF
+            if (error) {
+                [self showToast:error.localizedDescription];
+                return ;
+            }
+            [QADataManager createAskWithTitle:self.questionTitle content:self.textView.text attachmentID:item.result.resid completeBlock:^(HttpBaseRequestItem *item, NSError *error) {
+                STRONG_SELF
+                [self stopLoading];
+                if (error) {
+                    [self showToast:error.localizedDescription];
+                    return ;
+                }
+                [self showToast:@"发布成功"];
+                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                    [self dismissViewControllerAnimated:YES completion:nil];
+                });
+            }];
+        }];
+    }else {
+        WEAK_SELF
+        [QADataManager createAskWithTitle:self.questionTitle content:self.textView.text attachmentID:nil completeBlock:^(HttpBaseRequestItem *item, NSError *error) {
+            STRONG_SELF
+            [self stopLoading];
+            if (error) {
+                [self showToast:error.localizedDescription];
+                return ;
+            }
+            [self showToast:@"发布成功"];
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                [self dismissViewControllerAnimated:YES completion:nil];
+            });
+        }];
+        
+    }
+}
+- (void)testUpload {
+    NSString *filePath = [[NSBundle mainBundle] pathForResource:@"readme_helloworld" ofType:@"pdf"];
+    NSData *data = [NSData dataWithContentsOfFile:filePath];
+    NSString *sizeStr = [NSString stringWithFormat:@"%@", @(data.length)];
+    NSString *md5 = [GlobalUtils fileMD5:filePath];
+    
+    //    NSString *str = [NSString  alloc]initWithData:<#(nonnull NSData *)#> encoding:<#(NSStringEncoding)#>
+    //    NSData* data = UIImageJPEGRepresentation(self.imageView.image, 1.0);
+    //    NSString *sizeStr = [NSString stringWithFormat:@"%@", @(data.length)];
+    //    NSString *md5 = [GlobalUtils fileMD5:filePath];
+    
+    self.oneRequest = [[StepOneRequest alloc] init];
+    self.oneRequest.size = sizeStr;
+    self.oneRequest.chunkSize = sizeStr;
+    self.oneRequest.md5 = md5;
+    self.oneRequest.data = data;
     WEAK_SELF
-    [QADataManager createAskWithTitle:self.questionTitle content:self.textView.text attachmentID:nil completeBlock:^(HttpBaseRequestItem *item, NSError *error) {
-        STRONG_SELF
-        [self stopLoading];
-        if (error) {
-            [self showToast:error.localizedDescription];
-            return ;
-        }
-        [self showToast:@"发布成功"];
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            [self dismissViewControllerAnimated:YES completion:nil];
-        });
-    }];
+    [self.oneRequest startRequestWithRetClass:[NSObject class]
+                             andCompleteBlock:^(id retItem, NSError *error, BOOL isMock) {
+                                 STRONG_SELF
+                                 self.twoRequest = [[StepTwoRequest alloc] init];
+                                 self.twoRequest.md5 = md5;
+                                 [self.twoRequest startRequestWithRetClass:[StepTwoRequestItem class]
+                                                          andCompleteBlock:^(id retItem, NSError *error, BOOL isMock) {
+                                                              STRONG_SELF
+                                                              StepTwoRequestItem *item = retItem;
+                                                              NSString *attachmentID = item.result.resid;
+                                                              [QADataManager createAskWithTitle:self.questionTitle content:self.textView.text attachmentID:attachmentID completeBlock:^(HttpBaseRequestItem *item, NSError *error) {
+                                                                  STRONG_SELF
+                                                                  [self stopLoading];
+                                                                  if (error) {
+                                                                      [self showToast:error.localizedDescription];
+                                                                      return ;
+                                                                  }
+                                                                  [self showToast:@"发布成功"];
+                                                                  dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                                                                      [self dismissViewControllerAnimated:YES completion:nil];
+                                                                  });
+                                                              }];
+                                                          }];
+                             }];
 }
 
 #pragma mark - getter-imageView

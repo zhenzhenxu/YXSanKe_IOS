@@ -303,6 +303,9 @@
 		E96EB7AD1E94D2E50061D6C9 /* QACreateAnswerRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = E96EB7AC1E94D2E50061D6C9 /* QACreateAnswerRequest.m */; };
 		E96EB7B01E94E02C0061D6C9 /* createAnswerRequest.json in Resources */ = {isa = PBXBuildFile; fileRef = E96EB7AE1E94E02C0061D6C9 /* createAnswerRequest.json */; };
 		E96EB7B11E94E02C0061D6C9 /* createAskRequest.json in Resources */ = {isa = PBXBuildFile; fileRef = E96EB7AF1E94E02C0061D6C9 /* createAskRequest.json */; };
+		E985455D1ED97319007E5253 /* QAFileUploadFirstStepRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = E985455C1ED97319007E5253 /* QAFileUploadFirstStepRequest.m */; };
+		E98545601ED97340007E5253 /* QAFileUploadSecondStepRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = E985455F1ED97340007E5253 /* QAFileUploadSecondStepRequest.m */; };
+		E98ABD991ECAE44F0049435E /* TeachingPhotoBrowser.m in Sources */ = {isa = PBXBuildFile; fileRef = E98ABD981ECAE44F0049435E /* TeachingPhotoBrowser.m */; };
 		E99630871E95EF4700C4BF62 /* QAUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = E99630861E95EF4700C4BF62 /* QAUtils.m */; };
 		E996308A1E9C8C0A00C4BF62 /* UserStageSubjectInfoPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = E99630891E9C8C0A00C4BF62 /* UserStageSubjectInfoPicker.m */; };
 		E996308D1E9CB69000C4BF62 /* PersonalHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = E996308C1E9CB69000C4BF62 /* PersonalHeaderView.m */; };
@@ -894,6 +897,12 @@
 		E96EB7AC1E94D2E50061D6C9 /* QACreateAnswerRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QACreateAnswerRequest.m; sourceTree = "<group>"; };
 		E96EB7AE1E94E02C0061D6C9 /* createAnswerRequest.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = createAnswerRequest.json; sourceTree = "<group>"; };
 		E96EB7AF1E94E02C0061D6C9 /* createAskRequest.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = createAskRequest.json; sourceTree = "<group>"; };
+		E985455B1ED97319007E5253 /* QAFileUploadFirstStepRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QAFileUploadFirstStepRequest.h; sourceTree = "<group>"; };
+		E985455C1ED97319007E5253 /* QAFileUploadFirstStepRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QAFileUploadFirstStepRequest.m; sourceTree = "<group>"; };
+		E985455E1ED97340007E5253 /* QAFileUploadSecondStepRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QAFileUploadSecondStepRequest.h; sourceTree = "<group>"; };
+		E985455F1ED97340007E5253 /* QAFileUploadSecondStepRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QAFileUploadSecondStepRequest.m; sourceTree = "<group>"; };
+		E98ABD971ECAE44F0049435E /* TeachingPhotoBrowser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TeachingPhotoBrowser.h; sourceTree = "<group>"; };
+		E98ABD981ECAE44F0049435E /* TeachingPhotoBrowser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TeachingPhotoBrowser.m; sourceTree = "<group>"; };
 		E99630851E95EF4700C4BF62 /* QAUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QAUtils.h; sourceTree = "<group>"; };
 		E99630861E95EF4700C4BF62 /* QAUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QAUtils.m; sourceTree = "<group>"; };
 		E99630881E9C8C0A00C4BF62 /* UserStageSubjectInfoPicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserStageSubjectInfoPicker.h; sourceTree = "<group>"; };
@@ -1974,6 +1983,10 @@
 				E96EB7AB1E94D2E50061D6C9 /* QACreateAnswerRequest.h */,
 				E96EB7AC1E94D2E50061D6C9 /* QACreateAnswerRequest.m */,
 				E96EB7AE1E94E02C0061D6C9 /* createAnswerRequest.json */,
+				E985455B1ED97319007E5253 /* QAFileUploadFirstStepRequest.h */,
+				E985455C1ED97319007E5253 /* QAFileUploadFirstStepRequest.m */,
+				E985455E1ED97340007E5253 /* QAFileUploadSecondStepRequest.h */,
+				E985455F1ED97340007E5253 /* QAFileUploadSecondStepRequest.m */,
 			);
 			name = requests;
 			sourceTree = "<group>";
@@ -2436,6 +2449,7 @@
 				7C1A5F6C1E15130200832DED /* YXFileHtmlItem.m in Sources */,
 				7C1A5FE61E1637FC00832DED /* PagedListViewControllerBase.m in Sources */,
 				433C16841EDFCFA500FF4887 /* QASlideView.m in Sources */,
+				E98545601ED97340007E5253 /* QAFileUploadSecondStepRequest.m in Sources */,
 				7C1A5EA81E14F08700832DED /* AppDelegate.m in Sources */,
 				E99630901E9CC2F000C4BF62 /* UserInfoHeaderView.m in Sources */,
 				E96EB7501E8A7ADC0061D6C9 /* UserInfoTableViewCell.m in Sources */,
@@ -2546,6 +2560,7 @@
 				7C1809471E262DAA00B71863 /* FilterCell.m in Sources */,
 				7C1A5EA51E14F08700832DED /* main.m in Sources */,
 				30C48A8F1E52EACC00CCDBBE /* InstantRecordEntity+CoreDataProperties.m in Sources */,
+				E985455D1ED97319007E5253 /* QAFileUploadFirstStepRequest.m in Sources */,
 				E96EB74F1E8A7ADC0061D6C9 /* UserInfoPickerView.m in Sources */,
 				7C2251DD1E1F43A2004785D5 /* NSObject+BackgroundTask.m in Sources */,
 				7CDBFED61E8BB34B00C72E6F /* QAReplyListFetcher.m in Sources */,

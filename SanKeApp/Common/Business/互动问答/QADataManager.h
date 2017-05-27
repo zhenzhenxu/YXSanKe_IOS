@@ -11,6 +11,8 @@
 #import "QAReplyFavorRequest.h"
 #import "QACreateAskRequest.h"
 #import "QACreateAnswerRequest.h"
+#import "QAFileUploadFirstStepRequest.h"
+#import "QAFileUploadSecondStepRequest.h"
 
 extern NSString * const kQAQuestionInfoUpdateNotification; // 问题信息更新通知
 extern NSString * const kQAReplyInfoUpdateNotification; // 回复信息更新通知
@@ -41,4 +43,7 @@ extern NSString * const kQAReplyUserFavorKey;
 + (void)createAnswerWithAskID:(NSString *)askID
                    answer:(NSString *)answer
              completeBlock:(void(^)(HttpBaseRequestItem *item,NSError *error))completeBlock;
+//上传图片
++ (void)uploadFile:(UIImage *)image
+     completeBlock:(void(^)(QAFileUploadSecondStepRequestItem *item,NSError *error))completeBlock;
 @end
