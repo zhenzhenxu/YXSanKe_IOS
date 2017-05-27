@@ -9,10 +9,11 @@
 #import "PersonalHeaderView.h"
 
 #define ICONIMAGEVIEWHEIGHT 82.5f
-#define RADIAN_30 (M_PI * 30 / 180)
 
 @interface PersonalHeaderView ()<UIGestureRecognizerDelegate>
 @property (nonatomic, strong) UIImageView *backgroundImageView;
+@property (nonatomic, strong) UIVisualEffectView *effectView;
+@property (nonatomic, strong) UIView *maskView;
 @property (nonatomic, strong) UIImageView *iconImageView;
 @property (nonatomic, strong) UILabel *nameLabel;
 @property (nonatomic, strong) UILabel *editLabel;
@@ -35,11 +36,11 @@
     self.backgroundImageView.clipsToBounds = YES;
     self.backgroundImageView.userInteractionEnabled = YES;
     UIBlurEffect *effect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleLight];
-    UIVisualEffectView *effectView = [[UIVisualEffectView alloc] initWithEffect:effect];
-    effectView.alpha = 0.9;
+    self.effectView = [[UIVisualEffectView alloc] initWithEffect:effect];
+    self.effectView.alpha = 0.9;
     
-    UIView *maskView = [[UIView alloc]init];
-    maskView.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.3];
+    self.maskView = [[UIView alloc]init];
+    self.maskView.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.3];
     
     self.nameLabel = [[UILabel alloc]init];
     self.nameLabel.font = [UIFont boldSystemFontOfSize:17.0f];
@@ -62,24 +63,24 @@
     self.editLabel.userInteractionEnabled = YES;
     
     [self addSubview:self.backgroundImageView];
-    [self.backgroundImageView addSubview:effectView];
-    [self.backgroundImageView addSubview:maskView];
+    [self.backgroundImageView addSubview:self.effectView];
+    [self.backgroundImageView addSubview:self.maskView];
     [self.backgroundImageView addSubview:self.iconImageView];
     [self.backgroundImageView addSubview:self.nameLabel];
     [self.backgroundImageView addSubview:self.editLabel];
     [self.backgroundImageView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.mas_equalTo(0);
     }];
-    [effectView mas_makeConstraints:^(MASConstraintMaker *make) {
+    [self.effectView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.mas_equalTo(0);
     }];
-    [maskView mas_makeConstraints:^(MASConstraintMaker *make) {
+    [self.maskView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.mas_equalTo(0);
     }];
     [self.iconImageView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.mas_equalTo(0);
         make.centerY.mas_equalTo(0);
-        make.size.mas_equalTo(CGSizeMake(ICONIMAGEVIEWHEIGHT * cos(RADIAN_30), ICONIMAGEVIEWHEIGHT));
+        make.size.mas_equalTo(CGSizeMake(ICONIMAGEVIEWHEIGHT * cos(M_PI * 30 / 180), ICONIMAGEVIEWHEIGHT));
     }];
     [self.nameLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.mas_equalTo(0);
@@ -92,12 +93,13 @@
 }
 
 - (CAShapeLayer *)shapeLayerForMaskWithViewHeight:(CGFloat)viewHeight cornerRadius:(CGFloat)cornerRadius {
+    CGFloat radian_30 = M_PI * 30 / 180;
     CGFloat halfViewHeight = viewHeight * 0.5f;
-    CGFloat longSide = halfViewHeight * cos(RADIAN_30);
-    CGFloat shortSide = halfViewHeight * sin(RADIAN_30);
-    CGFloat gapLength = cornerRadius * tan(RADIAN_30);
-    CGFloat gapLongSide = cornerRadius * sin(RADIAN_30);
-    CGFloat gapShortSide = gapLength * sin(RADIAN_30);
+    CGFloat longSide = halfViewHeight * cos(radian_30);
+    CGFloat shortSide = halfViewHeight * sin(radian_30);
+    CGFloat gapLength = cornerRadius * tan(radian_30);
+    CGFloat gapLongSide = cornerRadius * sin(radian_30);
+    CGFloat gapShortSide = gapLength * sin(radian_30);
     UIBezierPath *path = [UIBezierPath bezierPath];
     [path moveToPoint:CGPointMake(0, shortSide + gapLength)];
     [path addQuadCurveToPoint:CGPointMake(gapLongSide, shortSide - gapShortSide) controlPoint:CGPointMake(0, shortSide)];
@@ -126,8 +128,16 @@
 
 - (void)setModel:(UserModel *)model {
     _model = model;
-    [self.iconImageView sd_setImageWithURL:[NSURL URLWithString:model.portraitUrl] placeholderImage:[UIImage imageNamed:@"大头像"] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
-        self.backgroundImageView.image = image;
+    [self.iconImageView sd_setImageWithURL:[NSURL URLWithString:model.portraitUrl] placeholderImage:[UIImage imageNamed:@"icon"] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+        if (image == nil) {
+            self.backgroundImageView.image = [UIImage yx_imageWithColor:[UIColor colorWithHexString:@"4691a6"]];
+            self.effectView.hidden = YES;
+            self.maskView.hidden = YES;
+        } else {
+            self.backgroundImageView.image = image;
+            self.effectView.hidden = NO;
+            self.maskView.hidden = NO;
+        }
     }];
     self.nameLabel.text = model.truename;
     if (model.isAnonymous) {
