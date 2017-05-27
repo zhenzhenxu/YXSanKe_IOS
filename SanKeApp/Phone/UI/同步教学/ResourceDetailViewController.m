@@ -137,10 +137,10 @@
 }
 
 - (void)answerButtonAction:(UIButton *)sender {
-    if ([UserManager sharedInstance].userModel.isAnonymous) {
-        [self showToast:@"请先登录"];
-        return;
-    }
+//    if ([UserManager sharedInstance].userModel.isAnonymous) {
+//        [self showToast:@"请先登录"];
+//        return;
+//    }
     MakeCommentViewController *vc = [[MakeCommentViewController alloc] init];
     vc.resourceID = self.resourceID;
     vc.resName = self.item.resName;

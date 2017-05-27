@@ -138,7 +138,7 @@
         element = cell.element;
         DDLogDebug(@"跳转到资源详情页");
         ResourceDetailViewController *resourceDetailVC = [[ResourceDetailViewController alloc] init];
-        resourceDetailVC.resourceID = @"28270372";
+        resourceDetailVC.resourceID = cell.element.elementID;
         [self.navigationController pushViewController:resourceDetailVC animated:YES];
     }];
     return cell;

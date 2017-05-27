@@ -8,6 +8,9 @@
 
 #import "PersonalHeaderView.h"
 
+#define ICONIMAGEVIEWHEIGHT 82.5f
+#define RADIAN_30 (M_PI * 30 / 180)
+
 @interface PersonalHeaderView ()<UIGestureRecognizerDelegate>
 @property (nonatomic, strong) UIImageView *backgroundImageView;
 @property (nonatomic, strong) UIImageView *iconImageView;
@@ -43,9 +46,7 @@
     self.nameLabel.textColor = [UIColor colorWithHexString:@"ffffff"];
     
     self.iconImageView = [[UIImageView alloc]init];
-    self.iconImageView.layer.cornerRadius = 36.5;
-    self.iconImageView.layer.borderColor = [UIColor whiteColor].CGColor;
-    self.iconImageView.layer.borderWidth = 1;
+    self.iconImageView.layer.mask = [self shapeLayerForMaskWithViewHeight:ICONIMAGEVIEWHEIGHT cornerRadius:8.0f];
     self.iconImageView.clipsToBounds = YES;
     self.iconImageView.contentMode = UIViewContentModeScaleAspectFill;
     self.iconImageView.userInteractionEnabled = YES;
@@ -78,7 +79,7 @@
     [self.iconImageView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.mas_equalTo(0);
         make.centerY.mas_equalTo(0);
-        make.size.mas_equalTo(CGSizeMake(75, 75));
+        make.size.mas_equalTo(CGSizeMake(ICONIMAGEVIEWHEIGHT * cos(RADIAN_30), ICONIMAGEVIEWHEIGHT));
     }];
     [self.nameLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.mas_equalTo(0);
@@ -88,6 +89,32 @@
         make.centerX.mas_equalTo(0);
         make.top.equalTo(self.iconImageView.mas_bottom).offset(12.0f);
     }];
+}
+
+- (CAShapeLayer *)shapeLayerForMaskWithViewHeight:(CGFloat)viewHeight cornerRadius:(CGFloat)cornerRadius {
+    CGFloat halfViewHeight = viewHeight * 0.5f;
+    CGFloat longSide = halfViewHeight * cos(RADIAN_30);
+    CGFloat shortSide = halfViewHeight * sin(RADIAN_30);
+    CGFloat gapLength = cornerRadius * tan(RADIAN_30);
+    CGFloat gapLongSide = cornerRadius * sin(RADIAN_30);
+    CGFloat gapShortSide = gapLength * sin(RADIAN_30);
+    UIBezierPath *path = [UIBezierPath bezierPath];
+    [path moveToPoint:CGPointMake(0, shortSide + gapLength)];
+    [path addQuadCurveToPoint:CGPointMake(gapLongSide, shortSide - gapShortSide) controlPoint:CGPointMake(0, shortSide)];
+    [path addLineToPoint:CGPointMake(longSide - gapLongSide, gapShortSide)];
+    [path addQuadCurveToPoint:CGPointMake(longSide + gapLongSide, gapShortSide      ) controlPoint:CGPointMake(longSide, 0)];
+    [path addLineToPoint:CGPointMake(longSide * 2 - gapLongSide, shortSide - gapShortSide)];
+    [path addQuadCurveToPoint:CGPointMake(longSide * 2, shortSide + gapLength) controlPoint:CGPointMake(longSide * 2, shortSide)];
+    [path addLineToPoint:CGPointMake(longSide * 2, shortSide + halfViewHeight - gapLength)];
+    [path addQuadCurveToPoint:CGPointMake(longSide * 2 - gapLongSide, shortSide + halfViewHeight + gapShortSide) controlPoint:CGPointMake(longSide * 2, shortSide + halfViewHeight)];
+    [path addLineToPoint:CGPointMake(longSide + gapLongSide, viewHeight - gapShortSide)];
+    [path addQuadCurveToPoint:CGPointMake(longSide - gapLongSide, viewHeight - gapShortSide) controlPoint:CGPointMake(longSide, viewHeight)];
+    [path addLineToPoint:CGPointMake(gapLongSide, shortSide + halfViewHeight + gapShortSide)];
+    [path addQuadCurveToPoint:CGPointMake(0, shortSide + halfViewHeight - gapLength) controlPoint:CGPointMake(0, shortSide + halfViewHeight)];
+    [path closePath];
+    CAShapeLayer * shapLayer = [CAShapeLayer layer];
+    shapLayer.path = path.CGPath;
+    return shapLayer;
 }
 
 - (void)editIconAction {
