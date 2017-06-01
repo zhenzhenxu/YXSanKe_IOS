@@ -9,10 +9,12 @@
 #import "MakeCommentViewController.h"
 #import "ResourceDataManger.h"
 #import "QATextView.h"
+#import "MenuSelectionView.h"
 
 @interface MakeCommentViewController ()
 
 @property (nonatomic, strong) QATextView *textView;
+@property (nonatomic, strong) MenuSelectionView *menuSelectionView;
 
 @end
 
@@ -64,11 +66,83 @@
     WEAK_SELF
     [[button rac_signalForControlEvents:UIControlEventTouchUpInside]subscribeNext:^(id x) {
         STRONG_SELF
-        [self.view endEditing:YES];
-        [self dismissViewControllerAnimated:YES completion:nil];
+        [self cancelAction];
     }];
     [self setupLeftWithCustomView:button];
     [self setupRightWithTitle:@"发送"];
+}
+
+- (void)cancelAction {
+    DDLogDebug(@"click to cancel");
+    [self.view endEditing:YES];
+    [self handleCancelAction];
+}
+
+- (void)handleCancelAction {
+    self.menuSelectionView = [[MenuSelectionView alloc]init];
+    self.menuSelectionView.dataArray = @[
+                                         @"确定",
+                                         @"取消"
+                                         ];
+    CGFloat height = [self.menuSelectionView totalHeight];
+    [self.view addSubview:self.menuSelectionView];
+    AlertView *alert = [[AlertView alloc]init];
+    alert.hideWhenMaskClicked = YES;
+    alert.maskColor = [[UIColor blackColor]colorWithAlphaComponent:0.4];
+    alert.contentView = self.menuSelectionView;
+    WEAK_SELF
+    [alert setHideBlock:^(AlertView *view) {
+        STRONG_SELF
+        [UIView animateWithDuration:0.3f animations:^{
+            [view.contentView mas_remakeConstraints:^(MASConstraintMaker *make) {
+                make.left.right.equalTo(view);
+                make.top.equalTo(view.mas_bottom).offset(0);
+                make.height.mas_equalTo(height);
+            }];
+            [view layoutIfNeeded];
+        } completion:^(BOOL finished) {
+            [view removeFromSuperview];
+        }];
+    }];
+    [alert showWithLayout:^(AlertView *view) {
+        STRONG_SELF
+        [view.contentView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.right.equalTo(view);
+            make.top.equalTo(view.mas_bottom).offset(0);
+            make.height.mas_equalTo(height);
+        }];
+        [view layoutIfNeeded];
+        [UIView animateWithDuration:0.3f animations:^{
+            [view.contentView mas_remakeConstraints:^(MASConstraintMaker *make) {
+                make.left.right.equalTo(view);
+                make.height.mas_equalTo(height);
+                make.bottom.equalTo(view);
+            }];
+            [view layoutIfNeeded];
+        }];
+    }];
+    [self.menuSelectionView setChooseMenuBlock:^(NSInteger index) {
+        STRONG_SELF
+        [alert hide];
+        [self chooseMenuWithIndex:index];
+    }];
+}
+
+- (void)chooseMenuWithIndex:(NSInteger)index {
+    switch (index) {
+        case 0:
+        {
+            [self dismissViewControllerAnimated:YES completion:nil];
+        }
+            break;
+        case 1:{
+            return;
+        }
+            break;
+            
+        default:
+            break;
+    }
 }
 
 - (void)naviRightAction {

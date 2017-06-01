@@ -12,12 +12,11 @@
 #import "MakeCommentViewController.h"
 #import "ResourceAskListFetcher.h"
 #import "ResourceDataManger.h"
-#import "TeachingPhotoBrowser.h"
+#import "PhotoBrowserController.h"
 
 @interface ResourceDetailViewController ()<MWPhotoBrowserDelegate>
 
 @property (nonatomic, strong) UIView *bottomView;
-@property (nonatomic, strong) TeachingPhotoBrowser *photoBrowser;
 @property (nonatomic, strong) ResourceDetailRequestItem_Data *item;
 @property (nonatomic, strong) YXFileItemBase *fileItem;
 
@@ -130,10 +129,9 @@
 }
 
 - (void)setupPhotoBrowser {
-    TeachingPhotoBrowser *browser = [[TeachingPhotoBrowser alloc] initWithDelegate:self];
-    browser.displayActionButton = NO;
-    self.photoBrowser = browser;
-    [self.navigationController pushViewController:self.photoBrowser animated:NO];
+    PhotoBrowserController *browser = [[PhotoBrowserController alloc] init];
+    browser.imageUrls = @[self.item.resThumb];
+    [self.navigationController pushViewController:browser animated:NO];
 }
 
 - (void)answerButtonAction:(UIButton *)sender {
@@ -192,16 +190,6 @@
         [self startLoading];
         [self firstPageFetch];
     }];
-}
-
-#pragma mark - MWPhotoBrowserDelegate
-- (NSUInteger)numberOfPhotosInPhotoBrowser:(MWPhotoBrowser *)photoBrowser {
-    return 1;
-}
-
-- (id <MWPhoto>)photoBrowser:(MWPhotoBrowser *)photoBrowser photoAtIndex:(NSUInteger)index {
-    MWPhoto *ptoto = [MWPhoto photoWithURL:[NSURL URLWithString:self.item.resThumb]];
-    return ptoto;
 }
 
 #pragma mark - UITableViewDataSource & UITableViewDelegate

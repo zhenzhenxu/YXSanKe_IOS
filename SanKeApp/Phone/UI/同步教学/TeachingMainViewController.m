@@ -13,20 +13,20 @@
 #import "GetBookInfoRequest.h"
 #import "TeachingPageModel.h"
 #import "TeachingMutiLabelView.h"
-#import "TeachingPhotoBrowser.h"
 #import "LabelListViewController.h"
+#import "PhotoBrowserController.h"
 
 @interface TeachingMainViewController ()<UITableViewDataSource,UITableViewDelegate,MWPhotoBrowserDelegate,TeachingFilterViewDelegate>
 #pragma mark - data
 @property (nonatomic, strong) GetBookInfoRequest *getBookInfoRequest;
 @property (nonatomic, strong) NSArray <NSArray<TeachingPageModel *> *>*dataArray;
 @property (nonatomic, strong) NSArray<TeachingPageModel *> *currentVolumDataArray;
+@property (nonatomic, strong) NSMutableArray *imageUrls;
 @property (nonatomic, strong) TeachingFiterModel *filterModel;
 #pragma mark - view
 @property (nonatomic, strong) TeachingFilterView *filterView;
 @property (nonatomic, strong) TeachingMutiLabelView *mutiTabView;
 @property (nonatomic, strong) UITableView *tableView;
-@property (nonatomic, strong) TeachingPhotoBrowser *photoBrowser;
 #pragma mark - other
 @property (nonatomic, assign) CGFloat lastContentOffset;
 @property (nonatomic, assign) BOOL isScrollTop;
@@ -105,11 +105,11 @@
         [self setupCurrentContent];
     }];
     
-    [[[NSNotificationCenter defaultCenter]rac_addObserverForName:kTeachingPhotoBrowserExitNotification object:nil]subscribeNext:^(id x) {
+    [[[NSNotificationCenter defaultCenter]rac_addObserverForName:kPhotoBrowserExitNotification object:nil]subscribeNext:^(id x) {
         STRONG_SELF
         NSNotification *noti = (NSNotification *)x;
         NSDictionary *dic = noti.userInfo;
-        NSString *indexStr = dic[kPhotoIndexKey];
+        NSString *indexStr = dic[kPhotoBrowserIndexKey];
         NSInteger currentIndex = indexStr.integerValue;
         
         NSIndexPath *currentIndexPath = [NSIndexPath indexPathForRow:currentIndex inSection:0];
@@ -270,11 +270,10 @@
     WEAK_SELF
     [cell setSelectedButtonActionBlock:^{
         STRONG_SELF
-        TeachingPhotoBrowser *browser = [[TeachingPhotoBrowser alloc] initWithDelegate:self];
-        browser.displayActionButton = NO;
-        self.photoBrowser = browser;
-        [self.photoBrowser setCurrentPhotoIndex:indexPath.row];
-        [self.navigationController pushViewController:self.photoBrowser animated:NO];
+        PhotoBrowserController *pbController = [[PhotoBrowserController alloc] init];
+        pbController.imageUrls = self.imageUrls;
+        pbController.currentIndex = indexPath.row;
+        [self.navigationController pushViewController:pbController animated:NO];
     }];
     return cell;
 }
@@ -446,5 +445,13 @@
 #pragma mark - getter
 - (NSArray<TeachingPageModel *> *)currentVolumDataArray {
     return self.dataArray[self.filterModel.volumChooseInteger];
+}
+
+- (void)setDataArray:(NSArray<NSArray<TeachingPageModel *> *> *)dataArray {
+    _dataArray = dataArray;
+    self.imageUrls = [NSMutableArray array];
+    for (int i = 0; i < self.currentVolumDataArray.count; i++) {
+        [self.imageUrls addObject:self.currentVolumDataArray[i].pageUrl];
+    }
 }
 @end

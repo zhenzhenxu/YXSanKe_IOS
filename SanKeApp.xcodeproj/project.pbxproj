@@ -25,6 +25,10 @@
 		30C87E0E1E52F4BB000CFBAA /* NSString+YXString.m in Sources */ = {isa = PBXBuildFile; fileRef = 30C87E0D1E52F4BB000CFBAA /* NSString+YXString.m */; };
 		30C87E111E52F4CF000CFBAA /* NSMutableDictionary+YXDictionarys.m in Sources */ = {isa = PBXBuildFile; fileRef = 30C87E101E52F4CF000CFBAA /* NSMutableDictionary+YXDictionarys.m */; };
 		30E70FC01E3482E8001B9BA4 /* ChannelTabFilterRequest.json in Resources */ = {isa = PBXBuildFile; fileRef = 30E70FBF1E3482E8001B9BA4 /* ChannelTabFilterRequest.json */; };
+		433C16831EDFCFA500FF4887 /* QASlideItemBaseView.m in Sources */ = {isa = PBXBuildFile; fileRef = 433C16801EDFCFA500FF4887 /* QASlideItemBaseView.m */; };
+		433C16841EDFCFA500FF4887 /* QASlideView.m in Sources */ = {isa = PBXBuildFile; fileRef = 433C16821EDFCFA500FF4887 /* QASlideView.m */; };
+		433C16871EDFCFC200FF4887 /* SlideImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 433C16861EDFCFC200FF4887 /* SlideImageView.m */; };
+		433C168A1EDFCFD400FF4887 /* PhotoBrowserController.m in Sources */ = {isa = PBXBuildFile; fileRef = 433C16891EDFCFD400FF4887 /* PhotoBrowserController.m */; };
 		4364513F1ED6639B009D168D /* CommentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4364513C1ED6639B009D168D /* CommentCell.m */; };
 		436451401ED6639B009D168D /* ResourceDetailHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4364513E1ED6639B009D168D /* ResourceDetailHeaderView.m */; };
 		436451451ED663AA009D168D /* MakeCommentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 436451421ED663AA009D168D /* MakeCommentViewController.m */; };
@@ -299,7 +303,6 @@
 		E96EB7AD1E94D2E50061D6C9 /* QACreateAnswerRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = E96EB7AC1E94D2E50061D6C9 /* QACreateAnswerRequest.m */; };
 		E96EB7B01E94E02C0061D6C9 /* createAnswerRequest.json in Resources */ = {isa = PBXBuildFile; fileRef = E96EB7AE1E94E02C0061D6C9 /* createAnswerRequest.json */; };
 		E96EB7B11E94E02C0061D6C9 /* createAskRequest.json in Resources */ = {isa = PBXBuildFile; fileRef = E96EB7AF1E94E02C0061D6C9 /* createAskRequest.json */; };
-		E98ABD991ECAE44F0049435E /* TeachingPhotoBrowser.m in Sources */ = {isa = PBXBuildFile; fileRef = E98ABD981ECAE44F0049435E /* TeachingPhotoBrowser.m */; };
 		E99630871E95EF4700C4BF62 /* QAUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = E99630861E95EF4700C4BF62 /* QAUtils.m */; };
 		E996308A1E9C8C0A00C4BF62 /* UserStageSubjectInfoPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = E99630891E9C8C0A00C4BF62 /* UserStageSubjectInfoPicker.m */; };
 		E996308D1E9CB69000C4BF62 /* PersonalHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = E996308C1E9CB69000C4BF62 /* PersonalHeaderView.m */; };
@@ -361,6 +364,14 @@
 		30C87E0F1E52F4CF000CFBAA /* NSMutableDictionary+YXDictionarys.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSMutableDictionary+YXDictionarys.h"; sourceTree = "<group>"; };
 		30C87E101E52F4CF000CFBAA /* NSMutableDictionary+YXDictionarys.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSMutableDictionary+YXDictionarys.m"; sourceTree = "<group>"; };
 		30E70FBF1E3482E8001B9BA4 /* ChannelTabFilterRequest.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = ChannelTabFilterRequest.json; sourceTree = "<group>"; };
+		433C167F1EDFCFA500FF4887 /* QASlideItemBaseView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QASlideItemBaseView.h; sourceTree = "<group>"; };
+		433C16801EDFCFA500FF4887 /* QASlideItemBaseView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QASlideItemBaseView.m; sourceTree = "<group>"; };
+		433C16811EDFCFA500FF4887 /* QASlideView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QASlideView.h; sourceTree = "<group>"; };
+		433C16821EDFCFA500FF4887 /* QASlideView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QASlideView.m; sourceTree = "<group>"; };
+		433C16851EDFCFC200FF4887 /* SlideImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SlideImageView.h; sourceTree = "<group>"; };
+		433C16861EDFCFC200FF4887 /* SlideImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SlideImageView.m; sourceTree = "<group>"; };
+		433C16881EDFCFD400FF4887 /* PhotoBrowserController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoBrowserController.h; sourceTree = "<group>"; };
+		433C16891EDFCFD400FF4887 /* PhotoBrowserController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoBrowserController.m; sourceTree = "<group>"; };
 		4364513B1ED6639B009D168D /* CommentCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommentCell.h; sourceTree = "<group>"; };
 		4364513C1ED6639B009D168D /* CommentCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommentCell.m; sourceTree = "<group>"; };
 		4364513D1ED6639B009D168D /* ResourceDetailHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ResourceDetailHeaderView.h; sourceTree = "<group>"; };
@@ -883,8 +894,6 @@
 		E96EB7AC1E94D2E50061D6C9 /* QACreateAnswerRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QACreateAnswerRequest.m; sourceTree = "<group>"; };
 		E96EB7AE1E94E02C0061D6C9 /* createAnswerRequest.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = createAnswerRequest.json; sourceTree = "<group>"; };
 		E96EB7AF1E94E02C0061D6C9 /* createAskRequest.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = createAskRequest.json; sourceTree = "<group>"; };
-		E98ABD971ECAE44F0049435E /* TeachingPhotoBrowser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TeachingPhotoBrowser.h; sourceTree = "<group>"; };
-		E98ABD981ECAE44F0049435E /* TeachingPhotoBrowser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TeachingPhotoBrowser.m; sourceTree = "<group>"; };
 		E99630851E95EF4700C4BF62 /* QAUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QAUtils.h; sourceTree = "<group>"; };
 		E99630861E95EF4700C4BF62 /* QAUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QAUtils.m; sourceTree = "<group>"; };
 		E99630881E9C8C0A00C4BF62 /* UserStageSubjectInfoPicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserStageSubjectInfoPicker.h; sourceTree = "<group>"; };
@@ -1548,6 +1557,10 @@
 		7C1A60141E163C8200832DED /* CustomView */ = {
 			isa = PBXGroup;
 			children = (
+				433C167F1EDFCFA500FF4887 /* QASlideItemBaseView.h */,
+				433C16801EDFCFA500FF4887 /* QASlideItemBaseView.m */,
+				433C16811EDFCFA500FF4887 /* QASlideView.h */,
+				433C16821EDFCFA500FF4887 /* QASlideView.m */,
 				7C18094A1E271AFC00B71863 /* CollectionViewEqualSpaceFlowLayout.h */,
 				7C18094B1E271AFC00B71863 /* CollectionViewEqualSpaceFlowLayout.m */,
 				9241FFF31E2651390015B587 /* YXGradientView.h */,
@@ -1610,6 +1623,8 @@
 				436451421ED663AA009D168D /* MakeCommentViewController.m */,
 				436451431ED663AA009D168D /* ResourceDetailViewController.h */,
 				436451441ED663AA009D168D /* ResourceDetailViewController.m */,
+				433C16881EDFCFD400FF4887 /* PhotoBrowserController.h */,
+				433C16891EDFCFD400FF4887 /* PhotoBrowserController.m */,
 			);
 			path = "同步教学";
 			sourceTree = "<group>";
@@ -2026,6 +2041,8 @@
 		E94976F71EC1A30A00A4642A /* View */ = {
 			isa = PBXGroup;
 			children = (
+				433C16851EDFCFC200FF4887 /* SlideImageView.h */,
+				433C16861EDFCFC200FF4887 /* SlideImageView.m */,
 				4364513B1ED6639B009D168D /* CommentCell.h */,
 				4364513C1ED6639B009D168D /* CommentCell.m */,
 				4364513D1ED6639B009D168D /* ResourceDetailHeaderView.h */,
@@ -2040,8 +2057,6 @@
 				E94977021EC1B53E00A4642A /* TeachingFilterBackgroundView.m */,
 				E9062AE21ED29DA500531472 /* TeachingMutiLabelView.h */,
 				E9062AE31ED29DA500531472 /* TeachingMutiLabelView.m */,
-				E98ABD971ECAE44F0049435E /* TeachingPhotoBrowser.h */,
-				E98ABD981ECAE44F0049435E /* TeachingPhotoBrowser.m */,
 				E9062AEE1ED2B2CC00531472 /* LabelListContainerView.h */,
 				E9062AEF1ED2B2CC00531472 /* LabelListContainerView.m */,
 				E9062B051ED2E66200531472 /* LabelTreeCell.h */,
@@ -2404,6 +2419,7 @@
 				7C1A5F881E1513D600832DED /* MJRefreshFooterView.m in Sources */,
 				E9355AE41E65574E007AE9F0 /* UploadHeadImgRequest.m in Sources */,
 				7C2251D31E1E2626004785D5 /* GCDTimer.m in Sources */,
+				433C16871EDFCFC200FF4887 /* SlideImageView.m in Sources */,
 				7C1A5F4A1E15127200832DED /* YXPlayerTopView.m in Sources */,
 				E9355AEA1E6674B4007AE9F0 /* MenuSelectionView.m in Sources */,
 				E94977031EC1B53E00A4642A /* TeachingFilterBackgroundView.m in Sources */,
@@ -2419,6 +2435,7 @@
 				4364513F1ED6639B009D168D /* CommentCell.m in Sources */,
 				7C1A5F6C1E15130200832DED /* YXFileHtmlItem.m in Sources */,
 				7C1A5FE61E1637FC00832DED /* PagedListViewControllerBase.m in Sources */,
+				433C16841EDFCFA500FF4887 /* QASlideView.m in Sources */,
 				7C1A5EA81E14F08700832DED /* AppDelegate.m in Sources */,
 				E99630901E9CC2F000C4BF62 /* UserInfoHeaderView.m in Sources */,
 				E96EB7501E8A7ADC0061D6C9 /* UserInfoTableViewCell.m in Sources */,
@@ -2445,7 +2462,6 @@
 				7C1809351E25D4A900B71863 /* StageSubjectHeaderView.m in Sources */,
 				E9230C4F1E3060FE00AC6617 /* MineUserModel.m in Sources */,
 				7C1A5EE41E15052000832DED /* BaseViewController.m in Sources */,
-				E98ABD991ECAE44F0049435E /* TeachingPhotoBrowser.m in Sources */,
 				7C76849A1E88C0B9004B05F6 /* QAQuestionDetailView.m in Sources */,
 				7C1CBEE41E81115200826FE9 /* QAQuestionCell.m in Sources */,
 				7C1A60101E163B8800832DED /* TestsRootViewController.m in Sources */,
@@ -2583,6 +2599,7 @@
 				436451591ED663ED009D168D /* ResourceDataManger.m in Sources */,
 				7C1809381E25DEBA00B71863 /* StageSubjectCell.m in Sources */,
 				E9062AE41ED29DA500531472 /* TeachingMutiLabelView.m in Sources */,
+				433C16831EDFCFA500FF4887 /* QASlideItemBaseView.m in Sources */,
 				7C7841BE1E2F37EB00755BC0 /* LoginDataManager.m in Sources */,
 				436451461ED663AA009D168D /* ResourceDetailViewController.m in Sources */,
 				7C1A5F761E15132200832DED /* FileDownloadHelper.m in Sources */,
@@ -2595,6 +2612,7 @@
 				9241FFE71E25E7C90015B587 /* CourseTableViewCell.m in Sources */,
 				E9355B771E6EB51E007AE9F0 /* UserInfoDataManger.m in Sources */,
 				7C7629D91E28A9D5007B5698 /* YXInitRequest.m in Sources */,
+				433C168A1EDFCFD400FF4887 /* PhotoBrowserController.m in Sources */,
 				7C1A5EF11E150B6A00832DED /* SKConfigManager.m in Sources */,
 				E96EB7311E8A16F40061D6C9 /* UpdateUserNameRequest.m in Sources */,
 				7C7841B81E2F1E2900755BC0 /* MineDataManager.m in Sources */,
