@@ -161,7 +161,6 @@
 		7C7629C11E27371D007B5698 /* LoginActionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C7629C01E27371D007B5698 /* LoginActionView.m */; };
 		7C7629C71E27443F007B5698 /* LoginInputView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C7629C61E27443F007B5698 /* LoginInputView.m */; };
 		7C7629CA1E276093007B5698 /* LoginLogoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C7629C91E276093007B5698 /* LoginLogoView.m */; };
-		7C7629D21E276DBE007B5698 /* logo.gif in Resources */ = {isa = PBXBuildFile; fileRef = 7C7629D11E276DBE007B5698 /* logo.gif */; };
 		7C7629D51E278E16007B5698 /* UserManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C7629D41E278E16007B5698 /* UserManager.m */; };
 		7C7629D91E28A9D5007B5698 /* YXInitRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C7629D81E28A9D5007B5698 /* YXInitRequest.m */; };
 		7C7629DC1E28B1F2007B5698 /* UpgradeManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C7629DB1E28B1F2007B5698 /* UpgradeManager.m */; };
@@ -305,6 +304,7 @@
 		E96EB7B11E94E02C0061D6C9 /* createAskRequest.json in Resources */ = {isa = PBXBuildFile; fileRef = E96EB7AF1E94E02C0061D6C9 /* createAskRequest.json */; };
 		E985455D1ED97319007E5253 /* QAFileUploadFirstStepRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = E985455C1ED97319007E5253 /* QAFileUploadFirstStepRequest.m */; };
 		E98545601ED97340007E5253 /* QAFileUploadSecondStepRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = E985455F1ED97340007E5253 /* QAFileUploadSecondStepRequest.m */; };
+		E98545621EDFA488007E5253 /* logo.gif in Resources */ = {isa = PBXBuildFile; fileRef = E98545611EDFA488007E5253 /* logo.gif */; };
 		E98ABD991ECAE44F0049435E /* TeachingPhotoBrowser.m in Sources */ = {isa = PBXBuildFile; fileRef = E98ABD981ECAE44F0049435E /* TeachingPhotoBrowser.m */; };
 		E99630871E95EF4700C4BF62 /* QAUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = E99630861E95EF4700C4BF62 /* QAUtils.m */; };
 		E996308A1E9C8C0A00C4BF62 /* UserStageSubjectInfoPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = E99630891E9C8C0A00C4BF62 /* UserStageSubjectInfoPicker.m */; };
@@ -633,7 +633,6 @@
 		7C7629C61E27443F007B5698 /* LoginInputView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginInputView.m; sourceTree = "<group>"; };
 		7C7629C81E276093007B5698 /* LoginLogoView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginLogoView.h; sourceTree = "<group>"; };
 		7C7629C91E276093007B5698 /* LoginLogoView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginLogoView.m; sourceTree = "<group>"; };
-		7C7629D11E276DBE007B5698 /* logo.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = logo.gif; sourceTree = "<group>"; };
 		7C7629D31E278E16007B5698 /* UserManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserManager.h; sourceTree = "<group>"; };
 		7C7629D41E278E16007B5698 /* UserManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserManager.m; sourceTree = "<group>"; };
 		7C7629D71E28A9D5007B5698 /* YXInitRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YXInitRequest.h; sourceTree = "<group>"; };
@@ -901,6 +900,7 @@
 		E985455C1ED97319007E5253 /* QAFileUploadFirstStepRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QAFileUploadFirstStepRequest.m; sourceTree = "<group>"; };
 		E985455E1ED97340007E5253 /* QAFileUploadSecondStepRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QAFileUploadSecondStepRequest.h; sourceTree = "<group>"; };
 		E985455F1ED97340007E5253 /* QAFileUploadSecondStepRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QAFileUploadSecondStepRequest.m; sourceTree = "<group>"; };
+		E98545611EDFA488007E5253 /* logo.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = logo.gif; sourceTree = "<group>"; };
 		E98ABD971ECAE44F0049435E /* TeachingPhotoBrowser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TeachingPhotoBrowser.h; sourceTree = "<group>"; };
 		E98ABD981ECAE44F0049435E /* TeachingPhotoBrowser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TeachingPhotoBrowser.m; sourceTree = "<group>"; };
 		E99630851E95EF4700C4BF62 /* QAUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QAUtils.h; sourceTree = "<group>"; };
@@ -1853,7 +1853,7 @@
 		7C7629CE1E2762B7007B5698 /* gif */ = {
 			isa = PBXGroup;
 			children = (
-				7C7629D11E276DBE007B5698 /* logo.gif */,
+				E98545611EDFA488007E5253 /* logo.gif */,
 			);
 			name = gif;
 			sourceTree = "<group>";
@@ -2324,7 +2324,7 @@
 				E9355B7C1E6FF85B007AE9F0 /* userInfo.json in Resources */,
 				7CDBFECE1E8B9EF100C72E6F /* questionlist_mock.json in Resources */,
 				E96EB7B01E94E02C0061D6C9 /* createAnswerRequest.json in Resources */,
-				7C7629D21E276DBE007B5698 /* logo.gif in Resources */,
+				E98545621EDFA488007E5253 /* logo.gif in Resources */,
 				927594E91E2F0DA000F87838 /* playHistory_mock.json in Resources */,
 				E9230C461E2F829900AC6617 /* LoginRequest.json in Resources */,
 				7C1A5EF31E150BD100832DED /* env_config.json in Resources */,

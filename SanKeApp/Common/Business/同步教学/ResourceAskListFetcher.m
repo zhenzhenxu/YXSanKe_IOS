@@ -18,7 +18,7 @@
     [self.request stopRequest];
     self.request = [[ResourceAskListRequest alloc]init];
     self.request.objectid = self.resourceID;
-    self.request.pageno = [NSString stringWithFormat:@"%ld", self.pageNum];
+    self.request.pageno = [NSString stringWithFormat:@"%ld", (long)self.pageNum];
     WEAK_SELF
     [self.request startRequestWithRetClass:[ResourceAskListItem class] andCompleteBlock:^(id retItem, NSError *error, BOOL isMock) {
         STRONG_SELF
