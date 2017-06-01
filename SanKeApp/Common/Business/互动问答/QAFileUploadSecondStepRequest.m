@@ -46,9 +46,9 @@
     self.status = @"upinfo";
     self.domain = @"main.zgjiaoyan.com";
     self.isexist = @"0";
-    self.filename = @"iosTestFile.jpg";
+    self.filename = @"iosQuestionFile.jpg";
 //    NSString *reserve = @"{\"typeId\":1000,\"title\":\"iosTestFile\",\"username\":\"研修网崔志伟\",\"uid\":20103549,\"shareType\":0,\"from\":6,\"source\":\"pc\",\"description\":\"\"}";
-    NSString *reserve = [NSString stringWithFormat:@"{\"typeId\":1000,\"title\":\"%@\",\"username\":\"%@\",\"uid\":\"%@\",\"shareType\":0,\"from\":6,\"source\":\"pc\",\"description\":\"\"}",self.filename,name,[UserManager sharedInstance].userModel.oldUserId];
+    NSString *reserve = [NSString stringWithFormat:@"{\"typeId\":1000,\"title\":\"%@\",\"username\":\"%@\",\"uid\":\"%@\",\"shareType\":0,\"from\":6,\"source\":\"ios\",\"description\":\"\"}",self.filename,name,[UserManager sharedInstance].userModel.oldUserId];
 
     self.reserve = reserve;
     

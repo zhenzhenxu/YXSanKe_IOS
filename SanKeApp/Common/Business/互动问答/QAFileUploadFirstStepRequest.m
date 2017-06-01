@@ -30,10 +30,10 @@
 - (void)startRequestWithRetClass:(Class)retClass
                 andCompleteBlock:(HttpRequestCompleteBlock)completeBlock {
     self.aid = @"app_wd_img";
-    self.name = @"upload.jpg";
+    self.name = @"iosQuestionFile.jpg";
 //    self.chunks = @"1";
     
-    [self.request addData:self.file withFileName:@"iosUpload" andContentType:nil forKey:@"file"];
+    [self.request addData:self.file withFileName:@"iosQuestionFile.jpg" andContentType:nil forKey:@"file"];
     [super startRequestWithRetClass:retClass andCompleteBlock:completeBlock];
 }
 @end
