@@ -157,10 +157,16 @@
     WEAK_SELF
     [self.mutiTabView setClickTabButtonBlock:^{
         STRONG_SELF
-        //跳转到标签页并选中相应的标签
+        GetBookInfoRequestItem_Volum *volum = self.filterModel.volums[self.filterModel.volumChooseInteger];
+        GetBookInfoRequestItem_Unit *unit = self.filterModel.units[self.filterModel.unitChooseInteger];
+        GetBookInfoRequestItem_Course *course = self.filterModel.courses[self.filterModel.courseChooseInteger];
+        
         LabelListViewController *vc = [[LabelListViewController alloc]init];
         vc.tabArray = self.mutiTabView.tabArray;
         vc.currentTabIndex = self.mutiTabView.currentTabIndex;
+        vc.volum = volum;
+        vc.unit = unit;
+        vc.course = course;
         [self.navigationController pushViewController:vc animated:YES];
     }];
 }
@@ -256,6 +262,17 @@
             *stop = YES;
         }
     }];
+    
+    
+    YXProblemItem *item = [[YXProblemItem alloc]init];
+    item.grade = [UserManager sharedInstance].userModel.stageID;
+    item.subject = [UserManager sharedInstance].userModel.subjectID;
+    item.volume_id = volum.volumID;
+    item.unit_id = unit.unitID;
+    item.course_id = course.courseID;
+    item.type = YXRecordClickType;
+    item.objType = @"filter_tbjx";
+    [YXRecordManager addRecord:item];
 }
 
 #pragma mark - UITableViewDataSource & Delegate

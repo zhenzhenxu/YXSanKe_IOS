@@ -127,6 +127,16 @@ static const CGFloat margin = 10;
     self.chooseViewController.view.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
     [self.bottomScrollView addSubview:self.chooseViewController.view];
     
+    YXProblemItem *item = [[YXProblemItem alloc]init];
+    item.grade = [UserManager sharedInstance].userModel.stageID;
+    item.subject = [UserManager sharedInstance].userModel.subjectID;
+    item.volume_id = self.volum.volumID;
+    item.unit_id = self.unit.unitID;
+    item.course_id = self.course.courseID;
+    item.tag_id = self.chooseViewController.label.labelID;
+    item.type = YXRecordClickType;
+    item.objType = @"filter_tbjx";
+    [YXRecordManager addRecord:item];
 }
 
 - (void)scrollTitleWithIndex:(NSInteger)index{

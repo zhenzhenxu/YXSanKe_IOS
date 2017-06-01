@@ -20,4 +20,5 @@
 @property (nonatomic, copy) NSString<Optional> *course_id;//课
 @property (nonatomic, copy) NSString<Optional> *object_id;
 @property (nonatomic, copy) NSString<Optional> *object_name;
+@property (nonatomic, copy) NSString<Optional> *tag_id;//标签id
 @end

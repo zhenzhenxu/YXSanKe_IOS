@@ -9,11 +9,7 @@
 #import "LabelListViewController.h"
 #import "LabelViewController.h"
 #import "LabelListContainerView.h"
-
-#define kScreenHeight [UIScreen mainScreen].bounds.size.height
-#define kScreenWidth   [UIScreen mainScreen].bounds.size.width
-
-
+#import "GetBookInfoRequest.h"
 
 @interface LabelListViewController ()<UIScrollViewDelegate>
 @property(nonatomic,strong) LabelListContainerView *containerView;
@@ -69,6 +65,9 @@
     }];
     self.containerView.childViewControllers = self.childViewControllers;
     self.containerView.chooseIndex = self.currentTabIndex;
+    self.containerView.volum = self.volum;
+    self.containerView.unit = self.unit;
+    self.containerView.course = self.course;
 }
 
 @end
