@@ -17,7 +17,6 @@
 
 @property (nonatomic, strong) UIScrollView *scrollView;
 @property (nonatomic, strong) MenuSelectionView *menuSelectionView;
-@property (nonatomic, strong) UIImage *savedImage;
 
 @end
 
@@ -175,10 +174,6 @@
 }
 
 - (void)saveImage:(UIImage *)image {
-    if (self.savedImage && self.savedImage == image) {
-        [YXPromtController showToast:@"已经保存成功" inView:self.scrollView];
-        return;
-    }
     PHAuthorizationStatus status = [PHPhotoLibrary authorizationStatus];
     switch (status) {
         case PHAuthorizationStatusDenied:
@@ -223,8 +218,7 @@
     if (error) {
         [YXPromtController showToast:@"保存失败" inView:self.scrollView];
     }else{
-        [YXPromtController showToast:@"保存成功" inView:self.scrollView];
-        self.savedImage = image;
+        [YXPromtController showToast:@"已经保存成功" inView:self.scrollView];
     }
 }
 

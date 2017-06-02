@@ -121,7 +121,7 @@ NSString * const kQAReplyUserFavorKey = @"kQAReplyUserFavorKey";
     
 }
 
-+ (void)uploadFile:(UIImage *)image completeBlock:(void (^)(QAFileUploadSecondStepRequestItem *, NSError *))completeBlock {
++ (void)uploadFile:(UIImage *)image fileName:(NSString *)fileName completeBlock:(void (^)(QAFileUploadSecondStepRequestItem *, NSError *))completeBlock {
     QADataManager *manager = [QADataManager sharedInstance];
     [manager.fileUploadFirstStepRequest stopRequest];
     manager.fileUploadFirstStepRequest = [[QAFileUploadFirstStepRequest alloc]init];
@@ -139,7 +139,7 @@ NSString * const kQAReplyUserFavorKey = @"kQAReplyUserFavorKey";
     NSString *infoStr = [NSString stringWithFormat:@"%@%@%@",userId,dateStr,sizeStr];
     NSString *md5 = [infoStr yx_md5];
     manager.fileUploadFirstStepRequest.md5 = md5;
-    
+    manager.fileUploadFirstStepRequest.name = fileName;
     manager.fileUploadFirstStepRequest.file = data;
     manager.fileUploadFirstStepRequest.userId = userId;
     manager.fileUploadFirstStepRequest.lastModifiedDate = dateStr;
@@ -152,6 +152,7 @@ NSString * const kQAReplyUserFavorKey = @"kQAReplyUserFavorKey";
         }
         [manager.fileUploadSecondStepRequest stopRequest];
         manager.fileUploadSecondStepRequest = [[QAFileUploadSecondStepRequest alloc]init];
+        manager.fileUploadSecondStepRequest.filename = fileName;
         manager.fileUploadSecondStepRequest.md5 = md5;
         [manager.fileUploadSecondStepRequest startRequestWithRetClass:[QAFileUploadSecondStepRequestItem class] andCompleteBlock:^(id retItem, NSError *error, BOOL isMock) {
             STRONG_SELF

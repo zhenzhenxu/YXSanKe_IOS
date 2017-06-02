@@ -12,9 +12,8 @@
 #import "MakeCommentViewController.h"
 #import "ResourceAskListFetcher.h"
 #import "ResourceDataManger.h"
-#import "PhotoBrowserController.h"
 
-@interface ResourceDetailViewController ()<MWPhotoBrowserDelegate>
+@interface ResourceDetailViewController ()
 
 @property (nonatomic, strong) UIView *bottomView;
 @property (nonatomic, strong) ResourceDetailRequestItem_Data *item;
@@ -111,9 +110,6 @@
     if(type == YXFileTypeUnknown || type == YXFileTypeAudio) {
         [self showToast:@"暂不支持该格式文件预览"];
         return;
-    } else if (type == YXFileTypePhoto) {
-        [self setupPhotoBrowser];
-        return;
     }
     [self.fileItem browseFile];
 }
@@ -126,12 +122,6 @@
         _fileItem.baseViewController = self;
     }
     return _fileItem;
-}
-
-- (void)setupPhotoBrowser {
-    PhotoBrowserController *browser = [[PhotoBrowserController alloc] init];
-    browser.imageUrls = @[self.item.resThumb];
-    [self.navigationController pushViewController:browser animated:NO];
 }
 
 - (void)answerButtonAction:(UIButton *)sender {

@@ -44,6 +44,6 @@ extern NSString * const kQAReplyUserFavorKey;
                    answer:(NSString *)answer
              completeBlock:(void(^)(HttpBaseRequestItem *item,NSError *error))completeBlock;
 //上传图片
-+ (void)uploadFile:(UIImage *)image
++ (void)uploadFile:(UIImage *)image fileName:(NSString *)fileName
      completeBlock:(void(^)(QAFileUploadSecondStepRequestItem *item,NSError *error))completeBlock;
 @end
