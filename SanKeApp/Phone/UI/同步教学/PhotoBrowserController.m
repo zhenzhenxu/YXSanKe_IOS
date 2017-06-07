@@ -39,8 +39,6 @@ NSString * const kPhotoBrowserIndexKey = @"kPhotoBrowserIndexKey";
     [super viewWillDisappear:animated];
     
     [self invalidateTimer];
-    [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:UIStatusBarAnimationNone];
-    self.navigationController.navigationBarHidden = NO;
     [[NSNotificationCenter defaultCenter] postNotificationName:kPhotoBrowserExitNotification object:nil userInfo:@{kPhotoBrowserIndexKey : @(self.currentIndex)}];
 }
 
@@ -51,6 +49,9 @@ NSString * const kPhotoBrowserIndexKey = @"kPhotoBrowserIndexKey";
 
 #pragma mark - setupUI
 - (void)setupUI {
+    self.edgesForExtendedLayout = UIRectEdgeAll;
+    self.automaticallyAdjustsScrollViewInsets = NO;
+    
     self.slideView = [[QASlideView alloc] init];
     self.slideView.dataSource = self;
     self.slideView.delegate = self;
@@ -74,7 +75,6 @@ NSString * const kPhotoBrowserIndexKey = @"kPhotoBrowserIndexKey";
     if (self.hideBarTimer) {
         [self.hideBarTimer invalidate];
         self.hideBarTimer = nil;
-        self.barHidden = YES;
     }
 }
 
@@ -85,16 +85,25 @@ NSString * const kPhotoBrowserIndexKey = @"kPhotoBrowserIndexKey";
 }
 
 - (void)controlNavigationBarHidden {
+    self.barHidden = !self.barHidden;
     [UIView animateWithDuration:0.35f animations:^{
-        [[UIApplication sharedApplication] setStatusBarHidden:!self.barHidden withAnimation:UIStatusBarAnimationSlide];
-        self.navigationController.navigationBarHidden = !self.barHidden;
+        [self setNeedsStatusBarAppearanceUpdate];
+        self.navigationController.navigationBarHidden = self.barHidden;
     } completion:^(BOOL finished) {
         if (self.barHidden) {
-            [self setupHideBarTimer];
-        } else {
             [self invalidateTimer];
+        } else {
+            [self setupHideBarTimer];
         }
     }];
+}
+
+- (BOOL)prefersStatusBarHidden {
+    return self.barHidden;
+}
+
+- (UIStatusBarAnimation)preferredStatusBarUpdateAnimation {
+    return UIStatusBarAnimationSlide;
 }
 
 #pragma mark - QASlideViewDataSource & QASlideViewDelegate
@@ -110,7 +119,7 @@ NSString * const kPhotoBrowserIndexKey = @"kPhotoBrowserIndexKey";
 
 - (void)slideView:(QASlideView *)slideView didSlideFromIndex:(NSInteger)from toIndex:(NSInteger)to {
     [[NSNotificationCenter defaultCenter] postNotificationName:@"kSlideViewDidSlide" object:nil];
-    self.title = [NSString stringWithFormat:@"%@/%@",@(to + 1),@(self.imageUrls.count)];
+    self.title = [NSString stringWithFormat:@"%@/%@", @(to + 1), @(self.imageUrls.count)];
     self.currentIndex = to;
     SlideImageView *slideImageView = (SlideImageView *)[slideView itemViewAtIndex:to];
     if (slideImageView) {

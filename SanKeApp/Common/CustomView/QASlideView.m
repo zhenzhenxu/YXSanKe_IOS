@@ -40,6 +40,7 @@ static const NSInteger kItemViewTagBase = 1234;
     self.mainScrollView.pagingEnabled = YES;
     self.mainScrollView.bounces = NO;
     self.mainScrollView.showsHorizontalScrollIndicator = NO;
+    self.mainScrollView.showsVerticalScrollIndicator = NO;
     self.mainScrollView.delegate = self;
     [self addSubview:self.mainScrollView];
     [self.mainScrollView mas_makeConstraints:^(MASConstraintMaker *make) {
