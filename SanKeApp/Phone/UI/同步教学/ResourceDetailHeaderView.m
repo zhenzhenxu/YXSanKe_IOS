@@ -169,7 +169,11 @@
     [self.resourceButton mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(self.containerView.mas_left).offset(10.0f);
         make.top.mas_equalTo(self.containerView.mas_top).offset(59.0f);
-        make.right.mas_lessThanOrEqualTo(self.containerView.mas_right).offset(-10.0f);
+        if (fileType == YXFileTypeDoc) {
+            make.right.mas_lessThanOrEqualTo(self.containerView.mas_right).offset(-10.0f);
+        } else {
+            make.right.mas_equalTo(self.containerView.mas_right).offset(-10.0f);
+        }
         make.height.mas_equalTo(widgetHeight);
     }];
 }

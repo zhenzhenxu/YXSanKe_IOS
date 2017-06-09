@@ -35,12 +35,16 @@
     self.backgroundImageView.contentMode = UIViewContentModeScaleAspectFill;
     self.backgroundImageView.clipsToBounds = YES;
     self.backgroundImageView.userInteractionEnabled = YES;
+    self.backgroundImageView.image = [UIImage yx_imageWithColor:[UIColor colorWithHexString:@"4691a6"]];
+    
     UIBlurEffect *effect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleLight];
     self.effectView = [[UIVisualEffectView alloc] initWithEffect:effect];
     self.effectView.alpha = 0.9;
+    self.effectView.hidden = YES;
     
     self.maskView = [[UIView alloc]init];
     self.maskView.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.3];
+    self.maskView.hidden = YES;
     
     self.nameLabel = [[UILabel alloc]init];
     self.nameLabel.font = [UIFont boldSystemFontOfSize:17.0f];
@@ -129,11 +133,7 @@
 - (void)setModel:(UserModel *)model {
     _model = model;
     [self.iconImageView sd_setImageWithURL:[NSURL URLWithString:model.portraitUrl] placeholderImage:[UIImage imageNamed:@"icon"] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
-        if (image == nil) {
-            self.backgroundImageView.image = [UIImage yx_imageWithColor:[UIColor colorWithHexString:@"4691a6"]];
-            self.effectView.hidden = YES;
-            self.maskView.hidden = YES;
-        } else {
+        if (image) {
             self.backgroundImageView.image = image;
             self.effectView.hidden = NO;
             self.maskView.hidden = NO;
