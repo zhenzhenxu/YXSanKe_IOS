@@ -34,7 +34,7 @@
 
 - (instancetype)init {
     if (self = [super init]) {
-        self.urlHead = [[SKConfigManager sharedInstance].server stringByAppendingString:@"app/get_res_ask"];
+        self.urlHead = [[SKConfigManager sharedInstance].server stringByAppendingString:@"app/sanke/get_res_ask"];
         self.action = @"list";
         self.objecttype = @"16";
     }

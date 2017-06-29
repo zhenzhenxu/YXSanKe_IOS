@@ -60,7 +60,7 @@
 @implementation GetBookInfoRequest
 - (instancetype)init {
     if (self = [super init]) {
-        self.urlHead = [[SKConfigManager sharedInstance].server stringByAppendingString:@"app/get_book_info"];
+        self.urlHead = [[SKConfigManager sharedInstance].server stringByAppendingString:@"app/sanke/get_book_info"];
         self.biz_id = [NSString stringWithFormat:@"%@_%@",[UserManager sharedInstance].userModel.stageID,[UserManager sharedInstance].userModel.subjectID];
     }
     return self;

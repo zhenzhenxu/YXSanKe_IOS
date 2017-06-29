@@ -27,7 +27,7 @@
 
 - (instancetype)init {
     if (self = [super init]) {
-        self.urlHead = [[SKConfigManager sharedInstance].server stringByAppendingString:@"app/get_label_resource"];
+        self.urlHead = [[SKConfigManager sharedInstance].server stringByAppendingString:@"app/sanke/get_label_resource"];
     }
     return self;
 }

@@ -85,7 +85,7 @@
     NSMutableAttributedString *attString = [[NSMutableAttributedString alloc] initWithString:_element.summary];
     [attString addAttribute:NSParagraphStyleAttributeName value:paragraphStyle range:NSMakeRange(0, _element.summary.length)];
     self.contentLabel.attributedText = attString;
-    self.expertLabel.text = [NSString stringWithFormat:@"%@ %@",_element.author,_element.thanks];
+    self.expertLabel.text = [NSString stringWithFormat:@"%@",_element.author];
     [self.posterImagView sd_setImageWithURL:[NSURL URLWithString:_element.thumb] placeholderImage:[UIImage imageNamed:@"默认"]];
 }
 - (void)touchesEnded:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {

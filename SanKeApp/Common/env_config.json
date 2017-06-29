@@ -1,5 +1,5 @@
 {
-    "server":"http://123.59.168.55:8083/",
+    "server":"http://123.59.168.55:8081/",
     "loginServer":"http://u.yanxiu.com/test/",
     "uploadServer":"http://upload.yanxiu.com/resource/index.jsp",
     "websocketServer":"ws://mobile.yanxiu.com/test/api/websocket",

@@ -12,7 +12,7 @@
 
 - (instancetype)init {
     if (self = [super init]) {
-        self.urlHead = [[SKConfigManager sharedInstance].server stringByAppendingString:@"app/create_res_ask"];
+        self.urlHead = [[SKConfigManager sharedInstance].server stringByAppendingString:@"app/sanke/create_res_ask"];
         self.replyed_comment_id = @"0";
         self.action = @"create";
         self.objecttype = @"16";
