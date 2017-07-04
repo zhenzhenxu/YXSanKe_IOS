@@ -126,7 +126,7 @@ NSString * const kQAReplyUserFavorKey = @"kQAReplyUserFavorKey";
     [manager.fileUploadFirstStepRequest stopRequest];
     manager.fileUploadFirstStepRequest = [[QAFileUploadFirstStepRequest alloc]init];
     
-    NSData* data = UIImageJPEGRepresentation(image, 1.0);
+    NSData *data = [UIImage compressionImage:image limitSize:5 * 1024 * 1024];
     NSString *sizeStr = [NSString stringWithFormat:@"%@", @(data.length)];
 //    manager.fileUploadFirstStepRequest.chunks = @"1";
     manager.fileUploadFirstStepRequest.size = sizeStr;

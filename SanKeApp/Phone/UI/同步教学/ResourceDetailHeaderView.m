@@ -129,7 +129,7 @@
     self.usernameLabel.text = item.userName;
     self.titlelabel.text = item.resName;
     self.browseCountLabel.text = [NSString stringWithFormat:@"浏览 %@", item.readNum];
-    NSDate *date = [NSDate dateWithTimeIntervalSince1970:item.createTime / 1000.0f];
+    NSDate *date = [NSDate dateWithTimeIntervalSince1970:[item.createTime integerValue] / 1000.0f];
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setDateFormat:@"yyyy-mm-dd"];
     NSString *createTime = [dateFormatter stringFromDate:date];
@@ -148,7 +148,12 @@
     } else if (fileType == YXFileTypeVideo) {
         widgetHeight = (SCREENWIDTH - 40.0f) * 400.0f / 670.0f;
         [self.resourceButton sd_setBackgroundImageWithURL:[NSURL URLWithString:self.item.resPreviewUrl] forState:UIControlStateNormal];
-        [self.resourceButton setImage:[UIImage imageNamed:@"播放"] forState:UIControlStateNormal];
+        UIImageView *playIconImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"播放"]];
+        [self.resourceButton addSubview:playIconImageView];
+        [playIconImageView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.center.mas_equalTo(self.resourceButton);
+            make.size.mas_equalTo(CGSizeMake(45.0f, 45.0f));
+        }];
     } else if (fileType == YXFileTypeDoc) {
         widgetHeight = 14.0f;
         NSMutableAttributedString *textUrlStr = [[NSMutableAttributedString alloc] initWithString:self.item.resName];

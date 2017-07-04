@@ -18,6 +18,7 @@
 @property (nonatomic, strong) UIView *bottomView;
 @property (nonatomic, strong) ResourceDetailRequestItem_Data *item;
 @property (nonatomic, strong) YXFileItemBase *fileItem;
+@property (nonatomic, assign) BOOL isWaitBool;
 
 @end
 
@@ -40,6 +41,13 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)firstPageFetch {
+    if (!self.isWaitBool) {
+        return;
+    }
+    [super firstPageFetch];
 }
 
 #pragma mark - setupUI
@@ -167,10 +175,20 @@
         fetcher.resourceID = self.resourceID;
         fetcher.pageSize = 10;
         self.dataFetcher = fetcher;
+        self.isWaitBool = YES;
         self.requestDelegate = self.dataFetcher;
         [self startLoading];
         [self firstPageFetch];
     }];
+}
+
+// 本页上方是资源详情，不应该有任何错误或为空界面覆盖，所以只需要弹个toast提示即可
+- (BOOL)handleRequestData:(UnhandledRequestData *)data inView:(UIView *)view {
+    if (data.error) {
+        [self showToast:data.error.localizedDescription];
+        return YES;
+    }
+    return NO;
 }
 
 - (void)setupObserver {

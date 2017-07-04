@@ -180,7 +180,7 @@
         [self showToast:@"请输入标题"];
     }else {
         QAPublishQuestionViewController *vc = [[QAPublishQuestionViewController alloc]init];
-        vc.questionTitle = self.textView.text;
+        vc.questionTitle = [self.textView.text yx_stringByTrimmingCharacters];
         [self.navigationController pushViewController:vc animated:YES];
     }
 }

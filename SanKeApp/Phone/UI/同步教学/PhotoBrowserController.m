@@ -113,6 +113,7 @@ NSString * const kPhotoBrowserIndexKey = @"kPhotoBrowserIndexKey";
 
 - (QASlideItemBaseView *)slideView:(QASlideView *)slideView itemViewAtIndex:(NSInteger)index {
     SlideImageView *imageView = [[SlideImageView alloc] init];
+    [imageView.imageView setShowActivityIndicatorView:YES];
     [imageView.imageView sd_setImageWithURL:[NSURL URLWithString:self.imageUrls[index]]];
     return (QASlideItemBaseView *)imageView;
 }

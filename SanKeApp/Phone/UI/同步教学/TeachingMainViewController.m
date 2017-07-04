@@ -16,7 +16,7 @@
 #import "LabelListViewController.h"
 #import "PhotoBrowserController.h"
 
-@interface TeachingMainViewController ()<UITableViewDataSource,UITableViewDelegate,MWPhotoBrowserDelegate,TeachingFilterViewDelegate>
+@interface TeachingMainViewController ()<UITableViewDataSource,UITableViewDelegate,TeachingFilterViewDelegate>
 #pragma mark - data
 @property (nonatomic, strong) GetBookInfoRequest *getBookInfoRequest;
 @property (nonatomic, strong) NSArray <NSArray<TeachingPageModel *> *>*dataArray;
@@ -297,24 +297,6 @@
     return cell;
 }
 
-#pragma mark - MWPhotoBrowserDelegate
-- (NSUInteger)numberOfPhotosInPhotoBrowser:(MWPhotoBrowser *)photoBrowser {
-    return self.currentVolumDataArray.count;
-}
-
-- (id <MWPhoto>)photoBrowser:(MWPhotoBrowser *)photoBrowser photoAtIndex:(NSUInteger)index {
-    if (index < self.currentVolumDataArray.count) {
-        NSString *url = self.currentVolumDataArray[index].pageUrl;
-        MWPhoto *ptoto = [MWPhoto photoWithURL:[NSURL URLWithString:url]];
-        return ptoto;
-    }
-    return nil;
-}
-
-- (NSString *)photoBrowser:(MWPhotoBrowser *)photoBrowser titleForPhotoAtIndex:(NSUInteger)index {
-    return [NSString stringWithFormat:@"%@/%@",@(index + 1),@(self.currentVolumDataArray.count)];
-}
-
 #pragma mark - scrollViewDelegate
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView{
     self.lastContentOffset = scrollView.contentOffset.y;
@@ -465,14 +447,16 @@
 
 #pragma mark - getter
 - (NSArray<TeachingPageModel *> *)currentVolumDataArray {
-    return self.dataArray[self.filterModel.volumChooseInteger];
+    if ([_currentVolumDataArray isEqualToArray:self.dataArray[self.filterModel.volumChooseInteger]]) {
+        return _currentVolumDataArray;
+    }
+    
+    _currentVolumDataArray = self.dataArray[self.filterModel.volumChooseInteger];
+    self.imageUrls = [NSMutableArray array];
+    for (int i = 0; i < _currentVolumDataArray.count; i++) {
+        [self.imageUrls addObject:_currentVolumDataArray[i].pageUrl];
+    }
+    return _currentVolumDataArray;
 }
 
-- (void)setDataArray:(NSArray<NSArray<TeachingPageModel *> *> *)dataArray {
-    _dataArray = dataArray;
-    self.imageUrls = [NSMutableArray array];
-    for (int i = 0; i < self.currentVolumDataArray.count; i++) {
-        [self.imageUrls addObject:self.currentVolumDataArray[i].pageUrl];
-    }
-}
 @end

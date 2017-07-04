@@ -162,7 +162,7 @@ static CGFloat const kTextViewHeight = 130.0f;
 - (void)publishQuestion {
     if (!isEmpty(self.imageView.image)) {
         WEAK_SELF
-        [QADataManager uploadFile:self.imageView.image fileName:[NSString stringWithFormat:@"%@.png", self.questionTitle] completeBlock:^(QAFileUploadSecondStepRequestItem *item, NSError *error) {
+        [QADataManager uploadFile:self.imageView.image fileName:[NSString stringWithFormat:@"%@.jpg", self.questionTitle] completeBlock:^(QAFileUploadSecondStepRequestItem *item, NSError *error) {
             STRONG_SELF
             if (error) {
                 [self showToast:error.localizedDescription];
