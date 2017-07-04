@@ -18,6 +18,7 @@
 #import "TeachingMainViewController.h"
 #import "YXSSOAuthManager.h"
 #import "PersonalCenterViewController.h"
+#import "GuideViewController.h"
 
 @interface AppDelegate ()
 @property (nonatomic, unsafe_unretained) UIBackgroundTaskIdentifier backgroundTaskIdentifier;
@@ -36,7 +37,7 @@
     [GlobalUtils setupCore];
     [[YXSSOAuthManager sharedManager] registerWXApp];
     [[YXSSOAuthManager sharedManager] registerQQApp];
-    //    [UpgradeManager checkForUpgrade];//当前版本暂不做升级界面
+    [UpgradeManager checkForUpgrade];
     //    [StageSubjectDataManager updateToLatestData];//当前版本的学科学段从本地取,不更新
     [self registerNotifications];
     
@@ -47,7 +48,14 @@
         YXTestViewController *vc = [[YXTestViewController alloc] init];
         self.window.rootViewController = [[SKNavigationController alloc] initWithRootViewController:vc];
     }else{
-        [self setupUI];
+        if (![[NSUserDefaults standardUserDefaults] boolForKey:[SKConfigManager sharedInstance].clientVersion]) {
+            [[NSUserDefaults standardUserDefaults] setBool:YES forKey:[SKConfigManager sharedInstance].clientVersion];
+            [[NSUserDefaults standardUserDefaults] synchronize];
+            GuideViewController *guideVC = [[GuideViewController alloc] init];
+            self.window.rootViewController = [[SKNavigationController alloc] initWithRootViewController:guideVC];
+        } else {
+            [self setupUI];
+        }
     }
     [self.window makeKeyAndVisible];
     [YXRecordManager startRegularReport];
