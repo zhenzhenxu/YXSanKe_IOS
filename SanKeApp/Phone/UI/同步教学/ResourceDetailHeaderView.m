@@ -8,6 +8,7 @@
 
 #import "ResourceDetailHeaderView.h"
 #import "ResourceDetailRequest.h"
+#import "PlayImageView.h"
 
 #define SCREENWIDTH [UIScreen mainScreen].bounds.size.width
 
@@ -19,7 +20,6 @@
 @property (nonatomic, strong) UILabel *titlelabel;
 @property (nonatomic, strong) UILabel *browseCountLabel;
 @property (nonatomic, strong) UILabel *publishTimeLabel;
-@property (nonatomic, strong) UILabel *availableCountLabel;
 @property (nonatomic, strong) UIButton *resourceButton;
 
 @end
@@ -56,7 +56,7 @@
     self.titlelabel = [[UILabel alloc] init];
     self.titlelabel.font = [UIFont boldSystemFontOfSize:14.0f];
     self.titlelabel.textColor = [UIColor colorWithHexString:@"333333"];
-    self.titlelabel.numberOfLines = 0;
+    self.titlelabel.lineBreakMode = NSLineBreakByTruncatingMiddle;
     [self.containerView addSubview:self.titlelabel];
     
     self.browseCountLabel = [self.usernameLabel clone];
@@ -69,6 +69,7 @@
     self.availableCountLabel = [[UILabel alloc] init];
     self.availableCountLabel.font = [UIFont boldSystemFontOfSize:12.0f];
     self.availableCountLabel.textColor = [UIColor colorWithHexString:@"999999"];
+    self.availableCountLabel.hidden = YES;
     [self addSubview:self.availableCountLabel];
     
     self.resourceButton = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -144,17 +145,16 @@
     YXFileType fileType = [QAFileTypeMappingTable fileTypeWithString:self.item.resType];
     if (fileType == YXFileTypePhoto) {
         widgetHeight = (SCREENWIDTH - 40.0f) * 524.0f / 670.0f;
-        [self.resourceButton sd_setBackgroundImageWithURL:[NSURL URLWithString:self.item.resPreviewUrl] forState:UIControlStateNormal];
+        [self.resourceButton sd_setBackgroundImageWithURL:[NSURL URLWithString:self.item.resThumb] forState:UIControlStateNormal placeholderImage:[UIImage yx_imageWithColor:[UIColor colorWithHexString:@"e6e6e6"]]];
     } else if (fileType == YXFileTypeVideo) {
         widgetHeight = (SCREENWIDTH - 40.0f) * 400.0f / 670.0f;
-        [self.resourceButton sd_setBackgroundImageWithURL:[NSURL URLWithString:self.item.resPreviewUrl] forState:UIControlStateNormal];
-        UIImageView *playIconImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"播放"]];
-        [self.resourceButton addSubview:playIconImageView];
-        [playIconImageView mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.center.mas_equalTo(self.resourceButton);
-            make.size.mas_equalTo(CGSizeMake(45.0f, 45.0f));
+        PlayImageView *playImageView = [[PlayImageView alloc] init];
+        [playImageView sd_setImageWithURL:[NSURL URLWithString:self.item.resThumb] placeholderImage:[UIImage yx_imageWithColor:[UIColor colorWithHexString:@"e6e6e6"]]];
+        [self.resourceButton addSubview:playImageView];
+        [playImageView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.edges.equalTo(self.resourceButton);
         }];
-    } else if (fileType == YXFileTypeDoc) {
+    } else {
         widgetHeight = 14.0f;
         NSMutableAttributedString *textUrlStr = [[NSMutableAttributedString alloc] initWithString:self.item.resName];
         [textUrlStr setAttributes:@{
@@ -163,9 +163,6 @@
                                     NSUnderlineStyleAttributeName : [NSNumber numberWithInteger:NSUnderlineStyleSingle]
                                     } range:NSMakeRange(0, textUrlStr.length)];
         [self.resourceButton setAttributedTitle:textUrlStr forState:UIControlStateNormal];
-    } else {
-        // 不支持的格式
-        widgetHeight = 0.0f;
     }
     
     self.frame = CGRectMake(0.0f, 0.0f, SCREENWIDTH, widgetHeight + 137.0f);
@@ -174,10 +171,10 @@
     [self.resourceButton mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(self.containerView.mas_left).offset(10.0f);
         make.top.mas_equalTo(self.containerView.mas_top).offset(59.0f);
-        if (fileType == YXFileTypeDoc) {
-            make.right.mas_lessThanOrEqualTo(self.containerView.mas_right).offset(-10.0f);
-        } else {
+        if (fileType == YXFileTypePhoto || fileType == YXFileTypeVideo) {
             make.right.mas_equalTo(self.containerView.mas_right).offset(-10.0f);
+        } else {
+            make.right.mas_lessThanOrEqualTo(self.containerView.mas_right).offset(-10.0f);
         }
         make.height.mas_equalTo(widgetHeight);
     }];

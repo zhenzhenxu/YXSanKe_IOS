@@ -88,7 +88,9 @@
 
 #pragma mark - YXBrowserExitDelegate 
 - (void)browserExit {
-    [self saveRecord];
+    if (!self.isNotNeededRecord) {
+        [self saveRecord];
+    }
 }
 
 @end

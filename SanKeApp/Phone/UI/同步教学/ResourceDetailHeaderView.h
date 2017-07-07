@@ -12,6 +12,7 @@
 
 @interface ResourceDetailHeaderView : UIView
 
+@property (nonatomic, strong) UILabel *availableCountLabel;
 @property (nonatomic, strong) ResourceDetailRequestItem_Data *item;
 @property (nonatomic, copy) void(^resourceButtonBlock)();
 

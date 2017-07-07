@@ -86,16 +86,13 @@ NSString * const kPhotoBrowserIndexKey = @"kPhotoBrowserIndexKey";
 
 - (void)controlNavigationBarHidden {
     self.barHidden = !self.barHidden;
-    [UIView animateWithDuration:0.35f animations:^{
-        [self setNeedsStatusBarAppearanceUpdate];
-        self.navigationController.navigationBarHidden = self.barHidden;
-    } completion:^(BOOL finished) {
-        if (self.barHidden) {
-            [self invalidateTimer];
-        } else {
-            [self setupHideBarTimer];
-        }
-    }];
+    [self setNeedsStatusBarAppearanceUpdate];
+    [self.navigationController setNavigationBarHidden:self.barHidden animated:NO];
+    if (self.barHidden) {
+        [self invalidateTimer];
+    } else {
+        [self setupHideBarTimer];
+    }
 }
 
 - (BOOL)prefersStatusBarHidden {
@@ -103,7 +100,7 @@ NSString * const kPhotoBrowserIndexKey = @"kPhotoBrowserIndexKey";
 }
 
 - (UIStatusBarAnimation)preferredStatusBarUpdateAnimation {
-    return UIStatusBarAnimationSlide;
+    return UIStatusBarAnimationNone;
 }
 
 #pragma mark - QASlideViewDataSource & QASlideViewDelegate

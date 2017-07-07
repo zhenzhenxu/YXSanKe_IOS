@@ -24,6 +24,7 @@
 - (void)stopAnimation;
 - (void)setPulldownViewHidden:(BOOL)hidden;
 - (void)setPullupViewHidden:(BOOL)hidden;
+- (void)refreshUIWhenDataIsNotEmpty;
 
 @property (nonatomic, assign) int emptyViewTopInset;
 

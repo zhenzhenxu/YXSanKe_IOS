@@ -15,6 +15,7 @@
 
 @interface ResourceDetailViewController ()
 
+@property (nonatomic, strong) ResourceDetailHeaderView *headerView;
 @property (nonatomic, strong) UIView *bottomView;
 @property (nonatomic, strong) ResourceDetailRequestItem_Data *item;
 @property (nonatomic, strong) YXFileItemBase *fileItem;
@@ -50,16 +51,20 @@
     [super firstPageFetch];
 }
 
+- (void)refreshUIWhenDataIsNotEmpty {
+    self.headerView.availableCountLabel.hidden = NO;
+}
+
 #pragma mark - setupUI
 - (void)setupUI {
-    ResourceDetailHeaderView *headerView = [[ResourceDetailHeaderView alloc] init];
-    headerView.item = self.item;
+    self.headerView = [[ResourceDetailHeaderView alloc] init];
+    self.headerView.item = self.item;
     WEAK_SELF
-    headerView.resourceButtonBlock = ^{
+    self.headerView.resourceButtonBlock = ^{
         STRONG_SELF
         [self previewResource];
     };
-    self.tableView.tableHeaderView = headerView;
+    self.tableView.tableHeaderView = self.headerView;
     self.tableView.backgroundColor = [UIColor clearColor];
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     [self.tableView registerClass:[CommentCell class] forCellReuseIdentifier:@"CommentCell"];
@@ -126,7 +131,8 @@
     if (_fileItem == nil) {
         _fileItem = [FileBrowserFactory browserWithFileType:[QAFileTypeMappingTable fileTypeWithString:self.item.resType]];
         _fileItem.name = self.item.resName;
-        _fileItem.url = self.item.resThumb;
+        _fileItem.url = self.item.resPreviewUrl;
+        _fileItem.isNotNeededRecord = YES;
         _fileItem.baseViewController = self;
     }
     return _fileItem;

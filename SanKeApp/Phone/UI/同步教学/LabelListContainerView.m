@@ -81,13 +81,15 @@ static const CGFloat margin = 10;
         x = CGRectGetMaxX(b.frame) + margin;
         b.tag = kTagBase + idx;
         [self.topScrollView addSubview:b];
-        if (idx < _childViewControllers.count - 1) {
-            CGFloat lineHeight = 9.0f;  CGFloat lineWidth = 1.0f;
-            CGFloat y = (self.topScrollView.bounds.size.height - lineHeight) / 2.0f;
-            UIView *line = [[UIView alloc]initWithFrame:CGRectMake(CGRectGetMaxX(b.frame) + margin -lineWidth, y, lineWidth, lineHeight)];
-            line.backgroundColor = [UIColor colorWithHexString:@"e6e6e6"];
-            x = CGRectGetMaxX(line.frame) + margin;
+        CGFloat lineHeight = 9.0f;  CGFloat lineWidth = 1.0f;
+        CGFloat y = (self.topScrollView.bounds.size.height - lineHeight) / 2.0f;
+        UIView *line = [[UIView alloc]initWithFrame:CGRectMake(CGRectGetMaxX(b.frame) + margin -lineWidth, y, lineWidth, lineHeight)];
+        line.backgroundColor = [UIColor colorWithHexString:@"e6e6e6"];
+        x = CGRectGetMaxX(line.frame) + margin;
+        if (idx < _childViewControllers.count - 1 || x < self.topScrollView.bounds.size.width) {
             [self.topScrollView addSubview:line];
+        } else {
+            x = CGRectGetMinX(line.frame);
         }
     }];
     self.topScrollView.contentSize = CGSizeMake( x, 44);

@@ -120,12 +120,19 @@
         self->_total = total;
         [self.dataArray removeAllObjects];
         [self.dataArray addObjectsFromArray:retItemArray];
+        if (self.dataArray.count > 0) {
+            [self refreshUIWhenDataIsNotEmpty];
+        }
         [self checkHasMore];
         [self.dataFetcher saveToCache];
         
         self.tableView.contentOffset = CGPointZero;
         [self.tableView reloadData];
     }];
+}
+
+- (void)refreshUIWhenDataIsNotEmpty {
+    
 }
 
 - (void)stopAnimation

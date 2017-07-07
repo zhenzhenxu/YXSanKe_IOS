@@ -161,10 +161,11 @@
 
 - (void)setElement:(GetLabelListRequestItem_Element *)element {
     _element = element;
-    self.expandButton.hidden = (element.items.count == 0);
     if (self.level == 0) {
         self.titleLabel.text = element.name;
         return;
+    } else {
+        self.expandButton.hidden = (element.items.count == 0);
     }
     CGSize titleSize = [element.name boundingRectWithSize:CGSizeMake([UIScreen mainScreen].bounds.size.width - 50 - 1 - 5- 10 -20, MAXFLOAT) options: NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:self.titleLabel.font} context:nil].size;
     CGFloat labelHeight = titleSize.height;

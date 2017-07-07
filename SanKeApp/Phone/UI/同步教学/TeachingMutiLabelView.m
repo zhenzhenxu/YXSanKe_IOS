@@ -54,13 +54,15 @@ static const CGFloat margin = 10;
         if (idx == 0) {
             self.contentOffset = CGPointMake(0, 0);
         }
-        if (idx < tabArray.count - 1) {
-            CGFloat lineHeight = 9.0f;  CGFloat lineWidth = 1.0f;
-            CGFloat y = (self.bounds.size.height - lineHeight) / 2.0f;
-            UIView *line = [[UIView alloc]initWithFrame:CGRectMake(CGRectGetMaxX(b.frame) + margin -lineWidth, y, lineWidth, lineHeight)];
-            line.backgroundColor = [UIColor colorWithHexString:@"e6e6e6"];
-            x = CGRectGetMaxX(line.frame) + margin;
+        CGFloat lineHeight = 9.0f;  CGFloat lineWidth = 1.0f;
+        CGFloat y = (self.bounds.size.height - lineHeight) / 2.0f;
+        UIView *line = [[UIView alloc]initWithFrame:CGRectMake(CGRectGetMaxX(b.frame) + margin -lineWidth, y, lineWidth, lineHeight)];
+        line.backgroundColor = [UIColor colorWithHexString:@"e6e6e6"];
+        x = CGRectGetMaxX(line.frame) + margin;
+        if (idx < tabArray.count - 1 || x < self.bounds.size.width) {
             [self addSubview:line];
+        } else {
+            x = CGRectGetMinX(line.frame);
         }
     }];
     self.contentSize = CGSizeMake( x, 44);
