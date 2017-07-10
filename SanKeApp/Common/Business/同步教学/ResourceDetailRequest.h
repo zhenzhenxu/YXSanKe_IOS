@@ -18,7 +18,7 @@
 @property (nonatomic, strong) NSString<Optional> *resThumb;
 @property (nonatomic, strong) NSString<Optional> *resDownloadUrl;
 @property (nonatomic, strong) NSString<Optional> *readNum;
-@property (nonatomic, assign) NSString<Optional> *createTime;
+@property (nonatomic, assign) NSString<Optional> *updateTime;
 @end
 
 @interface ResourceDetailRequestItem : HttpBaseRequestItem

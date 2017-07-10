@@ -129,12 +129,14 @@
     [self.avatarImageView sd_setImageWithURL:[NSURL URLWithString:item.icon] placeholderImage:[UIImage imageNamed:@"大头像"]];
     self.usernameLabel.text = item.userName;
     self.titlelabel.text = item.resName;
-    self.browseCountLabel.text = [NSString stringWithFormat:@"浏览 %@", item.readNum];
-    NSDate *date = [NSDate dateWithTimeIntervalSince1970:[item.createTime integerValue] / 1000.0f];
-    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    [dateFormatter setDateFormat:@"yyyy-mm-dd"];
-    NSString *createTime = [dateFormatter stringFromDate:date];
-    self.publishTimeLabel.text = createTime;
+    self.browseCountLabel.text = [NSString stringWithFormat:@"浏览 %@", item.readNum.integerValue > 9999 ? @"9999+" : item.readNum];
+    if (!isEmpty(item.updateTime)) {
+        NSDate *date = [NSDate dateWithTimeIntervalSince1970:[item.updateTime integerValue] / 1000.0];
+        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+        [dateFormatter setDateFormat:@"yyyy-MM-dd"];
+        NSString *updateTime = [dateFormatter stringFromDate:date];
+        self.publishTimeLabel.text = updateTime;
+    }
     self.availableCountLabel.text = @"评论";
     
     [self setupAttachmentButton];

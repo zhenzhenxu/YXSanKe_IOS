@@ -315,6 +315,9 @@
         self.isScrollTop = YES;
     }
     [self setupCurrentPageModel];
+    if (scrollView.contentOffset.y >= scrollView.contentSize.height - scrollView.bounds.size.height) {
+        [self showToast:@"没有更多"];
+    }
 }
 
 - (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate {
