@@ -13,5 +13,5 @@
 @property (nonatomic, assign) BOOL isCurrent;
 @property (nonatomic, strong) void(^ActionBlock) (void);
 
-+ (CGSize)sizeForTitle:(NSString *)title;
++ (CGSize)sizeForTitle:(NSString *)title collectionViewWidth:(CGFloat)width;
 @end

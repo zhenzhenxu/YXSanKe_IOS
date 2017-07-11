@@ -270,7 +270,7 @@ static const NSInteger kNotSelectedTag = -1;
 #pragma mark - UICollectionViewDelegate
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath{
     ChannelTabFilterRequestItem_filter *item = [self itemForIndexPath:indexPath];
-    return [FilterCell sizeForTitle:item.name];
+    return [FilterCell sizeForTitle:item.name collectionViewWidth:self.collectionView.width];
 }
 
 - (ChannelTabFilterRequestItem_filter *)itemForIndexPath:(NSIndexPath *)indexPath {

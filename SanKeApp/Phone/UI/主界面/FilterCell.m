@@ -10,6 +10,7 @@
 
 @interface FilterCell()
 @property (nonatomic, strong) UIButton *itemButton;
+@property (nonatomic, strong) UILabel *titleLabel;
 @end
 
 @implementation FilterCell
@@ -27,14 +28,21 @@
     UIImage *selectedImage = [UIImage yx_imageWithColor:[[UIColor colorWithHexString:@"d65b4b"] colorWithAlphaComponent:0.2]];
     [self.itemButton setBackgroundImage:normalImage forState:UIControlStateNormal];
     [self.itemButton setBackgroundImage:selectedImage forState:UIControlStateSelected];
-    [self.itemButton setTitleColor:[UIColor colorWithHexString:@"333333"] forState:UIControlStateNormal];
-    self.itemButton.titleLabel.font = [UIFont systemFontOfSize:12];
     self.itemButton.layer.cornerRadius = 3;
     self.itemButton.clipsToBounds = YES;
     [self.itemButton addTarget:self action:@selector(btnAction:) forControlEvents:UIControlEventTouchUpInside];
     [self.contentView addSubview:self.itemButton];
     [self.itemButton mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.mas_equalTo(0);
+    }];
+    
+    self.titleLabel = [[UILabel alloc] init];
+    self.titleLabel.font = [UIFont systemFontOfSize:12];
+    self.titleLabel.numberOfLines = 0;
+    self.titleLabel.textColor = [UIColor colorWithHexString:@"333333"];
+    [self.itemButton addSubview:self.titleLabel];
+    [self.titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.mas_equalTo(UIEdgeInsetsMake(9, 15, 9, 15));
     }];
 }
 
@@ -47,7 +55,7 @@
 
 - (void)setTitle:(NSString *)title {
     _title = title;
-    [self.itemButton setTitle:title forState:UIControlStateNormal];
+    self.titleLabel.text = title;
 }
 
 - (void)setIsCurrent:(BOOL)isCurrent {
@@ -55,9 +63,9 @@
     self.itemButton.selected = isCurrent;
 }
 
-+ (CGSize)sizeForTitle:(NSString *)title {
-    CGSize size = [title sizeWithAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:12]}];
-    return CGSizeMake(ceilf(size.width+30), 33);
++ (CGSize)sizeForTitle:(NSString *)title collectionViewWidth:(CGFloat)width {
+    CGSize size = [title boundingRectWithSize:CGSizeMake(width - 50, CGFLOAT_MAX) options:NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:12]} context:nil].size;
+        return CGSizeMake(ceilf(size.width + 30), ceilf(size.height + 18));
 }
 
 
