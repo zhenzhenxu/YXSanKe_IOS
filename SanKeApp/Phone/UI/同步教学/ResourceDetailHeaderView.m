@@ -151,6 +151,7 @@
     } else if (fileType == YXFileTypeVideo) {
         widgetHeight = (SCREENWIDTH - 40.0f) * 400.0f / 670.0f;
         PlayImageView *playImageView = [[PlayImageView alloc] init];
+        playImageView.isBiggerPlayIcon = YES;
         [playImageView sd_setImageWithURL:[NSURL URLWithString:self.item.resThumb] placeholderImage:[UIImage yx_imageWithColor:[UIColor colorWithHexString:@"e6e6e6"]]];
         [self.resourceButton addSubview:playImageView];
         [playImageView mas_makeConstraints:^(MASConstraintMaker *make) {

@@ -91,7 +91,7 @@ static CGFloat const kBottomViewHeight = 49.0f;
 
 - (void)setupUI {
     if ([YXShareManager isQQSupport]||[YXShareManager isWXAppSupport]) {
-        [self setupRightWithImageNamed:@"分享" highlightImageNamed:nil];
+        [self setupRightWithTitle:@"分享"];
     }
     
     self.headerView = [[QAQuestionDetailView alloc]init];

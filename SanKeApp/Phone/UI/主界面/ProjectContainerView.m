@@ -30,8 +30,12 @@ static const CGFloat margin = 10;
 }
 #pragma mark
 - (void)setupUI {
-    self.topScrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, kScreenWidth, 44)];
-    self.topScrollView.backgroundColor = [UIColor colorWithHexString:@"d65b4b"];
+    UIView *topLineView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, kScreenWidth, 1/[UIScreen mainScreen].scale)];
+    topLineView.backgroundColor = [UIColor colorWithHexString:@"e6e6e6"];
+    [self addSubview:topLineView];
+    CGFloat y = CGRectGetMaxY(topLineView.frame);
+    self.topScrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(0, y, kScreenWidth, 44)];
+    self.topScrollView.backgroundColor = [UIColor whiteColor];
     self.topScrollView.showsHorizontalScrollIndicator = NO;
     self.topScrollView.showsVerticalScrollIndicator = NO;
     [self addSubview:self.topScrollView];
@@ -78,7 +82,7 @@ static const CGFloat margin = 10;
             CGFloat lineHeight = 9.0f;  CGFloat lineWidth = 1.0f;
             CGFloat y = (self.topScrollView.bounds.size.height - lineHeight) / 2.0f;
             UIView *line = [[UIView alloc]initWithFrame:CGRectMake(CGRectGetMaxX(b.frame) + margin -lineWidth, y, lineWidth, lineHeight)];
-            line.backgroundColor = [UIColor colorWithHexString:@"fda89d"];
+            line.backgroundColor = [UIColor colorWithHexString:@"e6e6e6"];
             x = CGRectGetMaxX(line.frame) + margin;
             [self.topScrollView addSubview:line];
         }
@@ -89,9 +93,9 @@ static const CGFloat margin = 10;
 - (UIButton *)buttonWithTitle:(NSString *)title {
     UIButton *b = [UIButton buttonWithType:UIButtonTypeCustom];
     [b setTitle:title forState:UIControlStateNormal];
-    [b setTitleColor:[UIColor colorWithHexString:@"fda89d"] forState:UIControlStateNormal];
-    [b setTitleColor:[UIColor colorWithHexString:@"ffffff"] forState:UIControlStateSelected];
-    b.titleLabel.font = [UIFont boldSystemFontOfSize:13.0f];
+    [b setTitleColor:[UIColor colorWithHexString:@"333333"] forState:UIControlStateNormal];
+    [b setTitleColor:[UIColor colorWithHexString:@"4691a6"] forState:UIControlStateSelected];
+    b.titleLabel.font = [UIFont systemFontOfSize:13.0f];
     [b addTarget:self action:@selector(chooseButtonAction:) forControlEvents:UIControlEventTouchUpInside];
     return b;
 }

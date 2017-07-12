@@ -27,7 +27,7 @@
     // Do any additional setup after loading the view.
     self.navigationItem.title = self.questionItem.title;
     if ([YXShareManager isQQSupport]||[YXShareManager isWXAppSupport]) {
-        [self setupRightWithImageNamed:@"分享" highlightImageNamed:nil];
+        [self setupRightWithTitle:@"分享"];
     }
     [self setupUI];
     [self setupObserver];

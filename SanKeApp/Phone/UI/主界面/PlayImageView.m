@@ -8,6 +8,12 @@
 
 #import "PlayImageView.h"
 
+@interface PlayImageView ()
+
+@property (nonatomic, strong) UIImageView *playImageView;
+
+@end
+
 @implementation PlayImageView
 - (instancetype)init {
     if (self = [super init]) {
@@ -24,13 +30,18 @@
         make.edges.equalTo(self);
     }];
     
-    UIImageView *playImageView = [[UIImageView alloc] init];
-    playImageView.image = [UIImage imageNamed:@"播放"];
-    playImageView.alpha = 0.7f;
-    [self addSubview:playImageView];
-    [playImageView mas_makeConstraints:^(MASConstraintMaker *make) {
+    self.playImageView = [[UIImageView alloc] init];
+    self.playImageView.image = [UIImage imageNamed:@"播放-小"];
+    self.playImageView.alpha = 0.7f;
+    [self addSubview:self.playImageView];
+    [self.playImageView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.size.mas_offset(CGSizeMake(30.0f, 30.0f));
         make.center.equalTo(self);
     }];
+}
+
+- (void)setIsBiggerPlayIcon:(BOOL)isBiggerPlayIcon {
+    _isBiggerPlayIcon = isBiggerPlayIcon;
+    self.playImageView.image = [UIImage imageNamed:@"播放-大"];
 }
 @end

@@ -61,17 +61,21 @@
 
 - (void)setupUI {
     UIView *filterContainerView = [[UIView alloc]init];
-    filterContainerView.backgroundColor = [UIColor colorWithHexString:@"d65b4b"];
+    filterContainerView.backgroundColor = [UIColor whiteColor];
     [self.view addSubview:filterContainerView];
     [filterContainerView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.top.right.mas_equalTo(0);
         make.height.mas_equalTo(44);
     }];
     
+    UIView *topLineView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, kScreenWidth, 1/[UIScreen mainScreen].scale)];
+    topLineView.backgroundColor = [UIColor colorWithHexString:@"e6e6e6"];
+    [filterContainerView addSubview:topLineView];
+    
     self.hotButton = [UIButton buttonWithType:UIButtonTypeCustom];
     [self.hotButton setTitle:@"热门问题" forState:UIControlStateNormal];
-    [self.hotButton setTitleColor:[UIColor colorWithHexString:@"fda89d"] forState:UIControlStateNormal];
-    [self.hotButton setTitleColor:[UIColor colorWithHexString:@"ffffff"] forState:UIControlStateSelected];
+    [self.hotButton setTitleColor:[UIColor colorWithHexString:@"333333"] forState:UIControlStateNormal];
+    [self.hotButton setTitleColor:[UIColor colorWithHexString:@"4691a6"] forState:UIControlStateSelected];
     self.hotButton.titleLabel.font = [UIFont boldSystemFontOfSize:13.0f];
     [self.hotButton addTarget:self action:@selector(filterButtonAction:) forControlEvents:UIControlEventTouchUpInside];
     self.latestButton = [self.hotButton clone];

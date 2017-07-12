@@ -99,7 +99,7 @@ static const CGFloat margin = 10;
 - (UIButton *)buttonWithTitle:(NSString *)title {
     UIButton *b = [UIButton buttonWithType:UIButtonTypeCustom];
     [b setTitle:title forState:UIControlStateNormal];
-    [b setTitleColor:[UIColor colorWithHexString:@"33333"] forState:UIControlStateNormal];
+    [b setTitleColor:[UIColor colorWithHexString:@"333333"] forState:UIControlStateNormal];
     [b setTitleColor:[UIColor colorWithHexString:@"4691a6"] forState:UIControlStateSelected];
     b.titleLabel.font = [UIFont systemFontOfSize:13.0f];
     [b addTarget:self action:@selector(chooseButtonAction:) forControlEvents:UIControlEventTouchUpInside];

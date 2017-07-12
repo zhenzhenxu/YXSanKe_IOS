@@ -10,4 +10,6 @@
 
 @interface PlayImageView : UIImageView
 
+@property (nonatomic, assign) BOOL isBiggerPlayIcon;
+
 @end

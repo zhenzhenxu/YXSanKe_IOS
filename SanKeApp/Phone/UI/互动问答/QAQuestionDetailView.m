@@ -169,7 +169,8 @@ typedef NS_ENUM(NSUInteger, QAAttachmentType) {
     
     NSString *time = [QAUtils formatTimeWithOriginal:item.updateTime];
     self.timeLabel.text = [NSString stringWithFormat:@"更新时间：%@",time];
-    self.replyDescLabel.text = [NSString stringWithFormat:@"回答（%@）",item.answerNum];
+    
+    self.replyDescLabel.text = item.answerNum.integerValue > 0 ? [NSString stringWithFormat:@"回答（%@）",item.answerNum] : @" ";
     [self.headImageView sd_setImageWithURL:[NSURL URLWithString:item.avatar] placeholderImage:[UIImage imageNamed:@"大头像"]];
     
     QAAttachmentType type;
@@ -231,7 +232,7 @@ typedef NS_ENUM(NSUInteger, QAAttachmentType) {
             replyCount = @"9999+";
         }
         self.replyCountLabel.text = replyCount;
-        self.replyDescLabel.text = [NSString stringWithFormat:@"回答（%@）",replyCount];
+        self.replyDescLabel.text = replyCount.integerValue > 0 ? [NSString stringWithFormat:@"回答（%@）",replyCount] : @" ";
     }
     if (!isEmpty(browseCount)) {
         if (browseCount.integerValue >= 10000) {
