@@ -331,6 +331,11 @@
     [self setupCurrentPageModel];
 }
 
+- (void)scrollViewDidScrollToTop:(UIScrollView *)scrollView {
+    self.isScrollTop = YES;
+    [self setupCurrentPageModel];
+}
+
 #pragma mark - setupCurrentPageModel
 - (void)setupCurrentPageModel {
     NSIndexPath *currentIndexPath;

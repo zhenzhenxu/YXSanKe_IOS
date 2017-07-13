@@ -131,7 +131,7 @@
     self.titlelabel.text = item.resName;
     self.browseCountLabel.text = [NSString stringWithFormat:@"浏览 %@", item.readNum.integerValue > 9999 ? @"9999+" : item.readNum];
     if (!isEmpty(item.updateTime)) {
-        NSDate *date = [NSDate dateWithTimeIntervalSince1970:[item.updateTime integerValue] / 1000.0];
+        NSDate *date = [NSDate dateWithTimeIntervalSince1970:[item.updateTime doubleValue] / 1000];
         NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
         [dateFormatter setDateFormat:@"yyyy-MM-dd"];
         NSString *updateTime = [dateFormatter stringFromDate:date];

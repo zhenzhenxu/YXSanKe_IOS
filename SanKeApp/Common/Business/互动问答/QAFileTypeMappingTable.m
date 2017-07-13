@@ -54,6 +54,7 @@
                                  @"divx":@(YXFileTypeVideo),
                                  @"flv":@(YXFileTypeVideo),
                                  @"mp4":@(YXFileTypeVideo),
+                                 @"m3u8":@(YXFileTypeVideo),
                                  
                                  // audio
                                  // $mp3=' mid,wav,mp3,ra,ram,asf,wma';

@@ -18,14 +18,29 @@
 }
 
 - (void)setupUI {
-    FLAnimatedImage *image = [FLAnimatedImage animatedImageWithGIFData:[NSData dataWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"logo" ofType:@"gif"]]];
+    NSData *data = [NSData dataWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"logo" ofType:@"gif"]];
+    CGImageSourceRef source = CGImageSourceCreateWithData((__bridge CFDataRef)data, NULL);
+    size_t count = CGImageSourceGetCount(source);
+    NSMutableArray *images = [NSMutableArray array];
+    UIImage *lastImage;
+    for (size_t i = 0; i < count; i++) {
+        CGImageRef image = CGImageSourceCreateImageAtIndex(source, i, NULL);
+        [images addObject:[UIImage imageWithCGImage:image scale:[UIScreen mainScreen].scale orientation:UIImageOrientationUp]];
+        if (i == count - 1) {
+            lastImage = [UIImage imageWithCGImage:image scale:[UIScreen mainScreen].scale orientation:UIImageOrientationUp];
+        }
+        CGImageRelease(image);
+    }
+    CFRelease(source);
     
-    FLAnimatedImageView *imageView = [[FLAnimatedImageView alloc] init];
-    imageView.animatedImage = image;
-    [imageView setValue:@(1) forKey:@"loopCountdown"];
+    UIImageView *imageView = [[UIImageView alloc] init];
     imageView.contentMode = UIViewContentModeScaleAspectFit;
     imageView.clipsToBounds = YES;
     [self addSubview:imageView];
+    imageView.image = lastImage;
+    imageView.animationImages = images;
+    imageView.animationRepeatCount = 1;
+    [imageView startAnimating];
     [imageView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.center.mas_equalTo(0);
         make.size.mas_equalTo(CGSizeMake(100, 100));
