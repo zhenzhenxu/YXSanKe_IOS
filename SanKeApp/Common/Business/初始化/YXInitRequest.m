@@ -53,7 +53,7 @@
         _brand = [SKConfigManager sharedInstance].deviceType;
         [self setCurrentNetType];
         
-        _osModel = [UIDevice currentDevice].model;
+        self.osType = @"1";
         _appVersion = [SKConfigManager sharedInstance].clientVersion;
         _content = @"";
         _operType = @"app.upload.log";

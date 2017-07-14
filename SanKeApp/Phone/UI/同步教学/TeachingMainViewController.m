@@ -129,7 +129,6 @@
     self.tableView.delegate = self;
     self.tableView.rowHeight = 385.0f * kScreenHeightScale(1.0f);
     self.tableView.allowsSelection = NO;
-    self.tableView.showsVerticalScrollIndicator = NO;
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     [self.tableView registerClass:[TeachingMainCell class] forCellReuseIdentifier:@"TeachingMainCell"];
     [self.view addSubview:self.tableView];

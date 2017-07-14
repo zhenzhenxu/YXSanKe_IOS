@@ -3,10 +3,10 @@
     "loginServer":"http://u.yanxiu.com/test/",
     "uploadServer":"http://upload.yanxiu.com/resource/index.jsp",
     "websocketServer":"ws://mobile.yanxiu.com/test/api/websocket",
-    "initializeUrl":"http://mobile.yanxiu.com/test/api/initialize",
+    "initializeUrl":"http://mobile.yanxiu.com/v20/api/initialize",
     "mode":"test",
     "serverList" :{
-        "server":"http://main.zgjiaoyan.com/",
+        "server":"http://app.main.zgjiaoyan.com/",
         "loginServer":"http://u.yanxiu.com/",
         "uploadServer":"http://upload.yanxiu.com/resource/index.jsp",
         "websocketServer":"ws://mobile.yanxiu.com/websocket",
