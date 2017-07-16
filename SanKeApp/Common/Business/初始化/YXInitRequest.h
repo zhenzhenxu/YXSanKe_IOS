@@ -53,7 +53,6 @@
 @property (nonatomic, strong) NSString<Optional> *did;        //设备编号
 @property (nonatomic, strong) NSString<Optional> *brand;      //手机品牌
 @property (nonatomic, strong) NSString<Optional> *nettype;    //网络类型，0:mobile，1:wifi
-@property (nonatomic, strong) NSString<Optional> *osModel;    //操作系统标识
 @property (nonatomic, strong) NSString<Optional> *appVersion; //当前使用的应用的版本号
 @property (nonatomic, strong) NSString<Optional> *content;    //上报log的内容，可定义富文本
 @property (nonatomic, strong) NSString<Optional> *operType;   //操作类型，以自行定义标示

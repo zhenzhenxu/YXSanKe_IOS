@@ -10,7 +10,7 @@
         "loginServer":"http://u.yanxiu.com/",
         "uploadServer":"http://upload.yanxiu.com/resource/index.jsp",
         "websocketServer":"ws://mobile.yanxiu.com/websocket",
-        "initializeUrl":"http://mobile.yanxiu.com/initialize",
+        "initializeUrl":"http://mobile.yanxiu.com/test/api/initialize",
         "mode":"test"
     }
 }

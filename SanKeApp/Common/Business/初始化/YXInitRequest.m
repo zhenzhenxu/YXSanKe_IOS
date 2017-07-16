@@ -81,10 +81,5 @@
     }
 }
 
-+ (JSONKeyMapper *)keyMapper
-{
-    return [[JSONKeyMapper alloc]initWithDictionary:@{@"os":@"osModel"}];
-}
-
 @end
 

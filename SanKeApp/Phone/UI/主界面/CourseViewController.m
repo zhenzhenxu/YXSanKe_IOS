@@ -189,10 +189,12 @@
     self.selectionRequest = [ChannelTabFilterRequest new];
     self.selectionRequest.catid = self.videoItem.catID;
     [self startLoading];
+    self.projectNavRightView.leftButton.enabled = NO;
     WEAK_SELF
     [self.selectionRequest startRequestWithRetClass:[ChannelTabFilterRequestItem class] andCompleteBlock:^(id retItem, NSError *error, BOOL isMock) {
         STRONG_SELF
         [self stopLoading];
+        self.projectNavRightView.leftButton.enabled = YES;
         if (error) {
             [self showToast:error.localizedDescription];
             return;
