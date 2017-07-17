@@ -66,6 +66,7 @@
     WEAK_SELF
     [rightView setProjectNavButtonLeftBlock:^{
         STRONG_SELF
+        self.containerView.chooseViewController.projectNavRightView.leftButton.enabled = NO;
         [self.containerView.chooseViewController showFilterSelectionView];
     }];
     [rightView setProjectNavButtonRightBlock:^{
