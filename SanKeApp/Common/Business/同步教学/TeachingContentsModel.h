@@ -1,5 +1,5 @@
 //
-//  TeachingFiterModel.h
+//  TeachingContentsModel.h
 //  SanKeApp
 //
 //  Created by ZLL on 2017/5/10.
@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "GetBookInfoRequest.h"
 
-@interface TeachingFiterModel : NSObject
+@interface TeachingContentsModel : NSObject
 @property (nonatomic, strong) NSArray<GetBookInfoRequestItem_Volum *> *volums;
 @property (nonatomic, strong) NSArray<GetBookInfoRequestItem_Unit *> *units;
 @property (nonatomic, strong) NSArray<GetBookInfoRequestItem_Course *> *courses;
@@ -20,5 +20,5 @@
 @property (nonatomic, assign) NSInteger unitChooseInteger;
 @property (nonatomic, assign) NSInteger courseChooseInteger;
 
-+ (TeachingFiterModel *)modelFromRawData:(GetBookInfoRequestItem *)item;
++ (TeachingContentsModel *)modelFromRawData:(GetBookInfoRequestItem *)item;
 @end

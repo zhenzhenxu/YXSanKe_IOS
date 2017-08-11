@@ -8,6 +8,27 @@
 
 #import "GetBookInfoRequest.h"
 
+@implementation GetBookInfoRequestItem_MarkerLine
++ (JSONKeyMapper *)keyMapper {
+    return [[JSONKeyMapper alloc] initWithDictionary:@{@"id" : @"lineID"}];
+}
+@end
+
+@implementation GetBookInfoRequestItem_MarkerIcon
++ (JSONKeyMapper *)keyMapper {
+    return [[JSONKeyMapper alloc] initWithDictionary:@{@"id" : @"iconID"}];
+}
+@end
+
+@implementation GetBookInfoRequestItem_Marker
++ (JSONKeyMapper *)keyMapper {
+    return [[JSONKeyMapper alloc] initWithDictionary:@{@"id" : @"markerID"}];
+}
+@end
+
+@implementation GetBookInfoRequestItem_Mark
+@end
+
 @implementation GetBookInfoRequestItem_Page
 + (JSONKeyMapper *)keyMapper {
      return [[JSONKeyMapper alloc] initWithDictionary:@{@"idx":@"pageIndex"}];
@@ -24,6 +45,10 @@
 + (JSONKeyMapper *)keyMapper {
     return [[JSONKeyMapper alloc] initWithDictionary:@{@"id":@"courseID"}];
 }
+
+- (id)valueForUndefinedKey:(NSString *)key {
+    return nil;
+}
 @end
 
 @implementation GetBookInfoRequestItem_Unit
@@ -31,6 +56,10 @@
     return [[JSONKeyMapper alloc] initWithDictionary:@{@"id":@"unitID",
                                                        @"items":@"courses"
                                                        }];
+}
+
+- (id)valueForUndefinedKey:(NSString *)key {
+    return nil;
 }
 @end
 

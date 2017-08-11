@@ -212,18 +212,27 @@ static const NSInteger kItemViewTagBase = 1234;
 #pragma mark - Gesture Action
 - (void)panGestureAction:(UIPanGestureRecognizer *)gesture{
     CGPoint velocity = [gesture velocityInView:gesture.view];
-    if (![self isSlidingToRightWithVelocityPoint:velocity]) {
-        return;
-    }
-    if ([self hasScrollViewReachedMostRight]) {
+    if ([self isSlidingToRightWithVelocityPoint:velocity] && [self hasScrollViewReachedMostRight]) {
         if ([self.delegate respondsToSelector:@selector(slideViewDidReachMostRight:)]) {
             [self.delegate slideViewDidReachMostRight:self];
+        }
+    } else if ([self isSlidingToLeftWithVelocityPoint:velocity] && [self hasScrollViewReachedMostLeft]) {
+        if ([self.delegate respondsToSelector:@selector(slideViewDidReachMostLeft:)]) {
+            [self.delegate slideViewDidReachMostLeft:self];
         }
     }
 }
 
+- (BOOL)isSlidingToLeftWithVelocityPoint:(CGPoint)point{
+    return (ABS(point.x)/ABS(point.y)>2 && point.x>0);
+}
+
 - (BOOL)isSlidingToRightWithVelocityPoint:(CGPoint)point{
     return (ABS(point.x)/ABS(point.y)>2 && point.x<0);
+}
+
+- (BOOL)hasScrollViewReachedMostLeft {
+    return self.mainScrollView.contentOffset.x <= 0;
 }
 
 - (BOOL)hasScrollViewReachedMostRight{

@@ -11,6 +11,8 @@
 #import "SlideImageView.h"
 #import "MenuSelectionView.h"
 #import "YXPromtController.h"
+#import "GetMarkDetailRequest.h"
+#import "MarkDetailView.h"
 
 NSString * const kPhotoBrowserExitNotification = @"kPhotoBrowserExitNotification";
 NSString * const kPhotoBrowserIndexKey = @"kPhotoBrowserIndexKey";
@@ -22,6 +24,8 @@ NSString * const kPhotoBrowserIndexKey = @"kPhotoBrowserIndexKey";
 @property (nonatomic, strong) NSTimer *hideBarTimer;
 @property (nonatomic, strong) UITapGestureRecognizer *singleTap;
 @property (nonatomic, assign) BOOL barHidden;
+
+@property (nonatomic, strong) GetMarkDetailRequest *request;
 
 @end
 
@@ -103,26 +107,85 @@ NSString * const kPhotoBrowserIndexKey = @"kPhotoBrowserIndexKey";
     return UIStatusBarAnimationNone;
 }
 
+#pragma mark - showMarkerDetail
+- (void)fetchMarkDetailWithMarkBtn:(UIButton *)markBtn currentModel:(TeachingPageModel *)model {
+    GetBookInfoRequestItem_MarkerIcon *currentIcon = nil;
+    for (GetBookInfoRequestItem_Marker * marker in model.mark.marker) {
+        if (marker.markerID.integerValue == markBtn.tag / 1000) {
+            for (GetBookInfoRequestItem_MarkerIcon *icon in marker.icons) {
+                if (icon.iconID.integerValue == markBtn.tag - markBtn.tag / 1000 * 1000) {
+                    currentIcon = icon;
+                }
+            }
+        }
+    }
+    
+    if (isEmpty(currentIcon.textInfo)) {
+        [self.request stopRequest];
+        self.request = [[GetMarkDetailRequest alloc]init];
+        self.request.marker_id = [NSString stringWithFormat:@"%ld", markBtn.tag / 1000];
+        self.request.icon_id = [NSString stringWithFormat:@"%ld", markBtn.tag - markBtn.tag / 1000 * 1000];
+        [self startLoading];
+        WEAK_SELF
+        [self.request startRequestWithRetClass:[GetMarkDetailRequestItem class] andCompleteBlock:^(id retItem, NSError *error, BOOL isMock) {
+            STRONG_SELF
+            [self stopLoading];
+            if (error) {
+                [self showToast:error.localizedDescription];
+                return ;
+            }
+            GetMarkDetailRequestItem *item = retItem;
+            currentIcon.textInfo = item.data.textInfo;
+            [self showMarkerDetailWithTextInfo:currentIcon.textInfo markBtn:markBtn];
+        }];
+    } else {
+        [self showMarkerDetailWithTextInfo:currentIcon.textInfo markBtn:markBtn];
+    }
+}
+
+- (void)showMarkerDetailWithTextInfo:(NSString *)textInfo markBtn:(UIButton *)markBtn {
+    MarkDetailView *markDetailView = [[MarkDetailView alloc] init];
+    markDetailView.textInfo = textInfo;
+    markDetailView.markBtn = markBtn;
+
+    AlertView *alert = [[AlertView alloc] init];
+    alert.hideWhenMaskClicked = YES;
+    alert.contentView = markDetailView;
+    [alert showWithLayout:nil];
+}
+
 #pragma mark - QASlideViewDataSource & QASlideViewDelegate
 - (NSInteger)numberOfItemsInSlideView:(QASlideView *)slideView {
-    return self.imageUrls.count;
+    return self.currentVolumDataArray.count;
 }
 
 - (QASlideItemBaseView *)slideView:(QASlideView *)slideView itemViewAtIndex:(NSInteger)index {
     SlideImageView *imageView = [[SlideImageView alloc] init];
     [imageView.imageView setShowActivityIndicatorView:YES];
-    [imageView.imageView sd_setImageWithURL:[NSURL URLWithString:self.imageUrls[index]]];
+    [imageView.imageView sd_setImageWithURL:[NSURL URLWithString:self.currentVolumDataArray[index].pageUrl]];
+    imageView.markView.mark = self.currentVolumDataArray[index].mark;
+    imageView.markView.markerBtnBlock = ^(UIButton *markBtn) {
+        [self fetchMarkDetailWithMarkBtn:markBtn currentModel:self.currentVolumDataArray[index]];
+    };
     return (QASlideItemBaseView *)imageView;
 }
 
 - (void)slideView:(QASlideView *)slideView didSlideFromIndex:(NSInteger)from toIndex:(NSInteger)to {
     [[NSNotificationCenter defaultCenter] postNotificationName:@"kSlideViewDidSlide" object:nil];
-    self.title = [NSString stringWithFormat:@"%@/%@", @(to + 1), @(self.imageUrls.count)];
+    self.title = [NSString stringWithFormat:@"%@/%@", @(to + 1), @(self.currentVolumDataArray.count)];
     self.currentIndex = to;
-    SlideImageView *slideImageView = (SlideImageView *)[slideView itemViewAtIndex:to];
+    SlideImageView *slideImageView = [slideView itemViewAtIndex:to];
     if (slideImageView) {
         [self.singleTap requireGestureRecognizerToFail:slideImageView.doubleTap];
     }
+}
+
+- (void)slideViewDidReachMostLeft:(QASlideView *)slideView {
+    [self showToast:@"已翻到首页"];
+}
+
+- (void)slideViewDidReachMostRight:(QASlideView *)slideView {
+    [self showToast:@"已翻到末页"];
 }
 
 /*

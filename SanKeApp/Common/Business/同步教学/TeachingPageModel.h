@@ -15,6 +15,7 @@
 @interface TeachingPageModel : JSONModel
 @property (nonatomic, copy) NSString *pageIndex;
 @property (nonatomic, copy) NSString *pageUrl;
+@property (nonatomic, strong) GetBookInfoRequestItem_Mark *mark;
 @property (nonatomic, strong) NSArray<GetBookInfoRequestItem_Label *> *pageLabel;
 @property (nonatomic, copy) NSString *pageTarget;//volum,unit,course
 @property (nonatomic, assign) BOOL isStart;

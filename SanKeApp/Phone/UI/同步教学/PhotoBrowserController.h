@@ -7,13 +7,14 @@
 //
 
 #import "BaseViewController.h"
+#import "TeachingPageModel.h"
 
 extern NSString * const kPhotoBrowserExitNotification;
 extern NSString * const kPhotoBrowserIndexKey;
 
 @interface PhotoBrowserController : BaseViewController
 
-@property (nonatomic, strong) NSArray<NSString *> *imageUrls;
+@property (nonatomic, strong) NSArray<TeachingPageModel *> *currentVolumDataArray;
 @property (nonatomic, assign) NSInteger currentIndex;
 
 @end

@@ -11,7 +11,7 @@
 
 typedef void(^ClickTabButtonBlock)(void);
 
-@interface TeachingMutiLabelView : UIScrollView
+@interface TeachingMutiLabelView : UIView
 @property (nonatomic, strong) NSArray<GetBookInfoRequestItem_Label *> *tabArray;
 @property (nonatomic, assign) NSInteger currentTabIndex;
 - (void)setClickTabButtonBlock:(ClickTabButtonBlock)block;

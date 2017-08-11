@@ -7,11 +7,53 @@
 //
 
 #import "YXPostRequest.h"
+
+@protocol GetBookInfoRequestItem_MarkerLine <NSObject>
+@end
+@interface GetBookInfoRequestItem_MarkerLine : JSONModel
+@property (nonatomic, strong) NSString<Optional> *lineID;
+@property (nonatomic, strong) NSString<Optional> *x0;
+@property (nonatomic, strong) NSString<Optional> *y0;
+@property (nonatomic, strong) NSString<Optional> *x1;
+@property (nonatomic, strong) NSString<Optional> *y1;
+@end
+
+@protocol GetBookInfoRequestItem_MarkerIcon <NSObject>
+@end
+@interface GetBookInfoRequestItem_MarkerIcon : JSONModel
+@property (nonatomic, strong) NSString<Optional> *iconID;
+@property (nonatomic, strong) NSString<Optional> *ox;
+@property (nonatomic, strong) NSString<Optional> *oy;
+@property (nonatomic, strong) NSString<Optional> *textInfo;
+@end
+
+@protocol GetBookInfoRequestItem_Marker <NSObject>
+@end
+@interface GetBookInfoRequestItem_Marker : JSONModel
+@property (nonatomic, strong) NSString<Optional> *markerID;
+@property (nonatomic, strong) NSString<Optional> *lineAbove;
+@property (nonatomic, strong) NSString<Optional> *lineBelow;
+@property (nonatomic, strong) NSString<Optional> *iconWidth;
+@property (nonatomic, strong) NSString<Optional> *iconHeight;
+@property (nonatomic, strong) NSString<Optional> *markIcon;
+@property (nonatomic, strong) NSArray<GetBookInfoRequestItem_MarkerLine, Optional> *lines;
+@property (nonatomic, strong) NSArray<GetBookInfoRequestItem_MarkerIcon, Optional> *icons;
+@end
+
+@protocol GetBookInfoRequestItem_Mark <NSObject>
+@end
+@interface GetBookInfoRequestItem_Mark : JSONModel
+@property (nonatomic, strong) NSString<Optional> *picWidth;
+@property (nonatomic, strong) NSString<Optional> *picHeight;
+@property (nonatomic, strong) NSArray<GetBookInfoRequestItem_Marker, Optional> *marker;
+@end
+
 @protocol GetBookInfoRequestItem_Page <NSObject>
 @end
 @interface GetBookInfoRequestItem_Page: JSONModel
 @property (nonatomic, strong) NSString<Optional> *pageIndex;
 @property (nonatomic, strong) NSString<Optional> *pageUrl;
+@property (nonatomic, strong) GetBookInfoRequestItem_Mark<Optional> *mark;
 //target
 @property (nonatomic, strong) NSString<Optional> *pageVolum;
 @property (nonatomic, strong) NSString<Optional> *pageUnit;

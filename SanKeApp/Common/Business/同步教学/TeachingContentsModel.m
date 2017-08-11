@@ -1,17 +1,17 @@
 //
-//  TeachingFiterModel.m
+//  TeachingContentsModel.m
 //  SanKeApp
 //
 //  Created by ZLL on 2017/5/10.
 //  Copyright © 2017年 niuzhaowang. All rights reserved.
 //
 
-#import "TeachingFiterModel.h"
+#import "TeachingContentsModel.h"
 
-@implementation TeachingFiterModel
+@implementation TeachingContentsModel
 
-+ (TeachingFiterModel *)modelFromRawData:(GetBookInfoRequestItem *)item {
-    TeachingFiterModel *model = [[TeachingFiterModel alloc]init];
++ (TeachingContentsModel *)modelFromRawData:(GetBookInfoRequestItem *)item {
+    TeachingContentsModel *model = [[TeachingContentsModel alloc]init];
     
     model.volums = item.data.volums;
     model.volumName = @"册";

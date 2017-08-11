@@ -8,29 +8,28 @@
 
 #import "TeachingMainViewController.h"
 #import "TeachingMainCell.h"
-#import "TeachingFilterView.h"
-#import "TeachingFiterModel.h"
+#import "TeachingContentsModel.h"
 #import "GetBookInfoRequest.h"
 #import "TeachingPageModel.h"
 #import "TeachingMutiLabelView.h"
-#import "LabelListViewController.h"
+#import "LabelViewController.h"
 #import "PhotoBrowserController.h"
+#import "QASlideView.h"
+#import "TeachingContentsView.h"
+#import "GetMarkDetailRequest.h"
+#import "MarkDetailView.h"
 
-@interface TeachingMainViewController ()<UITableViewDataSource,UITableViewDelegate,TeachingFilterViewDelegate>
+@interface TeachingMainViewController ()<QASlideViewDataSource, QASlideViewDelegate>
 #pragma mark - data
 @property (nonatomic, strong) GetBookInfoRequest *getBookInfoRequest;
+@property (nonatomic, strong) GetMarkDetailRequest *request;
 @property (nonatomic, strong) NSArray <NSArray<TeachingPageModel *> *>*dataArray;
 @property (nonatomic, strong) NSArray<TeachingPageModel *> *currentVolumDataArray;
-@property (nonatomic, strong) NSMutableArray *imageUrls;
-@property (nonatomic, strong) TeachingFiterModel *filterModel;
+@property (nonatomic, strong) TeachingContentsModel *contentsModel;
 #pragma mark - view
-@property (nonatomic, strong) TeachingFilterView *filterView;
 @property (nonatomic, strong) TeachingMutiLabelView *mutiTabView;
 @property (nonatomic, strong) UIView *lineView;
-@property (nonatomic, strong) UITableView *tableView;
-#pragma mark - other
-@property (nonatomic, assign) CGFloat lastContentOffset;
-@property (nonatomic, assign) BOOL isScrollTop;
+@property (nonatomic, strong) QASlideView *tableView;
 @end
 
 @implementation TeachingMainViewController
@@ -47,7 +46,6 @@
     }];
     self.dataErrorView = [[DataErrorView alloc]init];
     
-    self.isScrollTop = YES;
     [self setupTitle];
     [self setupCurrentContent];
     [self setupObserver];
@@ -91,8 +89,7 @@
             return;
         }
        
-        self.filterModel = [TeachingFiterModel modelFromRawData:item];
-        [self dealWithFilterModel:self.filterModel];
+        self.contentsModel = [TeachingContentsModel modelFromRawData:item];
         self.dataArray = [TeachingPageModel TeachingPageModelsFromRawData:item];
         [self setupUI];
     }];
@@ -113,28 +110,22 @@
         NSString *indexStr = dic[kPhotoBrowserIndexKey];
         NSInteger currentIndex = indexStr.integerValue;
         
-        NSIndexPath *currentIndexPath = [NSIndexPath indexPathForRow:currentIndex inSection:0];
-        [self.tableView scrollToRowAtIndexPath:currentIndexPath atScrollPosition:UITableViewScrollPositionTop animated:NO];
-        TeachingMainCell *cell = [self.tableView cellForRowAtIndexPath:currentIndexPath];
+        [self.tableView scrollToItemIndex:currentIndex animated:NO];
+        TeachingMainCell *cell = [self.tableView itemViewAtIndex:currentIndex];
         TeachingPageModel *model = cell.model;
         [self setupCurrentPageLabelWithPageModel:model];
-        [self setupCurrentFiltersWithPageModel:model];
+        [self updateContentsModelWithPageModel:model];
     }];
 }
 
 - (void)setupUI {
-    self.tableView = [[UITableView alloc]initWithFrame:self.view.bounds style:UITableViewStylePlain];
+    self.tableView = [[QASlideView alloc]initWithFrame:self.view.bounds];
     self.tableView.backgroundColor = [UIColor colorWithHexString:@"e6e6e6"];
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
-    self.tableView.rowHeight = 385.0f * kScreenHeightScale(1.0f);
-    self.tableView.allowsSelection = NO;
-    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-    [self.tableView registerClass:[TeachingMainCell class] forCellReuseIdentifier:@"TeachingMainCell"];
     [self.view addSubview:self.tableView];
     [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.right.bottom.mas_equalTo(0);
-        make.top.mas_equalTo(44.0f);
+        make.edges.mas_equalTo(0);
     }];
     
     [self setupMutiTabView];
@@ -148,21 +139,75 @@
         make.left.right.mas_equalTo(0);
         make.height.mas_equalTo(1/[UIScreen mainScreen].scale);
     }];
+    
+    UIButton *contentsButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    contentsButton.frame = CGRectMake(15, self.view.bounds.size.height - 20 - 49, 50, 50);
+    [contentsButton setImage:[UIImage imageNamed:@"目录"] forState:UIControlStateNormal];
+    [contentsButton addTarget:self action:@selector(contentsButtonAction:) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:contentsButton];
+    [self.view bringSubviewToFront:contentsButton];
+}
+
+- (void)contentsButtonAction:(UIButton *)sender {
+    TeachingContentsView *contentsView = [[TeachingContentsView alloc] init];
+    contentsView.data = self.contentsModel;
+    AlertView *alert = [[AlertView alloc]init];
+    alert.hideWhenMaskClicked = YES;
+    alert.contentView = contentsView;
+    WEAK_SELF
+    [alert setHideBlock:^(AlertView *view) {
+        STRONG_SELF
+        [UIView animateWithDuration:0.3 animations:^{
+            [contentsView mas_remakeConstraints:^(MASConstraintMaker *make) {
+                make.right.mas_equalTo(view.mas_left);
+                make.top.bottom.mas_equalTo(0);
+                make.width.mas_equalTo(kScreenWidth - 50);
+            }];
+            [view layoutIfNeeded];
+        } completion:^(BOOL finished) {
+            [view removeFromSuperview];
+        }];
+    }];
+    [alert showWithLayout:^(AlertView *view) {
+        STRONG_SELF
+        [contentsView mas_remakeConstraints:^(MASConstraintMaker *make) {
+            make.right.mas_equalTo(view.mas_left);
+            make.top.bottom.mas_equalTo(0);
+            make.width.mas_equalTo(kScreenWidth - 50);
+        }];
+        [view layoutIfNeeded];
+        [UIView animateWithDuration:0.3 animations:^{
+            [contentsView mas_remakeConstraints:^(MASConstraintMaker *make) {
+                make.left.mas_equalTo(view.mas_left);
+                make.top.bottom.mas_equalTo(0);
+                make.width.mas_equalTo(kScreenWidth - 50);
+            }];
+            [view layoutIfNeeded];
+        }];
+    }];
+    
+    contentsView.pageChooseBlock = ^(TeachingContentsModel *model) {
+        STRONG_SELF
+        [alert hide];
+        
+        self.contentsModel = model;
+        [self scrollToCurrentPosition];
+        [self.tableView reloadData];
+    };
 }
 
 - (void)setupMutiTabView {
-    self.mutiTabView = [[TeachingMutiLabelView alloc]initWithFrame:CGRectMake(0, 44, self.view.width, 44)];
+    self.mutiTabView = [[TeachingMutiLabelView alloc]initWithFrame:CGRectMake(0, 0, self.view.width, 44)];
     [self.view addSubview:self.mutiTabView];
     WEAK_SELF
     [self.mutiTabView setClickTabButtonBlock:^{
         STRONG_SELF
-        GetBookInfoRequestItem_Volum *volum = self.filterModel.volums[self.filterModel.volumChooseInteger];
-        GetBookInfoRequestItem_Unit *unit = self.filterModel.units[self.filterModel.unitChooseInteger];
-        GetBookInfoRequestItem_Course *course = self.filterModel.courses[self.filterModel.courseChooseInteger];
+        GetBookInfoRequestItem_Volum *volum = self.contentsModel.volums[self.contentsModel.volumChooseInteger];
+        GetBookInfoRequestItem_Unit *unit = self.contentsModel.units[self.contentsModel.unitChooseInteger];
+        GetBookInfoRequestItem_Course *course = self.contentsModel.courses[self.contentsModel.courseChooseInteger];
         
-        LabelListViewController *vc = [[LabelListViewController alloc]init];
-        vc.tabArray = self.mutiTabView.tabArray;
-        vc.currentTabIndex = self.mutiTabView.currentTabIndex;
+        LabelViewController *vc = [[LabelViewController alloc]init];
+        vc.label = self.mutiTabView.tabArray[self.mutiTabView.currentTabIndex];
         vc.volum = volum;
         vc.unit = unit;
         vc.course = course;
@@ -170,84 +215,15 @@
     }];
 }
 
-- (void)dealWithFilterModel:(TeachingFiterModel *)model{
-    TeachingFilterView *filterView = [[TeachingFilterView alloc]initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, 44)];
-    self.filterView = filterView;
-    [self.view addSubview:filterView];
+#pragma mark - contentsUpdate
+- (void)scrollToCurrentPosition {
     
-    NSMutableArray *array0 = [NSMutableArray array];
-    for (GetBookInfoRequestItem_Volum *filter in model.volums) {
-        [array0 addObject:filter.name];
+    GetBookInfoRequestItem_Volum *volum = self.contentsModel.volums[self.contentsModel.volumChooseInteger];
+    GetBookInfoRequestItem_Unit *unit = self.contentsModel.units[self.contentsModel.unitChooseInteger];
+    GetBookInfoRequestItem_Course *course;
+    if (self.contentsModel.courseChooseInteger >= 0) {
+        course = self.contentsModel.courses[self.contentsModel.courseChooseInteger];
     }
-    [self.filterView addFilters:array0 forKey:model.volumName];
-    
-    NSMutableArray *array1 = [NSMutableArray array];
-    for (GetBookInfoRequestItem_Unit *filter in model.units) {
-        [array1 addObject:filter.name];
-    }
-    [self.filterView addFilters:array1 forKey:model.unitName];
-    
-    NSMutableArray *array2 = [NSMutableArray array];
-    for (GetBookInfoRequestItem_Course *filter in model.courses) {
-        [array2 addObject:filter.name];
-    }
-    [self.filterView addFilters:array2 forKey:model.courseName];
-    
-    filterView.delegate = self;
-}
-
-#pragma mark - TeachingFilterViewDelegate
-- (void)filterChanged:(NSArray *)filterArray{
-    NSNumber *num0 = filterArray[0];
-    
-    NSNumber *num1 = [NSNumber numberWithInteger:0];
-    if (num0.integerValue != self.filterModel.volumChooseInteger) {
-        self.filterModel.volumChooseInteger = num0.integerValue;
-        self.filterModel.unitChooseInteger = 0;
-        self.filterModel.courseChooseInteger = 0;
-        [self refreshUnitFilter];
-        [self.tableView reloadData];
-        return;
-    }else {
-        num1 = filterArray[1];
-    }
-    
-    NSNumber *num2 = [NSNumber numberWithInteger:0];
-    if (num1.integerValue != self.filterModel.unitChooseInteger) {
-        self.filterModel.unitChooseInteger = num1.integerValue;
-        self.filterModel.courseChooseInteger = 0;
-        [self refreshCourseFilter];
-        return;
-    }else {
-        num2 = filterArray[2];
-        self.filterModel.courseChooseInteger = num2.integerValue;
-    }
-    [self scrollToFilterPosition];
-}
-
-- (void)refreshUnitFilter{
-    NSMutableArray *array = [NSMutableArray array];
-    for (GetBookInfoRequestItem_Unit *filter in self.filterModel.units) {
-        [array addObject:filter.name];
-    }
-    [self.filterView refreshFilters:array forKey:self.filterModel.unitName isFilter:NO];
-    [self.filterView setCurrentIndex:0 forKey:self.filterModel.unitName];
-    [self refreshCourseFilter];
-}
-
-- (void)refreshCourseFilter{
-    NSMutableArray *array = [NSMutableArray array];
-    for (GetBookInfoRequestItem_Course *filter in self.filterModel.courses) {
-        [array addObject:filter.name];
-    }
-    [self.filterView refreshFilters:array forKey:self.filterModel.courseName isFilter:YES];
-}
-
-- (void)scrollToFilterPosition {
-    
-    GetBookInfoRequestItem_Volum *volum = self.filterModel.volums[self.filterModel.volumChooseInteger];
-    GetBookInfoRequestItem_Unit *unit = self.filterModel.units[self.filterModel.unitChooseInteger];
-    GetBookInfoRequestItem_Course *course = self.filterModel.courses[self.filterModel.courseChooseInteger];
     NSString *filter;
     if (isEmpty(course.courseID)) {
         filter = [NSString stringWithFormat:@"%@,%@",volum.volumID,unit.unitID];
@@ -256,7 +232,7 @@
     }
     [self.currentVolumDataArray enumerateObjectsUsingBlock:^(TeachingPageModel * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         if ([obj.pageTarget isEqualToString:filter] && obj.isStart) {
-            [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:idx inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:NO];
+            [self.tableView scrollToItemIndex:idx animated:NO];
             [self setupCurrentPageLabelWithPageModel:obj];
             *stop = YES;
         }
@@ -274,135 +250,8 @@
     [YXRecordManager addRecord:item];
 }
 
-#pragma mark - UITableViewDataSource & Delegate
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return self.currentVolumDataArray.count;
-}
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    TeachingMainCell *cell = [tableView dequeueReusableCellWithIdentifier:@"TeachingMainCell"];
-    TeachingPageModel *model = self.currentVolumDataArray[indexPath.row];
-    cell.model = model;
-    if (indexPath.row == 0) {
-        [self setupCurrentPageLabelWithPageModel:model];
-    }
-    WEAK_SELF
-    [cell setSelectedButtonActionBlock:^{
-        STRONG_SELF
-        PhotoBrowserController *pbController = [[PhotoBrowserController alloc] init];
-        pbController.imageUrls = self.imageUrls;
-        pbController.currentIndex = indexPath.row;
-        [self.navigationController pushViewController:pbController animated:NO];
-    }];
-    return cell;
-}
-
-#pragma mark - scrollViewDelegate
-- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView{
-    self.lastContentOffset = scrollView.contentOffset.y;
-    self.filterView.userInteractionEnabled = NO;
-}
-
-- (void)scrollViewWillBeginDecelerating:(UIScrollView *)scrollView {
-    self.filterView.userInteractionEnabled = NO;
-}
-- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
-    self.filterView.userInteractionEnabled = YES;
-    if (self.lastContentOffset - scrollView.contentOffset.y > 30) {
-        self.isScrollTop = NO;
-    }
-    if (scrollView.contentOffset.y - self.lastContentOffset > 30) {
-        self.isScrollTop = YES;
-    }
-    [self setupCurrentPageModel];
-    if (scrollView.contentOffset.y >= scrollView.contentSize.height - scrollView.bounds.size.height) {
-        [self showToast:@"没有更多"];
-    }
-}
-
-- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate {
-    self.filterView.userInteractionEnabled = YES;
-    if (self.lastContentOffset - scrollView.contentOffset.y > 30) {
-        self.isScrollTop = NO;
-    }
-    if (scrollView.contentOffset.y - self.lastContentOffset > 30) {
-        self.isScrollTop = YES;
-    }
-    [self setupCurrentPageModel];
-}
-
-- (void)scrollViewDidScrollToTop:(UIScrollView *)scrollView {
-    self.isScrollTop = YES;
-    [self setupCurrentPageModel];
-}
-
-#pragma mark - setupCurrentPageModel
-- (void)setupCurrentPageModel {
-    NSIndexPath *currentIndexPath;
-    if (self.isScrollTop) {
-        currentIndexPath = [self minVisibleIndexPath];
-    }else {
-        currentIndexPath = [self maxVisibleIndexPath];
-    }
-    TeachingMainCell *cell = [self.tableView cellForRowAtIndexPath:currentIndexPath];
-    TeachingPageModel *model = cell.model;
-    [self setupCurrentPageLabelWithPageModel:model];
-    [self setupCurrentFiltersWithPageModel:model];
-}
-
-- (NSIndexPath *)minVisibleIndexPath {
-    NSIndexPath *minIndexPath;
-    NSArray *array = [self.tableView indexPathsForVisibleRows];
-    if (array.count > 0) {
-        minIndexPath = array.firstObject;
-        for (NSIndexPath *indexPath in array) {
-            NSComparisonResult result = [minIndexPath compare:indexPath];
-            if (result == NSOrderedDescending) {
-                minIndexPath = indexPath;
-            }
-        }
-    }
-    return minIndexPath;
-}
-
-- (NSIndexPath *)maxVisibleIndexPath {
-    NSIndexPath *maxIndexPath;
-    NSArray *array = [self.tableView indexPathsForVisibleRows];
-    if (array.count > 0) {
-        maxIndexPath = array.firstObject;
-        for (NSIndexPath *indexPath in array) {
-            NSComparisonResult result = [maxIndexPath compare:indexPath];
-            if (result == NSOrderedAscending) {
-                if (indexPath.row == 1) {
-                    break ;
-                }
-                maxIndexPath = indexPath;
-            }
-        }
-    }
-    return maxIndexPath;
-}
-
-- (void)setupCurrentPageLabelWithPageModel:(TeachingPageModel *)model {
-    if (model.pageLabel.count > 0) {
-        self.mutiTabView.hidden = NO;
-        self.lineView.hidden = NO;
-        self.mutiTabView.tabArray = model.pageLabel;
-        [self.tableView mas_remakeConstraints:^(MASConstraintMaker *make) {
-            make.left.right.bottom.mas_equalTo(0);
-            make.top.mas_equalTo(44.0f + 44.0f);
-        }];
-    }else {
-        self.mutiTabView.hidden = YES;
-        self.lineView.hidden = YES;
-        [self.tableView mas_remakeConstraints:^(MASConstraintMaker *make) {
-            make.left.right.bottom.mas_equalTo(0);
-            make.top.mas_equalTo(44.0f);
-        }];
-    }
-}
-
-- (void)setupCurrentFiltersWithPageModel:(TeachingPageModel *)model{
-    GetBookInfoRequestItem_Volum *volum = self.filterModel.volums[self.filterModel.volumChooseInteger];
+- (void)updateContentsModelWithPageModel:(TeachingPageModel *)model {
+    GetBookInfoRequestItem_Volum *volum = self.contentsModel.volums[self.contentsModel.volumChooseInteger];
     
     NSString *target = model.pageTarget;
     NSString *volumStr = [NSString stringWithFormat:@"%@,",volum.volumID];
@@ -415,55 +264,140 @@
     NSArray *array = [result componentsSeparatedByString:@","];
     if (array.count > 0) {
         if (array.count == 1) {
-            [self.filterModel.units enumerateObjectsUsingBlock:^(GetBookInfoRequestItem_Unit * _Nonnull unit, NSUInteger idx, BOOL * _Nonnull stop) {
+            [self.contentsModel.units enumerateObjectsUsingBlock:^(GetBookInfoRequestItem_Unit * _Nonnull unit, NSUInteger idx, BOOL * _Nonnull stop) {
                 if ([array.firstObject isEqualToString:unit.unitID]) {
-                    self.filterModel.unitChooseInteger = idx;
-                    self.filterModel.courseChooseInteger = 0;
-                    NSMutableArray *array = [NSMutableArray array];
-                    for (GetBookInfoRequestItem_Course *filter in self.filterModel.courses) {
-                        [array addObject:filter.name];
-                    }
-                    [self.filterView refreshFilters:array forKey:self.filterModel.courseName isFilter:NO];
+                    self.contentsModel.unitChooseInteger = idx;
+                    self.contentsModel.courseChooseInteger = -1;
                     *stop = YES;
                 }
             }];
         }
         if (array.count == 2) {
-            [self.filterModel.units enumerateObjectsUsingBlock:^(GetBookInfoRequestItem_Unit * _Nonnull unit, NSUInteger idx, BOOL * _Nonnull stop) {
+            [self.contentsModel.units enumerateObjectsUsingBlock:^(GetBookInfoRequestItem_Unit * _Nonnull unit, NSUInteger idx, BOOL * _Nonnull stop) {
                 if ([array.firstObject isEqualToString:unit.unitID]) {
-                    self.filterModel.unitChooseInteger = idx;
-                    self.filterModel.courseChooseInteger = 0;
-                    NSMutableArray *array = [NSMutableArray array];
-                    for (GetBookInfoRequestItem_Course *filter in self.filterModel.courses) {
-                        [array addObject:filter.name];
-                    }
-                    [self.filterView refreshFilters:array forKey:self.filterModel.courseName isFilter:NO];
+                    self.contentsModel.unitChooseInteger = idx;
+                    self.contentsModel.courseChooseInteger = 0;
                     *stop = YES;
                 }
             }];
-            [self.filterModel.courses enumerateObjectsUsingBlock:^(GetBookInfoRequestItem_Course * _Nonnull course, NSUInteger idx, BOOL * _Nonnull stop) {
+            [self.contentsModel.courses enumerateObjectsUsingBlock:^(GetBookInfoRequestItem_Course * _Nonnull course, NSUInteger idx, BOOL * _Nonnull stop) {
                 if ([array.lastObject isEqualToString:course.courseID]) {
-                    self.filterModel.courseChooseInteger = idx;
+                    self.contentsModel.courseChooseInteger = idx;
                 }
             }];
         }
-        [self.filterView setCurrentIndex:self.filterModel.unitChooseInteger forKey:self.filterModel.unitName];
-        [self.filterView setCurrentIndex:self.filterModel.courseChooseInteger forKey:self.filterModel.courseName];
     }
+}
+
+- (void)setupCurrentPageLabelWithPageModel:(TeachingPageModel *)model {
+    if (model.pageLabel.count > 0) {
+        self.mutiTabView.hidden = NO;
+        self.lineView.hidden = NO;
+        self.mutiTabView.tabArray = model.pageLabel;
+        [self.tableView mas_remakeConstraints:^(MASConstraintMaker *make) {
+            make.edges.mas_equalTo(UIEdgeInsetsMake(44, 0, 0, 0));
+        }];
+    }else {
+        self.mutiTabView.hidden = YES;
+        self.lineView.hidden = YES;
+        [self.tableView mas_remakeConstraints:^(MASConstraintMaker *make) {
+            make.edges.mas_equalTo(0);
+        }];
+    }
+}
+
+#pragma mark - showMarkerDetail
+- (void)fetchMarkDetailWithMarkBtn:(UIButton *)markBtn currentModel:(TeachingPageModel *)model {
+    GetBookInfoRequestItem_MarkerIcon *currentIcon = nil;
+    for (GetBookInfoRequestItem_Marker * marker in model.mark.marker) {
+        if (marker.markerID.integerValue == markBtn.tag / 1000) {
+            for (GetBookInfoRequestItem_MarkerIcon *icon in marker.icons) {
+                if (icon.iconID.integerValue == markBtn.tag - markBtn.tag / 1000 * 1000) {
+                    currentIcon = icon;
+                }
+            }
+        }
+    }
+    
+    if (isEmpty(currentIcon.textInfo)) {
+        [self.request stopRequest];
+        self.request = [[GetMarkDetailRequest alloc]init];
+        self.request.marker_id = [NSString stringWithFormat:@"%ld", markBtn.tag / 1000];
+        self.request.icon_id = [NSString stringWithFormat:@"%ld", markBtn.tag - markBtn.tag / 1000 * 1000];
+        [self startLoading];
+        WEAK_SELF
+        [self.request startRequestWithRetClass:[GetMarkDetailRequestItem class] andCompleteBlock:^(id retItem, NSError *error, BOOL isMock) {
+            STRONG_SELF
+            [self stopLoading];
+            if (error) {
+                [self showToast:error.localizedDescription];
+                return ;
+            }
+            GetMarkDetailRequestItem *item = retItem;
+            currentIcon.textInfo = item.data.textInfo;
+            [self showMarkerDetailWithTextInfo:currentIcon.textInfo markBtn:markBtn];
+        }];
+    } else {
+        [self showMarkerDetailWithTextInfo:currentIcon.textInfo markBtn:markBtn];
+    }
+}
+
+- (void)showMarkerDetailWithTextInfo:(NSString *)textInfo markBtn:(UIButton *)markBtn {
+    MarkDetailView *markDetailView = [[MarkDetailView alloc] init];
+    markDetailView.textInfo = textInfo;
+    markDetailView.markBtn = markBtn;
+    
+    AlertView *alert = [[AlertView alloc] init];
+    alert.hideWhenMaskClicked = YES;
+    alert.contentView = markDetailView;
+    [alert showWithLayout:nil];
+}
+
+#pragma mark - QASlideViewDataSource & QASlideViewDelegate
+- (NSInteger)numberOfItemsInSlideView:(QASlideView *)slideView {
+    return self.currentVolumDataArray.count;
+}
+
+- (QASlideItemBaseView *)slideView:(QASlideView *)slideView itemViewAtIndex:(NSInteger)index {
+    TeachingMainCell *cell = [[TeachingMainCell alloc] init];
+    TeachingPageModel *model = self.currentVolumDataArray[index];
+    cell.model = model;
+    if (index == 0) {
+        [self setupCurrentPageLabelWithPageModel:model];
+    }
+    WEAK_SELF
+    [cell setSelectedButtonActionBlock:^{
+        STRONG_SELF
+        PhotoBrowserController *pbController = [[PhotoBrowserController alloc] init];
+        pbController.currentVolumDataArray = self.currentVolumDataArray;
+        pbController.currentIndex = index;
+        [self.navigationController pushViewController:pbController animated:NO];
+    }];
+    
+    cell.showMarkDetailBlock = ^(UIButton *markBtn) {
+        STRONG_SELF
+        [self fetchMarkDetailWithMarkBtn:markBtn currentModel:model];
+    };
+    return cell;
+}
+
+- (void)slideView:(QASlideView *)slideView didSlideFromIndex:(NSInteger)from toIndex:(NSInteger)to {
+    TeachingPageModel *model = self.currentVolumDataArray[to];
+    [self setupCurrentPageLabelWithPageModel:model];
+    [self updateContentsModelWithPageModel:model];
+}
+
+- (void)slideViewDidReachMostLeft:(QASlideView *)slideView {
+    [self showToast:@"已翻到首页"];
+}
+
+- (void)slideViewDidReachMostRight:(QASlideView *)slideView {
+    [self showToast:@"已翻到末页"];
 }
 
 #pragma mark - getter
 - (NSArray<TeachingPageModel *> *)currentVolumDataArray {
-    if ([_currentVolumDataArray isEqualToArray:self.dataArray[self.filterModel.volumChooseInteger]]) {
-        return _currentVolumDataArray;
-    }
-    
-    _currentVolumDataArray = self.dataArray[self.filterModel.volumChooseInteger];
-    self.imageUrls = [NSMutableArray array];
-    for (int i = 0; i < _currentVolumDataArray.count; i++) {
-        [self.imageUrls addObject:_currentVolumDataArray[i].pageUrl];
-    }
-    return _currentVolumDataArray;
+    return self.dataArray[self.contentsModel.volumChooseInteger];
 }
 
 @end

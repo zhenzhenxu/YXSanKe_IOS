@@ -10,7 +10,8 @@
 #import "GetBookInfoRequest.h"
 
 @interface LabelViewController : BaseViewController
-@property (nonatomic, strong)  GetBookInfoRequestItem_Label *label;
-
-- (void)refershLabelList;
+@property (nonatomic, strong) GetBookInfoRequestItem_Label *label;
+@property (nonatomic, strong) GetBookInfoRequestItem_Volum *volum;
+@property (nonatomic, strong) GetBookInfoRequestItem_Unit *unit;
+@property (nonatomic, strong) GetBookInfoRequestItem_Course *course;
 @end

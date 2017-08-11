@@ -24,8 +24,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    [self setupTitle];
+    self.navigationItem.title = self.label.name;
     [self setupUI];
+    [self uploadRecord];
     [self requestSelection];
     // Do any additional setup after loading the view.
 }
@@ -33,14 +34,6 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
-}
-
-- (void)setupTitle {
-    UserModel *model = [UserManager sharedInstance].userModel;
-    [StageSubjectDataManager fetchStageSubjectWithStageID:model.stageID subjectID:model.subjectID completeBlock:^(FetchStageSubjectRequestItem_stage *stage, FetchStageSubjectRequestItem_subject *subject) {
-        NSString *title = [stage.name stringByAppendingString:subject.name];
-        self.navigationItem.title = title;
-    }];
 }
 
 - (void)setupUI {
@@ -71,6 +64,19 @@
     }];
 }
 
+- (void)uploadRecord {
+    YXProblemItem *item = [[YXProblemItem alloc] init];
+    item.grade = [UserManager sharedInstance].userModel.stageID;
+    item.subject = [UserManager sharedInstance].userModel.subjectID;
+    item.volume_id = self.volum.volumID;
+    item.unit_id = self.unit.unitID;
+    item.course_id = self.course.courseID;
+    item.tag_id = self.label.labelID;
+    item.type = YXRecordClickType;
+    item.objType = @"filter_tbjx";
+    [YXRecordManager addRecord:item];
+}
+
 - (void)requestSelection{
     [self.selectionRequest stopRequest];
     self.selectionRequest = [[GetLabelListRequest alloc]init];
@@ -91,6 +97,9 @@
         self.treeNodes = item.data.elements;
         self.treeView.contentOffset = CGPointZero;
         [self.treeView reloadData];
+        for (GetLabelListRequestItem_Element *element in item.data.elements) {
+            [self.treeView expandRowForItem:element];
+        }
     }];
 }
 
@@ -113,23 +122,12 @@
 
 - (UITableViewCell *)treeView:(RATreeView *)treeView cellForItem:(id)item {
     NSInteger level = [treeView levelForCellForItem:item];
-    BOOL isExpand = [treeView isCellForItemExpanded:item];
     GetLabelListRequestItem_Element *element = item;
     
     LabelTreeCell *cell = [treeView dequeueReusableCellWithIdentifier:@"LabelTreeCell"];
-    cell.isExpand = isExpand;
+    cell.isExpand = YES;
     cell.level = level;
     cell.element = element;
-    WEAK_SELF
-    [cell setTreeExpandBlock:^(LabelTreeCell *cell) {
-        STRONG_SELF
-        if (cell.isExpand) {
-            [self.treeView collapseRowForItem:item];
-        }else {
-            [self.treeView expandRowForItem:item];
-        }
-        cell.isExpand = !cell.isExpand;
-    }];
     [cell setTreeClickBlock:^(LabelTreeCell *cell) {
         GetLabelListRequestItem_Element *element = nil;
         if (level == 0) {
@@ -157,7 +155,4 @@
     return NO;
 }
 
-- (void)refershLabelList {
-    [self requestSelection];
-}
 @end

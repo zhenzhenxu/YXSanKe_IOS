@@ -20,6 +20,7 @@
 @protocol QASlideViewDelegate <NSObject>
 @optional
 - (void)slideView:(QASlideView *)slideView didSlideFromIndex:(NSInteger)from toIndex:(NSInteger)to;
+- (void)slideViewDidReachMostLeft:(QASlideView *)slideView;
 - (void)slideViewDidReachMostRight:(QASlideView *)slideView;
 @end
 
@@ -33,7 +34,7 @@
 
 - (void)scrollToItemIndex:(NSInteger)index animated:(BOOL)animated;
 - (void)reloadData;
-- (QASlideItemBaseView *)itemViewAtIndex:(NSInteger)index; // maybe nil if not loaded or has been recycled.
+- (__kindof QASlideItemBaseView *)itemViewAtIndex:(NSInteger)index; // maybe nil if not loaded or has been recycled.
 
 @property (nonatomic, strong) UIPanGestureRecognizer *panGesture;
 

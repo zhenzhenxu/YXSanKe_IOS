@@ -23,7 +23,7 @@
 		<key>ChannelTabRequest</key>
 		<dict>
 			<key>mockEnable</key>
-			<false/>
+			<true/>
 			<key>mockFile</key>
 			<array>
 				<dict>
@@ -323,6 +323,20 @@
 					<string>resourceDetailText_mock.json</string>
 					<key>percent</key>
 					<integer>33</integer>
+				</dict>
+			</array>
+		</dict>
+		<key>GetMarkDetailRequest</key>
+		<dict>
+			<key>mockEnable</key>
+			<true/>
+			<key>mockFile</key>
+			<array>
+				<dict>
+					<key>fileName</key>
+					<string>GetMarkDetail_mock.json</string>
+					<key>percent</key>
+					<integer>100</integer>
 				</dict>
 			</array>
 		</dict>

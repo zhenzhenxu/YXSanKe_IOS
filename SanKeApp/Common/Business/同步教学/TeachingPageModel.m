@@ -26,6 +26,7 @@
                         TeachingPageModel *unitPage = [[TeachingPageModel alloc]init];
                         unitPage.pageUrl = page.pageUrl;
                         unitPage.pageIndex = page.pageIndex;
+                        unitPage.mark = page.mark;
                         unitPage.pageTarget = [NSString stringWithFormat:@"%@,%@",volum.volumID,unit.unitID];
                         if (idx == 0) {
                             unitPage.isStart = YES;
@@ -47,6 +48,7 @@
                             TeachingPageModel *coursePage = [[TeachingPageModel alloc]init];
                             coursePage.pageUrl = page.pageUrl;
                             coursePage.pageIndex = page.pageIndex;
+                            coursePage.mark = page.mark;
                             coursePage.pageTarget = [NSString stringWithFormat:@"%@,%@,%@",volum.volumID,unit.unitID,course.courseID];
                             if (idx == 0) {
                                 coursePage.isStart = YES;

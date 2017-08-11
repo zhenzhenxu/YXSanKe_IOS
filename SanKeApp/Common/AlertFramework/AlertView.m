@@ -18,7 +18,7 @@
     if (self = [super initWithFrame:frame]) {
         [self setupMaskView];
         self.hideWhenMaskClicked = NO;
-        self.maskColor = [[UIColor blackColor] colorWithAlphaComponent:0.5];
+        self.maskColor = [[UIColor blackColor] colorWithAlphaComponent:.4f];
     }
     return self;
 }
