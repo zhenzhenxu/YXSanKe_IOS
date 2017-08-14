@@ -11,7 +11,7 @@
 @interface TeachingContentsCell ()
 
 @property (nonatomic, strong) UILabel *titleLabel;
-@property (nonatomic, strong) UIImageView *dashedImageView;
+@property (nonatomic, strong) UIView *topLineView;
 
 @end
 
@@ -32,10 +32,10 @@
 
 #pragma mark - setupUI
 - (void)setupUI {
-    self.dashedImageView = [[UIImageView alloc] init];
-    self.dashedImageView.backgroundColor = [UIColor colorWithHexString:@"e6e6e6"];
-    [self.contentView addSubview:self.dashedImageView];
-    [self.dashedImageView mas_makeConstraints:^(MASConstraintMaker *make) {
+    self.topLineView = [[UIView alloc] init];
+    self.topLineView.backgroundColor = [UIColor colorWithHexString:@"e6e6e6"];
+    [self.contentView addSubview:self.topLineView];
+    [self.topLineView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.top.mas_equalTo(0);
         make.height.mas_equalTo(1);
     }];
@@ -48,7 +48,7 @@
     [self.titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(15);
         make.right.mas_equalTo(-15);
-        make.top.mas_equalTo(self.dashedImageView.mas_bottom).offset(18);
+        make.top.mas_equalTo(self.topLineView.mas_bottom).offset(18);
         make.bottom.mas_equalTo(-18);
     }];
 }
@@ -61,19 +61,17 @@
 
 - (void)setIsIndented:(BOOL)isIndented {
     _isIndented = isIndented;
-    if (isIndented) {
-        [self.dashedImageView mas_remakeConstraints:^(MASConstraintMaker *make) {
-            make.left.mas_equalTo(15);
-            make.right.top.mas_equalTo(0);
-            make.height.mas_equalTo(1);
-        }];
-        [self.titleLabel mas_remakeConstraints:^(MASConstraintMaker *make) {
-            make.left.mas_equalTo(41);
-            make.right.mas_equalTo(-15);
-            make.top.mas_equalTo(self.dashedImageView.mas_bottom).offset(18);
-            make.bottom.mas_equalTo(-18);
-        }];
-    }
+    [self.topLineView mas_remakeConstraints:^(MASConstraintMaker *make) {
+        make.left.mas_equalTo(isIndented ? 15 : 0);
+        make.right.top.mas_equalTo(0);
+        make.height.mas_equalTo(1);
+    }];
+    [self.titleLabel mas_remakeConstraints:^(MASConstraintMaker *make) {
+        make.left.mas_equalTo(isIndented ? 41 : 15);
+        make.right.mas_equalTo(-15);
+        make.top.mas_equalTo(self.topLineView.mas_bottom).offset(18);
+        make.bottom.mas_equalTo(-18);
+    }];
 }
 
 - (void)setIsSelected:(BOOL)isSelected {

@@ -105,6 +105,14 @@
         }
     }
     [self.tableView reloadData];
+    
+    [self.contentsArray enumerateObjectsUsingBlock:^(JSONModel *obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        if (self.data.courseChooseInteger >= 0 && [obj isEqual:self.data.courses[self.data.courseChooseInteger]]) {
+            [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:idx inSection:0] atScrollPosition:UITableViewScrollPositionBottom animated:YES];
+        } else if ([obj isEqual:self.data.units[self.data.unitChooseInteger]]) {
+            [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:idx inSection:0] atScrollPosition:UITableViewScrollPositionBottom animated:YES];
+        }
+    }];
 }
 
 #pragma mark - UITableViewDataSource & UITabelViewDelegate
@@ -119,17 +127,9 @@
     cell.isIndented = [self.contentsArray[indexPath.row] isKindOfClass:[GetBookInfoRequestItem_Course class]];
     
     if (self.data.courseChooseInteger >= 0) {
-        if ([model isEqual:self.data.courses[self.data.courseChooseInteger]]) {
-            cell.isSelected = YES;
-        } else {
-            cell.isSelected = NO;
-        }
+        cell.isSelected = [model isEqual:self.data.courses[self.data.courseChooseInteger]];
     } else {
-        if ([model isEqual:self.data.units[self.data.unitChooseInteger]]) {
-            cell.isSelected = YES;
-        } else {
-            cell.isSelected = NO;
-        }
+        cell.isSelected = [model isEqual:self.data.units[self.data.unitChooseInteger]];
     }
     return cell;
 }

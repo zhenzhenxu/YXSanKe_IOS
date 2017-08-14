@@ -204,7 +204,10 @@
         STRONG_SELF
         GetBookInfoRequestItem_Volum *volum = self.contentsModel.volums[self.contentsModel.volumChooseInteger];
         GetBookInfoRequestItem_Unit *unit = self.contentsModel.units[self.contentsModel.unitChooseInteger];
-        GetBookInfoRequestItem_Course *course = self.contentsModel.courses[self.contentsModel.courseChooseInteger];
+        GetBookInfoRequestItem_Course *course = nil;
+        if (self.contentsModel.courseChooseInteger >= 0) {
+            course = self.contentsModel.courses[self.contentsModel.courseChooseInteger];
+        }
         
         LabelViewController *vc = [[LabelViewController alloc]init];
         vc.label = self.mutiTabView.tabArray[self.mutiTabView.currentTabIndex];
@@ -220,7 +223,7 @@
     
     GetBookInfoRequestItem_Volum *volum = self.contentsModel.volums[self.contentsModel.volumChooseInteger];
     GetBookInfoRequestItem_Unit *unit = self.contentsModel.units[self.contentsModel.unitChooseInteger];
-    GetBookInfoRequestItem_Course *course;
+    GetBookInfoRequestItem_Course *course = nil;
     if (self.contentsModel.courseChooseInteger >= 0) {
         course = self.contentsModel.courses[self.contentsModel.courseChooseInteger];
     }
