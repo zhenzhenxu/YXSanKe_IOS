@@ -9,6 +9,7 @@
 #import "MarkView.h"
 
 #define kWidthRadio (self.bounds.size.width / self.mark.picWidth.integerValue)
+#define kHeightRadio (self.bounds.size.height / self.mark.picHeight.integerValue)
 
 @implementation MarkView
 
@@ -28,8 +29,8 @@
         [[UIColor redColor] setStroke];
         for (GetBookInfoRequestItem_Marker *marker in self.mark.marker) {
             for (GetBookInfoRequestItem_MarkerLine *line in marker.lines) {
-                [path moveToPoint:CGPointMake(line.x0.integerValue * kWidthRadio, line.y0.integerValue * kWidthRadio)];
-                [path addLineToPoint:CGPointMake(line.x1.integerValue * kWidthRadio, line.y1.integerValue * kWidthRadio)];
+                [path moveToPoint:CGPointMake(line.x0.integerValue * kWidthRadio, line.y0.integerValue * kHeightRadio)];
+                [path addLineToPoint:CGPointMake(line.x1.integerValue * kWidthRadio, line.y1.integerValue * kHeightRadio)];
             }
         }
         [path stroke];
@@ -42,7 +43,7 @@
         for (GetBookInfoRequestItem_Marker *marker in self.mark.marker) {
             for (GetBookInfoRequestItem_MarkerIcon *icon in marker.icons) {
                 UIButton *iconBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-                iconBtn.frame = CGRectMake(icon.ox.integerValue * kWidthRadio, icon.oy.integerValue * kWidthRadio, marker.iconWidth.integerValue, marker.iconHeight.integerValue);
+                iconBtn.frame = CGRectMake(icon.ox.integerValue * kWidthRadio, icon.oy.integerValue * kHeightRadio, marker.iconWidth.integerValue, marker.iconHeight.integerValue);
                 iconBtn.tag = marker.markerID.integerValue * 1000 + icon.iconID.integerValue;
                 [iconBtn sd_setBackgroundImageWithURL:[NSURL URLWithString:marker.markIcon] forState:UIControlStateNormal];
                 [iconBtn addTarget:self action:@selector(iconBtnAction:) forControlEvents:UIControlEventTouchUpInside];

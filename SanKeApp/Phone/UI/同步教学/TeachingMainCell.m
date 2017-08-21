@@ -59,6 +59,7 @@
         if (error) {
             self.contentImageView.image = [UIImage imageNamed:@"图片加载失败"];
         }else {
+            self.contentImageView.contentMode = UIViewContentModeScaleToFill;
             self.contentImageView.image = image;
             self.markView.mark = model.mark;
             WEAK_SELF
@@ -77,29 +78,30 @@
 }
 
 - (void)setupLayout {
-    CGRect frame = self.contentImageView.frame;
-    if (self.contentImageView.image) {
-        UIImage *image = self.contentImageView.image;
-        CGFloat width = image.size.width;
-        CGFloat height = image.size.height;
-        CGFloat maxHeight = self.bounds.size.height;
-        CGFloat maxWidth = self.bounds.size.width;
-        if(width > maxWidth || height > width){
-            CGFloat ratio = height / width;
-            CGFloat maxRatio = maxHeight / maxWidth;
-            if(ratio < maxRatio){
-                width = maxWidth;
-                height = width*ratio;
-            }else{
-                height = maxHeight;
-                width = height / ratio;
-            }
-        }
-        self.contentImageView.frame = CGRectMake((maxWidth - width) / 2, (maxHeight - height) / 2, width, height);
-    }else{
-        frame.origin = CGPointZero;
-        self.contentImageView.frame = frame;
-    }
+    // 等比例居中展示 后期需求可能会用 现版本平铺
+//    CGRect frame = self.contentImageView.frame;
+//    if (self.contentImageView.image) {
+//        UIImage *image = self.contentImageView.image;
+//        CGFloat width = image.size.width;
+//        CGFloat height = image.size.height;
+//        CGFloat maxHeight = self.bounds.size.height;
+//        CGFloat maxWidth = self.bounds.size.width;
+//        if(width > maxWidth || height > width){
+//            CGFloat ratio = height / width;
+//            CGFloat maxRatio = maxHeight / maxWidth;
+//            if(ratio < maxRatio){
+//                width = maxWidth;
+//                height = width*ratio;
+//            }else{
+//                height = maxHeight;
+//                width = height / ratio;
+//            }
+//        }
+//        self.contentImageView.frame = CGRectMake((maxWidth - width) / 2, (maxHeight - height) / 2, width, height);
+//    }else{
+//        frame.origin = CGPointZero;
+//        self.contentImageView.frame = frame;
+//    }
     self.markView.frame = self.contentImageView.bounds;
     [self.markView setNeedsDisplay];
 }

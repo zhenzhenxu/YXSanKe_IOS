@@ -11,8 +11,9 @@
 
 #define kContainerWidth (kScreenWidth - 50)
 
-@interface TeachingContentsView ()<UITableViewDataSource, UITableViewDelegate>
+@interface TeachingContentsView ()<UIScrollViewDelegate, UITableViewDataSource, UITableViewDelegate>
 
+@property (nonatomic, strong) UIScrollView *headerScrollView;
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) NSMutableArray *contentsArray;
 
@@ -34,34 +35,48 @@
     topLineView.backgroundColor = [UIColor colorWithHexString:@"e6e6e6"];
     [tableViewHeaderView addSubview:topLineView];
     
-    CGFloat lastButtonBottom = 0.0f;;
+    self.headerScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(topLineView.frame), kContainerWidth, 49)];
+    self.headerScrollView.showsHorizontalScrollIndicator = NO;
+    self.headerScrollView.showsVerticalScrollIndicator = NO;
+    self.headerScrollView.delegate = self;
+    self.headerScrollView.contentSize = CGSizeMake(kContainerWidth / 2.0f * self.data.volums.count, 49);
+    [tableViewHeaderView addSubview:self.headerScrollView];
     for (int i = 0; i < self.data.volums.count; i++) {
         UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
         GetBookInfoRequestItem_Volum *volum = self.data.volums[i];
         btn.tag = 1000 + i;
         if (i == self.data.volumChooseInteger) {
             btn.selected = YES;
+            self.headerScrollView.contentOffset = CGPointMake(i == self.data.volums.count - 1 ? self.headerScrollView.contentSize.width - kContainerWidth : kContainerWidth / 2.0f * i, 0);
         }
         [btn setTitle:volum.name forState:UIControlStateNormal];
         [btn setTitleColor:[UIColor colorWithHexString:@"333333"] forState:UIControlStateNormal];
         [btn setTitleColor:[UIColor colorWithHexString:@"4691a6"] forState:UIControlStateSelected];
         btn.titleLabel.font = [UIFont boldSystemFontOfSize:14.0f];
-        btn.frame = CGRectMake(i % 2 == 0 ? 0 : kContainerWidth / 2.0f, CGRectGetMaxY(topLineView.frame) + i / 2 * 49, kContainerWidth / 2.0f, 49);
+        btn.frame = CGRectMake(kContainerWidth / 2.0f * i, 0, kContainerWidth / 2.0f, 49);
         [btn addTarget:self action:@selector(volumeButtonAction:) forControlEvents:UIControlEventTouchUpInside];
-        [tableViewHeaderView addSubview:btn];
-        
-        if (i % 2 == 0) {
-            UIView *lineView = [[UIView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(btn.frame) + i / 2 * 49, kContainerWidth, 1)];
-            lineView.backgroundColor = [UIColor colorWithHexString:@"e6e6e6"];
-            [tableViewHeaderView addSubview:lineView];
-        }
-        
-        if (i == self.data.volums.count - 1) {
-            lastButtonBottom = CGRectGetMaxY(btn.frame);
-        }
+        [self.headerScrollView addSubview:btn];
     }
     
-    UILabel *contentsLabel = [[UILabel alloc] initWithFrame:CGRectMake(16, lastButtonBottom + 1 + 15, 40, 18)];
+    if (self.data.volums.count > 2) {
+        UIButton *leftScrollBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+        leftScrollBtn.frame = CGRectMake(0, CGRectGetMaxY(topLineView.frame), 34, 49);
+        [leftScrollBtn setImage:[UIImage imageNamed:@"书册滑动左"] forState:UIControlStateNormal];
+        [leftScrollBtn addTarget:self action:@selector(scrollBtnAction:) forControlEvents:UIControlEventTouchUpInside];
+        leftScrollBtn.tag = 2000;
+        [tableViewHeaderView addSubview:leftScrollBtn];
+        
+        UIButton *rightScrollBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+        rightScrollBtn.frame = CGRectMake(kContainerWidth - 34, CGRectGetMaxY(topLineView.frame), 34, 49);
+        [rightScrollBtn setImage:[UIImage imageNamed:@"书册滑动"] forState:UIControlStateNormal];
+        [rightScrollBtn addTarget:self action:@selector(scrollBtnAction:) forControlEvents:UIControlEventTouchUpInside];
+        [tableViewHeaderView addSubview:rightScrollBtn];
+    }
+    
+    UIView *middleLineView = [[UIView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(self.headerScrollView.frame), kContainerWidth, 1)];
+    middleLineView.backgroundColor = [UIColor colorWithHexString:@"e6e6e6"];
+    [tableViewHeaderView addSubview:middleLineView];
+    UILabel *contentsLabel = [[UILabel alloc] initWithFrame:CGRectMake(16, CGRectGetMaxY(middleLineView.frame) + 15, 40, 18)];
     contentsLabel.text = @"目录";
     contentsLabel.font = [UIFont systemFontOfSize:12.0f];
     contentsLabel.textColor = [UIColor colorWithHexString:@"333333"];
@@ -78,6 +93,22 @@
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     [self.tableView registerClass:[TeachingContentsCell class] forCellReuseIdentifier:NSStringFromClass([TeachingContentsCell class])];
     [self addSubview:self.tableView];
+}
+
+- (void)scrollBtnAction:(UIButton *)sender {
+    if (sender.tag == 2000) {
+        if (self.headerScrollView.contentOffset.x > kContainerWidth / 2.0f) {
+            self.headerScrollView.contentOffset = CGPointMake(self.headerScrollView.contentOffset.x - kContainerWidth / 2.0f, 0);
+        } else if (self.headerScrollView.contentOffset.x > 0) {
+            self.headerScrollView.contentOffset = CGPointMake(0, 0);
+        }
+    } else {
+        if (self.headerScrollView.contentOffset.x < self.headerScrollView.contentSize.width - kContainerWidth - kContainerWidth / 2.0f) {
+            self.headerScrollView.contentOffset = CGPointMake(self.headerScrollView.contentOffset.x + kContainerWidth / 2.0f, 0);
+        } else if (self.headerScrollView.contentOffset.x < self.headerScrollView.contentSize.width - kContainerWidth) {
+            self.headerScrollView.contentOffset = CGPointMake(self.headerScrollView.contentSize.width - kContainerWidth, 0);
+        }
+    }
 }
 
 - (void)volumeButtonAction:(UIButton *)sender {
@@ -107,12 +138,29 @@
     [self.tableView reloadData];
     
     [self.contentsArray enumerateObjectsUsingBlock:^(JSONModel *obj, NSUInteger idx, BOOL * _Nonnull stop) {
-        if (self.data.courseChooseInteger >= 0 && [obj isEqual:self.data.courses[self.data.courseChooseInteger]]) {
-            [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:idx inSection:0] atScrollPosition:UITableViewScrollPositionBottom animated:YES];
-        } else if ([obj isEqual:self.data.units[self.data.unitChooseInteger]]) {
-            [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:idx inSection:0] atScrollPosition:UITableViewScrollPositionBottom animated:YES];
+        if (self.data.courseChooseInteger >= 0) {
+            if ([obj isEqual:self.data.courses[self.data.courseChooseInteger]]) {
+                [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:idx inSection:0] atScrollPosition:UITableViewScrollPositionMiddle animated:NO];
+            }
+        } else {
+            if ([obj isEqual:self.data.units[self.data.unitChooseInteger]]) {
+                [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:idx inSection:0] atScrollPosition:UITableViewScrollPositionMiddle animated:NO];
+            }
         }
     }];
+}
+
+#pragma mark - UIScrollViewDelegate
+- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
+    if ([scrollView isEqual:self.headerScrollView]) {
+        scrollView.contentOffset = CGPointMake(round(scrollView.contentOffset.x / (kContainerWidth / 2.0f)) * (kContainerWidth / 2.0f), 0);
+    }
+}
+
+- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate {
+    if ([scrollView isEqual:self.headerScrollView]) {
+        scrollView.contentOffset = CGPointMake(round(scrollView.contentOffset.x / (kContainerWidth / 2.0f)) * (kContainerWidth / 2.0f), 0);
+    }
 }
 
 #pragma mark - UITableViewDataSource & UITabelViewDelegate
@@ -126,10 +174,14 @@
     cell.title = (NSString *)[model valueForKey:@"name"];
     cell.isIndented = [self.contentsArray[indexPath.row] isKindOfClass:[GetBookInfoRequestItem_Course class]];
     
-    if (self.data.courseChooseInteger >= 0) {
-        cell.isSelected = [model isEqual:self.data.courses[self.data.courseChooseInteger]];
-    } else {
+    if ([self.contentsArray[indexPath.row] isKindOfClass:[GetBookInfoRequestItem_Unit class]]) {
         cell.isSelected = [model isEqual:self.data.units[self.data.unitChooseInteger]];
+    } else {
+        if (self.data.courseChooseInteger >= 0) {
+            cell.isSelected = [model isEqual:self.data.courses[self.data.courseChooseInteger]];
+        } else {
+            cell.isSelected = NO;
+        }
     }
     return cell;
 }
