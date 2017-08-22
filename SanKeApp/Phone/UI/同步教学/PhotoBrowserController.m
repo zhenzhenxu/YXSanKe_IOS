@@ -55,6 +55,7 @@ NSString * const kPhotoBrowserIndexKey = @"kPhotoBrowserIndexKey";
 - (void)setupUI {
     self.edgesForExtendedLayout = UIRectEdgeAll;
     self.automaticallyAdjustsScrollViewInsets = NO;
+    self.navigationController.navigationBar.backgroundColor = [UIColor whiteColor];
     
     self.slideView = [[QASlideView alloc] init];
     self.slideView.dataSource = self;
@@ -161,9 +162,7 @@ NSString * const kPhotoBrowserIndexKey = @"kPhotoBrowserIndexKey";
 
 - (QASlideItemBaseView *)slideView:(QASlideView *)slideView itemViewAtIndex:(NSInteger)index {
     SlideImageView *imageView = [[SlideImageView alloc] init];
-    [imageView.imageView setShowActivityIndicatorView:YES];
-    [imageView.imageView sd_setImageWithURL:[NSURL URLWithString:self.currentVolumDataArray[index].pageUrl]];
-    imageView.markView.mark = self.currentVolumDataArray[index].mark;
+    imageView.model = self.currentVolumDataArray[index];
     imageView.markView.markerBtnBlock = ^(UIButton *markBtn) {
         [self fetchMarkDetailWithMarkBtn:markBtn currentModel:self.currentVolumDataArray[index]];
     };

@@ -32,8 +32,7 @@
     [self addSubview:self.contentImageView];
     
     [self.contentImageView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.bottom.right.mas_equalTo(0);
-        make.top.mas_equalTo(0);
+        make.edges.mas_equalTo(0);
     }];
     
     UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(selectedAction)];
@@ -62,11 +61,6 @@
             self.contentImageView.contentMode = UIViewContentModeScaleToFill;
             self.contentImageView.image = image;
             self.markView.mark = model.mark;
-            WEAK_SELF
-            self.markView.markerBtnBlock = ^(UIButton *markBtn) {
-                STRONG_SELF
-                self.showMarkDetailBlock(markBtn);
-            };
             [self setNeedsLayout];
         }
     }];
@@ -74,34 +68,6 @@
 
 - (void)layoutSubviews {
     [super layoutSubviews];
-    [self setupLayout];
-}
-
-- (void)setupLayout {
-    // 等比例居中展示 后期需求可能会用 现版本平铺
-//    CGRect frame = self.contentImageView.frame;
-//    if (self.contentImageView.image) {
-//        UIImage *image = self.contentImageView.image;
-//        CGFloat width = image.size.width;
-//        CGFloat height = image.size.height;
-//        CGFloat maxHeight = self.bounds.size.height;
-//        CGFloat maxWidth = self.bounds.size.width;
-//        if(width > maxWidth || height > width){
-//            CGFloat ratio = height / width;
-//            CGFloat maxRatio = maxHeight / maxWidth;
-//            if(ratio < maxRatio){
-//                width = maxWidth;
-//                height = width*ratio;
-//            }else{
-//                height = maxHeight;
-//                width = height / ratio;
-//            }
-//        }
-//        self.contentImageView.frame = CGRectMake((maxWidth - width) / 2, (maxHeight - height) / 2, width, height);
-//    }else{
-//        frame.origin = CGPointZero;
-//        self.contentImageView.frame = frame;
-//    }
     self.markView.frame = self.contentImageView.bounds;
     [self.markView setNeedsDisplay];
 }

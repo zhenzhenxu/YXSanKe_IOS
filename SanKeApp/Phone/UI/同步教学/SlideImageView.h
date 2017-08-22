@@ -8,11 +8,13 @@
 
 #import "QASlideItemBaseView.h"
 #import "MarkView.h"
+#import "TeachingPageModel.h"
+
 
 @interface SlideImageView : QASlideItemBaseView
 
-@property (nonatomic, strong) UIImageView *imageView;
 @property (nonatomic, strong) UITapGestureRecognizer *doubleTap;
 @property (nonatomic, strong) MarkView *markView;
+@property (nonatomic, strong) TeachingPageModel *model;
 
 @end

@@ -77,9 +77,9 @@
     _textInfo = textInfo;
     
     NSDictionary *options = @{
-                              DTDefaultFontSize : @14.0f,
-                              DTDefaultTextColor : [UIColor colorWithHexString:@"333333"],
-                              DTDefaultLineHeightMultiplier : @2
+//                              DTDefaultFontSize : @14.0f,
+//                              DTDefaultTextColor : [UIColor colorWithHexString:@"333333"],
+//                              DTDefaultLineHeightMultiplier : @2
                               };
     NSData *data = [textInfo dataUsingEncoding:NSUTF8StringEncoding];
     NSAttributedString *attributedString = [[NSAttributedString alloc] initWithHTMLData:data options:options documentAttributes:NULL];

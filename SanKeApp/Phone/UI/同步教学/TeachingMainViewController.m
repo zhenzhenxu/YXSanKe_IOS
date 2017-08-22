@@ -377,7 +377,7 @@
         [self.navigationController pushViewController:pbController animated:NO];
     }];
     
-    cell.showMarkDetailBlock = ^(UIButton *markBtn) {
+    cell.markView.markerBtnBlock = ^(UIButton *markBtn) {
         STRONG_SELF
         [self fetchMarkDetailWithMarkBtn:markBtn currentModel:model];
     };

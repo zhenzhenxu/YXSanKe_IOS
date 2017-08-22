@@ -16,6 +16,7 @@
 @interface SlideImageView () <UIScrollViewDelegate>
 
 @property (nonatomic, strong) UIScrollView *scrollView;
+@property (nonatomic, strong) UIImageView *imageView;
 @property (nonatomic, strong) MenuSelectionView *menuSelectionView;
 
 @end
@@ -59,6 +60,7 @@
     imageView.userInteractionEnabled = YES;
     [scrollView addSubview:imageView];
     self.imageView = imageView;
+    [self.imageView setShowActivityIndicatorView:YES];
     
     self.doubleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleDoubleTap:)];
     [self.doubleTap setNumberOfTapsRequired:2];
@@ -69,6 +71,20 @@
     
     self.markView = [[MarkView alloc] init];
     [self.imageView addSubview:self.markView];
+}
+
+- (void)setModel:(TeachingPageModel *)model {
+    _model = model;
+    
+    [self.imageView sd_setImageWithURL:[NSURL URLWithString:model.pageUrl] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+        if (error) {
+            self.imageView.image = [UIImage imageNamed:@"图片加载失败"];
+        }else {
+            self.imageView.image = image;
+            self.markView.mark = model.mark;
+            [self setNeedsLayout];
+        }
+    }];
 }
 
 - (void)layoutSubviews {

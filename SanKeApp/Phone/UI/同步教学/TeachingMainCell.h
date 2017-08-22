@@ -7,8 +7,8 @@
 //
 
 #import "QASlideItemBaseView.h"
-#import "TeachingPageModel.h"
 #import "MarkView.h"
+#import "TeachingPageModel.h"
 
 
 typedef void(^SelectedButtonActionBlock)(void);
@@ -17,7 +17,6 @@ typedef void(^SelectedButtonActionBlock)(void);
 
 @property (nonatomic, strong) MarkView *markView;
 @property (nonatomic, strong) TeachingPageModel *model;
-@property (nonatomic, copy) void (^showMarkDetailBlock)(UIButton *markBtn);
 - (void)setSelectedButtonActionBlock:(SelectedButtonActionBlock)block;
 
 @end
