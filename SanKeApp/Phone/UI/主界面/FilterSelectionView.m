@@ -14,6 +14,9 @@
 
 static const NSInteger kNotSelectedTag = -1;
 
+@implementation FilterSelectedItem
+@end
+
 @interface FilterSelectionView()<UICollectionViewDataSource,UICollectionViewDelegate>
 @property (nonatomic, strong) UICollectionView *collectionView;
 @property (nonatomic, assign) NSInteger firstLevelSelectedIndex;
@@ -31,8 +34,8 @@ static const NSInteger kNotSelectedTag = -1;
 
 - (instancetype)initWithFrame:(CGRect)frame {
     if (self = [super initWithFrame:frame]) {
-        self.firstLevelSelectedIndex = kNotSelectedTag;
-        self.secondLevelSelectedIndex = kNotSelectedTag;
+        self.firstLevelSelectedIndex = 0;
+        self.secondLevelSelectedIndex = 0;
         self.thirdLevelSelectedIndex = kNotSelectedTag;
         self.forthLevelSelectedIndex = kNotSelectedTag;
         [self setupUI];
@@ -43,6 +46,14 @@ static const NSInteger kNotSelectedTag = -1;
 
 - (void)setupUI {
     self.backgroundColor = [UIColor whiteColor];
+    UIView *topLineView = [[UIView alloc] init];
+    topLineView.backgroundColor = [UIColor colorWithHexString:@"e6e6e6"];
+    [self addSubview:topLineView];
+    [topLineView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.top.right.mas_equalTo(0);
+        make.height.mas_equalTo(1);
+    }];
+    
     CollectionViewEqualSpaceFlowLayout *flowLayout = [[CollectionViewEqualSpaceFlowLayout alloc] init];
     flowLayout.scrollDirection = UICollectionViewScrollDirectionVertical;
     flowLayout.minimumInteritemSpacing = 10;
@@ -55,45 +66,60 @@ static const NSInteger kNotSelectedTag = -1;
     self.collectionView.delegate = self;
     self.collectionView.dataSource = self;
     self.collectionView.backgroundColor = [UIColor whiteColor];
-    self.collectionView.contentInset = UIEdgeInsetsMake(30, 0, 0, 0);
     [self.collectionView registerClass:[FilterCell class] forCellWithReuseIdentifier:@"FilterCell"];
     [self.collectionView registerClass:[FilterHeaderView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"FilterHeaderView"];
     [self addSubview:self.collectionView];
     [self.collectionView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.edges.mas_equalTo(UIEdgeInsetsMake(0, 0, 35, 0));
+        make.edges.mas_equalTo(UIEdgeInsetsMake(1, 0, 68, 0));
+    }];
+    
+    UIView *lineView = [[UIView alloc] init];
+    lineView.backgroundColor = [UIColor colorWithHexString:@"e6e6e6"];
+    [self addSubview:lineView];
+    [lineView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.right.mas_equalTo(0);
+        make.top.mas_equalTo(self.collectionView.mas_bottom);
+        make.height.mas_equalTo(1);
     }];
     
     UIButton *resetButton = [[UIButton alloc]init];
+    resetButton.layer.cornerRadius = 2;
+    resetButton.clipsToBounds = YES;
     resetButton.titleLabel.font = [UIFont systemFontOfSize:15.0];
-    [resetButton setBackgroundImage:[UIImage yx_imageWithColor:[[UIColor colorWithHexString:@"d65b4b"] colorWithAlphaComponent:0.2]] forState:UIControlStateNormal];
+    [resetButton setBackgroundImage:[UIImage yx_imageWithColor:[UIColor colorWithHexString:@"f3f3f3"]] forState:UIControlStateNormal];
     [resetButton setTitle:@"重置" forState:UIControlStateNormal];
-    [resetButton setTitleColor:[UIColor colorWithHexString:@"d65b4b"] forState:UIControlStateNormal];
+    [resetButton setTitleColor:[UIColor colorWithHexString:@"333333"] forState:UIControlStateNormal];
     [[resetButton rac_signalForControlEvents:UIControlEventTouchUpInside] subscribeNext:^(id x) {
         self.needReset = YES;
         [self resetAction];
     }];
     
     UIButton *doneButton = [[UIButton alloc]init];
+    doneButton.layer.cornerRadius = 2;
+    doneButton.clipsToBounds = YES;
     doneButton.titleLabel.font = [UIFont systemFontOfSize:15.0];
-    [doneButton setBackgroundImage:[UIImage yx_imageWithColor:[UIColor colorWithHexString:@"d65b4b"]] forState:UIControlStateNormal];
-    [doneButton setTitle:@"完成" forState:UIControlStateNormal];
+    [doneButton setBackgroundImage:[UIImage yx_imageWithColor:[UIColor colorWithHexString:@"4691a6"]] forState:UIControlStateNormal];
+    [doneButton setTitle:@"确认" forState:UIControlStateNormal];
     [doneButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [doneButton addTarget:self action:@selector(doneAction) forControlEvents:UIControlEventTouchUpInside];
     
     [self addSubview:resetButton];
     [self addSubview:doneButton];
     [resetButton mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.mas_equalTo(self.collectionView.mas_left);
-        make.top.mas_equalTo(self.collectionView.mas_bottom);
-        make.bottom.mas_equalTo(0);
+        make.centerX.mas_equalTo(self.mas_centerX).offset(-67.5f);
+        make.centerY.mas_equalTo(lineView.mas_bottom).offset(34.5f);
+        make.size.mas_equalTo(CGSizeMake(75, 29));
     }];
     [doneButton mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.mas_equalTo(resetButton.mas_right);
-        make.top.mas_equalTo(resetButton.mas_top);
-        make.right.mas_equalTo(self.collectionView.mas_right);
-        make.bottom.mas_equalTo(0);
-        make.width.mas_equalTo(resetButton.mas_width);
+        make.centerX.mas_equalTo(self.mas_centerX).offset(67.5f);
+        make.centerY.mas_equalTo(lineView.mas_bottom).offset(34.5f);
+        make.size.mas_equalTo(CGSizeMake(75, 29));
     }];
+}
+
+- (void)setHasCourseFilter:(BOOL)hasCourseFilter {
+    _hasCourseFilter = hasCourseFilter;
+    self.secondLevelSelectedIndex = hasCourseFilter ? kNotSelectedTag : 0;
 }
 
 #pragma mark -  Button Actions
@@ -102,10 +128,10 @@ static const NSInteger kNotSelectedTag = -1;
     self.tFirstLevelSelectedIndex = self.firstLevelSelectedIndex;
     self.tSecondLevelSelectedIndex = self.secondLevelSelectedIndex;
     self.tThirdLevelSelectedIndex = self.thirdLevelSelectedIndex;
-    self.tFirstLevelSelectedIndex = self.forthLevelSelectedIndex;
+    self.tForthLevelSelectedIndex = self.forthLevelSelectedIndex;
     
-    self.firstLevelSelectedIndex = kNotSelectedTag;
-    self.secondLevelSelectedIndex = kNotSelectedTag;
+    self.firstLevelSelectedIndex = 0;
+    self.secondLevelSelectedIndex = self.hasCourseFilter ? kNotSelectedTag : 0;
     self.thirdLevelSelectedIndex = kNotSelectedTag;
     self.forthLevelSelectedIndex = kNotSelectedTag;
     
@@ -116,7 +142,7 @@ static const NSInteger kNotSelectedTag = -1;
     self.firstLevelSelectedIndex = self.tFirstLevelSelectedIndex;
     self.secondLevelSelectedIndex = self.tSecondLevelSelectedIndex;
     self.tThirdLevelSelectedIndex = self.thirdLevelSelectedIndex;
-    self.forthLevelSelectedIndex = self.tFirstLevelSelectedIndex;
+    self.forthLevelSelectedIndex = self.tForthLevelSelectedIndex;
 }
 
 - (void)doneAction {
@@ -130,27 +156,33 @@ static const NSInteger kNotSelectedTag = -1;
     ChannelTabFilterRequestItem_filter *third = nil;
     ChannelTabFilterRequestItem_filter *forth = nil;
     if (self.secondLevelSelectedIndex != kNotSelectedTag) {
-        second = first.subFilters[self.secondLevelSelectedIndex];
-        if (self.thirdLevelSelectedIndex != kNotSelectedTag) {
-            third = second.subFilters[self.thirdLevelSelectedIndex];
-            if (self.forthLevelSelectedIndex != kNotSelectedTag) {
-                forth = third.subFilters[self.forthLevelSelectedIndex];
+        if (first.subFilters.count > 0) {
+            second = first.subFilters[self.secondLevelSelectedIndex];
+            if (self.thirdLevelSelectedIndex != kNotSelectedTag) {
+                if (second.subFilters.count > 0) {
+                    third = second.subFilters[self.thirdLevelSelectedIndex];
+                    if (self.forthLevelSelectedIndex != kNotSelectedTag) {
+                        if (third.subFilters.count > 0) {
+                            forth = third.subFilters[self.forthLevelSelectedIndex];
+                        }
+                    }
+                }
             }
         }
     }
     
-    YXProblemItem *item = [[YXProblemItem alloc]init];
-    item.edition_id = first.filterID;
-    item.volume_id = second.filterID;
-    item.unit_id = third.filterID;
-    item.course_id = forth.filterID;
-    BLOCK_EXEC(self.completeBlock,item);
+    FilterSelectedItem *selectedItem = [[FilterSelectedItem alloc] init];
+    selectedItem.volume = first;
+    selectedItem.unit = second;
+    selectedItem.course = third;
+    
+    BLOCK_EXEC(self.completeBlock, selectedItem);
     
     YXProblemItem *recordItem = [[YXProblemItem alloc]init];
-    recordItem.edition_id = first.filterID ? first.filterID : [NSString string];
-    recordItem.volume_id = second.filterID ? second.filterID : [NSString string];
-    recordItem.unit_id = third.filterID ? third.filterID : [NSString string];
-    recordItem.course_id = forth.filterID ? forth.filterID : [NSString string];
+    recordItem.edition_id = @"720175";
+    recordItem.volume_id = first.filterID ? first.filterID : [NSString string];
+    recordItem.unit_id = second.filterID ? second.filterID : [NSString string];
+    recordItem.course_id = third.filterID ? third.filterID : [NSString string];
     recordItem.grade = [UserManager sharedInstance].userModel.stageID;
     recordItem.subject = [UserManager sharedInstance].userModel.subjectID;
     recordItem.section_id = self.sectionId;
@@ -171,11 +203,17 @@ static const NSInteger kNotSelectedTag = -1;
         }
         return 1;
     }
+    if (first.subFilters.count < 1) {
+        return 1;
+    }
     ChannelTabFilterRequestItem_filter *second = first.subFilters[self.secondLevelSelectedIndex];
     if (self.thirdLevelSelectedIndex == kNotSelectedTag) {
         if (second.subFilters.count > 0) {
             return 3;
         }
+        return 2;
+    }
+    if (second.subFilters.count < 1) {
         return 2;
     }
     ChannelTabFilterRequestItem_filter *third = second.subFilters[self.thirdLevelSelectedIndex];
@@ -221,7 +259,7 @@ static const NSInteger kNotSelectedTag = -1;
         STRONG_SELF
         if (indexPath.section == 0) {
             self.firstLevelSelectedIndex = indexPath.row;
-            self.secondLevelSelectedIndex = kNotSelectedTag;
+            self.secondLevelSelectedIndex = self.hasCourseFilter ? kNotSelectedTag : 0;
             self.thirdLevelSelectedIndex = kNotSelectedTag;
             [self.collectionView reloadData];
         }else {
@@ -251,16 +289,16 @@ static const NSInteger kNotSelectedTag = -1;
         FilterHeaderView *headerView = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"FilterHeaderView" forIndexPath:indexPath];
         if (indexPath.section == 0) {
             headerView.seperatorHidden = YES;
-            headerView.title = self.data.category.name;
+            headerView.title = self.data.category.subCategory.name;
         }else if (indexPath.section == 1){
             headerView.seperatorHidden = NO;
-            headerView.title = self.data.category.subCategory.name;
+            headerView.title = self.data.category.subCategory.subCategory.name;
         }else if (indexPath.section == 2){
             headerView.seperatorHidden = NO;
-            headerView.title = self.data.category.subCategory.subCategory.name;
+            headerView.title = self.data.category.subCategory.subCategory.subCategory.name;
         }else {
             headerView.seperatorHidden = NO;
-            headerView.title = self.data.category.subCategory.subCategory.subCategory.name;
+            headerView.title = self.data.category.subCategory.subCategory.subCategory.subCategory.name;
         }
         return headerView;
     }

@@ -18,7 +18,7 @@
 
 @interface ChannelTabFilterRequestItem_category : JSONModel
 //@property (nonatomic, strong) NSString *categoryID;
-@property (nonatomic, strong) NSString *name;
+@property (nonatomic, strong) NSString<Optional> *name;
 @property (nonatomic, strong) ChannelTabFilterRequestItem_category<Optional> *subCategory;
 @end
 
@@ -33,4 +33,5 @@
 
 @interface ChannelTabFilterRequest : YXGetRequest
 @property (nonatomic, strong) NSString *catid;
+@property (nonatomic, strong) NSString *code;
 @end

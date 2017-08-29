@@ -10,6 +10,7 @@
 @protocol ChannelTabRequestItem_Data_Category
 @end
 @interface ChannelTabRequestItem_Data_Category : JSONModel
+@property (nonatomic, strong) NSString *moduleId;
 @property (nonatomic, strong) NSString *cateName;
 @property (nonatomic, strong) NSString *catId;
 @end

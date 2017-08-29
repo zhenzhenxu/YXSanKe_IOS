@@ -8,6 +8,9 @@
 
 #import "ChannelTabRequest.h"
 @implementation ChannelTabRequestItem_Data_Category
++ (JSONKeyMapper *)keyMapper {
+    return [[JSONKeyMapper alloc] initWithDictionary:@{@"id" : @"moduleId"}];
+}
 @end
 @implementation ChannelTabRequestItem_Data
 @end

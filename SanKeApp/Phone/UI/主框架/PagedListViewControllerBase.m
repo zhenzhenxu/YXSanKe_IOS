@@ -9,9 +9,7 @@
 #import "PagedListViewControllerBase.h"
 #import "MJRefresh.h"
 
-@interface PagedListViewControllerBase ()  {
-    NSInteger _total;
-    
+@interface PagedListViewControllerBase ()  {    
     MJRefreshFooterView *_footer;
     MJRefreshHeaderView *_header;
 }

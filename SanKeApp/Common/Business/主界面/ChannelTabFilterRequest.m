@@ -24,18 +24,12 @@
 }
 @end
 @implementation ChannelTabFilterRequestItem
-
-@end
-
-@interface ChannelTabFilterRequest()
-@property (nonatomic, strong) NSString *code;
 @end
 
 @implementation ChannelTabFilterRequest
 - (instancetype)init {
     if (self = [super init]) {
         self.urlHead = [[SKConfigManager sharedInstance].server stringByAppendingString:@"app/sanke/cascade"];
-        self.code = @"version_grade_unit";
     }
     return self;
 }

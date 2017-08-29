@@ -10,7 +10,6 @@
 
 @interface FilterCell()
 @property (nonatomic, strong) UIButton *itemButton;
-@property (nonatomic, strong) UILabel *titleLabel;
 @end
 
 @implementation FilterCell
@@ -24,24 +23,22 @@
 
 - (void)setupUI{
     self.itemButton = [[UIButton alloc]init];
-    UIImage *normalImage = [UIImage yx_imageWithColor:[UIColor colorWithHexString:@"e6e6e6"]];
-    UIImage *selectedImage = [UIImage yx_imageWithColor:[[UIColor colorWithHexString:@"d65b4b"] colorWithAlphaComponent:0.2]];
+    UIImage *normalImage = [UIImage yx_imageWithColor:[UIColor colorWithHexString:@"f3f3f3"]];
+    UIImage *selectedImage = [UIImage yx_imageWithColor:[UIColor colorWithHexString:@"4691a6"]];
     [self.itemButton setBackgroundImage:normalImage forState:UIControlStateNormal];
     [self.itemButton setBackgroundImage:selectedImage forState:UIControlStateSelected];
-    self.itemButton.layer.cornerRadius = 3;
+    [self.itemButton setTitleColor:[UIColor colorWithHexString:@"333333"] forState:UIControlStateNormal];
+    [self.itemButton setTitleColor:[UIColor colorWithHexString:@"ffffff"] forState:UIControlStateSelected];
+    self.itemButton.titleLabel.font = [UIFont systemFontOfSize:12.0f];
+    self.itemButton.titleLabel.numberOfLines = 0;
+    self.itemButton.layer.cornerRadius = 2;
     self.itemButton.clipsToBounds = YES;
     [self.itemButton addTarget:self action:@selector(btnAction:) forControlEvents:UIControlEventTouchUpInside];
     [self.contentView addSubview:self.itemButton];
     [self.itemButton mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.mas_equalTo(0);
     }];
-    
-    self.titleLabel = [[UILabel alloc] init];
-    self.titleLabel.font = [UIFont systemFontOfSize:12];
-    self.titleLabel.numberOfLines = 0;
-    self.titleLabel.textColor = [UIColor colorWithHexString:@"333333"];
-    [self.itemButton addSubview:self.titleLabel];
-    [self.titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+    [self.itemButton.titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.mas_equalTo(UIEdgeInsetsMake(9, 15, 9, 15));
     }];
 }
@@ -55,7 +52,7 @@
 
 - (void)setTitle:(NSString *)title {
     _title = title;
-    self.titleLabel.text = title;
+    [self.itemButton setTitle:title forState:UIControlStateNormal];
 }
 
 - (void)setIsCurrent:(BOOL)isCurrent {

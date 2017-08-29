@@ -11,12 +11,11 @@
 #import "YXRecordManager.h"
 #import "YXProblemItem.h"
 
-#define kScreenHeight [UIScreen mainScreen].bounds.size.height
-#define kScreenWidth   [UIScreen mainScreen].bounds.size.width
 static const NSUInteger kTagBase = 10086;
-static const CGFloat margin = 10;
+static const CGFloat margin = 0;
 @interface ProjectContainerView ()<UIScrollViewDelegate>
-@property (nonatomic, strong) UIScrollView *topScrollView;
+@property (nonatomic, strong) UIView *topSegmentView;
+@property (nonatomic, strong) UIView *lineView;
 @property (nonatomic, strong) UIScrollView *bottomScrollView;
 @end
 
@@ -34,12 +33,11 @@ static const CGFloat margin = 10;
     topLineView.backgroundColor = [UIColor colorWithHexString:@"e6e6e6"];
     [self addSubview:topLineView];
     CGFloat y = CGRectGetMaxY(topLineView.frame);
-    self.topScrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(0, y, kScreenWidth, 44)];
-    self.topScrollView.backgroundColor = [UIColor whiteColor];
-    self.topScrollView.showsHorizontalScrollIndicator = NO;
-    self.topScrollView.showsVerticalScrollIndicator = NO;
-    [self addSubview:self.topScrollView];
-    self.bottomScrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(0, self.topScrollView.frame.origin.y+self.topScrollView.frame.size.height, self.frame.size.width, self.frame.size.height-self.topScrollView.frame.size.height)];
+    self.topSegmentView = [[UIView alloc]initWithFrame:CGRectMake(0, y, kScreenWidth, 44)];
+    self.topSegmentView.backgroundColor = [UIColor whiteColor];
+    [self addSubview:self.topSegmentView];
+    
+    self.bottomScrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(0, CGRectGetMaxY(self.topSegmentView.frame), self.frame.size.width, self.frame.size.height-CGRectGetMaxY(self.topSegmentView.frame))];
     self.bottomScrollView.autoresizingMask = UIViewAutoresizingFlexibleHeight;
     self.bottomScrollView.pagingEnabled = YES;
     self.bottomScrollView.showsHorizontalScrollIndicator = NO;
@@ -51,7 +49,7 @@ static const CGFloat margin = 10;
 }
 
 - (void)setChildViewControllers:(NSArray<__kindof CourseViewController *> *)childViewControllers {
-    for (UIView *v in self.topScrollView.subviews) {
+    for (UIView *v in self.topSegmentView.subviews) {
         [v removeFromSuperview];
     }
     for (UIView *v in self.bottomScrollView.subviews) {
@@ -64,30 +62,28 @@ static const CGFloat margin = 10;
     [_childViewControllers enumerateObjectsUsingBlock:^(CourseViewController *obj, NSUInteger idx, BOOL * _Nonnull stop) {
         UIButton *b = [self buttonWithTitle:obj.videoItem.name];
         [b sizeToFit];
-        CGFloat btnWidth = b.width;
-        b.frame = CGRectMake(x, 0, btnWidth, self.topScrollView.frame.size.height);
+        CGFloat btnWidth = (kScreenWidth - 2) / 3.0f;
+        b.frame = CGRectMake(x, 0, btnWidth, self.topSegmentView.frame.size.height);
         x = CGRectGetMaxX(b.frame) + margin;
         b.tag = kTagBase + idx;
-        [self.topScrollView addSubview:b];
+        [self.topSegmentView addSubview:b];
         if (idx == 0) {
             obj.view.frame = CGRectMake(self.bottomScrollView.frame.size.width*idx, 0, self.bottomScrollView.frame.size.width, self.bottomScrollView.frame.size.height);
             obj.view.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
             [self.bottomScrollView addSubview:obj.view];
             self.bottomScrollView.contentOffset = CGPointMake(0, 0);
-            self.topScrollView.contentOffset = CGPointMake(0, 0);
             b.selected = YES;
             self.chooseViewController = obj;
         }
         if (idx < _childViewControllers.count - 1) {
             CGFloat lineHeight = 9.0f;  CGFloat lineWidth = 1.0f;
-            CGFloat y = (self.topScrollView.bounds.size.height - lineHeight) / 2.0f;
+            CGFloat y = (self.topSegmentView.bounds.size.height - lineHeight) / 2.0f;
             UIView *line = [[UIView alloc]initWithFrame:CGRectMake(CGRectGetMaxX(b.frame) + margin -lineWidth, y, lineWidth, lineHeight)];
             line.backgroundColor = [UIColor colorWithHexString:@"e6e6e6"];
             x = CGRectGetMaxX(line.frame) + margin;
-            [self.topScrollView addSubview:line];
+            [self.topSegmentView addSubview:line];
         }
     }];
-    self.topScrollView.contentSize = CGSizeMake( x, 44);
     self.bottomScrollView.contentSize = CGSizeMake(self.bottomScrollView.frame.size.width*self.childViewControllers.count, self.bottomScrollView.frame.size.height);
 }
 - (UIButton *)buttonWithTitle:(NSString *)title {
@@ -95,7 +91,7 @@ static const CGFloat margin = 10;
     [b setTitle:title forState:UIControlStateNormal];
     [b setTitleColor:[UIColor colorWithHexString:@"333333"] forState:UIControlStateNormal];
     [b setTitleColor:[UIColor colorWithHexString:@"4691a6"] forState:UIControlStateSelected];
-    b.titleLabel.font = [UIFont systemFontOfSize:13.0f];
+    b.titleLabel.font = [UIFont boldSystemFontOfSize:13.0f];
     [b addTarget:self action:@selector(chooseButtonAction:) forControlEvents:UIControlEventTouchUpInside];
     return b;
 }
@@ -105,7 +101,7 @@ static const CGFloat margin = 10;
     if (sender.selected) {
         BLOCK_EXEC(self.ClickTabButtonBlock);
     }
-    for (UIButton *b in self.topScrollView.subviews) {
+    for (UIButton *b in self.topSegmentView.subviews) {
         if ([b isKindOfClass:[UIButton class]]) {
             b.selected = NO;
         }
@@ -115,10 +111,9 @@ static const CGFloat margin = 10;
     NSInteger index = sender.tag - kTagBase;
     self.bottomScrollView.contentOffset = CGPointMake(self.bottomScrollView.frame.size.width*index, 0);
     self.chooseViewController = self.childViewControllers[index];
-    self.chooseViewController.projectNavRightView.leftButton.hidden = [self.chooseViewController.videoItem.catID isEqualToString:@"0"];
     
     [self recordUp];
-    [self scrollTitleWithIndex:index];
+    [self changeSelectedTitleWithIndex:index];
     
     if (self.chooseViewController.view.superview)
         return;
@@ -139,49 +134,28 @@ static const CGFloat margin = 10;
     [YXRecordManager addRecord:item];
 }
 
-- (void)scrollTitleWithIndex:(NSInteger)index{
-    CGFloat offsetx = 0.0f;
-    for (UIButton *b in self.topScrollView.subviews) {
+- (void)changeSelectedTitleWithIndex:(NSInteger)index{
+    for (UIButton *b in self.topSegmentView.subviews) {
         if ([b isKindOfClass:[UIButton class]]) {
             b.selected = NO;
             if (b.tag-kTagBase == index) {
                 b.selected = YES;
-                offsetx = b.center.x - self.topScrollView.frame.size.width * 0.5;
             }
         }
     }
-    if ((self.topScrollView.contentSize.width - kScreenWidth) >= margin * 2 * self.childViewControllers.count) {
-        CGFloat offsetMax = self.topScrollView.contentSize.width - self.topScrollView.frame.size.width;
-        if (offsetx < 0) {
-            offsetx = 0;
-        }else if (offsetx > offsetMax){
-            offsetx = offsetMax;
-        }
-        CGPoint offset = CGPointMake(offsetx, self.topScrollView.contentOffset.y);
-        [self.topScrollView setContentOffset:offset animated:YES];
-    }
 }
 
-//- (void)layoutSubviews{
-//    self.bottomScrollView.contentSize = CGSizeMake(self.bottomScrollView.frame.size.width*self.childViewControllers.count, self.bottomScrollView.frame.size.height);
-//    self.topScrollView.contentSize = CGSizeMake( kScreenWidth / 4.0f * self.childViewControllers.count, 44);
-//}
 #pragma mark - UIScrollViewDelegate
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView{
     NSInteger index = scrollView.contentOffset.x/scrollView.frame.size.width;
-    [self scrollTitleWithIndex:index];
+    [self changeSelectedTitleWithIndex:index];
     
     self.chooseViewController = self.childViewControllers[index];
-    self.chooseViewController.projectNavRightView.leftButton.hidden = [self.chooseViewController.videoItem.catID isEqualToString:@"0"];
     [self recordUp];
     if (self.chooseViewController.view.superview) return;
     self.chooseViewController.view.frame = CGRectMake(self.bottomScrollView.frame.size.width*index, 0, self.bottomScrollView.frame.size.width, self.bottomScrollView.frame.size.height);
     self.chooseViewController.view.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
     [self.bottomScrollView addSubview:self.chooseViewController.view];
-    
 }
-
-
-
 
 @end

@@ -7,20 +7,14 @@
 //
 
 #import "ProjectMainViewController.h"
-#import "YXDrawerController.h"
 #import "PlayRecordViewController.h"
 #import "ProjectContainerView.h"
 #import "CourseViewController.h"
-#import "ProjectNavRightView.h"
-#import "FilterSelectionView.h"
 #import "ChannelTabRequest.h"
-#import "ChannelTabFilterRequest.h"
 
 @interface ProjectMainViewController ()
 @property (nonatomic, strong) ChannelTabRequest *tabRequest;
 @property (nonatomic, strong) ProjectContainerView *containerView;
-@property (nonatomic, strong) ChannelTabFilterRequest *selectionrequest;
-@property (nonatomic, strong) ProjectNavRightView *projectNavRightView;
 @end
 
 @implementation ProjectMainViewController
@@ -33,7 +27,7 @@
     // Do any additional setup after loading the view.
    
     [self setupUI];
-    [self setupRightNavView];
+    [self setupRightWithImageNamed:@"历史记录-2" highlightImageNamed:nil];
     [self requestForChannelTab];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(requestForChannelTab) name:kStageSubjectDidChangeNotification object:nil];
 }
@@ -41,6 +35,11 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)naviRightAction {
+    PlayRecordViewController *vc = [[PlayRecordViewController alloc]init];
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 #pragma mark - setupUI
@@ -60,22 +59,6 @@
     self.dataErrorView = [[DataErrorView alloc]init];
 }
 
-- (void)setupRightNavView {
-    ProjectNavRightView *rightView = [[ProjectNavRightView alloc] init];
-    self.projectNavRightView = rightView;
-    WEAK_SELF
-    [rightView setProjectNavButtonLeftBlock:^{
-        STRONG_SELF
-        self.containerView.chooseViewController.projectNavRightView.leftButton.enabled = NO;
-        [self.containerView.chooseViewController showFilterSelectionView];
-    }];
-    [rightView setProjectNavButtonRightBlock:^{
-        STRONG_SELF;
-        PlayRecordViewController *vc = [[PlayRecordViewController alloc]init];
-        [self.navigationController pushViewController:vc animated:YES];
-    }];
-    [self setupRightWithCustomView:rightView];
-}
 - (void)showContainerView:(NSArray *)categorys {
     self.containerView.hidden = NO;
     for (CourseViewController *vc in self.childViewControllers) {
@@ -85,10 +68,17 @@
         CourseVideoItem *item = [[CourseVideoItem alloc] init];
         item.name = [NSString stringWithFormat:@"%@",cat.cateName];
         item.catID = cat.catId;
+        item.moduleId = cat.moduleId;
         item.fromType = 1;
+        if ([cat.cateName isEqualToString:@"教材新在哪里"]) {
+            item.code = @"xznl_tab";
+        } else if ([cat.cateName isEqualToString:@"关键点位引领"]) {
+            item.code = @"gjdw_tab";
+        } else if ([cat.cateName isEqualToString:@"课例研磨示例"]) {
+            item.code = @"klym_tab";
+        }
         CourseViewController *vc = [[CourseViewController alloc] init];
         vc.videoItem = item;
-        vc.projectNavRightView = self.projectNavRightView;
         [self addChildViewController:vc];
     }
     WEAK_SELF
@@ -97,9 +87,6 @@
         [self.containerView.chooseViewController firstPageFetch];
     }];
     self.containerView.childViewControllers = self.childViewControllers;
-    CourseViewController *vc = self.containerView.childViewControllers.firstObject;
-    vc.projectNavRightView.leftButton.hidden = YES;
-
 }
 
 #pragma mark - request

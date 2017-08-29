@@ -9,7 +9,9 @@
 #import "BaseViewController.h"
 #import "PagedListFetcherBase.h"
 
-@interface PagedListViewControllerBase : BaseViewController<UITableViewDataSource, UITableViewDelegate>
+@interface PagedListViewControllerBase : BaseViewController<UITableViewDataSource, UITableViewDelegate> {
+    NSInteger _total;
+}
 @property (nonatomic, strong) UIView *contentView;
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, assign) BOOL bIsGroupedTableViewStyle;    // currently trick
@@ -21,6 +23,7 @@
 @property (nonatomic, strong) PagedListFetcherBase *dataFetcher;
 - (void)firstPageFetch;
 - (void)morePageFetch;
+- (void)checkHasMore;
 - (void)stopAnimation;
 - (void)setPulldownViewHidden:(BOOL)hidden;
 - (void)setPullupViewHidden:(BOOL)hidden;

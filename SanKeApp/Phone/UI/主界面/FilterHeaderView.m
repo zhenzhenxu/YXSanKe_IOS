@@ -31,12 +31,12 @@
     }];
     
     self.titleLabel = [[UILabel alloc]init];
-    self.titleLabel.font = [UIFont systemFontOfSize:12];
+    self.titleLabel.font = [UIFont boldSystemFontOfSize:11];
     self.titleLabel.textColor = [UIColor colorWithHexString:@"333333"];
     [self addSubview:self.titleLabel];
     [self.titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.mas_equalTo(10);
-        make.bottom.mas_equalTo(0);
+        make.left.mas_equalTo(17);
+        make.top.mas_equalTo(self.seperatorView.mas_bottom).offset(11);
     }];
 }
 
