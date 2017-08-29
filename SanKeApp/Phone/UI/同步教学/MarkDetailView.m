@@ -75,14 +75,9 @@
 #pragma mark - setters
 - (void)setTextInfo:(NSString *)textInfo {
     _textInfo = textInfo;
-    
-    NSDictionary *options = @{
-//                              DTDefaultFontSize : @14.0f,
-//                              DTDefaultTextColor : [UIColor colorWithHexString:@"333333"],
-//                              DTDefaultLineHeightMultiplier : @2
-                              };
+
     NSData *data = [textInfo dataUsingEncoding:NSUTF8StringEncoding];
-    NSAttributedString *attributedString = [[NSAttributedString alloc] initWithHTMLData:data options:options documentAttributes:NULL];
+    NSAttributedString *attributedString = [[NSAttributedString alloc] initWithHTMLData:data options:nil documentAttributes:NULL];
     DTCoreTextLayouter *layouter = [[DTCoreTextLayouter alloc] initWithAttributedString:attributedString];
     NSRange entireString = NSMakeRange(0, [attributedString length]);
     self.attributedTextContentView.attributedString = attributedString;

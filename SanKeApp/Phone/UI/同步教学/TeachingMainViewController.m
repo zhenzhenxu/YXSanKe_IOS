@@ -51,6 +51,13 @@
     [self setupObserver];
 }
 
+- (void)viewDidDisappear:(BOOL)animated {
+    [super viewDidDisappear:animated];
+    if (self.mutiTabView.expandBtn.selected) {
+        [self.mutiTabView expandBtnAction];
+    }
+}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

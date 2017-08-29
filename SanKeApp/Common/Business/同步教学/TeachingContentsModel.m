@@ -30,10 +30,7 @@
 }
 
 - (NSArray<GetBookInfoRequestItem_Course *> *)courses {
-    GetBookInfoRequestItem_Course *course = [[GetBookInfoRequestItem_Course alloc]init];
-    course.name = @"全部";
-    NSMutableArray *array = [[NSMutableArray alloc]initWithArray:self.units[self.unitChooseInteger].courses];
-    [array insertObject:course atIndex:0];
-    return array.copy;
+    return self.units[self.unitChooseInteger].courses;
 }
+
 @end

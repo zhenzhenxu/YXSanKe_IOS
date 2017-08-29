@@ -16,7 +16,6 @@ static const CGFloat margin = 12;
 @property (nonatomic, copy) ClickTabButtonBlock buttonActionBlock;
 @property (nonatomic, strong) UIButton *blackView;
 @property (nonatomic, strong) UIButton *lastLabelBtn;
-@property (nonatomic, strong) UIButton *expandBtn;
 @end
 
 

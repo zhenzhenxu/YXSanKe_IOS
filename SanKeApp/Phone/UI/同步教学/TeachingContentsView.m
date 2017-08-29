@@ -85,6 +85,7 @@
     tableViewHeaderView.frame = CGRectMake(0, 0, kContainerWidth, CGRectGetMaxY(contentsLabel.frame) + 15);
     
     self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, kContainerWidth, kScreenHeight) style:UITableViewStylePlain];
+    self.tableView.showsVerticalScrollIndicator = NO;
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
     self.tableView.tableHeaderView = tableViewHeaderView;
