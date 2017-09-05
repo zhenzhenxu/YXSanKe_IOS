@@ -34,8 +34,13 @@
 }
 
 - (void)viewDidLoad {
-    [self requestSelection];
     [super viewDidLoad];
+    WEAK_SELF
+    [self.errorView setRetryBlock:^{
+        STRONG_SELF
+        [self requestSelection];
+    }];
+    [self requestSelection];
     [self setupUI];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refresh:) name:kRecordReportSuccessNotification object:nil];
     
@@ -185,6 +190,7 @@
             }];
             [view layoutIfNeeded];
         } completion:^(BOOL finished) {
+            [selectionView cancelReset];
             [view removeFromSuperview];
         }];
     }];
@@ -239,8 +245,10 @@
     WEAK_SELF
     [self.selectionRequest startRequestWithRetClass:[ChannelTabFilterRequestItem class] andCompleteBlock:^(id retItem, NSError *error, BOOL isMock) {
         STRONG_SELF
-        if (error) {
-            [self showToast:error.localizedDescription];
+        UnhandledRequestData *data = [[UnhandledRequestData alloc] init];
+        data.requestDataExist = !isEmpty(retItem);
+        data.error = error;
+        if ([self handleRequestData:data inView:self.contentView]) {
             return;
         }
         ChannelTabFilterRequestItem *item = retItem;

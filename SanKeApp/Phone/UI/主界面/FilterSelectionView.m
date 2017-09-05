@@ -27,7 +27,6 @@ static const NSInteger kNotSelectedTag = -1;
 @property (nonatomic, assign) NSInteger tSecondLevelSelectedIndex;
 @property (nonatomic, assign) NSInteger tThirdLevelSelectedIndex;
 @property (nonatomic, assign) NSInteger tForthLevelSelectedIndex;
-@property (nonatomic, assign) BOOL needReset;
 @end
 
 @implementation FilterSelectionView
@@ -35,11 +34,13 @@ static const NSInteger kNotSelectedTag = -1;
 - (instancetype)initWithFrame:(CGRect)frame {
     if (self = [super initWithFrame:frame]) {
         self.firstLevelSelectedIndex = 0;
-        self.secondLevelSelectedIndex = 0;
         self.thirdLevelSelectedIndex = kNotSelectedTag;
         self.forthLevelSelectedIndex = kNotSelectedTag;
+        
+        self.tFirstLevelSelectedIndex = self.firstLevelSelectedIndex;
+        self.tThirdLevelSelectedIndex = self.thirdLevelSelectedIndex;
+        self.tForthLevelSelectedIndex = self.forthLevelSelectedIndex;
         [self setupUI];
-        self.needReset = NO;
     }
     return self;
 }
@@ -90,7 +91,6 @@ static const NSInteger kNotSelectedTag = -1;
     [resetButton setTitle:@"重置" forState:UIControlStateNormal];
     [resetButton setTitleColor:[UIColor colorWithHexString:@"333333"] forState:UIControlStateNormal];
     [[resetButton rac_signalForControlEvents:UIControlEventTouchUpInside] subscribeNext:^(id x) {
-        self.needReset = YES;
         [self resetAction];
     }];
     
@@ -120,32 +120,34 @@ static const NSInteger kNotSelectedTag = -1;
 - (void)setHasCourseFilter:(BOOL)hasCourseFilter {
     _hasCourseFilter = hasCourseFilter;
     self.secondLevelSelectedIndex = hasCourseFilter ? kNotSelectedTag : 0;
+    self.tSecondLevelSelectedIndex = self.secondLevelSelectedIndex;
 }
 
 #pragma mark -  Button Actions
 - (void)resetAction {
+    self.tFirstLevelSelectedIndex = 0;
+    self.tSecondLevelSelectedIndex = self.hasCourseFilter ? kNotSelectedTag : 0;
+    self.tThirdLevelSelectedIndex = kNotSelectedTag;
+    self.tForthLevelSelectedIndex = kNotSelectedTag;
     
+    [self.collectionView reloadData];
+}
+
+- (void)cancelReset {
     self.tFirstLevelSelectedIndex = self.firstLevelSelectedIndex;
     self.tSecondLevelSelectedIndex = self.secondLevelSelectedIndex;
     self.tThirdLevelSelectedIndex = self.thirdLevelSelectedIndex;
     self.tForthLevelSelectedIndex = self.forthLevelSelectedIndex;
     
-    self.firstLevelSelectedIndex = 0;
-    self.secondLevelSelectedIndex = self.hasCourseFilter ? kNotSelectedTag : 0;
-    self.thirdLevelSelectedIndex = kNotSelectedTag;
-    self.forthLevelSelectedIndex = kNotSelectedTag;
-    
     [self.collectionView reloadData];
 }
 
-- (void)cancelReset{
+- (void)doneAction {
     self.firstLevelSelectedIndex = self.tFirstLevelSelectedIndex;
     self.secondLevelSelectedIndex = self.tSecondLevelSelectedIndex;
-    self.tThirdLevelSelectedIndex = self.thirdLevelSelectedIndex;
+    self.thirdLevelSelectedIndex = self.tThirdLevelSelectedIndex;
     self.forthLevelSelectedIndex = self.tForthLevelSelectedIndex;
-}
 
-- (void)doneAction {
     ChannelTabFilterRequestItem_filter *first;
     if (self.firstLevelSelectedIndex == kNotSelectedTag) {
         first = nil;
@@ -193,11 +195,11 @@ static const NSInteger kNotSelectedTag = -1;
 
 #pragma mark - UICollectionViewDataSource
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView{
-    if (self.firstLevelSelectedIndex == kNotSelectedTag) {
+    if (self.tFirstLevelSelectedIndex == kNotSelectedTag) {
         return 1;
     }
-    ChannelTabFilterRequestItem_filter *first = self.data.filters[self.firstLevelSelectedIndex];
-    if (self.secondLevelSelectedIndex == kNotSelectedTag) {
+    ChannelTabFilterRequestItem_filter *first = self.data.filters[self.tFirstLevelSelectedIndex];
+    if (self.tSecondLevelSelectedIndex == kNotSelectedTag) {
         if (first.subFilters.count > 0) {
             return 2;
         }
@@ -206,8 +208,8 @@ static const NSInteger kNotSelectedTag = -1;
     if (first.subFilters.count < 1) {
         return 1;
     }
-    ChannelTabFilterRequestItem_filter *second = first.subFilters[self.secondLevelSelectedIndex];
-    if (self.thirdLevelSelectedIndex == kNotSelectedTag) {
+    ChannelTabFilterRequestItem_filter *second = first.subFilters[self.tSecondLevelSelectedIndex];
+    if (self.tThirdLevelSelectedIndex == kNotSelectedTag) {
         if (second.subFilters.count > 0) {
             return 3;
         }
@@ -216,7 +218,7 @@ static const NSInteger kNotSelectedTag = -1;
     if (second.subFilters.count < 1) {
         return 2;
     }
-    ChannelTabFilterRequestItem_filter *third = second.subFilters[self.thirdLevelSelectedIndex];
+    ChannelTabFilterRequestItem_filter *third = second.subFilters[self.tThirdLevelSelectedIndex];
     if (third.subFilters.count > 0) {
         return 4;
     }
@@ -227,15 +229,15 @@ static const NSInteger kNotSelectedTag = -1;
     if (section == 0) {
         return self.data.filters.count;
     }
-    ChannelTabFilterRequestItem_filter *firstItem = self.data.filters[self.firstLevelSelectedIndex];
+    ChannelTabFilterRequestItem_filter *firstItem = self.data.filters[self.tFirstLevelSelectedIndex];
     if (section == 1) {
         return firstItem.subFilters.count;
     }
-    ChannelTabFilterRequestItem_filter *secondItem = firstItem.subFilters[self.secondLevelSelectedIndex];
+    ChannelTabFilterRequestItem_filter *secondItem = firstItem.subFilters[self.tSecondLevelSelectedIndex];
     if (section == 2) {
         return secondItem.subFilters.count;
     }
-    ChannelTabFilterRequestItem_filter *thirdItem = secondItem.subFilters[self.thirdLevelSelectedIndex];
+    ChannelTabFilterRequestItem_filter *thirdItem = secondItem.subFilters[self.tThirdLevelSelectedIndex];
     return thirdItem.subFilters.count;
     
 }
@@ -246,33 +248,33 @@ static const NSInteger kNotSelectedTag = -1;
     ChannelTabFilterRequestItem_filter *item = [self itemForIndexPath:indexPath];
     cell.title = item.name;
     if (indexPath.section == 0) {
-        cell.isCurrent = indexPath.row==self.firstLevelSelectedIndex;
+        cell.isCurrent = indexPath.row==self.tFirstLevelSelectedIndex;
     }else if (indexPath.section == 1){
-        cell.isCurrent = indexPath.row==self.secondLevelSelectedIndex;
+        cell.isCurrent = indexPath.row==self.tSecondLevelSelectedIndex;
     }else if (indexPath.section == 2){
-        cell.isCurrent = indexPath.row==self.thirdLevelSelectedIndex;
+        cell.isCurrent = indexPath.row==self.tThirdLevelSelectedIndex;
     }else {
-        cell.isCurrent = indexPath.row==self.forthLevelSelectedIndex;
+        cell.isCurrent = indexPath.row==self.tForthLevelSelectedIndex;
     }
     WEAK_SELF
     [cell setActionBlock:^{
         STRONG_SELF
         if (indexPath.section == 0) {
-            self.firstLevelSelectedIndex = indexPath.row;
-            self.secondLevelSelectedIndex = self.hasCourseFilter ? kNotSelectedTag : 0;
-            self.thirdLevelSelectedIndex = kNotSelectedTag;
+            self.tFirstLevelSelectedIndex = indexPath.row;
+            self.tSecondLevelSelectedIndex = self.hasCourseFilter ? kNotSelectedTag : 0;
+            self.tThirdLevelSelectedIndex = kNotSelectedTag;
             [self.collectionView reloadData];
         }else {
             if (indexPath.section == 1) {
-                self.secondLevelSelectedIndex = indexPath.row;
-                self.thirdLevelSelectedIndex = kNotSelectedTag;
+                self.tSecondLevelSelectedIndex = indexPath.row;
+                self.tThirdLevelSelectedIndex = kNotSelectedTag;
                 [self.collectionView reloadData];
             }else if (indexPath.section == 2){
-                self.thirdLevelSelectedIndex = indexPath.row;
-                self.forthLevelSelectedIndex = kNotSelectedTag;
+                self.tThirdLevelSelectedIndex = indexPath.row;
+                self.tForthLevelSelectedIndex = kNotSelectedTag;
                 [self.collectionView reloadData];
             }else {
-                self.forthLevelSelectedIndex = indexPath.row;
+                self.tForthLevelSelectedIndex = indexPath.row;
                 [CATransaction begin];
                 [CATransaction setDisableActions:YES];
                 [self.collectionView reloadSections:[NSIndexSet indexSetWithIndex:indexPath.section]];
@@ -316,15 +318,15 @@ static const NSInteger kNotSelectedTag = -1;
     if (indexPath.section == 0) {
         item = self.data.filters[indexPath.row];
     }else {
-        ChannelTabFilterRequestItem_filter *firstItem = self.data.filters[self.firstLevelSelectedIndex];
+        ChannelTabFilterRequestItem_filter *firstItem = self.data.filters[self.tFirstLevelSelectedIndex];
         if (indexPath.section == 1) {
             item = firstItem.subFilters[indexPath.row];
         }else{
-            ChannelTabFilterRequestItem_filter *secondItem = firstItem.subFilters[self.secondLevelSelectedIndex];
+            ChannelTabFilterRequestItem_filter *secondItem = firstItem.subFilters[self.tSecondLevelSelectedIndex];
             if (indexPath.section == 2){
                 item = secondItem.subFilters[indexPath.row];
             }else {
-                ChannelTabFilterRequestItem_filter *thirdItem = secondItem.subFilters[self.thirdLevelSelectedIndex];
+                ChannelTabFilterRequestItem_filter *thirdItem = secondItem.subFilters[self.tThirdLevelSelectedIndex];
                 item = thirdItem.subFilters[indexPath.row];
             }
         }

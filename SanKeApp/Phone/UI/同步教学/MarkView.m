@@ -39,13 +39,14 @@
 
 - (void)layoutSubviews {
     [super layoutSubviews];
+    [self removeSubviews];
     if (!isEmpty(self.mark)) {
         for (GetBookInfoRequestItem_Marker *marker in self.mark.marker) {
             for (GetBookInfoRequestItem_MarkerIcon *icon in marker.icons) {
                 UIButton *iconBtn = [UIButton buttonWithType:UIButtonTypeCustom];
                 iconBtn.frame = CGRectMake(icon.ox.integerValue * kWidthRadio, icon.oy.integerValue * kHeightRadio, marker.iconWidth.integerValue, marker.iconHeight.integerValue);
                 iconBtn.tag = marker.markerID.integerValue * 1000 + icon.iconID.integerValue;
-                [iconBtn sd_setBackgroundImageWithURL:[NSURL URLWithString:marker.markIcon] forState:UIControlStateNormal];
+                [iconBtn setImage:[UIImage imageNamed:@"标注icon"] forState:UIControlStateNormal];
                 [iconBtn addTarget:self action:@selector(iconBtnAction:) forControlEvents:UIControlEventTouchUpInside];
                 [self addSubview:iconBtn];
             }

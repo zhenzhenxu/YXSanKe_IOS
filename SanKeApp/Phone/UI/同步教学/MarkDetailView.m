@@ -54,7 +54,7 @@
     self.bounds = CGRectMake(0, 0, kMarkMaxWidth, scrollViewHeight);
 }
 
-- (void)updateDetailViewLocation {
+- (void)updateDetailViewLocation:(BOOL)animated {
     CGFloat detailCenterY = 0.0f;
     
     if ([self.markBtn.superview convertPoint:self.markBtn.center toView:self.window].y > kScreenHeight / 2.0f) {
@@ -65,11 +65,16 @@
         self.center = CGPointMake(kScreenWidth / 2.0f, [self.markBtn.superview convertPoint:CGPointMake(self.markBtn.center.x, CGRectGetMaxY(self.markBtn.frame)) toView:self.window].y);
     }
     CGFloat currentHeight = self.bounds.size.height;
-    self.bounds = CGRectMake(0, 0, kMarkMaxWidth, 0);
-    [UIView animateWithDuration:0.3 animations:^{
+    if (animated) {
+        self.bounds = CGRectMake(0, 0, kMarkMaxWidth, 0);
+        [UIView animateWithDuration:0.3 animations:^{
+            self.center = CGPointMake(kScreenWidth / 2.0f, detailCenterY);
+            self.bounds = CGRectMake(0, 0, kMarkMaxWidth, currentHeight);
+        }];
+    } else {
         self.center = CGPointMake(kScreenWidth / 2.0f, detailCenterY);
         self.bounds = CGRectMake(0, 0, kMarkMaxWidth, currentHeight);
-    }];
+    }
 }
 
 #pragma mark - setters
@@ -94,7 +99,7 @@
 
 - (void)setMarkBtn:(UIButton *)markBtn {
     _markBtn = markBtn;
-    [self updateDetailViewLocation];
+    [self updateDetailViewLocation:YES];
 }
 
 #pragma mark - DTAttributedTextContentViewDelegate
@@ -115,12 +120,10 @@
 #pragma mark - DTLazyImageViewDelegate
 - (void)lazyImageView:(DTLazyImageView *)lazyImageView didChangeImageSize:(CGSize)size
 {
-    NSURL *url = lazyImageView.url;
-    NSPredicate *pred = [NSPredicate predicateWithFormat:@"contentURL == %@", url];
+    NSPredicate *pred = [NSPredicate predicateWithFormat:@"class == %@", [DTImageTextAttachment class]];
     
     CGFloat imagesHeight = 0.0f;
     
-    // update all attachments that matching this URL
     for (DTTextAttachment *oneAttachment in [self.attributedTextContentView.layoutFrame textAttachmentsWithPredicate:pred])
     {
         oneAttachment.displaySize = CGSizeMake(kMarkMaxWidth - 30, (kMarkMaxWidth - 30) / size.width * size.height);
@@ -136,6 +139,7 @@
     self.contentView.frame = CGRectMake(0, 0, kMarkMaxWidth, self.attributedTextContentView.frame.size.height + 30);
     self.contentSize = self.contentView.frame.size;
     [self fitSizeOfScrollView];
+    [self updateDetailViewLocation:NO];
     // here we're layouting the entire string,
     // might be more efficient to only relayout the paragraphs that contain these attachments
     [self.attributedTextContentView relayoutText];

@@ -20,6 +20,7 @@
 #import "MarkDetailView.h"
 
 @interface TeachingMainViewController ()<QASlideViewDataSource, QASlideViewDelegate>
+@property (nonatomic, assign) BOOL shouldReserveFilter;
 #pragma mark - data
 @property (nonatomic, strong) GetBookInfoRequest *getBookInfoRequest;
 @property (nonatomic, strong) GetMarkDetailRequest *request;
@@ -53,9 +54,10 @@
 
 - (void)viewDidDisappear:(BOOL)animated {
     [super viewDidDisappear:animated];
-    if (self.mutiTabView.expandBtn.selected) {
+    if (!self.shouldReserveFilter && self.mutiTabView.expandBtn.selected) {
         [self.mutiTabView expandBtnAction];
     }
+    self.shouldReserveFilter = NO;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -209,6 +211,7 @@
     WEAK_SELF
     [self.mutiTabView setClickTabButtonBlock:^{
         STRONG_SELF
+        self.shouldReserveFilter = YES;
         GetBookInfoRequestItem_Volum *volum = self.contentsModel.volums[self.contentsModel.volumChooseInteger];
         GetBookInfoRequestItem_Unit *unit = self.contentsModel.units[self.contentsModel.unitChooseInteger];
         GetBookInfoRequestItem_Course *course = nil;
