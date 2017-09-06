@@ -94,6 +94,7 @@
 }
 - (void)firstPageFetch {
     if (!self.dataFetcher) {
+        [self stopLoading];
         return;
     }
     

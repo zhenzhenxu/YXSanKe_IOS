@@ -103,6 +103,7 @@
     self.volumeLabel.font = [UIFont systemFontOfSize:11.0f];
     self.volumeLabel.textColor = [UIColor colorWithHexString:@"4691a6"];
     self.volumeLabel.textAlignment = NSTextAlignmentCenter;
+    self.volumeLabel.hidden = YES;
     [self.middleTabView addSubview:self.volumeLabel];
     [self.volumeLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(selectedLabel.mas_right).offset(5);
@@ -164,6 +165,7 @@
     self.unitLabel.text = filterSelectedItem.unit.name;
     self.courseLabel.text = filterSelectedItem.course.name;
     
+    self.volumeLabel.hidden = isEmpty(filterSelectedItem.volume.name);
     self.unitLabel.hidden = isEmpty(filterSelectedItem.unit.name);
     self.courseLabel.hidden = isEmpty(filterSelectedItem.course.name);
 }
@@ -242,9 +244,11 @@
     self.selectionRequest = [ChannelTabFilterRequest new];
     self.selectionRequest.catid = self.videoItem.catID;
     self.selectionRequest.code = self.videoItem.code;
+    [self startLoading];
     WEAK_SELF
     [self.selectionRequest startRequestWithRetClass:[ChannelTabFilterRequestItem class] andCompleteBlock:^(id retItem, NSError *error, BOOL isMock) {
         STRONG_SELF
+        [self stopLoading];
         UnhandledRequestData *data = [[UnhandledRequestData alloc] init];
         data.requestDataExist = !isEmpty(retItem);
         data.error = error;
