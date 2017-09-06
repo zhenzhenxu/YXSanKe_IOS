@@ -135,7 +135,11 @@ NSString * const kPhotoBrowserIndexKey = @"kPhotoBrowserIndexKey";
                 [self showToast:error.localizedDescription];
                 return ;
             }
-            GetMarkDetailRequestItem *item = retItem;
+            GetMarkDetailRequestItem *item = (GetMarkDetailRequestItem *)retItem;
+            if (isEmpty(item.data)) {
+                [self showToast:@"暂无内容"];
+                return;
+            }
             currentIcon.textInfo = item.data.textInfo;
             [self showMarkerDetailWithTextInfo:currentIcon.textInfo markBtn:markBtn];
         }];
