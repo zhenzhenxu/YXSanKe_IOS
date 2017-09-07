@@ -8,20 +8,14 @@
 
 #import "YXPostRequest.h"
 
-@protocol GetBookInfoRequestItem_MarkerLine <NSObject>
+@protocol GetBookInfoRequestItem_Marker_Item <NSObject>
 @end
-@interface GetBookInfoRequestItem_MarkerLine : JSONModel
-@property (nonatomic, strong) NSString<Optional> *lineID;
+@interface GetBookInfoRequestItem_Marker_Item : JSONModel
+@property (nonatomic, strong) NSString<Optional> *itemID;
 @property (nonatomic, strong) NSString<Optional> *x0;
 @property (nonatomic, strong) NSString<Optional> *y0;
 @property (nonatomic, strong) NSString<Optional> *x1;
 @property (nonatomic, strong) NSString<Optional> *y1;
-@end
-
-@protocol GetBookInfoRequestItem_MarkerIcon <NSObject>
-@end
-@interface GetBookInfoRequestItem_MarkerIcon : JSONModel
-@property (nonatomic, strong) NSString<Optional> *iconID;
 @property (nonatomic, strong) NSString<Optional> *ox;
 @property (nonatomic, strong) NSString<Optional> *oy;
 @property (nonatomic, strong) NSString<Optional> *textInfo;
@@ -36,8 +30,8 @@
 @property (nonatomic, strong) NSString<Optional> *iconWidth;
 @property (nonatomic, strong) NSString<Optional> *iconHeight;
 @property (nonatomic, strong) NSString<Optional> *markIcon;
-@property (nonatomic, strong) NSArray<GetBookInfoRequestItem_MarkerLine, Optional> *lines;
-@property (nonatomic, strong) NSArray<GetBookInfoRequestItem_MarkerIcon, Optional> *icons;
+@property (nonatomic, strong) NSArray<GetBookInfoRequestItem_Marker_Item, Optional> *lines;
+@property (nonatomic, strong) NSArray<GetBookInfoRequestItem_Marker_Item, Optional> *icons;
 @end
 
 @protocol GetBookInfoRequestItem_Mark <NSObject>

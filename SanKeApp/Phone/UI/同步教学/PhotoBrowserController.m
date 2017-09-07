@@ -109,23 +109,19 @@ NSString * const kPhotoBrowserIndexKey = @"kPhotoBrowserIndexKey";
 }
 
 #pragma mark - showMarkerDetail
-- (void)fetchMarkDetailWithMarkBtn:(UIButton *)markBtn currentModel:(TeachingPageModel *)model {
-    GetBookInfoRequestItem_MarkerIcon *currentIcon = nil;
-    for (GetBookInfoRequestItem_Marker * marker in model.mark.marker) {
-        if (marker.markerID.integerValue == markBtn.tag / 1000) {
-            for (GetBookInfoRequestItem_MarkerIcon *icon in marker.icons) {
-                if (icon.iconID.integerValue == markBtn.tag - markBtn.tag / 1000 * 1000) {
-                    currentIcon = icon;
-                }
-            }
-        }
-    }
+- (void)fetchMarkDetailWithMarkBtn:(UIButton *)markBtn isLineBtn:(BOOL)isLineBtn currentModel:(TeachingPageModel *)model {
+    GetBookInfoRequestItem_Marker *marker = model.mark.marker[markBtn.tag - markBtn.tag / 1000 * 1000];
+    GetBookInfoRequestItem_Marker_Item *currentMark = isLineBtn ? marker.lines[markBtn.tag / 1000] : marker.icons[markBtn.tag / 1000];
     
-    if (isEmpty(currentIcon.textInfo)) {
+    if (isEmpty(currentMark.textInfo)) {
         [self.request stopRequest];
         self.request = [[GetMarkDetailRequest alloc]init];
-        self.request.marker_id = [NSString stringWithFormat:@"%ld", markBtn.tag / 1000];
-        self.request.icon_id = [NSString stringWithFormat:@"%ld", markBtn.tag - markBtn.tag / 1000 * 1000];
+        self.request.marker_id = marker.markerID;
+        if (isLineBtn) {
+            self.request.line_id = currentMark.itemID;
+        } else {
+            self.request.icon_id = currentMark.itemID;
+        }
         [self startLoading];
         WEAK_SELF
         [self.request startRequestWithRetClass:[GetMarkDetailRequestItem class] andCompleteBlock:^(id retItem, NSError *error, BOOL isMock) {
@@ -140,11 +136,11 @@ NSString * const kPhotoBrowserIndexKey = @"kPhotoBrowserIndexKey";
                 [self showToast:@"暂无内容"];
                 return;
             }
-            currentIcon.textInfo = item.data.textInfo;
-            [self showMarkerDetailWithTextInfo:currentIcon.textInfo markBtn:markBtn];
+            currentMark.textInfo = item.data.textInfo;
+            [self showMarkerDetailWithTextInfo:currentMark.textInfo markBtn:markBtn];
         }];
     } else {
-        [self showMarkerDetailWithTextInfo:currentIcon.textInfo markBtn:markBtn];
+        [self showMarkerDetailWithTextInfo:currentMark.textInfo markBtn:markBtn];
     }
 }
 
@@ -167,8 +163,8 @@ NSString * const kPhotoBrowserIndexKey = @"kPhotoBrowserIndexKey";
 - (QASlideItemBaseView *)slideView:(QASlideView *)slideView itemViewAtIndex:(NSInteger)index {
     SlideImageView *imageView = [[SlideImageView alloc] init];
     imageView.model = self.currentVolumDataArray[index];
-    imageView.markView.markerBtnBlock = ^(UIButton *markBtn) {
-        [self fetchMarkDetailWithMarkBtn:markBtn currentModel:self.currentVolumDataArray[index]];
+    imageView.markView.markerBtnBlock = ^(UIButton *markBtn, BOOL isLineBtn) {
+        [self fetchMarkDetailWithMarkBtn:markBtn isLineBtn:isLineBtn currentModel:self.currentVolumDataArray[index]];
     };
     return (QASlideItemBaseView *)imageView;
 }

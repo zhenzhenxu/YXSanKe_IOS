@@ -20,48 +20,44 @@
     return self;
 }
 
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect {
-    if (!isEmpty(self.mark)) {
-        UIBezierPath *path = [UIBezierPath bezierPath];
-        path.lineWidth = 2;
-        [[UIColor redColor] setStroke];
-        for (GetBookInfoRequestItem_Marker *marker in self.mark.marker) {
-            for (GetBookInfoRequestItem_MarkerLine *line in marker.lines) {
-                [path moveToPoint:CGPointMake(line.x0.integerValue * kWidthRadio, line.y0.integerValue * kHeightRadio)];
-                [path addLineToPoint:CGPointMake(line.x1.integerValue * kWidthRadio, line.y1.integerValue * kHeightRadio)];
-            }
-        }
-        [path stroke];
-    }
-}
-
 - (void)layoutSubviews {
     [super layoutSubviews];
     [self removeSubviews];
     if (!isEmpty(self.mark)) {
-        for (GetBookInfoRequestItem_Marker *marker in self.mark.marker) {
-            for (GetBookInfoRequestItem_MarkerIcon *icon in marker.icons) {
+        [self.mark.marker enumerateObjectsUsingBlock:^(GetBookInfoRequestItem_Marker *marker, NSUInteger index, BOOL * _Nonnull stop) {
+            [marker.lines enumerateObjectsUsingBlock:^(GetBookInfoRequestItem_Marker_Item *line, NSUInteger idx, BOOL * _Nonnull stop) {
+                UIButton *lineBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+                lineBtn.frame = CGRectMake(line.x0.integerValue * kWidthRadio, line.y0.integerValue * kHeightRadio - marker.lineAbove.integerValue - 1, (line.x1.integerValue - line.x0.integerValue) * kWidthRadio, marker.lineAbove.integerValue + marker.lineBelow.integerValue + 2);
+                lineBtn.tag = idx * 1000 + index;
+                [lineBtn addTarget:self action:@selector(lineBtnAction:) forControlEvents:UIControlEventTouchUpInside];
+                [self addSubview:lineBtn];
+                UILabel *lineLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, marker.lineAbove.integerValue, lineBtn.bounds.size.width, 2)];
+                lineLabel.backgroundColor = [UIColor redColor];
+                [lineBtn addSubview:lineLabel];
+            }];
+            [marker.icons enumerateObjectsUsingBlock:^(GetBookInfoRequestItem_Marker_Item *icon, NSUInteger idx, BOOL * _Nonnull stop) {
                 UIButton *iconBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-                iconBtn.frame = CGRectMake(icon.ox.integerValue * kWidthRadio - marker.iconWidth.integerValue * .5f , icon.oy.integerValue * kHeightRadio - marker.iconHeight.integerValue, marker.iconWidth.integerValue, marker.iconHeight.integerValue);
-                iconBtn.tag = marker.markerID.integerValue * 1000 + icon.iconID.integerValue;
+                iconBtn.frame = CGRectMake(icon.ox.integerValue * kWidthRadio - marker.iconWidth.integerValue * .5f , icon.oy.integerValue * kHeightRadio - marker.iconWidth.integerValue * 1.25f, marker.iconWidth.integerValue, marker.iconWidth.integerValue * 1.25f);
+                iconBtn.tag = idx * 1000 + index;
                 [iconBtn setImage:[UIImage imageNamed:@"标注icon"] forState:UIControlStateNormal];
                 [iconBtn addTarget:self action:@selector(iconBtnAction:) forControlEvents:UIControlEventTouchUpInside];
                 [self addSubview:iconBtn];
-            }
-        }
+            }];
+        }];
     }
 }
 
+- (void)lineBtnAction:(UIButton *)sender {
+    BLOCK_EXEC(self.markerBtnBlock, sender, YES);
+}
+
 - (void)iconBtnAction:(UIButton *)sender {
-    BLOCK_EXEC(self.markerBtnBlock, sender);
+    BLOCK_EXEC(self.markerBtnBlock, sender, NO);
 }
 
 #pragma mark - setter
 - (void)setMark:(GetBookInfoRequestItem_Mark *)mark {
     _mark = mark;
-    [self setNeedsDisplay];
     [self setNeedsLayout];
 }
 

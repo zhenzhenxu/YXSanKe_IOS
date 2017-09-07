@@ -41,6 +41,7 @@
     
     self.markView = [[MarkView alloc] init];
     [self.contentImageView addSubview:self.markView];
+    self.contentImageView.clipsToBounds = YES;
 }
 
 - (void)selectedAction {
@@ -69,7 +70,6 @@
 - (void)layoutSubviews {
     [super layoutSubviews];
     self.markView.frame = self.contentImageView.bounds;
-    [self.markView setNeedsDisplay];
 }
 
 @end

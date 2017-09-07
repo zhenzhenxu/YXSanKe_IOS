@@ -12,6 +12,6 @@
 @interface MarkView : UIView
 
 @property (nonatomic, strong) GetBookInfoRequestItem_Mark *mark;
-@property (nonatomic, copy) void (^markerBtnBlock)(UIButton *markBtn);
+@property (nonatomic, copy) void (^markerBtnBlock)(UIButton *markBtn, BOOL isLineBtn);
 
 @end

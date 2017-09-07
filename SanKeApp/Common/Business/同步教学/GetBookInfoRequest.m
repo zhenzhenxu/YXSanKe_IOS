@@ -8,15 +8,9 @@
 
 #import "GetBookInfoRequest.h"
 
-@implementation GetBookInfoRequestItem_MarkerLine
+@implementation GetBookInfoRequestItem_Marker_Item
 + (JSONKeyMapper *)keyMapper {
-    return [[JSONKeyMapper alloc] initWithDictionary:@{@"id" : @"lineID"}];
-}
-@end
-
-@implementation GetBookInfoRequestItem_MarkerIcon
-+ (JSONKeyMapper *)keyMapper {
-    return [[JSONKeyMapper alloc] initWithDictionary:@{@"id" : @"iconID"}];
+    return [[JSONKeyMapper alloc] initWithDictionary:@{@"id" : @"itemID"}];
 }
 @end
 

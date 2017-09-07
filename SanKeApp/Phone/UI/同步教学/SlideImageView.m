@@ -120,7 +120,6 @@
         self.scrollView.contentSize = self.imageView.frame.size;
     }
     self.markView.frame = self.imageView.bounds;
-    [self.markView setNeedsDisplay];
     self.scrollView.contentOffset = CGPointZero;
 }
 
@@ -280,7 +279,6 @@
     CGFloat offsetX = originalSize.width > contentSize.width ? (originalSize.width - contentSize.width) / 2 : 0;
     CGFloat offsetY = originalSize.height > contentSize.height ? (originalSize.height - contentSize.height) / 2 : 0;
     self.imageView.center = CGPointMake(contentSize.width / 2 + offsetX, contentSize.height / 2 + offsetY);
-    [self.markView setNeedsDisplay];
 }
 
 /*
