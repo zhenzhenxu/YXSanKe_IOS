@@ -27,17 +27,19 @@
         [self.mark.marker enumerateObjectsUsingBlock:^(GetBookInfoRequestItem_Marker *marker, NSUInteger index, BOOL * _Nonnull stop) {
             [marker.lines enumerateObjectsUsingBlock:^(GetBookInfoRequestItem_Marker_Item *line, NSUInteger idx, BOOL * _Nonnull stop) {
                 UIButton *lineBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-                lineBtn.frame = CGRectMake(line.x0.integerValue * kWidthRadio, line.y0.integerValue * kHeightRadio - marker.lineAbove.integerValue - 1, (line.x1.integerValue - line.x0.integerValue) * kWidthRadio, marker.lineAbove.integerValue + marker.lineBelow.integerValue + 2);
+                CGFloat lineAbove = marker.lineAbove.integerValue;
+                CGFloat lineBelow = marker.lineBelow.integerValue;
+                lineBtn.frame = CGRectMake(line.x0.integerValue * kWidthRadio, (line.y0.integerValue - lineAbove - 12.5f) * kHeightRadio, (line.x1.integerValue - line.x0.integerValue) * kWidthRadio, (lineAbove + lineBelow + 5 + 20) * kHeightRadio);
                 lineBtn.tag = idx * 1000 + index;
                 [lineBtn addTarget:self action:@selector(lineBtnAction:) forControlEvents:UIControlEventTouchUpInside];
                 [self addSubview:lineBtn];
-                UILabel *lineLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, marker.lineAbove.integerValue, lineBtn.bounds.size.width, 2)];
+                UILabel *lineLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, (lineAbove + 10) * kHeightRadio, lineBtn.bounds.size.width, 5 * kHeightRadio)];
                 lineLabel.backgroundColor = [UIColor redColor];
                 [lineBtn addSubview:lineLabel];
             }];
             [marker.icons enumerateObjectsUsingBlock:^(GetBookInfoRequestItem_Marker_Item *icon, NSUInteger idx, BOOL * _Nonnull stop) {
                 UIButton *iconBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-                iconBtn.frame = CGRectMake(icon.ox.integerValue * kWidthRadio - marker.iconWidth.integerValue * .5f , icon.oy.integerValue * kHeightRadio - marker.iconWidth.integerValue * 1.25f, marker.iconWidth.integerValue, marker.iconWidth.integerValue * 1.25f);
+                iconBtn.frame = CGRectMake(icon.ox.integerValue * kWidthRadio - 40 * kWidthRadio * .5f , icon.oy.integerValue * kHeightRadio - 40 * kWidthRadio * 1.25f, 40 * kWidthRadio, 40 * kWidthRadio * 1.25f);
                 iconBtn.tag = idx * 1000 + index;
                 [iconBtn setImage:[UIImage imageNamed:@"标注icon"] forState:UIControlStateNormal];
                 [iconBtn addTarget:self action:@selector(iconBtnAction:) forControlEvents:UIControlEventTouchUpInside];

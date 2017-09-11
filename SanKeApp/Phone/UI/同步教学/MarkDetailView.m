@@ -16,7 +16,6 @@
 
 @property (nonatomic, strong) UIView *contentView;
 @property (nonatomic, strong) DTAttributedTextContentView *attributedTextContentView;
-@property (nonatomic, assign) CGFloat suggestedTextHeight;
 
 @end
 
@@ -91,7 +90,6 @@
     DTCoreTextLayoutFrame *layoutFrame = [layouter layoutFrameWithRect:maxRect range:entireString];
     CGSize sizeNeeded = [layoutFrame frame].size;
     self.attributedTextContentView.frame = CGRectMake(15, 15, kMarkMaxWidth - 30, sizeNeeded.height);
-    self.suggestedTextHeight = sizeNeeded.height;
     self.contentView.frame = CGRectMake(0, 0, kMarkMaxWidth, sizeNeeded.height + 30);
     self.contentSize = self.contentView.frame.size;
     [self fitSizeOfScrollView];
@@ -120,7 +118,7 @@
 #pragma mark - DTLazyImageViewDelegate
 - (void)lazyImageView:(DTLazyImageView *)lazyImageView didChangeImageSize:(CGSize)size
 {
-    NSPredicate *pred = [NSPredicate predicateWithFormat:@"class == %@", [DTImageTextAttachment class]];
+    NSPredicate *pred = [NSPredicate predicateWithFormat:@"contentURL == %@", lazyImageView.url];
     
     CGFloat imagesHeight = 0.0f;
     
@@ -134,7 +132,7 @@
     self.attributedTextContentView.layouter = nil;
     
     CGRect frame = self.attributedTextContentView.frame;
-    frame.size.height = self.suggestedTextHeight + imagesHeight;
+    frame.size.height = frame.size.height + imagesHeight;
     self.attributedTextContentView.frame = frame;
     self.contentView.frame = CGRectMake(0, 0, kMarkMaxWidth, self.attributedTextContentView.frame.size.height + 30);
     self.contentSize = self.contentView.frame.size;
