@@ -27,17 +27,13 @@
                                                 nil]];
     
     UIView *barBgView = [[UIView alloc]initWithFrame:CGRectMake(0, -20, self.view.bounds.size.width, 20)];
-    barBgView.backgroundColor = [UIColor colorWithHexString:@"4691a6"];
+    barBgView.backgroundColor = [UIColor whiteColor];
     [self.navigationBar addSubview:barBgView];
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
-}
-
-- (UIStatusBarStyle)preferredStatusBarStyle {
-    return UIStatusBarStyleLightContent;
 }
 
 - (BOOL)shouldAutorotate{

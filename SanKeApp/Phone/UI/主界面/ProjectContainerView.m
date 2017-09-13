@@ -73,6 +73,7 @@ static const CGFloat margin = 0;
             [self.bottomScrollView addSubview:obj.view];
             self.bottomScrollView.contentOffset = CGPointMake(0, 0);
             b.selected = YES;
+            b.titleLabel.font = [UIFont boldSystemFontOfSize:13.0f];
             self.chooseViewController = obj;
         }
         if (idx < _childViewControllers.count - 1) {
@@ -91,7 +92,7 @@ static const CGFloat margin = 0;
     [b setTitle:title forState:UIControlStateNormal];
     [b setTitleColor:[UIColor colorWithHexString:@"333333"] forState:UIControlStateNormal];
     [b setTitleColor:[UIColor colorWithHexString:@"4691a6"] forState:UIControlStateSelected];
-    b.titleLabel.font = [UIFont boldSystemFontOfSize:13.0f];
+    b.titleLabel.font = [UIFont systemFontOfSize:13.0f];
     [b addTarget:self action:@selector(chooseButtonAction:) forControlEvents:UIControlEventTouchUpInside];
     return b;
 }
@@ -104,10 +105,12 @@ static const CGFloat margin = 0;
     for (UIButton *b in self.topSegmentView.subviews) {
         if ([b isKindOfClass:[UIButton class]]) {
             b.selected = NO;
+            b.titleLabel.font = [UIFont systemFontOfSize:13.0f];
         }
     }
     
     sender.selected = YES;
+    sender.titleLabel.font = [UIFont boldSystemFontOfSize:13.0f];
     NSInteger index = sender.tag - kTagBase;
     self.bottomScrollView.contentOffset = CGPointMake(self.bottomScrollView.frame.size.width*index, 0);
     self.chooseViewController = self.childViewControllers[index];
@@ -138,8 +141,10 @@ static const CGFloat margin = 0;
     for (UIButton *b in self.topSegmentView.subviews) {
         if ([b isKindOfClass:[UIButton class]]) {
             b.selected = NO;
+            b.titleLabel.font = [UIFont systemFontOfSize:13.0f];
             if (b.tag-kTagBase == index) {
                 b.selected = YES;
+                b.titleLabel.font = [UIFont boldSystemFontOfSize:13.0f];
             }
         }
     }

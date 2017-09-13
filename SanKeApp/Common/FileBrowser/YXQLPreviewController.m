@@ -109,7 +109,7 @@
     
     [self.overlayNavigationBar pushNavigationItem:self.overlayNavigationItem animated:NO];
     UIView *barBgView = [[UIView alloc]init];
-    barBgView.backgroundColor = [UIColor colorWithHexString:@"4691a6"];
+    barBgView.backgroundColor = [UIColor whiteColor];
     [self.overlayNavigationBar addSubview:barBgView];
     [barBgView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.mas_equalTo(0);
