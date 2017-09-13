@@ -56,7 +56,14 @@
 #pragma mark - setters
 - (void)setTitle:(NSString *)title {
     _title = title;
-    self.titleLabel.text = title;
+    
+    CGSize titleSize = [title boundingRectWithSize:CGSizeMake(kScreenWidth -  (self.isIndented ? 106 : 80), CGFLOAT_MAX) options:NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:13]} context:nil].size;
+    
+    NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString:title];
+    NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
+    [paragraphStyle setLineSpacing: titleSize.height < 20 ? 0 : 5];
+    [attributedString addAttribute:NSParagraphStyleAttributeName value:paragraphStyle range:NSMakeRange(0, title.length)];
+    self.titleLabel.attributedText = attributedString;
 }
 
 - (void)setIsIndented:(BOOL)isIndented {

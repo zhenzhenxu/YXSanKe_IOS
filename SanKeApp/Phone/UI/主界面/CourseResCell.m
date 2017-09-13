@@ -42,7 +42,7 @@
     } else {
         [self setupUIForSecondLevel];
     }
-    CGSize titleSize = [title boundingRectWithSize:CGSizeMake([UIScreen mainScreen].bounds.size.width - 50 - 1 - 5- 10 -20, MAXFLOAT) options: NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:self.titleLabel.font} context:nil].size;
+    CGSize titleSize = [title boundingRectWithSize:CGSizeMake(kScreenWidth - 86, CGFLOAT_MAX) options: NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:self.titleLabel.font} context:nil].size;
     CGFloat labelHeight = titleSize.height;
     if (labelHeight / self.titleLabel.font.lineHeight > 1) {
         NSMutableAttributedString * attributedString1 = [[NSMutableAttributedString alloc] initWithString:title];

@@ -172,8 +172,8 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     TeachingContentsCell *cell = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass([TeachingContentsCell class])];
     JSONModel *model = self.contentsArray[indexPath.row];
-    cell.title = (NSString *)[model valueForKey:@"name"];
     cell.isIndented = [self.contentsArray[indexPath.row] isKindOfClass:[GetBookInfoRequestItem_Course class]];
+    cell.title = (NSString *)[model valueForKey:@"name"];
     
     if ([self.contentsArray[indexPath.row] isKindOfClass:[GetBookInfoRequestItem_Unit class]]) {
         cell.isSelected = [model isEqual:self.data.units[self.data.unitChooseInteger]];
