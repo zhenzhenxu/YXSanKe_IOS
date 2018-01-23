@@ -261,7 +261,7 @@
 		<key>GetBookInfoRequest</key>
 		<dict>
 			<key>mockEnable</key>
-			<true/>
+			<false/>
 			<key>mockFile</key>
 			<array>
 				<dict>
@@ -275,7 +275,7 @@
 		<key>GetLabelListRequest</key>
 		<dict>
 			<key>mockEnable</key>
-			<true/>
+			<false/>
 			<key>mockFile</key>
 			<array>
 				<dict>
@@ -289,7 +289,7 @@
 		<key>ResourceAskListRequest</key>
 		<dict>
 			<key>mockEnable</key>
-			<true/>
+			<false/>
 			<key>mockFile</key>
 			<array>
 				<dict>
@@ -303,7 +303,7 @@
 		<key>ResourceDetailRequest</key>
 		<dict>
 			<key>mockEnable</key>
-			<true/>
+			<false/>
 			<key>mockFile</key>
 			<array>
 				<dict>
@@ -329,7 +329,7 @@
 		<key>GetMarkDetailRequest</key>
 		<dict>
 			<key>mockEnable</key>
-			<true/>
+			<false/>
 			<key>mockFile</key>
 			<array>
 				<dict>
@@ -343,12 +343,26 @@
 		<key>GetResListRequest</key>
 		<dict>
 			<key>mockEnable</key>
-			<true/>
+			<false/>
 			<key>mockFile</key>
 			<array>
 				<dict>
 					<key>fileName</key>
 					<string>GetResList_Mock.json</string>
+					<key>percent</key>
+					<integer>100</integer>
+				</dict>
+			</array>
+		</dict>
+		<key>LunboPageRequest</key>
+		<dict>
+			<key>mockEnable</key>
+			<true/>
+			<key>mockFile</key>
+			<array>
+				<dict>
+					<key>fileName</key>
+					<string>lunboPage_mock.json</string>
 					<key>percent</key>
 					<integer>100</integer>
 				</dict>

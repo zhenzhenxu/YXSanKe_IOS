@@ -214,6 +214,7 @@
 		7CDBFED31E8BB09500C72E6F /* QAQuestionListFetcher.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CDBFED21E8BB09500C72E6F /* QAQuestionListFetcher.m */; };
 		7CDBFED61E8BB34B00C72E6F /* QAReplyListFetcher.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CDBFED51E8BB34B00C72E6F /* QAReplyListFetcher.m */; };
 		7CDBFED91E8CEA5E00C72E6F /* QAFileTypeMappingTable.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CDBFED81E8CEA5E00C72E6F /* QAFileTypeMappingTable.m */; };
+		9201A9E72016D89900364A8C /* FocusPotationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9201A9E62016D89900364A8C /* FocusPotationViewController.m */; };
 		923A4E2E1E2C9FF5001059E2 /* ChannelTabRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 923A4E2D1E2C9FF5001059E2 /* ChannelTabRequest.m */; };
 		923A4E311E2CA4E7001059E2 /* CourseVideoRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 923A4E301E2CA4E7001059E2 /* CourseVideoRequest.m */; };
 		923A4E351E2CAE1C001059E2 /* channelTab_mock.json in Resources */ = {isa = PBXBuildFile; fileRef = 923A4E331E2CAE1C001059E2 /* channelTab_mock.json */; };
@@ -234,6 +235,10 @@
 		927594E91E2F0DA000F87838 /* playHistory_mock.json in Resources */ = {isa = PBXBuildFile; fileRef = 927594E71E2F0DA000F87838 /* playHistory_mock.json */; };
 		92E7D1391E28A83F00A34300 /* AloneCourseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 92E7D1381E28A83F00A34300 /* AloneCourseViewController.m */; };
 		92E7D13D1E28A88600A34300 /* AloneCourseTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 92E7D13C1E28A88600A34300 /* AloneCourseTableViewCell.m */; };
+		92EFD5B520172197007AA227 /* FocusRotationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 92EFD5B320172197007AA227 /* FocusRotationView.m */; };
+		92EFD5B8201721FC007AA227 /* LunboPageRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 92EFD5B7201721FC007AA227 /* LunboPageRequest.m */; };
+		92EFD5BB201728EE007AA227 /* YXWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 92EFD5BA201728EE007AA227 /* YXWebViewController.m */; };
+		92EFD5BD20172C6E007AA227 /* lunboPage_mock.json in Resources */ = {isa = PBXBuildFile; fileRef = 92EFD5BC20172C6D007AA227 /* lunboPage_mock.json */; };
 		E902E6CD1E2C9FD5009441B3 /* stageAndSubject.json in Resources */ = {isa = PBXBuildFile; fileRef = E902E6CC1E2C9FD5009441B3 /* stageAndSubject.json */; };
 		E902E6DB1E2CD109009441B3 /* UpgradeView.m in Sources */ = {isa = PBXBuildFile; fileRef = E902E6DA1E2CD109009441B3 /* UpgradeView.m */; };
 		E902E6DE1E2CE19D009441B3 /* ErrorView.m in Sources */ = {isa = PBXBuildFile; fileRef = E902E6DD1E2CE19D009441B3 /* ErrorView.m */; };
@@ -734,6 +739,8 @@
 		7CDBFED71E8CEA5E00C72E6F /* QAFileTypeMappingTable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QAFileTypeMappingTable.h; sourceTree = "<group>"; };
 		7CDBFED81E8CEA5E00C72E6F /* QAFileTypeMappingTable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QAFileTypeMappingTable.m; sourceTree = "<group>"; };
 		8CA901E0E3034091D4CACB93 /* Pods-SanKeApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SanKeApp.release.xcconfig"; path = "Pods/Target Support Files/Pods-SanKeApp/Pods-SanKeApp.release.xcconfig"; sourceTree = "<group>"; };
+		9201A9E52016D89900364A8C /* FocusPotationViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FocusPotationViewController.h; sourceTree = "<group>"; };
+		9201A9E62016D89900364A8C /* FocusPotationViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FocusPotationViewController.m; sourceTree = "<group>"; };
 		923A4E2C1E2C9FF5001059E2 /* ChannelTabRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChannelTabRequest.h; sourceTree = "<group>"; };
 		923A4E2D1E2C9FF5001059E2 /* ChannelTabRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChannelTabRequest.m; sourceTree = "<group>"; };
 		923A4E2F1E2CA4E7001059E2 /* CourseVideoRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CourseVideoRequest.h; sourceTree = "<group>"; };
@@ -770,6 +777,13 @@
 		92E7D1381E28A83F00A34300 /* AloneCourseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AloneCourseViewController.m; sourceTree = "<group>"; };
 		92E7D13B1E28A88600A34300 /* AloneCourseTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AloneCourseTableViewCell.h; sourceTree = "<group>"; };
 		92E7D13C1E28A88600A34300 /* AloneCourseTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AloneCourseTableViewCell.m; sourceTree = "<group>"; };
+		92EFD5B320172197007AA227 /* FocusRotationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FocusRotationView.m; sourceTree = "<group>"; };
+		92EFD5B420172197007AA227 /* FocusRotationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FocusRotationView.h; sourceTree = "<group>"; };
+		92EFD5B6201721FC007AA227 /* LunboPageRequest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LunboPageRequest.h; sourceTree = "<group>"; };
+		92EFD5B7201721FC007AA227 /* LunboPageRequest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LunboPageRequest.m; sourceTree = "<group>"; };
+		92EFD5B9201728EE007AA227 /* YXWebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YXWebViewController.h; sourceTree = "<group>"; };
+		92EFD5BA201728EE007AA227 /* YXWebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YXWebViewController.m; sourceTree = "<group>"; };
+		92EFD5BC20172C6D007AA227 /* lunboPage_mock.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = lunboPage_mock.json; sourceTree = "<group>"; };
 		95C0F730E14B85E0B6BD8FAF /* libPods-SanKeApp.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-SanKeApp.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E902E6CC1E2C9FD5009441B3 /* stageAndSubject.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = stageAndSubject.json; sourceTree = "<group>"; };
 		E902E6D91E2CD109009441B3 /* UpgradeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UpgradeView.h; sourceTree = "<group>"; };
@@ -1545,6 +1559,8 @@
 				7C1A600D1E163B8800832DED /* TestsRootViewController.m */,
 				7C1A600E1E163B8800832DED /* YXTestViewController.h */,
 				7C1A600F1E163B8800832DED /* YXTestViewController.m */,
+				9201A9E52016D89900364A8C /* FocusPotationViewController.h */,
+				9201A9E62016D89900364A8C /* FocusPotationViewController.m */,
 			);
 			path = TestFramework;
 			sourceTree = "<group>";
@@ -1733,6 +1749,8 @@
 				43240B691F4C17B8007A9234 /* CourseResListViewController.m */,
 				92E7D1371E28A83F00A34300 /* AloneCourseViewController.h */,
 				92E7D1381E28A83F00A34300 /* AloneCourseViewController.m */,
+				92EFD5B9201728EE007AA227 /* YXWebViewController.h */,
+				92EFD5BA201728EE007AA227 /* YXWebViewController.m */,
 			);
 			path = "主界面";
 			sourceTree = "<group>";
@@ -1842,6 +1860,7 @@
 		7C6F21A51E248BDA000AB43A /* 主界面 */ = {
 			isa = PBXGroup;
 			children = (
+				92EFD5BC20172C6D007AA227 /* lunboPage_mock.json */,
 				7C6F21A61E248BDA000AB43A /* readme.txt */,
 				923A4E2C1E2C9FF5001059E2 /* ChannelTabRequest.h */,
 				923A4E2D1E2C9FF5001059E2 /* ChannelTabRequest.m */,
@@ -1857,6 +1876,8 @@
 				43240B631F4BD580007A9234 /* GetResList_Mock.json */,
 				43240B651F4BD8F9007A9234 /* GetResListRequest.h */,
 				43240B661F4BD8F9007A9234 /* GetResListRequest.m */,
+				92EFD5B6201721FC007AA227 /* LunboPageRequest.h */,
+				92EFD5B7201721FC007AA227 /* LunboPageRequest.m */,
 			);
 			path = "主界面";
 			sourceTree = "<group>";
@@ -2013,6 +2034,8 @@
 		9241FFDE1E25D5680015B587 /* view */ = {
 			isa = PBXGroup;
 			children = (
+				92EFD5B420172197007AA227 /* FocusRotationView.h */,
+				92EFD5B320172197007AA227 /* FocusRotationView.m */,
 				9241FFED1E26120A0015B587 /* RadianBaseCell.h */,
 				9241FFEE1E26120A0015B587 /* RadianBaseCell.m */,
 				9241FFDF1E25D5830015B587 /* ProjectContainerView.h */,
@@ -2349,6 +2372,7 @@
 				7C1A5F941E15143F00832DED /* MockConfig.plist in Resources */,
 				E9062B041ED2D68E00531472 /* GetLabelListRequest.json in Resources */,
 				436451501ED663D8009D168D /* resourceAskList_mock.json in Resources */,
+				92EFD5BD20172C6E007AA227 /* lunboPage_mock.json in Resources */,
 				7C6F219E1E24838C000AB43A /* area_data.json in Resources */,
 				E9230C571E30919B00AC6617 /* UpdateStageSubjectRequest.json in Resources */,
 				7C1A5F8E1E15143400832DED /* neterror_mock.json in Resources */,
@@ -2469,6 +2493,7 @@
 				E9355B441E6D84BD007AE9F0 /* RegisterViewController.m in Sources */,
 				E96EB7401E8A79FD0061D6C9 /* AboutHeaderView.m in Sources */,
 				E96EB75A1E8A7B610061D6C9 /* ChangePasswordViewController.m in Sources */,
+				92EFD5B8201721FC007AA227 /* LunboPageRequest.m in Sources */,
 				7C78419D1E2E2AD900755BC0 /* UpdateStageSubjectRequest.m in Sources */,
 				7CDBFEC11E8B8D7A00C72E6F /* QAReplyListRequest.m in Sources */,
 				7CDBFEC71E8B98C000C72E6F /* QAReplyFavorRequest.m in Sources */,
@@ -2589,6 +2614,7 @@
 				7C7841B41E2F15DA00755BC0 /* StageSubjectDataManager.m in Sources */,
 				7C1A5F151E15108F00832DED /* DownloadManager.m in Sources */,
 				7C1A60001E16396C00832DED /* UIImageView+AnimationCompletion.m in Sources */,
+				9201A9E72016D89900364A8C /* FocusPotationViewController.m in Sources */,
 				7C1A60011E16396C00832DED /* UIViewController+Keyboard.m in Sources */,
 				7C1A60061E16396C00832DED /* UIView+YXShadowColor.m in Sources */,
 				7C7841B11E2F150100755BC0 /* SaveRecordRequest.m in Sources */,
@@ -2607,6 +2633,8 @@
 				7C1A5F781E15132200832DED /* FileBrowserFactory.m in Sources */,
 				30C48A7D1E52E72100CCDBBE /* YXStatisticRequest.m in Sources */,
 				7C1A5FC81E1631DD00832DED /* UnhandledRequestData.m in Sources */,
+				92EFD5B520172197007AA227 /* FocusRotationView.m in Sources */,
+				92EFD5BB201728EE007AA227 /* YXWebViewController.m in Sources */,
 				E96EB7AD1E94D2E50061D6C9 /* QACreateAnswerRequest.m in Sources */,
 				E94423C01E767A1500F8F795 /* HistoryDeleteRequest.m in Sources */,
 				7C1A60021E16396C00832DED /* UIImage+Color.m in Sources */,

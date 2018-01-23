@@ -10,13 +10,13 @@
 #import "StageSubjectSelectViewController.h"
 #import "FilterSelectionView.h"
 #import "LoginViewController.h"
-
+#import "FocusPotationViewController.h"
 @interface YXTestViewController ()
 @end
 
 @implementation YXTestViewController
 - (void)viewDidLoad {
-    self.devTestActions = @[@"stage_subject",@"filter",@"login",@"45"];
+    self.devTestActions = @[@"stage_subject",@"filter",@"login",@"focusPotation"];
     [super viewDidLoad];
 }
 
@@ -64,6 +64,9 @@
     LoginViewController *vc = [[LoginViewController alloc]init];
     [self.navigationController pushViewController:vc animated:YES];
 }
-
+- (void)focusPotation {
+    FocusPotationViewController *vc = [[FocusPotationViewController alloc]init];
+    [self.navigationController pushViewController:vc animated:YES];
+}
 @end
 

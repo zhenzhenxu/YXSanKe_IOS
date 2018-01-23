@@ -1,0 +1,38 @@
+{
+    "code": 0, 
+    "data": {
+        "items": [
+            {
+                "id": 1, 
+                "image": "http://s1.jsyxw.cn/res/web/3.0/img/active/default.jpg", 
+                "detail": "http://www.baidu.com"
+            }, 
+            {
+                "id": 2, 
+                "image": "http://scc.jsyxw.cn/course/37/8837.jpg",
+                "detail": "http://www.baidu.com"
+            }, 
+            {
+                "id": 3, 
+                "image": "http://scc.jsyxw.cn/course/45/2445.jpg",
+                "detail": "http://www.baidu.com"
+            }, 
+            {
+                "id": 4, 
+                "image": "http://scc.jsyxw.cn/course/37/8837.jpg",
+                "detail": "http://www.baidu.com"
+            }, 
+            {
+                "id": 5, 
+                "image": "http://scc.jsyxw.cn/course/37/8837.jpg",
+                "detail": "http://www.baidu.com"
+            }, 
+            {
+                "id": 6, 
+                "image": "http://6.jpg", 
+                "detail": "http://www.baidu.com"
+            }
+        ]
+    }, 
+    "desc": "success"
+}

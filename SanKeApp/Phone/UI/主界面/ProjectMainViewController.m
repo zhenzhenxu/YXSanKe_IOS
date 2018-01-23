@@ -11,10 +11,16 @@
 #import "ProjectContainerView.h"
 #import "CourseViewController.h"
 #import "ChannelTabRequest.h"
+#import "LunboPageRequest.h"
+#import "FocusRotationView.h"
+#import "YXWebViewController.h"
 
 @interface ProjectMainViewController ()
 @property (nonatomic, strong) ChannelTabRequest *tabRequest;
 @property (nonatomic, strong) ProjectContainerView *containerView;
+@property (nonatomic, strong) FocusRotationView *rotationView;
+@property (nonatomic, strong) LunboPageRequest *pageRequest;
+@property (nonatomic, strong) LunboPageItem_Data *itemData;
 @end
 
 @implementation ProjectMainViewController
@@ -31,7 +37,10 @@
     [self requestForChannelTab];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(requestForChannelTab) name:kStageSubjectDidChangeNotification object:nil];
 }
-
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    [self requestForLunboPage];
+}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
@@ -44,6 +53,25 @@
 
 #pragma mark - setupUI
 - (void)setupUI {
+    self.rotationView = [[FocusRotationView alloc] init];
+    self.rotationView.hidden = YES;
+    self.rotationView.backgroundColor = [UIColor clearColor];
+    WEAK_SELF
+    self.rotationView.focusRotationClickBlock = ^(NSInteger integer) {
+        STRONG_SELF
+        LunboPageItem_Data_Item *item = self.itemData.items[integer];
+        YXWebViewController *VC = [[YXWebViewController alloc] init];
+        VC.urlString = item.detail;
+        VC.isUpdatTitle = YES;
+        [self.navigationController pushViewController:VC animated:YES];
+    };
+    [self.view addSubview:self.rotationView];
+    [self.rotationView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(self.view.mas_left);
+        make.right.equalTo(self.view.mas_right);
+        make.top.equalTo(self.view.mas_top);
+        make.height.mas_offset(150.0f);
+    }];
     self.containerView = [[ProjectContainerView alloc]initWithFrame:self.view.bounds];
     self.containerView.hidden = YES;
     self.containerView.autoresizingMask = UIViewAutoresizingFlexibleHeight;
@@ -51,12 +79,40 @@
     self.emptyView = [[EmptyView alloc]init];
     self.emptyView.backgroundColor = [UIColor whiteColor];
     self.errorView = [[ErrorView alloc]init];
-    @weakify(self);
     [self.errorView setRetryBlock:^{
-        @strongify(self); if (!self) return;
+        STRONG_SELF
         [self requestForChannelTab];
     }];
     self.dataErrorView = [[DataErrorView alloc]init];
+}
+- (void)setupLunboContentView:(NSArray *)array {
+    NSMutableArray *mutableArry = [[NSMutableArray alloc] initWithCapacity:4];
+    WEAK_SELF
+    [array enumerateObjectsUsingBlock:^(LunboPageItem_Data_Item *obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        STRONG_SELF
+        UIImageView *imageView = [[UIImageView alloc] init];
+        imageView.backgroundColor = [UIColor colorWithHexString:@"e6e6e6"];
+        imageView.contentMode = UIViewContentModeScaleAspectFill;
+        UILabel *placeholderLabel = [[UILabel alloc] init];
+        placeholderLabel.text = @"图片正在加载中";
+        placeholderLabel.textColor = [UIColor colorWithHexString:@"999999"];
+        placeholderLabel.font = [UIFont systemFontOfSize:14.0f];
+        [imageView addSubview:placeholderLabel];
+        imageView.backgroundColor = [UIColor colorWithHexString:@"dadde0"];
+        [placeholderLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.center.equalTo(imageView);
+        }];
+        [imageView sd_setImageWithURL:[NSURL URLWithString:obj.image] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+            if (image != nil && error == nil) {
+                [placeholderLabel removeFromSuperview];
+                imageView.backgroundColor = [UIColor clearColor];
+            }else {
+                placeholderLabel.text = @"图片加载失败";
+            }
+        }];
+        [mutableArry addObject:imageView];
+    }];
+    self.rotationView.itemViewArray = mutableArry;
 }
 
 - (void)showContainerView:(NSArray *)categorys {
@@ -89,6 +145,8 @@
     self.containerView.childViewControllers = self.childViewControllers;
 }
 
+
+
 #pragma mark - request
 - (void)requestForChannelTab {
     UserModel *model = [UserManager sharedInstance].userModel;
@@ -119,4 +177,24 @@
     }];
     self.tabRequest = request;
 }
+
+- (void)requestForLunboPage {
+    LunboPageRequest *request = [[LunboPageRequest alloc] init];
+    WEAK_SELF
+    [request startRequestWithRetClass:[LunboPageItem class] andCompleteBlock:^(id retItem, NSError *error, BOOL isMock) {
+        STRONG_SELF
+        self.containerView.hidden = NO;
+        LunboPageItem *item = retItem;
+        if (error || item.data.items.count == 0) {
+   
+        }else {
+            self.containerView.frame = CGRectMake(0.0f, 150.0f, self.view.bounds.size.width, self.view.bounds.size.height - 150.0f);
+            self.rotationView.hidden = NO;
+            self.itemData = item.data;
+            [self setupLunboContentView:item.data.items];
+        }
+    }];
+    self.pageRequest = request;
+}
+
 @end
