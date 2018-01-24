@@ -14,6 +14,7 @@
 #import "LunboPageRequest.h"
 #import "FocusRotationView.h"
 #import "YXWebViewController.h"
+#import "SKTabBarController.h"
 
 @interface ProjectMainViewController ()
 @property (nonatomic, strong) ChannelTabRequest *tabRequest;
@@ -35,6 +36,7 @@
     [self setupUI];
     [self setupRightWithImageNamed:@"历史记录-2" highlightImageNamed:nil];
     [self requestForChannelTab];
+    [self setupObservers];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(requestForChannelTab) name:kStageSubjectDidChangeNotification object:nil];
 }
 - (void)viewDidAppear:(BOOL)animated {
@@ -50,7 +52,15 @@
     PlayRecordViewController *vc = [[PlayRecordViewController alloc]init];
     [self.navigationController pushViewController:vc animated:YES];
 }
-
+- (void)setupObservers {
+    WEAK_SELF
+    [[[NSNotificationCenter defaultCenter]rac_addObserverForName:kTabBarDidSelectNotification object:nil]subscribeNext:^(NSNotification *x) {
+        STRONG_SELF
+        if (self.navigationController == x.object) {
+            [self requestForLunboPage];
+        }
+    }];
+}
 #pragma mark - setupUI
 - (void)setupUI {
     self.rotationView = [[FocusRotationView alloc] init];
@@ -183,10 +193,13 @@
     WEAK_SELF
     [request startRequestWithRetClass:[LunboPageItem class] andCompleteBlock:^(id retItem, NSError *error, BOOL isMock) {
         STRONG_SELF
-        self.containerView.hidden = NO;
         LunboPageItem *item = retItem;
-        if (error || item.data.items.count == 0) {
-   
+        if (error) {
+            return;
+        }
+        if (item.data.items.count == 0) {
+            self.containerView.frame = CGRectMake(0.0f, 0.0f, self.view.bounds.size.width, self.view.bounds.size.height);
+            self.rotationView.hidden = YES;
         }else {
             self.containerView.frame = CGRectMake(0.0f, 150.0f, self.view.bounds.size.width, self.view.bounds.size.height - 150.0f);
             self.rotationView.hidden = NO;

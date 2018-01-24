@@ -9,6 +9,8 @@
 #import "SKTabBarController.h"
 #import "TeachingMainViewController.h"
 
+NSString * const kTabBarDidSelectNotification = @"kTabBarDidSelectNotification";
+
 @interface SKTabBarController ()<UITabBarControllerDelegate>
 
 @property (nonatomic, assign) NSUInteger oldSelectedIndex;
@@ -49,4 +51,8 @@
     return [[self topViewController] prefersStatusBarHidden];
 }
 
+#pragma mark - UITabBarControllerDelegate
+- (void)tabBarController:(UITabBarController *)tabBarController didSelectViewController:(UIViewController *)viewController {
+    [[NSNotificationCenter defaultCenter]postNotificationName:kTabBarDidSelectNotification object:viewController];
+}
 @end
