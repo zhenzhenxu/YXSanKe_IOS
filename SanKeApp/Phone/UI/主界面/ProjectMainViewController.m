@@ -103,6 +103,7 @@
         UIImageView *imageView = [[UIImageView alloc] init];
         imageView.backgroundColor = [UIColor colorWithHexString:@"e6e6e6"];
         imageView.contentMode = UIViewContentModeScaleAspectFill;
+        imageView.clipsToBounds = YES;
         UILabel *placeholderLabel = [[UILabel alloc] init];
         placeholderLabel.text = @"图片正在加载中";
         placeholderLabel.textColor = [UIColor colorWithHexString:@"999999"];
