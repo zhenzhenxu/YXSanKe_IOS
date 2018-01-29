@@ -80,7 +80,7 @@
         make.left.equalTo(self.view.mas_left);
         make.right.equalTo(self.view.mas_right);
         make.top.equalTo(self.view.mas_top);
-        make.height.mas_offset(150.0f);
+        make.height.mas_equalTo(120.0f);
     }];
     self.containerView = [[ProjectContainerView alloc]initWithFrame:self.view.bounds];
     self.containerView.hidden = YES;
