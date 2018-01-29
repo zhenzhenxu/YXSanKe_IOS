@@ -202,7 +202,7 @@
             self.containerView.frame = CGRectMake(0.0f, 0.0f, self.view.bounds.size.width, self.view.bounds.size.height);
             self.rotationView.hidden = YES;
         }else {
-            self.containerView.frame = CGRectMake(0.0f, 150.0f, self.view.bounds.size.width, self.view.bounds.size.height - 150.0f);
+            self.containerView.frame = CGRectMake(0.0f, 120.0f, self.view.bounds.size.width, self.view.bounds.size.height - 120.0f);
             self.rotationView.hidden = NO;
             self.itemData = item.data;
             [self setupLunboContentView:item.data.items];
