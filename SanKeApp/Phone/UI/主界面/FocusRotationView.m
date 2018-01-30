@@ -58,6 +58,7 @@
     [self.pageControl setPageControlStyle:PageControlStyleDefault];
     [self.pageControl setCoreNormalColor:[UIColor colorWithHexString:@"4691a6"]];
     [self.pageControl setCoreSelectedColor:[UIColor blackColor]];
+    self.pageControl.diameter = 8;
     self.pageControl.hidden = YES;
     [self addSubview:self.pageControl];
     
