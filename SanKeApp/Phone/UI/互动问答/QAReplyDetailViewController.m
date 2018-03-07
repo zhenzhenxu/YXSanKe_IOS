@@ -113,17 +113,20 @@
     self.tableView.tableHeaderView = headerView;
     [self.tableView registerClass:[QAReplyDetailCell class] forCellReuseIdentifier:@"QAReplyDetailCell"];
     [self.view addSubview:self.tableView];
+    CGFloat bottomHeight = (kScreenHeight == 812.0f) ? -34.0f : 0.f;
     [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.top.right.mas_equalTo(0);
-        make.bottom.mas_equalTo(-49);
+        make.bottom.mas_equalTo(-49 + bottomHeight);
     }];
     
     UIView *menuContainerView = [[UIView alloc]init];
     menuContainerView.backgroundColor = [UIColor whiteColor];
     [self.view addSubview:menuContainerView];
+    
     [menuContainerView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.right.bottom.mas_equalTo(0);
+        make.left.right.mas_equalTo(0);
         make.top.mas_equalTo(self.tableView.mas_bottom);
+        make.bottom.equalTo(self.view).offset(bottomHeight);
     }];
     
     WEAK_SELF

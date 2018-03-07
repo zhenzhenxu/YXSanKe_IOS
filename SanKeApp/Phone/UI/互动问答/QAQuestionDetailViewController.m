@@ -151,14 +151,17 @@ static CGFloat const kBottomViewHeight = 49.0f;
     [self.view addSubview:self.bottomView];
     [self.bottomView addSubview:lineView];
     [self.bottomView addSubview:viewCommentsButton];
+    CGFloat bottomHeight = kScreenHeight == 812.0f ? -34.0f : 0;
     [self.bottomView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.right.bottom.equalTo(self.view);
+        make.left.right.equalTo(self.view);
         make.height.mas_equalTo(kBottomViewHeight);
+        make.bottom.equalTo(self.view).offset(bottomHeight);
     }];
     [lineView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.top.equalTo(self.bottomView);
         make.height.mas_equalTo(1/[UIScreen mainScreen].scale);
     }];
+    
     [viewCommentsButton mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(lineView.mas_bottom);
         make.left.right.bottom.equalTo(bottomView);
