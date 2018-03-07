@@ -162,6 +162,7 @@
 		7C2251D01E1DEB4F004785D5 /* SKAlertTitleLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C2251CF1E1DEB4F004785D5 /* SKAlertTitleLabel.m */; };
 		7C2251D31E1E2626004785D5 /* GCDTimer.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C2251D21E1E2626004785D5 /* GCDTimer.m */; };
 		7C2251DD1E1F43A2004785D5 /* NSObject+BackgroundTask.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C2251DC1E1F43A2004785D5 /* NSObject+BackgroundTask.m */; };
+		7C2F4625204927FC00FAC74E /* MarkBtn.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C2F4624204927FC00FAC74E /* MarkBtn.m */; };
 		7C6F218A1E232F6A000AB43A /* ProjectMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C6F21891E232F6A000AB43A /* ProjectMainViewController.m */; };
 		7C6F21901E232F8E000AB43A /* YXDrawerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C6F218D1E232F8E000AB43A /* YXDrawerController.m */; };
 		7C6F21911E232F8E000AB43A /* YXDrawerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C6F218F1E232F8E000AB43A /* YXDrawerViewController.m */; };
@@ -639,6 +640,8 @@
 		7C2251D21E1E2626004785D5 /* GCDTimer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GCDTimer.m; sourceTree = "<group>"; };
 		7C2251DB1E1F43A2004785D5 /* NSObject+BackgroundTask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+BackgroundTask.h"; sourceTree = "<group>"; };
 		7C2251DC1E1F43A2004785D5 /* NSObject+BackgroundTask.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+BackgroundTask.m"; sourceTree = "<group>"; };
+		7C2F4623204927FC00FAC74E /* MarkBtn.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MarkBtn.h; sourceTree = "<group>"; };
+		7C2F4624204927FC00FAC74E /* MarkBtn.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MarkBtn.m; sourceTree = "<group>"; };
 		7C6F21881E232F6A000AB43A /* ProjectMainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProjectMainViewController.h; sourceTree = "<group>"; };
 		7C6F21891E232F6A000AB43A /* ProjectMainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProjectMainViewController.m; sourceTree = "<group>"; };
 		7C6F218C1E232F8E000AB43A /* YXDrawerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YXDrawerController.h; sourceTree = "<group>"; };
@@ -2117,6 +2120,8 @@
 				434A42051F340DC900621B53 /* TeachingContentsCell.m */,
 				436B7AEF1F380831001878BA /* MarkView.h */,
 				436B7AF01F380831001878BA /* MarkView.m */,
+				7C2F4623204927FC00FAC74E /* MarkBtn.h */,
+				7C2F4624204927FC00FAC74E /* MarkBtn.m */,
 				433B034E1F396D6F00809A2B /* MarkDetailView.h */,
 				433B034F1F396D6F00809A2B /* MarkDetailView.m */,
 			);
@@ -2675,6 +2680,7 @@
 				7C1A5F951E15143F00832DED /* YXMockManager.m in Sources */,
 				7C1A600A1E1639BD00832DED /* UIView+YXAddtion.m in Sources */,
 				7C1A5F3A1E15126500832DED /* YXAudioPlayerViewController.m in Sources */,
+				7C2F4625204927FC00FAC74E /* MarkBtn.m in Sources */,
 				7C1A5F2E1E15111800832DED /* YXUploadRequest.m in Sources */,
 				E9355B3E1E6983CF007AE9F0 /* SubmitButton.m in Sources */,
 				7C1A5F221E1510FA00832DED /* UploadRequest.m in Sources */,

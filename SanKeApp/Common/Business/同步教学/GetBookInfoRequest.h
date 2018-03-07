@@ -19,6 +19,10 @@
 @property (nonatomic, strong) NSString<Optional> *ox;
 @property (nonatomic, strong) NSString<Optional> *oy;
 @property (nonatomic, strong) NSString<Optional> *textInfo;
+@property (nonatomic, strong) NSString<Optional> *style;
+@property (nonatomic, strong) NSString<Optional> *state;
+
+
 @end
 
 @protocol GetBookInfoRequestItem_Marker <NSObject>

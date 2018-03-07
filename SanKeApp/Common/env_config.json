@@ -12,5 +12,13 @@
         "websocketServer":"ws://mobile.yanxiu.com/websocket",
         "initializeUrl":"http://mobile.yanxiu.com/test/api/initialize",
         "mode":"test"
+    },
+    "testServerList" :{
+        "server":"http://123.59.168.55:8081/",
+        "loginServer":"http://u.yanxiu.com/test/",
+        "uploadServer":"http://upload.yanxiu.com/resource/index.jsp",
+        "websocketServer":"ws://mobile.yanxiu.com/test/api/websocket",
+        "initializeUrl":"http://mobile.yanxiu.com/v20/api/initialize",
+        "mode":"test"
     }
 }
