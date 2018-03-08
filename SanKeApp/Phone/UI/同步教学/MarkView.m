@@ -27,9 +27,6 @@
         [self.mark.marker enumerateObjectsUsingBlock:^(GetBookInfoRequestItem_Marker *marker, NSUInteger index, BOOL * _Nonnull stop) {
             [marker.lines enumerateObjectsUsingBlock:^(GetBookInfoRequestItem_Marker_Item *line, NSUInteger idx, BOOL * _Nonnull stop) {
                 
-                //FIXME: 暂定 待修改
-                NSAssert(line.style.integerValue == 1, @"出现了别的lineStyle");
-                DDLogDebug(@" ----- line.style : %@ ",line.style);
                 CGFloat lineAbove = marker.lineAbove.integerValue;
                 CGFloat lineBelow = marker.lineBelow.integerValue;
                 MarkBtn *mark = [MarkBtn initWithMarker_Item:line ScaleX:kWidthRadio ScaleY:kHeightRadio lineAbove:lineAbove  lineBelow:lineBelow];
@@ -37,21 +34,6 @@
                 [mark addTarget:self action:@selector(lineBtnAction:) forControlEvents:UIControlEventTouchUpInside];
                 [self addSubview:mark];
                  
-
-                /*
-                UIButton *lineBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-                lineBtn.backgroundColor = [UIColor yellowColor];
-                CGFloat lineAbove = marker.lineAbove.integerValue;
-                CGFloat lineBelow = marker.lineBelow.integerValue;
-                lineBtn.frame = CGRectMake(line.x0.integerValue * kWidthRadio, (line.y0.integerValue - lineAbove - 12.5f) * kHeightRadio, (line.x1.integerValue - line.x0.integerValue) * kWidthRadio, (lineAbove + lineBelow + 5 + 20) * kHeightRadio);
-                DDLogDebug(NSStringFromCGRect(lineBtn.frame));
-                lineBtn.tag = idx * 1000 + index;
-                [lineBtn addTarget:self action:@selector(lineBtnAction:) forControlEvents:UIControlEventTouchUpInside];
-                [self addSubview:lineBtn];
-                UILabel *lineLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, (lineAbove + 10) * kHeightRadio, lineBtn.bounds.size.width, 5 * kHeightRadio)];
-                lineLabel.backgroundColor = [UIColor redColor];
-                [lineBtn addSubview:lineLabel];
-                */
             }];
             [marker.icons enumerateObjectsUsingBlock:^(GetBookInfoRequestItem_Marker_Item *icon, NSUInteger idx, BOOL * _Nonnull stop) {
                 UIButton *iconBtn = [UIButton buttonWithType:UIButtonTypeCustom];
